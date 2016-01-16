@@ -1,0 +1,1755 @@
+﻿#maincontent
+{
+    padding-top: 8px;
+}
+.autocomplete_button
+{
+    background: url(../images/go-btn-bkg.png) repeat-x;
+    border: 1px solid #058a2f;
+    cursor: pointer;
+    float: left;
+    height: 20px; 
+    margin-left: 5px;
+    margin-top: 5px;
+    width: 40px;
+}
+
+.autocomplete 
+{
+    /*width:280px;*/
+}
+
+.autocomplete .autocomplete_input
+{
+    border: 1px solid #666666;
+    display: block;
+    float: left;
+    height: 19px;
+    margin: 5px 0 0 2px;
+    width: 145px;
+}
+
+.autocomplete .autocomplete_unused
+{
+    background-color: #F2F2F2;
+}
+
+#above .divider
+{
+    background: transparent url(../../images/backgrounds/tab-bkgd.png) repeat-x scroll left top;
+    border-top: 1px solid #B4C9CA;
+    margin:0 -11px;
+    height:9px;
+}
+
+#above .divider.nobackground {
+    background: none;
+}
+
+#above .autocomplete
+{
+    float: right;
+    padding-top: 1px;
+    position: relative;
+}
+
+#above .autocomplete .message
+{
+    top: 2.8em;
+    left: 0.8em;
+}
+
+#above .tabs
+{
+    padding-left: 11px;
+    margin-left: -11px;
+    margin-right: -11px;
+}
+
+#above .tabs .tab:first-child
+{
+}
+
+#above .tabs img.newBadge
+{
+    left: 50%;
+    margin-left: -12px;
+    position: absolute;
+    top: -6px;
+    z-index: 2;
+}
+
+.headerlinks
+{
+    float: right;
+}
+
+.headerlinks div
+{
+    /*padding: 2px;*/
+    clear: both;
+}
+
+.headerlinks p
+{
+    float: left;
+    width: 110px;
+}
+
+.topExecutives th
+{
+    border-bottom: 1px solid #D4E0E0;
+    padding: 2px 0;
+}
+
+.topExecutives .nameHeader,
+.topExecutives .titleHeader
+{
+    padding-left: 5px;
+}
+
+.topExecutives td
+{
+    padding: 5px 5px;
+}
+
+.topExecutives .age
+{
+    width: 50px;
+}
+
+.topExecutives .tenure
+{
+    width: 90px;
+}
+
+/*
+#executives .heading
+{
+    margin-bottom: 4px;
+    position: relative;   
+}
+
+#executives .heading .name
+{
+    padding-left: 7px;
+}
+
+#executives .heading .age
+{
+    left: 274px;
+    position: absolute;
+}
+
+#executives .heading .title
+{
+    left: 329px;
+    position: absolute;
+}
+*/
+
+#executives .execListContainer
+{
+    overflow: auto;
+    height: 178px;
+    margin: 10px 0;
+    *overflow-x: hidden;
+    width: 100%;
+}
+
+#executives .execList
+{
+    border-top: 1px solid #B4C9CA;
+    width: 100%;
+}
+
+#executives .execList td
+{
+    border-bottom: 1px solid #B4C9CA;
+}
+
+#executives .execList .name
+{
+    padding: 4px 7px;
+    width: 260px;
+}
+
+#executives .execList .age
+{
+    padding: 4px 0;
+    width: 55px;
+}
+
+#executives .execList .title
+{
+    padding: 4px 0;
+}
+
+#executiveBio .biography
+{
+    margin-bottom: 25px;
+}
+
+#executiveBio .biography p
+{
+    margin: 5px 0;
+}
+
+#executiveBio h2
+{
+    border-top: none;
+}
+
+#officers .oneandhalfwide,
+#officers .onewide
+{
+    margin: 0;
+    padding-right: 18px;
+}
+.section,
+#officers .rowheader
+{
+    border-bottom: 1px solid #D4E0E0;
+    padding: 2px 5px;
+}
+#officers .section
+{
+    border: none;
+}
+.section.heavy
+{
+    border-width: 3px;
+}
+.sectionlast
+{
+	border-bottom: none;
+}
+.block.heavytop,
+.section.heavytop
+{
+    border-top: 3px solid #D4E0E0;
+}
+.block.heavytop h2
+{
+	border-top: none;
+}
+.section .sectionHeader
+{
+    margin-bottom: 0;
+}
+
+.section .column
+{
+    float:left;
+}
+.section .age
+{
+    width: 40px;
+}
+
+div.optionticker
+{
+    margin: 0px 0px 6px 6px;
+}
+div.optionticker span.mainoptionticker
+{
+    margin-right: 6px;
+}
+#optioninfo
+{
+    float: left;
+    margin: 0 6px;
+    width: 31%;
+}
+
+#optioninfo .subheader .lastcolumn
+{
+    background: transparent url(../images/arrow-sm-dn.png) no-repeat scroll right 5px;
+    padding-right: 10px;
+}
+
+#optioninfo.up .subheader .lastcolumn
+{
+    background: transparent url(../images/arrow-sm-up.png) no-repeat scroll right 5px;
+}
+
+#optionchart
+{
+    float: left;
+    margin: 0 6px;
+    position: relative;
+    width: 62%;
+}
+
+.quotedisplay.vertical
+{
+    border-top: 1px solid #D4E0E0;    
+}
+.quotedisplay.horizontal
+{
+    border: 1px solid #D4E0E0;
+    padding: 0;
+}
+.quotedisplay.horizontal .section
+{
+    border-bottom:none;
+}
+.quotedisplay .section .prevclose
+{
+	font-size: 1.6em;
+}
+.quotedisplay .prevclosedata
+{
+	float: right;
+}
+.quotedisplay .prevclosedata span
+{
+	padding: 0 4px;
+}
+
+.block .full
+{
+    display: none;
+}
+.fullIt .limited
+{
+    display: none;
+}
+.fullIt .full
+{
+    display: block;
+}
+.defaultButton 
+{   
+    background: #DAE6E6 url(../images/btn-standard-bkg.png) repeat-x;
+    border: 1px solid #BBC7C7;
+    color: #00477E;
+    cursor: pointer;
+    height: 18px;
+    margin-left: 10px;
+    padding: 0 2px;
+    vertical-align: middle;  
+}
+
+.companydescription p
+{
+    padding-left: 5px;
+}
+.block .companyinfo
+{
+    padding-left: 5px;
+}
+.quotelist .tr
+{
+    padding: 0px;
+    min-height: 29px;
+}
+.quotelist .th
+{
+    min-height: 20px;
+    text-align: left;
+}
+.quotelist td
+{
+    border-bottom: 1px solid #D4E0E0;
+}
+.quotelist td
+{
+    padding: 5px 0px 4px;
+}
+
+.quotelist .quotelist-symb
+{
+    padding-left: 5px;
+}
+.items .quotelist-symb , .items .quotelist-last , #nonchrome td .changeBarContainer
+{
+    padding-top: 3px;
+}
+td .changeBarContainer 
+{
+    margin-left: 20px;
+}
+.items .quotelist-last
+{
+    margin-right: 32px;
+    padding-right: 13px;
+}
+.items .up td.bgLast
+{
+    background: url(../images/arrow-sm-up.png) no-repeat right 9px;
+}
+.items .down td.bgLast
+{
+    background: url(../images/arrow-sm-dn.png) no-repeat right 13px;
+}
+
+.quotelist th
+{
+    cursor: pointer;
+    border-bottom: 1px solid #B4C9CA;    
+}
+.quotelist th.quotelist-headlines
+{
+    cursor: default;
+    text-align:left;
+}
+.quotelist th.headerSortUp span
+{
+    padding-right: 10px;
+    background: url(../images/arrow-sortup.png) no-repeat right 5px;
+}
+.quotelist th.headerSortDown span
+{
+    padding-right: 10px;
+    background: url(../images/arrow-sortdown.png) no-repeat right 5px;
+}
+
+
+.quotelist-symb, .quotelist-last, .quotelist-change
+{
+    width: 55px;
+}
+
+.quotelist-percentchange
+{
+    width: 120px;
+}
+
+#companyCompetitors
+{
+    width: 100%;
+}
+
+#companyCompetitors .quotelist-last,
+#companyCompetitors .quotelist-percentchange
+{
+    width: 20%;
+}
+#companyCompetitors td .changeBarContainer 
+{
+    margin-left: 35px;
+}
+
+#companyCompetitors .quotelist-last
+{
+    background-image: none !important;
+}
+
+/* change bar stuff */
+#nonchrome .changeBarContainer {
+	height: 20px;
+	position: relative;
+	white-space: nowrap;
+}
+
+#nonchrome .neutral .changeBar {
+	background: none;
+}
+
+#nonchrome .changeBar {
+	position: absolute;
+	width: 55px;
+	height: 20px;
+}
+
+#nonchrome  .small .changeBar {
+	width: 40px;
+}
+
+#nonchrome .up .changeBar, #nonchrome  .neutral .changeBar {
+	margin-left: 55px;	
+}
+#nonchrome .up .small .changeBar,#nonchrome  .neutral .small .changeBar {
+	margin-left: 40px;
+}
+
+#nonchrome .changeMarker {
+	height: 20px;
+	float: right;
+}
+#nonchrome .down .changeBar {
+	border-right: 2px solid black;
+}
+#nonchrome .up .changeBar,#nonchrome  .neutral .changeBar {
+	border-left: 2px solid black;
+	border-right: none;
+}
+
+#maincontent .down .changeBar .changeMarker {
+	background-color: #B50000;
+}
+#nonchrome .up .changeBar .changeMarker {
+	background-color: #007C1D;
+}
+#nonchrome .up .changeBar .changeMarker, #nonchrome  .neutral .changeBar .changeMarker {
+	float: left;
+}
+
+#nonchrome .down .changeValue { 
+	margin-left: 65px;
+}
+#nonchrome .down .small .changeValue {
+	margin-left: 45px;
+}
+#nonchrome .up .changeValue {
+	margin-left: 4px;	
+}
+#nonchrome .neutral .changeValue 
+{
+	margin-left: 10px;
+}
+#nonchrome .up .small .changeValue, #nonchrome  .neutral .small .changeValue {
+	margin-left: -7px;
+}
+#nonchrome .changeValue {
+	position: absolute;
+	padding: 0px;
+	width: 40px;
+}
+#nonchrome .changeValue p {
+	margin: 0pt;
+	padding: 0pt;
+}
+
+.foreverblock
+{
+    overflow: hidden;
+}
+.foreverblock .headlinewrapper
+{
+	height: 175px;
+	overflow: auto;
+	position: relative;
+}
+.foreverblock .earningsheadlinewrapper
+{
+	height: 70px;
+}
+.foreverblock ol
+{
+    /*height: 175px;
+    overflow: hidden;*/
+    position: relative;
+}
+div.foreverblock div.headlinewrapper ol
+{
+    margin-left: 0px;
+} 
+.foreverblock li
+{
+    clear: both;
+    padding: 3px 5px;
+    position: relative;
+}
+.foreverblock li p
+{
+    /*margin-left: 90px;*/
+    /*float: left;*/
+    display: inline;
+}
+.foreverblock li div
+{
+    padding-left: 124px;    
+}
+.foreverblock li .uniqueId 
+{
+    display: none;
+}
+.foreverblock li .timestamp,
+.foreverblock li .source
+{
+    margin-left: 0;
+}
+.foreverblock li .timestamp
+{
+    left: 3px;
+    position: absolute;
+    width: 124px;
+}
+.foreverblock ol li.loading
+{
+	background: url(../../images/ajax-loader.gif) left center no-repeat;
+	height: 16px;
+	padding-left: 20px;
+}
+.foreverblock .nonews
+{
+    margin-left:5px;
+}
+
+.fourwide .foreverblock li
+{
+    position: static;
+}
+.fourwide .foreverblock p
+{
+    /*margin-left: 0;*/
+    clear: both;
+    display: block;
+    float: none;
+}
+.fourwide .foreverblock li div
+{
+    padding-left: 0;
+}
+.fourwide .foreverblock li .timestamp
+{
+    display: inline;
+    padding-right: 4px;
+    position: static;
+    width: auto;
+}
+.fourwide .foreverblock li .source
+{
+    display: inline;
+}
+.fourwide .foreverblock li a
+{
+    /*display: block;*/
+    margin-left: 0;
+}
+
+.block
+{
+    margin-bottom: 20px;
+}
+
+.headlines
+{
+	margin-bottom: 5px;
+}
+#currencytools .headlines
+{
+    margin-bottom: 20px;
+}
+
+.headlines h2
+{
+    border-bottom: 1px solid #B4C9CA;
+}
+#mwheadlines /*ol*/ .headlinewrapper
+{
+    height: 230px;
+}
+#partnerheadlines /*ol*/ .headlinewrapper
+{
+	height: 23.5em;
+}
+#prheadlines /*ol*/ .headlinewrapper
+{
+	height: 17.4em;
+}
+#prheadlines
+{
+	padding-bottom: 20px;
+}
+
+#chartnews .addgutter
+{
+   margin-right: 9px;
+}
+#chartnews .fourwide
+{
+    margin-bottom: 0;
+}
+
+#related
+{
+    margin-left: 7px;
+}
+#related p
+{
+    margin-left: 10px;
+}
+
+#quotedata
+{
+    float: left;
+    margin-right: 20px;
+    width: 200px;
+}
+#quotedata img, #quotedata .splitdata
+{
+    float: right;
+}
+#quotedata .splitdata
+{
+    margin-right: 3px;
+}
+#quotedata div
+{
+    border-bottom: 1px solid #D4E0E0;
+    padding: 3px 0;
+}
+#historicalquotechart, #quotechart
+{
+    float: left;
+    height: 200px;
+    position: relative;
+}
+
+#sentiment
+{
+    padding-top:9px;
+}
+#sentiment #pickssection
+{
+    background: url(../images/picker-top.png) no-repeat;
+    padding-top: 25px;
+}
+
+#sentiment #picksheader
+{
+    border-left: 1px solid #d4e0e0;
+    border-right: 1px solid #d4e0e0;
+}
+#sentiment #pickswidget
+{
+    border-bottom: 1px solid #d4e0e0;
+    border-left: 1px solid #d4e0e0;
+    border-right: 1px solid #d4e0e0;
+    padding: 0 23px 10px;
+}
+#sentimentseemore .infowidth {
+    width: 216px;
+}
+#hulbertpromo
+{        
+    float:right;
+    border: 1px solid #D4E0E0;    
+    background-color: #F1F7F3;    
+    width:150px;    
+    font-size:.9em;    
+    line-height:1em;    
+    margin-top:4px;    
+    color: #004176;
+}
+#hulbertpromo p
+{
+    margin-top:1px;    
+    float:left;
+    width: 100px;
+}
+#hulbertpromo img
+{
+    float:left;    
+    margin-right:10px;
+}
+#hulbertpromo span
+{
+    display:block;    
+    float:right;    
+    font-size:1.5em;    
+    margin:6px 5px 0 0;
+}
+
+#instrumentheader
+{
+    float:left; 
+    padding-left:6px
+}
+#instrumentheader #instrumentname
+{
+    color: #333;
+    font-size:25px; 
+    line-height:1.2em;
+    background-color: Transparent;
+    margin: 0;
+    padding: 0;    
+}
+#instrumentheader #instrumentticker
+{
+    font-size:15px; 
+    line-height:1.2em;
+    text-transform:uppercase; 
+    padding-bottom: 14px;    
+}
+#addToPortfolio
+{
+	position: absolute;
+    padding: 2px 0;
+}
+#addToPortfolio a.fakebutton {
+    font-size: 10px;
+}
+
+/* Mutual Funds */
+#mfholdings table.fundstable
+{
+    margin-bottom:15px;
+}
+
+table.fundstable
+{
+	width: 100%;
+}
+table.fundstable th
+{
+	font-size: .9em;
+	font-weight: bold;
+	line-height: 1.1em;
+	padding: 0 4px;
+	width: 18%;
+}
+table.fundstable th.narrow
+{
+	width: 10%;
+}
+table.fundstable td
+{
+	padding: 2px 0;
+	text-align: center;
+}
+table.fundstable th,
+table.fundstable td
+{
+	border-bottom: 1px solid #D4E0E0;
+}
+table.fundstable .company
+{
+	text-align: left;
+	width: 50%;
+}
+.investmentpolicy
+{
+	font-weight: bold;
+}
+
+.lipperleader img
+{
+	padding: 0 10px;
+}
+.lipperleader .key
+{
+	background: url(../images/mutualfunds/key/horizontal-320x35.jpg) center center no-repeat;
+	height: 40px;
+}
+
+.section .down,
+.fundstable .down
+{
+	color: #B50000;
+}
+.section .up,
+.fundstable .up
+{
+	color: #007C1D;
+}
+
+#expenseCalculator
+{
+	display: none;
+}
+#expenseCalculator p
+{
+	clear: right;
+	padding: 4px 0;
+}
+#expenseCalculator select,
+#expenseCalculator input,
+#expenseCalculator .result
+{
+	border: 1px solid #D4E0E0;
+	float: right;
+	text-align: right;
+	width: 70px;
+}
+#expenseCalculator button
+{
+	font-size: 1em;
+	height: auto;
+	margin: 0;
+	padding: 2px 6px;
+	width: 100%;
+}
+#expenseCalculator .disclaimer
+{
+	color: #999;
+	float: none;
+}
+#fundComparison input.fund
+{
+	margin: 2px;
+	width: 40px;
+}
+#fundComparison a
+{
+	float: left;
+	font-size: 0.9em;
+	text-align: center;
+	width: 60px;
+}
+#fundComparison .inputs
+{
+	float: left;
+}
+#fundComparison.hideExtra .extra
+{
+	display: none;
+}
+#fundComparison span
+{
+	float: left;
+	padding-top: 4px;
+}
+#findAnotherFund button,
+#fundComparison button
+{
+	padding: 0 30px;
+	margin-left: 110px;
+}
+#tenkGrowth.loading
+{
+	background: transparent url(../../images/ajax-loader.gif) no-repeat center center;
+	height: 1.2em;
+	width: 50px;
+}
+#growthOf10k select,
+#growthOf10k input,
+#growthOf10k button
+{
+	margin-bottom: 8px;
+}
+
+#findAnotherFund p
+{
+	margin-top: 4px;
+}
+#findAnotherFund div
+{
+	float: left;
+	padding-bottom: 6px;
+	width: 50%;
+}
+#findAnotherFund select
+{
+	width: 90%;
+}
+
+#mfholdings .unavailable{
+    margin: 0 0 15px 15px;
+}
+
+#sectorPieChart
+{
+    float:left;
+    margin-bottom:10px;
+    position:relative;
+    z-index:5;
+}
+
+#assetPieChart
+{
+    float:left;
+    position:relative;
+    z-index:5;
+}
+
+.pieChartLegend
+{
+    margin-left:15px;
+    margin-top:40px;
+    float:left;
+    width:250px;
+}
+#sectorLegend.pieChartLegend
+{
+    margin-top:0;
+}
+.pieChartLegend .row
+{
+    border-bottom: 1px solid #D4E0E0;
+}
+.pieChartLegend .row.seperator
+{
+    border-top: 2px solid #D4E0E0;
+}
+
+.pieChartLegend .row p, .pieChartLegend .row div
+{
+    margin-left:3px;
+}
+.pieChartLegend .row p.last
+{
+    float:right;
+    text-align:right;
+}
+.pieChartLegend .row div
+{
+    float:left;
+    width:12px;
+    height:12px;
+    margin-top:2px;
+    margin-right:6px;
+}
+.pieChartLegend .pie0
+{
+    background-color:#338078;
+}
+.pieChartLegend .pie1
+{
+    background-color:#CF9100;
+}
+.pieChartLegend .pie2
+{
+    background-color:#5DACB3;
+}
+.pieChartLegend .pie3
+{
+    background-color:#015DA6;
+}
+.pieChartLegend .pie4
+{
+    background-color:#FF8800;
+}
+.pieChartLegend .pie5
+{
+    background-color:#FFCC00;
+}
+.pieChartLegend .pie6
+{
+    background-color:#086892;
+}
+.pieChartLegend .pie7
+{
+    background-color:#B40000;
+}
+.pieChartLegend .pie8
+{
+    background-color:#3B9732;
+}
+.pieChartLegend .pie9
+{
+    background-color:#000080;
+}
+
+#newsletterrecommending .curtain
+{
+    max-width: 100px;
+}
+table.datatable
+{
+    width: 100%;
+    caption-side: bottom;
+    border-spacing: 0;
+    text-align: left;
+}
+table.datatable caption
+{
+    padding: 2px;
+    line-height: 1.3em;
+}
+table.datatable caption,
+table.datatable thead
+{
+    font-size: 0.92em;
+}
+table.datatable th,
+table.datatable td
+{
+    border-bottom: 1px solid #d4e0e0;
+    padding: 2px 5px;
+}
+table.datatable .curtain
+{
+    border: 1px solid #b4c8c7;
+    background-color: #d4e0e0;
+}
+
+.hulbert_verticalbar
+{ 
+    font-size: 0.92em;
+}
+.hulbert_verticalbar table
+{
+    width: 258px;
+    float: left;
+    margin-right: 4px;
+    z-index: 2;
+    position: relative;
+}
+.hulbert_verticalbar tbody,
+.hulbert_verticalbar .ylabels
+{
+    height: 43px;
+}
+.hulbert_verticalbar tbody
+{
+    width: 258px;
+    background-color: #f0f7f0;
+    background: #f0f7f0 url(../images/hulbert_vertbar_bkg.png) repeat-x scroll left 50%;
+}
+.hulbert_verticalbar tbody td
+{
+    height: 43px;
+    padding-right: 2px;
+    border: 1px solid #d4e0e0;
+    border-width: 1px 0;
+}
+.hulbert_verticalbar tfoot
+{
+    font-size: 0.83em;
+}
+.hulbert_verticalbar td.up
+{
+    text-align: right;
+    padding: 0 0 0 2px;
+    border-left-width: 1px;
+}
+.hulbert_verticalbar td.down.last
+{
+    border-right-width: 1px;
+}
+.hulbert_verticalbar td div
+{
+    width: 8px;
+    overflow: hidden;
+}
+.hulbert_verticalbar td span
+{
+    display: none;
+}
+.hulbert_verticalbar td.up div
+{
+    float: right;
+}
+.hulbert_verticalbar ul.key li
+{
+    float: left;
+    margin-right: 10px;
+}
+.hulbert_verticalbar ul.key li div
+{
+    height: 8px;
+    width: 8px;
+    float: left;
+    margin-right: 5px;
+    margin: 5px 4px 4px;
+    overflow: hidden;
+}
+.hulbert_verticalbar ul.key li div.up,
+.hulbert_verticalbar td.up div
+{
+    background-color: #007c1d;
+}
+.hulbert_verticalbar ul.key li div.down,
+.hulbert_verticalbar td.down div
+{
+    background-color: #b50000;
+}
+.hulbert_verticalbar .ylabels
+{
+    position: relative;
+    z-index: 1;
+}
+.hulbert_verticalbar .ylabels span
+{
+    position: absolute;
+}
+.hulbert_verticalbar .ylabels span.top
+{
+    top: -8px;
+}
+.hulbert_verticalbar .ylabels span.middle
+{
+    top: 13px;
+}
+.hulbert_verticalbar .ylabels span.bottom
+{
+    bottom: -8px;
+}
+
+.hulbertbar
+{
+    height: 15px;
+    color: #fff;
+    text-align: right;
+    font-size: 0.92em;
+    padding-right: 5px;
+    font-weight: bold;
+}
+.hulbertbar *
+{
+    vertical-align: middle;
+}
+#hulbertlandingpromo p.twoandhalfwide
+{
+    color: #999;
+    font-size: 1.42em;
+    line-height: 1.1em;
+    width: 275px;
+}
+
+#sentimentalrainbow
+{
+    height: 5.525em;
+    border: 1px solid #d4e0e0;
+    font-size: 0.92em;
+    width: 33.243em;
+    position: relative;
+    padding: 0 0.362em;
+}
+#sentimentalrainbowbackground
+{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+#sentimentalrainbow .sentiment
+{
+    border-top: 1px solid #d4e0e0;
+    float: right;
+    margin: 14px 2px 0;
+    position: absolute;
+}
+#sentimentalrainbow .sentiment.dropped
+{
+    margin-top:17px;
+    z-index: 10;
+}
+#sentimentalrainbow .sentiment a
+{
+    border: 1px solid #d4e0e0;
+    border-width: 0 1px 1px;
+    padding: 0 3px;
+    position: relative;
+    top: -1px;
+    float: left;
+    white-space: nowrap;
+}
+#sentimentalrainbow .sentiment img
+{
+    position: absolute;
+    right: 0;
+    top: -8px;
+    clip: rect(0px 11px 8px 0px);
+    clear: both;
+}
+#sentimentalrainbow .sentiment.left img
+{
+    left: 0;
+    right: auto;
+}
+#sentimentalrainbow .sentiment.dropped img
+{
+    top: -11px;
+    clip: rect(0px 11px 11px 0px);
+}
+#sentimentalrainbow #hulbertsentiment
+{
+    margin-top: 5px;
+    width: 9.35em;
+}
+#sentimentalrainbow #hulbertsentiment img
+{
+    bottom: -6px;
+    top: auto;
+}
+#sentimentalrainbow #analystsentiment, #sentimentalrainbow #communitysentiment
+{ 
+    width: 4.83em;
+    top: 39%;
+}
+#sentimentalrainbow #communitysentiment
+{
+    width: 6.2em;
+}
+
+#fblike
+{
+    float:left; 
+    margin-left:5px;
+}
+.twowide #videos.block div
+{
+    padding: 0 29px 10px;
+    line-height:1.1em;
+    font-size:0.9em;
+}
+#twitfollow
+{
+    margin-left:10px;
+    float:left;   
+}
+
+#twitfollow iframe
+{
+    width:140px; 
+    height:20px;
+}
+
+
+.analystEstimates .footer,
+.insider .footer,
+.financials .footer
+{
+    margin: 2px 0 10px;
+}
+
+.subnavigation
+{
+    margin-bottom: 10px;
+}
+
+.subnavigation span
+{
+    float: left;
+    padding: 6px 12px 6px 0;
+}
+
+.subnavigation span a
+{
+    padding: 4px;
+}
+
+.analystEstimates table,
+.insider table
+{
+    width: 100%;
+}
+
+.financials .crDataTable
+{
+    width: 100%;
+}
+
+.financials .crDataTable tr.hidden
+{
+    display: none;
+}
+
+.financials .crDataTable .rowTitle
+{
+    padding: 2px 0 2px 8px;
+    text-align: left;
+}
+
+.financials .crDataTable .childRow .rowTitle
+{
+    padding-left: 38px;
+}
+
+.financials .crDataTable .rowLevel-2 .rowTitle
+{
+    padding-left: 38px;
+}
+
+.financials .crDataTable .rowLevel-3 .rowTitle
+{
+    padding-left: 58px;
+}
+
+.financials .crDataTable .rowLevel-4 .rowTitle
+{
+    padding-left: 78px;
+}
+
+.financials .crDataTable th
+{
+    padding: 9px 0;
+}
+
+.financials .expand
+{
+    background: url(../images/financials-expand-collapse.gif) no-repeat scroll 0 0 transparent;
+    display: inline-block;
+    height: 14px;
+    vertical-align: text-bottom;
+    width: 20px;
+}
+
+.financials .expand.expand-open
+{
+    background-position: 0 bottom;
+}
+
+.financials .crDataTable .valueCell
+{
+    padding: 7px 5px;
+    text-align: right;
+    width: 88px;
+}
+
+.financials .crDataTable .miniGraphCell
+{
+    padding: 6px 0;
+    width: 80px;
+}
+
+.financials .crDataTableAd
+{
+    margin: 20px 0;
+}
+
+.analystEstimates h2
+{
+    margin-top: 25px;
+}
+
+.analystEstimates .snapshot td.column2
+{
+    padding-left: 10px;
+}
+
+.insider .roster td
+{
+    padding: 2px 0 2px 10px;
+}
+
+.insider .roster th.relationship
+{
+    padding-left: 10px;
+}
+
+.insider .roster td.shareholder
+{
+    padding-left: 0;
+}
+
+.insider .actionsContainer
+{
+    overflow: auto;
+    height: 276px;
+    *overflow-x: hidden;
+    width: 100%;
+}
+
+.insider .actions
+{
+    border-top: 1px solid #B4C9CA;
+    font-size: 1em;
+    margin-bottom: 20px;
+    width: 100%;
+    *width: 98%;
+}
+
+.insider .actions td
+{
+    border-bottom: 1px solid #B4C9CA;
+    padding: 8px 8px;
+}
+
+.insider .actions .date { width: 13%; }
+.insider .actions .name { width: 28%; }
+.insider .actions .shares { width: 14%; }
+.insider .actions .transaction { width: 28%; }
+.insider .actions .value { width: 16%; }
+
+.insider .actions.individual .transaction { width: 56%; }
+
+.insider .actions .transactionArea
+{
+    display: block;
+}
+
+.insider .actions .transPosNeg
+{
+    -moz-border-radius: 100%;
+    -webkit-border-radius: 100%;
+    border-radius: 100%;
+    -moz-box-shadow: 1px 1px 3px #6F6F6F;
+    -webkit-box-shadow: 1px 1px 3px #6F6F6F;
+    box-shadow: 1px 1px 3px #6F6F6F;
+    display: inline-block;
+    float: left;
+    width: 15px;
+}
+
+.insider .actions .transactionDesc
+{
+    float: left;
+    margin-left: 7px;
+    width: 84%;
+}
+
+.insider .actions.individual .transactionDesc
+{
+    width: 90%;
+}
+
+.insider .actions .transPosNeg.pos
+{
+    background-color: #007C1D;
+}
+
+.insider .actions .transPosNeg.neg
+{
+    background-color: #B50000;
+}
+
+.insider .heading
+{
+    margin-bottom: 4px;
+    position: relative;
+}
+
+.insider .heading .date
+{
+    padding-left: 7px;
+}
+
+.insider .heading .name
+{
+    left: 86px;
+    position: absolute;
+}
+
+.insider .heading .shares
+{
+    left: 265px;
+    position: absolute;
+}
+
+.insider .heading.individual .shares
+{
+    left: 112px;
+}
+
+.insider .heading .transaction
+{
+    left: 340px;
+    position: absolute;
+}
+
+.insider .heading.individual .transaction
+{
+    left: 184px;
+}
+
+.insider .heading .value
+{
+    left: 516px;
+    position: absolute;
+}
+
+#insiderTransactionSummary table
+{
+    border-collapse: collapse;
+    margin: 10px 0;
+    width: 100%;
+}
+
+#insiderTransactionSummary th
+{
+    border-bottom: 1px solid #D4E0E0;
+    border-top: 1px solid #D4E0E0;
+    padding: 5px 0;
+}
+
+#insiderTransactionSummary th.timeFrame
+{
+    padding-left: 10px;
+}
+
+#insiderTransactionSummary td
+{
+    border-bottom: 1px solid #D4E0E0;
+    border-right: 1px solid #D4E0E0;
+    height: 60px;
+    padding-left: 10px;
+}
+
+#insiderTransactionSummary td.shares
+{
+    border-right: none;
+}
+
+#insiderTransactionSummary td.transactions div
+{
+    margin-bottom: 5px;
+}
+
+#insiderTransactionSummary td .transactionCount.pos,
+#insiderTransactionSummary td .transactionCount.neg,
+#insiderTransactionSummary td .transactionCount
+{
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+    display: inline-block;
+    padding: 1px 3px;
+}
+
+.recentInsiderChart
+{
+    min-height: 132px;
+    position: relative;
+}
+
+.recentInsiderChart .helpTip
+{
+    display: none;
+    position: absolute;
+}
+
+.recentInsiderChart .crHelpTip .helpTip-content
+{
+    border: 1px solid #FFF;
+    -moz-box-shadow: 1px 1px 4px #666;
+    -webkit-box-shadow: 1px 1px 4px #666;
+    box-shadow: 1px 1px 4px #666;
+    line-height: 1.2em;
+    padding: 5px;
+    width: 137px;
+}
+
+.recentInsiderChart .helpTip-content::after {
+    clear: both;
+    content: " ";
+    height: 0;
+    line-height: 0;
+    display: block;
+    visibility: hidden;
+}
+
+.recentInsiderChart .helpTip-house
+{
+    float: none;
+    position: relative;
+    z-index: 999;
+}
+
+.recentInsiderChart .helpTip-bottom
+{
+    bottom: 11px;
+    left: 0;
+}
+
+.recentInsiderChart .helpTip .helpTip-tip
+{
+    position: absolute;
+}
+
+.recentInsiderChart .helpTip-bottom .helpTip-tip
+{
+    background: url('../images/sprite_crHelpColor.png') 0px 0px no-repeat;
+    background-position: right top;
+    bottom: 0;
+    height: 11px;
+    left: 50%;
+    margin-bottom: -10px;
+    margin-left: -11px;
+    width: 15px;
+}
+.recentInsiderChart .circlemarker
+{
+    -moz-box-shadow: 1px 1px 3px #999;
+    -webkit-box-shadow: 1px 1px 3px #999;
+    box-shadow: 1px 1px 3px #999;
+    -moz-border-radius: 15px;
+    -webkit-border-radius: 15px;
+    border-radius: 15px;
+    cursor: pointer;
+    display: block;
+    float: left;
+    height: 11px;
+    line-height: 11px;
+    min-width: 11px;
+    padding: 2px;
+}
+
+.chartLegend .circlemarkerSmall
+{
+    -moz-box-shadow: 1px 1px 3px #999;
+    -webkit-box-shadow: 1px 1px 3px #999;
+    box-shadow: 1px 1px 3px #999;
+    -moz-border-radius: 15px;
+    -webkit-border-radius: 15px;
+    border-radius: 15px;
+    cursor: pointer;
+    display: block;
+    float: left;
+    height: 9px;
+    line-height: 9px;
+    min-width: 9px;
+    padding: 0;
+}
+
+.chartLegend
+{
+    visibility: hidden;
+    margin: 0 0 11px;
+    min-height: 1em;
+}
+
+.chartLegend .legendLabel
+{
+    float: left;
+    margin: -6px 11px 0 1px;
+    padding-top: 1px;
+}
+
+/* MiniGraph styles */
+.financials .crDataTable .miniGraphCell .miniGraph
+{
+	height: 20px;
+	width: 80px;
+}
+.financials .crDataTable .miniGraphCell .chartArea
+{
+	position: relative;
+	height: 20px; /* set for hidden elements */
+	width: 80px; /* set for hidden elements */
+}
+.financials .crDataTable .miniGraphCell .chartBar
+{
+	position: absolute;
+	width: 10%;
+}
+/* End MiniGraph styles */
+
+#advchartcontrols
+{
+    float: left;
+    width:175px;
+}
+.ipodiscussion {
+    background-color:#F0F0F0;
+    margin-bottom:10px;
+    padding:5px;
+    font-size: 13px;
+}
+#etfprofile table {
+     width: 100%
+}
+#etfprofile table.overview th {
+     font-weight: bold
+}
+#etfprofile .etfsection {
+     margin-bottom: 15px;
+}
+#etfprofile table.overview td {
+     text-align: center;
+}
+#etfprofile table.detail td.value {
+     text-align: right;
+}
+#etfprofile .performance table.detail td.value {
+     text-align: center;
+}
+#etfprofile table.detail td {
+     border-bottom: 1px solid #D4E0E0
+}
+#etfprofile h2 {
+     font-size: 14px;
+     font-weight: bold; 
+     margin-bottom:3px
+}
+
+/* Benzinga blocks */
+#analystratings li, #earningssummaries li { padding: 3px 5px; }
+#analystratings li a, #earningssummaries li a { margin-left: 0; }
+#analystratings li .source, #earningssummaries li .source { display: inline; }
+#analystratings li .timestamp, #earningssummaries li .timestamp {
+    display: inline;
+    padding-right: 4px;
+    position: static;
+    width: auto;
+}
+#analystratings li .timestamp, #analystratings li .source, #earningssummaries li .timestamp, #earningssummaries li .source {
+    color: #666;
+    font-size: 0.8em;
+}

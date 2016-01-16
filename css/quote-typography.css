@@ -1,0 +1,549 @@
+﻿.autocomplete_button
+{
+    color: #FFFFFF;
+    font-size: 1.17em;
+    text-align: center;
+    vertical-align: middle;
+}
+.autocomplete .autocomplete_input
+{
+    font-size: .96em;
+    font-weight: normal;
+}
+.autocomplete .autocomplete_unused
+{
+    color: #AAAAAA;
+}
+.bgVolume
+{
+    font-size:1em;
+    font-weight:bold;
+}
+.centerData
+{
+    text-align: center;
+}
+
+.headerlinks p
+{
+    font-size: .8em
+}
+
+.section .data
+{
+    font-weight: bold;
+}
+.section .lastcolumn
+{
+    text-align: right;
+}
+.section .centerData
+{
+    text-align: center;
+}
+div.optionticker
+{
+    font-size: 1.6em;
+}
+#optioninfo .subheader
+{
+    font-size: 1.6em;
+}
+#optioninfo .change
+{
+    color: #B40000;
+}
+#optioninfo.up .change
+{
+    color: #00AA00;
+}
+
+.defaultButton 
+{   
+    font-size: .92em;  
+    text-align: center;
+}
+h2 .defaultButton
+{
+    font-size: .5em;
+}
+
+.block .companyname
+{
+    font-weight: bold;
+}
+
+.block h2
+{
+    font-size: 1.67em;
+}
+#hulbertlandingpromo h2
+{
+    font-size: 2.08em;
+}
+
+.quotelist th
+{
+    color: #004176;
+    font-size: .9em;
+}
+.quotelist .items .quotelist-symb, .items .quotelist-last
+{    
+    font-size: 1.2em;
+}
+th.quotelist-headlines
+{
+    color: #333333;
+}
+
+.quotelist-symb
+{
+    text-align: left;
+}
+.items .quotelist-symb, .items .quotelist-last
+{
+    font-weight: bold;
+}
+.items .quotelist-last, .items .quotelist-change
+{
+    text-align: right;
+}
+.quotelist p.bgPercentChange.biggerText
+{
+    font-size:0.92em;
+}
+.quotelist th
+{
+    text-transform: uppercase;
+}
+
+.quotelist p.indexheadline
+{
+    font-size: 0.9em;
+    line-height: 1.2em;
+}
+.quotelist span.indexheadlinetime
+{
+    color: #666666;
+    font-size: 0.8em;
+}
+
+#companyCompetitors .quotelist-percentchange
+{
+    font-weight: bold;
+    text-align: right;
+}
+
+.competitorlist .price
+{
+    color: #000000;
+}
+
+.down .changeValue { 
+	color: #B50000;
+}
+.up .changeValue {
+	color: #007c1d;
+}
+.neutral .changeValue 
+{
+	color: #0000CC;
+}
+
+.changeValue p {
+	font-size: 0.83em;
+}
+
+.foreverblock ol
+{
+    line-height: 1.2em;
+}
+.foreverblock li .timestamp,
+.foreverblock li .source
+{
+    color: #666;
+    font-size: 0.8em;
+}
+
+#mwheadlines h2
+{
+    font-size: 1.67em;
+}
+
+#historicalquote #nodata
+{
+    font-size: 1.2em;
+    text-align: center;
+}
+#historicalquote #nodata span
+{
+    font-weight: bold;
+}
+
+#sentiment #picksheader
+{
+    font-size: 1.2em;
+    font-weight: bold;
+    text-align: center;
+}
+
+.topExecutives
+{
+    width: 100%;
+}
+
+.topExecutives th
+{
+    font-size: .92em;
+}
+
+.topExecutives .age,
+.topExecutives .tenure
+{
+    font-weight: bold;
+    text-align: center;
+}
+
+.topExecutives .nameHeader,
+.topExecutives .titleHeader
+{
+    text-align: left;
+}
+
+.topExecutives th.AgeHeader,
+.topExecutives th.tenureHeader
+{
+    text-align: center;
+}
+
+/*
+#executives .heading
+{
+    font-size: .92em;
+    text-transform: uppercase;
+}
+*/
+
+#executives .jobTitle
+{
+    font-size: .92em;
+}
+
+#executives .execList
+{
+    /*cursor: pointer;*/
+}
+
+#executives .execList td
+{
+    vertical-align: top;
+}
+
+#executives .execList tr.selected td
+{
+    background-color: #E6F4FF;
+    cursor: default;
+}
+
+#officers .sectionHeader
+{
+    font-size: .92em;
+}
+
+.insider .notavailable
+{
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.analystEstimates .footer,
+.insider .footer,
+.financials .footer
+{
+    font-size: .75em;
+    text-align: right;
+}
+
+.subnavigation span a
+{
+    border: solid 1px #B4C9CA;
+}
+
+.subnavigation span.on a
+{
+    background-color: #F0F7F2;
+    color: #000;
+    cursor: default;
+    text-decoration: none;
+}
+
+.analystEstimates th,
+.insider th
+{
+    font-weight: normal;
+}
+
+.analystEstimates td, .analystEstimates th,
+.insider td, .insider th
+{
+    border-bottom: 1px solid #D4E0E0;
+}
+
+.insider .shareholder
+{
+    text-transform: uppercase;
+}
+
+.insider .actions .name span
+{
+    font-size: .95em;
+}
+
+.analystEstimates .estimates td, .analystEstimates .estimates th,
+.insider .roster td, .insider .roster th
+{
+    text-align: right;
+}
+
+.insider .roster .colLeft
+{
+    text-align: left;
+}
+
+.insider .heading
+{
+    font-size: .92em;
+}
+
+.insider .actions .shares,
+.insider .actions .value
+{
+    text-align: right;
+}
+
+#insiderTransactionSummary th
+{
+    font-size: .92em;
+    font-weight: bold;
+}
+
+#insiderTransactionSummary th.timeFrame
+{
+    text-align: left;
+}
+
+#insiderTransactionSummary td .transactionCount.pos,
+#insiderTransactionSummary td .transactionCount.neg,
+#insiderTransactionSummary td .transactionCount
+{
+    color: #FFF;
+    font-size: .92em;
+    text-align: center;
+}
+
+#insiderTransactionSummary td .transactionCount
+{
+    color: #333;
+}
+
+#insiderTransactionSummary td .transactionCount.pos
+{
+    background-color: #007C1D;
+}
+
+#insiderTransactionSummary td .transactionCount.neg
+{
+    background-color: #B50000;
+}
+
+#insiderTransactionSummary h3,
+#executives h3
+{
+    font-size: 1.3em;
+    font-weight: bold;
+}
+
+.recentInsiderChart .helpTip
+{
+    color: #FFF;
+}
+
+.recentInsiderChart .crHelpTip .helpTip-content
+{
+    background: -moz-linear-gradient(top, #687177,#687177 45%,#555D62 65%);
+    background: -webkit-gradient(linear,left top,left bottom,from(#687177),color-stop(0.45,#687177),color-stop(0.65,#585F64),to(#555D62));
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#687177',endColorstr='#555D62');
+    font-size: .9em;
+}
+
+.recentInsiderChart .helpTip.crHelpTip.crHelpLrg
+{
+    font-size: 12px;
+    text-align: center;
+}
+
+.recentInsiderChart .circlemarker
+{
+    color: #FFF;
+    font-size: 11px;
+    font-weight: bold;
+    text-align: center;
+    white-space: nowrap;
+}
+
+.chartLegend .circlemarkerSmall
+{
+    color: #FFF;
+    font-size: 9px;
+    font-weight: bold;
+    text-align: center;
+    white-space: nowrap;
+}
+
+.recentInsiderChart .circlemarker-green,
+.chartLegend .circlemarker-green
+{
+    background-color: #007C1D;
+}
+
+.recentInsiderChart .circlemarker-red,
+.chartLegend .circlemarker-red
+{
+    background-color: #B50000;
+}
+
+.recentInsiderChart .circlemarker-gray,
+.chartLegend .circlemarker-gray
+{
+    background-color: #CCC;
+    color: #535353;
+}
+
+.chartLegend .legendLabel
+{
+    color: #888;
+    font-size: .9em;
+    text-transform: uppercase;
+}
+
+.analystEstimates .snapshot td
+{
+    text-align: right;
+    font-weight: bold;
+}
+
+.analystEstimates .snapshot td.first,
+.analystEstimates .snapshot td a
+{
+    font-weight: normal;
+}
+
+.analystEstimates .snapshot td.recommendation
+{
+    text-transform: uppercase;
+}
+
+.analystEstimates .ratings td
+{
+    text-align: center;
+}
+
+.analystEstimates .ratings td.current
+{
+    font-weight: bold;
+}
+
+.analystEstimates .ratings tr.last td
+{
+    text-transform: uppercase;
+}
+
+.analystEstimates .ratingsConversionTable
+{
+    border-bottom: 1px solid #D4E0E0;
+}
+
+.analystEstimates td.first
+{
+    text-align: left;
+}
+
+/* financials */
+.financials h2
+{
+    font-size: 1.3em;
+    font-weight: bold;
+    margin: 30px 8px 8px;
+}
+
+.financials .crDataTable
+{
+    border-bottom: 1px solid #D0D0D0;
+    border-top: 1px solid #D0D0D0;
+}
+
+.financials .crDataTable th
+{
+    font-weight: bold;
+}
+
+.financials .crDataTable td
+{
+    border-left: 1px dotted #B2B2B2;
+    border-top: 1px dotted #B2B2B2;
+}
+
+.financials .crDataTable td.neg
+{
+    background-color: #FC9D9B;
+}
+
+.financials .crDataTable td.pos-top
+{
+    background-color: #91D391;
+}
+
+.financials .crDataTable td.pos-middle
+{
+    background-color: #A5E5AA;
+}
+
+.financials .crDataTable td.pos-bottom
+{
+    background-color: #D0F0CD;
+}
+
+.financials .crDataTable .rowTitle
+{
+    border-left: none;
+    font-weight: normal;
+}
+
+.financials .crDataTable .childRow .rowTitle
+{
+    color: #999;
+}
+
+.financials .crDataTable .totalRow td
+{
+    background-color: #D9DFDD;
+    font-weight: bold;
+}
+
+.financials .crDataTable .deltaType-negative
+{
+    color: #C00;
+}
+
+/* MiniGraph styles */
+.financials .crDataTable .miniGraphCell
+{
+    text-align: center;
+}
+
+.financials .crDataTable .miniGraphCell .chartBar
+{
+	background-color: #333;
+	border: solid 1px #FFF;
+}
+/* End MiniGraph styles */
