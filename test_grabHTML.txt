@@ -1,10 +1,10 @@
-hellourls is http://www.marketwatch.com/investing/stock/RBY/news
+hellourls is http://www.marketwatch.com/investing/stock/TROV/news
 curl result is *
 <!DOCTYPE html>
 <html xmlns:fb="http://www.facebook.com/2008/fbml" xmlns:og="http://ogp.me/ns#" lang="en">
 <head>
     <title>
-    RBY News - Rubicon Minerals Corp. Company News &amp; Press Releases - MarketWatch</title>
+    TROV News - TrovaGene Inc. Company News &amp; Press Releases - MarketWatch</title>
     <meta http-equiv="X-UA-Compatible" content="IE=8,IE=9,IE=10"/>
     <meta name="apple-itunes-app" content="app-id=336693422"/>
     <meta name="lifp_signature" content="50eb2d087826a77e5d000001"/>
@@ -12,8 +12,8 @@ curl result is *
     <meta name="robots" content="noarchive,noodp"/>
     <link rel="shortcut icon" href="http://mw2.wsj.net/MW5/content/images/favicon.ico"/>
     <link rel="apple-touch-icon-precomposed" href="http://mw1.wsj.net/MW5/content/images/favicon-152.png"/>
-    <link rel="stylesheet" href="http://mw2.wsj.net/MW5/content/combined/combined-min-1.0.7140.css" type="text/css"/>
-    <script type="text/javascript" src="http://mw1.wsj.net/MW5/content/combined/combined-head-min-1.0.7140.js"></script>
+    <link rel="stylesheet" href="http://mw2.wsj.net/MW5/content/combined/combined-min-1.0.7159.css" type="text/css"/>
+    <script type="text/javascript" src="http://mw1.wsj.net/MW5/content/combined/combined-head-min-1.0.7159.js"></script>
 
     <script type="text/javascript">
         MarketWatch.setBaseUrl('');
@@ -25,19 +25,19 @@ curl result is *
 
   <link type="text/css" href="http://mw2.wsj.net/MW5/content/investing/css/quote-layout.css?v=addport" rel="stylesheet"/>
   <link type="text/css" href="http://mw3.wsj.net/MW5/content/investing/css/quote-typography.css" rel="stylesheet"/>
-  <link rel="canonical" href="http://www.marketwatch.com/investing/stock/rby/news"/>
-  <link rel="alternate" media="only screen and (max-width: 640px)" href="http://www.marketwatch.com/m/quote/rby"/>
-    <meta id="description" name="description" content="Updated news for Rubicon Minerals Corp. - including RBY company news, press releases and other industry & stock market news."></meta>
-    <meta id="keywords" name="keywords" content="RBY, RBY news, RBY company news, RBY press releases, Rubicon Minerals Corp. news, Rubicon Minerals Corp. press releases, Rubicon Minerals Corp. Stock news"></meta>
+  <link rel="canonical" href="http://www.marketwatch.com/investing/stock/trov/news"/>
+  <link rel="alternate" media="only screen and (max-width: 640px)" href="http://www.marketwatch.com/m/quote/trov"/>
+    <meta id="description" name="description" content="Updated news for TrovaGene Inc. - including TROV company news, press releases and other industry & stock market news."></meta>
+    <meta id="keywords" name="keywords" content="TROV, TROV news, TROV company news, TROV press releases, TrovaGene Inc. news, TrovaGene Inc. press releases, TrovaGene Inc. Stock news"></meta>
   <meta property="og:type" content="company"></meta>
-  <meta property="og:title" content="Rubicon Minerals Corp."></meta>
-  <meta property="og:url" content="http://www.marketwatch.com/investing/stock/rby"></meta>
+  <meta property="og:title" content="TrovaGene Inc."></meta>
+  <meta property="og:url" content="http://www.marketwatch.com/investing/stock/trov"></meta>
   <meta property="og:image" content="http://s.wsj.net/public/resources/MWimages/MW-DR328_mw_soc_NS_20150801233302.png"></meta>
   <meta property="fb:admins" content="100000091985075"></meta>
   <meta property="fb:app_id" content="283204329838"></meta>
   
     <script type="text/javascript" src="http://mw2.wsj.net/MW5/content/business/js/marketwatch.brokerbar.js?v=c"></script>
-    <script type="text/javascript" src="http://segment-data.zqtk.net/dowjones-d8s23j?url=http%3A%2F%2Fwww.marketwatch.com/investing/stock/RBY/news"></script>
+    <script type="text/javascript" src="http://segment-data.zqtk.net/dowjones-d8s23j?url=http%3A%2F%2Fwww.marketwatch.com/investing/stock/TROV/news"></script>
 	<link type="text/css" href="http://mw2.wsj.net/MW5/content/market/css/quotedisplay.css?v=bb" rel="stylesheet"/>
   <script src="/investing/Home/_HeadlineItem" type="text/javascript"></script><script type="text/javascript">
     window.NREUM || (NREUM = {}), __nr_require = function (t, e, n) { function r(n) { if (!e[n]) { var o = e[n] = { exports: {} }; t[n][0].call(o.exports, function (e) { var o = t[n][1][e]; return r(o ? o : e) }, o, o.exports) } return e[n].exports } if ("function" == typeof __nr_require) return __nr_require; for (var o = 0; o < n.length; o++) r(n[o]); return r }({ QJf3ax: [function (t, e) { function n(t) { function e(e, n, a) { t && t(e, n, a), a || (a = {}); for (var c = s(e), f = c.length, u = i(a, o, r), d = 0; f > d; d++) c[d].apply(u, n); return u } function a(t, e) { f[t] = s(t).concat(e) } function s(t) { return f[t] || [] } function c() { return n(e) } var f = {}; return { on: a, emit: e, create: c, listeners: s, _events: f } } function r() { return {} } var o = "nr@context", i = t("gos"); e.exports = n() }, { gos: "7eSDFh" }], ee: [function (t, e) { e.exports = t("QJf3ax") }, {}], 3: [function (t) { function e(t) { try { i.console && console.log(t) } catch (e) { } } var n, r = t("ee"), o = t(1), i = {}; try { n = localStorage.getItem("__nr_flags").split(","), console && "function" == typeof console.log && (i.console = !0, -1 !== n.indexOf("dev") && (i.dev = !0), -1 !== n.indexOf("nr_dev") && (i.nrDev = !0)) } catch (a) { } i.nrDev && r.on("internal-error", function (t) { e(t.stack) }), i.dev && r.on("fn-err", function (t, n, r) { e(r.stack) }), i.dev && (e("NR AGENT IN DEVELOPMENT MODE"), e("flags: " + o(i, function (t) { return t }).join(", "))) }, { 1: 22, ee: "QJf3ax" }], 4: [function (t) { function e(t, e, n, i, s) { try { c ? c -= 1 : r("err", [s || new UncaughtException(t, e, n)]) } catch (f) { try { r("ierr", [f, (new Date).getTime(), !0]) } catch (u) { } } return "function" == typeof a ? a.apply(this, o(arguments)) : !1 } function UncaughtException(t, e, n) { this.message = t || "Uncaught error with no additional information", this.sourceURL = e, this.line = n } function n(t) { r("err", [t, (new Date).getTime()]) } var r = t("handle"), o = t(6), i = t("ee"), a = window.onerror, s = !1, c = 0; t("loader").features.err = !0, t(5), window.onerror = e; try { throw new Error } catch (f) { "stack" in f && (t(1), t(2), "addEventListener" in window && t(3), window.XMLHttpRequest && XMLHttpRequest.prototype && XMLHttpRequest.prototype.addEventListener && window.XMLHttpRequest && XMLHttpRequest.prototype && XMLHttpRequest.prototype.addEventListener && !/CriOS/.test(navigator.userAgent) && t(4), s = !0) } i.on("fn-start", function () { s && (c += 1) }), i.on("fn-err", function (t, e, r) { s && (this.thrown = !0, n(r)) }), i.on("fn-end", function () { s && !this.thrown && c > 0 && (c -= 1) }), i.on("internal-error", function (t) { r("ierr", [t, (new Date).getTime(), !0]) }) }, { 1: 9, 2: 8, 3: 6, 4: 10, 5: 3, 6: 23, ee: "QJf3ax", handle: "D5DuLP", loader: "G9z0Bl" }], 5: [function (t) { function e() { } if (window.performance && window.performance.timing && window.performance.getEntriesByType) { var n = t("ee"), r = t("handle"), o = t(1), i = t(2); t("loader").features.stn = !0, t(3), n.on("fn-start", function (t) { var e = t[0]; e instanceof Event && (this.bstStart = Date.now()) }), n.on("fn-end", function (t, e) { var n = t[0]; n instanceof Event && r("bst", [n, e, this.bstStart, Date.now()]) }), o.on("fn-start", function (t, e, n) { this.bstStart = Date.now(), this.bstType = n }), o.on("fn-end", function (t, e) { r("bstTimer", [e, this.bstStart, Date.now(), this.bstType]) }), i.on("fn-start", function () { this.bstStart = Date.now() }), i.on("fn-end", function (t, e) { r("bstTimer", [e, this.bstStart, Date.now(), "requestAnimationFrame"]) }), n.on("pushState-start", function () { this.time = Date.now(), this.startPath = location.pathname + location.hash }), n.on("pushState-end", function () { r("bstHist", [location.pathname + location.hash, this.startPath, this.time]) }), "addEventListener" in window.performance && (window.performance.addEventListener("webkitresourcetimingbufferfull", function () { r("bstResource", [window.performance.getEntriesByType("resource")]), window.performance.webkitClearResourceTimings() }, !1), window.performance.addEventListener("resourcetimingbufferfull", function () { r("bstResource", [window.performance.getEntriesByType("resource")]), window.performance.clearResourceTimings() }, !1)), document.addEventListener("scroll", e, !1), document.addEventListener("keypress", e, !1), document.addEventListener("click", e, !1) } }, { 1: 9, 2: 8, 3: 7, ee: "QJf3ax", handle: "D5DuLP", loader: "G9z0Bl" }], 6: [function (t, e) { function n(t) { i.inPlace(t, ["addEventListener", "removeEventListener"], "-", r) } function r(t) { return t[1] } var o = (t(1), t("ee").create()), i = t(2)(o), a = t("gos"); if (e.exports = o, n(window), "getPrototypeOf" in Object) { for (var s = document; s && !s.hasOwnProperty("addEventListener") ;) s = Object.getPrototypeOf(s); s && n(s); for (var c = XMLHttpRequest.prototype; c && !c.hasOwnProperty("addEventListener") ;) c = Object.getPrototypeOf(c); c && n(c) } else XMLHttpRequest.prototype.hasOwnProperty("addEventListener") && n(XMLHttpRequest.prototype); o.on("addEventListener-start", function (t) { if (t[1]) { var e = t[1]; "function" == typeof e ? this.wrapped = t[1] = a(e, "nr@wrapped", function () { return i(e, "fn-", null, e.name || "anonymous") }) : "function" == typeof e.handleEvent && i.inPlace(e, ["handleEvent"], "fn-") } }), o.on("removeEventListener-start", function (t) { var e = this.wrapped; e && (t[1] = e) }) }, { 1: 23, 2: 24, ee: "QJf3ax", gos: "7eSDFh" }], 7: [function (t, e) { var n = (t(2), t("ee").create()), r = t(1)(n); e.exports = n, r.inPlace(window.history, ["pushState"], "-") }, { 1: 24, 2: 23, ee: "QJf3ax" }], 8: [function (t, e) { var n = (t(2), t("ee").create()), r = t(1)(n); e.exports = n, r.inPlace(window, ["requestAnimationFrame", "mozRequestAnimationFrame", "webkitRequestAnimationFrame", "msRequestAnimationFrame"], "raf-"), n.on("raf-start", function (t) { t[0] = r(t[0], "fn-") }) }, { 1: 24, 2: 23, ee: "QJf3ax" }], 9: [function (t, e) { function n(t, e, n) { t[0] = o(t[0], "fn-", null, n) } var r = (t(2), t("ee").create()), o = t(1)(r); e.exports = r, o.inPlace(window, ["setTimeout", "setInterval", "setImmediate"], "setTimer-"), r.on("setTimer-start", n) }, { 1: 24, 2: 23, ee: "QJf3ax" }], 10: [function (t, e) { function n() { f.inPlace(this, p, "fn-") } function r(t, e) { f.inPlace(e, ["onreadystatechange"], "fn-") } function o(t, e) { return e } function i(t, e) { for (var n in t) e[n] = t[n]; return e } var a = t("ee").create(), s = t(1), c = t(2), f = c(a), u = c(s), d = window.XMLHttpRequest, p = ["onload", "onerror", "onabort", "onloadstart", "onloadend", "onprogress", "ontimeout"]; e.exports = a, window.XMLHttpRequest = function (t) { var e = new d(t); try { a.emit("new-xhr", [], e), u.inPlace(e, ["addEventListener", "removeEventListener"], "-", o), e.addEventListener("readystatechange", n, !1) } catch (r) { try { a.emit("internal-error", [r]) } catch (i) { } } return e }, i(d, XMLHttpRequest), XMLHttpRequest.prototype = d.prototype, f.inPlace(XMLHttpRequest.prototype, ["open", "send"], "-xhr-", o), a.on("send-xhr-start", r), a.on("open-xhr-start", r) }, { 1: 6, 2: 24, ee: "QJf3ax" }], 11: [function (t) { function e(t) { var e = this.params, r = this.metrics; if (!this.ended) { this.ended = !0; for (var i = 0; c > i; i++) t.removeEventListener(s[i], this.listener, !1); if (!e.aborted) { if (r.duration = (new Date).getTime() - this.startTime, 4 === t.readyState) { e.status = t.status; var a = t.responseType, f = "arraybuffer" === a || "blob" === a || "json" === a ? t.response : t.responseText, u = n(f); if (u && (r.rxSize = u), this.sameOrigin) { var d = t.getResponseHeader("X-NewRelic-App-Data"); d && (e.cat = d.split(", ").pop()) } } else e.status = 0; r.cbTime = this.cbTime, o("xhr", [e, r, this.startTime]) } } } function n(t) { if ("string" == typeof t && t.length) return t.length; if ("object" != typeof t) return void 0; if ("undefined" != typeof ArrayBuffer && t instanceof ArrayBuffer && t.byteLength) return t.byteLength; if ("undefined" != typeof Blob && t instanceof Blob && t.size) return t.size; if ("undefined" != typeof FormData && t instanceof FormData) return void 0; try { return JSON.stringify(t).length } catch (e) { return void 0 } } function r(t, e) { var n = i(e), r = t.params; r.host = n.hostname + ":" + n.port, r.pathname = n.pathname, t.sameOrigin = n.sameOrigin } if (window.XMLHttpRequest && XMLHttpRequest.prototype && XMLHttpRequest.prototype.addEventListener && !/CriOS/.test(navigator.userAgent)) { t("loader").features.xhr = !0; var o = t("handle"), i = t(2), a = t("ee"), s = ["load", "error", "abort", "timeout"], c = s.length, f = t(1); t(4), t(3), a.on("new-xhr", function () { this.totalCbs = 0, this.called = 0, this.cbTime = 0, this.end = e, this.ended = !1, this.xhrGuids = {} }), a.on("open-xhr-start", function (t) { this.params = { method: t[0] }, r(this, t[1]), this.metrics = {} }), a.on("open-xhr-end", function (t, e) { "loader_config" in NREUM && "xpid" in NREUM.loader_config && this.sameOrigin && e.setRequestHeader("X-NewRelic-ID", NREUM.loader_config.xpid) }), a.on("send-xhr-start", function (t, e) { var r = this.metrics, o = t[0], i = this; if (r && o) { var f = n(o); f && (r.txSize = f) } this.startTime = (new Date).getTime(), this.listener = function (t) { try { "abort" === t.type && (i.params.aborted = !0), ("load" !== t.type || i.called === i.totalCbs && (i.onloadCalled || "function" != typeof e.onload)) && i.end(e) } catch (n) { try { a.emit("internal-error", [n]) } catch (r) { } } }; for (var u = 0; c > u; u++) e.addEventListener(s[u], this.listener, !1) }), a.on("xhr-cb-time", function (t, e, n) { this.cbTime += t, e ? this.onloadCalled = !0 : this.called += 1, this.called !== this.totalCbs || !this.onloadCalled && "function" == typeof n.onload || this.end(n) }), a.on("xhr-load-added", function (t, e) { var n = "" + f(t) + !!e; this.xhrGuids && !this.xhrGuids[n] && (this.xhrGuids[n] = !0, this.totalCbs += 1) }), a.on("xhr-load-removed", function (t, e) { var n = "" + f(t) + !!e; this.xhrGuids && this.xhrGuids[n] && (delete this.xhrGuids[n], this.totalCbs -= 1) }), a.on("addEventListener-end", function (t, e) { e instanceof XMLHttpRequest && "load" === t[0] && a.emit("xhr-load-added", [t[1], t[2]], e) }), a.on("removeEventListener-end", function (t, e) { e instanceof XMLHttpRequest && "load" === t[0] && a.emit("xhr-load-removed", [t[1], t[2]], e) }), a.on("fn-start", function (t, e, n) { e instanceof XMLHttpRequest && ("onload" === n && (this.onload = !0), ("load" === (t[0] && t[0].type) || this.onload) && (this.xhrCbStart = (new Date).getTime())) }), a.on("fn-end", function (t, e) { this.xhrCbStart && a.emit("xhr-cb-time", [(new Date).getTime() - this.xhrCbStart, this.onload, e], e) }) } }, { 1: "XL7HBI", 2: 12, 3: 10, 4: 6, ee: "QJf3ax", handle: "D5DuLP", loader: "G9z0Bl" }], 12: [function (t, e) { e.exports = function (t) { var e = document.createElement("a"), n = window.location, r = {}; e.href = t, r.port = e.port; var o = e.href.split("://"); return !r.port && o[1] && (r.port = o[1].split("/")[0].split("@").pop().split(":")[1]), r.port && "0" !== r.port || (r.port = "https" === o[0] ? "443" : "80"), r.hostname = e.hostname || n.hostname, r.pathname = e.pathname, r.protocol = o[0], "/" !== r.pathname.charAt(0) && (r.pathname = "/" + r.pathname), r.sameOrigin = !e.hostname || e.hostname === document.domain && e.port === n.port && e.protocol === n.protocol, r } }, {}], 13: [function (t, e) { function n(t) { return function () { r(t, [(new Date).getTime()].concat(i(arguments))) } } var r = t("handle"), o = t(1), i = t(2); "undefined" == typeof window.newrelic && (newrelic = window.NREUM); var a = ["setPageViewName", "addPageAction", "setCustomAttribute", "finished", "addToTrace", "inlineHit", "noticeError"]; o(a, function (t, e) { window.NREUM[e] = n("api-" + e) }), e.exports = window.NREUM }, { 1: 22, 2: 23, handle: "D5DuLP" }], "7eSDFh": [function (t, e) { function n(t, e, n) { if (r.call(t, e)) return t[e]; var o = n(); if (Object.defineProperty && Object.keys) try { return Object.defineProperty(t, e, { value: o, writable: !0, enumerable: !1 }), o } catch (i) { } return t[e] = o, o } var r = Object.prototype.hasOwnProperty; e.exports = n }, {}], gos: [function (t, e) { e.exports = t("7eSDFh") }, {}], handle: [function (t, e) { e.exports = t("D5DuLP") }, {}], D5DuLP: [function (t, e) { function n(t, e, n) { return r.listeners(t).length ? r.emit(t, e, n) : (o[t] || (o[t] = []), void o[t].push(e)) } var r = t("ee").create(), o = {}; e.exports = n, n.ee = r, r.q = o }, { ee: "QJf3ax" }], id: [function (t, e) { e.exports = t("XL7HBI") }, {}], XL7HBI: [function (t, e) { function n(t) { var e = typeof t; return !t || "object" !== e && "function" !== e ? -1 : t === window ? 0 : i(t, o, function () { return r++ }) } var r = 1, o = "nr@id", i = t("gos"); e.exports = n }, { gos: "7eSDFh" }], G9z0Bl: [function (t, e) { function n() { var t = p.info = NREUM.info, e = f.getElementsByTagName("script")[0]; if (t && t.licenseKey && t.applicationID && e) { s(d, function (e, n) { e in t || (t[e] = n) }); var n = "https" === u.split(":")[0] || t.sslForHttp; p.proto = n ? "https://" : "http://", a("mark", ["onload", i()]); var r = f.createElement("script"); r.src = p.proto + t.agent, e.parentNode.insertBefore(r, e) } } function r() { "complete" === f.readyState && o() } function o() { a("mark", ["domContent", i()]) } function i() { return (new Date).getTime() } var a = t("handle"), s = t(1), c = (t(2), window), f = c.document, u = ("" + location).split("?")[0], d = { beacon: "bam.nr-data.net", errorBeacon: "bam.nr-data.net", agent: "js-agent.newrelic.com/nr-632.min.js" }, p = e.exports = { offset: i(), origin: u, features: {} }; f.addEventListener ? (f.addEventListener("DOMContentLoaded", o, !1), c.addEventListener("load", n, !1)) : (f.attachEvent("onreadystatechange", r), c.attachEvent("onload", n)), a("mark", ["firstbyte", i()]) }, { 1: 22, 2: 13, handle: "D5DuLP" }], loader: [function (t, e) { e.exports = t("G9z0Bl") }, {}], 22: [function (t, e) { function n(t, e) { var n = [], o = "", i = 0; for (o in t) r.call(t, o) && (n[i] = e(o, t[o]), i += 1); return n } var r = Object.prototype.hasOwnProperty; e.exports = n }, {}], 23: [function (t, e) { function n(t, e, n) { e || (e = 0), "undefined" == typeof n && (n = t ? t.length : 0); for (var r = -1, o = n - e || 0, i = Array(0 > o ? 0 : o) ; ++r < o;) i[r] = t[e + r]; return i } e.exports = n }, {}], 24: [function (t, e) { function n(t) { return !(t && "function" == typeof t && t.apply && !t[i]) } var r = t("ee"), o = t(1), i = "nr@wrapper", a = Object.prototype.hasOwnProperty; e.exports = function (t) { function e(t, e, r, a) { function nrWrapper() { var n, i, s, f; try { i = this, n = o(arguments), s = r && r(n, i) || {} } catch (d) { u([d, "", [n, i, a], s]) } c(e + "start", [n, i, a], s); try { return f = t.apply(i, n) } catch (p) { throw c(e + "err", [n, i, p], s), p } finally { c(e + "end", [n, i, f], s) } } return n(t) ? t : (e || (e = ""), nrWrapper[i] = !0, f(t, nrWrapper), nrWrapper) } function s(t, r, o, i) { o || (o = ""); var a, s, c, f = "-" === o.charAt(0); for (c = 0; c < r.length; c++) s = r[c], a = t[s], n(a) || (t[s] = e(a, f ? s + o : o, i, s)) } function c(e, n, r) { try { t.emit(e, n, r) } catch (o) { u([o, e, n, r]) } } function f(t, e) { if (Object.defineProperty && Object.keys) try { var n = Object.keys(t); return n.forEach(function (n) { Object.defineProperty(e, n, { get: function () { return t[n] }, set: function (e) { return t[n] = e, e } }) }), e } catch (r) { u([r]) } for (var o in t) a.call(t, o) && (e[o] = t[o]); return e } function u(e) { try { t.emit("internal-error", e) } catch (n) { } } return t || (t = r), e.inPlace = s, e.flag = i, e } }, { 1: 23, ee: "QJf3ax" }] }, {}, ["G9z0Bl", 4, 11, 5]);
@@ -86,16 +86,6 @@ curl result is *
         </div>
     
         <div id="daypartwrap">
-                <div id="daypartbanner" class=" us countdowntoclose">       
-                    <p class="marketstate">
-                        <span class="state">New York Markets Close in:</span>
-                        <span id="daypartcountdown" class="time"></span>
-                    </p>
-                        <p class="links">
-                                    <a href="/topics/columns/movers-and-shakers?dist=countdown">After Hours Preview</a>
-                                    <a href="/tools/marketsummary/screener.asp?exchange=15&amp;view=8&amp;lookup=Look+Up">Winners and Losers</a>
-                        </p>
-                </div>
         </div>
     </div>
 </div><!-- determining the user level here -->
@@ -217,7 +207,7 @@ curl result is *
 				<div id="above">
   <script>
     $(document).ready(function() {
-      MarketWatch.Investing.setActiveTicker('RBY');
+      MarketWatch.Investing.setActiveTicker('TROV');
     });
   </script>
   
@@ -228,7 +218,7 @@ curl result is *
 
 
     <div id="qpcbar">
-        <div class="qpcbutton" style="width: 20%;">
+        <div class="qpcbutton" style="width: 16.6666666666667%;">
             <div class="qpccontainer">
 
 
@@ -250,7 +240,7 @@ curl result is *
 	
             </div>
         </div>
-        <div class="qpcbutton" style="width: 20%;">
+        <div class="qpcbutton" style="width: 16.6666666666667%;">
             <div class="qpccontainer expandable">
 
 
@@ -275,7 +265,7 @@ curl result is *
                     <div class="qpcclose">Close</div>
             </div>
         </div>
-        <div class="qpcbutton" style="width: 20%;">
+        <div class="qpcbutton" style="width: 16.6666666666667%;">
             <div class="qpccontainer expandable">
 
 
@@ -300,7 +290,7 @@ curl result is *
                     <div class="qpcclose">Close</div>
             </div>
         </div>
-        <div class="qpcbutton" style="width: 20%;">
+        <div class="qpcbutton" style="width: 16.6666666666667%;">
             <div class="qpccontainer expandable">
 
 
@@ -325,7 +315,7 @@ curl result is *
                     <div class="qpcclose">Close</div>
             </div>
         </div>
-        <div class="qpcbutton" style="width: 20%;">
+        <div class="qpcbutton" style="width: 16.6666666666667%;">
             <div class="qpccontainer expandable">
 
 
@@ -348,6 +338,28 @@ curl result is *
                     <div class="qpcexpand">Expand</div>
                     <div class="qpckeepopen">Keep Open</div>
                     <div class="qpcclose">Close</div>
+            </div>
+        </div>
+        <div class="qpcbutton" style="width: 16.6666666666667%;">
+            <div class="qpccontainer">
+
+
+
+
+	
+
+
+
+
+
+
+
+    <div id="ad_QPCButton6" class="advertisement " style="">
+      <div class="cutouthelper">
+		
+      </div>
+  </div>
+	
             </div>
         </div>
         <div class="clear"></div>
@@ -434,9 +446,9 @@ curl result is *
    
   <div class="divider"></div>
       <div id="instrumentheader">
-          <h1 id="instrumentname">Rubicon Minerals Corp.</h1>
+          <h1 id="instrumentname">TrovaGene Inc.</h1>
           <p id="instrumentticker" class="textdeemphasized" style="float:left">
-                  NYSE MKT: RBY
+                  NASDAQ: TROV
           </p>
       </div>
 
@@ -456,8 +468,8 @@ curl result is *
           </p>-->
           <p style="float: right;">
 
-	<a target="_blank" href="https://ad.doubleclick.net/ddm/trackclk/N3941.marketwatch.com/B9306818.126532652;dc_trk_aid=299684181">Join TD Ameritrade</a>
-	<img src="https://ad.doubleclick.net/ddm/trackimp/N3941.marketwatch.com/B9306818.126532652;dc_trk_aid=299684181;dc_trk_cid=67442974;ord=%%CACHEBUSTER%%?/369138091" border="0" width="1" height="1" alt=""/>
+	<a target="_blank" href="https://ad.doubleclick.net/ddm/trackclk/N3941.marketwatch.com/B9306818.126532652;dc_trk_aid=299684181;dc_trk_cid=67442974;dc_lat=;dc_rdid=;tag_for_child_directed_treatment=">Join TD Ameritrade</a>
+	<img src="https://ad.doubleclick.net/ddm/trackimp/N3941.marketwatch.com/B9306818.126532652;dc_trk_aid=299684181;dc_trk_cid=67442974;ord=%%CACHEBUSTER%%?/1187953468" border="0" width="1" height="1" alt=""/>
 	        </p>
         </div>
         <div>
@@ -468,25 +480,25 @@ curl result is *
   <div class="clear"> </div>
 
    <div class="tabs">
-        <a href="/investing/stock/RBY" class="tab">Overview
+        <a href="/investing/stock/TROV" class="tab">Overview
       </a>
-        <a href="/investing/stock/RBY/profile" class="tab">Profile
+        <a href="/investing/stock/TROV/profile" class="tab">Profile
       </a>
-        <a href="/investing/stock/RBY/news" class="tab selected">News
+        <a href="/investing/stock/TROV/news" class="tab selected">News
       </a>
-        <a href="/investing/stock/RBY/charts" class="tab">Charts
+        <a href="/investing/stock/TROV/charts" class="tab">Charts
       </a>
-        <a href="/investing/stock/RBY/financials" class="tab">Financials
+        <a href="/investing/stock/TROV/financials" class="tab">Financials
       </a>
-        <a href="/investing/stock/RBY/historical" class="tab">Historical Quotes
+        <a href="/investing/stock/TROV/historical" class="tab">Historical Quotes
       </a>
-        <a href="/investing/stock/RBY/analystestimates" class="tab">Analyst Estimates
+        <a href="/investing/stock/TROV/analystestimates" class="tab">Analyst Estimates
       </a>
-        <a href="/investing/stock/RBY/options" class="tab">Options
+        <a href="/investing/stock/TROV/options" class="tab">Options
       </a>
-        <a href="/investing/stock/RBY/secfilings" class="tab">SEC Filings
+        <a href="/investing/stock/TROV/secfilings" class="tab">SEC Filings
       </a>
-        <a href="/investing/stock/RBY/insideractions" class="tab">Insiders
+        <a href="/investing/stock/TROV/insideractions" class="tab">Insiders
       </a>
     </div>
 
@@ -498,53 +510,53 @@ curl result is *
 
 
 
-       
+
 
   
-<div class="quotedisplay tenwidequote open" id="quoteDisplay_325605967">
+<div class="quotedisplay tenwidequote after" id="quoteDisplay_1623296445">
     <span class="bgChannel">/marketstate/country/us</span>
 	<div class="companyname">
-		<a href="/investing/stock/RBY" title="Rubicon Minerals Corp.">Rubicon Minerals Corp.</a>
+		<a href="/investing/stock/TROV" title="TrovaGene Inc.">TrovaGene Inc.</a>
 	</div>
     <div class="section activeQuote bgQuote down">
 		<div class="marketheader" style="float:none">
-		    <p class="column marketstate">Market open</p>
-		        <p class="column"><span>&nbsp;--</span>Real time quotes</p>
-                    <p class="lastcolumn bgTimestamp longformat">Jan 11, 2016, 9:52 a.m.</p>
+		    <p class="column marketstate">After Hours</p>
+		        <p class="column"><span>&nbsp;--</span>Quotes are delayed by 20 min</p>
+                    <p class="lastcolumn bgTimestamp longformat">Jan 22, 2016, 6:47 p.m.</p>
 		</div>
 		<div class="ticker">
-			<a href="/investing/stock/RBY" title="Rubicon Minerals Corp.">RBY</a>
+			<a href="/investing/stock/TROV" title="TrovaGene Inc.">TROV</a>
 		</div>
-		<span class="bgChannel">/quotes/zigman/18671/composite</span>
+		<span class="bgChannel">/quotes/zigman/10294822/composite</span>
         <div class="lastprice">
 			<div class="pricewrap">
 					<p class="currency">$</p>			
- 				<p class="data bgLast">0.03</p>
+ 				<p class="data bgLast">4.82</p>
  			</div>
 			<p style="clear:left" class="priceclear"></p>
 		</div>
 		<div class="lastpricedetails">
 			<p class="vertelement column">Change</p>
 			<p class="lastcolumn data">
-				<span class="bgChange">-0.07</span>
-				<span class="bgPercentChange">-66.36%</span>
+				<span class="bgChange">-0.03</span>
+				<span class="bgPercentChange">-0.62%</span>
 			</p>
 		  <p class="column vertelement">Volume</p>
-		  <p class="lastcolumn data"><span class="horzelement">Volume </span><span class="bgVolume">5.12m</span></p>
-		  <p class="lastcolumn vertelement">Real time quotes</p>
+		  <p class="lastcolumn data"><span class="horzelement">Volume </span><span>9,583</span></p>
+		  <p class="lastcolumn vertelement">Quotes are delayed by 20 min</p>
 		</div>
 			<div class="intradaychart">
-				<div id="intradaymediumchart325605967" style="position: relative; margin: auto 0; font-size: .7em; float:right; padding-right:7px;"></div>
+				<div id="intradaymediumchart1623296445" style="position: relative; margin: auto 0; font-size: .7em; float:right; padding-right:7px;"></div>
 <script type="text/javascript">
   try {
-          var intradaymediumchart325605967Data = [{"Key":"US:RBY","Value":{"BarFactor":300000,"BarSize":5,"CustomDateRange":false,"Data":[{"Key":"US:RBY","Value":{"BlueGrassChannel":"\/quotes\/zigman\/18671\/composite","IsIndex":0,"Name":"Rubicon Minerals Corp.","Sessions":[{"High":{"Index":0,"Price":0.0414},"Low":{"Index":4,"Price":0.0333},"News":null,"PreviousClose":0.099,"Regions":[{"Start":0,"Stop":0,"Type":0},{"Start":78,"Stop":78,"Type":1}],"Start":"\/Date(1452526200000-0600)\/","Stop":"\/Date(1452549540000-0600)\/","Trades":[0.0414,0.0349,0.0362,0.0354,0.0333],"Weight":10}]}}],"Error":null,"xAxisLabelInfo":{"chartUnit":0,"displayUnit":1},"xAxisLabelsObj":{"ElementList":[{"element":"10a","x":13},{"element":"11a","x":41},{"element":"12p","x":68},{"element":"1p","x":96},{"element":"2p","x":123},{"element":"3p","x":151}],"timeLines":[13,41,68,96,123,151]}}}];
-          var intradaymediumchart325605967Chart = new EmbeddedChart('#intradaymediumchart325605967', SmallChartStyle,
+          var intradaymediumchart1623296445Data = [{"Key":"US:TROV","Value":{"BarFactor":300000,"BarSize":5,"CustomDateRange":false,"Data":[{"Key":"US:TROV","Value":{"BlueGrassChannel":"\/quotes\/zigman\/10294822\/composite","IsIndex":0,"Name":"TrovaGene Inc.","Sessions":[{"High":{"Index":0,"Price":5.37},"Low":{"Index":41,"Price":4.375},"News":null,"PreviousClose":5.69,"Regions":[{"Start":0,"Stop":0,"Type":0},{"Start":78,"Stop":113,"Type":1}],"Start":"\/Date(1453476600000-0600)\/","Stop":"\/Date(1453510500000-0600)\/","Trades":[5.26,4.93,5,4.9601,4.6899,4.7,4.6189,4.6689,4.6,4.555,4.4801,4.41,4.43,4.5278,4.6,4.64,4.5601,4.55,4.57,4.59,4.5343,4.6255,4.62,4.66,4.64,4.5,4.4601,4.5,4.5099,4.43,4.45,4.432,4.43,4.41,4.41,4.49,4.43,4.47,4.4399,4.435,4.39,4.43,4.4172,4.405,4.43,4.4458,4.49,4.47,4.455,4.47,4.4875,4.49,4.51,4.5258,4.5563,4.629,4.72,4.65,4.63,4.67,4.8,4.771,4.77,4.89,4.853,4.82,4.78,4.79,4.87,4.9001,4.83,4.83,4.815,4.84,4.84,4.77,4.82,4.85,4.76,4.79,4.8,4.85,4.8,4.85,null,null,null,null,null,null,null,null,null,4.81,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,4.82],"Weight":10}]}}],"Error":null,"xAxisLabelInfo":{"chartUnit":0,"displayUnit":1},"xAxisLabelsObj":{"ElementList":[{"element":"11a","x":28},{"element":"1p","x":66},{"element":"3p","x":103},{"element":"5p","x":141}],"timeLines":[28,66,103,141]}}}];
+          var intradaymediumchart1623296445Chart = new EmbeddedChart('#intradaymediumchart1623296445', SmallChartStyle,
           178, 35, '1dy', '5mi',
           null, null,
-          intradaymediumchart325605967Data, 'US:RBY', '');
-          intradaymediumchart325605967Chart.ShowChart();
-          intradaymediumchart325605967Data = null;
-          jQuery.data($('#intradaymediumchart325605967').get(0), 'embeddedchart', intradaymediumchart325605967Chart);
+          intradaymediumchart1623296445Data, 'US:TROV', '');
+          intradaymediumchart1623296445Chart.ShowChart();
+          intradaymediumchart1623296445Data = null;
+          jQuery.data($('#intradaymediumchart1623296445').get(0), 'embeddedchart', intradaymediumchart1623296445Chart);
   }
   catch(err) {}
 </script>
@@ -552,21 +564,21 @@ curl result is *
 		<div class="clear activequoteclear"></div>
     </div>
     <div class="prevclose section bgQuote">
-		<span class="bgChannel">/quotes/zigman/18671/composite</span>
+		<span class="bgChannel">/quotes/zigman/10294822/composite</span>
 		<p class="column">Previous close</p>
 		<p class="lastcolumn data mrkthours price">
 				<span class="currency">$</span>
-			0.10
+			5.69
 		</p>
 		<div class="offhours">
 			<p class="lastcolumn data bgLast price">
 					<span class="currency">$</span>
-				0.03
+				4.85
 			</p>
 			<p class="column vertelement">Change</p>
 			<p class="lastcolumn data">
-				<span class="bgChange">-0.07</span>
-				<span class="bgPercentChange">-66.36%</span>
+				<span class="bgChange">-0.84</span>
+				<span class="bgPercentChange">-14.76%</span>
 			</p>				
 		</div>
     </div>
@@ -574,14 +586,14 @@ curl result is *
       <div class="section rangesection">
 				<p class="column">Day low</p>
 				<p class="lastcolumn">Day high</p>
-			    <p class="column data">$0.03</p>
-			    <p class="data lastcolumn">$0.07</p>
+			    <p class="column data">$4.38</p>
+			    <p class="data lastcolumn">$5.37</p>
           <div class="rangechart">
               <div>
-                <img class="openprice" alt="Open" src="http://mw1.wsj.net/MW5/content/investing/images/pointer.png" style="padding-left:24.538258575197889182058047490%"/>
+                <img class="openprice" alt="Open" src="http://mw1.wsj.net/MW5/content/investing/images/pointer.png" style="padding-left:90.95477386934673366834170854%"/>
               </div>
               <div class="outerbar">
-                <div class="innerbar" style="width:3.166226912928759894459102900%"></div>
+                <div class="innerbar" style="width:47.738693467336683417085427140%"></div>
               </div>
           </div>
 			</div>
@@ -589,17 +601,17 @@ curl result is *
 				<p class="column">52 week low</p>
 				<p class="lastcolumn">52 week high</p>
 				<p class="column data">
-            $0.03
+            $2.85
         </p>
 				<p class="data lastcolumn">
-            $1.35
+            $13.58
         </p>
 				<div class="rangechart">
 				  <div>
-					  <img class="openprice" alt="Open" src="http://mw1.wsj.net/MW5/content/investing/images/pointer.png" style="padding-left:0.5093894928913555842773511700%"/>
+					  <img class="openprice" alt="Open" src="http://mw1.wsj.net/MW5/content/investing/images/pointer.png" style="padding-left:22.647505615045526136755482240%"/>
 				  </div>
 				  <div class="outerbar">
-					  <div class="innerbar" style="width:0%"></div>
+					  <div class="innerbar" style="width:18.640087231246679900466910840%"></div>
 				  </div>
 				</div>
 			</div>
@@ -631,81 +643,12 @@ curl result is *
 
 	
   <div id="mwheadlines" data-doctype="806" class="foreverblock block headlines">
-    <span class="bgChannel">/news/marketwatch/company/us/rby</span>
+    <span class="bgChannel">/news/marketwatch/company/us/trov</span>
     <h2>
-      MarketWatch News on RBY
+      MarketWatch News on TROV
     </h2>
     
-    <div class="headlinewrapper">
-      <ol>
-        
-<li class="fnewsitem" data-uniqueid="1077845008">
-  <div>
-      <p> <a href="/story/canadas-hot-stocks-rubicon-veresen-continental-2012-06-04">Canada&#39;s hot stocks: Rubicon, Veresen, Continental</a></p>
-    <p class="timestamp"><span>10:17 a.m. June 4, 2012</span></p>
-      <p class="source"> - MarketWatch.com</p>
-  </div>
-</li>
-<li class="fnewsitem" data-uniqueid="1062927121">
-  <div>
-      <p> <a href="/story/canada-hot-stocks-rubicon-antrim-2012-02-06">Canada hot stocks: Rubicon, Antrim</a></p>
-    <p class="timestamp"><span>11:54 a.m. Feb. 6, 2012</span></p>
-      <p class="source"> - MarketWatch.com</p>
-  </div>
-</li>
-<li class="fnewsitem" data-uniqueid="1062895100">
-  <div>
-      <p> <a href="/story/canada-hot-stocks-to-watch-cp-cn-transcanada-2012-02-06">Canada hot stocks to watch: CP, CN, TransCanada</a></p>
-    <p class="timestamp"><span>9:24 a.m. Feb. 6, 2012</span></p>
-      <p class="source"> - MarketWatch.com</p>
-  </div>
-</li>
-<li class="fnewsitem" data-uniqueid="1050905804">
-  <div>
-      <p> <a href="/story/opportunity-knocks-in-gold-silver-mining-stocks-2011-10-14">Opportunity knocks in gold, silver mining stocks</a></p>
-    <p class="timestamp"><span>11:01 p.m. Oct. 13, 2011</span></p>
-      <p class="source"> - Myra P. Saefong</p>
-  </div>
-</li>
-<li class="fnewsitem" data-uniqueid="1042552218">
-  <div>
-      <p> <a href="/story/canada-hot-stocks-to-watch-barrick-potash-2011-07-28">Canada hot stocks to watch: Barrick, Potash</a></p>
-    <p class="timestamp"><span>7:38 a.m. July 28, 2011</span></p>
-      <p class="source"> - MarketWatch</p>
-  </div>
-</li>
-<li class="fnewsitem" data-uniqueid="1040740316">
-  <div>
-      <p> <a href="/story/canada-hot-stocks-couche-tard-vitran-rubicon-2011-07-12">Canada hot stocks: Couche-Tard, Vitran, Rubicon</a></p>
-    <p class="timestamp"><span>1:27 p.m. July 12, 2011</span></p>
-      <p class="source"> - MarketWatch</p>
-  </div>
-</li>
-<li class="fnewsitem" data-uniqueid="1038702045">
-  <div>
-      <p>
-        <a href="http://blogs.marketwatch.com/thetell/2011/06/22/boeing-off-1-1-stocks-fall-ahead-of-bernanke/">Boeing off 1.1%; Stocks fall ahead of Bernanke</a>
-      </p>
-    <p class="timestamp"><span>9:02 a.m. June 22, 2011</span></p>
-      <p class="source"> - Tom Bemis</p>
-  </div>
-</li>
-<li class="fnewsitem" data-uniqueid="1029596932">
-  <div>
-      <p> <a href="/story/thursdays-biggest-gaining-and-declining-stocks-2011-03-31">Thursday’s biggest gaining and declining stocks</a></p>
-    <p class="timestamp"><span>3:52 p.m. March 31, 2011</span></p>
-      <p class="source"> - Kate Gibson</p>
-  </div>
-</li>
-<li class="fnewsitem" data-uniqueid="958973001">
-  <div>
-      <p> <a href="/story/the-strategies-that-are-working-the-best-this-year">The strategies that are working the best this year</a></p>
-    <p class="timestamp"><span>11:01 p.m. May 3, 2009</span></p>
-      <p class="source"> - Mark Hulbert</p>
-  </div>
-</li>
-      </ol>
-    </div>
+    <p class="nonews">No News currently available for TROV</p>
   <div style="clear:both"></div>
   </div>
 
@@ -736,192 +679,192 @@ curl result is *
 
 	
   <div id="partnerheadlines" data-doctype="2008" class="foreverblock block headlines">
-    <span class="bgChannel">/news/nonmarketwatch/company/us/rby</span>
+    <span class="bgChannel">/news/nonmarketwatch/company/us/trov</span>
     <h2>
-      Other News on RBY
+      Other News on TROV
     </h2>
     
     <div class="headlinewrapper">
       <ol>
         
-<li class="fnewsitem" data-uniqueid="66d403e8-4e8e-4367-8c75-d5b2443cda0f:255">
+<li class="fnewsitem" data-uniqueid="8de95e42-6af9-4112-aeab-f952db39faf3:207">
   <div>
       <p>
-        <a href="http://www.zacks.com/stock/news/202617/4-gold-mining-stocks-that-plunged-more-than-50-in-2015?cid=CS-MKTWTCH-HL-202617">4 Gold Mining Stocks That Plunged More than 50% in 2015</a>
+        <a href="http://www.thestreet.com/story/13432871/1/trovagene-trov-is-weak-on-high-volume-today.html?puc=TSMKTWATCH&cm_ven=TSMKTWATCH">TrovaGene (TROV) Is Weak On High Volume Today</a>
       </p>
-    <p class="timestamp"><span>12:51 p.m. Dec. 31, 2015</span></p>
-      <p class="source"> - Zacks.com</p>
+    <p class="timestamp"><span>10:07 a.m. Jan. 22, 2016</span></p>
+      <p class="source"> - TheStreet.com</p>
   </div>
 </li>
-<li class="fnewsitem" data-uniqueid="66d403e8-4e8e-4367-8c75-d5b2443cda0f:254">
+<li class="fnewsitem" data-uniqueid="8de95e42-6af9-4112-aeab-f952db39faf3:208">
   <div>
       <p>
-        <a href="http://investorplace.com/2015/12/4-miners-can-survive-1050-gold-15-silver/">4 Miners that Can Survive $1,050 Gold and $15 Silver</a>
+        <a href="http://investorplace.com/2016/01/hottest-manufacturing-stocks-now-trox-ypf-bwen-acad/">Hottest Manufacturing Stocks Now – TROX YPF BWEN ACAD</a>
       </p>
-    <p class="timestamp"><span>4:30 a.m. Dec. 22, 2015</span></p>
+    <p class="timestamp"><span>4:30 a.m. Jan. 22, 2016</span></p>
       <p class="source"> - InvestorPlace.com</p>
   </div>
 </li>
-<li class="fnewsitem" data-uniqueid="66d403e8-4e8e-4367-8c75-d5b2443cda0f:253">
+<li class="fnewsitem" data-uniqueid="8de95e42-6af9-4112-aeab-f952db39faf3:206">
   <div>
       <p>
-        <a href="http://www.zacks.com/stock/news/201654/the-zacks-analyst-blog-highlights-iamgold-pershing-gold-pretium-resources-rubicon-minerals-and-comstock-mining?cid=CS-MKTWTCH-HL-201654">The Zacks Analyst Blog Highlights: IAMGOLD, Pershing Gold, Pretium Resources, Rubicon Minerals and Comstock Mining</a>
+        <a href="http://www.zacks.com/stock/news/204573/why-is-trovagene-inc-trov-stock-soaring-today?cid=CS-MKTWTCH-HL-204573">Why Is Trovagene Inc. (TROV) Stock Soaring Today?</a>
       </p>
-    <p class="timestamp"><span>9:30 a.m. Dec. 21, 2015</span></p>
+    <p class="timestamp"><span>4:27 p.m. Jan. 21, 2016</span></p>
       <p class="source"> - Zacks.com</p>
   </div>
 </li>
-<li class="fnewsitem" data-uniqueid="66d403e8-4e8e-4367-8c75-d5b2443cda0f:252">
+<li class="fnewsitem" data-uniqueid="8de95e42-6af9-4112-aeab-f952db39faf3:205">
   <div>
       <p>
-        <a href="http://www.zacks.com/stock/news/201518/5-gold-mining-stocks-to-avoid-as-gold-prices-tumble?cid=CS-MKTWTCH-HL-201518">5 Gold Mining Stocks to Avoid as Gold Prices Tumble</a>
+        <a href="http://www.thestreet.com/story/13431998/1/trovagene-trov-stock-soars-on-america-s-choice-provider-network-partnership.html?puc=TSMKTWATCH&cm_ven=TSMKTWATCH">Trovagene (TROV) Stock Soars on America's Choice Provider Network Partnership</a>
       </p>
-    <p class="timestamp"><span>10:19 a.m. Dec. 18, 2015</span></p>
+    <p class="timestamp"><span>2:28 p.m. Jan. 21, 2016</span></p>
+      <p class="source"> - TheStreet.com</p>
+  </div>
+</li>
+<li class="fnewsitem" data-uniqueid="8de95e42-6af9-4112-aeab-f952db39faf3:203">
+  <div>
+      <p>
+        <a href="http://seekingalpha.com/news/3042636-trovagene-inks-contract-insurance-network-covering-ctdna-tests-shares-rise-10-percent?source=marketwatch">Trovagene inks contract with insurance network covering ctDNA tests; shares rise 10% premarket</a>
+      </p>
+    <p class="timestamp"><span>8:58 a.m. Jan. 21, 2016</span></p>
+      <p class="source"> - Seeking Alpha</p>
+  </div>
+</li>
+<li class="fnewsitem" data-uniqueid="8de95e42-6af9-4112-aeab-f952db39faf3:204">
+  <div>
+      <p>
+        <a href="http://investorplace.com/2016/01/hottest-manufacturing-stocks-now-trov-bgg-aqxp-ecyt/">Hottest Manufacturing Stocks Now – TROV BGG AQXP ECYT</a>
+      </p>
+    <p class="timestamp"><span>4:30 a.m. Jan. 21, 2016</span></p>
+      <p class="source"> - InvestorPlace.com</p>
+  </div>
+</li>
+<li class="fnewsitem" data-uniqueid="8de95e42-6af9-4112-aeab-f952db39faf3:202">
+  <div>
+      <p>
+        <a href="http://investorplace.com/2016/01/hottest-manufacturing-stocks-now-cbyl-atra-nby-dsci/">Hottest Manufacturing Stocks Now – CBYL ATRA NBY DSCI</a>
+      </p>
+    <p class="timestamp"><span>4:30 a.m. Jan. 15, 2016</span></p>
+      <p class="source"> - InvestorPlace.com</p>
+  </div>
+</li>
+<li class="fnewsitem" data-uniqueid="8de95e42-6af9-4112-aeab-f952db39faf3:201">
+  <div>
+      <p>
+        <a href="http://investorplace.com/2016/01/biggest-movers-in-manufacturing-stocks-now-ttnp-jagx-lpth-ctmx/">Biggest Movers in Manufacturing Stocks Now – TTNP JAGX LPTH CTMX</a>
+      </p>
+    <p class="timestamp"><span>4:15 a.m. Jan. 13, 2016</span></p>
+      <p class="source"> - InvestorPlace.com</p>
+  </div>
+</li>
+<li class="fnewsitem" data-uniqueid="8de95e42-6af9-4112-aeab-f952db39faf3:200">
+  <div>
+      <p>
+        <a href="http://investorplace.com/2015/12/hottest-manufacturing-stocks-now-adms-trox-htbx-mt/">Hottest Manufacturing Stocks Now – ADMS TROX HTBX MT</a>
+      </p>
+    <p class="timestamp"><span>4:15 a.m. Dec. 23, 2015</span></p>
+      <p class="source"> - InvestorPlace.com</p>
+  </div>
+</li>
+<li class="fnewsitem" data-uniqueid="8de95e42-6af9-4112-aeab-f952db39faf3:199">
+  <div>
+      <p>
+        <a href="http://www.zacks.com/stock/news/201405/trovagene-trov-receives-new-patent-for-pcm-technology?cid=CS-MKTWTCH-HL-201405">TrovaGene (TROV) Receives New Patent for PCM Technology</a>
+      </p>
+    <p class="timestamp"><span>2:45 p.m. Dec. 17, 2015</span></p>
       <p class="source"> - Zacks.com</p>
   </div>
 </li>
-<li class="fnewsitem" data-uniqueid="66d403e8-4e8e-4367-8c75-d5b2443cda0f:251">
+<li class="fnewsitem" data-uniqueid="8de95e42-6af9-4112-aeab-f952db39faf3:197">
   <div>
       <p>
-        <a href="http://seekingalpha.com/article/3759446-5-gold-stocks-to-avoid-in-2016?source=marketwatch">5 Gold Stocks To Avoid In 2016</a>
+        <a href="http://seekingalpha.com/news/2987466-trovagene-issued-new-patent-covering-ctdna-technology?source=marketwatch">Trovagene issued new patent covering ctDNA technology</a>
       </p>
-    <p class="timestamp"><span>9:05 a.m. Dec. 16, 2015</span></p>
+    <p class="timestamp"><span>10:34 a.m. Dec. 16, 2015</span></p>
       <p class="source"> - Seeking Alpha</p>
   </div>
 </li>
-<li class="fnewsitem" data-uniqueid="66d403e8-4e8e-4367-8c75-d5b2443cda0f:250">
+<li class="fnewsitem" data-uniqueid="8de95e42-6af9-4112-aeab-f952db39faf3:198">
   <div>
       <p>
-        <a href="http://seekingalpha.com/article/3750916-top-10-gold-stocks-for-2016?source=marketwatch">Top 10 Gold Stocks For 2016</a>
+        <a href="http://investorplace.com/2015/12/biggest-movers-in-manufacturing-stocks-now-adxs-arry-cbyl-ovas/">Biggest Movers in Manufacturing Stocks Now – ADXS ARRY CBYL OVAS</a>
       </p>
-    <p class="timestamp"><span>3:17 p.m. Dec. 11, 2015</span></p>
+    <p class="timestamp"><span>4:45 a.m. Dec. 16, 2015</span></p>
+      <p class="source"> - InvestorPlace.com</p>
+  </div>
+</li>
+<li class="fnewsitem" data-uniqueid="8de95e42-6af9-4112-aeab-f952db39faf3:196">
+  <div>
+      <p>
+        <a href="http://www.zacks.com/stock/news/200914/the-zacks-analyst-blog-highlights-arista-networks-nevro-trovagene-and-servisfirst-bancshares?cid=CS-MKTWTCH-HL-200914">The Zacks Analyst Blog Highlights: Arista Networks, Nevro, TrovaGene and ServisFirst Bancshares</a>
+      </p>
+    <p class="timestamp"><span>9:30 a.m. Dec. 14, 2015</span></p>
+      <p class="source"> - Zacks.com</p>
+  </div>
+</li>
+<li class="fnewsitem" data-uniqueid="8de95e42-6af9-4112-aeab-f952db39faf3:195">
+  <div>
+      <p>
+        <a href="http://seekingalpha.com/news/2979856-biotime-to-distribute-shares-of-oncocyte-unit-to-stockholders-by-end-of-the-month?source=marketwatch">BioTime to distribute shares of OncoCyte unit to stockholders by end of the month</a>
+      </p>
+    <p class="timestamp"><span>12:39 p.m. Dec. 11, 2015</span></p>
       <p class="source"> - Seeking Alpha</p>
   </div>
 </li>
-<li class="fnewsitem" data-uniqueid="66d403e8-4e8e-4367-8c75-d5b2443cda0f:249">
+<li class="fnewsitem" data-uniqueid="8de95e42-6af9-4112-aeab-f952db39faf3:194">
   <div>
       <p>
-        <a href="http://seekingalpha.com/article/3722396-resource-sector-digest-china-continues-to-import-a-massive-amount-of-physical-gold?source=marketwatch">Resource Sector Digest: China Continues To Import A Massive Amount Of Physical Gold</a>
+        <a href="http://www.zacks.com/stock/news/200805/funds-hold-these-4-favorably-ranked-stocks-do-you?cid=CS-MKTWTCH-HL-200805">Funds Hold These 4 Favorably-Ranked Stocks: Do You?</a>
       </p>
-    <p class="timestamp"><span>12:53 a.m. Dec. 1, 2015</span></p>
-      <p class="source"> - Seeking Alpha</p>
+    <p class="timestamp"><span>11:51 a.m. Dec. 11, 2015</span></p>
+      <p class="source"> - Zacks.com</p>
   </div>
 </li>
-<li class="fnewsitem" data-uniqueid="66d403e8-4e8e-4367-8c75-d5b2443cda0f:248">
+<li class="fnewsitem" data-uniqueid="8de95e42-6af9-4112-aeab-f952db39faf3:193">
   <div>
       <p>
-        <a href="http://seekingalpha.com/article/3702706-michael-curran-goes-down-market-shopping-for-winners?source=marketwatch">Michael Curran Goes Down-Market Shopping For Winners</a>
+        <a href="http://www.zacks.com/stock/news/200745/how-trovagene-trov-stock-stands-out-in-a-strong-industry?cid=CS-MKTWTCH-HL-200745">How TrovaGene (TROV) Stock Stands Out in a Strong Industry</a>
       </p>
-    <p class="timestamp"><span>1:44 p.m. Nov. 20, 2015</span></p>
-      <p class="source"> - Seeking Alpha</p>
+    <p class="timestamp"><span>8:32 a.m. Dec. 11, 2015</span></p>
+      <p class="source"> - Zacks.com</p>
   </div>
 </li>
-<li class="fnewsitem" data-uniqueid="66d403e8-4e8e-4367-8c75-d5b2443cda0f:247">
+<li class="fnewsitem" data-uniqueid="8de95e42-6af9-4112-aeab-f952db39faf3:192">
   <div>
       <p>
-        <a href="http://seekingalpha.com/article/3690686-resource-sector-digest-the-yes-no-yes-no-yes-no-game-in-the-etf-sector?source=marketwatch">Resource Sector Digest: The Yes-No-Yes-No-Yes-No Game In The ETF Sector</a>
+        <a href="http://investorplace.com/2015/12/biggest-movers-in-manufacturing-stocks-now-clsn-clcd-axon-tpub/">Biggest Movers in Manufacturing Stocks Now – CLSN CLCD AXON TPUB</a>
       </p>
-    <p class="timestamp"><span>9:30 a.m. Nov. 17, 2015</span></p>
-      <p class="source"> - Seeking Alpha</p>
+    <p class="timestamp"><span>9:00 a.m. Dec. 1, 2015</span></p>
+      <p class="source"> - InvestorPlace.com</p>
   </div>
 </li>
-<li class="fnewsitem" data-uniqueid="66d403e8-4e8e-4367-8c75-d5b2443cda0f:246">
+<li class="fnewsitem" data-uniqueid="8de95e42-6af9-4112-aeab-f952db39faf3:191">
   <div>
       <p>
-        <a href="http://seekingalpha.com/article/3667616-miningwealth-weekly-update-6-whats-happening-to-the-streaming-industry?source=marketwatch">MiningWEALTH Weekly Update #6: What's Happening To The Streaming Industry?</a>
+        <a href="http://www.zacks.com/stock/news/199241/can-the-uptrend-continue-for-trovagene-trov?cid=CS-MKTWTCH-HL-199241">Can The Uptrend Continue for TrovaGene (TROV)?	</a>
       </p>
-    <p class="timestamp"><span>2:48 p.m. Nov. 9, 2015</span></p>
-      <p class="source"> - Seeking Alpha</p>
+    <p class="timestamp"><span>8:05 a.m. Nov. 27, 2015</span></p>
+      <p class="source"> - Zacks.com</p>
   </div>
 </li>
-<li class="fnewsitem" data-uniqueid="66d403e8-4e8e-4367-8c75-d5b2443cda0f:245">
+<li class="fnewsitem" data-uniqueid="8de95e42-6af9-4112-aeab-f952db39faf3:190">
   <div>
       <p>
-        <a href="http://seekingalpha.com/article/3665316-resource-sector-digest-utter-failure?source=marketwatch">Resource Sector Digest: Utter Failure</a>
+        <a href="http://investorplace.com/2015/11/18-biotechnology-stocks-to-buy-now/">18 Biotechnology Stocks to Buy Now</a>
       </p>
-    <p class="timestamp"><span>8:30 a.m. Nov. 9, 2015</span></p>
-      <p class="source"> - Seeking Alpha</p>
+    <p class="timestamp"><span>2:45 a.m. Nov. 23, 2015</span></p>
+      <p class="source"> - InvestorPlace.com</p>
   </div>
 </li>
-<li class="fnewsitem" data-uniqueid="66d403e8-4e8e-4367-8c75-d5b2443cda0f:244">
+<li class="fnewsitem" data-uniqueid="8de95e42-6af9-4112-aeab-f952db39faf3:189">
   <div>
       <p>
-        <a href="http://seekingalpha.com/article/3664906-rubicon-minerals-from-bad-dream-to-nightmare?source=marketwatch">Rubicon Minerals: From Bad Dream To Nightmare</a>
+        <a href="http://investorplace.com/2015/11/biggest-movers-in-manufacturing-stocks-now-nvet-glf-asmb-mdxg/">Biggest Movers in Manufacturing Stocks Now – NVET GLF ASMB MDXG</a>
       </p>
-    <p class="timestamp"><span>5:44 a.m. Nov. 9, 2015</span></p>
-      <p class="source"> - Seeking Alpha</p>
-  </div>
-</li>
-<li class="fnewsitem" data-uniqueid="66d403e8-4e8e-4367-8c75-d5b2443cda0f:243">
-  <div>
-      <p>
-        <a href="http://seekingalpha.com/article/3655096-rubicon-minerals-stock-tanks-over-60-percent-after-suspending-underground-mining?source=marketwatch">Rubicon Minerals Stock Tanks Over 60% After Suspending Underground Mining</a>
-      </p>
-    <p class="timestamp"><span>10:49 p.m. Nov. 5, 2015</span></p>
-      <p class="source"> - Seeking Alpha</p>
-  </div>
-</li>
-<li class="fnewsitem" data-uniqueid="66d403e8-4e8e-4367-8c75-d5b2443cda0f:242">
-  <div>
-      <p>
-        <a href="http://seekingalpha.com/article/3642706-oil-and-ems-bounce-golds-struggles-continue-bezeks-daily-briefing?source=marketwatch">Oil And EMs Bounce, Gold's Struggles Continue - Bezek's Daily Briefing</a>
-      </p>
-    <p class="timestamp"><span>5:04 a.m. Nov. 4, 2015</span></p>
-      <p class="source"> - Seeking Alpha</p>
-  </div>
-</li>
-<li class="fnewsitem" data-uniqueid="66d403e8-4e8e-4367-8c75-d5b2443cda0f:241">
-  <div>
-      <p>
-        <a href="http://seekingalpha.com/news/2888596-rubicon-minerals-suspends-underground-work-at-phoenix-gold-project?source=marketwatch">Rubicon Minerals suspends underground work at Phoenix gold project</a>
-      </p>
-    <p class="timestamp"><span>12:37 p.m. Nov. 3, 2015</span></p>
-      <p class="source"> - Seeking Alpha</p>
-  </div>
-</li>
-<li class="fnewsitem" data-uniqueid="66d403e8-4e8e-4367-8c75-d5b2443cda0f:240">
-  <div>
-      <p>
-        <a href="http://seekingalpha.com/article/3602776-red-eagle-mining-has-huge-upside-potential-but-carries-too-much-risk?source=marketwatch">Red Eagle Mining Has Huge Upside Potential, But Carries Too Much Risk</a>
-      </p>
-    <p class="timestamp"><span>9:06 a.m. Oct. 27, 2015</span></p>
-      <p class="source"> - Seeking Alpha</p>
-  </div>
-</li>
-<li class="fnewsitem" data-uniqueid="66d403e8-4e8e-4367-8c75-d5b2443cda0f:239">
-  <div>
-      <p>
-        <a href="http://seekingalpha.com/article/3603126-miningwealth-weekly-update-4-seeking-alpha-edition-will-equity-capital-find-its-way-into-resources?source=marketwatch">MiningWEALTH Weekly Update #4, Seeking Alpha Edition: Will Equity Capital Find Its Way Into Resources?</a>
-      </p>
-    <p class="timestamp"><span>10:43 a.m. Oct. 26, 2015</span></p>
-      <p class="source"> - Seeking Alpha</p>
-  </div>
-</li>
-<li class="fnewsitem" data-uniqueid="66d403e8-4e8e-4367-8c75-d5b2443cda0f:238">
-  <div>
-      <p>
-        <a href="http://www.gurufocus.com/news/368948/how-to-stocks-based-on-estimated-revenue/WSJ">How to Stocks Based on Estimated Revenue</a>
-      </p>
-    <p class="timestamp"><span>5:51 p.m. Oct. 21, 2015</span></p>
-      <p class="source"> - GuruFocus.com</p>
-  </div>
-</li>
-<li class="fnewsitem" data-uniqueid="66d403e8-4e8e-4367-8c75-d5b2443cda0f:237">
-  <div>
-      <p>
-        <a href="http://seekingalpha.com/article/3582416-rubicon-minerals-a-tax-loss-candidate-for-investors?source=marketwatch">Rubicon Minerals: A Tax-Loss Candidate For Investors?</a>
-      </p>
-    <p class="timestamp"><span>12:07 p.m. Oct. 20, 2015</span></p>
-      <p class="source"> - Seeking Alpha</p>
-  </div>
-</li>
-<li class="fnewsitem" data-uniqueid="66d403e8-4e8e-4367-8c75-d5b2443cda0f:236">
-  <div>
-      <p>
-        <a href="http://seekingalpha.com/article/3581836-miningwealth-weekly-update-seeking-alpha-edition-3-should-you-buy-gold-lynas?source=marketwatch">MiningWEALTH Weekly Update Seeking Alpha Edition #3: Should You Buy Gold, Lynas?</a>
-      </p>
-    <p class="timestamp"><span>9:27 a.m. Oct. 19, 2015</span></p>
-      <p class="source"> - Seeking Alpha</p>
+    <p class="timestamp"><span>4:45 a.m. Nov. 16, 2015</span></p>
+      <p class="source"> - InvestorPlace.com</p>
   </div>
 </li>
         <li class="loading">Loading more headlines...</li>
@@ -938,167 +881,152 @@ curl result is *
 
 	
   <div id="prheadlines" data-doctype="2007" class="foreverblock block headlines">
-    <span class="bgChannel">/news/pressrelease/company/us/rby</span>
+    <span class="bgChannel">/news/pressrelease/company/us/trov</span>
     <h2>
-      Press Releases on RBY
+      Press Releases on TROV
     </h2>
     
     <div class="headlinewrapper">
       <ol>
         
-<li class="fnewsitem" data-uniqueid="1194372693">
+<li class="fnewsitem" data-uniqueid="1195167067">
   <div>
-      <p> <a href="/story/rubicon-updates-mineral-resource-statement-for-the-phoenix-gold-project-and-evaluates-strategic-alternatives-2016-01-11-9173438">Rubicon Updates Mineral Resource Statement for the Phoenix Gold
-Project And Evaluates Strategic Alternatives</a></p>
-    <p class="timestamp"><span class='timeAgo'><span>10 min ago</span><span class='invisible'>9:43 a.m. Jan. 11, 2016</span></span></p>
-      <p class="source"> - Marketwired</p>
-  </div>
-</li>
-<li class="fnewsitem" data-uniqueid="1190040002">
-  <div>
-      <p> <a href="/story/rubicon-minerals-announces-filing-of-its-third-quarter-2015-financial-statements-2015-11-12-18173915">Rubicon Minerals Announces Filing of Its Third Quarter 2015 Financial
-Statements</a></p>
-    <p class="timestamp"><span>6:09 p.m. Nov. 12, 2015</span></p>
-      <p class="source"> - Marketwired</p>
-  </div>
-</li>
-<li class="fnewsitem" data-uniqueid="1189147122">
-  <div>
-      <p> <a href="/story/underground-activities-temporarily-suspended-at-the-phoenix-gold-project-rubicon-to-enhance-its-geological-model-and-develop-an-implementation-plan-2015-11-03-617329">Underground Activities Temporarily Suspended at the Phoenix Gold
-Project; Rubicon to Enhance Its Geological Model and Develop an
-Implementation Plan</a></p>
-    <p class="timestamp"><span>6:02 a.m. Nov. 3, 2015</span></p>
-      <p class="source"> - Marketwired</p>
-  </div>
-</li>
-<li class="fnewsitem" data-uniqueid="1186801038">
-  <div>
-      <p> <a href="/story/rubicon-minerals-temporarily-suspends-mill-operations-underground-operations-continue-during-the-trial-stoping-period-2015-10-05-6173143">Rubicon Minerals Temporarily Suspends Mill Operations; Underground
-Operations Continue During the Trial Stoping Period</a></p>
-    <p class="timestamp"><span>5:01 a.m. Oct. 5, 2015</span></p>
-      <p class="source"> - Marketwired</p>
-  </div>
-</li>
-<li class="fnewsitem" data-uniqueid="1186801036">
-  <div>
-      <p> <a href="/story/rubicon-minerals-announces-appointment-of-new-interim-chief-executive-officer-2015-10-05-6173128">Rubicon Minerals Announces Appointment of New Interim Chief Executive
-Officer</a></p>
-    <p class="timestamp"><span>5:01 a.m. Oct. 5, 2015</span></p>
-      <p class="source"> - Marketwired</p>
-  </div>
-</li>
-<li class="fnewsitem" data-uniqueid="1183180913">
-  <div>
-      <p> <a href="/story/rubicon-minerals-provides-an-update-on-the-phoenix-gold-project-2015-08-20-6173119">Rubicon Minerals Provides an Update on the Phoenix Gold Project</a></p>
-    <p class="timestamp"><span>5:01 a.m. Aug. 20, 2015</span></p>
-      <p class="source"> - Marketwired</p>
-  </div>
-</li>
-<li class="fnewsitem" data-uniqueid="1180875057">
-  <div>
-      <p> <a href="/story/stocks-coverage-on-the-gold-sector----barrick-gold-goldcorp-iamgold-rubicon-minerals-and-sandstorm-gold-2015-07-21">Stocks Coverage on the Gold Sector -- Barrick Gold, Goldcorp, IAMGOLD, Rubicon Minerals, and Sandstorm Gold</a></p>
-    <p class="timestamp"><span>8:00 a.m. July 21, 2015</span></p>
+      <p> <a href="/story/trovagene-announces-agreement-with-americas-choice-provider-network-to-offer-patients-access-to-its-ctdna-precision-cancer-monitoring-platform-2016-01-21">Trovagene Announces Agreement with America&#39;s Choice Provider Network to Offer Patients Access to its ctDNA Precision Cancer Monitoring Platform</a></p>
+    <p class="timestamp"><span>8:15 a.m. Jan. 21, 2016</span></p>
       <p class="source"> - PR Newswire - PRF</p>
   </div>
 </li>
-<li class="fnewsitem" data-uniqueid="1179689742">
+<li class="fnewsitem" data-uniqueid="1193234508">
   <div>
-      <p> <a href="/story/rubicon-minerals-announces-results-of-its-2015-meeting-of-shareholders-2015-06-25-17173213">Rubicon Minerals Announces Results of its 2015 Meeting of
-Shareholders</a></p>
-    <p class="timestamp"><span>4:02 p.m. June 25, 2015</span></p>
-      <p class="source"> - Marketwired</p>
+      <p> <a href="/story/how-it-all-plays-out---analyst-notes-on-bazaarvoice-straight-path-communications-trovagene-and-eldorado-resorts-2015-12-24">How it All Plays Out - Analyst Notes on Bazaarvoice, Straight Path Communications, Trovagene and Eldorado Resorts</a></p>
+    <p class="timestamp"><span>7:50 a.m. Dec. 24, 2015</span></p>
+      <p class="source"> - ACCESSWIRE</p>
   </div>
 </li>
-<li class="fnewsitem" data-uniqueid="1179605608">
+<li class="fnewsitem" data-uniqueid="1192636303">
   <div>
-      <p> <a href="/story/rubicons-phoenix-gold-project-pours-first-gold-2015-06-24-6173149">Rubicon&#39;s Phoenix Gold Project Pours First Gold</a></p>
-    <p class="timestamp"><span>5:01 a.m. June 24, 2015</span></p>
-      <p class="source"> - Marketwired</p>
-  </div>
-</li>
-<li class="fnewsitem" data-uniqueid="1179281912">
-  <div>
-      <p> <a href="/story/rubicon-provides-an-update-on-its-red-lake-exploration-program-and-nevada-properties-2015-06-17-617317">Rubicon Provides an Update on its Red Lake Exploration Program and
-Nevada Properties</a></p>
-    <p class="timestamp"><span>5:01 a.m. June 17, 2015</span></p>
-      <p class="source"> - Marketwired</p>
-  </div>
-</li>
-<li class="fnewsitem" data-uniqueid="1178568449">
-  <div>
-      <p> <a href="/story/rubicon-announces-the-appointment-of-bill-shand-to-vice-president-operations-2015-06-01-17173158">Rubicon Announces the Appointment of Bill Shand to Vice President,
-Operations</a></p>
-    <p class="timestamp"><span>4:01 p.m. June 1, 2015</span></p>
-      <p class="source"> - Marketwired</p>
-  </div>
-</li>
-<li class="fnewsitem" data-uniqueid="1178082575">
-  <div>
-      <p> <a href="/story/rubicon-enrols-in-long-term-electricity-cost-savings-program-2015-05-20-6173132">Rubicon Enrols in Long-Term Electricity Cost Savings Program</a></p>
-    <p class="timestamp"><span>5:01 a.m. May 20, 2015</span></p>
-      <p class="source"> - Marketwired</p>
-  </div>
-</li>
-<li class="fnewsitem" data-uniqueid="1178082574">
-  <div>
-      <p> <a href="/story/shareholders-invited-to-attend-rubicons-annual-general-and-special-meeting-of-shareholders-on-wednesday-june-24-2015-in-toronto-ontario-2015-05-20-6173127">Shareholders Invited to Attend Rubicon&#39;s Annual General and Special
-Meeting of Shareholders on Wednesday, June 24, 2015 in Toronto,
-Ontario</a></p>
-    <p class="timestamp"><span>5:01 a.m. May 20, 2015</span></p>
-      <p class="source"> - Marketwired</p>
-  </div>
-</li>
-<li class="fnewsitem" data-uniqueid="1177796695">
-  <div>
-      <p> <a href="/story/rubicon-secures-us50-million-loan-facility-with-cppib-credit-investments-inc-2015-05-14-6173115">Rubicon Secures US$50 Million Loan Facility with CPPIB Credit
-Investments Inc.</a></p>
-    <p class="timestamp"><span>5:01 a.m. May 14, 2015</span></p>
-      <p class="source"> - Marketwired</p>
-  </div>
-</li>
-<li class="fnewsitem" data-uniqueid="1176812975">
-  <div>
-      <p> <a href="/story/gold-technical-review----kinross-gold-yamana-gold-new-gold-rubicon-minerals-and-golden-star-resources-2015-05-01-918350">Gold Technical Review -- Kinross Gold, Yamana Gold, New Gold, Rubicon Minerals, and Golden Star Resources</a></p>
-    <p class="timestamp"><span>8:05 a.m. May 1, 2015</span></p>
+      <p> <a href="/story/trovagene-announces-patent-issuance-broadening-its-precision-cancer-monitoring-ip-portfolio-2015-12-16">Trovagene Announces Patent Issuance, Broadening its Precision Cancer Monitoring IP Portfolio</a></p>
+    <p class="timestamp"><span>8:15 a.m. Dec. 16, 2015</span></p>
       <p class="source"> - PR Newswire - PRF</p>
   </div>
 </li>
-<li class="fnewsitem" data-uniqueid="1175080735">
+<li class="fnewsitem" data-uniqueid="1192146807">
   <div>
-      <p> <a href="/story/rubicons-phoenix-gold-project-commences-mill-commissioning-and-remains-on-schedule-for-mid-2015-projected-initial-production-2015-04-14-6173118">Rubicon&#39;s Phoenix Gold Project Commences Mill Commissioning and
-Remains on Schedule for Mid-2015 Projected Initial Production</a></p>
-    <p class="timestamp"><span>5:01 a.m. April 14, 2015</span></p>
-      <p class="source"> - Marketwired</p>
-  </div>
-</li>
-<li class="fnewsitem" data-uniqueid="1173884891">
-  <div>
-      <p> <a href="/story/gold-stocks-on-our-radar---yamana-gold-kinross-gold-new-gold-rubicon-minerals-and-sandstorm-gold-2015-03-31">Gold Stocks on our Radar - Yamana Gold, Kinross Gold, New Gold, Rubicon Minerals, and Sandstorm Gold</a></p>
-    <p class="timestamp"><span>7:40 a.m. March 31, 2015</span></p>
+      <p> <a href="/story/trovagene-adjourns-special-meeting-of-stockholders-to-december-23-2015-2015-12-09">Trovagene Adjourns Special Meeting of Stockholders to December 23, 2015</a></p>
+    <p class="timestamp"><span>4:05 p.m. Dec. 9, 2015</span></p>
       <p class="source"> - PR Newswire - PRF</p>
   </div>
 </li>
-<li class="fnewsitem" data-uniqueid="1173793742">
+<li class="fnewsitem" data-uniqueid="1191090505">
   <div>
-      <p> <a href="/story/rubicon-minerals-announces-filing-of-its-annual-financials-for-the-fiscal-year-ended-december-31-2014-2015-03-30-71735950">Rubicon Minerals Announces Filing of its Annual Financials for the
-Fiscal Year Ended December 31, 2014</a></p>
-    <p class="timestamp"><span>6:59 a.m. March 30, 2015</span></p>
-      <p class="source"> - Marketwired</p>
-  </div>
-</li>
-<li class="fnewsitem" data-uniqueid="1170814058">
-  <div>
-      <p> <a href="/story/gold-stocks-under-review----kinross-gold-iamgold-new-gold-rubicon-minerals-and-alamos-gold-2015-02-25">Gold Stocks under Review -- Kinross Gold, IAMGOLD, New Gold, Rubicon Minerals, and Alamos Gold</a></p>
-    <p class="timestamp"><span>8:45 a.m. Feb. 25, 2015</span></p>
+      <p> <a href="/story/trovagene-to-present-at-27th-annual-piper-jaffray-healthcare-conference-and-attend-evercore-isi-investor-conference-2015-11-25">Trovagene to Present at 27th Annual Piper Jaffray Healthcare Conference and Attend Evercore ISI Investor Conference</a></p>
+    <p class="timestamp"><span>8:15 a.m. Nov. 25, 2015</span></p>
       <p class="source"> - PR Newswire - PRF</p>
   </div>
 </li>
-<li class="fnewsitem" data-uniqueid="1167372576">
+<li class="fnewsitem" data-uniqueid="1190687586">
   <div>
-      <p> <a href="/story/orefinders-welcomes-mr-claude-bouchard-peng-to-the-board-of-directors-2015-01-22-141733631">Orefinders Welcomes Mr. Claude Bouchard, P.Eng. to the Board of
-Directors</a></p>
-    <p class="timestamp"><span>2:36 p.m. Jan. 22, 2015</span></p>
-      <p class="source"> - Marketwired</p>
+      <p> <a href="/story/a-look-inside-the-chart-technical-insights---research-on-tillys-geospace-technologies-synthetic-biologics-and-trovagene-2015-11-20">A Look Inside the Chart, Technical Insights - Research on Tilly&#39;s, Geospace Technologies, Synthetic Biologics and TrovaGene</a></p>
+    <p class="timestamp"><span>8:31 a.m. Nov. 20, 2015</span></p>
+      <p class="source"> - ACCESSWIRE</p>
+  </div>
+</li>
+<li class="fnewsitem" data-uniqueid="1190295994">
+  <div>
+      <p> <a href="/story/trovagene-to-present-at-upcoming-healthcare-conferences-2015-11-16">Trovagene to Present at Upcoming Healthcare Conferences</a></p>
+    <p class="timestamp"><span>8:05 a.m. Nov. 16, 2015</span></p>
+      <p class="source"> - PR Newswire - PRF</p>
+  </div>
+</li>
+<li class="fnewsitem" data-uniqueid="1189505813">
+  <div>
+      <p> <a href="/story/clinical-data-featuring-trovagenes-precision-cancer-monitoring-platform-to-be-presented-at-the-aacr-nci-eortc-international-conference-on-molecular-targets-and-cancer-therapeutics-2015-11-06">Clinical Data Featuring Trovagene&#39;s Precision Cancer Monitoring Platform to be Presented at the AACR-NCI-EORTC International Conference on Molecular Targets and Cancer Therapeutics</a></p>
+    <p class="timestamp"><span>8:15 a.m. Nov. 6, 2015</span></p>
+      <p class="source"> - PR Newswire - PRF</p>
+  </div>
+</li>
+<li class="fnewsitem" data-uniqueid="1188486809">
+  <div>
+      <p> <a href="/story/trovagenes-urine-based-liquid-biopsy-platform-shows-clinical-sensitivity-of-93-percent-in-lung-cancer-study-2015-10-27">Trovagene&#39;s Urine-Based Liquid Biopsy Platform Shows Clinical Sensitivity of 93 Percent in Lung Cancer Study</a></p>
+    <p class="timestamp"><span>7:15 a.m. Oct. 27, 2015</span></p>
+      <p class="source"> - PR Newswire - PRF</p>
+  </div>
+</li>
+<li class="fnewsitem" data-uniqueid="1187567930">
+  <div>
+      <p> <a href="/story/trovagene-schedules-release-of-third-quarter-2015-financial-results-and-investor-conference-call-2015-10-15">Trovagene Schedules Release of Third Quarter 2015 Financial Results and Investor Conference Call</a></p>
+    <p class="timestamp"><span>7:05 a.m. Oct. 15, 2015</span></p>
+      <p class="source"> - PR Newswire - PRF</p>
+  </div>
+</li>
+<li class="fnewsitem" data-uniqueid="1187096665">
+  <div>
+      <p> <a href="/story/practical-clinical-benefits-of-trovagenes-urine-based-liquid-biopsy-platform-demonstrated-in-field-experience-analysis-2015-10-08">Practical Clinical Benefits of Trovagene&#39;s Urine-Based Liquid Biopsy Platform Demonstrated in Field Experience Analysis</a></p>
+    <p class="timestamp"><span>3:05 p.m. Oct. 8, 2015</span></p>
+      <p class="source"> - PR Newswire - PRF</p>
+  </div>
+</li>
+<li class="fnewsitem" data-uniqueid="1186979482">
+  <div>
+      <p> <a href="/story/pharmaceutical-sector-due-diligence-report---searching-for-opportunities-among-the-bruised-small-cap-market-2015-10-07">Pharmaceutical Sector Due Diligence Report - Searching for Opportunities Among the Bruised Small Cap Market</a></p>
+    <p class="timestamp"><span>7:14 a.m. Oct. 7, 2015</span></p>
+      <p class="source"> - ACCESSWIRE</p>
+  </div>
+</li>
+<li class="fnewsitem" data-uniqueid="1185775899">
+  <div>
+      <p> <a href="/story/results-from-second-large-scale-clinical-trial-for-trovagenes-urine-based-hpv-test-released-2015-09-21">Results from Second Large-Scale Clinical Trial for Trovagene&#39;s Urine-based HPV Test Released</a></p>
+    <p class="timestamp"><span>7:05 a.m. Sept. 21, 2015</span></p>
+      <p class="source"> - PR Newswire - PRF</p>
+  </div>
+</li>
+<li class="fnewsitem" data-uniqueid="1185020938">
+  <div>
+      <p> <a href="/story/trovagene-forms-european-institute-with-alberto-bardelli-phd-core-technologies-transferred-from-university-of-torino-2015-09-10">Trovagene Forms European Institute with Alberto Bardelli, Ph.D.; Core Technologies Transferred from University of Torino</a></p>
+    <p class="timestamp"><span>2:00 a.m. Sept. 10, 2015</span></p>
+      <p class="source"> - PR Newswire - PRF</p>
+  </div>
+</li>
+<li class="fnewsitem" data-uniqueid="1184960006">
+  <div>
+      <p> <a href="/story/trovagenes-urine-based-liquid-biopsy-platform-shown-to-detect-impact-of-cancer-therapy-within-24-hours-2015-09-09">Trovagene&#39;s Urine-Based Liquid Biopsy Platform Shown to Detect Impact of Cancer Therapy within 24 Hours</a></p>
+    <p class="timestamp"><span>7:05 a.m. Sept. 9, 2015</span></p>
+      <p class="source"> - PR Newswire - PRF</p>
+  </div>
+</li>
+<li class="fnewsitem" data-uniqueid="1183023122">
+  <div>
+      <p> <a href="/story/trovagene-to-present-clinical-data-and-capabilities-of-its-urine-based-liquid-biopsy-platform-at-the-7th-annual-next-generation-dx-summit-2015-08-18">Trovagene to Present Clinical Data and Capabilities of Its Urine-Based Liquid Biopsy Platform at the 7th Annual Next Generation Dx Summit</a></p>
+    <p class="timestamp"><span>7:05 a.m. Aug. 18, 2015</span></p>
+      <p class="source"> - PR Newswire - PRF</p>
+  </div>
+</li>
+<li class="fnewsitem" data-uniqueid="1181013902">
+  <div>
+      <p> <a href="/story/trovagene-schedules-release-of-second-quarter-2015-financial-results-and-investor-conference-call-2015-07-23">Trovagene Schedules Release of Second Quarter 2015 Financial Results and Investor Conference Call</a></p>
+    <p class="timestamp"><span>7:15 a.m. July 23, 2015</span></p>
+      <p class="source"> - PR Newswire - PRF</p>
+  </div>
+</li>
+<li class="fnewsitem" data-uniqueid="1180940894">
+  <div>
+      <p> <a href="/story/trovagene-inc-announces-closing-of-public-offering-of-common-stock-2015-07-22">Trovagene, Inc. Announces Closing of Public Offering of Common Stock</a></p>
+    <p class="timestamp"><span>9:12 a.m. July 22, 2015</span></p>
+      <p class="source"> - PR Newswire - PRF</p>
+  </div>
+</li>
+<li class="fnewsitem" data-uniqueid="1180715867">
+  <div>
+      <p> <a href="/story/trovagene-inc-announces-pricing-of-public-offering-of-common-stock-2015-07-17">Trovagene, Inc. Announces Pricing of Public Offering of Common Stock</a></p>
+    <p class="timestamp"><span>8:00 a.m. July 17, 2015</span></p>
+      <p class="source"> - PR Newswire - PRF</p>
+  </div>
+</li>
+<li class="fnewsitem" data-uniqueid="1180681353">
+  <div>
+      <p> <a href="/story/trovagene-inc-announces-public-offering-of-common-stock-2015-07-16">Trovagene, Inc. Announces Public Offering of Common Stock</a></p>
+    <p class="timestamp"><span>3:29 p.m. July 16, 2015</span></p>
+      <p class="source"> - PR Newswire - PRF</p>
   </div>
 </li>
         <li class="loading">Loading more headlines...</li>
@@ -1110,7 +1038,7 @@ Directors</a></p>
 
 </div>
     <div class="sixwide addgutter">
-      <div class="OUTBRAIN" data-src="http://www.marketwatch.com/investing/stock/RBY/news" data-widget-id="AR_6" data-ob-template="marketwatch"></div>
+      <div class="OUTBRAIN" data-src="http://www.marketwatch.com/investing/stock/TROV/news" data-widget-id="AR_6" data-ob-template="marketwatch"></div>
       <script type="text/javascript" async="async" src="http://widgets.outbrain.com/outbrain.js"></script>
     </div>
 
@@ -1194,48 +1122,48 @@ Directors</a></p>
 
 <div id="header">
   <div class="headsection">
-      <a id="profilelogin" href="https://id.marketwatch.com/access/50eb2d087826a77e5d000001/latest/login_standalone.html?url=http%3A%2F%2Fwww.marketwatch.com%2Finvesting%2Fstock%2FRBY%2Fnews" data-widget="LIFP.login">Log In</a>
+      <a id="profilelogin" href="https://id.marketwatch.com/access/50eb2d087826a77e5d000001/latest/login_standalone.html?url=http%3A%2F%2Fwww.marketwatch.com%2Finvesting%2Fstock%2FTROV%2Fnews" data-widget="LIFP.login">Log In</a>
       <a id="logo" href="/">
           <img class="mw-logo-fp" src="http://mw1.wsj.net/MW5/content/images/mw_header_logo.svg" alt="MarketWatch"/>
       </a>
 
 
 <div id="marketstate">
-	<div class="currenttime">9:53 <span>AM EST</span></div>
-	<div class="currentdate">January 11, 2016</div>
+	<div class="currenttime">1:46 <span>AM EST</span></div>
+	<div class="currentdate">January 23, 2016</div>
 	<div class="marketlist">
 			<div class="bgMarketState market usmarket 
-	open" title="Open">
+	closed" title="Closed">
 				<span class="bgChannel">/marketstate/country/us</span>
 				<div class="marketlabel">New York</div>
 				<div class="marketstatus bgCurrentMarketState">
-	Open</div>
+	Closed</div>
 			</div>
-			<div class="bgMarketState market open" title="Open">
+			<div class="bgMarketState market" title="Closed">
 				<span class="bgChannel">/marketstate/country/uk</span>
 				<div class="marketlabel">London</div>
 				<div class="marketstatus bgCurrentMarketState">
-	Open</div>
+	Closed</div>
 			</div>
-			<div class="bgMarketState market" title="Coming of Age  (Adults') Day">
+			<div class="bgMarketState market" title="Closed">
 				<span class="bgChannel">/marketstate/country/jp</span>
 				<div class="marketlabel">Tokyo</div>
 				<div class="marketstatus bgCurrentMarketState">
-	Holiday</div>
+	Closed</div>
 			</div>
 		<div class="clear"></div>
 	</div>
 	<div class="marketmap">
 		<div class="bgMarketState mapstatus 
-	open" title="Open">
+	closed" title="Closed">
         <span class="bgChannel">/marketstate/country/us</span>
         <div class="usDot">&nbsp;</div>
 		</div>
-		<div class="bgMarketState mapstatus open" title="Open">
+		<div class="bgMarketState mapstatus" title="Closed">
         <span class="bgChannel">/marketstate/country/uk</span>
         <div class="ukDot">&nbsp;</div>
 		</div>
-		<div class="bgMarketState mapstatus" title="Coming of Age  (Adults') Day">
+		<div class="bgMarketState mapstatus" title="Closed">
         <span class="bgChannel">/marketstate/country/jp</span>
         <div class="jpDot">&nbsp;</div>
 		</div>
@@ -1260,45 +1188,45 @@ Directors</a></p>
     <ol id="latestnewsviewport">
       <span class="bgChannel">/news/latest</span>
       
-  <li class="fnewsitem" data-uniqueid="8c077dc4-5ad2-4f73-b9c3-a381c5fece05:756937"><span class="timestamp"><span>9:46a</span></span><p><a href="/story/when-is-the-state-of-the-union-speech-2016-01-08?link=MW_latest_news" target="_blank">What time is the State of the Union speech? </a></p></li>
+  <li class="fnewsitem" data-uniqueid="8c077dc4-5ad2-4f73-b9c3-a381c5fece05:760635"><span class="timestamp"><span>8:40p</span></span><p><a href="/story/your-gadgets-support-illegal-child-labor-in-africa-2016-01-21?link=MW_latest_news" target="_blank">Tech companies use materials mined illegally by children in Africa</a></p></li>
 
-  <li class="fnewsitem" data-uniqueid="8c077dc4-5ad2-4f73-b9c3-a381c5fece05:756936"><span class="timestamp"><span>9:45a</span></span><p><span target="_blank"><a href="/investing/stock/gm?link=MW_latest_news" target="_blank">General Motors upgraded to outperform at Credit Suisse</a></span></p></li>
+  <li class="fnewsitem" data-uniqueid="8c077dc4-5ad2-4f73-b9c3-a381c5fece05:760634"><span class="timestamp"><span>7:28p</span></span><p><a href="/story/uber-and-lyft-didnt-bankrupt-yellow-cab-and-they-could-hit-same-pothole-2016-01-22?link=MW_latest_news" target="_blank">Uber and Lyft didn’t bankrupt Yellow Cab, and they could hit same pothole</a></p></li>
 
-  <li class="fnewsitem" data-uniqueid="8c077dc4-5ad2-4f73-b9c3-a381c5fece05:756935"><span class="timestamp"><span>9:44a</span></span><p><a href="/story/rock-legend-david-bowie-was-a-financial-innovator-too-2016-01-11?link=MW_latest_news" target="_blank">Rock legend David Bowie was a financial innovator, too</a></p></li>
+  <li class="fnewsitem" data-uniqueid="8c077dc4-5ad2-4f73-b9c3-a381c5fece05:760633"><span class="timestamp"><span>7:07p</span></span><p><a href="/story/apple-exec-in-charge-of-car-program-leaves-company-2016-01-22?link=MW_latest_news" target="_blank">Apple exec in charge of car program leaves company</a></p></li>
 
-  <li class="fnewsitem" data-uniqueid="8c077dc4-5ad2-4f73-b9c3-a381c5fece05:756934"><span class="timestamp"><span>9:43a</span></span><p><a href="/story/a-schulman-earnings-hit-by-costs-of-a-probe-2016-01-11?link=MW_latest_news" target="_blank">A. Schulman earnings hit by costs of a probe</a></p></li>
+  <li class="fnewsitem" data-uniqueid="8c077dc4-5ad2-4f73-b9c3-a381c5fece05:760632"><span class="timestamp"><span>6:41p</span></span><p><a href="/story/apple-earnings-optimism-may-be-detached-from-reality-2016-01-21?link=MW_latest_news" target="_blank">Apple earnings optimism may be ‘detached from reality’</a></p></li>
 
-  <li class="fnewsitem" data-uniqueid="8c077dc4-5ad2-4f73-b9c3-a381c5fece05:756933"><span class="timestamp"><span>9:39a</span></span><p><span target="_blank"><a href="/investing/stock/m?link=MW_latest_news" target="_blank">Macy&#39;s shares up 5.6% in morning trading</a></span></p></li>
+  <li class="fnewsitem" data-uniqueid="8c077dc4-5ad2-4f73-b9c3-a381c5fece05:760631"><span class="timestamp"><span>6:38p</span></span><p><a href="/story/in-shadow-of-uber-hq-sfs-yellow-cab-files-for-bankruptcy-2016-01-22?link=MW_latest_news" target="_blank">In shadow of Uber HQ, S.F.’s Yellow Cab files for bankruptcy</a></p></li>
 
-  <li class="fnewsitem" data-uniqueid="8c077dc4-5ad2-4f73-b9c3-a381c5fece05:756932"><span class="timestamp"><span>9:38a</span></span><p><a href="/story/chinas-worst-kept-secret-yuan-is-unpegged-from-dollar-2016-01-11?link=MW_latest_news" target="_blank">China’s worst-kept secret: Yuan is unpegged from dollar</a></p></li>
+  <li class="fnewsitem" data-uniqueid="8c077dc4-5ad2-4f73-b9c3-a381c5fece05:760630"><span class="timestamp"><span>6:34p</span></span><p><span target="_blank">5 dead in Canadian school shooting in Saskatchewan: reports</span></p></li>
 
-  <li class="fnewsitem" data-uniqueid="8c077dc4-5ad2-4f73-b9c3-a381c5fece05:756931"><span class="timestamp"><span>9:37a</span></span><p><span target="_blank"><a href="/investing/stock/kss?link=MW_latest_news" target="_blank">Kohl&#39;s shares up 4.4% in morning trading</a></span></p></li>
+  <li class="fnewsitem" data-uniqueid="8c077dc4-5ad2-4f73-b9c3-a381c5fece05:760629"><span class="timestamp"><span>6:17p</span></span><p><a href="/story/these-signs-will-mark-the-bottom-for-the-stock-market-2016-01-22?link=MW_latest_news" target="_blank">These signs will mark the bottom for the stock market</a></p></li>
 
-	<li class="breaking fnewsitem" data-uniqueid="8c077dc4-5ad2-4f73-b9c3-a381c5fece05:756930"><span class="timestamp"><span>9:36a</span></span><p>BREAKING</p><span class="timestamp"></span><p><span target="_blank"><a href="/investing/stock/mck?link=MW_latest_news" target="_blank">Shares of McKesson Corp. lead S&amp;P 500 decliners,  sink 6.8%</a></span></p></li>
+  <li class="fnewsitem" data-uniqueid="8c077dc4-5ad2-4f73-b9c3-a381c5fece05:760628"><span class="timestamp"><span>5:53p</span></span><p><a href="/story/google-to-pay-back-taxes-to-uk-pay-more-in-future-2016-01-22?link=MW_latest_news" target="_blank">Google to pay back taxes to U.K., pay more in future</a></p></li>
 
-  <li class="fnewsitem" data-uniqueid="8c077dc4-5ad2-4f73-b9c3-a381c5fece05:756929"><span class="timestamp"><span>9:34a</span></span><p><span target="_blank"><a href="/investing/stock/hca?link=MW_latest_news" target="_blank">HCA shares jump 6.4% to lead S&amp;P 500 gainers</a></span></p></li>
+  <li class="fnewsitem" data-uniqueid="8c077dc4-5ad2-4f73-b9c3-a381c5fece05:760626"><span class="timestamp"><span>5:45p</span></span><p><a href="/story/winter-storm-jonas-will-likely-stifle-already-slow-box-office-weekend-2016-01-21?link=MW_latest_news" target="_blank">Winter Storm Jonas will likely stifle already slow box-office weekend</a></p></li>
 
-  <li class="fnewsitem" data-uniqueid="8c077dc4-5ad2-4f73-b9c3-a381c5fece05:756928"><span class="timestamp"><span>9:33a</span></span><p><span target="_blank"><a href="/investing/index/djia?link=MW_latest_news" target="_blank">All 30 Dow components in positive territory in early trade</a></span></p></li>
+  <li class="fnewsitem" data-uniqueid="8c077dc4-5ad2-4f73-b9c3-a381c5fece05:760624"><span class="timestamp"><span>5:39p</span></span><p><a href="/story/the-airports-where-passengers-try-to-sneak-guns-and-the-37-billion-dietary-supplement-scam-2016-01-22?link=MW_latest_news" target="_blank">The airports where passengers try to sneak guns, and the $37 billion dietary supplement scam</a></p></li>
 
-  <li class="fnewsitem" data-uniqueid="8c077dc4-5ad2-4f73-b9c3-a381c5fece05:756927"><span class="timestamp"><span>9:33a</span></span><p><span target="_blank"><a href="/investing/stock/aapl?link=MW_latest_news" target="_blank">Shares of Apple climb 1.7% to lead Dow advancers in early trade</a></span></p></li>
+  <li class="fnewsitem" data-uniqueid="8c077dc4-5ad2-4f73-b9c3-a381c5fece05:760622"><span class="timestamp"><span>5:31p</span></span><p><a href="/story/should-you-ever-use-a-coupon-on-a-first-date-2016-01-22-171073121?link=MW_latest_news" target="_blank">Should You Ever Use a Coupon on a First Date?</a></p></li>
 
-	<li class="breaking fnewsitem" data-uniqueid="8c077dc4-5ad2-4f73-b9c3-a381c5fece05:756926"><span class="timestamp"><span>9:32a</span></span><p>BREAKING</p><span class="timestamp"></span><p><a href="/story/us-stocks-open-higher-after-worst-start-to-a-new-year-2016-01-11?link=MW_latest_news" target="_blank">U.S. stocks open higher after worst start to a new year</a></p></li>
+  <li class="fnewsitem" data-uniqueid="8c077dc4-5ad2-4f73-b9c3-a381c5fece05:760621"><span class="timestamp"><span>5:21p</span></span><p><a href="/story/att-to-book-22-billion-gain-related-to-pensions-postemployment-plans-2016-01-22?link=MW_latest_news" target="_blank">AT&amp;T to book $2.2 billion gain related to pensions, postemployment plans</a></p></li>
 
-  <li class="fnewsitem" data-uniqueid="8c077dc4-5ad2-4f73-b9c3-a381c5fece05:756923"><span class="timestamp"><span>9:31a</span></span><p><span target="_blank"><a href="/investing/index/djia?link=MW_latest_news" target="_blank">S&amp;P 500 opens 0.3% higher at 1,930</a></span></p></li>
+  <li class="fnewsitem" data-uniqueid="8c077dc4-5ad2-4f73-b9c3-a381c5fece05:760620"><span class="timestamp"><span>5:20p</span></span><p><a href="/story/morgan-stanley-discloses-51-stake-in-grubhub-2016-01-22?link=MW_latest_news" target="_blank">Morgan Stanley discloses 5.1% stake in GrubHub </a></p></li>
 
-  <li class="fnewsitem" data-uniqueid="8c077dc4-5ad2-4f73-b9c3-a381c5fece05:756924"><span class="timestamp"><span>9:31a</span></span><p><span target="_blank"><a href="/investing/index/djia?link=MW_latest_news" target="_blank">Dow Industrials open 0.3% higher at 16,418</a></span></p></li>
+  <li class="fnewsitem" data-uniqueid="8c077dc4-5ad2-4f73-b9c3-a381c5fece05:760618"><span class="timestamp"><span>5:00p</span></span><p><a href="/story/even-tv-execs-think-there-are-too-many-good-shows-2016-01-22?link=MW_latest_news" target="_blank">Even TV execs think there are too many good shows</a></p></li>
 
-  <li class="fnewsitem" data-uniqueid="8c077dc4-5ad2-4f73-b9c3-a381c5fece05:756925"><span class="timestamp"><span>9:31a</span></span><p><span target="_blank"><a href="/investing/index/djia?link=MW_latest_news" target="_blank">Nasdaq Composite rises 0.7% to 4,673 at open</a></span></p></li>
+  <li class="fnewsitem" data-uniqueid="8c077dc4-5ad2-4f73-b9c3-a381c5fece05:760617"><span class="timestamp"><span>4:58p</span></span><p><a href="/story/takata-air-bag-recall-to-cover-5-million-more-vehicles-2016-01-22?link=MW_latest_news" target="_blank">Takata air-bag recall to cover 5 million more vehicles</a></p></li>
 
-	<li class="breaking fnewsitem" data-uniqueid="8c077dc4-5ad2-4f73-b9c3-a381c5fece05:756922"><span class="timestamp"><span>9:30a</span></span><p>BREAKING</p><span class="timestamp"></span><p><span target="_blank"><a href="/investing/index/djia?link=MW_latest_news" target="_blank">U.S. stocks open higher, rebound after last week&#39;s losses</a></span></p></li>
+  <li class="fnewsitem" data-uniqueid="8c077dc4-5ad2-4f73-b9c3-a381c5fece05:760616"><span class="timestamp"><span>4:58p</span></span><p><a href="/story/american-expresss-stock-cuts-dows-gain-by-more-than-50-points-2016-01-22?link=MW_latest_news" target="_blank">American Express&#39;s stock cuts Dow&#39;s gain by more than 50 points</a></p></li>
 
-  <li class="fnewsitem" data-uniqueid="8c077dc4-5ad2-4f73-b9c3-a381c5fece05:756921"><span class="timestamp"><span>9:29a</span></span><p><a href="/story/american-apparel-gets-approval-of-reorganization-plan-from-all-voting-classes-2016-01-11?link=MW_latest_news" target="_blank">American Apparel gets approval of reorganization plan from all voting classes</a></p></li>
+  <li class="fnewsitem" data-uniqueid="8c077dc4-5ad2-4f73-b9c3-a381c5fece05:760615"><span class="timestamp"><span>4:55p</span></span><p><a href="/story/first-time-buyers-slowly-returning-to-housing-market-data-show-2016-01-22?link=MW_latest_news" target="_blank">First-time buyers slowly returning to housing market, data show</a></p></li>
 
-  <li class="fnewsitem" data-uniqueid="8c077dc4-5ad2-4f73-b9c3-a381c5fece05:756920"><span class="timestamp"><span>9:19a</span></span><p><span target="_blank"><a href="/investing/stock/aapl?link=MW_latest_news" target="_blank">Apple&#39;s stock on course for first back-to-back daily gain in 7 weeks</a></span></p></li>
+  <li class="fnewsitem" data-uniqueid="8c077dc4-5ad2-4f73-b9c3-a381c5fece05:760614"><span class="timestamp"><span>4:47p</span></span><p><a href="/story/dollar-boosted-across-the-board-on-eurozone-stimulus-hopes-2016-01-22?link=MW_latest_news" target="_blank">Dollar posts first weekly gain of new year versus yen</a></p></li>
 
-  <li class="fnewsitem" data-uniqueid="8c077dc4-5ad2-4f73-b9c3-a381c5fece05:756919"><span class="timestamp"><span>9:19a</span></span><p><a href="/story/the-long-view-this-baby-bull-is-just-giving-investors-a-chance-to-buy-the-dip-2016-01-11?link=MW_latest_news" target="_blank">The long view: This ‘baby bull’ is just giving investors a chance to buy the dip</a></p></li>
+  <li class="fnewsitem" data-uniqueid="8c077dc4-5ad2-4f73-b9c3-a381c5fece05:760613"><span class="timestamp"><span>4:36p</span></span><p><a href="/story/what-to-expect-from-the-new-form-1040-2016-01-19?link=MW_latest_news" target="_blank">Doing your taxes? What to expect from the new Form 1040</a></p></li>
 
-  <li class="fnewsitem" data-uniqueid="8c077dc4-5ad2-4f73-b9c3-a381c5fece05:756918"><span class="timestamp"><span>9:14a</span></span><p><a href="/story/under-armours-stock-drops-after-morgan-stanley-slashes-rating-price-target-2016-01-11?link=MW_latest_news" target="_blank">Under Armour&#39;s stock drops after Morgan Stanley slashes rating, price target</a></p></li>
+  <li class="fnewsitem" data-uniqueid="8c077dc4-5ad2-4f73-b9c3-a381c5fece05:760612"><span class="timestamp"><span>4:25p</span></span><p><a href="/story/when-oil-will-bottom-and-nine-other-money-stories-you-may-have-missed-2016-01-22?link=MW_latest_news" target="_blank">‘When oil will bottom’ and nine other money stories you may have missed</a></p></li>
 
       <li class="loading">Loading more headlines...</li>
     </ol>
@@ -1310,10 +1238,10 @@ Directors</a></p>
 		<h4><a href="/investing/index/DJIA" title="Dow Jones Industrial Average">dow</a></h4>
 		<div class="marketdata bgQuote up">
 			<span class="bgChannel">/quotes/zigman/627449/realtime</span>
-			<div class="bgLast marketprice">16,366.21</div>
+			<div class="bgLast marketprice">16,093.51</div>
 			<div class="marketchangedata">
-				<div class="bgChange marketchange">+19.76</div>
-				<div class="bgPercentChange marketpercent">+0.12%</div>
+				<div class="bgChange marketchange">+210.83</div>
+				<div class="bgPercentChange marketpercent">+1.33%</div>
 			</div>
 			<div class="clear"></div>
 		</div>
@@ -1322,10 +1250,10 @@ Directors</a></p>
 		<h4><a href="/investing/index/COMP" title="NASDAQ Composite Index">nasdaq</a></h4>
 		<div class="marketdata bgQuote up">
 			<span class="bgChannel">/quotes/zigman/12633936/realtime</span>
-			<div class="bgLast marketprice">4,647.09</div>
+			<div class="bgLast marketprice">4,591.18</div>
 			<div class="marketchangedata">
-				<div class="bgChange marketchange">+3.46</div>
-				<div class="bgPercentChange marketpercent">+0.07%</div>
+				<div class="bgChange marketchange">+119.12</div>
+				<div class="bgPercentChange marketpercent">+2.66%</div>
 			</div>
 			<div class="clear"></div>
 		</div>
@@ -1334,10 +1262,10 @@ Directors</a></p>
 		<h4><a href="/investing/index/SPX" title="S&amp;P 500 Index">s&amp;p 500</a></h4>
 		<div class="marketdata bgQuote up">
 			<span class="bgChannel">/quotes/zigman/3870025/realtime</span>
-			<div class="bgLast marketprice">1,924.36</div>
+			<div class="bgLast marketprice">1,906.90</div>
 			<div class="marketchangedata">
-				<div class="bgChange marketchange">+2.33</div>
-				<div class="bgPercentChange marketpercent">+0.12%</div>
+				<div class="bgChange marketchange">+37.91</div>
+				<div class="bgPercentChange marketpercent">+2.03%</div>
 			</div>
 			<div class="clear"></div>
 		</div>
@@ -1529,66 +1457,66 @@ Directors</a></p>
         <ul class="traffic-driver__list">
                 <li class="traffic-driver__item">
                     <div class="td__column">
-                        <a href="http://www.mansionglobal.com/?link=TDheader_1">Mansion Global</a>
+                        <a href="http://www.marketwatch.com/economy-politics?link=TDheader_1" >Economy &amp; Politics</a>
                     </div>
                     <div class="td__image">
-                        <a href="http://www.mansionglobal.com/articles/17742-lightning-strikes-twice-on-central-park-west?link=TDimage_1" rel='nofollow'>
-                            <img src="http://mansion-global-app.s3.amazonaws.com/article-images/2016/01/37CLiving-900x600.jpg" alt="a">
+                        <a href="http://www.marketwatch.com/story/worlds-big-thinkers-weigh-in-on-robots-trump-and-the-coming-revolution-2016-01-22?link=TDimage_1"  >
+                            <img src="http://ei.marketwatch.com//Multimedia/2015/04/17/Photos/MD/MW-DJ928_robots_20150417142126_MD.jpg" alt="a">
                         </a>
                     </div>
                     <h3 class="td__headline">
-                        <a href="http://www.mansionglobal.com/articles/17742-lightning-strikes-twice-on-central-park-west?link=TDheadline_1" rel='nofollow'>Lightning strikes twice on Central Park West</a>
+                        <a href="http://www.marketwatch.com/story/worlds-big-thinkers-weigh-in-on-robots-trump-and-the-coming-revolution-2016-01-22?link=TDheadline_1"  >World&#39;s big thinkers weigh in on robots, Trump and the coming revolution</a>
                     </h3>
                     <div class="td__more">
-                        <a href="http://www.mansionglobal.com/articles/17742-lightning-strikes-twice-on-central-park-west?link=TDviewmore_1" rel='nofollow'>View More</a>
+                        <a href="http://www.marketwatch.com/story/worlds-big-thinkers-weigh-in-on-robots-trump-and-the-coming-revolution-2016-01-22?link=TDviewmore_1"  >View More</a>
                     </div>
                 </li>
                 <li class="traffic-driver__item">
                     <div class="td__column">
-                        <a href="http://www.marketwatch.com/topics/columns/asia-markets?link=TDheader_2">Asia Markets</a>
+                        <a href="http://www.mansionglobal.com/?link=TDheader_2" target='_blank'>Mansion Global</a>
                     </div>
                     <div class="td__image">
-                        <a href="http://www.marketwatch.com/story/china-stocks-drop-sharply-in-early-trading-2016-01-10?link=TDimage_2" >
-                            <img src="http://ei.marketwatch.com//Multimedia/2016/01/04/Photos/MD/MW-EC412_chinas_20160104221547_MD.jpg" alt="a">
+                        <a href="http://www.mansionglobal.com/miami?link=TDimage_2" target='_blank' rel='nofollow'>
+                            <img src="http://mansion-global-app.s3.amazonaws.com/article-images/2015/10/NORTH-BAY-ROAD.jpg" alt="a">
                         </a>
                     </div>
                     <h3 class="td__headline">
-                        <a href="http://www.marketwatch.com/story/china-stocks-drop-sharply-in-early-trading-2016-01-10?link=TDheadline_2" >China stocks drop again, dragging Asian markets </a>
+                        <a href="http://www.mansionglobal.com/miami?link=TDheadline_2" target='_blank' rel='nofollow'>Discover the luxury locales of Miami</a>
                     </h3>
                     <div class="td__more">
-                        <a href="http://www.marketwatch.com/story/china-stocks-drop-sharply-in-early-trading-2016-01-10?link=TDviewmore_2" >View More</a>
+                        <a href="http://www.mansionglobal.com/miami?link=TDviewmore_2" target='_blank' rel='nofollow'>View More</a>
                     </div>
                 </li>
                 <li class="traffic-driver__item">
                     <div class="td__column">
-                        <a href="http://www.marketwatch.com/industries?link=TDheader_3">Industries</a>
+                        <a href="http://www.marketwatch.com/industries/media?link=TDheader_3" >Media</a>
                     </div>
                     <div class="td__image">
-                        <a href="http://www.marketwatch.com/story/i-already-know-the-winner-of-the-next-powerball-drawing-2016-01-10?link=TDimage_3" >
-                            <img src="http://ei.marketwatch.com//Multimedia/2016/01/10/Photos/MD/MW-EC972_iwantm_20160110115231_MD.jpg" alt="a">
+                        <a href="http://www.marketwatch.com/story/there-are-too-many-shows-on-tv-and-execs-know-it-2016-01-22?link=TDimage_3"  >
+                            <img src="http://ei.marketwatch.com//Multimedia/2016/01/22/Photos/MD/MW-ED836_AzizAn_20160122145635_MD.jpg" alt="a">
                         </a>
                     </div>
                     <h3 class="td__headline">
-                        <a href="http://www.marketwatch.com/story/i-already-know-the-winner-of-the-next-powerball-drawing-2016-01-10?link=TDheadline_3" >I already know who Powerball winner will be</a>
+                        <a href="http://www.marketwatch.com/story/there-are-too-many-shows-on-tv-and-execs-know-it-2016-01-22?link=TDheadline_3"  >Even TV execs think there are too many good shows</a>
                     </h3>
                     <div class="td__more">
-                        <a href="http://www.marketwatch.com/story/i-already-know-the-winner-of-the-next-powerball-drawing-2016-01-10?link=TDviewmore_3" >View More</a>
+                        <a href="http://www.marketwatch.com/story/there-are-too-many-shows-on-tv-and-execs-know-it-2016-01-22?link=TDviewmore_3"  >View More</a>
                     </div>
                 </li>
                 <li class="traffic-driver__item">
                     <div class="td__column">
-                        <a href="http://www.marketwatch.com/trading-deck/stories/stocks?link=TDheader_4">Stocks</a>
+                        <a href="http://www.marketwatch.com/topics/columns/the-margin?link=TDheader_4" >National News</a>
                     </div>
                     <div class="td__image">
-                        <a href="http://www.marketwatch.com/story/why-is-everyone-so-bearish-2016-01-10?link=TDimage_4" >
-                            <img src="http://ei.marketwatch.com//Multimedia/2016/01/10/Photos/MD/MW-EC973_brown__20160110120950_MD.jpg" alt="a">
+                        <a href="http://www.marketwatch.com/story/apples-new-massive-underground-auditorium-as-seen-in-drone-footage-2016-01-22?link=TDimage_4"  >
+                            <img src="http://ei.marketwatch.com//Multimedia/2016/01/22/Photos/MD/MW-ED822_apple__20160122115901_MD.jpg" alt="a">
                         </a>
                     </div>
                     <h3 class="td__headline">
-                        <a href="http://www.marketwatch.com/story/why-is-everyone-so-bearish-2016-01-10?link=TDheadline_4" >Why is everyone so bearish about the market?</a>
+                        <a href="http://www.marketwatch.com/story/apples-new-massive-underground-auditorium-as-seen-in-drone-footage-2016-01-22?link=TDheadline_4"  >Apple&#39;s new massive underground auditorium, as seen in drone footage</a>
                     </h3>
                     <div class="td__more">
-                        <a href="http://www.marketwatch.com/story/why-is-everyone-so-bearish-2016-01-10?link=TDviewmore_4" >View More</a>
+                        <a href="http://www.marketwatch.com/story/apples-new-massive-underground-auditorium-as-seen-in-drone-footage-2016-01-22?link=TDviewmore_4"  >View More</a>
                     </div>
                 </li>
         </ul>
@@ -1750,16 +1678,16 @@ Directors</a></p>
 			            s.server = "www.marketwatch.com";
 			            s.prop1 = "Research and Tools";
 			            s.prop2 = "MW_Company Research";
-			            s.prop5 = "http://www.marketwatch.com/investing/stock/RBY/news";
-			            s.prop6 = "http://www.marketwatch.com/investing/stock/RBY/news";
+			            s.prop5 = "http://www.marketwatch.com/investing/stock/TROV/news";
+			            s.prop6 = "http://www.marketwatch.com/investing/stock/TROV/news";
 			            s.prop7 = "off";
 			            s.eVar11 = "MarketWatch";
 			            s.pageName = "MW_Company News";
 			            s.prop3 = "MW_Research and Tools_Quote_Page";
 			            s.prop8 = "MarketWatch";
-			            s.prop12 = "RBY";
-			            s.prop14 = "Rubicon Minerals Corp.";
-			            s.prop15 = "NYSE MKT";
+			            s.prop12 = "TROV";
+			            s.prop14 = "TrovaGene Inc.";
+			            s.prop15 = "NASDAQ";
 			            s.prop16 = "Stock";
 			            s.prop19 = "quote";
 			            s.prop22 = "MW_Research and Tools_Quote_Page";
@@ -1772,8 +1700,8 @@ Directors</a></p>
 			            s.prop25 = "";
 			            s.prop27 = "nomem";
 			            s.eVar4 = "MW_Company News";
-			            s.eVar31 = "Monday";
-			            s.eVar32 = "08:00";
+			            s.eVar31 = "Saturday";
+			            s.eVar32 = "00:00";
         /************* DO NOT ALTER ANYTHING BELOW THIS LINE ! **************/
         var s_code=s.t();if(s_code)document.write(s_code) }
         </script>
@@ -1823,7 +1751,7 @@ Directors</a></p>
       LIFP.subscribe(LIFP.events.login);
       (function(){ var _scrimOpen = LIFP.createIFrame; LIFP.createIFrame = function(){ _scrimOpen.apply(this, arguments); $(".login_overlay").height($("body").outerHeight() + 185); }})();
     </script>
-    <script type="text/javascript" src="http://mw1.wsj.net/MW5/content/combined/combined-tail-min-1.0.7140.js"></script>
+    <script type="text/javascript" src="http://mw1.wsj.net/MW5/content/combined/combined-tail-min-1.0.7159.js"></script>
 	<script type="text/javascript" src="http://mw1.wsj.net/MW5/content/investing/js/marketwatch.investing.js"></script>
     <div id="fb-root"></div>
     <script type="text/javascript" src="http://mw3.wsj.net/MW5/content/js/marketwatch.facebook.like.js"></script>
@@ -1877,7 +1805,7 @@ Directors</a></p>
     if (typeof(doctype) == "undefined") {
     doctype = $(this).attr("data-doctype");
     }
-    var nb = new MarketWatch.News.NewsBox(this, doctype, 'RBY', 'US', '');
+    var nb = new MarketWatch.News.NewsBox(this, doctype, 'TROV', 'US', '');
     nb.setNewsSpark(Spark.Shared._Investing_HeadlineItem.RenderView);
     var thunk = this;
     if (typeof (BlueGrass) != "undefined" && $(thunk).find(".bgChannel").text() != "") {
@@ -1929,8 +1857,8 @@ Directors</a></p>
 	ScrillaZilla.Escort.addClient(
 		ScrillaZilla.Client('#ad_QPCButton1', 
 			{
-				ord : 1978751583,
-				src : 'http://ad.doubleclick.net/adj/brokerbuttons.marketwatch.com/quotes;psg=;sym=RBY;u=NULL**120x60**RBY**;sz=120x60;pos=1;tile=1;ord=',
+				ord : 1049483746,
+				src : 'http://ad.doubleclick.net/adj/brokerbuttons.marketwatch.com/quotes;psg=;sym=TROV;u=NULL**120x60**TROV**;sz=120x60;pos=1;tile=1;ord=',
 				
 				
         addProximic : true,
@@ -1952,8 +1880,8 @@ Directors</a></p>
 	ScrillaZilla.Escort.addClient(
 		ScrillaZilla.Client('#ad_QPCButton2', 
 			{
-				ord : 1978751583,
-				src : 'http://ad.doubleclick.net/adj/brokerbuttons.marketwatch.com/quotes;psg=;sym=RBY;u=NULL**120x60**RBY**;sz=120x60;pos=2;tile=2;ord=',
+				ord : 1049483746,
+				src : 'http://ad.doubleclick.net/adj/brokerbuttons.marketwatch.com/quotes;psg=;sym=TROV;u=NULL**120x60**TROV**;sz=120x60;pos=2;tile=2;ord=',
 				
 				
         addProximic : true,
@@ -1975,8 +1903,8 @@ Directors</a></p>
 	ScrillaZilla.Escort.addClient(
 		ScrillaZilla.Client('#ad_QPCButton3', 
 			{
-				ord : 1978751583,
-				src : 'http://ad.doubleclick.net/adj/brokerbuttons.marketwatch.com/quotes;psg=;sym=RBY;u=NULL**120x60**RBY**;sz=120x60;pos=3;tile=3;ord=',
+				ord : 1049483746,
+				src : 'http://ad.doubleclick.net/adj/brokerbuttons.marketwatch.com/quotes;psg=;sym=TROV;u=NULL**120x60**TROV**;sz=120x60;pos=3;tile=3;ord=',
 				
 				
         addProximic : true,
@@ -1998,8 +1926,8 @@ Directors</a></p>
 	ScrillaZilla.Escort.addClient(
 		ScrillaZilla.Client('#ad_QPCButton4', 
 			{
-				ord : 1978751583,
-				src : 'http://ad.doubleclick.net/adj/brokerbuttons.marketwatch.com/quotes;psg=;sym=RBY;u=NULL**120x60**RBY**;sz=120x60;pos=4;tile=4;ord=',
+				ord : 1049483746,
+				src : 'http://ad.doubleclick.net/adj/brokerbuttons.marketwatch.com/quotes;psg=;sym=TROV;u=NULL**120x60**TROV**;sz=120x60;pos=4;tile=4;ord=',
 				
 				
         addProximic : true,
@@ -2021,8 +1949,31 @@ Directors</a></p>
 	ScrillaZilla.Escort.addClient(
 		ScrillaZilla.Client('#ad_QPCButton5', 
 			{
-				ord : 1978751583,
-				src : 'http://ad.doubleclick.net/adj/brokerbuttons.marketwatch.com/quotes;psg=;sym=RBY;u=NULL**120x60**RBY**;sz=120x60;pos=5;tile=5;ord=',
+				ord : 1049483746,
+				src : 'http://ad.doubleclick.net/adj/brokerbuttons.marketwatch.com/quotes;psg=;sym=TROV;u=NULL**120x60**TROV**;sz=120x60;pos=5;tile=5;ord=',
+				
+				
+        addProximic : true,
+                
+                
+				lateLoad : true,
+                autoLoad : true,
+                lazyLoad : false,
+                bumpLoad : false,
+				refresh : false,
+				independentRefresh : false,
+				refreshRate : 480000,
+				refreshDomain : "",
+				type : "script",
+				refreshUrl : "/cdn_content/business/re.html"
+			})
+	);
+  
+	ScrillaZilla.Escort.addClient(
+		ScrillaZilla.Client('#ad_QPCButton6', 
+			{
+				ord : 1049483746,
+				src : 'http://ad.doubleclick.net/adj/brokerbuttons.marketwatch.com/quotes;psg=;sym=TROV;u=NULL**120x60**TROV**;sz=120x60;pos=6;tile=6;ord=',
 				
 				
         addProximic : true,
@@ -2044,8 +1995,8 @@ Directors</a></p>
 	ScrillaZilla.Escort.addClient(
 		ScrillaZilla.Client('#ad_QPCButton2Expandable', 
 			{
-				ord : 1978751583,
-				src : 'http://ad.doubleclick.net/adj/brokerbuttons.marketwatch.com/quotes;psg=;sym=RBY;u=NULL**970x250**RBY**;sz=970x250;pos=2;tile=2;ord=',
+				ord : 1049483746,
+				src : 'http://ad.doubleclick.net/adj/brokerbuttons.marketwatch.com/quotes;psg=;sym=TROV;u=NULL**970x250**TROV**;sz=970x250;pos=2;tile=2;ord=',
 				
 				
         addProximic : true,
@@ -2067,8 +2018,8 @@ Directors</a></p>
 	ScrillaZilla.Escort.addClient(
 		ScrillaZilla.Client('#ad_QPCButton3Expandable', 
 			{
-				ord : 1978751583,
-				src : 'http://ad.doubleclick.net/adj/brokerbuttons.marketwatch.com/quotes;psg=;sym=RBY;u=NULL**970x250**RBY**;sz=970x250;pos=3;tile=3;ord=',
+				ord : 1049483746,
+				src : 'http://ad.doubleclick.net/adj/brokerbuttons.marketwatch.com/quotes;psg=;sym=TROV;u=NULL**970x250**TROV**;sz=970x250;pos=3;tile=3;ord=',
 				
 				
         addProximic : true,
@@ -2090,8 +2041,8 @@ Directors</a></p>
 	ScrillaZilla.Escort.addClient(
 		ScrillaZilla.Client('#ad_QPCButton4Expandable', 
 			{
-				ord : 1978751583,
-				src : 'http://ad.doubleclick.net/adj/brokerbuttons.marketwatch.com/quotes;psg=;sym=RBY;u=NULL**970x250**RBY**;sz=970x250;pos=4;tile=4;ord=',
+				ord : 1049483746,
+				src : 'http://ad.doubleclick.net/adj/brokerbuttons.marketwatch.com/quotes;psg=;sym=TROV;u=NULL**970x250**TROV**;sz=970x250;pos=4;tile=4;ord=',
 				
 				
         addProximic : true,
@@ -2113,8 +2064,8 @@ Directors</a></p>
 	ScrillaZilla.Escort.addClient(
 		ScrillaZilla.Client('#ad_QPCButton5Expandable', 
 			{
-				ord : 1978751583,
-				src : 'http://ad.doubleclick.net/adj/brokerbuttons.marketwatch.com/quotes;psg=;sym=RBY;u=NULL**970x250**RBY**;sz=970x250;pos=5;tile=5;ord=',
+				ord : 1049483746,
+				src : 'http://ad.doubleclick.net/adj/brokerbuttons.marketwatch.com/quotes;psg=;sym=TROV;u=NULL**970x250**TROV**;sz=970x250;pos=5;tile=5;ord=',
 				
 				
         addProximic : true,
@@ -2136,8 +2087,8 @@ Directors</a></p>
 	ScrillaZilla.Escort.addClient(
 		ScrillaZilla.Client('#ad_QuoteRibbon', 
 			{
-				ord : 1978751583,
-				src : 'http://ad.doubleclick.net/adj/marketwatch.com/investortools_news;psg=;sym=RBY;u=NULL**325x30**RBY**;sz=325x30;tile=1;ord=',
+				ord : 1049483746,
+				src : 'http://ad.doubleclick.net/adj/marketwatch.com/investortools_news;psg=;sym=TROV;u=NULL**325x30**TROV**;sz=325x30;tile=1;ord=',
 				width : '325',
 				height : '30',
         addProximic : true,
@@ -2159,8 +2110,8 @@ Directors</a></p>
 	ScrillaZilla.Escort.addClient(
 		ScrillaZilla.Client('#ad_DisplayAd2', 
 			{
-				ord : 1978751583,
-				src : 'http://ad.doubleclick.net/adj/bottom.marketwatch.com/investortools_news;psg=;sym=RBY;u=NULL**300x250/300x600**RBY**;sz=300x250/300x600;pos=7;tile=7;ord=',
+				ord : 1049483746,
+				src : 'http://ad.doubleclick.net/adj/bottom.marketwatch.com/investortools_news;psg=;sym=TROV;u=NULL**300x250/300x600**TROV**;sz=300x250/300x600;pos=7;tile=7;ord=',
 				
 				
         addProximic : true,
@@ -2185,8 +2136,8 @@ Directors</a></p>
 	ScrillaZilla.Escort.addClient(
 		ScrillaZilla.Client('#ad_DisplayAd1', 
 			{
-				ord : 1978751583,
-				src : 'http://ad.doubleclick.net/adj/marketwatch.com/investortools_news;psg=;sym=RBY;u=NULL**300x250,300x600**RBY**;sz=300x250,300x600;pos=6;tile=6;ord=',
+				ord : 1049483746,
+				src : 'http://ad.doubleclick.net/adj/marketwatch.com/investortools_news;psg=;sym=TROV;u=NULL**300x250,300x600**TROV**;sz=300x250,300x600;pos=6;tile=6;ord=',
 				
 				
         addProximic : true,
@@ -2226,18 +2177,7 @@ Directors</a></p>
          };
 
          MarketWatch.DayParting.setup({
-             
-                 nextEvent: {
-                 market: "US",
-                 display: "New York", 
-                 state: DayParts.CountdownToClose,
-                 stateDisplay: "New York Markets Close in:",
-                 start: new Date("Mon, 11 Jan 2016 20:00:00 GMT"),
-                 end: new Date("Mon, 11 Jan 2016 21:00:00 GMT"),
-                 links: ' <a href="/topics/columns/movers-and-shakers?dist=countdown">After Hours Preview</a>  <a href="/tools/marketsummary/screener.asp?exchange=15&amp;view=8&amp;lookup=Look+Up">Winners and Losers</a> '
-                 },
-             
-            time: new Date("Mon, 11 Jan 2016 14:53:31 GMT"),
+            time: new Date("Sat, 23 Jan 2016 06:46:34 GMT"),
             isNewsHole: false,
             eventEndpoint: "/Theme/home/getnextdaypart"
          });
@@ -2252,6 +2192,15 @@ Directors</a></p>
         document.body.appendChild(e);
       };
     </script>
+    
+      <script type="text/javascript">
+        if (MarketWatch && MarketWatch.Member && MarketWatch.Member.isMktwMember()) {
+          $.ajax({
+            url: 'http://api.wsj.com/api/satchel/me/marketwatch/watchlistSettings',
+            xhrFields: { withCredentials: true }
+          });
+        }
+      </script>
 
     <script type="text/javascript">
       bio.init();
@@ -2268,7 +2217,7 @@ Directors</a></p>
         }
         else {
         _sf_async_config.useCanonical = false;
-        _sf_async_config.path = '/investing/stock/RBY/news';
+        _sf_async_config.path = '/investing/stock/TROV/news';
         }
       var _sf_async_config = _sf_async_config || {};
         _sf_async_config.sections = 'Quotes';
@@ -2284,7 +2233,7 @@ Directors</a></p>
       e.setAttribute('type', 'text/javascript');
       e.setAttribute('src',
       (("https:" == document.location.protocol) ? "https://a248.e.akamai.net/chartbeat.download.akamai.com/102508/" : "http://static.chartbeat.com/") +
-      "js/chartbeat_pub.js");
+      "js/chartbeat.js");
       document.body.appendChild(e);
       }
       var oldonload = window.onload;

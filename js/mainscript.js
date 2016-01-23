@@ -371,7 +371,7 @@ $("#copy_price_to_percentage").click(function(){
 
        $("#yestCloseText").focus();
 
-        $("div#bigcharts_chart_container").html("<img style='max-width:100%; max-height:100%;' src='http://bigcharts.marketwatch.com/kaavio.Webhost/charts/big.chart?nosettings=1&symb=" + original_symbol + "&uf=0&type=2&size=2&freq=1&entitlementtoken=0c33378313484ba9b46b8e24ded87dd6&time=4&rand=" + Math.random() + "&compidx=&ma=0&maval=9&lf=1&lf2=0&lf3=0&height=335&width=579&mocktick=1'>");
+        $("div#bigcharts_chart_container").html("<a target='blank' style='cursor: pointer;' title='Click to open 5-day chart' onclick='return openPage(\"http://bigcharts.marketwatch.com/quickchart/quickchart.asp?symb=" + original_symbol + "&insttype=&freq=7&show=&time=3&rand=" + Math.random() + "\")'> <img style='max-width:100%; max-height:100%;' src='http://bigcharts.marketwatch.com/kaavio.Webhost/charts/big.chart?nosettings=1&symb=" + original_symbol + "&uf=0&type=2&size=2&freq=1&entitlementtoken=0c33378313484ba9b46b8e24ded87dd6&time=4&rand=" + Math.random() + "&compidx=&ma=0&maval=9&lf=1&lf2=0&lf3=0&height=335&width=579&mocktick=1)'></a>");
 
       $("div#bigcharts_chart_container").css("background-color", "#BBDDFF");
       $("div#right_bottom_container").css("background-color", "#BBDDFF");                   
@@ -385,7 +385,9 @@ $("#copy_price_to_percentage").click(function(){
           dataType: 'html',
           success:  function (data) {
             console.log(data);
-           $("div#bigcharts_yest_close").html(data + "<img style='max-width:100%; max-height:100%;' src='http://bigcharts.marketwatch.com/kaavio.Webhost/charts/big.chart?nosettings=1&symb=" + original_symbol + "&uf=0&type=2&size=2&freq=7&entitlementtoken=0c33378313484ba9b46b8e24ded87dd6&time=3&rand=" + Math.random() + "&compidx=&ma=0&maval=9&lf=1&lf2=0&lf3=0&height=335&width=579&mocktick=1'>"); 
+//           $("div#bigcharts_yest_close").html(data + "<img style='max-width:100%; max-height:100%;' src='http://bigcharts.marketwatch.com/kaavio.Webhost/charts/big.chart?nosettings=1&symb=" + original_symbol + "&uf=0&type=2&size=2&freq=7&entitlementtoken=0c33378313484ba9b46b8e24ded87dd6&time=3&rand=" + Math.random() + "&compidx=&ma=0&maval=9&lf=1&lf2=0&lf3=0&height=335&width=579&mocktick=1'>"); 
+            // we're going to put the VIX in here instead of the 5-day chart for the symbol 
+            $("div#bigcharts_yest_close").html(data + "<img style='max-width:100%; max-height:100%;' src='http://bigcharts.marketwatch.com/kaavio.Webhost/charts/big.chart?nosettings=1&amp;symb=vix&amp;uf=0&amp;type=2&amp;size=2&amp;sid=1704273&amp;style=320&amp;freq=1&amp;entitlementtoken=0c33378313484ba9b46b8e24ded87dd6&amp;time=8&amp;rand=" + Math.random() + "&amp;compidx=&amp;ma=0&amp;maval=9&amp;lf=1&amp;lf2=0&amp;lf3=0&amp;height=335&amp;width=579&amp;mocktick=1'>"); 
           }
       });  // end of AJAX call to bigcharts   
       $("div#bigcharts_chart_container").css("background-color", "#F3F3FF");                         
@@ -572,7 +574,7 @@ $('#yestCloseText').keypress(function(e){
         var volumeChecked = $("#volumeChecked").html();
         if (volumeChecked == "0")
         {
-          alert("CHECK VOLUME - DAILY AND 30 DAY\n\nDid it spike up yesterday?");
+          alert("CHECK VOLUME - DAILY AND 30 DAY\n\nDid it spike up yesterday?\n\nIs the TMX price lower than the BigCharts price?\n\nCheck the VIX");
           $("#volumeChecked").html("1");
         }
       } 

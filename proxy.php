@@ -506,9 +506,6 @@ else if ($which_website == "bigcharts")
 
 
       $bigChartsReturn = preg_replace('/<\/div>/', $percentageChangeText . '%</div>', $bigChartsReturn); 
-//      fwrite( $file, "BigchartsReturn is " . $bigChartsReturn );
-
-//      fwrite( $file, "Bigcharts yest close is " . $bigChartsYestClose[4]);      
 
 echo $bigChartsReturn; 
 
