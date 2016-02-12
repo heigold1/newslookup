@@ -508,8 +508,17 @@ else if ($which_website == "bigcharts")
 
       $percentageChangeText = '<br><b>&nbsp; % Change</b> - \$' . $bigChartsHigh .'/\$' . $bigChartsLow . ' = ' . $percentageChange; 
 
+      // grab the last vix value 
+      $url = "http://bigcharts.marketwatch.com/quickchart/quickchart.asp?symb=vix&insttype=&freq=9&show=&time=1"; 
+      $result = grabHTML($host_name, $url);
+      $html = str_get_html($result);  
 
-      $bigChartsReturn = preg_replace('/<\/div>/', $percentageChangeText . '%</div>', $bigChartsReturn); 
+      $vixTD = $html->find('td.last div'); 
+      $vixTD[0] = preg_replace('/<div>/', '', $vixTD[0]); 
+      $vixTD[0] = preg_replace('/<\/div>/', '', $vixTD[0]);
+      $vixTDReturn = "<br>Last VIX Value: " . $vixTD[0];
+
+      $bigChartsReturn = preg_replace('/<\/div>/', $vixTDReturn . '</div>', $bigChartsReturn); 
 
 echo $bigChartsReturn; 
 
