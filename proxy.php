@@ -509,13 +509,15 @@ else if ($which_website == "bigcharts")
       $percentageChangeText = '<br><b>&nbsp; % Change</b> - \$' . $bigChartsHigh .'/\$' . $bigChartsLow . ' = ' . $percentageChange; 
 
       // grab the last vix value 
-      $url = "http://bigcharts.marketwatch.com/quickchart/quickchart.asp?symb=vix&insttype=&freq=9&show=&time=1"; 
-      $result = grabHTML($host_name, $url);
+//      $url = "http://bigcharts.marketwatch.com/quickchart/quickchart.asp?symb=vix&insttype=&freq=9&show=&time=1"; 
+      $url = "http://finance.yahoo.com/q?s=^VIX"; 
+
+      $result = grabHTML("finance.yahoo.com", $url);
       $html = str_get_html($result);  
 
-      $vixTD = $html->find('td.last div'); 
-      $vixTD[0] = preg_replace('/<div>/', '', $vixTD[0]); 
-      $vixTD[0] = preg_replace('/<\/div>/', '', $vixTD[0]);
+      $vixTD = $html->find('.time_rtq_ticker span'); 
+      $vixTD[0] = preg_replace('/<span id="yfs_l10_\^vix">/', '', $vixTD[0]); 
+      $vixTD[0] = preg_replace('/<\/span>/', '', $vixTD[0]); 
       $vixTDReturn = "<br>Last VIX Value: " . $vixTD[0];
 
       $bigChartsReturn = preg_replace('/<\/div>/', $vixTDReturn . '</div>', $bigChartsReturn); 
@@ -545,8 +547,7 @@ else if ($which_website == "etrade")
 
 //       fwrite( $file, " host_name is " . $host_name . " Etade page - " . $html);
       echo $returnEtradeHTML; 
-}
-else if ($which_website == "google")
+}else if ($which_website == "google")
 {
       fwrite( $file, " which_website is - " . $which_website . "\r\n"); 
       fwrite( $file, " host_name is " . $host_name . "\r\n");  
