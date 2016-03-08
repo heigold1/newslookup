@@ -87,7 +87,16 @@ function get_yahoo_yesterday_trade_date()
 function get_marketwatch_friday_trade_date()
 {
     $friday_marketwatch_trade_date = "";
-    $friday_marketwatch_trade_date = date('M. d, Y',strtotime("-3 days"));
+    $month = date('M',strtotime("-3 days"));
+
+    if ($month == ('Mar'))
+    {
+      $friday_marketwatch_trade_date = "March " . date('d, Y',strtotime("-3 days"));      
+    }
+    else
+    {
+      $friday_marketwatch_trade_date = date('M. d, Y',strtotime("-3 days"));      
+    }
 
     $friday_marketwatch_trade_date = preg_replace('/0([1-9]),/', '$1,', $friday_marketwatch_trade_date);
 
@@ -97,7 +106,16 @@ function get_marketwatch_friday_trade_date()
 function get_marketwatch_saturday_trade_date()
 {
     $saturday_marketwatch_trade_date = "";
-    $saturday_marketwatch_trade_date = date('M. d, Y',strtotime("-2 days"));
+    $month = date('M',strtotime("-2 days"));
+
+    if ($month == ('Mar'))
+    {
+      $saturday_marketwatch_trade_date = "March " . date('d, Y',strtotime("-2 days"));
+    }
+    else
+    {
+      $saturday_marketwatch_trade_date = date('M. d, Y',strtotime("-2 days"));
+    }
 
     $saturday_marketwatch_trade_date = preg_replace('/0([1-9]),/', '$1,', $saturday_marketwatch_trade_date);
 
@@ -107,7 +125,16 @@ function get_marketwatch_saturday_trade_date()
 function get_marketwatch_yesterday_trade_date()
 {
     $yesterday_marketwatch_trade_date = "";
-    $yesterday_marketwatch_trade_date = date('M. d, Y',strtotime("-1 days"));
+    $month = date('M',strtotime("-1 days"));
+
+    if ($month == ('Mar'))
+    {
+      $yesterday_marketwatch_trade_date = "March " . date('d, Y',strtotime("-1 days"));
+    }
+    else
+    {
+      $yesterday_marketwatch_trade_date = date('M. d, Y',strtotime("-1 days"));
+    }
 
     $yesterday_marketwatch_trade_date = preg_replace('/0([1-9]),/', '$1,', $yesterday_marketwatch_trade_date);
 
@@ -117,7 +144,16 @@ function get_marketwatch_yesterday_trade_date()
 function get_marketwatch_today_trade_date()
 {
     $today_marketwatch_trade_date = "";
-    $today_marketwatch_trade_date = date('M. d, Y');
+    $month = date('M');
+
+    if ($month == ('Mar'))
+    {
+      $today_marketwatch_trade_date = "March " . date('d, Y');
+    }
+    else
+    {
+      $today_marketwatch_trade_date = date('M. d, Y');
+    }
 
     $today_marketwatch_trade_date = preg_replace('/0([1-9]),/', '$1,', $today_marketwatch_trade_date);
 
@@ -227,6 +263,7 @@ $finalReturn = "";
 
 if ($which_website == "marketwatch")
 {
+fwrite( $file, "we are in marketwatch\n");   
       $url="http://$host_name/investing/$stockOrFund/$symbol/news";
       $result = grabHTML($host_name, $url); 
       $html = str_get_html($result);
