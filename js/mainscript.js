@@ -556,7 +556,7 @@ $(document.body).on('keyup', "#entryPercentage", function(){
       
       if ($(this).val().match(/.53/g))
       {
-        $("#amountSpending").val("800");
+        $("#amountSpending").val("700");
       }
 
       calcAll(); 
