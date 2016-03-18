@@ -366,7 +366,7 @@ $("#copy_price_to_percentage").click(function(){
         $("#yestCloseText").val("");
         $("#entryPrice").val("-----"); 
         $("#entryPercentage").val("-----");
-        $("#amountSpending").val("700");
+        $("#amountSpending").val("1200");
         $("#orderStub").val("-----------------------"); 
 
        $("#yestCloseText").focus();
@@ -556,7 +556,7 @@ $(document.body).on('keyup', "#entryPercentage", function(){
       
       if ($(this).val().match(/.53/g))
       {
-        $("#amountSpending").val("700");
+        $("#amountSpending").val("800");
       }
 
       calcAll(); 
