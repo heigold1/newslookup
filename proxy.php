@@ -342,6 +342,7 @@ fwrite( $file, "we are in marketwatch\n");
       $returnHTML = preg_replace('/ strategic alternatives/i', '<span style="font-size: 12px; background-color:red; color:black"><b>&nbsp;strategic alternatives</span>**BANKRUPTCY**</b>&nbsp;', $returnHTML);                  
       $returnHTML = preg_replace('/ unpatentable/i', '<span style="font-size: 12px; background-color:red; color:black"><b>&nbsp;unpatentable</span> (65%)</b>&nbsp;', $returnHTML);
       $returnHTML = preg_replace('/ accelerate or increase/i', '<span style="font-size: 12px; background-color:red; color:black"><b>&nbsp;accelerate or increase</span> (Possible Chapter 11, stay away)</b>&nbsp;', $returnHTML);
+      $returnHTML = preg_replace('/ denial of application/i', '<span style="font-size: 12px; background-color:red; color:black"><b>&nbsp;denial of application</span> (65%)</b>&nbsp;', $returnHTML);
 
 
       $beginHTML = '<html><head><link rel="stylesheet" href="./css/combined-min-1.0.5754.css" type="text/css"/>
@@ -499,6 +500,7 @@ else if ($which_website == "yahoo")
       $finalReturn = preg_replace('/ strategic alternatives/i', '<span style="font-size: 12px; background-color:red; color:black"><b>&nbsp;strategic alternatives</span></b>&nbsp;', $finalReturn);
       $finalReturn = preg_replace('/ unpatentable/i', '<span style="font-size: 12px; background-color:red; color:black"><b>&nbsp;unpatentable</span> (60%)</b>&nbsp;', $finalReturn);
       $finalReturn = preg_replace('/ accelerate or increase/i', '<span style="font-size: 12px; background-color:red; color:black"><b>&nbsp;accelerate or increase</span> (Possible Chapter 11, stay away)</b>&nbsp;', $finalReturn);
+      $finalReturn = preg_replace('/ denial of application/i', '<span style="font-size: 12px; background-color:red; color:black"><b>&nbsp;denial of application</span> (65%)</b>&nbsp;', $finalReturn);
 
 //      strip_tags($finalReturn, '<embed><img>');// '#<img[^>]*>#i'
 
