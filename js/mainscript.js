@@ -369,6 +369,9 @@ $("#copy_price_to_percentage").click(function(){
         $("#amountSpending").val("1100");
         $("#orderStub").val("-----------------------"); 
 
+        $("#roundShares_50").checked = true; 
+        $("input[name=roundShares][value=50]").prop('checked', true);
+
        $("#yestCloseText").focus();
 
         $("div#bigcharts_chart_container").html("<a target='blank' style='cursor: pointer;' title='Click to open 5-day chart' onclick='return openPage(\"http://bigcharts.marketwatch.com/quickchart/quickchart.asp?symb=" + original_symbol + "&insttype=&freq=7&show=&time=3&rand=" + Math.random() + "\")'> <img style='max-width:100%; max-height:100%;' src='http://bigcharts.marketwatch.com/kaavio.Webhost/charts/big.chart?nosettings=1&symb=" + original_symbol + "&uf=0&type=2&size=2&freq=1&entitlementtoken=0c33378313484ba9b46b8e24ded87dd6&time=4&rand=" + Math.random() + "&compidx=&ma=0&maval=9&lf=1&lf2=0&lf3=0&height=335&width=579&mocktick=1)'></a>");
