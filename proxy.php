@@ -93,7 +93,15 @@ function get_marketwatch_friday_trade_date()
     {
       $friday_marketwatch_trade_date = "March " . date('d, Y',strtotime("-3 days"));      
     }
-    else
+    else if ($month == ('Apr'))
+    {
+      $friday_marketwatch_trade_date = "April " . date('d, Y',strtotime("-3 days"));      
+    }
+    else if ($month == ('May'))
+    {
+      $friday_marketwatch_trade_date = "May " . date('d, Y',strtotime("-3 days"));      
+    }
+    else 
     {
       $friday_marketwatch_trade_date = date('M. d, Y',strtotime("-3 days"));      
     }
@@ -111,6 +119,14 @@ function get_marketwatch_saturday_trade_date()
     if ($month == ('Mar'))
     {
       $saturday_marketwatch_trade_date = "March " . date('d, Y',strtotime("-2 days"));
+    }
+    else if ($month == ('Apr'))
+    {
+      $saturday_marketwatch_trade_date = "April " . date('d, Y',strtotime("-2 days"));
+    }
+    else if ($month == ('May'))
+    {
+      $saturday_marketwatch_trade_date = "May " . date('d, Y',strtotime("-2 days"));
     }
     else
     {
@@ -131,6 +147,14 @@ function get_marketwatch_yesterday_trade_date()
     {
       $yesterday_marketwatch_trade_date = "March " . date('d, Y',strtotime("-1 days"));
     }
+    else if ($month == ('Apr'))
+    {
+      $yesterday_marketwatch_trade_date = "April " . date('d, Y',strtotime("-1 days"));
+    }
+    else if ($month == ('May'))
+    {
+      $yesterday_marketwatch_trade_date = "May " . date('d, Y',strtotime("-1 days"));
+    }
     else
     {
       $yesterday_marketwatch_trade_date = date('M. d, Y',strtotime("-1 days"));
@@ -149,6 +173,14 @@ function get_marketwatch_today_trade_date()
     if ($month == ('Mar'))
     {
       $today_marketwatch_trade_date = "March " . date('d, Y');
+    }
+    else if ($month == ('Apr'))
+    {
+      $today_marketwatch_trade_date = "April " . date('d, Y');
+    }
+    else if ($month == ('May'))
+    {
+      $today_marketwatch_trade_date = "May " . date('d, Y');
     }
     else
     {
