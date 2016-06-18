@@ -379,6 +379,11 @@ fwrite( $file, "we are in marketwatch\n");
       $returnHTML = preg_replace('/ breach of contract/i', '<span style="font-size: 12px; background-color:red; color:black"><b>&nbsp;breach of contract</span> (If lost lawsuit, then 75%)</b>&nbsp;', $returnHTML);      
       $returnHTML = preg_replace('/ jury verdict/i', '<span style="font-size: 12px; background-color:red; color:black"><b>&nbsp;jury verdict</span> BE CAREFUL (If lost major lawsuit, then 70-75%)</b>&nbsp;', $returnHTML);      
       $returnHTML = preg_replace('/ fcc/i', '<span style="font-size: 12px; background-color:red; color:black"><b>&nbsp;FCC</span> if regulation had long-term ratifications, then 65-70%</b>&nbsp;', $returnHTML);      
+      $returnHTML = preg_replace('/ layoffs/i', '<span style="font-size: 12px; background-color:red; color:black"><b>&nbsp;layoffs</span> (check Jay\'s percentages)</b>&nbsp;', $returnHTML);      
+      $returnHTML = preg_replace('/ layoff/i', '<span style="font-size: 12px; background-color:red; color:black"><b>&nbsp;layoff</span> (check Jay\'s percentages)</b>&nbsp;', $returnHTML);      
+      $returnHTML = preg_replace('/ lays off/i', '<span style="font-size: 12px; background-color:red; color:black"><b>&nbsp;lays off</span> (check Jay\'s percentages)</b>&nbsp;', $returnHTML);      
+      $returnHTML = preg_replace('/ restructuring/i', '<span style="font-size: 12px; background-color:red; color:black"><b>&nbsp;restructuring</span></b>&nbsp;', $returnHTML);      
+      $returnHTML = preg_replace('/ restructure/i', '<span style="font-size: 12px; background-color:red; color:black"><b>&nbsp;restructure</span></b>&nbsp;', $returnHTML);      
 
 
       $beginHTML = '<html><head><link rel="stylesheet" href="./css/combined-min-1.0.5754.css" type="text/css"/>
@@ -541,6 +546,11 @@ else if ($which_website == "yahoo")
       $finalReturn = preg_replace('/ breach of contract/i', '<span style="font-size: 12px; background-color:red; color:black"><b>&nbsp;breach of contract</span> (If lost lawsuit, then 75%)</b>&nbsp;', $finalReturn);      
       $finalReturn = preg_replace('/ jury verdict/i', '<span style="font-size: 12px; background-color:red; color:black"><b>&nbsp;jury verdict</span> BE CAREFUL (If lost major lawsuit, then 70-75%)</b>&nbsp;', $finalReturn);      
       $finalReturn = preg_replace('/ fcc/i', '<span style="font-size: 12px; background-color:red; color:black"><b>&nbsp;FCC</span> if regulation had long-term ratifications, then 65-70%</b>&nbsp;', $finalReturn);      
+      $finalReturn = preg_replace('/ layoffs/i', '<span style="font-size: 12px; background-color:red; color:black"><b>&nbsp;layoffs</span> (check Jay\'s percentages)</b>&nbsp;', $finalReturn);      
+      $finalReturn = preg_replace('/ layoff/i', '<span style="font-size: 12px; background-color:red; color:black"><b>&nbsp;layoff</span> (check Jay\'s percentages)</b>&nbsp;', $finalReturn);      
+      $finalReturn = preg_replace('/ lays off/i', '<span style="font-size: 12px; background-color:red; color:black"><b>&nbsp;lays off</span> (check Jay\'s percentages)</b>&nbsp;', $finalReturn);      
+      $finalReturn = preg_replace('/ restructuring/i', '<span style="font-size: 12px; background-color:red; color:black"><b>&nbsp;restructuring</span></b>&nbsp;', $finalReturn);      
+      $finalReturn = preg_replace('/ restructure/i', '<span style="font-size: 12px; background-color:red; color:black"><b>&nbsp;restructure</span></b>&nbsp;', $finalReturn);      
 
 //      strip_tags($finalReturn, '<embed><img>');// '#<img[^>]*>#i'
 
