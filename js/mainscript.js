@@ -429,7 +429,8 @@ $("#copy_price_to_percentage").click(function(){
 
         windowName1 = window.open("https://www.google.com/search?hl=en&gl=us&tbm=nws&authuser=1&q=" +  google_keyword_string);
 
-	    	$("div#right_top_container").html(data); 
+
+	    	$("div#right_top_container").html(data);
 
         yesterdaysClose = " " + data.match(/<h4(.*?)h4>/g) + " "; 
         yesterdaysClose = yesterdaysClose.replace(/ <h4>/ig, "");
@@ -451,11 +452,14 @@ $("#copy_price_to_percentage").click(function(){
         } 
     	} // yahoo success function 
 	});  // yahoo ajax   
-  $("div#right_top_container").css("background-color", "#F3F3FF");                   
+  $("div#right_top_container").css("background-color", "#F3F3FF");
+
+
 
   // AJAX call to marketwatch 
   var eTradeIFrame = '<br><iframe id="etrade_iframe" src="https://www.etrade.wallst.com/v1/stocks/news/search_results.asp?symbol=' + symbol + '&rsO=new#lastTradeTime" width="575px" height="340px"></iframe>';
 //  var googleIFrame = '<br><iframe src="https://www.google.com/search?hl=en&gl=us&tbm=nws&authuser=0&q=' + google_keyword_string + '&oq=' + google_keyword_string + '" width="575px" height="400px"></iframe>'; 
+
 
   $("div#left_bottom_container").css("background-color", "#BBDDFF");                     
  	$.ajax({
@@ -474,6 +478,7 @@ $("#copy_price_to_percentage").click(function(){
   $("div#left_bottom_container").css("background-color", "#F3F3FF");   
   var myIframe = document.getElementById('iframe');
       myIframe.contentWindow.scrollTo(75, 100); 
+
 
 /*
   $("div#left_bottom_container").css("background-color", "#BBDDFF");                     

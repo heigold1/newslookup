@@ -48,10 +48,10 @@ function get_yahoo_friday_trade_date()
 
     $friday_yahoo_trade_week_day = date('l', strtotime("-3 days"));
     $friday_yahoo_trade_week_day = mb_substr($friday_yahoo_trade_week_day, 0, 3);
-    $friday_yahoo_trade_month_day = date(', M d', strtotime("-3 days"));
-    $friday_yahoo_trade_date = $friday_yahoo_trade_week_day . $friday_yahoo_trade_month_day;
+    $friday_yahoo_trade_month_day = date(', d M Y', strtotime("-3 days"));
+    $friday_yahoo_trade_date = $friday_yahoo_trade_wee_day . $friday_yahoo_trade_month_day;
  
-    $friday_yahoo_trade_date = preg_replace('/0([1-9])/', '$1', $friday_yahoo_trade_date);
+//    $friday_yahoo_trade_date = preg_replace('/\, 0([1-9])/', '$1', $friday_yahoo_trade_date);
  
     return $friday_yahoo_trade_date;
 }
@@ -62,10 +62,10 @@ function get_yahoo_saturday_trade_date()
 
     $saturday_yahoo_trade_week_day = date('l', strtotime("-2 days"));
     $saturday_yahoo_trade_week_day = mb_substr($saturday_yahoo_trade_week_day, 0, 3);
-    $saturday_yahoo_trade_month_day = date(', M d', strtotime("-2 days"));
+    $saturday_yahoo_trade_month_day = date(', d M Y', strtotime("-2 days"));
     $saturday_yahoo_trade_date = $saturday_yahoo_trade_week_day . $saturday_yahoo_trade_month_day;
  
-    $saturday_yahoo_trade_date = preg_replace('/0([1-9])/', '$1', $saturday_yahoo_trade_date);
+//    $saturday_yahoo_trade_date = preg_replace('/\, 0([1-9])/', '$1', $saturday_yahoo_trade_date);
 
     return $saturday_yahoo_trade_date;
 }
@@ -76,12 +76,26 @@ function get_yahoo_yesterday_trade_date()
 
     $yesterday_yahoo_trade_week_day = date('l', strtotime("-1 days"));
     $yesterday_yahoo_trade_week_day = mb_substr($yesterday_yahoo_trade_week_day, 0, 3);
-    $yesterday_yahoo_trade_month_day = date(', M d', strtotime("-1 days"));
+    $yesterday_yahoo_trade_month_day = date(', d M Y', strtotime("-1 days"));
     $yesterday_yahoo_trade_date = $yesterday_yahoo_trade_week_day . $yesterday_yahoo_trade_month_day;
  
-    $yesterday_yahoo_trade_date = preg_replace('/0([1-9])/', '$1', $yesterday_yahoo_trade_date);
+//    $yesterday_yahoo_trade_date = preg_replace('/\, 0([1-9])/', '$1', $yesterday_yahoo_trade_date);
 
     return $yesterday_yahoo_trade_date;
+}
+
+function get_yahoo_todays_trade_date()
+{
+    $todays_yahoo_trade_date = "";
+
+    $todays_yahoo_trade_week_day = date('l');
+    $todays_yahoo_trade_week_day = mb_substr($todays_yahoo_trade_week_day, 0, 3);
+    $todays_yahoo_trade_month_day = date(', d M Y');
+    $todays_yahoo_trade_date = $todays_yahoo_trade_week_day . $todays_yahoo_trade_month_day;
+ 
+//    $todays_yahoo_trade_date = preg_replace('/\, 0([1-9])/', '$1', $todays_yahoo_trade_date);
+
+    return $todays_yahoo_trade_date;
 }
 
 function get_marketwatch_friday_trade_date()
@@ -257,6 +271,8 @@ if( $file_grabHTML == false )
 
 fwrite($file_grabHTML, "hello"); 
 fwrite($file_grabHTML, "urls is " . $url . "\r\n"); 
+fwrite($file_grabHTML, "function_host_name is " . $function_host_name . "\r\n"); 
+
 
 $ch = curl_init();
 $header=array('GET /1575051 HTTP/1.1',
@@ -270,7 +286,7 @@ $header=array('GET /1575051 HTTP/1.1',
 
     curl_setopt($ch,CURLOPT_URL,$url);
     curl_setopt($ch,CURLOPT_RETURNTRANSFER,true);
-    curl_setopt($ch,CURLOPT_CONNECTTIMEOUT,0);
+    curl_setopt($ch,CURLOPT_CONNECTTIMEOUT, 300);
     curl_setopt( $ch, CURLOPT_COOKIESESSION, true );
 
 //    curl_setopt($ch, CURLOPT_USERPWD, "heigold1:heimer27");
@@ -280,13 +296,26 @@ $header=array('GET /1575051 HTTP/1.1',
     curl_setopt($ch,CURLOPT_COOKIEJAR,'cookies.txt');
     curl_setopt($ch,CURLOPT_HTTPHEADER,$header);
 
+
+
+curl_setopt($ch, CURLOPT_VERBOSE, true);
+curl_setopt($ch, CURLOPT_STDERR,$f = fopen(__DIR__ . "/error.log", "w+"));
+
+
     $returnHTML = curl_exec($ch); 
 
 fwrite($file_grabHTML, "curl result is *" . $returnHTML . "*\r\n"); 
-   
+
+
+if($errno = curl_errno($ch)) {
+    $error_message = curl_strerror($errno);
+    echo "cURL error ({$errno}):\n {$error_message}";
+}   
+   curl_close($ch);
     return $returnHTML; 
-    $result=curl_exec($ch);
-    curl_close($ch);
+
+
+ 
 
 } // end of function grabHTML
 
@@ -403,23 +432,43 @@ fwrite( $file, "we are in marketwatch\n");
 }
 else if ($which_website == "yahoo")
 {
-      // first round of data, from normal finance.yahoo.com/q?s=msft&ql=1
+fwrite( $file, "we are in yahoo\n");
 
-      $url="http://$host_name/q?s=$symbol&ql=1"; 
+
+    // grab the news 
+
+    $rss = simplexml_load_file("http://feeds.finance.yahoo.com/rss/2.0/headline?s=$symbol&region=US&lang=en-US");
+    $allNews = "<ul class='newsSide'>";
+    $i = 0;
+    foreach ($rss->channel->item as $feedItem) {
+        $i++;
+        $allNews .= "<li "; 
+
+        if ($i % 2 == 1)
+        {
+          $allNews .=  "style='background-color: #FFFFFF; '"; 
+        };
+        
+        $allNews .=  " ><a href='$feedItem->link' title='$feedItem->title'> " . $feedItem->pubDate . " " . $feedItem->title . "</a></li>";
+    }
+    $allNews .=  "</ul>";
+
+      // grab the finanicals 
+
+      $url="http://finance.yahoo.com/quote/$symbol";
+      $host_name = "finance.yahoo.com";
+
       $result = grabHTML($host_name, $url); 
-      $result = str_replace ('href="/', 'href="http://finance.yahoo.com/', $result);  
-      $result = str_replace ('a href', 'a onclick="return openPage(this.href)" href', $result);  
-//      $result = preg_replace('/ etf/i', '<span style="background-color:red; color:black"><b> &nbsp;ETF</b>&nbsp;</span>', $result);                        
-//      $result = preg_replace('/ etn/i', '<span style="background-color:red; color:black"><b> &nbsp;ETN</b>&nbsp;</span>', $result);                        
 
+      $result = str_replace ('href="/', 'href="http://finance.yahoo.com/', $result);
+      $html = str_get_html($result); 
 
-      $html = str_get_html($result);  
-//      $ret = $html->find('#yfncsumtab'); 
-      $retOriginalPage = $html->find('#yfi_headlines'); 
+      $full_company_name = $html->find('h6'); 
+      $full_company_name_html = str_get_html($full_company_name[0]);
 
-      $full_company_name = $html->find('div#yfi_rt_quote_summary div div h2'); 
-      $returnCompanyName = $full_company_name[0]; 
-      $returnCompanyName = preg_replace('/h2/', 'h1', $returnCompanyName);              
+      $returnCompanyName = $full_company_name_html;
+      $returnCompanyName = preg_replace('/<h6.*\">/', '<h6>', $returnCompanyName);         
+      $returnCompanyName = preg_replace('/h6/', 'h1', $returnCompanyName);
 
       $google_keyword_string = $returnCompanyName; 
 /*      $google_keyword_string = trim($google_keyword_string); 
@@ -429,66 +478,45 @@ else if ($which_website == "yahoo")
       $google_keyword_string = preg_replace('/\)/', "", $google_keyword_string);
       $google_keyword_string = preg_replace('/\,/', "", $google_keyword_string);
       $google_keyword_string = preg_replace('/ /', "+", $google_keyword_string);  */ 
-      $yesterdays_close =  $html->find('div#yfi_quote_summary_data table tbody tr td'); 
+      $yesterdays_close =  $html->find('table.table-qsp-stats tbody tr td'); 
 
-      $returnYesterdaysClose = $yesterdays_close[0]; 
+      $returnYesterdaysClose = $yesterdays_close[1]; 
+      $returnYesterdaysClose = preg_replace('/<td class="(.*)">/', '<b>Prev. close</b> - \$', $returnYesterdaysClose);  
+      $returnYesterdaysClose = preg_replace('/<\/td>/', ' - ', $reurnYesterdaysClose); 
 
-      $returnYesterdaysClose = preg_replace('/<td class="(.*)">/', '<b>Prev. close</b> - $', $returnYesterdaysClose);  
-      $returnYesterdaysClose = preg_replace('/<\/td>/', ' - ', $returnYesterdaysClose);        
-//      $returnYesterdaysClose = '<h4 style="display: inline">' . $returnYesterdaysClose . '</h4>';   
 
-      $preMarketYesterdaysClose = $html->find('div#yfi_rt_quote_summary div div span span'); 
-      $preMarketYesterdaysClose[1] = preg_replace('/<span id="(.*)">/', '<span> <b>PRE MKT prev. close (last)</b> - $', $preMarketYesterdaysClose[1]);
+      $preMarketYesterdaysClose = $html->find('div#quote-header-info section span'); 
+      $preMarketYesterdaysClose[0] = preg_replace('/<span class="(.*)">/', '<span> <b>PRE MKT prev. close (last)</b> - $', $preMarketYesterdaysClose[0]);
 
-      $tableDataArray = $html->find('.yfnc_tabledata1'); 
-      $avgVol3Months = $tableDataArray[10];
-      $avgVol3Months = preg_replace('/<td class="(.*)">/', '<font size="3" style="font-size: 12px; background-color:#CCFF99; color: black; display: inline-block;"><b>Avg Vol (3m)</b> - ', $avgVol3Months);  
+      $tableDataArray = $html->find('div#quote-summary div table tbody tr td'); 
+
+      $avgVol3Months = $tableDataArray[15];
+      $avgVol3Months = preg_replace('/<td class="(.*)">/', '<font size="3" style="font-size: 12px; background-color:#CCFF99; color: black; display: inline-block;"><b>Avg Vol (3m) - ', $avgVol3Months);  
       $avgVol3Months = preg_replace('/<\/td>/', ' - ', $avgVol3Months);
+      $avgVol3Months .= "</b></font>";
 
-      $currentVolume = $tableDataArray[9];
+      $currentVolume = $tableDataArray[13];
       $currentVolume = preg_replace('/<td class="(.*)">/', '<b>Current Vol</b> - ', $currentVolume);  
       $currentVolume = preg_replace('/<\/td>/', ' - ', $currentVolume);
 
-      // grab the information from the company profile 
+      // Now we grab website, sector, and company from finviz.com
 
-      $url="http://finance.yahoo.com/q/pr?s=$symbol+Profile"; 
-      $result = grabHTML($host_name, $url); 
-      $result = str_replace ('href="/', 'href="http://finance.yahoo.com/', $result);  
-      $html = str_get_html($result); 
-      $retProfilePage = $html->find('.yfnc_modtitlew1');
-      $finalProfileInfo = str_replace('<a ', '<a target="_blank"', $retProfilePage[0]);    
-
-      $finalProfileInfo = str_replace('class="yfnc_modtitlew1"', 'valign="top"', $finalProfileInfo); 
-
-      $finalProfileInfo = preg_replace('/Phone:(.*)\d{4}<br>/', '', $finalProfileInfo);      
-      $finalProfileInfo = preg_replace('/<span class="yfi-module-title">Details<\/span>/', '', $finalProfileInfo);      
-      $finalProfileInfo = preg_replace('/<tr><td class="yfnc_tablehead1" width="50%">Index Membership:<\/td><td class="yfnc_tabledata1">N\/A<\/td><\/tr>/', '', $finalProfileInfo);
-      $finalProfileInfo = preg_replace('/<tr><th align="left"><span class="yfi-module-title">Business Summary<\/span><\/th><th align="right">&nbsp;<\/th><\/tr>/', '', $finalProfileInfo); 
-      $finalProfileInfo = preg_replace('/<tr><td class="yfnc_tablehead1" width="50%">Full Time Employees:(.*?)<\/td><\/tr>/', '', $finalProfileInfo); 
-      $finalProfileInfo = preg_replace('/Technology/', '<span style="font-size: 12px; background-color:red; color:black"><b>Technology</b></span>', $finalProfileInfo);
-      $finalProfileInfo = preg_replace('/Basic Materials/', '<span style="font-size: 12px; background-color:red; color:black"><b>Basic Materials</b></span>', $finalProfileInfo);
-      $finalProfileInfo = preg_replace('/Healthcare/', '<span style="font-size: 12px; background-color:red; color:black"><b>Healthcare</b></span>', $finalProfileInfo);
-      $finalProfileInfo = preg_replace('/China/', '<span style="font-size: 12px; background-color:red; color:black"><b>China</b></span>', $finalProfileInfo);
-      $finalProfileInfo = preg_replace('/Services/', '<span style="font-size: 12px; background-color:red; color:black"><b>Services</b></span>', $finalProfileInfo);
-      $finalProfileInfo = preg_replace('/Conglomerates/', '<span style="font-size: 12px; background-color:red; color:black"><b>Conglomerates</b></span>', $finalProfileInfo);
-      $finalProfileInfo = preg_replace('/Consumer Goods/', '<span style="font-size: 12px; background-color:red; color:black"><b>Consumer Goods</b></span>', $finalProfileInfo);
-      $finalProfileInfo = preg_replace('/Financial/', '<span style="font-size: 12px; background-color:red; color:black"><b>Financial</b></span>', $finalProfileInfo);
-      $finalProfileInfo = preg_replace('/Utilities/', '<span style="font-size: 12px; background-color:red; color:black"><b>Utilities</b></span>', $finalProfileInfo);
-/*      $finalProfileInfo = preg_replace('/sector:/i', '<span style="font-size: 12px; background-color:red; color:black"><b>Sector:</b></span>', $finalProfileInfo); */
-/*      $finalProfileInfo = preg_replace('/industry:/i', '<span style="font-size: 12px; background-color:red; color:black"><b>Industry:</b></span>', $finalProfileInfo); */
-
-      // this will parse the company address from the $retProfilePage string
-
-      preg_match('/<td width=\"270" class="yfnc_modtitlew1">(.*)Details/', $finalProfileInfo, $matches); 
-      
-      $companyAddress =  $matches[0];      
+      $url="http://www.finviz.com/quote.ashx?t=$symbol";
+      $host_name = "www.finviz.com";
+      $result = grabHTML($host_name, $url);
+      $html = str_get_html($result);
  
-      $finalReturn = str_replace('<a ', '<a target="_blank" ', $retOriginalPage[0]);       
+      $companyWebsiteArray = $html->find('table.fullview-title tbody tr td a');
+      $companyWebsite = $companyWebsiteArray[1];
+      $companyWebsite = preg_replace('/<b>.*<\/b>/', '<b>Website</b>', $companyWebsite);
+      $companyWebsite = str_replace('<a ', '<a target="_blank" onclick="return openPage(this.href)" ', $companyWebsite);    
 
-/*      $finalReturn = preg_replace("/<img[^>]+\>/i", "", $finalReturn); 
-      $finalReturn = preg_replace("/<embed.+?<\/embed>/im", "", $finalReturn);       
-      $finalReturn = preg_replace("/<iframe.+?<\/iframe>/im", "", $finalReturn); 
-      $finalReturn = preg_replace("/<script.+?<\/script>/im", "", $finalReturn);  */ 
+      $sectorCountryArray = $html->find('table.fullview-title tbody tr td a');
+      $sectorCountry = " " . $sectorCountryArray[2] . " - " . $sectorCountryArray[3] . " - " . $sectorCountryArray[4] . "<br>";
+      $sectorCountry = str_replace('<a', '<span', $sectorCountry);    
+      $sectorCountry = str_replace('\/a', '/span', $sectorCountry);    
+
+      $finalReturn = str_replace('<a ', '<a target="_blank" onclick="return openPage(this.href)" ', $allNews);
 
       $finalReturn = preg_replace($patterns = array("/<img[^>]+\>/i", "/<embed.+?<\/embed>/im", "/<iframe.+?<\/iframe>/im", "/<script.+?<\/script>/im"), $replace = array("", "", "", ""), $finalReturn);
 
@@ -500,18 +528,15 @@ else if ($which_website == "yahoo")
       $finalReturn = preg_replace('/([A-Z][a-z][a-z] [0-9][0-9]:[0-9][0-9][A-Z]M EDT)|([A-Z][a-z][a-z] [0-9]:[0-9][0-9][A-Z]M EDT)/', '<span style="font-size: 12px; background-color:black; color:white">$1$2</span> ', $finalReturn);
       $finalReturn = preg_replace('/([A-Z][a-z][a-z] [0-9][0-9]:[0-9][0-9][A-Z]M EST)|([A-Z][a-z][a-z] [0-9]:[0-9][0-9][A-Z]M EST)/', '<span style="font-size: 12px; background-color:black; color:white">$1$2</span> ', $finalReturn);
 
-
-
-
       $yahoo_todays_date = date('l'); 
       if ($yahoo_todays_date == "Monday")
       {
-        $finalReturn = preg_replace('/(' .  get_yahoo_friday_trade_date() . ')/', '<span style="font-size: 12px; background-color:black; color:white">$1</span> ', $finalReturn);
-        $finalReturn = preg_replace('/(' .  get_yahoo_saturday_trade_date() . ')/', '<span style="font-size: 12px; background-color:black; color:white">$1</span> ', $finalReturn);      
+        $finalReturn = preg_replace('/(' .  get_yahoo_friday_trade_date() . ')/', '<span style="font-size: 12px; background-color:black; color:white"> $1</span> ', $finalReturn);
+        $finalReturn = preg_replace('/(' .  get_yahoo_saturday_trade_date() . ')/', '<span style="font-size: 12px; background-color:black; color:white"> $1</span> ', $finalReturn);      
       }
 
-      $finalReturn = preg_replace('/(' .  get_yahoo_yesterday_trade_date() . ')/', '<span style="font-size: 12px; background-color:black; color:white">$1</span> ', $finalReturn);
-
+      $finalReturn = preg_replace('/(' .  get_yahoo_yesterday_trade_date() . ')/', '<span style="font-size: 12px; background-color:black; color:white"> $1</span> ', $finalReturn);
+      $finalReturn = preg_replace('/(' .  get_yahoo_todays_trade_date() . ')/', '<span style="font-size: 12px; background-color:black; color:white"> $1</span> ', $finalReturn);
 
       $finalReturn = preg_replace('/ delisted|delisted /i', '<span style="font-size: 12px; background-color:red; color:black"><b> DELISTED</span> If delisting tomorrow 65%, if days away then 50-55%</b>', $finalReturn);
       $finalReturn = preg_replace('/ delisting|delisting /i', '<span style="font-size: 12px; background-color:red; color:black"><b> DELISTING</span> If delisting tomorrow 65%, if days away then 50-55%</b>', $finalReturn);
@@ -558,14 +583,16 @@ else if ($which_website == "yahoo")
 
 //      strip_tags($finalReturn, '<embed><img>');// '#<img[^>]*>#i'
 
-      $message_board = '</font><a target="_blank" href="http://finance.yahoo.com/mb/' . $symbol . '/"> Yahoo Message Boards</a>&nbsp;&nbsp;&nbsp;&nbsp;'; 
-      $company_profile = '<a target="_blank" href="http://finance.yahoo.com/q/pr?s=' . $symbol . '+Profile">Yahoo Company Profile for ' . $symbol . '</a><br>'; 
+      $message_board = '</font><a target="_blank" onclick="return openPage(this.href)" href="http://finance.yahoo.com/quote/' . $symbol . '/community?ltr=1"> Yahoo Message Boards</a>&nbsp;&nbsp;&nbsp;&nbsp;'; 
+      $company_profile = '<a target="_blank" onclick="return openPage(this.href)" href="http://finance.yahoo.com/quote/' . $symbol . '/profile">Yahoo Company Profile for ' . $symbol . '</a><br>'; 
       $yahoo_main_page = '<a target="_blank" href="http://finance.yahoo.com/q?s=' . $symbol . '&ql=1">Yahoo Main Page for ' . $symbol . '</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
       $yahoo_5_day_chart = '<a target="_blank" href="http://finance.yahoo.com/echarts?s=' . $symbol . '+Interactive#symbol=' . $symbol . ';range=5d">5-day Chart for ' . $symbol . '</a><br><br>';
       $eTrade = '<a target="_blank" href="https://www.etrade.wallst.com/v1/stocks/news/search_results.asp?symbol=' . $symbol . '">E*TRADE news for ' . $symbol . '</a>';
-      $google = '<a target="_blank" href="https://www.google.com/search?hl=en&gl=us&tbm=nws&authuser=1&q=' . $google_keyword_string . '">Google news for ' . $symbol . '</a><br>'; 
+      $google = '<a target="_blank" onclick="return openPage(this.href)" href="https://www.google.com/search?hl=en&gl=us&tbm=nws&authuser=1&q=' . $google_keyword_string . '">Google news for ' . $symbol . '</a><br>';
+        $google = preg_replace('/<h1>/', '', $google);
+        $google = preg_replace('/<\/h1>/', '', $google);
 
-      $finalReturn = $returnCompanyName . $returnYesterdaysClose . $preMarketYesterdaysClose[1] . "<br>" . "<div style='display: inline-block;'>" . $currentVolume . $avgVol3Months . $message_board . $yahoo_main_page . $eTrade . '<table width="600px"><tr width="600px"><td valign="top" >' . $finalReturn . '</td><td valign="top">' . $finalProfileInfo . '</td></tr></table>'; 
+      $finalReturn = $returnCompanyName . $companyWebsite . $sectorCountry . $returnYesterdaysClose . $preMarketYesterdaysClose[0] . "<br>" . "<div style='display: inline-block;'>" . $currentVolume . $avgVol3Months . $company_profile . $message_board . $google . '<table width="550px"><tr width="550px"><td valign="top" >' . $finalReturn . '</td><td valign="top">' . /* $finalProfileInfo . */ '</td></tr></table>'; 
 
       echo $finalReturn; 
 
@@ -574,7 +601,7 @@ else if ($which_website == "yahoo")
 } // if ($which_website == "yahoo")
 else if ($which_website == "bigcharts")
 {
-      $url = "http://$host_name/quickchart/quickchart.asp?symb=$symbol&insttype=&freq=1&show=&time=8"; 
+      $url = "http://$host_name/quickchart/quickchart.asp?symb=$symbol&insttype=&freq=1&show=&time=8";
       $result = grabHTML($host_name, $url);
       $html = str_get_html($result);  
 
@@ -603,15 +630,16 @@ else if ($which_website == "bigcharts")
 
       // grab the last vix value 
 //      $url = "http://bigcharts.marketwatch.com/quickchart/quickchart.asp?symb=vix&insttype=&freq=9&show=&time=1"; 
-      $url = "http://finance.yahoo.com/q?s=^VIX"; 
+      $url = "http://finance.yahoo.com/quote/^VIX/news"; 
 
       $result = grabHTML("finance.yahoo.com", $url);
       $html = str_get_html($result);  
 
-      $vixTD = $html->find('.time_rtq_ticker span'); 
-      $vixTD[0] = preg_replace('/<span id="yfs_l10_\^vix">/', '', $vixTD[0]); 
-      $vixTD[0] = preg_replace('/<\/span>/', '', $vixTD[0]); 
-      $vixTDReturn = "<br>Last VIX Value: " . $vixTD[0];
+      $vixTDArray = $html->find('div#quote-header-info section span'); 
+
+      $vixTDArray[0] = preg_replace('/<span.*\">/', '', $vixTDArray[0]); 
+      $vixTDArray[0] = preg_replace('/<\/span>/', '', $vixTDArray[0]); 
+      $vixTDReturn = "<br>Last VIX Value: " . $vixTDArray[0];
 
       $bigChartsReturn = preg_replace('/<\/div>/', $vixTDReturn . '</div>', $bigChartsReturn); 
 
