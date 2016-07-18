@@ -434,9 +434,6 @@ else if ($which_website == "yahoo")
 {
 fwrite( $file, "we are in yahoo\n");
 
-fwrite( $file, "get_yahoo_friday_trade_date is " . get_yahoo_friday_trade_date() );   
-die();
-
     // grab the news 
 
     $rss = simplexml_load_file("http://feeds.finance.yahoo.com/rss/2.0/headline?s=$symbol&region=US&lang=en-US");
