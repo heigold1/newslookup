@@ -49,7 +49,7 @@ function get_yahoo_friday_trade_date()
     $friday_yahoo_trade_week_day = date('l', strtotime("-3 days"));
     $friday_yahoo_trade_week_day = mb_substr($friday_yahoo_trade_week_day, 0, 3);
     $friday_yahoo_trade_month_day = date(', d M Y', strtotime("-3 days"));
-    $friday_yahoo_trade_date = $friday_yahoo_trade_wee_day . $friday_yahoo_trade_month_day;
+    $friday_yahoo_trade_date = $friday_yahoo_trade_week_day . $friday_yahoo_trade_month_day;
  
 //    $friday_yahoo_trade_date = preg_replace('/\, 0([1-9])/', '$1', $friday_yahoo_trade_date);
  
@@ -434,6 +434,8 @@ else if ($which_website == "yahoo")
 {
 fwrite( $file, "we are in yahoo\n");
 
+fwrite( $file, "get_yahoo_friday_trade_date is " . get_yahoo_friday_trade_date() );   
+die();
 
     // grab the news 
 
