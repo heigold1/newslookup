@@ -362,11 +362,11 @@ fwrite( $file, "we are in marketwatch\n");
       $marketwatch_todays_date = date('l'); 
       if ($marketwatch_todays_date == "Monday")
       {
-        $returnHTML = preg_replace('/(' .  get_marketwatch_friday_trade_date() . ')/', '<span style="font-size: 8px; background-color:black; color:white">$1</span>', $returnHTML);
-        $returnHTML = preg_replace('/(' .  get_marketwatch_saturday_trade_date() . ')/', '<span style="font-size: 8px; background-color:black; color:white">$1</span>', $returnHTML);      
+        $returnHTML = preg_replace('/(' .  get_marketwatch_friday_trade_date() . ')/', '<span style="font-size: 8px; background-color:#000080 ; color:white">$1</span>', $returnHTML);
+        $returnHTML = preg_replace('/(' .  get_marketwatch_saturday_trade_date() . ')/', '<span style="font-size: 8px; background-color:#000080 ; color:white">$1</span>', $returnHTML);      
       }  
 
-      $returnHTML = preg_replace('/(' .  get_marketwatch_yesterday_trade_date() . ')/', '<span style="font-size: 8px; background-color:black; color:white">$1</span>', $returnHTML);     
+      $returnHTML = preg_replace('/(' .  get_marketwatch_yesterday_trade_date() . ')/', '<span style="font-size: 8px; background-color:#000080 ; color:white">$1</span>', $returnHTML);     
       $returnHTML = preg_replace('/(' .  get_marketwatch_today_trade_date() . ')/', '<span style="font-size: 8px; background-color:black; color:white">$1</span>', $returnHTML);           
 
       $returnHTML = preg_replace('/([0-9][0-9]:[0-9][0-9] [a-z]\.m\.  Today)|([0-9]:[0-9][0-9] [a-z]\.m\.  Today)/', '<span style="font-size: 8px; background-color:black; color:white">$1$2</span>', $returnHTML);
@@ -556,12 +556,12 @@ $googleNewsRSSFeed = simplexml_load_file('https://news.google.com/news/feeds?hl=
       $yahoo_todays_date = date('l'); 
       if ($yahoo_todays_date == "Monday")
       {
-        $finalReturn = preg_replace('/(' .  get_yahoo_friday_trade_date() . ')/', '<span style="font-size: 12px; background-color:black; color:white"> $1</span> ', $finalReturn);
-        $finalReturn = preg_replace('/(' .  get_yahoo_saturday_trade_date() . ')/', '<span style="font-size: 12px; background-color:black; color:white"> $1</span> ', $finalReturn);      
+        $finalReturn = preg_replace('/(' .  get_yahoo_friday_trade_date() . ')/', '<span style="font-size: 12px; background-color:#000080 ; color:white"> $1</span> ', $finalReturn);
+        $finalReturn = preg_replace('/(' .  get_yahoo_saturday_trade_date() . ')/', '<span style="font-size: 12px; background-color:#000080 ; color:white"> $1</span> ', $finalReturn);      
       }
 
-      $finalReturn = preg_replace('/(' .  get_yahoo_yesterday_trade_date() . ')/', '<span style="font-size: 12px; background-color:black; color:white"> $1</span> ', $finalReturn);
-      $finalReturn = preg_replace('/(' .  get_yahoo_todays_trade_date() . ')/', '<span style="font-size: 12px; background-color:black; color:white"> $1</span> ', $finalReturn);
+      $finalReturn = preg_replace('/(' .  get_yahoo_yesterday_trade_date() . ')/', '<span style="font-size: 12px; background-color:   #000080; color:white"> $1</span> ', $finalReturn);
+      $finalReturn = preg_replace('/(' .  get_yahoo_todays_trade_date() . ')/', '<span style="font-size: 12px; background-color:  #000080; color:white"> $1</span> ', $finalReturn);
 
       $finalReturn = preg_replace('/ delisted|delisted /i', '<span style="font-size: 12px; background-color:red; color:black"><b> DELISTED</span> If delisting tomorrow 65%, if days away then 50-55%</b>', $finalReturn);
       $finalReturn = preg_replace('/ delisting|delisting /i', '<span style="font-size: 12px; background-color:red; color:black"><b> DELISTING</span> If delisting tomorrow 65%, if days away then 50-55%</b>', $finalReturn);
