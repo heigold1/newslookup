@@ -561,7 +561,7 @@ $googleNewsRSSFeed = simplexml_load_file('https://news.google.com/news/feeds?hl=
       }
 
       $finalReturn = preg_replace('/(' .  get_yahoo_yesterday_trade_date() . ')/', '<span style="font-size: 12px; background-color:   #000080; color:white"> $1</span> ', $finalReturn);
-      $finalReturn = preg_replace('/(' .  get_yahoo_todays_trade_date() . ')/', '<span style="font-size: 12px; background-color:  #000080; color:white"> $1</span> ', $finalReturn);
+      $finalReturn = preg_replace('/(' .  get_yahoo_todays_trade_date() . ')/', '<span style="font-size: 12px; background-color:  black; color:white"> $1</span> ', $finalReturn);
 
       $finalReturn = preg_replace('/ delisted|delisted /i', '<span style="font-size: 12px; background-color:red; color:black"><b> DELISTED</span> If delisting tomorrow 65%, if days away then 50-55%</b>', $finalReturn);
       $finalReturn = preg_replace('/ delisting|delisting /i', '<span style="font-size: 12px; background-color:red; color:black"><b> DELISTING</span> If delisting tomorrow 65%, if days away then 50-55%</b>', $finalReturn);
