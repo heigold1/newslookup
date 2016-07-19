@@ -485,7 +485,7 @@ fwrite( $file, "we are in yahoo\n");
       $google_keyword_string = preg_replace('/ltd\./i', "+", $google_keyword_string);
 
 
-$googleNewsRSSFeed = simplexml_load_file('https://news.google.com/news/feeds?hl=en&gl=ca&q='.$symbol.'&um=1&ie=UTF-8&output=rss'); /* URL of Google News RSS feed*/
+$googleNewsRSSFeed = simplexml_load_file('https://news.google.com/news/feeds?hl=en&gl=ca&q='.$google_keyword_string.'&um=1&ie=UTF-8&output=rss'); /* URL of Google News RSS feed*/
 
 
     $googleNews = "<ul class='newsSide'>";
