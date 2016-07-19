@@ -470,13 +470,39 @@ fwrite( $file, "we are in yahoo\n");
       $returnCompanyName = preg_replace('/h6/', 'h1', $returnCompanyName);
 
       $google_keyword_string = $returnCompanyName; 
-/*      $google_keyword_string = trim($google_keyword_string); 
+      $google_keyword_string = trim($google_keyword_string); 
       $google_keyword_string = preg_replace('/<h1>/', "", $google_keyword_string);
       $google_keyword_string = preg_replace('/<\/h1>/', "", $google_keyword_string);
       $google_keyword_string = preg_replace('/\(/', "", $google_keyword_string);
       $google_keyword_string = preg_replace('/\)/', "", $google_keyword_string);
       $google_keyword_string = preg_replace('/\,/', "", $google_keyword_string);
-      $google_keyword_string = preg_replace('/ /', "+", $google_keyword_string);  */ 
+      $google_keyword_string = preg_replace('/ /', "+", $google_keyword_string);
+
+      $google_keyword_string = preg_replace('/&/i', "+", $google_keyword_string);
+      $google_keyword_string = preg_replace('/amp;/i', "+", $google_keyword_string);
+      $google_keyword_string = preg_replace('/.international/i', "+", $google_keyword_string);
+      $google_keyword_string = preg_replace('/inc\./i', "+", $google_keyword_string);
+      $google_keyword_string = preg_replace('/ltd\./i', "+", $google_keyword_string);
+
+
+$googleNewsRSSFeed = simplexml_load_file('https://news.google.com/news/feeds?hl=en&gl=ca&q='.$symbol.'&um=1&ie=UTF-8&output=rss'); /* URL of Google News RSS feed*/
+
+
+    $googleNews = "<ul class='newsSide'>";
+    $i = 0;
+    foreach ($googleNewsRSSFeed->channel->item as $feedItem) {
+        $i++;
+        $googleNews .= "<li "; 
+
+        if ($i % 2 == 1)
+        {
+          $googleNews .=  "style='background-color: #FFFFFF; '"; 
+        };
+        
+        $googleNews .=  " ><a href='$feedItem->link' title='$feedItem->title'> " . $feedItem->pubDate . " " . $feedItem->title . "</a></li>";
+    }
+    $googleNews .=  "</ul>";
+
       $yesterdays_close =  $html->find('table.table-qsp-stats tbody tr td'); 
 
       $returnYesterdaysClose = $yesterdays_close[1]; 
@@ -515,7 +541,7 @@ fwrite( $file, "we are in yahoo\n");
       $sectorCountry = str_replace('<a', '<span', $sectorCountry);    
       $sectorCountry = str_replace('\/a', '/span', $sectorCountry);    
 
-      $finalReturn = str_replace('<a ', '<a target="_blank" onclick="return openPage(this.href)" ', $allNews);
+      $finalReturn = "<td valign='top' >" . str_replace('<a ', '<a target="_blank" onclick="return openPage(this.href)" ', $allNews) . '</td><td valign="top">' . str_replace('<a ', '<a target="_blank" onclick="return openPage(this.href)" ', $googleNews) . '</td>';
 
       $finalReturn = preg_replace($patterns = array("/<img[^>]+\>/i", "/<embed.+?<\/embed>/im", "/<iframe.+?<\/iframe>/im", "/<script.+?<\/script>/im"), $replace = array("", "", "", ""), $finalReturn);
 
@@ -591,7 +617,7 @@ fwrite( $file, "we are in yahoo\n");
         $google = preg_replace('/<h1>/', '', $google);
         $google = preg_replace('/<\/h1>/', '', $google);
 
-      $finalReturn = $returnCompanyName . $companyWebsite . $sectorCountry . $returnYesterdaysClose . $preMarketYesterdaysClose[0] . "<br>" . "<div style='display: inline-block;'>" . $currentVolume . $avgVol3Months . $company_profile . $message_board . $google . '<table width="550px"><tr width="550px"><td valign="top" >' . $finalReturn . '</td><td valign="top">' . /* $finalProfileInfo . */ '</td></tr></table>'; 
+      $finalReturn = $returnCompanyName . $companyWebsite . $sectorCountry . $returnYesterdaysClose . $preMarketYesterdaysClose[0] . "<br>" . "<div style='display: inline-block;'>" . $currentVolume . $avgVol3Months . $company_profile . $message_board . $google . '<table width="575px"><tr width="575px">' . $finalReturn . '</tr></table>'; 
 
       echo $finalReturn; 
 

@@ -427,8 +427,7 @@ $("#copy_price_to_percentage").click(function(){
         google_keyword_string = google_keyword_string.replace(/ltd\./ig, "");
 
 
-        windowName1 = window.open("https://www.google.com/search?hl=en&gl=us&tbm=nws&authuser=1&q=" +  google_keyword_string);
-
+//        windowName1 = window.open("https://www.google.com/search?hl=en&gl=us&tbm=nws&authuser=1&q=" +  google_keyword_string);
 
 	    	$("div#right_top_container").html(data);
 
@@ -453,6 +452,7 @@ $("#copy_price_to_percentage").click(function(){
     	} // yahoo success function 
 	});  // yahoo ajax   
   $("div#right_top_container").css("background-color", "#F3F3FF");
+
 
 
 
