@@ -468,7 +468,7 @@ $("#copy_price_to_percentage").click(function(){
            stockOrFund: stockOrFund, 
 	    	   which_website: "marketwatch", 
 	    	   host_name: "www.marketwatch.com"},
-       async: false, 
+       async: true, 
 	    dataType: 'html',
 	    success:  function (data) {
 	    	console.log(data);
