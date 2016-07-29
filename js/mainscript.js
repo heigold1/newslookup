@@ -366,7 +366,7 @@ $("#copy_price_to_percentage").click(function(){
         $("#yestCloseText").val("");
         $("#entryPrice").val("-----"); 
         $("#entryPercentage").val("-----");
-        $("#amountSpending").val("1150");
+        $("#amountSpending").val("1300");
         $("#orderStub").val("-----------------------"); 
 
         $("#roundShares_50").checked = true; 
