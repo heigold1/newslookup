@@ -462,12 +462,11 @@ fwrite( $file, "we are in yahoo\n");
       $result = str_replace ('href="/', 'href="http://finance.yahoo.com/', $result);
       $html = str_get_html($result); 
 
-      $full_company_name = $html->find('h6'); 
+      $full_company_name = $html->find('h1'); 
       $full_company_name_html = str_get_html($full_company_name[0]);
 
       $returnCompanyName = $full_company_name_html;
-      $returnCompanyName = preg_replace('/<h6.*\">/', '<h6>', $returnCompanyName);         
-      $returnCompanyName = preg_replace('/h6/', 'h1', $returnCompanyName);
+      $returnCompanyName = preg_replace('/<h1.*\">/', '<h1>', $returnCompanyName);         
 
       $google_keyword_string = $returnCompanyName; 
       $google_keyword_string = trim($google_keyword_string); 
