@@ -654,8 +654,8 @@ else if ($which_website == "bigcharts")
 
       // grab the last vix value 
 //      $url = "http://bigcharts.marketwatch.com/quickchart/quickchart.asp?symb=vix&insttype=&freq=9&show=&time=1"; 
-      $url = "http://finance.yahoo.com/quote/^VIX/news"; 
-
+      $url = "http://finance.yahoo.com/quote/^VIX?p=^VIX"; 
+ 
       $result = grabHTML("finance.yahoo.com", $url);
       $html = str_get_html($result);  
 
