@@ -227,3 +227,7 @@ div#bigcharts_yest_close{
 	border-style: solid; 
 	border-width: 1px; 	
 }
+
+li.indent{
+	margin-left: 25px;
+}
