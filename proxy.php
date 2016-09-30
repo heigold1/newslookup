@@ -6,7 +6,6 @@ consumer_secret: 886529f1c9d06729e97b6f511a89b4df
 */
 
 include 'config.php';
-include 'C:\Xampp\php\Common\Common.php';
 
 require_once("simple_html_dom.php"); 
 error_reporting(0);
@@ -359,7 +358,7 @@ fwrite( $file, "we are in marketwatch\n");
 
       $returnHTML = str_replace('<span>', '<span style="font-weight: bold;">', $returnHTML); 
 
-      $marketwatch_todays_date = date('l'); 
+      $marketwatch_todays_date = date('l', strtotime("-9 hours")); 
       if ($marketwatch_todays_date == "Monday")
       {
         $returnHTML = preg_replace('/(' .  get_marketwatch_friday_trade_date() . ')/', '<span style="font-size: 8px; background-color:#000080 ; color:white">$1</span>', $returnHTML);
@@ -552,7 +551,7 @@ $googleNewsRSSFeed = simplexml_load_file('https://news.google.com/news/feeds?hl=
       $finalReturn = preg_replace('/([A-Z][a-z][a-z] [0-9][0-9]:[0-9][0-9][A-Z]M EDT)|([A-Z][a-z][a-z] [0-9]:[0-9][0-9][A-Z]M EDT)/', '<span style="font-size: 12px; background-color:black; color:white">$1$2</span> ', $finalReturn);
       $finalReturn = preg_replace('/([A-Z][a-z][a-z] [0-9][0-9]:[0-9][0-9][A-Z]M EST)|([A-Z][a-z][a-z] [0-9]:[0-9][0-9][A-Z]M EST)/', '<span style="font-size: 12px; background-color:black; color:white">$1$2</span> ', $finalReturn);
 
-      $yahoo_todays_date = date('l'); 
+      $yahoo_todays_date = date('l', strtotime("-9 hours")); 
       if ($yahoo_todays_date == "Monday")
       {
         $finalReturn = preg_replace('/(' .  get_yahoo_friday_trade_date() . ')/', '<span style="font-size: 12px; background-color:#000080 ; color:white"> $1</span> ', $finalReturn);
