@@ -54,7 +54,8 @@ if($errno = curl_errno($ch)) {
     return $returnHTML; 
 } // end of function grabHTML
 
-    $current_time = date('Gis', strtotime("-9 hours")); 
+    $current_time = date('Gis', strtotime("-3 hours")); 
+
   	$symbol='MSFT'; // $_GET['symbol'];
   	$date_parameter = "";
 
@@ -77,7 +78,6 @@ if($errno = curl_errno($ch)) {
     	}
 
   	}
-
 
 	$fullURL = "http://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20%20%20yahoo.finance.historicaldata%20where%20%20symbol%20%20%20%20=%20%22" . $symbol . "%22and%20%20%20%20startDate%20=%20%22" . $date_parameter . "%22%20and%20%20%20%20endDate%20%20%20=%20%22" . $date_parameter . "%22&format=json&diagnostics=true&env=store://datatables.org/alltableswithkeys&callback="; 
 
