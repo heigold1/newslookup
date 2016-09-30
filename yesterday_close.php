@@ -56,7 +56,7 @@ if($errno = curl_errno($ch)) {
 
     $current_time = date('Gis', strtotime("-3 hours")); 
 
-  	$symbol='MSFT'; // $_GET['symbol'];
+  	$symbol=$_GET['symbol'];
   	$date_parameter = "";
 
   	if ($current_time > 130000)  // 1:00 PM 
