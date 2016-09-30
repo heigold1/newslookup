@@ -3,13 +3,13 @@
 
 function get_friday_trade_date()
 {
-    $friday_trade_date = date('Y-m-d', strtotime("-45 hours"));
+    $friday_trade_date = date('Y-m-d', strtotime("-75 hours"));
     return $friday_trade_date;
 }
 
 function get_yesterday_trade_date()
 {
-    $yesterday_trade_date = date('Y-m-d', strtotime("-33 hours"));
+    $yesterday_trade_date = date('Y-m-d', strtotime("-27 hours"));
     return $yesterday_trade_date;
 }
 
@@ -55,18 +55,18 @@ if($errno = curl_errno($ch)) {
 } // end of function grabHTML
 
     $current_time = date('Gis', strtotime("-9 hours")); 
-  	$symbol=$_GET['symbol'];
+  	$symbol='MSFT'; // $_GET['symbol'];
   	$date_parameter = "";
 
   	if ($current_time > 130000)  // 1:00 PM 
   	{
   		// if it's after 1:00 (closing bell) then we go with today's date 
-  		$date_parameter = date('Y-m-d', strtotime("-9 hours"));
+  		$date_parameter = date('Y-m-d', strtotime("-3 hours"));
   	}
   	else
   	{
   		// if it's still before 1:00 (closing bell) then we are using yesterday's date
-		$todays_date_weekday = date('l', strtotime("-9 hours"));   //   h:i:s A 
+		$todays_date_weekday = date('l', strtotime("-3 hours"));   //   h:i:s A 
     	if ($todays_date_weekday == "Monday")
     	{
       		$date_parameter = get_friday_trade_date();
