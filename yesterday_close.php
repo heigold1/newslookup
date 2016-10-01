@@ -11,12 +11,21 @@
 require_once(dirname(__FILE__) . '/../Common/Common.php');
 require_once 'Market/MarketClient.class.php';  */
 
-
 //require_once("config.php");
-require_once(dirname(__FILE__) . '/Samples/Config.php');
+
+/*require_once(dirname(__FILE__) . '/Samples/Config.php');
 require_once(dirname(__FILE__) . '/Common/Common.php');
 require_once(dirname(__FILE__) . '/OAuth/etOAuth.class.php');
-require_once(dirname(__FILE__) . '/Market/MarketClient.class.php');
+require_once(dirname(__FILE__) . '/Market/MarketClient.class.php'); */
+
+include './Samples/Config.php';
+include './Common/Common.php';
+include './OAuth/etOAuth.class.php';
+include './Market/MarketClient.class.php';
+
+/*
+$file_name = dirname(__FILE__);
+echo $file_name; die(); */
 
 $symbol=$_GET['symbol'];
 
@@ -37,6 +46,7 @@ $ac_obj	= new MarketClient($consumer);
 		$request_params->__set('symbolList', array($symbol));
 		$request_params->__set('detailFlag', 'All');
 		$out 	= $ac_obj->getQuote($request_params);
+
 	}catch(ETWSException $e){
 		echo 	"***Caught exception***  \n".
 				"Error Code 	: " . $e->getErrorCode()."\n" .
@@ -53,22 +63,21 @@ $ac_obj	= new MarketClient($consumer);
 
 	}
 
-	$mkt_responce_obj = etHttpUtils::GetResponseObject($out);
+	$mkt_responce_obj = json_decode($out); //etHttpUtils::GetResponseObject($out);
 
 	$current_time = date('Gis', strtotime("-3 hours")); 
 
   	if ($current_time > 130000)  // 1:00 PM 
   	{
-  		if (isset($mkt_responce_obj->QuoteData->all->lastTrade))
+  		if (isset($mkt_responce_obj->quoteResponse->quoteData->all->lastTrade))
   		{
-  			$last_trade = (string) $mkt_responce_obj->QuoteData->all->lastTrade;
+  			$last_trade = (string) $mkt_responce_obj->quoteResponse->quoteData->all->lastTrade;
 
   			if (preg_match('/E-4/', $last_trade))
   			{
   				$last_trade = floatval(preg_replace('/E-4/', '', $last_trade))/10000;
-
-  				echo $last_trade;
   			}
+  			echo $last_trade;
 		}
 		else
   		{
@@ -78,15 +87,14 @@ $ac_obj	= new MarketClient($consumer);
   	}
   	else
   	{
-  		if (isset($mkt_responce_obj->QuoteData->all->prevClose))
+  		if (isset($mkt_responce_obj->quoteResponse->quoteData->all->prevClose))
   		{
-  			$prev_close = (string) $mkt_responce_obj->QuoteData->all->prevClose;
+  			$prev_close = (string) $mkt_responce_obj->quoteResponse->quoteData->all->prevClose;
   			if (preg_match('/E-4/', $prev_close))
   			{
   				$prev_close = floatval(preg_replace('/E-4/', '', $prev_close))/10000;
-
-  				echo $prev_close;
   			}
+  			echo $prev_close;
 		}
 		else
 		{
