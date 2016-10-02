@@ -68,7 +68,7 @@
 							<td width="130px"><input type="radio" name="roundShares" id="roundShares" value="1000">Round 1,000</td> 						
 						</tr>
 						<tr height="15">
-							<td width="140px">E*T Low <span id="eTradeLow">&nbsp;&nbsp;&nbsp;</span></td>
+							<td width="140px">E*T Low $<span id="eTradeLow">&nbsp;&nbsp;&nbsp;</span></td>
 							<td width="330px">
 							</td>
 							<td width="130px"></td> 						
