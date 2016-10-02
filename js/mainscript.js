@@ -383,7 +383,20 @@ $("#copy_price_to_percentage").click(function(){
           async: false, 
           dataType: 'html',
           success:  function (data) {
-            $("#yestCloseText").val(data);
+            returnData = data.match(/Caught exception/i); 
+            if (returnData)
+            {
+              $("#yestCloseText").val('EXCEPTION');
+            }
+            else
+            {
+              jsonObject = JSON.parse(data);
+              $("#yestCloseText").val(jsonObject.prev_close);
+              
+            }
+
+
+
             console.log(data);
           }
       });  // end of AJAX call to grab yahoo finance's yesterday's close API 

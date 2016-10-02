@@ -72,12 +72,14 @@ $ac_obj	= new MarketClient($consumer);
   		if (isset($mkt_responce_obj->quoteResponse->quoteData->all->lastTrade))
   		{
   			$last_trade = (string) $mkt_responce_obj->quoteResponse->quoteData->all->lastTrade;
+			$low = (string) $mkt_responce_obj->quoteResponse->quoteData->all->low;
 
   			if (preg_match('/E-4/', $last_trade))
   			{
   				$last_trade = floatval(preg_replace('/E-4/', '', $last_trade))/10000;
   			}
-  			echo $last_trade;
+  			echo '{"prev_close":"' . $last_trade . '", ' . 
+  				 ' "low":"' . $low . '"}';
 		}
 		else
   		{
@@ -90,11 +92,13 @@ $ac_obj	= new MarketClient($consumer);
   		if (isset($mkt_responce_obj->quoteResponse->quoteData->all->prevClose))
   		{
   			$prev_close = (string) $mkt_responce_obj->quoteResponse->quoteData->all->prevClose;
+			$low = (string) $mkt_responce_obj->quoteResponse->quoteData->all->low;
   			if (preg_match('/E-4/', $prev_close))
   			{
   				$prev_close = floatval(preg_replace('/E-4/', '', $prev_close))/10000;
   			}
-  			echo $prev_close;
+  			echo '{"prev_close":"' . $prev_close . '", ' . 
+  				 ' "low":"' . $low . '"}';
 		}
 		else
 		{
