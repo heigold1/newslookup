@@ -392,7 +392,7 @@ $("#copy_price_to_percentage").click(function(){
             {
               jsonObject = JSON.parse(data);
               $("#yestCloseText").val(jsonObject.prev_close);
-              
+              $("#eTradeLow").html(jsonObject.low);
             }
 
 
