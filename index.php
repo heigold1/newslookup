@@ -70,6 +70,7 @@
 						<tr height="15">
 							<td width="140px">E*T Low $<span id="eTradeLow">&nbsp;&nbsp;&nbsp;</span></td>
 							<td width="330px">
+								E*T High $<span id="eTradeHigh">&nbsp;&nbsp;&nbsp;</span>
 							</td>
 							<td width="130px"></td> 						
 						</tr>

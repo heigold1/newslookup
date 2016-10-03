@@ -201,7 +201,7 @@ div#bigcharts_yest_close{
 	background-color: #FFFFFF;  
 }
 
-#eTradeLow{
+#eTradeLow, #eTradeHigh{
 	width: 50px;
 	background-color: #FFFFFF;  
 }
