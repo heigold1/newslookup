@@ -386,7 +386,7 @@ $("#copy_price_to_percentage").click(function(){
             returnData = data.match(/Caught exception/i); 
             if (returnData)
             {
-              $("#yestCloseText").val('EXCEPTION');
+              $("#yestCloseText").val(data);
             }
             else
             {
