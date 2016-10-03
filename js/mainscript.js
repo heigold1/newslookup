@@ -364,6 +364,8 @@ $("#copy_price_to_percentage").click(function(){
 //    window.open("https://www.etrade.wallst.com/v1/stocks/news/search_results.asp?symbol=" + symbol + "&rsO=new");
       
         $("#yestCloseText").val("");
+        $("#eTradeLow").val("");
+        $("#eTradeHigh").val("");
         $("#entryPrice").val("-----"); 
         $("#entryPercentage").val("-----");
         $("#amountSpending").val("800");
@@ -613,7 +615,7 @@ $('#yestCloseText').keypress(function(e){
         var volumeChecked = $("#volumeChecked").html();
         if (volumeChecked == "0")
         {
-          alert("CHECK VOLUME - DAILY AND 30 DAY\n\nDid it spike up yesterday?\n\nIs the TMX price lower than the BigCharts price?\n\nCheck the VIX");
+          alert("CHECK VOLUME - DAILY AND 30 DAY\n\nDid it spike up yesterday?\n\nCheck the VIX");
           $("#volumeChecked").html("1");
         }
       } 
@@ -640,6 +642,27 @@ $(document.body).on('change', "input[type=radio][name=roundShares]", function(){
 $(document.body).on('keyup', "#orderStub", function(){
        reCalcOrderStub(); 
 });  // when one of the round-to-nearest radio buttons changes
+
+$("#entryPercentage").click(function(){
+  var volumeChecked = $("#volumeChecked").html();
+  if (volumeChecked == "0")
+  {
+    alert("CHECK VOLUME - DAILY AND 30 DAY\n\nDid it spike up yesterday?\n\nCheck the VIX");
+    $("#volumeChecked").html("1");
+  }
+});
+
+$("#entryPrice").click(function(){
+  var volumeChecked = $("#volumeChecked").html();
+  if (volumeChecked == "0")
+  {
+    alert("CHECK VOLUME - DAILY AND 30 DAY\n\nDid it spike up yesterday?\n\nCheck the VIX");
+    $("#volumeChecked").html("1");
+  }
+});
+
+
+
 
 /* $(document.body).on('keyup', "#amountSpending", function(){
       calcAll(); 
