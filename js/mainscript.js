@@ -485,9 +485,6 @@ $("#copy_price_to_percentage").click(function(){
 	});  // yahoo ajax   
   $("div#right_top_container").css("background-color", "#F3F3FF");
 
-
-
-
   // AJAX call to marketwatch 
   var eTradeIFrame = '<br><iframe id="etrade_iframe" src="https://www.etrade.wallst.com/v1/stocks/news/search_results.asp?symbol=' + symbol + '&rsO=new#lastTradeTime" width="575px" height="340px"></iframe>';
 //  var googleIFrame = '<br><iframe src="https://www.google.com/search?hl=en&gl=us&tbm=nws&authuser=0&q=' + google_keyword_string + '&oq=' + google_keyword_string + '" width="575px" height="400px"></iframe>'; 
@@ -546,7 +543,7 @@ $("#copy_price_to_percentage").click(function(){
         console.log(data);
         div_left_bottom_container = $("div#left_bottom_container").html(); 
         $("div#left_bottom_container").html(div_left_bottom_container + data); 
-      }
+     }
   });  // end of AJAX call to eTrade
   $("div#left_bottom_container").css("background-color", "#F3F3FF");     
   */ 
