@@ -364,8 +364,8 @@ $("#copy_price_to_percentage").click(function(){
 //    window.open("https://www.etrade.wallst.com/v1/stocks/news/search_results.asp?symbol=" + symbol + "&rsO=new");
       
         $("#yestCloseText").val("");
-        $("#eTradeLow").val("");
-        $("#eTradeHigh").val("");
+        $("#eTradeLow").html("");
+        $("#eTradeHigh").html("");
         $("#entryPrice").val("-----"); 
         $("#entryPercentage").val("-----");
         $("#amountSpending").val("800");
