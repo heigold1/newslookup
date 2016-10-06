@@ -396,6 +396,14 @@ $("#copy_price_to_percentage").click(function(){
               $("#yestCloseText").val(jsonObject.prev_close);
               $("#eTradeLow").html(jsonObject.low);
               $("#eTradeHigh").html(jsonObject.high);
+
+              $("#day5").html(jsonObject.day_5);
+              $("#day4").html(jsonObject.day_4);
+              $("#day3").html(jsonObject.day_3);
+              $("#day2").html(jsonObject.day_2);
+              $("#day1").html(jsonObject.day_1);
+
+              alert(jsonObject.day_5);
             }
 
 

@@ -206,6 +206,19 @@ div#bigcharts_yest_close{
 	background-color: #FFFFFF;  
 }
 
+.historical_data_days{
+	width: 50px;
+	background-color: #FFFFFF;  
+}
+
+.historical_data_label{
+	color: #000000; 
+	background-color: #000000; 
+/*	display:inline-block;   */ 
+	width: 10px;
+}
+
+
 #orderStub{
 	width: 315px;
 }
