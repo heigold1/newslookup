@@ -366,6 +366,11 @@ $("#copy_price_to_percentage").click(function(){
         $("#yestCloseText").val("");
         $("#eTradeLow").html("");
         $("#eTradeHigh").html("");
+        $("#day5").html("");
+        $("#day4").html("");
+        $("#day3").html("");
+        $("#day2").html("");
+        $("#day1").html("");
         $("#entryPrice").val("-----"); 
         $("#entryPercentage").val("-----");
         $("#amountSpending").val("800");
@@ -402,8 +407,6 @@ $("#copy_price_to_percentage").click(function(){
               $("#day3").html(jsonObject.day_3);
               $("#day2").html(jsonObject.day_2);
               $("#day1").html(jsonObject.day_1);
-
-              alert(jsonObject.day_5);
             }
 
 
@@ -675,6 +678,13 @@ $("#entryPrice").click(function(){
 
     $("#yestCloseText").val("");
     $("#entryPrice").val("-----"); 
+    $("#eTradeLow").html("");
+    $("#eTradeHigh").html("");
+    $("#day5").html("");
+    $("#day4").html("");
+    $("#day3").html("");
+    $("#day2").html("");
+    $("#day1").html("");
     $("#entryPercentage").val("-----");
     $("#amountSpending").val("-----");
     $("#orderStub").val("-----------------------");    
