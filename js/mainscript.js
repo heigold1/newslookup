@@ -408,9 +408,6 @@ $("#copy_price_to_percentage").click(function(){
       });  // End of AJAX to get E*TRADE API data 
       $("div#left_top_container").css("background-color", "#F3F3FF");
 
-
-/********************** BEGIN HERE  ***************************************
-
       // Yahoo Finance historical data API 
       $("div#left_top_container").css("background-color", "#BBDDFF");                   
       $.ajax({
@@ -536,7 +533,6 @@ $("#copy_price_to_percentage").click(function(){
   var myIframe = document.getElementById('iframe');
       myIframe.contentWindow.scrollTo(75, 100); 
 
-************************************ END HERE *********************************/ 
 
 /*
   $("div#left_bottom_container").css("background-color", "#BBDDFF");                     
