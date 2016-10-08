@@ -699,34 +699,6 @@ else if ($which_website == "etrade")
 
 //       fwrite( $file, " host_name is " . $host_name . " Etade page - " . $html);
       echo $returnEtradeHTML; 
-}else if ($which_website == "google")
-{
-      fwrite( $file, " which_website is - " . $which_website . "\r\n"); 
-      fwrite( $file, " host_name is " . $host_name . "\r\n");  
-      fwrite( $file, " google_keyword_string is " . $google_keyword_string . "\r\n");
-
- $url =  "www.google.com/search?hl=en&gl=us&tbm=nws&authuser=1&q=" . $google_keyword_string;
-
-      fwrite( $file, " url is " . $google_keyword_string . "\r\n");
-      $result = grabHTML($host_name, $url);
-
-      fwrite( $file, " result is *" . $result . "*\r\n");
-
-
-/*
-      $result = grabEtradeHTML("www.etrade.wallst.com", $url);
-      $html = str_get_html($result);  
-      $eTradeNewsDiv = $html->find('#news_story');
-
-//      $html = str_get_html($eTradeNewsDiv[0]);  
-      $returnEtradeHTML = $eTradeNewsDiv[0]; 
-      $returnEtradeHTML = preg_replace('/<div class="fRight newsSideWidth t10">(.*)<div class="clear"><\/div>/', '', $returnEtradeHTML); 
-      $returnEtradeHTML = preg_replace('/width:306px;/', 'width:600px;', $returnEtradeHTML); 
-
-      fwrite( $file, " after calling grabHTML for google, result is " . $returnEtradeHTML . "\r\n"); 
-
-//       fwrite( $file, " host_name is " . $host_name . " Etade page - " . $html);
-      echo $returnEtradeHTML;   */
 }
 
 // fwrite( $file, $ret[0] );
