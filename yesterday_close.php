@@ -102,7 +102,7 @@ $ac_obj = new MarketClient($consumer);
            ' "high":"' . $high . '"}'; */
     }
     else
-      {
+    {
       echo "------";
     }
 

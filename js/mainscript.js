@@ -390,8 +390,9 @@ $("#copy_price_to_percentage").click(function(){
           async: false, 
           dataType: 'html',
           success:  function (data) {
+
             returnData = data.match(/Caught exception/i); 
-            if (returnData)
+            if (returnData || (data == '------'))
             {
               $("#yestCloseText").val(data);
             }
@@ -407,7 +408,10 @@ $("#copy_price_to_percentage").click(function(){
       });  // End of AJAX to get E*TRADE API data 
       $("div#left_top_container").css("background-color", "#F3F3FF");
 
-      // old way of accessing Yahoo Finance historical data API 
+
+/********************** BEGIN HERE  ***************************************
+
+      // Yahoo Finance historical data API 
       $("div#left_top_container").css("background-color", "#BBDDFF");                   
       $.ajax({
           url: "yahoo_finance_api_historical_data.php",
@@ -532,7 +536,7 @@ $("#copy_price_to_percentage").click(function(){
   var myIframe = document.getElementById('iframe');
       myIframe.contentWindow.scrollTo(75, 100); 
 
-
+************************************ END HERE *********************************/ 
 
 /*
   $("div#left_bottom_container").css("background-color", "#BBDDFF");                     
