@@ -371,8 +371,8 @@ $("#copy_price_to_percentage").click(function(){
         $("#day3").html("");
         $("#day2").html("");
         $("#day1").html("");
-        $("#entryPrice").val("-----"); 
-        $("#entryPercentage").val("-----");
+        $("#entryPrice").val(""); 
+        $("#entryPercentage").val("");
         $("#amountSpending").val("800");
         $("#orderStub").val("-----------------------"); 
 
@@ -381,7 +381,7 @@ $("#copy_price_to_percentage").click(function(){
 
        $("#yestCloseText").focus();
 
-
+      // E*TRADE API data
 
       $("div#left_top_container").css("background-color", "#BBDDFF");                   
       $.ajax({
@@ -401,20 +401,35 @@ $("#copy_price_to_percentage").click(function(){
               $("#yestCloseText").val(jsonObject.prev_close);
               $("#eTradeLow").html(jsonObject.low);
               $("#eTradeHigh").html(jsonObject.high);
+            }
+            console.log(data);
+          }
+      });  // End of AJAX to get E*TRADE API data 
+      $("div#left_top_container").css("background-color", "#F3F3FF");
 
+      // old way of accessing Yahoo Finance historical data API 
+      $("div#left_top_container").css("background-color", "#BBDDFF");                   
+      $.ajax({
+          url: "yahoo_finance_api_historical_data.php",
+          data: {symbol: original_symbol},
+          async: false, 
+          dataType: 'html',
+          success:  function (data) {
+              jsonObject = JSON.parse(data);
               $("#day5").html(jsonObject.day_5);
               $("#day4").html(jsonObject.day_4);
               $("#day3").html(jsonObject.day_3);
               $("#day2").html(jsonObject.day_2);
               $("#day1").html(jsonObject.day_1);
-            }
-
-
+              $("#yahoo_historical_data_link").html("<a onclick='return openPage(this.href)' href='http://localhost/newslookup/yahoo_finance_api_historical_data.php?symbol=" + original_symbol + "'>Hist</a>");
 
             console.log(data);
           }
       });  // end of AJAX call to grab yahoo finance's yesterday's close API 
-      $("div#left_top_container").css("background-color", "#F3F3FF");   
+      $("div#left_top_container").css("background-color", "#F3F3FF");
+
+
+/****************** START HERE *********************************
 
 
       $("div#bigcharts_chart_container").html("<a target='blank' style='cursor: pointer;' title='Click to open 5-day chart' onclick='return openPage(\"http://bigcharts.marketwatch.com/quickchart/quickchart.asp?symb=" + original_symbol + "&insttype=&freq=7&show=&time=3&rand=" + Math.random() + "\")'> <img style='max-width:100%; max-height:100%;' src='http://bigcharts.marketwatch.com/kaavio.Webhost/charts/big.chart?nosettings=1&symb=" + original_symbol + "&uf=0&type=2&size=2&freq=1&entitlementtoken=0c33378313484ba9b46b8e24ded87dd6&time=4&rand=" + Math.random() + "&compidx=&ma=0&maval=9&lf=1&lf2=0&lf3=0&height=335&width=579&mocktick=1)'></a>");
@@ -518,6 +533,9 @@ $("#copy_price_to_percentage").click(function(){
   $("div#left_bottom_container").css("background-color", "#F3F3FF");   
   var myIframe = document.getElementById('iframe');
       myIframe.contentWindow.scrollTo(75, 100); 
+
+
+*************************** END HERE ********************************/
 
 
 /*
