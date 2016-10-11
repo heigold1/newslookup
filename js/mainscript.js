@@ -619,7 +619,7 @@ $('#yestCloseText').keypress(function(e){
         var volumeChecked = $("#volumeChecked").html();
         if (volumeChecked == "0")
         {
-          alert("CHECK VOLUME - DAILY AND 30 DAY\n\nDid it spike up yesterday?\n\nCheck the VIX");
+          alert("CHECK VOLUME - DAILY AND 30 DAY\n\nDid it spike up yesterday?\n\nCheck the VIX\n\nCheck $1.00 > Pink Sheet stocks");
           $("#volumeChecked").html("1");
         }
       } 
@@ -651,7 +651,7 @@ $("#entryPercentage").click(function(){
   var volumeChecked = $("#volumeChecked").html();
   if (volumeChecked == "0")
   {
-    alert("CHECK VOLUME - DAILY AND 30 DAY\n\nDid it spike up yesterday?\n\nCheck the VIX");
+          alert("CHECK VOLUME - DAILY AND 30 DAY\n\nDid it spike up yesterday?\n\nCheck the VIX\n\nCheck $1.00 > Pink Sheet stocks");
     $("#volumeChecked").html("1");
   }
 });
@@ -660,7 +660,7 @@ $("#entryPrice").click(function(){
   var volumeChecked = $("#volumeChecked").html();
   if (volumeChecked == "0")
   {
-    alert("CHECK VOLUME - DAILY AND 30 DAY\n\nDid it spike up yesterday?\n\nCheck the VIX");
+          alert("CHECK VOLUME - DAILY AND 30 DAY\n\nDid it spike up yesterday?\n\nCheck the VIX\n\nCheck $1.00 > Pink Sheet stocks");
     $("#volumeChecked").html("1");
   }
 });
