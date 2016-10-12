@@ -417,6 +417,12 @@ $("#copy_price_to_percentage").click(function(){
           dataType: 'html',
           success:  function (data) {
               jsonObject = JSON.parse(data);
+
+              if (jsonObject.day_5 == "--")
+              {
+                openPage("http://localhost/newslookup/yahoo_finance_api_historical_data.php?symbol=" + original_symbol);
+              }
+
               $("#day5").html(jsonObject.day_5);
               $("#day4").html(jsonObject.day_4);
               $("#day3").html(jsonObject.day_3);
