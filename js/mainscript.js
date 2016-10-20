@@ -399,14 +399,43 @@ $("#copy_price_to_percentage").click(function(){
             else
             {
               jsonObject = JSON.parse(data);
+              low = jsonObject.low;
+              bid = jsonObject.bid;
+
               $("#yestCloseText").val(jsonObject.prev_close);
-              $("#eTradeLow").html(jsonObject.low);
+              $("#eTradeLow").html(low);
               $("#eTradeHigh").html(jsonObject.high);
+
+              defaultEntry = 0.0;
+
+              if (bid <= low)
+              {
+                defaultEntry = parseFloat(bid);
+                if (defaultEntry == 0.9999)
+                {
+                  defaultEntry = 1.00;
+                }
+                else if (defaultEntry < 0.9999)
+                {
+                  defaultEntry += 0.0001
+                }
+                else if (defaultEntry >= 1.0)
+                {
+                  defaultEntry += 0.01;
+                }
+                defaultEntry = defaultEntry.toString();
+                defaultEntry = defaultEntry.replace(/^0\./gm, '.');
+
+                $("#entryPrice").val(defaultEntry);
+                calcAll(); 
+              }
             }
             console.log(data);
           }
       });  // End of AJAX to get E*TRADE API data 
       $("div#left_top_container").css("background-color", "#F3F3FF");
+
+      CopyToClipboard();
 
       // Yahoo Finance historical data API 
       $("div#left_top_container").css("background-color", "#BBDDFF");                   

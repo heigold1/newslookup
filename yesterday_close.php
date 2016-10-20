@@ -75,8 +75,9 @@ $ac_obj = new MarketClient($consumer);
       if (isset($mkt_responce_obj->quoteResponse->quoteData->all->lastTrade))
       {
         $last_trade = (string) $mkt_responce_obj->quoteResponse->quoteData->all->lastTrade;
-      $low = (string) $mkt_responce_obj->quoteResponse->quoteData->all->low;
-      $high = (string) $mkt_responce_obj->quoteResponse->quoteData->all->high;
+        $low = (string) $mkt_responce_obj->quoteResponse->quoteData->all->low;
+        $high = (string) $mkt_responce_obj->quoteResponse->quoteData->all->high;
+        $bid = (string) $mkt_responce_obj->quoteResponse->quoteData->all->bid;
 
         if (preg_match('/E-4/', $last_trade))
         {
@@ -90,10 +91,15 @@ $ac_obj = new MarketClient($consumer);
         {
           $high = floatval(preg_replace('/E-4/', '', $high))/10000;
         }
+        if (preg_match('/E-4/', $bid))
+        {
+          $bid = floatval(preg_replace('/E-4/', '', $bid))/10000;
+        }
 
         $dataArray['prev_close'] = $last_trade; 
         $dataArray['low'] = $low; 
         $dataArray['high'] = $high; 
+        $dataArray['bid'] = $bid; 
 
         echo json_encode($dataArray);
 
@@ -112,8 +118,9 @@ $ac_obj = new MarketClient($consumer);
       if (isset($mkt_responce_obj->quoteResponse->quoteData->all->prevClose))
       {
         $prev_close = (string) $mkt_responce_obj->quoteResponse->quoteData->all->prevClose;
-      $low = (string) $mkt_responce_obj->quoteResponse->quoteData->all->low;
-      $high = (string) $mkt_responce_obj->quoteResponse->quoteData->all->high;
+        $low = (string) $mkt_responce_obj->quoteResponse->quoteData->all->low;
+        $high = (string) $mkt_responce_obj->quoteResponse->quoteData->all->high;
+        $bid = (string) $mkt_responce_obj->quoteResponse->quoteData->all->bid;
 
         if (preg_match('/E-4/', $prev_close))
         {
@@ -127,10 +134,15 @@ $ac_obj = new MarketClient($consumer);
         {
           $high = floatval(preg_replace('/E-4/', '', $high))/10000;
         }
+        if (preg_match('/E-4/', $bid))
+        {
+          $bid = floatval(preg_replace('/E-4/', '', $bid))/10000;
+        }
 
         $dataArray['prev_close'] = $prev_close; 
         $dataArray['low'] = $low; 
         $dataArray['high'] = $high; 
+        $dataArray['bid'] = $bid; 
 
         echo json_encode($dataArray);
         
