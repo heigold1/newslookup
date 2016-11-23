@@ -395,7 +395,7 @@ fwrite( $file, "we are in marketwatch\n");
       $returnHTML = preg_replace('/ terminate| terminates| terminated| termination/i', '<span style="font-size: 12px; background-color:red; color:black"><b>&nbsp;terminate&nbsp;</span> (65%) </b>', $returnHTML);            
       $returnHTML = preg_replace('/ drug/i', '<span style="font-size: 12px; background-color:red; color:black"><b>&nbsp;drug&nbsp;</span></b>', $returnHTML);            
       $returnHTML = preg_replace('/ guidance/i', '<span style="font-size: 12px; background-color:red; color:black"><b>&nbsp;guidance</span> (35-40% early)</b>&nbsp;', $returnHTML);
-      $returnHTML = preg_replace('/ update/i', '<span style="font-size: 12px; background-color:red; color:black"><b>&nbsp;update</span> (Jay backs off)</b>&nbsp;', $returnHTML);
+      $returnHTML = preg_replace('/ regulatory update/i', '<span style="font-size: 12px; background-color:red; color:black"><b>&nbsp;regulatory update (35% even if regulation is good)</span></b>&nbsp;', $returnHTML);
       $returnHTML = preg_replace('/ susbended/i', '<span style="font-size: 12px; background-color:red; color:black"><b>&nbsp;suspended</span> (65-70%)</b>&nbsp;', $returnHTML);      
       $returnHTML = preg_replace('/ fraud/i', '<span style="font-size: 12px; background-color:red; color:black"><b>&nbsp;fraud</span></b>&nbsp;', $returnHTML);      
       $returnHTML = preg_replace('/ dividend/i', '<span style="font-size: 12px; background-color:red; color:black"><b>&nbsp;dividend</span> (if cut, 65-70%)</b>&nbsp;', $returnHTML);            
@@ -592,7 +592,7 @@ $googleNewsRSSFeed = simplexml_load_file('https://news.google.com/news/feeds?hl=
       $finalReturn = preg_replace('/ terminate| terminates| terminated| termination/i', '<span style="font-size: 12px; background-color:red; color:black"><b>&nbsp;terminate&nbsp;</span> (65%) </b>', $finalReturn);            
       $finalReturn = preg_replace('/ drug/i', '<span style="font-size: 12px; background-color:red; color:black"><b>&nbsp;drug&nbsp;</span></b>', $finalReturn);
       $finalReturn = preg_replace('/ guidance/i', '<span style="font-size: 12px; background-color:red; color:black"><b>&nbsp;guidance</span> (35-40% early)</b>&nbsp;', $finalReturn);
-      $finalReturn = preg_replace('/ update/i', '<span style="font-size: 12px; background-color:red; color:black"><b>&nbsp;update</span> (Jay backs off)</b>&nbsp;', $finalReturn);
+      $finalReturn = preg_replace('/ regulatory update/i', '<span style="font-size: 12px; background-color:red; color:black"><b>&nbsp;regulatory update (35% even if regulation is good)</span></b>&nbsp;', $finalReturn);
       $finalReturn = preg_replace('/ suspended/i', '<span style="font-size: 12px; background-color:red; color:black"><b>&nbsp;suspended</span> (65-70%)</b>&nbsp;', $finalReturn);
       $finalReturn = preg_replace('/ fraud/i', '<span style="font-size: 12px; background-color:red; color:black"><b>&nbsp;fraud</span></b>&nbsp;', $finalReturn);      
       $finalReturn = preg_replace('/ dividend/i', '<span style="font-size: 12px; background-color:red; color:black"><b>&nbsp;dividend</span> (if cut, 65-70%)</b>&nbsp;', $finalReturn);            
