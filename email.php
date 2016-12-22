@@ -12,6 +12,7 @@ if (isset($_GET['trade']))
 
 	$from = '<brentheigold@gmail.com>';
 	$to = 'jayratliffdtf@gmail.com';
+//	$to = 'brent@heigoldinvestments.com';
 
 	$subject = $order_to_send;
 	$body = "";

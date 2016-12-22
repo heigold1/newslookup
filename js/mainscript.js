@@ -594,16 +594,30 @@ $("#copy_price_to_percentage").click(function(){
 
 // email the trade to Jay 
 $("#email_trade").click(function(){
+  
+var orderString = $("#orderStub").val();
+
+if ($('input#check_offering').is(':checked')) 
+{
+  var yestClose = $('#yestCloseText').val();
+  var yestCloseDecimal = yestClose.substr(yestClose.indexOf("."), yestClose.length - yestClose.indexOf("."));
+  if (yestCloseDecimal.length == 2)
+  {
+    yestClose = yestClose + "0";
+  }
+  orderString = orderString.replace(")", " down from offer price of $" + yestClose + ")"); 
+  $('input#check_offering').attr('checked', false);
+}   
 
   $.ajax({
       url: "email.php",
-      data: {trade: $("#orderStub").val()},
+      data: {trade: orderString},
        async: false, 
       dataType: 'html',
       success:  function (data) {
         alert(data);
       }
-  });  // end of AJAX call to marketwatch  
+  });  // end of AJAX call 
 
 }); // end of e-mail trade button 
 
@@ -717,5 +731,7 @@ $("#entryPrice").click(function(){
     $("#entryPercentage").val("-----");
     $("#amountSpending").val("-----");
     $("#orderStub").val("-----------------------");    
+    $('input#check_offering').attr('checked', false);
+
 
 });  // End of the initial automatically called function

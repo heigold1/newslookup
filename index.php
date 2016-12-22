@@ -53,7 +53,7 @@
 						</tr>
 						<tr>
 							<td width="140px">Spend $<input tabindex = "5" id="amountSpending"></td>
-							<td width="330px">Price of $<input tabindex ="4" id="entryPrice">, percent. is <span id="calculatedPercentage">&nbsp; &nbsp; </span>%</td>
+							<td width="330px">Price of $<input tabindex ="4" id="entryPrice">, percent. is <span id="calculatedPercentage">&nbsp; &nbsp; </span>%<span id="offering">Of <input id="check_offering" type="checkbox"></span></td>
 							<td width="130px"><input type="radio" name="roundShares" id="roundShares" value="100" checked="true">Round 100</td> 						
 						</tr>
 						<tr height="15">
