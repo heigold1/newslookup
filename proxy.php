@@ -662,21 +662,22 @@ else if ($which_website == "bigcharts")
       $percentageChangeText = '<br><b>&nbsp; % Change</b> - \$' . $bigChartsHigh .'/\$' . $bigChartsLow . ' = ' . $percentageChange; 
 
       // grab the last vix value 
-//      $url = "http://bigcharts.marketwatch.com/quickchart/quickchart.asp?symb=vix&insttype=&freq=9&show=&time=1"; 
-      $url = "http://finance.yahoo.com/quote/^VIX?p=^VIX"; 
+      $url = "http://bigcharts.marketwatch.com/quickchart/quickchart.asp?symb=vix&insttype=&freq=9&show=&time=1"; 
+//       $url = "http://finance.yahoo.com/quote/^VIX?p=^VIX"; 
  
-      $result = grabHTML("finance.yahoo.com", $url);
+      $result = grabHTML("bigcharts.marketwatch.com", $url);
       $html = str_get_html($result);  
 
-      $vixTDArray = $html->find('div#quote-header-info section span'); 
+//      $vixTDArray = $html->find('div#quote-header-info section span'); 
+      $vixTDArray = $html->find('table#quote tbody tr td div'); 
 
-      $vixTDArray[0] = preg_replace('/<span.*\">/', '', $vixTDArray[0]); 
-      $vixTDArray[0] = preg_replace('/<\/span>/', '', $vixTDArray[0]); 
-      $vixTDReturn = "<br>Last VIX Value: " . $vixTDArray[0];
+      $vixTDArray[4] = preg_replace('/<div\>/', '', $vixTDArray[4]); 
+      $vixTDArray[4] = preg_replace('/<\/div>/', '', $vixTDArray[4]); 
+      $vixTDReturn = "<br>Last VIX Value: " . $vixTDArray[4];
 
       $bigChartsReturn = preg_replace('/<\/div>/', $vixTDReturn . '</div>', $bigChartsReturn); 
 
-echo $bigChartsReturn; 
+      echo $bigChartsReturn; 
 
 } // if ($which_website == "bigcharts")
 else if ($which_website == "etrade")

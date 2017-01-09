@@ -382,7 +382,6 @@ $("#copy_price_to_percentage").click(function(){
        $("#yestCloseText").focus();
 
       // E*TRADE API data
-
       $("div#left_top_container").css("background-color", "#BBDDFF");                   
       $.ajax({
           url: "yesterday_close.php",
@@ -390,7 +389,6 @@ $("#copy_price_to_percentage").click(function(){
           async: false, 
           dataType: 'html',
           success:  function (data) {
-
             returnData = data.match(/Caught exception/i); 
             if (returnData || (data == '------'))
             {
@@ -431,7 +429,13 @@ $("#copy_price_to_percentage").click(function(){
               }
             }
             console.log(data);
-          }
+          },
+          error: function (xhr, ajaxOptions, thrownError) {
+/*            
+        alert("Error is " + xhr.status);
+        alert(thrownError); */ 
+        $("#yestCloseText").val(xhr.status);
+      }
       });  // End of AJAX to get E*TRADE API data 
       $("div#left_top_container").css("background-color", "#F3F3FF");
 

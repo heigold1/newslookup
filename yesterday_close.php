@@ -36,7 +36,7 @@ $ini_array = parse_ini_file('etrade.ini', true);
 
 //$consumer   = new etOAuthConsumer(ETWS_APP_KEY,ETWS_APP_SECRET);
 $consumer = new etOAuthConsumer($ini_array['OAuth']['oauth_consumer_key'],$ini_array['OAuth']['consumer_secret']);
- 
+
 $consumer->oauth_token      = $ini_array['OAuth']['oauth_token'];
 $consumer->oauth_token_secret   = $ini_array['OAuth']['oauth_token_secret'];
 
@@ -66,7 +66,8 @@ $ac_obj = new MarketClient($consumer);
 
   }
 
-  $mkt_responce_obj = json_decode($out); //etHttpUtils::GetResponseObject($out);
+  $mkt_responce_obj = json_decode($out);   // USE THIS ON THE Verio Server 
+  //etHttpUtils::GetResponseObject($out);   // Use this on localhost
 
   $current_time = date('Gis', strtotime("-3 hours")); 
 
@@ -106,12 +107,11 @@ $ac_obj = new MarketClient($consumer);
 /*        echo '{"prev_close":"' . $last_trade . '",' . 
            ' "low":"' . $low . '",' . 
            ' "high":"' . $high . '"}'; */
-    }
-    else
-    {
-      echo "------";
-    }
-
+      }
+      else
+      {
+        echo "------";
+      }
     }
     else
     {
