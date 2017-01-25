@@ -371,8 +371,8 @@ fwrite( $file, "we are in marketwatch\n");
       $returnHTML = preg_replace('/([0-9][0-9]:[0-9][0-9] [a-z]\.m\.  Today)|([0-9]:[0-9][0-9] [a-z]\.m\.  Today)/', '<span style="font-size: 8px; background-color:black; color:white">$1$2</span>', $returnHTML);
       $returnHTML = preg_replace('/([0-9][0-9] min ago)|([0-9] min ago)/', '<span style="font-size: 8px; background-color:black; color:white">$1$2</span>', $returnHTML);      
 
-      $finalReturn = preg_replace('/ delisted|delisted /i', '<span style="font-size: 12px; background-color:red; color:black"><b> DELISTED</span> If delisting tomorrow 65%, if days away then 50-55%</b>', $finalReturn);
-      $finalReturn = preg_replace('/ delisting|delisting /i', '<span style="font-size: 12px; background-color:red; color:black"><b> DELISTING</span> If delisting tomorrow 65%, if days away then 50-55%</b>', $finalReturn);
+      $returnHTML = preg_replace('/ delist/i', '<span style="font-size: 12px; background-color:red; color:black"><b> delist</span> If delisting tomorrow 65%, if days away then 50-55%</b>', $returnHTML);
+
       $returnHTML = preg_replace('/ chapter 11|chapter 11 /i', '<span style="font-size: 12px; background-color:red; color:black"><b> &nbsp;CHAPTER 11</b>&nbsp;</span>', $returnHTML);
       $returnHTML = preg_replace('/ reverse split|reverse split /i', '<span style="font-size: 12px; background-color:red; color:black"><b> &nbsp;REVERSE SPLIT</b>&nbsp;</span>', $returnHTML);
       $returnHTML = preg_replace('/ reverse stock split|reverse stock split /i', '<span style="font-size: 12px; background-color:red; color:black"><b> &nbsp;REVERSE STOCK SPLIT</b>&nbsp;</span>', $returnHTML);
@@ -570,8 +570,7 @@ $googleNewsRSSFeed = simplexml_load_file('https://news.google.com/news/feeds?hl=
       $finalReturn = preg_replace('/(' .  get_yahoo_yesterday_trade_date() . ')/', '<span style="font-size: 12px; background-color:   #000080; color:white"> $1</span> ', $finalReturn);
       $finalReturn = preg_replace('/(' .  get_yahoo_todays_trade_date() . ')/', '<span style="font-size: 12px; background-color:  black; color:white"> $1</span> ', $finalReturn);
 
-      $finalReturn = preg_replace('/ delisted|delisted /i', '<span style="font-size: 12px; background-color:red; color:black"><b> DELISTED</span> If delisting tomorrow 65%, if days away then 50-55%</b>', $finalReturn);
-      $finalReturn = preg_replace('/ delisting|delisting /i', '<span style="font-size: 12px; background-color:red; color:black"><b> DELISTING</span> If delisting tomorrow 65%, if days away then 50-55%</b>', $finalReturn);
+      $finalReturn = preg_replace('/ delist/i', '<span style="font-size: 12px; background-color:red; color:black"><b> delist</span> If delisting tomorrow 65%, if days away then 50-55%</b>', $finalReturn);
       $finalReturn = preg_replace('/ chapter 11|chapter 11 /i', '<span style="font-size: 12px; background-color:red; color:black"><b> &nbsp;CHAPTER 11</b></span>', $finalReturn);
       $finalReturn = preg_replace('/ reverse split|reverse split /i', '<span style="font-size: 12px; background-color:red; color:black"><b> &nbsp;REVERSE SPLIT</b></span>', $finalReturn);
       $finalReturn = preg_replace('/ reverse stock split|reverse stock split /i', '<div style="font-size: 12px; background-color:red; display: inline-block;">REVERSE STOCK SPLIT</div>', $finalReturn);
