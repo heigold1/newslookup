@@ -95,6 +95,12 @@
 		<div id="left_bottom_container">
 		</div> <!-- Left Bottom Container Div -->
 
+		<div id="left_bottom_streetinsider">
+		</div> <!-- Left Bottom Container Div -->
+
+		<div id="left_bottom_etrade">
+		</div> <!-- Left Bottom Container Div -->
+
 	</div> <!-- Left Container Div -->
 
 	<div id="right_container">

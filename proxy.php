@@ -238,6 +238,7 @@ curl_setopt($ch,CURLOPT_URL, $url);
 curl_setopt($ch,CURLOPT_RETURNTRANSFER,true);
 curl_setopt($ch,CURLOPT_CONNECTTIMEOUT,0);
 curl_setopt( $ch, CURLOPT_COOKIESESSION, true );
+curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
 
 curl_setopt($ch, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
 
@@ -416,6 +417,8 @@ fwrite( $file, "we are in marketwatch\n");
       $returnHTML = preg_replace('/ clinical hold/i', '<span style="font-size: 12px; background-color:red; color:black"><b>&nbsp;clinical hold</span> (65 - 70%)</b>&nbsp;', $returnHTML);
       $returnHTML = preg_replace('/ withdrawal(.*)application/i', '<span style="font-size: 12px; background-color:red; color:black"><b>&nbsp; withdrawal $1 application (55%)</b></span>&nbsp;', $returnHTML);
       $returnHTML = preg_replace('/ convertible senior notes/i', '<span style="font-size: 12px; background-color:red; color:black"><b>&nbsp; convertible senior notes (35%)</b></span>&nbsp;', $returnHTML);
+      $returnHTML = preg_replace('/ amendment(.*) to secured credit facilities/i', '<span style="font-size: 12px; background-color:red; color:black"><b>&nbsp; amendments to secured credit facilities (65%)</b></span>&nbsp;', $returnHTML);
+      $returnHTML = preg_replace('/ notice of effectiveness/i', '<span style="font-size: 12px; background-color:red; color:black"><b>&nbsp; notice of effectiveness (40% till you see the notice)</b></span>&nbsp;', $returnHTML);
 
 
       $beginHTML = '<html><head><link rel="stylesheet" href="./css/combined-min-1.0.5754.css" type="text/css"/>
@@ -611,6 +614,8 @@ $googleNewsRSSFeed = simplexml_load_file('https://news.google.com/news/feeds?hl=
       $finalReturn = preg_replace('/ restructure/i', '<span style="font-size: 12px; background-color:red; color:black"><b>&nbsp;restructure</span></b>&nbsp;', $finalReturn);      
       $finalReturn = preg_replace('/ clinical hold/i', '<span style="font-size: 12px; background-color:red; color:black"><b>&nbsp;clinical hold</span> (65 - 70%)</b>&nbsp;', $finalReturn);
       $finalReturn = preg_replace('/ convertible senior notes/i', '<span style="font-size: 12px; background-color:red; color:black"><b>&nbsp; convertible senior notes (35%)</b></span>&nbsp;', $finalReturn);
+      $finalReturn = preg_replace('/ amendment(.*) to secured credit facilities/i', '<span style="font-size: 12px; background-color:red; color:black"><b>&nbsp; amendments to secured credit facilities (65%)</b></span>&nbsp;', $finalReturn);
+      $finalReturn = preg_replace('/ notice of effectiveness/i', '<span style="font-size: 12px; background-color:red; color:black"><b>&nbsp; notice of effectiveness (40% till you see the notice)</b></span>&nbsp;', $finalReturn);
 
 
 //      strip_tags($finalReturn, '<embed><img>');// '#<img[^>]*>#i'
@@ -679,6 +684,16 @@ else if ($which_website == "bigcharts")
       echo $bigChartsReturn; 
 
 } // if ($which_website == "bigcharts")
+else if ($which_website == "streetinsider")
+{
+ $url =  "https://www.streetinsider.com/stock_lookup.php?LookUp=Get+Quote&q=$symbol";
+
+      $result = grabEtradeHTML("https://www.streetinsider.com", $url);
+      $html = str_get_html("**" + $result + "**");  
+
+echo "url is $url"; 
+
+}
 else if ($which_website == "etrade")
 {
       fwrite( $file, " which_website is - " . $which_website . "\r\n"); 

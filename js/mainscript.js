@@ -362,7 +362,15 @@ $("#copy_price_to_percentage").click(function(){
     // E*TRADE
     
 //    window.open("https://www.etrade.wallst.com/v1/stocks/news/search_results.asp?symbol=" + symbol + "&rsO=new");
+      openPage('https://www.streetinsider.com/stock_lookup.php?LookUp=Get+Quote&q=' + symbol + '#content_all');
       
+        // initialize everything
+
+        $("#left_bottom_container").html("");
+        $("#bigcharts_chart_container").html("");
+        $("#bigcharts_yest_close").html("");
+        $("#right_top_container").html("");
+
         $("#yestCloseText").val("");
         $("#eTradeLow").html("");
         $("#eTradeHigh").html("");
@@ -548,9 +556,11 @@ $("#copy_price_to_percentage").click(function(){
   $("div#right_top_container").css("background-color", "#F3F3FF");
 
   // AJAX call to marketwatch 
-  var eTradeIFrame = '<br><iframe id="etrade_iframe" src="https://www.etrade.wallst.com/v1/stocks/news/search_results.asp?symbol=' + symbol + '&rsO=new#lastTradeTime" width="575px" height="340px"></iframe>';
+  
 //  var googleIFrame = '<br><iframe src="https://www.google.com/search?hl=en&gl=us&tbm=nws&authuser=0&q=' + google_keyword_string + '&oq=' + google_keyword_string + '" width="575px" height="400px"></iframe>'; 
 
+(function(){
+  var eTradeIFrame = '<br><iframe id="etrade_iframe" src="https://www.etrade.wallst.com/v1/stocks/news/search_results.asp?symbol=' + symbol + '&rsO=new#lastTradeTime" width="575px" height="340px"></iframe>';
 
   $("div#left_bottom_container").css("background-color", "#BBDDFF");                     
  	$.ajax({
@@ -567,7 +577,29 @@ $("#copy_price_to_percentage").click(function(){
     	}
 	});  // end of AJAX call to marketwatch     
   $("div#left_bottom_container").css("background-color", "#F3F3FF");   
-  var myIframe = document.getElementById('iframe');
+})(1);
+
+/*
+(function(){
+  $("div#left_bottom_streetinsider").css("background-color", "#BBDDFF");                     
+  $.ajax({
+      url: "proxy.php",
+      data: {symbol: symbol,
+           stockOrFund: stockOrFund, 
+           which_website: "streetinsider", 
+           host_name: "www.streetinsider.com"},
+       async: true, 
+      dataType: 'html',
+      success:  function (data) {
+        console.log(data);
+        $("div#left_bottom_streetinsider").html(data); 
+      }
+  });  // end of AJAX call to streetinsider     
+  $("div#left_bottom_streetinsider").css("background-color", "#F3F3FF");   
+})(2);
+
+*/ 
+  var myIframe = document.getElementById('etrade_iframe');
       myIframe.contentWindow.scrollTo(75, 100); 
 
 
