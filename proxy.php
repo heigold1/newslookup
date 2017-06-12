@@ -238,7 +238,9 @@ curl_setopt($ch,CURLOPT_URL, $url);
 curl_setopt($ch,CURLOPT_RETURNTRANSFER,true);
 curl_setopt($ch,CURLOPT_CONNECTTIMEOUT,0);
 curl_setopt( $ch, CURLOPT_COOKIESESSION, true );
-curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+
+    curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
+    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
 
 curl_setopt($ch, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
 
@@ -285,6 +287,8 @@ $header=array('GET /1575051 HTTP/1.1',
     );
 
     curl_setopt($ch,CURLOPT_URL,$url);
+    curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
+    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
     curl_setopt($ch,CURLOPT_RETURNTRANSFER,true);
     curl_setopt($ch,CURLOPT_CONNECTTIMEOUT, 300);
     curl_setopt( $ch, CURLOPT_COOKIESESSION, true );
@@ -359,7 +363,7 @@ fwrite( $file, "we are in marketwatch\n");
 
       $returnHTML = str_replace('<span>', '<span style="font-weight: bold;">', $returnHTML); 
 
-      $marketwatch_todays_date = date('l', strtotime("-9 hours")); 
+      $marketwatch_todays_date = date('l'/*, strtotime("-9 hours")*/); 
       if ($marketwatch_todays_date == "Monday")
       {
         $returnHTML = preg_replace('/(' .  get_marketwatch_friday_trade_date() . ')/', '<span style="font-size: 8px; background-color:#000080 ; color:white">$1</span>', $returnHTML);
@@ -419,6 +423,8 @@ fwrite( $file, "we are in marketwatch\n");
       $returnHTML = preg_replace('/ convertible senior notes/i', '<span style="font-size: 12px; background-color:red; color:black"><b>&nbsp; convertible senior notes (35%)</b></span>&nbsp;', $returnHTML);
       $returnHTML = preg_replace('/ amendment(.*) to secured credit facilities/i', '<span style="font-size: 12px; background-color:red; color:black"><b>&nbsp; amendments to secured credit facilities (65%)</b></span>&nbsp;', $returnHTML);
       $returnHTML = preg_replace('/ notice of effectiveness/i', '<span style="font-size: 12px; background-color:red; color:black"><b>&nbsp; notice of effectiveness (40% till you see the notice)</b></span>&nbsp;', $returnHTML);
+      $returnHTML = preg_replace('/ equity investment/i', '<span style="font-size: 12px; background-color:red; color:black"><b>&nbsp; equity investment - look for price of new shares</b></span>&nbsp;', $returnHTML);
+      $returnHTML = preg_replace('/ lease termination/i', '<span style="font-size: 12px; background-color:red; color:black"><b>&nbsp; DANGER - Chapter 7 warning - 90%</b></span>&nbsp;', $returnHTML);
 
 
       $beginHTML = '<html><head><link rel="stylesheet" href="./css/combined-min-1.0.5754.css" type="text/css"/>
@@ -465,19 +471,67 @@ fwrite( $file, "we are in yahoo\n");
 
       // grab the finanicals 
 
-      $url="http://finance.yahoo.com/quote/$symbol";
-      $host_name = "finance.yahoo.com";
+      // Now we grab website, sector, and company from finviz.com
 
-      $result = grabHTML($host_name, $url); 
+      $url="http://www.finviz.com/quote.ashx?t=$symbol";
+      $host_name = "www.finviz.com";
+      $result = grabHTML($host_name, $url);
+      $html = str_get_html($result);
+ 
+      $companyWebsiteArray = $html->find('table.fullview-title tbody tr td a');
+      $companyWebsite = $companyWebsiteArray[1];
+      $companyWebsite = preg_replace('/<b>.*<\/b>/', '<b>Website</b>', $companyWebsite);
+      $companyWebsite = str_replace('<a ', '<a target="_blank" onclick="return openPage(this.href)" ', $companyWebsite);    
 
-      $result = str_replace ('href="/', 'href="http://finance.yahoo.com/', $result);
-      $html = str_get_html($result); 
+      $sectorCountryArray = $html->find('table.fullview-title tbody tr td a');
+      $sectorCountry = " " . $sectorCountryArray[2] . " - " . $sectorCountryArray[3] . " - " . $sectorCountryArray[4] . "<br>";
+      $sectorCountry = str_replace('<a', '<span', $sectorCountry);    
+      $sectorCountry = str_replace('\/a', '/span', $sectorCountry);   
+/*
+      $companyNameArray = $html->find('table.fullview-title tbody tr td a');
+      $companyName = $companyNameArray[0];
+      $returnCompanyName = preg_replace('/<a.*\">/', '<h1>', $companyName);     
+      $returnCompanyName = preg_replace('/\/a>/', '/h1', $returnCompanyName); 
+      $returnCompanyName = "*" . $returnCompanyName . "*"; 
 
-      $full_company_name = $html->find('h1'); 
-      $full_company_name_html = str_get_html($full_company_name[0]);
+*/       
 
-      $returnCompanyName = $full_company_name_html;
-      $returnCompanyName = preg_replace('/<h1.*\">/', '<h1>', $returnCompanyName);         
+      // grab the financials from yahoo.com
+
+      $url = "https://finance.yahoo.com/quote/$symbol?p=$symbol";
+      $html = file_get_html($url);
+      $companyNameArray = $html->find('h1');
+      $returnCompanyName = $companyNameArray[0]; 
+      $returnCompanyName = preg_replace('/\sclass.*\">/', '>', $returnCompanyName);
+
+/*
+      $yesterdays_close =  $html->find('table.table-qsp-stats tbody tr td'); 
+
+      $returnYesterdaysClose = $yesterdays_close[1]; 
+      $returnYesterdaysClose = preg_replace('/<td class="(.*)">/', '<b>Prev. close</b> - \$', $returnYesterdaysClose);  
+      $returnYesterdaysClose = preg_replace('/<\/td>/', ' - ', $reurnYesterdaysClose); 
+
+
+      $preMarketYesterdaysClose = $html->find('div#quote-header-info section span'); 
+      $preMarketYesterdaysClose[0] = preg_replace('/<span class="(.*)">/', '<span> <b>PRE MKT prev. close (last)</b> - $', $preMarketYesterdaysClose[0]);
+
+      $tableDataArray = $html->find('div#quote-summary div table tbody tr td'); 
+
+      $avgVol3Months = $tableDataArray[15];
+      $avgVol3Months = preg_replace('/<td class="(.*)">/', '<font size="3" style="font-size: 12px; background-color:#CCFF99; color: black; display: inline-block;"><b>Avg Vol (3m) - ', $avgVol3Months);  
+      $avgVol3Months = preg_replace('/<\/td>/', ' - ', $avgVol3Months);
+      $avgVol3Months .= "</b></font>";
+*/ 
+
+      $volumeArray = $html->find("div#quote-summary div table tbody tr td");
+
+      $currentVolume = "Vol - " . $volumeArray[13];
+
+      $avgVol3Months = $volumeArray[15];
+      $avgVol3Months = preg_replace('/<td class="(.*)">/', '<font size="3" style="font-size: 12px; background-color:#CCFF99; color: black; display: inline-block;"><b>Avg Vol (3m) - ', $avgVol3Months);  
+      $avgVol3Months = preg_replace('/<\/td>/', ' - ', $avgVol3Months);
+      $avgVol3Months .= "</b></font>";
+
 
       $google_keyword_string = $returnCompanyName; 
       $google_keyword_string = trim($google_keyword_string); 
@@ -513,43 +567,9 @@ $googleNewsRSSFeed = simplexml_load_file('https://news.google.com/news/feeds?hl=
     }
     $googleNews .=  "</ul>";
 
-      $yesterdays_close =  $html->find('table.table-qsp-stats tbody tr td'); 
-
-      $returnYesterdaysClose = $yesterdays_close[1]; 
-      $returnYesterdaysClose = preg_replace('/<td class="(.*)">/', '<b>Prev. close</b> - \$', $returnYesterdaysClose);  
-      $returnYesterdaysClose = preg_replace('/<\/td>/', ' - ', $reurnYesterdaysClose); 
 
 
-      $preMarketYesterdaysClose = $html->find('div#quote-header-info section span'); 
-      $preMarketYesterdaysClose[0] = preg_replace('/<span class="(.*)">/', '<span> <b>PRE MKT prev. close (last)</b> - $', $preMarketYesterdaysClose[0]);
-
-      $tableDataArray = $html->find('div#quote-summary div table tbody tr td'); 
-
-      $avgVol3Months = $tableDataArray[15];
-      $avgVol3Months = preg_replace('/<td class="(.*)">/', '<font size="3" style="font-size: 12px; background-color:#CCFF99; color: black; display: inline-block;"><b>Avg Vol (3m) - ', $avgVol3Months);  
-      $avgVol3Months = preg_replace('/<\/td>/', ' - ', $avgVol3Months);
-      $avgVol3Months .= "</b></font>";
-
-      $currentVolume = $tableDataArray[13];
-      $currentVolume = preg_replace('/<td class="(.*)">/', '<b>Current Vol</b> - ', $currentVolume);  
-      $currentVolume = preg_replace('/<\/td>/', ' - ', $currentVolume);
-
-      // Now we grab website, sector, and company from finviz.com
-
-      $url="http://www.finviz.com/quote.ashx?t=$symbol";
-      $host_name = "www.finviz.com";
-      $result = grabHTML($host_name, $url);
-      $html = str_get_html($result);
  
-      $companyWebsiteArray = $html->find('table.fullview-title tbody tr td a');
-      $companyWebsite = $companyWebsiteArray[1];
-      $companyWebsite = preg_replace('/<b>.*<\/b>/', '<b>Website</b>', $companyWebsite);
-      $companyWebsite = str_replace('<a ', '<a target="_blank" onclick="return openPage(this.href)" ', $companyWebsite);    
-
-      $sectorCountryArray = $html->find('table.fullview-title tbody tr td a');
-      $sectorCountry = " " . $sectorCountryArray[2] . " - " . $sectorCountryArray[3] . " - " . $sectorCountryArray[4] . "<br>";
-      $sectorCountry = str_replace('<a', '<span', $sectorCountry);    
-      $sectorCountry = str_replace('\/a', '/span', $sectorCountry);    
 
       $finalReturn = "<td valign='top' >" . str_replace('<a ', '<a target="_blank" onclick="return openPage(this.href)" ', $allNews) . '</td><td valign="top">' . str_replace('<a ', '<a target="_blank" onclick="return openPage(this.href)" ', $googleNews) . '</td>';
 
@@ -563,7 +583,7 @@ $googleNewsRSSFeed = simplexml_load_file('https://news.google.com/news/feeds?hl=
       $finalReturn = preg_replace('/([A-Z][a-z][a-z] [0-9][0-9]:[0-9][0-9][A-Z]M EDT)|([A-Z][a-z][a-z] [0-9]:[0-9][0-9][A-Z]M EDT)/', '<span style="font-size: 12px; background-color:black; color:white">$1$2</span> ', $finalReturn);
       $finalReturn = preg_replace('/([A-Z][a-z][a-z] [0-9][0-9]:[0-9][0-9][A-Z]M EST)|([A-Z][a-z][a-z] [0-9]:[0-9][0-9][A-Z]M EST)/', '<span style="font-size: 12px; background-color:black; color:white">$1$2</span> ', $finalReturn);
 
-      $yahoo_todays_date = date('l', strtotime("-9 hours")); 
+      $yahoo_todays_date = date('l' /*, strtotime("-9 hours") */); 
       if ($yahoo_todays_date == "Monday")
       {
         $finalReturn = preg_replace('/(' .  get_yahoo_friday_trade_date() . ')/', '<span style="font-size: 12px; background-color:#000080 ; color:white"> $1</span> ', $finalReturn);
@@ -616,6 +636,8 @@ $googleNewsRSSFeed = simplexml_load_file('https://news.google.com/news/feeds?hl=
       $finalReturn = preg_replace('/ convertible senior notes/i', '<span style="font-size: 12px; background-color:red; color:black"><b>&nbsp; convertible senior notes (35%)</b></span>&nbsp;', $finalReturn);
       $finalReturn = preg_replace('/ amendment(.*) to secured credit facilities/i', '<span style="font-size: 12px; background-color:red; color:black"><b>&nbsp; amendments to secured credit facilities (65%)</b></span>&nbsp;', $finalReturn);
       $finalReturn = preg_replace('/ notice of effectiveness/i', '<span style="font-size: 12px; background-color:red; color:black"><b>&nbsp; notice of effectiveness (40% till you see the notice)</b></span>&nbsp;', $finalReturn);
+      $finalReturn = preg_replace('/ equity investment/i', '<span style="font-size: 12px; background-color:red; color:black"><b>&nbsp; equity investment - look for price of new shares</b></span>&nbsp;', $finalReturn);
+      $finalReturn = preg_replace('/ lease termination/i', '<span style="font-size: 12px; background-color:red; color:black"><b>&nbsp; DANGER - Chapter 7 warning - 90%</b></span>&nbsp;', $finalReturn);
 
 
 //      strip_tags($finalReturn, '<embed><img>');// '#<img[^>]*>#i'

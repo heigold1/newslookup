@@ -234,7 +234,10 @@ $("#copy_price_to_percentage").click(function(){
     theNumber = theNumber.toFixedDown(4);
   }
   var str_theNumber = theNumber.toString().replace(/^0./g, ".");
-  $("#entryPrice").val(str_theNumber);
+  while ($("#entryPrice").val() != str_theNumber)
+  {
+    $("#entryPrice").val(str_theNumber);
+  }
 });
 
   // once the submit button is clicked
@@ -362,7 +365,7 @@ $("#copy_price_to_percentage").click(function(){
     // E*TRADE
     
 //    window.open("https://www.etrade.wallst.com/v1/stocks/news/search_results.asp?symbol=" + symbol + "&rsO=new");
-      openPage('https://www.streetinsider.com/stock_lookup.php?LookUp=Get+Quote&q=' + symbol + '#content_all');
+      openPage('https://www.streetinsider.com/stock_lookup.php?LookUp=Get+Quote&q=' + symbol + '#tab_all');
       
         // initialize everything
 
@@ -448,7 +451,7 @@ $("#copy_price_to_percentage").click(function(){
       $("div#left_top_container").css("background-color", "#F3F3FF");
 
       CopyToClipboard();
-
+/*  Wait until the API is working again 
       // Yahoo Finance historical data API 
       $("div#left_top_container").css("background-color", "#BBDDFF");                   
       $.ajax({
@@ -475,7 +478,7 @@ $("#copy_price_to_percentage").click(function(){
           }
       });  // end of AJAX call to grab yahoo finance's yesterday's close API 
       $("div#left_top_container").css("background-color", "#F3F3FF");
-
+*/
       $("div#bigcharts_chart_container").html("<a target='blank' style='cursor: pointer;' title='Click to open 5-day chart' onclick='return openPage(\"http://bigcharts.marketwatch.com/quickchart/quickchart.asp?symb=" + original_symbol + "&insttype=&freq=7&show=&time=3&rand=" + Math.random() + "\")'> <img style='max-width:100%; max-height:100%;' src='http://bigcharts.marketwatch.com/kaavio.Webhost/charts/big.chart?nosettings=1&symb=" + original_symbol + "&uf=0&type=2&size=2&freq=1&entitlementtoken=0c33378313484ba9b46b8e24ded87dd6&time=4&rand=" + Math.random() + "&compidx=&ma=0&maval=9&lf=1&lf2=0&lf3=0&height=335&width=579&mocktick=1)'></a>");
 
       $("div#bigcharts_chart_container").css("background-color", "#BBDDFF");
@@ -578,6 +581,8 @@ $("#copy_price_to_percentage").click(function(){
 	});  // end of AJAX call to marketwatch     
   $("div#left_bottom_container").css("background-color", "#F3F3FF");   
 })(1);
+
+  $("h1").css({"padding-top" : "0px", "margin-top" : "0px", "padding-bottom" : "0px", "margin-bottom" : "0px"}); 
 
 /*
 (function(){
@@ -697,6 +702,7 @@ $(document.body).on('keyup', "#entryPrice", function(){
 });  // end of entryPrice change function
 
 $('#yestCloseText').keypress(function(e){
+/*   taking out all the reminder stuff, don't really need it any more, May 8th, 2017 
       if(e.keyCode==9)
       {
         var volumeChecked = $("#volumeChecked").html();
@@ -706,7 +712,7 @@ $('#yestCloseText').keypress(function(e){
           $("#volumeChecked").html("1");
         }
       } 
-//      $('#submit_button').click();
+*/ 
 });  // end of yestCloseText keypress function
 
 $(document.body).on('keyup', "#yestCloseText", function(e){
@@ -731,21 +737,25 @@ $(document.body).on('keyup', "#orderStub", function(){
 });  // when one of the round-to-nearest radio buttons changes
 
 $("#entryPercentage").click(function(){
+/* taking this out now, don't know if I need this check anymore May 8th 2017 
   var volumeChecked = $("#volumeChecked").html();
   if (volumeChecked == "0")
   {
           alert("CHECK VOLUME - DAILY AND 30 DAY\n\nDid it spike up yesterday?\n\nCheck the VIX\n\nCheck $1.00 > Pink Sheet stocks");
     $("#volumeChecked").html("1");
   }
+*/ 
 });
 
 $("#entryPrice").click(function(){
   var volumeChecked = $("#volumeChecked").html();
+/*  
   if (volumeChecked == "0")
   {
           alert("CHECK VOLUME - DAILY AND 30 DAY\n\nDid it spike up yesterday?\n\nCheck the VIX\n\nCheck $1.00 > Pink Sheet stocks");
     $("#volumeChecked").html("1");
   }
+  */
 });
 
 
