@@ -384,7 +384,7 @@ $("#copy_price_to_percentage").click(function(){
         $("#day1").html("");
         $("#entryPrice").val(""); 
         $("#entryPercentage").val("");
-        $("#amountSpending").val("800");
+        $("#amountSpending").val("795");
         $("#orderStub").val("-----------------------"); 
 
         $("#roundShares_50").checked = true; 
