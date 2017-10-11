@@ -384,7 +384,7 @@ $("#copy_price_to_percentage").click(function(){
         $("#day1").html("");
         $("#entryPrice").val(""); 
         $("#entryPercentage").val("");
-        $("#amountSpending").val("800");
+        $("#amountSpending").val("770");
         $("#orderStub").val("-----------------------"); 
 
         $("#roundShares_50").checked = true; 
@@ -682,6 +682,7 @@ $('#entryPercentage').keypress(function(e){
 //      $('#submit_button').click();
 });  // end of entryPercentage change function
 
+/*
 $(document.body).on('keyup', "#entryPercentage", function(){
 
       // specify a ".53" percent on to the existing percent, to signify that we are doing 
@@ -689,11 +690,13 @@ $(document.body).on('keyup', "#entryPercentage", function(){
       
       if ($(this).val().match(/.53/g))
       {
-        $("#amountSpending").val("800");
+        $("#amountSpending").val("770");
       }
 
       calcAll(); 
 });  // end of entryPercentage change function
+*/
+
 
 $(document.body).on('keyup', "#entryPrice", function(){
       calcAll(); 
