@@ -10,15 +10,6 @@ include 'config.php';
 require_once("simple_html_dom.php"); 
 error_reporting(0);
 
-$filename = "test.txt";
-$file = fopen( $filename, "w" );
-if( $file == false )
-{
-   echo ( "Error in opening new file" );
-   exit();
-}
-
-fwrite( $file, "testwrite");   
 
 // header('Content-type: text/html');
 $symbol=$_GET['symbol'];
@@ -27,18 +18,8 @@ $which_website=$_GET['which_website'];
 $stockOrFund=$_GET['stockOrFund']; 
 $google_keyword_string = $_GET['google_keyword_string'];
 
-// $html_return=file_get_contents($url);
-
-// fwrite( $file, "stockOrFund is " . $stockOrFund);
-
-// fwrite( $file, "which_website is  " . $which_website);
 
 fopen("cookies.txt", "w");
-
-function testFunction()
-{
-  fwrite( $file, "test function");   
-}
 
 
 function get_yahoo_friday_trade_date()
@@ -209,16 +190,7 @@ function get_marketwatch_today_trade_date()
 function grabEtradeHTML($etrade_host_name, $url)
 {
 
-$filename = "test_grabEtradeHTML.txt";
-$file_grabHTML = fopen( $filename, "w" );
-if( $file_grabHTML == false )
-{
-   echo ( "Error in opening new file" );
-   exit();
-}
 
-//fwrite( $file_grabHTML, " inside grabHTML, function_host_name is " . $function_host_name . "\r\n");
-//fwrite( $file_grabHTML, "  url is " . $url . "\r\n");
 
 $ch = curl_init();
 $header=array('GET /1575051 HTTP/1.1',
@@ -252,8 +224,6 @@ curl_setopt($ch,CURLOPT_HTTPHEADER,$header);
 
 $returnHTML = curl_exec($ch);
 
-//fwrite( $file_grabHTML, "  returnHTML is " . $returnHTML . "\r\n");
-fclose( $file_grabHTML);
 
 return $returnHTML;
 
@@ -262,19 +232,6 @@ return $returnHTML;
 
 function grabHTML($function_host_name, $url)
 {
-
-$filename = "test_grabHTML.txt";
-$file_grabHTML = fopen( $filename, "w" );
-if( $file_grabHTML == false )
-{
-   echo ( "Error in opening new file" );
-   exit();
-}
-
-fwrite($file_grabHTML, "hello"); 
-fwrite($file_grabHTML, "urls is " . $url . "\r\n"); 
-fwrite($file_grabHTML, "function_host_name is " . $function_host_name . "\r\n"); 
-
 
 $ch = curl_init();
 $header=array('GET /1575051 HTTP/1.1',
@@ -308,9 +265,6 @@ curl_setopt($ch, CURLOPT_STDERR,$f = fopen(__DIR__ . "/error.log", "w+"));
 
     $returnHTML = curl_exec($ch); 
 
-fwrite($file_grabHTML, "curl result is *" . $returnHTML . "*\r\n"); 
-
-
 if($errno = curl_errno($ch)) {
     $error_message = curl_strerror($errno);
     echo "cURL error ({$errno}):\n {$error_message}";
@@ -328,25 +282,25 @@ $finalReturn = "";
 
 if ($which_website == "marketwatch")
 {
-fwrite( $file, "we are in marketwatch\n");   
-      $url="http://$host_name/investing/$stockOrFund/$symbol/news";
+
+      $url="https://$host_name/investing/$stockOrFund/$symbol/news";
       $result = grabHTML($host_name, $url); 
       $html = str_get_html($result);
 
       if (($pos = strpos($html, "<html><head><title>Object moved") > -1) && 
           ($stockOrFund == "stock"))
           {
-              $url="http://$host_name/investing/fund/$symbol/news";
+              $url="https://$host_name/investing/fund/$symbol/news";
               $result = grabHTML($host_name, $url); 
           }
       else if (($pos = strpos($html, "<html><head><title>Object moved") > -1) && 
           ($stockOrFund == "fund"))
           {
-              $url="http://$host_name/investing/stock/$symbol/news";
+              $url="https://$host_name/investing/stock/$symbol/news";
               $result = grabHTML($host_name, $url); 
           }
 
-      $result = str_replace ('href="/', 'href="http://www.marketwatch.com/', $result);  
+      $result = str_replace ('href="/', 'href="https://www.marketwatch.com/', $result);  
       $result = str_replace ('heigoldinvestments.com', 'marketwatch.com', $result); 
       $result = str_replace ('localhost', 'www.marketwatch.com', $result); 
       $result = preg_replace('/ etf/i', '<span style="background-color:red; color:black"><b> &nbsp;ETF</b>&nbsp;</span>', $result);
@@ -443,7 +397,7 @@ fwrite( $file, "we are in marketwatch\n");
 }
 else if ($which_website == "yahoo")
 {
-fwrite( $file, "we are in yahoo\n");
+
 
     // grab the news 
 
@@ -720,8 +674,6 @@ echo "url is $url";
 }
 else if ($which_website == "etrade")
 {
-      fwrite( $file, " which_website is - " . $which_website . "\r\n"); 
-      fwrite( $file, " host_name is " . $host_name . "\r\n");  
 
  $url =  "www.etrade.wallst.com/v1/stocks/news/search_results.asp?symbol=$symbol&rsO=new";
 
@@ -736,14 +688,10 @@ else if ($which_website == "etrade")
       $returnEtradeHTML = preg_replace('/<div class="fRight newsSideWidth t10">(.*)<div class="clear"><\/div>/', '', $returnEtradeHTML); 
       $returnEtradeHTML = preg_replace('/width:306px;/', 'width:600px;', $returnEtradeHTML); 
 
-      fwrite( $file, " after calling grabEtradeHTML result is " . $returnEtradeHTML . "\r\n"); 
 
-//       fwrite( $file, " host_name is " . $host_name . " Etade page - " . $html);
       echo $returnEtradeHTML; 
 }
 
-// fwrite( $file, $ret[0] );
 
-fclose( $file );
 
 ?>
