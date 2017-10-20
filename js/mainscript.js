@@ -234,6 +234,7 @@ $("#copy_price_to_percentage").click(function(){
     theNumber = theNumber.toFixedDown(4);
   }
   var str_theNumber = theNumber.toString().replace(/^0./g, ".");
+
   while ($("#entryPrice").val() != str_theNumber)
   {
     $("#entryPrice").val(str_theNumber);
@@ -671,8 +672,8 @@ $('#quote_input').keypress(function(e){
 $('#entryPercentage').keypress(function(e){
       if(e.keyCode==13)
       {
-        $('#copy_price_to_percentage').click();
         calcAll(); 
+        $('#copy_price_to_percentage').click();
         CopyToClipboard();  
         $("#entryPrice").focus();   
         var theLength = $("#entryPrice").val().length;
