@@ -428,7 +428,7 @@ else if ($which_website == "yahoo")
 
       // Now we grab website, sector, and company from finviz.com
 
-      $url="http://www.finviz.com/quote.ashx?t=$symbol";
+      $url="https://www.finviz.com/quote.ashx?t=$symbol";
       $host_name = "www.finviz.com";
       $result = grabHTML($host_name, $url);
       $html = str_get_html($result);
