@@ -12,6 +12,9 @@ var windowName8;
 var windowName9; 
 var windowName10; 
 
+
+
+
 function CopyToClipboard() {
   var copyTextarea = $("#orderStub");
   copyTextarea.select();
@@ -220,6 +223,9 @@ $(function() {
 
   setInterval(blink, 3000);
 
+var modal = document.getElementById('myModal');
+modal.style.display = "none";
+
   // set the focus to the symbol input field
   $("#quote_input").focus();
 
@@ -384,8 +390,8 @@ $("#copy_price_to_percentage").click(function(){
         $("#day2").html("");
         $("#day1").html("");
         $("#entryPrice").val(""); 
-        $("#entryPercentage").val("");
-        $("#amountSpending").val("700");
+        $("#entryPercentage").val(""); 
+        $("#amountSpending").val("625");
         $("#orderStub").val("-----------------------"); 
 
         $("#roundShares_50").checked = true; 
@@ -670,6 +676,22 @@ $('#quote_input').keypress(function(e){
 
 
 $('#entryPercentage').keypress(function(e){
+
+      var volumeChecked = $("#volumeChecked").html();
+      if (volumeChecked == "0")
+      {
+        var modal = document.getElementById('myModal');
+        modal.style.display = "block";
+        setTimeout(function(){ 
+          var modal = document.getElementById('myModal');
+          modal.style.display = "none";
+        }, 1500);
+
+//        alert("CHECK VOLUME - DAILY AND 30 DAY\n\nDid it spike up yesterday?\n\nCheck the VIX\n\nCheck $1.00 > Pink Sheet stocks");
+        $("#volumeChecked").html("1");
+      }
+
+
       if(e.keyCode==13)
       {
         calcAll(); 

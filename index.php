@@ -119,6 +119,14 @@
 
 </div>  <!--  Main Container Div -->
 
+<div id="myModal" class="modal">
+
+  <!-- Modal content -->
+  <div class="modal-content">
+    <p style="font-size: 75px">CHECK THE VOLUME</p>
+  </div>
+
+</div>
 
 
 </body>
