@@ -685,7 +685,7 @@ $('#entryPercentage').keypress(function(e){
         setTimeout(function(){ 
           var modal = document.getElementById('myModal');
           modal.style.display = "none";
-        }, 1500);
+        }, 750);
 
 //        alert("CHECK VOLUME - DAILY AND 30 DAY\n\nDid it spike up yesterday?\n\nCheck the VIX\n\nCheck $1.00 > Pink Sheet stocks");
         $("#volumeChecked").html("1");
