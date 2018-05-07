@@ -391,7 +391,7 @@ $("#copy_price_to_percentage").click(function(){
         $("#day1").html("");
         $("#entryPrice").val(""); 
         $("#entryPercentage").val(""); 
-        $("#amountSpending").val("625");
+        $("#amountSpending").val("575");
         $("#orderStub").val("-----------------------"); 
 
         $("#roundShares_50").checked = true; 
@@ -445,6 +445,10 @@ $("#copy_price_to_percentage").click(function(){
                 $("#entryPrice").val(defaultEntry);
                 calcAll(); 
               }
+
+                var newCalculatedPercentage=((jsonObject.prev_close-low)/jsonObject.prev_close)*100
+                $("#eTradeLowPercentage").html(newCalculatedPercentage.toFixed(2)); 
+
             }
             console.log(data);
           },

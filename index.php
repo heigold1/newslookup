@@ -68,7 +68,7 @@
 							<td width="130px"><input type="radio" name="roundShares" id="roundShares" value="1000">Round 1,000</td> 						
 						</tr>
 						<tr height="15">
-							<td width="140px">E*T Low $<span id="eTradeLow">&nbsp;&nbsp;&nbsp;</span></td>
+							<td width="140px">Lw $<span id="eTradeLow">&nbsp;&nbsp;&nbsp;</span>&nbsp;(<span id="eTradeLowPercentage">&nbsp;</span>)%</td>
 							<td width="460px" colspan="2">
 								E*T High $<span id="eTradeHigh">&nbsp;&nbsp;&nbsp;</span>
 
@@ -123,7 +123,7 @@
 
   <!-- Modal content -->
   <div class="modal-content">
-    <p style="font-size: 75px">CHECK THE VOLUME</p>
+    <p style="font-size: 60px">CHECK THE CHART/VOLUME</p>
   </div>
 
 </div>
