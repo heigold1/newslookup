@@ -321,6 +321,15 @@ if ($which_website == "marketwatch")
 
       // Recent News
       $firstNewsGroupArticleContent = $firstNewsGroup->find('.article__content');
+
+      $marketWatchNewsHTML = '<html><head><link rel="stylesheet" href="./css/combined-min-1.0.5754.css" type="text/css"/>
+      <link type="text/css" href="./css/quote-layout.css" rel="stylesheet"/>
+        <link type="text/css" href="./css/quote-typography.css" rel="stylesheet"/>
+      </head>
+      <body>
+      '; 
+
+
       $marketWatchNewsHTML = $full_company_name[0] . "<h1>Recent News</h1>";
       $marketWatchNewsHTML .= '<div style="max-height: 200px; overflow: auto;">';
 
@@ -419,20 +428,9 @@ if ($which_website == "marketwatch")
       $marketWatchNewsHTML = preg_replace('/ lease termination/i', '<span style="font-size: 12px; background-color:red; color:black"><b>&nbsp; DANGER - Chapter 7 warning - 90%</b></span>&nbsp;', $marketWatchNewsHTML);
       $marketWatchNewsHTML = preg_replace('/ redemption of public shares/i', '<span style="font-size: 12px; background-color:red; color:black"><b>&nbsp; Redemption of Public Shares - 92%</b></span>&nbsp;', $marketWatchNewsHTML);
 
+      $marketWatchNewsHTML .= '</body></html>'; 
 
-echo $marketWatchNewsHTML . "\n";
-die();
-
-      $marketWatchNewsHTML = '<html><head><link rel="stylesheet" href="./css/combined-min-1.0.5754.css" type="text/css"/>
-<link type="text/css" href="./css/quote-layout.css" rel="stylesheet"/>
-  <link type="text/css" href="./css/quote-typography.css" rel="stylesheet"/>
-</head>
-<body>
-'; 
-      $beginHTML .= $full_company_name[0]; 
-      $beginHTML .= $returnHTML; 
-      $beginHTML .= '</body></html>'; 
-      $marketWatchfinalReturn = str_replace('<a ', '<a target="_blank"', $beginHTML);
+      $marketWatchfinalReturn = str_replace('<a ', '<a target="_blank"', $marketWatchNewsHTML);
 
       echo $marketWatchfinalReturn;       
 }
