@@ -351,13 +351,13 @@ if ($which_website == "marketwatch")
       // Other News
       $secondNewsGroupArticleContent = $secondNewsGroup->find('.article__content');
       $marketWatchNewsHTML .= "<h1>Other News</h1>";
-      $marketWatchNewsHTML .= '<div style="max-height: 200px; overflow: auto;">';
+      $marketWatchNewsHTML .= '<div style="max-height: 250px; overflow: auto;">';
 
       foreach ($secondNewsGroupArticleContent as $article)
       {
         $articleContent = str_get_html($article);
         $dateTime = $articleContent->find('li.article__timestamp');
-        $dateTimeSpan = '<span>' . $dateTime[0]->text() . "</span>"; 
+        $dateTimeSpan = '<span style="font-size: 10px;">' . $dateTime[0]->text() . "</span>"; 
         $headline = $articleContent->find('.article__headline');
         $headline = preg_replace('/h3/', 'span', $headline); 
         $timeStamp = preg_match('/data-est=\"(.*)\" class/', $dateTime[0], $timeStampMatches);
