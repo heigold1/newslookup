@@ -282,8 +282,8 @@ $finalReturn = "";
 
 if ($which_website == "marketwatch")
 {
+      $url="https://$host_name/investing/$stockOrFund/$symbol";
 
-      $url="https://$host_name/investing/$stockOrFund/$symbol/news";
       $result = grabHTML($host_name, $url); 
       $html = str_get_html($result);
 
@@ -307,13 +307,63 @@ if ($which_website == "marketwatch")
       $result = preg_replace('/ etn/i', '<span style="background-color:red; color:black"><b> &nbsp;ETN</b>&nbsp;</span>', $result);
       $result = str_replace ('a href', 'a onclick="return openPage(this.href)" href', $result);  
 
-
       $html = str_get_html($result);
 
-      $full_company_name = $html->find('#instrumentname'); 
-      $ret = $html->find('#maincontent'); 
+      $full_company_name = $html->find('.company__name'); 
 
-      $returnHTML = $ret[0]; 
+      $ret = $html->find('.j-tabPanes'); 
+
+
+
+      $firstNewsGroup = str_get_html($ret[0]);
+      $secondNewsGroup = str_get_html($ret[1]);
+      $thirdNewsGroup = $html->find('div.element--collection:nth-child(3) > mw-tabs:nth-child(2) > div:nth-child(2)');
+
+      // Recent News
+      $firstNewsGroupArticleContent = $firstNewsGroup->find('.article__content');
+      $marketWatchNewsHTML = $full_company_name[0] . "<h1>Recent News</h1>";
+      $marketWatchNewsHTML .= '<div style="max-height: 200px; overflow: auto;">';
+
+      foreach ($firstNewsGroupArticleContent as $article)
+      {
+        $marketWatchNewsHTML .= '<div>';
+        $articleContent = str_get_html($article);
+        $timeStamp = $articleContent->find('li.article__timestamp');
+        $timeStampSpan = '<span>' . $timeStamp[0]->text() . "</span>"; 
+        $headline = $articleContent->find('.article__headline');
+        $headline = preg_replace('/h3/', 'span', $headline); 
+        $marketWatchNewsHTML .=  $timeStampSpan . "&nbsp;" . $headline[0]; 
+        $marketWatchNewsHTML .= "</div>";
+
+      }
+      $marketWatchNewsHTML .= "</div>";
+
+      // Other News
+      $secondNewsGroupArticleContent = $secondNewsGroup->find('.article__content');
+      $marketWatchNewsHTML .= "<h1>Other News</h1>";
+      $marketWatchNewsHTML .= '<div style="max-height: 200px; overflow: auto;">';
+
+      foreach ($secondNewsGroupArticleContent as $article)
+      {
+        $marketWatchNewsHTML .= '<div>';
+        $articleContent = str_get_html($article);
+        $timeStamp = $articleContent->find('li.article__timestamp');
+        $timeStampSpan = '<span>' . $timeStamp[0]->text() . "</span>"; 
+        $headline = $articleContent->find('.article__headline');
+        $headline = preg_replace('/h3/', 'span', $headline); 
+        $marketWatchNewsHTML .=  $timeStampSpan . "&nbsp;" . $headline[0]; 
+        $marketWatchNewsHTML .= "</div>";
+
+      }
+      $marketWatchNewsHTML .= "</div>";
+
+
+
+
+ echo $marketWatchNewsHTML . "\n";
+die();
+
+// k      $returnHTML = $ret[0]; 
 
       $returnHTML = str_replace('<span>', '<span style="font-weight: bold;">', $returnHTML); 
 

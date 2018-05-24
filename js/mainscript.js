@@ -372,8 +372,11 @@ $("#copy_price_to_percentage").click(function(){
     // E*TRADE
     
 //    window.open("https://www.etrade.wallst.com/v1/stocks/news/search_results.asp?symbol=" + symbol + "&rsO=new");
-      openPage('https://www.streetinsider.com/stock_lookup.php?LookUp=Get+Quote&q=' + symbol + '#tab_all');
-      
+//      openPage('https://www.streetinsider.com/stock_lookup.php?LookUp=Get+Quote&q=' + symbol + '#tab_all');
+//       openPage('https://www.nasdaq.com/symbol/' + symbol + '/sec-filings'); 
+//      openPage('https://www.sec.gov/cgi-bin/browse-edgar?CIK=' + symbol + '&owner=exclude&action=getcompany&Find=Search');
+      openPage('http://www.heigoldinvestments.com/test/proxy_sec.php?symbol=' + symbol); 
+
         // initialize everything
 
         $("#left_bottom_container").html("");
@@ -461,7 +464,8 @@ $("#copy_price_to_percentage").click(function(){
       $("div#left_top_container").css("background-color", "#F3F3FF");
 
       CopyToClipboard();
-/*  Wait until the API is working again 
+/*
+  Wait until the API is working again 
       // Yahoo Finance historical data API 
       $("div#left_top_container").css("background-color", "#BBDDFF");                   
       $.ajax({
