@@ -313,11 +313,9 @@ if ($which_website == "marketwatch")
 
       $ret = $html->find('.j-tabPanes'); 
 
-
-
       $firstNewsGroup = str_get_html($ret[0]);
       $secondNewsGroup = str_get_html($ret[1]);
-      $thirdNewsGroup = $html->find('div.element--collection:nth-child(3) > mw-tabs:nth-child(2) > div:nth-child(2)');
+      $thirdNewsGroup = $html->find('html.icons-loaded.mono-loaded.enhanced body.page--quote.symbol--Stock.page--Index.quote-fixed div.container.wrapper.clearfix.j-quoteContainer.stock div.content-region.region--primary div.template.template--primary div.column.column--full div.element.element--collection.external mw-tabs.element__options div.j-tabPanes');
 
       // Recent News
       $firstNewsGroupArticleContent = $firstNewsGroup->find('.article__content');
@@ -337,15 +335,18 @@ if ($which_website == "marketwatch")
       {
         $marketWatchNewsHTML .= '<div>';
         $articleContent = str_get_html($article);
-        $timeStamp = $articleContent->find('li.article__timestamp');
-        $timeStampSpan = '<span>' . $timeStamp[0]->text() . "</span>"; 
+        $dateTime = $articleContent->find('li.article__timestamp');
+        $dateTimeSpan = '<span>' . $dateTime[0]->text() . "</span>"; 
         $headline = $articleContent->find('.article__headline');
         $headline = preg_replace('/h3/', 'span', $headline); 
-        $marketWatchNewsHTML .=  $timeStampSpan . "&nbsp;" . $headline[0]; 
+        $marketWatchNewsHTML .=  $dateTimeSpan . "&nbsp;" . $headline[0]; 
         $marketWatchNewsHTML .= "</div>";
 
       }
       $marketWatchNewsHTML .= "</div>";
+
+
+      $secondNewsArray = array();
 
       // Other News
       $secondNewsGroupArticleContent = $secondNewsGroup->find('.article__content');
@@ -354,16 +355,23 @@ if ($which_website == "marketwatch")
 
       foreach ($secondNewsGroupArticleContent as $article)
       {
-        $marketWatchNewsHTML .= '<div>';
         $articleContent = str_get_html($article);
-        $timeStamp = $articleContent->find('li.article__timestamp');
-        $timeStampSpan = '<span>' . $timeStamp[0]->text() . "</span>"; 
+        $dateTime = $articleContent->find('li.article__timestamp');
+        $dateTimeSpan = '<span>' . $dateTime[0]->text() . "</span>"; 
         $headline = $articleContent->find('.article__headline');
         $headline = preg_replace('/h3/', 'span', $headline); 
-        $marketWatchNewsHTML .=  $timeStampSpan . "&nbsp;" . $headline[0]; 
-        $marketWatchNewsHTML .= "</div>";
-
+        $timeStamp = preg_match('/data-est=\"(.*)\" class/', $dateTime[0], $timeStampMatches);
+        $timeInteger = strtotime($timeStampMatches[1]);
+        $secondNewsArray[$timeInteger] = $dateTimeSpan . "&nbsp;" . $headline[0];
       }
+
+      krsort($secondNewsArray);
+
+      foreach($secondNewsArray as $item)
+      {
+        $marketWatchNewsHTML .= "<div>" . $item . "</div>";
+      }
+
       $marketWatchNewsHTML .= "</div>";
 
       $marketwatch_todays_date = date('l'/*, strtotime("-9 hours")*/); 
