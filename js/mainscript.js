@@ -375,7 +375,7 @@ $("#copy_price_to_percentage").click(function(){
 //      openPage('https://www.streetinsider.com/stock_lookup.php?LookUp=Get+Quote&q=' + symbol + '#tab_all');
 //       openPage('https://www.nasdaq.com/symbol/' + symbol + '/sec-filings'); 
 //      openPage('https://www.sec.gov/cgi-bin/browse-edgar?CIK=' + symbol + '&owner=exclude&action=getcompany&Find=Search');
-      openPage('http://www.heigoldinvestments.com/test/proxy_sec.php?symbol=' + symbol); 
+      openPage('./proxy_sec.php?symbol=' + symbol); 
 
         // initialize everything
 
@@ -395,6 +395,7 @@ $("#copy_price_to_percentage").click(function(){
         $("#entryPrice").val(""); 
         $("#entryPercentage").val(""); 
         $("#amountSpending").val("575");
+        $("#eTradeLowPercentage").val("");
         $("#orderStub").val("-----------------------"); 
 
         $("#roundShares_50").checked = true; 
