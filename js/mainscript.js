@@ -394,7 +394,7 @@ $("#copy_price_to_percentage").click(function(){
         $("#day1").html("");
         $("#entryPrice").val(""); 
         $("#entryPercentage").val(""); 
-        $("#amountSpending").val("575");
+        $("#amountSpending").val("620");
         $("#eTradeLowPercentage").val("");
         $("#orderStub").val("-----------------------"); 
 
