@@ -394,8 +394,8 @@ $("#copy_price_to_percentage").click(function(){
         $("#day1").html("");
         $("#entryPrice").val(""); 
         $("#entryPercentage").val(""); 
-        $("#amountSpending").val("620");
-        $("#eTradeLowPercentage").val("");
+        $("#amountSpending").val("1000");
+        $("#eTradeLowPercentage").html("");
         $("#orderStub").val("-----------------------"); 
 
         $("#roundShares_50").checked = true; 
