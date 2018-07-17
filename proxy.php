@@ -1,10 +1,5 @@
 <?php 
 
-/* 
-oauth_consumer_key: 874c996f1f6ecaa46c65abb115da9912
-consumer_secret: 886529f1c9d06729e97b6f511a89b4df
-*/
-
 include 'config.php';
 
 require_once("simple_html_dom.php"); 
@@ -30,9 +25,7 @@ function get_yahoo_friday_trade_date()
     $friday_yahoo_trade_week_day = mb_substr($friday_yahoo_trade_week_day, 0, 3);
     $friday_yahoo_trade_month_day = date(', d M Y', strtotime("-3 days"));
     $friday_yahoo_trade_date = $friday_yahoo_trade_week_day . $friday_yahoo_trade_month_day;
- 
-//    $friday_yahoo_trade_date = preg_replace('/\, 0([1-9])/', '$1', $friday_yahoo_trade_date);
- 
+
     return $friday_yahoo_trade_date;
 }
 
@@ -44,8 +37,6 @@ function get_yahoo_saturday_trade_date()
     $saturday_yahoo_trade_week_day = mb_substr($saturday_yahoo_trade_week_day, 0, 3);
     $saturday_yahoo_trade_month_day = date(', d M Y', strtotime("-2 days"));
     $saturday_yahoo_trade_date = $saturday_yahoo_trade_week_day . $saturday_yahoo_trade_month_day;
- 
-//    $saturday_yahoo_trade_date = preg_replace('/\, 0([1-9])/', '$1', $saturday_yahoo_trade_date);
 
     return $saturday_yahoo_trade_date;
 }
@@ -58,8 +49,6 @@ function get_yahoo_yesterday_trade_date()
     $yesterday_yahoo_trade_week_day = mb_substr($yesterday_yahoo_trade_week_day, 0, 3);
     $yesterday_yahoo_trade_month_day = date(', d M Y', strtotime("-1 days"));
     $yesterday_yahoo_trade_date = $yesterday_yahoo_trade_week_day . $yesterday_yahoo_trade_month_day;
- 
-//    $yesterday_yahoo_trade_date = preg_replace('/\, 0([1-9])/', '$1', $yesterday_yahoo_trade_date);
 
     return $yesterday_yahoo_trade_date;
 }
@@ -72,8 +61,6 @@ function get_yahoo_todays_trade_date()
     $todays_yahoo_trade_week_day = mb_substr($todays_yahoo_trade_week_day, 0, 3);
     $todays_yahoo_trade_month_day = date(', d M Y');
     $todays_yahoo_trade_date = $todays_yahoo_trade_week_day . $todays_yahoo_trade_month_day;
- 
-//    $todays_yahoo_trade_date = preg_replace('/\, 0([1-9])/', '$1', $todays_yahoo_trade_date);
 
     return $todays_yahoo_trade_date;
 }
@@ -197,10 +184,7 @@ $header=array('GET /1575051 HTTP/1.1',
 "Host: www.etrade.wallst.com",
 'Accept:text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
 'Accept-Language:en-US,en;q=0.8',
-// old 'Cookie: 1432%5F0=E57E25DD8D0A3F041AED1172A4473B69; GZIP=1; mmcore.tst=0.478; mmid=2017346849%7CAQAAAAqgcK3s3AsAAA%3D%3D; mmcore.pd=1639725045%7CAQAAAAoBQqBwrezcCx0RoEIBAL2yvfdgTdJIDXVzLmV0cmFkZS5jb20OAAAAvbK992BN0kgAAAAA/////wD//////////wANdXMuZXRyYWRlLmNvbQLcCwEAAAAAAAIAAAAAAP///////////////wAAAAAAAUU%3D; mmcore.srv=cg6.usw; s_cc=true; s_ppv=26; oda_uid=386242%3A%3A@@553b78bf9315fa054c5e2297; oda_bsid=386242%3A%3A@@*; oda_sid=386242%3A%3A@@553b78bffcbb01f5d14768e5; oda_lv=386242%3A%3A@@1429960895712; oda_cp=386242%3A%3A@@Quotes%7E%21@Snapshot%20-%20Equity%7E%21@1429960895712%7E%21@1; s_fid=1B78A634002A44E1-0A2A2F01C2B51A25; SC_pvp=www.etrade.wallst.com%3Av1%3Astocks%3Asnapshot%3Asnapshot.asp; s_sq=etrglobal%2Cetrwsod%3D%2526pid%253Dwww.etrade.wallst.com%25253Av1%25253Astocks%25253Asnapshot%25253Asnapshot.asp%2526pidt%253D1%2526oid%253Dhttps%25253A%25252F%25252Fwww.etrade.wallst.com%25252Fv1%25252Fstocks%25252Fnews%25252Fsearch_results.asp%25253Fsymbol%25253DMSFT_1%2526oidt%253D1%2526ot%253DA%2526oi%253D1;',
-//'Cookie: GZIP=1; oda_bsid=386242%3A%3A@@*; 1432%5F0=7AF57B6C68E6B44D9F01302B067266B6; et_segment=; hb_referrer_flg=; mmcore.LBWay=; mmcore.tst=0.405; mmid=2140111876%7CAgAAAAqgcK3s3AsAAA%3D%3D; mmcore.pd=-389252185%7CAwAAAAoBQqBwrezcC8MKotQCAMTETlaeTdJIDXVzLmV0cmFkZS5jb20OAAAAvbK992BN0kgAAAAA/////wD//////////wANdXMuZXRyYWRlLmNvbQLcCwIAAAAAAAIAAAAAAP///////////////wAAAAAAAUU%3D; mmcore.srv=cg6.usw; s_cc=true; oda_uid=386242%3A%3A@@553b78bf9315fa054c5e2297; oda_sid=386242%3A%3A@@553bdd760a80da1ee260f226; oda_lv=386242%3A%3A@@1429987252445; oda_cp=386242%3A%3A@@Quotes%7E%21@Snapshot%20-%20Equity%7E%21@1429987252445%7E%21@0; s_ppv=26; s_fid=1B78A634002A44E1-0A2A2F01C2B51A25; SC_pvp=www.etrade.wallst.com%3Av1%3Astocks%3Asnapshot%3Asnapshot.asp;   s_sq=etrglobal%2Cetrwsod%3D%2526pid%253Dwww.etrade.wallst.com%25253Av1%25253Astocks%25253Asnapshot%25253Asnapshot.asp%2526pidt%253D1%2526oid%253Dhttps%25253A%25252F%25252Fwww.etrade.wallst.com%25252Fv1%25252Fstocks%25252Fnews%25252Fsearch_results.asp%25253Fsymbol%25253DMSFT%2526ot%253DA', // Saturday at 11:44 AM
-  'Cookie: oda_bsid=386242%3A%3A@@*; 1432%5F0=C3D1E46964D0597C69BAB2D9F8A3652F', // Saturday at 3:09 PM - this worked
-
+'Cookie: oda_bsid=386242%3A%3A@@*; 1432%5F0=C3D1E46964D0597C69BAB2D9F8A3652F',
 'Cache-Control:max-age=0',
 'Connection:keep-alive',
 'User-Agent:Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/27.0.1453.116 Safari/537.36',
@@ -215,8 +199,6 @@ curl_setopt( $ch, CURLOPT_COOKIESESSION, true );
     curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
 
 curl_setopt($ch, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
-
-// curl_setopt ($ch, CURLOPT_POSTFIELDS, "username=michael@moderneveryday.com&password=modern1213");
 
 curl_setopt($ch,CURLOPT_COOKIEFILE,'cookies.txt');
 curl_setopt($ch,CURLOPT_COOKIEJAR,'cookies.txt');
@@ -233,14 +215,14 @@ return $returnHTML;
 function grabHTML($function_host_name, $url)
 {
 
-$ch = curl_init();
-$header=array('GET /1575051 HTTP/1.1',
-    "Host: $function_host_name",
-    'Accept:text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
-    'Accept-Language:en-US,en;q=0.8',
-    'Cache-Control:max-age=0',
-    'Connection:keep-alive',
-    'User-Agent:Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/27.0.1453.116 Safari/537.36',
+    $ch = curl_init();
+    $header=array('GET /1575051 HTTP/1.1',
+        "Host: $function_host_name",
+        'Accept:text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+        'Accept-Language:en-US,en;q=0.8',
+        'Cache-Control:max-age=0',
+        'Connection:keep-alive',
+        'User-Agent:Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/27.0.1453.116 Safari/537.36',
     );
 
     curl_setopt($ch,CURLOPT_URL,$url);
@@ -250,30 +232,23 @@ $header=array('GET /1575051 HTTP/1.1',
     curl_setopt($ch,CURLOPT_CONNECTTIMEOUT, 300);
     curl_setopt( $ch, CURLOPT_COOKIESESSION, true );
 
-//    curl_setopt($ch, CURLOPT_USERPWD, "heigold1:heimer27");
     curl_setopt($ch, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
 
     curl_setopt($ch,CURLOPT_COOKIEFILE,'cookies.txt');
     curl_setopt($ch,CURLOPT_COOKIEJAR,'cookies.txt');
     curl_setopt($ch,CURLOPT_HTTPHEADER,$header);
 
-
-
-curl_setopt($ch, CURLOPT_VERBOSE, true);
-curl_setopt($ch, CURLOPT_STDERR,$f = fopen(__DIR__ . "/error.log", "w+"));
-
+    curl_setopt($ch, CURLOPT_VERBOSE, true);
+    curl_setopt($ch, CURLOPT_STDERR,$f = fopen(__DIR__ . "/error.log", "w+"));
 
     $returnHTML = curl_exec($ch); 
 
-if($errno = curl_errno($ch)) {
-    $error_message = curl_strerror($errno);
-    echo "cURL error ({$errno}):\n {$error_message}";
-}   
-   curl_close($ch);
+    if($errno = curl_errno($ch)) {
+        $error_message = curl_strerror($errno);
+        echo "cURL error ({$errno}):\n {$error_message}";
+    }   
+    curl_close($ch);
     return $returnHTML; 
-
-
- 
 
 } // end of function grabHTML
 
@@ -326,7 +301,6 @@ if ($which_website == "marketwatch")
       </head>
       <body>
       '; 
-
 
       $marketWatchNewsHTML = $full_company_name[0] . "<h1>Recent News</h1>";
       $marketWatchNewsHTML .= '<div style="max-height: 200px; overflow: auto;">';
@@ -444,8 +418,6 @@ if ($which_website == "marketwatch")
 }
 else if ($which_website == "yahoo")
 {
-
-
     // grab the news 
 
     $rss = simplexml_load_file("http://feeds.finance.yahoo.com/rss/2.0/headline?s=$symbol&region=US&lang=en-US");
@@ -469,7 +441,8 @@ else if ($which_website == "yahoo")
 
         $allNews .=  " ><a href='$feedItem->link' title='$feedItem->title'> " . $feedItem->pubDate . " " . $newsTitle . "</a></li>";
     }
-    $allNews .=  "</ul>";
+
+      $allNews .=  "</ul>";
 
       // grab the finanicals 
 
@@ -489,14 +462,6 @@ else if ($which_website == "yahoo")
       $sectorCountry = " " . $sectorCountryArray[2] . " - " . $sectorCountryArray[3] . " - " . $sectorCountryArray[4] . "<br>";
       $sectorCountry = str_replace('<a', '<span', $sectorCountry);    
       $sectorCountry = str_replace('\/a', '/span', $sectorCountry);   
-/*
-      $companyNameArray = $html->find('table.fullview-title tbody tr td a');
-      $companyName = $companyNameArray[0];
-      $returnCompanyName = preg_replace('/<a.*\">/', '<h1>', $companyName);     
-      $returnCompanyName = preg_replace('/\/a>/', '/h1', $returnCompanyName); 
-      $returnCompanyName = "*" . $returnCompanyName . "*"; 
-
-*/       
 
       // grab the financials from yahoo.com
 
@@ -506,25 +471,6 @@ else if ($which_website == "yahoo")
       $returnCompanyName = $companyNameArray[0]; 
       $returnCompanyName = preg_replace('/\sclass.*\">/', '>', $returnCompanyName);
 
-/*
-      $yesterdays_close =  $html->find('table.table-qsp-stats tbody tr td'); 
-
-      $returnYesterdaysClose = $yesterdays_close[1]; 
-      $returnYesterdaysClose = preg_replace('/<td class="(.*)">/', '<b>Prev. close</b> - \$', $returnYesterdaysClose);  
-      $returnYesterdaysClose = preg_replace('/<\/td>/', ' - ', $reurnYesterdaysClose); 
-
-
-      $preMarketYesterdaysClose = $html->find('div#quote-header-info section span'); 
-      $preMarketYesterdaysClose[0] = preg_replace('/<span class="(.*)">/', '<span> <b>PRE MKT prev. close (last)</b> - $', $preMarketYesterdaysClose[0]);
-
-      $tableDataArray = $html->find('div#quote-summary div table tbody tr td'); 
-
-      $avgVol3Months = $tableDataArray[15];
-      $avgVol3Months = preg_replace('/<td class="(.*)">/', '<font size="3" style="font-size: 12px; background-color:#CCFF99; color: black; display: inline-block;"><b>Avg Vol (3m) - ', $avgVol3Months);  
-      $avgVol3Months = preg_replace('/<\/td>/', ' - ', $avgVol3Months);
-      $avgVol3Months .= "</b></font>";
-*/ 
-
       $volumeArray = $html->find("div#quote-summary div table tbody tr td");
 
       $currentVolume = "Vol - " . $volumeArray[13];
@@ -533,7 +479,6 @@ else if ($which_website == "yahoo")
       $avgVol3Months = preg_replace('/<td class="(.*)">/', '<font size="3" style="font-size: 12px; background-color:#CCFF99; color: black; display: inline-block;"><b>Avg Vol (3m) - ', $avgVol3Months);  
       $avgVol3Months = preg_replace('/<\/td>/', ' - ', $avgVol3Months);
       $avgVol3Months .= "</b></font>";
-
 
       $google_keyword_string = $returnCompanyName; 
       $google_keyword_string = trim($google_keyword_string); 
@@ -551,27 +496,24 @@ else if ($which_website == "yahoo")
       $google_keyword_string = preg_replace('/ltd\./i', "+", $google_keyword_string);
 
 
-$googleNewsRSSFeed = simplexml_load_file('https://news.google.com/news/feeds?hl=en&gl=ca&q='.$google_keyword_string.'&um=1&ie=UTF-8&output=rss'); /* URL of Google News RSS feed*/
+      // URL of Google News RSS feed
+      $googleNewsRSSFeed = simplexml_load_file('https://news.google.com/news/feeds?hl=en&gl=ca&q='.$google_keyword_string.'&um=1&ie=UTF-8&output=rss'); 
 
 
-    $googleNews = "<ul class='newsSide'>";
-    $i = 0;
-    foreach ($googleNewsRSSFeed->channel->item as $feedItem) {
-        $i++;
-        $googleNews .= "<li "; 
+      $googleNews = "<ul class='newsSide'>";
+      $i = 0;
+      foreach ($googleNewsRSSFeed->channel->item as $feedItem) {
+          $i++;
+          $googleNews .= "<li "; 
 
-        if ($i % 2 == 1)
-        {
-          $googleNews .=  "style='background-color: #FFFFFF; '"; 
-        };
-        
-        $googleNews .=  " ><a href='$feedItem->link' title='$feedItem->title'> " . $feedItem->pubDate . " " . $feedItem->title . "</a></li>";
-    }
-    $googleNews .=  "</ul>";
-
-
-
- 
+          if ($i % 2 == 1)
+          {
+            $googleNews .=  "style='background-color: #FFFFFF; '"; 
+          };
+          
+          $googleNews .=  " ><a href='$feedItem->link' title='$feedItem->title'> " . $feedItem->pubDate . " " . $feedItem->title . "</a></li>";
+      }
+      $googleNews .=  "</ul>";
 
       $finalReturn = "<td valign='top' >" . str_replace('<a ', '<a target="_blank" onclick="return openPage(this.href)" ', $allNews) . '</td><td valign="top">' . str_replace('<a ', '<a target="_blank" onclick="return openPage(this.href)" ', $googleNews) . '</td>';
 
@@ -642,9 +584,6 @@ $googleNewsRSSFeed = simplexml_load_file('https://news.google.com/news/feeds?hl=
       $finalReturn = preg_replace('/ lease termination/i', '<span style="font-size: 12px; background-color:red; color:black"><b>&nbsp; DANGER - Chapter 7 warning - 90%</b></span>&nbsp;', $finalReturn);
       $finalReturn = preg_replace('/ redemption of public shares/i', '<span style="font-size: 12px; background-color:red; color:black"><b>&nbsp; Redemption of Public Shares - 92%</b></span>&nbsp;', $finalReturn);
 
-
-//      strip_tags($finalReturn, '<embed><img>');// '#<img[^>]*>#i'
-
       $message_board = '</font><a target="_blank" onclick="return openPage(this.href)" href="http://finance.yahoo.com/quote/' . $symbol . '/community?ltr=1"> Yahoo Message Boards</a>&nbsp;&nbsp;&nbsp;&nbsp;'; 
       $company_profile = '<a target="_blank" onclick="return openPage(this.href)" href="http://finance.yahoo.com/quote/' . $symbol . '/profile">Yahoo Company Profile for ' . $symbol . '</a><br>'; 
       $yahoo_main_page = '<a target="_blank" href="http://finance.yahoo.com/q?s=' . $symbol . '&ql=1">Yahoo Main Page for ' . $symbol . '</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
@@ -657,8 +596,6 @@ $googleNewsRSSFeed = simplexml_load_file('https://news.google.com/news/feeds?hl=
       $finalReturn = $returnCompanyName . $companyWebsite . $sectorCountry . $returnYesterdaysClose . $preMarketYesterdaysClose[0] . "<br>" . "<div style='display: inline-block;'>" . $currentVolume . $avgVol3Months . $company_profile . $message_board . $google . '<table width="575px"><tr width="575px">' . $finalReturn . '</tr></table>'; 
 
       echo $finalReturn; 
-
-//        JSON string 
 
 } // if ($which_website == "yahoo")
 else if ($which_website == "bigcharts")
@@ -692,12 +629,10 @@ else if ($which_website == "bigcharts")
 
       // grab the last vix value 
       $url = "http://bigcharts.marketwatch.com/quickchart/quickchart.asp?symb=vix&insttype=&freq=9&show=&time=1"; 
-//       $url = "http://finance.yahoo.com/quote/^VIX?p=^VIX"; 
  
       $result = grabHTML("bigcharts.marketwatch.com", $url);
       $html = str_get_html($result);  
 
-//      $vixTDArray = $html->find('div#quote-header-info section span'); 
       $vixTDArray = $html->find('table#quote tbody tr td div'); 
 
       $vixTDArray[4] = preg_replace('/<div\>/', '', $vixTDArray[4]); 
@@ -716,29 +651,21 @@ else if ($which_website == "streetinsider")
       $result = grabEtradeHTML("https://www.streetinsider.com", $url);
       $html = str_get_html("**" + $result + "**");  
 
-echo "url is $url"; 
+      echo "url is $url"; 
 
 }
 else if ($which_website == "etrade")
 {
-
- $url =  "www.etrade.wallst.com/v1/stocks/news/search_results.asp?symbol=$symbol&rsO=new";
-
-// $url="http://finance.yahoo.com/q?s=$symbol&ql=1"; 
-
+      $url =  "www.etrade.wallst.com/v1/stocks/news/search_results.asp?symbol=$symbol&rsO=new";
       $result = grabEtradeHTML("www.etrade.wallst.com", $url);
       $html = str_get_html($result);  
       $eTradeNewsDiv = $html->find('#news_story');
 
-//      $html = str_get_html($eTradeNewsDiv[0]);  
       $returnEtradeHTML = $eTradeNewsDiv[0]; 
       $returnEtradeHTML = preg_replace('/<div class="fRight newsSideWidth t10">(.*)<div class="clear"><\/div>/', '', $returnEtradeHTML); 
       $returnEtradeHTML = preg_replace('/width:306px;/', 'width:600px;', $returnEtradeHTML); 
 
-
       echo $returnEtradeHTML; 
 }
-
-
 
 ?>

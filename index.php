@@ -62,8 +62,6 @@
 
 							<input tabindex="6" id="orderStub"><button id="email_trade" type="button">..</button>
 
-							<!-- <span id="finalSymbol">AAAA</span> BUY <span id="finalShares">0,000,000</span> $<span id="finalPrice">0.0000</span> (<span id="finalPercentage">00.00</span>%) --> 
-
 							</td>
 							<td width="130px"><input type="radio" name="roundShares" id="roundShares" value="1000">Round 1,000</td> 						
 						</tr>
@@ -83,12 +81,6 @@
 					</table> <!-- Order entry information (yest. close, etc...) --> 
 
 			</div> <!-- Enter Quote Div -->
-<!-- 			
- 			<div id="place_order_div">
-					Entry % <input id="entry_percentage" class="textbox" type="text">$ Amount<input id="dollar_amount" class="textbox" type="text"><input id="place_order" type="submit" value="Place Order">  
-
-			</div> -->   <!-- Place Order Div -->   
-
 
 		</div> <!-- Left Top Container Div -->
 
