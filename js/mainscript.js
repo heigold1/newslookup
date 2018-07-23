@@ -583,6 +583,7 @@ $('#entryPercentage').keypress(function(e){
       var volumeChecked = $("#volumeChecked").html();
       if (volumeChecked == "0")
       {
+        alert("Check the chart/volume");
         var modal = document.getElementById('myModal');
         modal.style.display = "block";
         setTimeout(function(){ 
@@ -592,7 +593,6 @@ $('#entryPercentage').keypress(function(e){
 
         $("#volumeChecked").html("1");
       }
-
 
       if(e.keyCode==13)
       {
