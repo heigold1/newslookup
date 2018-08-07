@@ -416,32 +416,17 @@ else if ($which_website == "yahoo")
       $sectorCountry = str_replace('<a', '<span', $sectorCountry);    
       $sectorCountry = str_replace('\/a', '/span', $sectorCountry);   
 
-      // grab the financials from yahoo.com
-/*
-      $url = "https://finance.yahoo.com/quote/$symbol?p=$symbol";
-      $html = file_get_html($url);
-
-      $companyNameArray = $html->find('h1');
-*/
-
       $returnCompanyName = '<h1>' . $_GET['company_name'] . '</h1>';      // $companyNameArray[0]; 
-//      $returnCompanyName = preg_replace('/\sclass.*\">/', '>', $returnCompanyName);
-
-//      $volumeArray = $html->find("div#quote-summary div table tbody tr td");
 
       $currentVolume = '<span style="font-size: 12px; background-color:#ff9999; color: black; display: inline-block;"><b>Vol - ' . number_format((int) $_GET['total_volume']) . '</b></span>'; 
 
       $avgVol3Months = "to do";  // $volumeArray[15];
-//      $avgVol10days = $_GET['ten_day_volume'];
-
 
       $avgVol10days = '<span style="font-size: 12px; background-color:#CCFF99; color: black; display: inline-block;"><b>10 day vol - ' . number_format((int) $_GET['ten_day_volume']) . '</b></span>'; 
 
 
-/*
-      $avgVol3Months = preg_replace('/<td class="(.*)">/', '<font size="3" style="font-size: 12px; background-color:#CCFF99; color: black; display: inline-block;"><b>Avg Vol (3m) - ', $avgVol3Months);  
-      $avgVol3Months = preg_replace('/<\/td>/', ' - ', $avgVol3Months);
-      $avgVol3Months .= "</b></font>";  */ 
+      // todo - put in the avgVol3Months from finviz.com
+      // $avgVol3Months = 
 
       $google_keyword_string = $returnCompanyName; 
       $google_keyword_string = trim($google_keyword_string); 
