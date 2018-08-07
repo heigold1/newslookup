@@ -539,8 +539,7 @@ $(function() {
 	    data: {symbol: symbol,
            stockOrFund: stockOrFund, 
 	    	   which_website: "marketwatch", 
-	    	   host_name: "www.marketwatch.com",
-           company_name: yahooCompanyName},
+	    	   host_name: "www.marketwatch.com"},
        async: true, 
 	    dataType: 'html',
 	    success:  function (data) {

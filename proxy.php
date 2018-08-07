@@ -267,17 +267,12 @@ if ($which_website == "marketwatch")
 {
 //      $url="https://$host_name/investing/$stockOrFund/$symbol";
 
-      $full_company_name = $_GET['company_name'];
-
-      $url = "http://ec2-52-41-122-145.us-west-2.compute.amazonaws.com/puppeteer-marketwatch/grab-news.php?stockOrFund=stock&symbol=AAPL";
+      $url = "http://ec2-52-41-122-145.us-west-2.compute.amazonaws.com/puppeteer-marketwatch/grab-news.php?stockOrFund=$stockOrFund&symbol=$symbol";
 
 #       $result = grabHTML($host_name, $url); 
       $result = curl_get_contents($url);
 
       $resultDecoded = json_decode($result, true);
-
-
-echo "mw is:<br>";
 
       $marketWatchNewsHTML = '<html><head><link rel="stylesheet" href="./css/combined-min-1.0.5754.css" type="text/css"/>
       <link type="text/css" href="./css/quote-layout.css" rel="stylesheet"/>
@@ -286,7 +281,7 @@ echo "mw is:<br>";
       <body>
       '; 
 
-      $marketWatchNewsHTML = $full_company_name . "<h1>Recent News</h1>";
+      $marketWatchNewsHTML = "<h1>Recent News</h1>";
       $marketWatchNewsHTML .= '<div style="max-height: 200px; overflow: auto;">';
 
       foreach ($resultDecoded['mw'] as $mw)
@@ -307,148 +302,6 @@ echo "mw is:<br>";
         $marketWatchNewsHTML .= '</div>';
       } 
       $marketWatchNewsHTML .= '</div>';
-
-
-echo $marketWatchNewsHTML; 
-
-/*
-echo "result MW:<br>";
-echo $result['mw'];
-echo "result other:<br>";
-echo $result['other'];
-*/
-
-
-return;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-      $html = str_get_html('<!DOCTYPE html><html><head><title></title></head><body>' . $result . '</body></html>');
-
-      $ret = $html->find('.j-tabPanes'); 
-
-
-echo "ret is: <br>"; 
-echo $ret[0]; 
-return;
-
-
-/*      
-      $firstNewsGroup = str_get_html($ret[0]);
-      $secondNewsGroup = str_get_html($ret[1]);
-echo "firstNewsGroup is: <br>";
-var_dump($firstNewsGroup); 
-return; 
-*/
-
-
-
-
-      if (($pos = strpos($html, "<html><head><title>Object moved") > -1) && 
-          ($stockOrFund == "stock"))
-          {
-              $url="https://$host_name/investing/fund/$symbol/news";
-              $result = grabHTML($host_name, $url); 
-          }
-      else if (($pos = strpos($html, "<html><head><title>Object moved") > -1) && 
-          ($stockOrFund == "fund"))
-          {
-              $url="https://$host_name/investing/stock/$symbol/news";
-              $result = grabHTML($host_name, $url); 
-          }
-
-/*      $result = str_replace ('href="/', 'href="https://www.marketwatch.com/', $result);  
-      $result = str_replace ('heigoldinvestments.com', 'marketwatch.com', $result); 
-      $result = str_replace ('localhost', 'www.marketwatch.com', $result);   */ 
-      $result = preg_replace('/ etf/i', '<span style="background-color:red; color:black"><b> &nbsp;ETF</b>&nbsp;</span>', $result);
-      $result = preg_replace('/ etn/i', '<span style="background-color:red; color:black"><b> &nbsp;ETN</b>&nbsp;</span>', $result);
-      $result = str_replace ('a href', 'a onclick="return openPage(this.href)" href', $result);  
-
-      $html = str_get_html($result);
-
-      $full_company_name = $html->find('.company__name'); 
-
-      $ret = $html->find('.j-tabPanes'); 
-
-      $firstNewsGroup = str_get_html($ret[0]);
-      $secondNewsGroup = str_get_html($ret[1]);
-
-      $thirdNewsGroup = $html->find('html.icons-loaded.mono-loaded.enhanced body.page--quote.symbol--Stock.page--Index.quote-fixed div.container.wrapper.clearfix.j-quoteContainer.stock div.content-region.region--primary div.template.template--primary div.column.column--full div.element.element--collection.external mw-tabs.element__options div.j-tabPanes');
-
-      // Recent News
-      $firstNewsGroupArticleContent = $firstNewsGroup->find('.article__content');
-
-      $marketWatchNewsHTML = '<html><head><link rel="stylesheet" href="./css/combined-min-1.0.5754.css" type="text/css"/>
-      <link type="text/css" href="./css/quote-layout.css" rel="stylesheet"/>
-        <link type="text/css" href="./css/quote-typography.css" rel="stylesheet"/>
-      </head>
-      <body>
-      '; 
-
-      $marketWatchNewsHTML = $full_company_name[0] . "<h1>Recent News</h1>";
-      $marketWatchNewsHTML .= '<div style="max-height: 200px; overflow: auto;">';
-
-      foreach ($firstNewsGroupArticleContent as $article)
-      {
-        $marketWatchNewsHTML .= '<div>';
-        $articleContent = str_get_html($article);
-        $dateTime = $articleContent->find('li.article__timestamp');
-        $dateTimeSpan = '<span>' . $dateTime[0]->text() . "</span>"; 
-        $headline = $articleContent->find('.article__headline');
-        $headline = preg_replace('/h3/', 'span', $headline); 
-        $marketWatchNewsHTML .=  $dateTimeSpan . "&nbsp;" . $headline[0]; 
-        $marketWatchNewsHTML .= "</div>";
-
-      }
-      $marketWatchNewsHTML .= "</div>";
-
-
-      $secondNewsArray = array();
-
-      // Other News
-      $secondNewsGroupArticleContent = $secondNewsGroup->find('.article__content');
-      $marketWatchNewsHTML .= "<h1>Other News</h1>";
-      $marketWatchNewsHTML .= '<div style="max-height: 250px; overflow: auto;">';
-
-      foreach ($secondNewsGroupArticleContent as $article)
-      {
-        $articleContent = str_get_html($article);
-        $dateTime = $articleContent->find('li.article__timestamp');
-        $dateTimeSpan = '<span style="font-size: 10px;">' . $dateTime[0]->text() . "</span>"; 
-        $headline = $articleContent->find('.article__headline');
-        $headline = preg_replace('/h3/', 'span', $headline); 
-        $timeStamp = preg_match('/data-est=\"(.*)\" class/', $dateTime[0], $timeStampMatches);
-        $timeInteger = strtotime($timeStampMatches[1]);
-        $secondNewsArray[$timeInteger] = $dateTimeSpan . "&nbsp;" . $headline[0];
-      }
-
-      krsort($secondNewsArray);
-
-      foreach($secondNewsArray as $item)
-      {
-        $marketWatchNewsHTML .= "<div>" . $item . "</div>";
-      }
-
-      $marketWatchNewsHTML .= "</div>";
 
       $marketwatch_todays_date = date('l'/*, strtotime("-9 hours")*/); 
       if ($marketwatch_todays_date == "Monday")
@@ -514,9 +367,7 @@ return;
 
       $marketWatchNewsHTML .= '</body></html>'; 
 
-      $marketWatchfinalReturn = str_replace('<a ', '<a target="_blank"', $marketWatchNewsHTML);
-
-      echo $marketWatchfinalReturn;       
+      echo $marketWatchNewsHTML;       
 }
 else if ($which_website == "yahoo")
 {
