@@ -67,7 +67,8 @@ $ac_obj = new MarketClient($consumer);
   }
 
   $mkt_responce_obj = json_decode($out);   // USE THIS ON THE Verio Server 
-  //etHttpUtils::GetResponseObject($out);   // Use this on localhost
+
+//  $mkt_response_obj = etHttpUtils::GetResponseObject($out);   // Use this on localhost
 
   $current_time = date('Gis', strtotime("-3 hours")); 
 
@@ -75,6 +76,9 @@ $ac_obj = new MarketClient($consumer);
     {
       if (isset($mkt_responce_obj->quoteResponse->quoteData->all->lastTrade))
       {
+        $company_name = (string) $mkt_responce_obj->quoteResponse->quoteData->all->companyName;
+        $ten_day_volume = (string) $mkt_responce_obj->quoteResponse->quoteData->all->volume10Day; 
+        $total_volume = (string) $mkt_responce_obj->quoteResponse->quoteData->all->totalVolume;
         $last_trade = (string) $mkt_responce_obj->quoteResponse->quoteData->all->lastTrade;
         $low = (string) $mkt_responce_obj->quoteResponse->quoteData->all->low;
         $high = (string) $mkt_responce_obj->quoteResponse->quoteData->all->high;
@@ -101,6 +105,9 @@ $ac_obj = new MarketClient($consumer);
         $dataArray['low'] = $low; 
         $dataArray['high'] = $high; 
         $dataArray['bid'] = $bid; 
+        $dataArray['ten_day_volume'] = $ten_day_volume; 
+        $dataArray['total_volume'] = $total_volume; 
+        $dataArray['company_name'] = $company_name;
 
         echo json_encode($dataArray);
 
@@ -110,14 +117,18 @@ $ac_obj = new MarketClient($consumer);
       }
       else
       {
-        echo "------";
+        echo "------a";
       }
     }
     else
     {
+
       if (isset($mkt_responce_obj->quoteResponse->quoteData->all->prevClose))
       {
         $prev_close = (string) $mkt_responce_obj->quoteResponse->quoteData->all->prevClose;
+        $ten_day_volume = (string) $mkt_responce_obj->quoteResponse->quoteData->all->volume10Day; 
+        $total_volume = (string) $mkt_responce_obj->quoteResponse->quoteData->all->totalVolume;
+        $company_name = (string) $mkt_responce_obj->quoteResponse->quoteData->all->companyName;
         $low = (string) $mkt_responce_obj->quoteResponse->quoteData->all->low;
         $high = (string) $mkt_responce_obj->quoteResponse->quoteData->all->high;
         $bid = (string) $mkt_responce_obj->quoteResponse->quoteData->all->bid;
@@ -143,16 +154,19 @@ $ac_obj = new MarketClient($consumer);
         $dataArray['low'] = $low; 
         $dataArray['high'] = $high; 
         $dataArray['bid'] = $bid; 
+        $dataArray['ten_day_volume'] = $ten_day_volume; 
+        $dataArray['total_volume'] = $total_volume; 
+        $dataArray['company_name'] = $company_name;
 
         echo json_encode($dataArray);
         
 /*        echo '{"prev_close":"' . $prev_close . '",' . 
            ' "low":"' . $low . '",' . 
-           ' "high":"' . $high . '"}';  */ 
+           ' "high":"' .(string) $mkt_responce_obj->quoteResponse->quoteData->all->volume10Day $high . '"}';  */ 
       }
       else
       {
-        echo "------";
+        echo "------b";
       }
     }
 

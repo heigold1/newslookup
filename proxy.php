@@ -5,7 +5,6 @@ include 'config.php';
 require_once("simple_html_dom.php"); 
 error_reporting(0);
 
-
 // header('Content-type: text/html');
 $symbol=$_GET['symbol'];
 $host_name=$_GET['host_name'];
@@ -13,9 +12,7 @@ $which_website=$_GET['which_website'];
 $stockOrFund=$_GET['stockOrFund']; 
 $google_keyword_string = $_GET['google_keyword_string'];
 
-
 fopen("cookies.txt", "w");
-
 
 function get_yahoo_friday_trade_date()
 {
@@ -173,41 +170,52 @@ function get_marketwatch_today_trade_date()
     return $today_marketwatch_trade_date;
 }
 
+function curl_get_contents($url)
+{
+    $ch = curl_init();
+
+    curl_setopt($ch, CURLOPT_HEADER, 0);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+    curl_setopt($ch, CURLOPT_URL, $url);
+
+    $data = curl_exec($ch);
+    curl_close($ch);
+
+    return $data;
+}
 
 function grabEtradeHTML($etrade_host_name, $url)
 {
 
+    $ch = curl_init();
+    $header=array('GET /1575051 HTTP/1.1',
+    "Host: www.etrade.wallst.com",
+    'Accept:text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+    'Accept-Language:en-US,en;q=0.8',
+    'Cookie: oda_bsid=386242%3A%3A@@*; 1432%5F0=C3D1E46964D0597C69BAB2D9F8A3652F',
+    'Cache-Control:max-age=0',
+    'Connection:keep-alive',
+    'User-Agent:Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/27.0.1453.116 Safari/537.36',
+    );
+
+    curl_setopt($ch,CURLOPT_URL, $url);
+    curl_setopt($ch,CURLOPT_RETURNTRANSFER,true);
+    curl_setopt($ch,CURLOPT_CONNECTTIMEOUT,0);
+    curl_setopt( $ch, CURLOPT_COOKIESESSION, true );
+
+        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
+
+    curl_setopt($ch, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
+
+    curl_setopt($ch,CURLOPT_COOKIEFILE,'cookies.txt');
+    curl_setopt($ch,CURLOPT_COOKIEJAR,'cookies.txt');
+    curl_setopt($ch,CURLOPT_HTTPHEADER,$header);
+
+    $returnHTML = curl_exec($ch);
 
 
-$ch = curl_init();
-$header=array('GET /1575051 HTTP/1.1',
-"Host: www.etrade.wallst.com",
-'Accept:text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
-'Accept-Language:en-US,en;q=0.8',
-'Cookie: oda_bsid=386242%3A%3A@@*; 1432%5F0=C3D1E46964D0597C69BAB2D9F8A3652F',
-'Cache-Control:max-age=0',
-'Connection:keep-alive',
-'User-Agent:Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/27.0.1453.116 Safari/537.36',
-);
-
-curl_setopt($ch,CURLOPT_URL, $url);
-curl_setopt($ch,CURLOPT_RETURNTRANSFER,true);
-curl_setopt($ch,CURLOPT_CONNECTTIMEOUT,0);
-curl_setopt( $ch, CURLOPT_COOKIESESSION, true );
-
-    curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
-    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
-
-curl_setopt($ch, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
-
-curl_setopt($ch,CURLOPT_COOKIEFILE,'cookies.txt');
-curl_setopt($ch,CURLOPT_COOKIEJAR,'cookies.txt');
-curl_setopt($ch,CURLOPT_HTTPHEADER,$header);
-
-$returnHTML = curl_exec($ch);
-
-
-return $returnHTML;
+    return $returnHTML;
 
 } // end of function grabEtradeHTML
 
@@ -257,10 +265,103 @@ $finalReturn = "";
 
 if ($which_website == "marketwatch")
 {
-      $url="https://$host_name/investing/$stockOrFund/$symbol";
+//      $url="https://$host_name/investing/$stockOrFund/$symbol";
 
-      $result = grabHTML($host_name, $url); 
-      $html = str_get_html($result);
+      $full_company_name = $_GET['company_name'];
+
+      $url = "http://ec2-52-41-122-145.us-west-2.compute.amazonaws.com/puppeteer-marketwatch/grab-news.php?stockOrFund=stock&symbol=AAPL";
+
+#       $result = grabHTML($host_name, $url); 
+      $result = curl_get_contents($url);
+
+      $resultDecoded = json_decode($result, true);
+
+
+echo "mw is:<br>";
+
+      $marketWatchNewsHTML = '<html><head><link rel="stylesheet" href="./css/combined-min-1.0.5754.css" type="text/css"/>
+      <link type="text/css" href="./css/quote-layout.css" rel="stylesheet"/>
+        <link type="text/css" href="./css/quote-typography.css" rel="stylesheet"/>
+      </head>
+      <body>
+      '; 
+
+      $marketWatchNewsHTML = $full_company_name . "<h1>Recent News</h1>";
+      $marketWatchNewsHTML .= '<div style="max-height: 200px; overflow: auto;">';
+
+      foreach ($resultDecoded['mw'] as $mw)
+      {
+        $marketWatchNewsHTML .= '<div>';
+        $marketWatchNewsHTML .= '<span>' . $mw['date'] . '</span>' . '<a target="blank" href="' . $mw['link'] . '" >' . $mw['headline'] . '</a>'; 
+        $marketWatchNewsHTML .= '</div>';
+      } 
+      $marketWatchNewsHTML .= '</div>';
+
+      $marketWatchNewsHTML .= "<h1>Other News</h1>";
+      $marketWatchNewsHTML .= '<div style="max-height: 250px; overflow: auto;">';
+
+      foreach ($resultDecoded['other'] as $other)
+      {
+        $marketWatchNewsHTML .= '<div>';
+        $marketWatchNewsHTML .= '<span>' . $other['date'] . '</span>' . '<a target="blank" href="' . $other['link'] . '" >' . $other['headline'] . '</a>'; 
+        $marketWatchNewsHTML .= '</div>';
+      } 
+      $marketWatchNewsHTML .= '</div>';
+
+
+echo $marketWatchNewsHTML; 
+
+/*
+echo "result MW:<br>";
+echo $result['mw'];
+echo "result other:<br>";
+echo $result['other'];
+*/
+
+
+return;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      $html = str_get_html('<!DOCTYPE html><html><head><title></title></head><body>' . $result . '</body></html>');
+
+      $ret = $html->find('.j-tabPanes'); 
+
+
+echo "ret is: <br>"; 
+echo $ret[0]; 
+return;
+
+
+/*      
+      $firstNewsGroup = str_get_html($ret[0]);
+      $secondNewsGroup = str_get_html($ret[1]);
+echo "firstNewsGroup is: <br>";
+var_dump($firstNewsGroup); 
+return; 
+*/
+
+
+
 
       if (($pos = strpos($html, "<html><head><title>Object moved") > -1) && 
           ($stockOrFund == "stock"))
@@ -275,9 +376,9 @@ if ($which_website == "marketwatch")
               $result = grabHTML($host_name, $url); 
           }
 
-      $result = str_replace ('href="/', 'href="https://www.marketwatch.com/', $result);  
+/*      $result = str_replace ('href="/', 'href="https://www.marketwatch.com/', $result);  
       $result = str_replace ('heigoldinvestments.com', 'marketwatch.com', $result); 
-      $result = str_replace ('localhost', 'www.marketwatch.com', $result); 
+      $result = str_replace ('localhost', 'www.marketwatch.com', $result);   */ 
       $result = preg_replace('/ etf/i', '<span style="background-color:red; color:black"><b> &nbsp;ETF</b>&nbsp;</span>', $result);
       $result = preg_replace('/ etn/i', '<span style="background-color:red; color:black"><b> &nbsp;ETN</b>&nbsp;</span>', $result);
       $result = str_replace ('a href', 'a onclick="return openPage(this.href)" href', $result);  
@@ -290,6 +391,7 @@ if ($which_website == "marketwatch")
 
       $firstNewsGroup = str_get_html($ret[0]);
       $secondNewsGroup = str_get_html($ret[1]);
+
       $thirdNewsGroup = $html->find('html.icons-loaded.mono-loaded.enhanced body.page--quote.symbol--Stock.page--Index.quote-fixed div.container.wrapper.clearfix.j-quoteContainer.stock div.content-region.region--primary div.template.template--primary div.column.column--full div.element.element--collection.external mw-tabs.element__options div.j-tabPanes');
 
       // Recent News
@@ -464,21 +566,31 @@ else if ($which_website == "yahoo")
       $sectorCountry = str_replace('\/a', '/span', $sectorCountry);   
 
       // grab the financials from yahoo.com
-
+/*
       $url = "https://finance.yahoo.com/quote/$symbol?p=$symbol";
       $html = file_get_html($url);
+
       $companyNameArray = $html->find('h1');
-      $returnCompanyName = $companyNameArray[0]; 
-      $returnCompanyName = preg_replace('/\sclass.*\">/', '>', $returnCompanyName);
+*/
 
-      $volumeArray = $html->find("div#quote-summary div table tbody tr td");
+      $returnCompanyName = '<h1>' . $_GET['company_name'] . '</h1>';      // $companyNameArray[0]; 
+//      $returnCompanyName = preg_replace('/\sclass.*\">/', '>', $returnCompanyName);
 
-      $currentVolume = "Vol - " . $volumeArray[13];
+//      $volumeArray = $html->find("div#quote-summary div table tbody tr td");
 
-      $avgVol3Months = $volumeArray[15];
+      $currentVolume = '<span style="font-size: 12px; background-color:#ff9999; color: black; display: inline-block;"><b>Vol - ' . number_format((int) $_GET['total_volume']) . '</b></span>'; 
+
+      $avgVol3Months = "to do";  // $volumeArray[15];
+//      $avgVol10days = $_GET['ten_day_volume'];
+
+
+      $avgVol10days = '<span style="font-size: 12px; background-color:#CCFF99; color: black; display: inline-block;"><b>10 day vol - ' . number_format((int) $_GET['ten_day_volume']) . '</b></span>'; 
+
+
+/*
       $avgVol3Months = preg_replace('/<td class="(.*)">/', '<font size="3" style="font-size: 12px; background-color:#CCFF99; color: black; display: inline-block;"><b>Avg Vol (3m) - ', $avgVol3Months);  
       $avgVol3Months = preg_replace('/<\/td>/', ' - ', $avgVol3Months);
-      $avgVol3Months .= "</b></font>";
+      $avgVol3Months .= "</b></font>";  */ 
 
       $google_keyword_string = $returnCompanyName; 
       $google_keyword_string = trim($google_keyword_string); 
@@ -593,7 +705,7 @@ else if ($which_website == "yahoo")
         $google = preg_replace('/<h1>/', '', $google);
         $google = preg_replace('/<\/h1>/', '', $google);
 
-      $finalReturn = $returnCompanyName . $companyWebsite . $sectorCountry . $returnYesterdaysClose . $preMarketYesterdaysClose[0] . "<br>" . "<div style='display: inline-block;'>" . $currentVolume . $avgVol3Months . $company_profile . $message_board . $google . '<table width="575px"><tr width="575px">' . $finalReturn . '</tr></table>'; 
+      $finalReturn = $returnCompanyName . $companyWebsite . $sectorCountry . $returnYesterdaysClose . $preMarketYesterdaysClose[0] . "<br>" . "<div style='display: inline-block;'>" . $currentVolume . $avgVol10days . $avgVol3Months . $company_profile . $message_board . $google . '<table width="575px"><tr width="575px">' . $finalReturn . '</tr></table>'; 
 
       echo $finalReturn; 
 
@@ -603,6 +715,7 @@ else if ($which_website == "bigcharts")
       $url = "http://$host_name/quickchart/quickchart.asp?symb=$symbol&insttype=&freq=1&show=&time=8";
       $result = grabHTML($host_name, $url);
       $html = str_get_html($result);  
+
 
       $bigChartsYestClose = $html->find('table#quote tbody tr td div'); 
       $bigChartsYestClose[4] = preg_replace('/<div>/', '<div><b>PRE MKT prev close (last)</b> - $', $bigChartsYestClose[4]); 

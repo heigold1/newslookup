@@ -227,7 +227,7 @@ $(function() {
       {
         $("#entryPrice").val(str_theNumber);
       }
-});
+  });
 
   // once the submit button is clicked
 
@@ -237,9 +237,12 @@ $(function() {
    	var symbol;
    	var positionOfPeriod; 
     var yahooCompanyName = ""; 
+    var yahoo10DayVolume = "";
+    var totalVolume = "";
     var stockOrFund = ""; 
     var yesterdaysClose; 
     var google_keyword_string= "";
+
 
     // close any open news windows
 
@@ -388,7 +391,7 @@ $(function() {
           dataType: 'html',
           success:  function (data) {
             returnData = data.match(/Caught exception/i); 
-            if (returnData || (data == '------'))
+            if (returnData || (data == '------') || (data == '------a') || (data == '------b'))
             {
               $("#yestCloseText").val("EXP");
             }
@@ -401,6 +404,10 @@ $(function() {
               $("#yestCloseText").val(jsonObject.prev_close);
               $("#eTradeLow").html(low);
               $("#eTradeHigh").html(jsonObject.high);
+
+              yahooCompanyName = jsonObject.company_name;
+              yahoo10DayVolume = jsonObject.ten_day_volume; 
+              totalVolume = jsonObject.total_volume; 
 
               defaultEntry = 0.0;
 
@@ -468,7 +475,11 @@ $(function() {
 	    url: "proxy.php",
 	    data: {symbol: symbol,
 	    	   which_website: "yahoo", 
-	    	   host_name: "finance.yahoo.com"}, 
+	    	   host_name: "finance.yahoo.com",
+           company_name: yahooCompanyName,
+           ten_day_volume: yahoo10DayVolume, 
+           total_volume: totalVolume
+           },  
        async: false, 
 	    dataType: 'html',
 	    success:  function (data) {
@@ -510,6 +521,7 @@ $(function() {
         {
             stockOrFund = "stock";
         } 
+
     	} // yahoo success function 
 	});  // yahoo ajax   
   $("div#right_top_container").css("background-color", "#F3F3FF");
@@ -519,20 +531,27 @@ $(function() {
 (function(){
   var eTradeIFrame = '<br><iframe id="etrade_iframe" src="https://www.etrade.wallst.com/v1/stocks/news/search_results.asp?symbol=' + symbol + '&rsO=new#lastTradeTime" width="575px" height="340px"></iframe>';
 
+  openPage('https://www.marketwatch.com/investing/' + stockOrFund + '/' + symbol); 
+
   $("div#left_bottom_container").css("background-color", "#BBDDFF");                     
  	$.ajax({
 	    url: "proxy.php",
 	    data: {symbol: symbol,
            stockOrFund: stockOrFund, 
 	    	   which_website: "marketwatch", 
-	    	   host_name: "www.marketwatch.com"},
+	    	   host_name: "www.marketwatch.com",
+           company_name: yahooCompanyName},
        async: true, 
 	    dataType: 'html',
 	    success:  function (data) {
 	    	console.log(data);
 	    	$("div#left_bottom_container").html(data + eTradeIFrame); 
     	}
-	});  // end of AJAX call to marketwatch     
+	});  // end of AJAX call to marketwatch    
+
+  $("div#left_bottom_container").html(eTradeIFrame); 
+
+
   $("div#left_bottom_container").css("background-color", "#F3F3FF");   
 })(1);
 
