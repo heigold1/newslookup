@@ -533,20 +533,22 @@ $(function() {
 
   openPage('https://www.marketwatch.com/investing/' + stockOrFund + '/' + symbol); 
 
-  $("div#left_bottom_container").css("background-color", "#BBDDFF");                     
- 	$.ajax({
-	    url: "proxy.php",
-	    data: {symbol: symbol,
-           stockOrFund: stockOrFund, 
-	    	   which_website: "marketwatch", 
-	    	   host_name: "www.marketwatch.com"},
-       async: true, 
-	    dataType: 'html',
-	    success:  function (data) {
-	    	console.log(data);
-	    	$("div#left_bottom_container").html(data + eTradeIFrame); 
-    	}
-	});  // end of AJAX call to marketwatch    
+//  openPage('http://puppeteer-marketwatch.com/?symbol=' + symbol + '&stockOrFund=' + stockOrFund);
+
+//  $("div#left_bottom_container").css("background-color", "#BBDDFF");                     
+// 	$.ajax({
+//	    url: "proxy.php",
+//	    data: {symbol: symbol,
+//           stockOrFund: stockOrFund, 
+//	    	   which_website: "marketwatch", 
+//	    	   host_name: "www.marketwatch.com"},
+//       async: true, 
+//	    dataType: 'html',
+//	    success:  function (data) {
+//	    	console.log(data);
+//	    	$("div#left_bottom_container").html( data +  eTradeIFrame); 
+//    	}
+//	});  // end of AJAX call to marketwatch    
 
   $("div#left_bottom_container").html(eTradeIFrame); 
 

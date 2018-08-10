@@ -267,9 +267,10 @@ if ($which_website == "marketwatch")
 {
 //      $url="https://$host_name/investing/$stockOrFund/$symbol";
 
-      $url = "http://ec2-52-41-122-145.us-west-2.compute.amazonaws.com/puppeteer-marketwatch/grab-news.php?stockOrFund=$stockOrFund&symbol=$symbol";
+//      $url = "http://ec2-52-41-122-145.us-west-2.compute.amazonaws.com/puppeteer-marketwatch/grab-news.php?stockOrFund=$stockOrFund&symbol=$symbol";
 
-#       $result = grabHTML($host_name, $url); 
+return;
+
       $result = curl_get_contents($url);
 
       $resultDecoded = json_decode($result, true);
@@ -301,6 +302,8 @@ if ($which_website == "marketwatch")
         $marketWatchNewsHTML .= '<span>' . $other['date'] . '</span>' . '<a target="blank" href="' . $other['link'] . '" >' . $other['headline'] . '</a>'; 
         $marketWatchNewsHTML .= '</div>';
       } 
+
+
       $marketWatchNewsHTML .= '</div>';
 
       $marketwatch_todays_date = date('l'/*, strtotime("-9 hours")*/); 
