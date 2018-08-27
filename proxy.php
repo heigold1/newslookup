@@ -384,6 +384,15 @@ else if ($which_website == "yahoo")
         $i++;
         $allNews .= "<li "; 
 
+        // Convert time from GMT to  AM/PM New York
+        $publicationDateStrToTime = strtotime($feedItem->pubDate);
+        $convertedDate = new DateTime(); 
+        $convertedDate->setTimestamp($publicationDateStrToTime);
+        $interval = DateInterval::createFromDateString('-3 hours'); 
+        $convertedDate->add($interval); 
+
+        $feedItem->pubDate = preg_replace("/[0-9][0-9]\:[0-9][0-9]\:[0-9][0-9] \+0000/", "", $feedItem->pubDate); 
+
         if ($i % 2 == 1)
         {
           $allNews .=  "style='background-color: #FFFFFF; '"; 
@@ -396,7 +405,7 @@ else if ($which_website == "yahoo")
         $newsTitle = preg_replace('/ withdrawal(.*)application/i', '<span style="font-size: 12px; background-color:red; color:black"><b> withdrawal $1 application (55%) </b></span> ', $newsTitle);
         $newsTitle = preg_replace('/nasdaq rejects(.*)listing/i', '<span style="font-size: 12px; background-color:red; color:black"><b>Nasdaq rejects $1 listing</span> If delisting tomorrow 65%, if delisting days away then 50-55%</b>&nbsp;', $newsTitle);
 
-        $allNews .=  " ><a href='$feedItem->link' title='$feedItem->title'> " . $feedItem->pubDate . " " . $newsTitle . "</a></li>";
+        $allNews .=  " ><a href='$feedItem->link' title='$feedItem->title'> " . $feedItem->pubDate . " " . $convertedDate->format("g:i A") . " - " . $newsTitle . "</a></li>";
     }
 
       $allNews .=  "</ul>";

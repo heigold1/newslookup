@@ -205,31 +205,31 @@ $(function() {
 
   setInterval(blink, 3000);
 
-  var modal = document.getElementById('myModal');
-  modal.style.display = "none";
+    var modal = document.getElementById('myModal');
+    modal.style.display = "none";
 
-  // set the focus to the symbol input field
-  $("#quote_input").focus();
+    // set the focus to the symbol input field
+    $("#quote_input").focus();
 
-  $("#copy_price_to_percentage").click(function(){
-      var theNumber = parseFloat($("#calculatedPrice").html());
-      if (theNumber > 1)
-      {
-        theNumber = theNumber.toFixedDown(2);
-      }
-      else if (theNumber < 1)
-      {
-        theNumber = theNumber.toFixedDown(4);
-      }
-      var str_theNumber = theNumber.toString().replace(/^0./g, ".");
+    $("#copy_price_to_percentage").click(function(){
+        var theNumber = parseFloat($("#calculatedPrice").html());
+        if (theNumber > 1)
+        {
+            theNumber = theNumber.toFixedDown(2);
+        }
+        else if (theNumber < 1)
+        {
+            theNumber = theNumber.toFixedDown(4);
+        }
+        var str_theNumber = theNumber.toString().replace(/^0./g, ".");
 
-      while ($("#entryPrice").val() != str_theNumber)
-      {
+        while ($("#entryPrice").val() != str_theNumber)
+        {
         $("#entryPrice").val(str_theNumber);
-      }
-  });
+        }
+    });
 
-  // once the submit button is clicked
+    // once the submit button is clicked
 
    $("#submit_button").click(function(){
 
@@ -339,22 +339,22 @@ $(function() {
 
     if ( $("#strip_last_character_checkbox").prop('checked') && (positionOfPeriod > -1) )
     {
-      // if any stocks have a ".PD" or a ".WS", etc... 
+        // if any stocks have a ".PD" or a ".WS", etc... 
 
-    symbol = original_symbol.substr(0, positionOfPeriod); 
-    }
-   	else if ( $("#strip_last_character_checkbox").prop('checked') && (original_symbol.length == 5) )
-   	{
-   		symbol = original_symbol.slice(0,-1); 
-   	}
-   	else
-   	{
-		symbol = original_symbol;    		
-   	}
+        symbol = original_symbol.substr(0, positionOfPeriod); 
+        }
+       	else if ( $("#strip_last_character_checkbox").prop('checked') && (original_symbol.length == 5) )
+       	{
+       		symbol = original_symbol.slice(0,-1); 
+       	}
+       	else
+       	{
+    		symbol = original_symbol;    		
+       	}
 
-      original_symbol = original_symbol.replace(/\.p\./gi, ".P"); 
+        original_symbol = original_symbol.replace(/\.p\./gi, ".P"); 
 
-      openPage('./proxy_sec.php?symbol=' + symbol); 
+        openPage('./proxy_sec.php?symbol=' + symbol); 
 
         // initialize everything
 
@@ -380,65 +380,65 @@ $(function() {
         $("#roundShares_50").checked = true; 
         $("input[name=roundShares][value=50]").prop('checked', true);
 
-       $("#yestCloseText").focus();
+        $("#yestCloseText").focus();
 
-      // E*TRADE API data
-      $("div#left_top_container").css("background-color", "#BBDDFF");                   
-      $.ajax({
-          url: "yesterday_close.php",
-          data: {symbol: original_symbol},
-          async: false, 
-          dataType: 'html',
-          success:  function (data) {
-            returnData = data.match(/Caught exception/i); 
-            if (returnData || (data == '------') || (data == '------a') || (data == '------b'))
-            {
-              $("#yestCloseText").val("EXP");
-            }
-            else
-            {
-              jsonObject = JSON.parse(data);
-              low = jsonObject.low;
-              bid = jsonObject.bid;
+        // E*TRADE API data
+        $("div#left_top_container").css("background-color", "#BBDDFF");
+        $.ajax({
+            url: "yesterday_close.php",
+            data: {symbol: original_symbol},
+            async: false, 
+            dataType: 'html',
+            success:  function (data) {
+                    returnData = data.match(/Caught exception/i); 
+                    if (returnData || (data == '------') || (data == '------a') || (data == '------b'))
+                    {
+                      $("#yestCloseText").val("EXP");
+                    }
+                    else
+                    {
+                    jsonObject = JSON.parse(data);
+                    low = jsonObject.low;
+                    bid = jsonObject.bid;
 
-              $("#yestCloseText").val(jsonObject.prev_close);
-              $("#eTradeLow").html(low);
-              $("#eTradeHigh").html(jsonObject.high);
+                    $("#yestCloseText").val(jsonObject.prev_close);
+                    $("#eTradeLow").html(low);
+                    $("#eTradeHigh").html(jsonObject.high);
 
-              yahooCompanyName = jsonObject.company_name;
-              yahoo10DayVolume = jsonObject.ten_day_volume; 
-              totalVolume = jsonObject.total_volume; 
+                    yahooCompanyName = jsonObject.company_name;
+                    yahoo10DayVolume = jsonObject.ten_day_volume; 
+                    totalVolume = jsonObject.total_volume; 
 
-              defaultEntry = 0.0;
+                    defaultEntry = 0.0;
 
-              if (bid <= low)
-              {
-                defaultEntry = parseFloat(bid);
-                if (defaultEntry == 0.9999)
-                {
-                  defaultEntry = 1.00;
+                    if (bid <= low)
+                    {
+                        defaultEntry = parseFloat(bid);
+                        if (defaultEntry == 0.9999)
+                        {
+                        defaultEntry = 1.00;
+                        }
+                        else if (defaultEntry < 0.9999)
+                        {
+                        defaultEntry += 0.0001
+                        }
+                        else if (defaultEntry >= 1.0)
+                        {
+                        defaultEntry += 0.01;
+                        }
+                        defaultEntry = defaultEntry.toString();
+                        defaultEntry = defaultEntry.replace(/^0\./gm, '.');
+
+                        $("#entryPrice").val(defaultEntry);
+                        calcAll(); 
+                    }
+                    var newCalculatedPercentage=((jsonObject.prev_close-low)/jsonObject.prev_close)*100
+                    $("#eTradeLowPercentage").html(newCalculatedPercentage.toFixed(2)); 
+
                 }
-                else if (defaultEntry < 0.9999)
-                {
-                  defaultEntry += 0.0001
-                }
-                else if (defaultEntry >= 1.0)
-                {
-                  defaultEntry += 0.01;
-                }
-                defaultEntry = defaultEntry.toString();
-                defaultEntry = defaultEntry.replace(/^0\./gm, '.');
-
-                $("#entryPrice").val(defaultEntry);
-                calcAll(); 
-              }
-                var newCalculatedPercentage=((jsonObject.prev_close-low)/jsonObject.prev_close)*100
-                $("#eTradeLowPercentage").html(newCalculatedPercentage.toFixed(2)); 
-
-            }
-            console.log(data);
-          },
-          error: function (xhr, ajaxOptions, thrownError) {
+                console.log(data);
+            },
+        error: function (xhr, ajaxOptions, thrownError) {
 
         $("#yestCloseText").val(xhr.status);
       }
@@ -480,7 +480,7 @@ $(function() {
            ten_day_volume: yahoo10DayVolume, 
            total_volume: totalVolume
            },  
-       async: false, 
+      async: false, 
 	    dataType: 'html',
 	    success:  function (data) {
 	    	console.log(data);
@@ -521,40 +521,40 @@ $(function() {
         {
             stockOrFund = "stock";
         } 
-
     	} // yahoo success function 
 	});  // yahoo ajax   
+
   $("div#right_top_container").css("background-color", "#F3F3FF");
 
-  // AJAX call to marketwatch 
+      // AJAX call to marketwatch 
 
-(function(){
-  var eTradeIFrame = '<br><iframe id="etrade_iframe" src="https://www.etrade.wallst.com/v1/stocks/news/search_results.asp?symbol=' + symbol + '&rsO=new#lastTradeTime" width="575px" height="340px"></iframe>';
+      (function(){
+        var eTradeIFrame = '<br><iframe id="etrade_iframe" src="https://www.etrade.wallst.com/v1/stocks/news/search_results.asp?symbol=' + symbol + '&rsO=new#lastTradeTime" width="575px" height="340px"></iframe>';
 
-  openPage('https://www.marketwatch.com/investing/' + stockOrFund + '/' + symbol); 
+        openPage('https://www.marketwatch.com/investing/' + stockOrFund + '/' + symbol); 
 
-//  openPage('http://puppeteer-marketwatch.com/?symbol=' + symbol + '&stockOrFund=' + stockOrFund);
+      //  openPage('http://puppeteer-marketwatch.com/?symbol=' + symbol + '&stockOrFund=' + stockOrFund);
 
-//  $("div#left_bottom_container").css("background-color", "#BBDDFF");                     
-// 	$.ajax({
-//	    url: "proxy.php",
-//	    data: {symbol: symbol,
-//           stockOrFund: stockOrFund, 
-//	    	   which_website: "marketwatch", 
-//	    	   host_name: "www.marketwatch.com"},
-//       async: true, 
-//	    dataType: 'html',
-//	    success:  function (data) {
-//	    	console.log(data);
-//	    	$("div#left_bottom_container").html( data +  eTradeIFrame); 
-//    	}
-//	});  // end of AJAX call to marketwatch    
+      //  $("div#left_bottom_container").css("background-color", "#BBDDFF");                     
+      // 	$.ajax({
+      //	    url: "proxy.php",
+      //	    data: {symbol: symbol,
+      //           stockOrFund: stockOrFund, 
+      //	    	   which_website: "marketwatch", 
+      //	    	   host_name: "www.marketwatch.com"},
+      //       async: true, 
+      //	    dataType: 'html',
+      //	    success:  function (data) {
+      //	    	console.log(data);
+      //	    	$("div#left_bottom_container").html( data +  eTradeIFrame); 
+      //    	}
+      //	});  // end of AJAX call to marketwatch    
 
-  $("div#left_bottom_container").html(eTradeIFrame); 
+        $("div#left_bottom_container").html(eTradeIFrame); 
 
 
-  $("div#left_bottom_container").css("background-color", "#F3F3FF");   
-})(1);
+        $("div#left_bottom_container").css("background-color", "#F3F3FF");   
+      })(1);
 
   $("h1").css({"padding-top" : "0px", "margin-top" : "0px", "padding-bottom" : "0px", "margin-bottom" : "0px"}); 
 

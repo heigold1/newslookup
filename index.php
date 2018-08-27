@@ -31,9 +31,12 @@
 									{
 										echo $_GET['symbol'];
 									}
+									else{
+										echo "NOT SET"; 
+									}
 								?>
 								">
-								<input id="submit_button" type="submit" value="Submit">  
+								<input id="submit_button" type="submit" value="Submit">
 							</td>
 							<td style="width:450px"> 
 								<span id="strip_last_character">
