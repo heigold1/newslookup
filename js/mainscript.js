@@ -203,6 +203,11 @@ Number.prototype.toFixedDown = function(digits) {
 
 $(function() {
 
+
+if ($.trim($("#quote_input").val()) != ""){
+  alert("not blank");
+}
+
   setInterval(blink, 3000);
 
     var modal = document.getElementById('myModal');

@@ -25,17 +25,7 @@
 					<table>
 						<tr>
 							<td style="width:200px">
-								<input tabindex ="1" style="text-align: left;" id="quote_input" class="textbox" type="text" size="10" value="
-								<?php 
-									if (isset($_GET['symbol']))
-									{
-										echo $_GET['symbol'];
-									}
-									else{
-										echo "NOT SET"; 
-									}
-								?>
-								">
+<input tabindex ="1" style="text-align: left;" id="quote_input" class="textbox" type="text" size="10" value="<?php echo $_GET['symbol'] ?>">
 								<input id="submit_button" type="submit" value="Submit">
 							</td>
 							<td style="width:450px"> 
