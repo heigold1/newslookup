@@ -204,8 +204,9 @@ Number.prototype.toFixedDown = function(digits) {
 $(function() {
 
 
+
 if ($.trim($("#quote_input").val()) != ""){
-  alert("not blank");
+//  alert("not blank");
 }
 
   setInterval(blink, 3000);
@@ -234,339 +235,360 @@ if ($.trim($("#quote_input").val()) != ""){
         }
     });
 
-    // once the submit button is clicked
-
-   $("#submit_button").click(function(){
-
-   	var original_symbol = $.trim($("#quote_input").val()); 
-   	var symbol;
-   	var positionOfPeriod; 
-    var yahooCompanyName = ""; 
-    var yahoo10DayVolume = "";
-    var totalVolume = "";
-    var stockOrFund = ""; 
-    var yesterdaysClose; 
-    var google_keyword_string= "";
 
 
-    // close any open news windows
+    function closeAllWindows(){
+      // close any open news windows
 
-    var numWindowsOpen = $("#windowNumber").html();
+      var numWindowsOpen = $("#windowNumber").html();
 
-    for (i = 1; i <= numWindowsOpen; i++) 
-    { 
-      switch(i)
-      {
-        case 1: 
-          if (windowName1)
-          {
-            windowName1.close();
+      for (i = 1; i <= numWindowsOpen; i++) 
+      { 
+        switch(i)
+        {
+          case 1: 
+            if (windowName1)
+            {
+              windowName1.close();
+            }
+          break; 
+
+          case 2: 
+            if (windowName2)
+            {
+              windowName2.close();
+            }
+          break; 
+
+          case 3: 
+            if (windowName3)
+            {
+              windowName3.close();
+            }
+          break; 
+
+          case 4: 
+            if (windowName4)
+            {
+              windowName4.close();
+            }
+          break; 
+        
+          case 5: 
+            if (windowName5)
+            {
+              windowName5.close();
+            }
+          break; 
+
+          case 6: 
+            if (windowName6)
+            {
+              windowName6.close();
+            }
+          break; 
+
+          case 7: 
+            if (windowName7)
+            {
+              windowName7.close();
+            }
+          break; 
+
+          case 8:  
+            if (windowName8)
+            {
+              windowName8.close();
+            }
+          break; 
+
+          case 9: 
+            if (windowName9)
+            {
+              windowName9.close();
+            }
+          break; 
+
+          case 10: 
+            if (windowName10)
+            {
+              windowName10.close();
+            }
+          break; 
           }
-        break; 
-
-        case 2: 
-          if (windowName2)
-          {
-            windowName2.close();
-          }
-        break; 
-
-        case 3: 
-          if (windowName3)
-          {
-            windowName3.close();
-          }
-        break; 
-
-        case 4: 
-          if (windowName4)
-          {
-            windowName4.close();
-          }
-        break; 
-      
-        case 5: 
-          if (windowName5)
-          {
-            windowName5.close();
-          }
-        break; 
-
-        case 6: 
-          if (windowName6)
-          {
-            windowName6.close();
-          }
-        break; 
-
-        case 7: 
-          if (windowName7)
-          {
-            windowName7.close();
-          }
-        break; 
-
-        case 8:  
-          if (windowName8)
-          {
-            windowName8.close();
-          }
-        break; 
-
-        case 9: 
-          if (windowName9)
-          {
-            windowName9.close();
-          }
-        break; 
-
-        case 10: 
-          if (windowName10)
-          {
-            windowName10.close();
-          }
-        break; 
         }
-      }
 
-    $("#windowNumber").html("1"); 
-  
-    // first, clear all the DIVS to give the impression that it is refreshing 
+      $("#windowNumber").html("1"); 
+    }
 
-   	positionOfPeriod = original_symbol.indexOf(".");
-   	stringLength = original_symbol.length; 
 
-    // set the volume checked variable to 0
+    function startProcess(){
 
-    $("#volumeChecked").html("0");
+          var original_symbol = $.trim($("#quote_input").val()); 
+          var symbol;
+          var positionOfPeriod; 
+          var yahooCompanyName = ""; 
+          var yahoo10DayVolume = "";
+          var totalVolume = "";
+          var stockOrFund = ""; 
+          var yesterdaysClose; 
+          var google_keyword_string= "";
 
-   	// take out the 5th "W/R/Z" for symbols like CBSTZ. 
+          closeAllWindows();
 
-    if ( $("#strip_last_character_checkbox").prop('checked') && (positionOfPeriod > -1) )
-    {
-        // if any stocks have a ".PD" or a ".WS", etc... 
 
-        symbol = original_symbol.substr(0, positionOfPeriod); 
-        }
-       	else if ( $("#strip_last_character_checkbox").prop('checked') && (original_symbol.length == 5) )
-       	{
-       		symbol = original_symbol.slice(0,-1); 
-       	}
-       	else
-       	{
-    		symbol = original_symbol;    		
-       	}
 
-        original_symbol = original_symbol.replace(/\.p\./gi, ".P"); 
 
-        openPage('./proxy_sec.php?symbol=' + symbol); 
 
-        // initialize everything
+          
+        
+          // first, clear all the DIVS to give the impression that it is refreshing 
 
-        $("#left_bottom_container").html("");
-        $("#bigcharts_chart_container").html("");
-        $("#bigcharts_yest_close").html("");
-        $("#right_top_container").html("");
+          positionOfPeriod = original_symbol.indexOf(".");
+          stringLength = original_symbol.length; 
 
-        $("#yestCloseText").val("");
-        $("#eTradeLow").html("");
-        $("#eTradeHigh").html("");
-        $("#day5").html("");
-        $("#day4").html("");
-        $("#day3").html("");
-        $("#day2").html("");
-        $("#day1").html("");
-        $("#entryPrice").val(""); 
-        $("#entryPercentage").val(""); 
-        $("#amountSpending").val("1000");
-        $("#eTradeLowPercentage").html("");
-        $("#orderStub").val("-----------------------"); 
+          // set the volume checked variable to 0
 
-        $("#roundShares_50").checked = true; 
-        $("input[name=roundShares][value=50]").prop('checked', true);
+          $("#volumeChecked").html("0");
 
-        $("#yestCloseText").focus();
+          // take out the 5th "W/R/Z" for symbols like CBSTZ. 
 
-        // E*TRADE API data
-        $("div#left_top_container").css("background-color", "#BBDDFF");
-        $.ajax({
-            url: "yesterday_close.php",
-            data: {symbol: original_symbol},
+          if ( $("#strip_last_character_checkbox").prop('checked') && (positionOfPeriod > -1) )
+          {
+              // if any stocks have a ".PD" or a ".WS", etc... 
+
+              symbol = original_symbol.substr(0, positionOfPeriod); 
+              }
+              else if ( $("#strip_last_character_checkbox").prop('checked') && (original_symbol.length == 5) )
+              {
+                symbol = original_symbol.slice(0,-1); 
+              }
+              else
+              {
+              symbol = original_symbol;       
+              }
+
+              original_symbol = original_symbol.replace(/\.p\./gi, ".P"); 
+
+              openPage('./proxy_sec.php?symbol=' + symbol); 
+
+              // initialize everything
+
+              $("#left_bottom_container").html("");
+              $("#bigcharts_chart_container").html("");
+              $("#bigcharts_yest_close").html("");
+              $("#right_top_container").html("");
+
+              $("#yestCloseText").val("");
+              $("#eTradeLow").html("");
+              $("#eTradeHigh").html("");
+              $("#day5").html("");
+              $("#day4").html("");
+              $("#day3").html("");
+              $("#day2").html("");
+              $("#day1").html("");
+              $("#entryPrice").val(""); 
+              $("#entryPercentage").val(""); 
+              $("#amountSpending").val("1000");
+              $("#eTradeLowPercentage").html("");
+              $("#orderStub").val("-----------------------"); 
+
+              $("#roundShares_50").checked = true; 
+              $("input[name=roundShares][value=50]").prop('checked', true);
+
+              $("#yestCloseText").focus();
+
+              // E*TRADE API data
+              $("div#left_top_container").css("background-color", "#BBDDFF");
+              $.ajax({
+                  url: "yesterday_close.php",
+                  data: {symbol: original_symbol},
+                  async: false, 
+                  dataType: 'html',
+                  success:  function (data) {
+                          returnData = data.match(/Caught exception/i); 
+                          if (returnData || (data == '------') || (data == '------a') || (data == '------b'))
+                          {
+                            $("#yestCloseText").val("EXP");
+                          }
+                          else
+                          {
+                          jsonObject = JSON.parse(data);
+                          low = jsonObject.low;
+                          bid = jsonObject.bid;
+
+                          $("#yestCloseText").val(jsonObject.prev_close);
+                          $("#eTradeLow").html(low);
+                          $("#eTradeHigh").html(jsonObject.high);
+
+                          yahooCompanyName = jsonObject.company_name;
+                          yahoo10DayVolume = jsonObject.ten_day_volume; 
+                          totalVolume = jsonObject.total_volume; 
+
+                          defaultEntry = 0.0;
+
+                          if (bid <= low)
+                          {
+                              defaultEntry = parseFloat(bid);
+                              if (defaultEntry == 0.9999)
+                              {
+                              defaultEntry = 1.00;
+                              }
+                              else if (defaultEntry < 0.9999)
+                              {
+                              defaultEntry += 0.0001
+                              }
+                              else if (defaultEntry >= 1.0)
+                              {
+                              defaultEntry += 0.01;
+                              }
+                              defaultEntry = defaultEntry.toString();
+                              defaultEntry = defaultEntry.replace(/^0\./gm, '.');
+
+                              $("#entryPrice").val(defaultEntry);
+                              calcAll(); 
+                          }
+                          var newCalculatedPercentage=((jsonObject.prev_close-low)/jsonObject.prev_close)*100
+                          $("#eTradeLowPercentage").html(newCalculatedPercentage.toFixed(2)); 
+
+                      }
+                      console.log(data);
+                  },
+              error: function (xhr, ajaxOptions, thrownError) {
+
+              $("#yestCloseText").val(xhr.status);
+            }
+            });  // End of AJAX to get E*TRADE API data 
+            $("div#left_top_container").css("background-color", "#F3F3FF");
+
+            CopyToClipboard();
+
+            $("div#bigcharts_chart_container").html("<a target='blank' style='cursor: pointer;' title='Click to open 5-day chart' onclick='return openPage(\"http://bigcharts.marketwatch.com/quickchart/quickchart.asp?symb=" + original_symbol + "&insttype=&freq=7&show=&time=3&rand=" + Math.random() + "\")'> <img style='max-width:100%; max-height:100%;' src='http://bigcharts.marketwatch.com/kaavio.Webhost/charts/big.chart?nosettings=1&symb=" + original_symbol + "&uf=0&type=2&size=2&freq=1&entitlementtoken=0c33378313484ba9b46b8e24ded87dd6&time=4&rand=" + Math.random() + "&compidx=&ma=0&maval=9&lf=1&lf2=0&lf3=0&height=335&width=579&mocktick=1)'></a>");
+
+            $("div#bigcharts_chart_container").css("background-color", "#BBDDFF");
+            $("div#right_bottom_container").css("background-color", "#BBDDFF");                   
+            $.ajax({
+                url: "proxy.php",
+                data: {symbol: original_symbol,
+                    stockOrFund: stockOrFund, 
+                    which_website: "bigcharts", 
+                    host_name: "bigcharts.marketwatch.com"},
+                async: false, 
+                dataType: 'html',
+                success:  function (data) {
+                  console.log(data);
+                  // this is for the symbol's 5-day chart
+                 $("div#bigcharts_yest_close").html(data + "<img style='max-width:100%; max-height:100%;' src='http://bigcharts.marketwatch.com/kaavio.Webhost/charts/big.chart?nosettings=1&symb=" + original_symbol + "&uf=0&type=2&size=2&freq=7&entitlementtoken=0c33378313484ba9b46b8e24ded87dd6&time=3&rand=" + Math.random() + "&compidx=&ma=0&maval=9&lf=1&lf2=0&lf3=0&height=335&width=579&mocktick=1'>"); 
+                }
+            });  // end of AJAX call to bigcharts   
+            $("div#bigcharts_chart_container").css("background-color", "#F3F3FF");                         
+            $("div#right_bottom_container").css("background-color", "#F3F3FF");                   
+
+            // AJAX call to yahoo finance 
+
+            $("div#right_top_container").css("background-color", "#BBDDFF");                
+            $.ajax({
+            url: "proxy.php",
+            data: {symbol: symbol,
+                 which_website: "yahoo", 
+                 host_name: "finance.yahoo.com",
+                 company_name: yahooCompanyName,
+                 ten_day_volume: yahoo10DayVolume, 
+                 total_volume: totalVolume
+                 },  
             async: false, 
             dataType: 'html',
             success:  function (data) {
-                    returnData = data.match(/Caught exception/i); 
-                    if (returnData || (data == '------') || (data == '------a') || (data == '------b'))
-                    {
-                      $("#yestCloseText").val("EXP");
-                    }
-                    else
-                    {
-                    jsonObject = JSON.parse(data);
-                    low = jsonObject.low;
-                    bid = jsonObject.bid;
+              console.log(data);
 
-                    $("#yestCloseText").val(jsonObject.prev_close);
-                    $("#eTradeLow").html(low);
-                    $("#eTradeHigh").html(jsonObject.high);
+              yahooCompanyName = " " + data.match(/<h1(.*?)h1>/g) + " "; 
 
-                    yahooCompanyName = jsonObject.company_name;
-                    yahoo10DayVolume = jsonObject.ten_day_volume; 
-                    totalVolume = jsonObject.total_volume; 
+              google_keyword_string = yahooCompanyName;
+              google_keyword_string = $.trim(google_keyword_string); 
+              google_keyword_string = google_keyword_string.replace(/<h1>/ig, "");
+              google_keyword_string = google_keyword_string.replace(/<\/h1>/ig, "");
+              google_keyword_string = google_keyword_string.replace(/\(/ig, "");
+              google_keyword_string = google_keyword_string.replace(/\)/ig, "");
+              google_keyword_string = google_keyword_string.replace(/\,/ig, "");
+              google_keyword_string = google_keyword_string.replace(/ /ig, "+");
+              google_keyword_string = google_keyword_string.replace(/&/ig, "");
+              google_keyword_string = google_keyword_string.replace(/amp;/ig, "");
+              google_keyword_string = google_keyword_string.replace(/.international/ig, "");
+              google_keyword_string = google_keyword_string.replace(/inc\./ig, "");
+              google_keyword_string = google_keyword_string.replace(/ltd\./ig, "");
 
-                    defaultEntry = 0.0;
+              $("div#right_top_container").html(data);
 
-                    if (bid <= low)
-                    {
-                        defaultEntry = parseFloat(bid);
-                        if (defaultEntry == 0.9999)
-                        {
-                        defaultEntry = 1.00;
-                        }
-                        else if (defaultEntry < 0.9999)
-                        {
-                        defaultEntry += 0.0001
-                        }
-                        else if (defaultEntry >= 1.0)
-                        {
-                        defaultEntry += 0.01;
-                        }
-                        defaultEntry = defaultEntry.toString();
-                        defaultEntry = defaultEntry.replace(/^0\./gm, '.');
+              yesterdaysClose = " " + data.match(/<h4(.*?)h4>/g) + " "; 
+              yesterdaysClose = yesterdaysClose.replace(/ <h4>/ig, "");
+              yesterdaysClose = yesterdaysClose.replace(/<\/h4> /ig, "");         
 
-                        $("#entryPrice").val(defaultEntry);
-                        calcAll(); 
-                    }
-                    var newCalculatedPercentage=((jsonObject.prev_close-low)/jsonObject.prev_close)*100
-                    $("#eTradeLowPercentage").html(newCalculatedPercentage.toFixed(2)); 
+              etfStringLocation =  yahooCompanyName.search(/ etf /i);
 
-                }
-                console.log(data);
-            },
-        error: function (xhr, ajaxOptions, thrownError) {
+              // if it is an ETF then we need to tell the proxy server that, so when it 
+              // searches for marketwatch information it can insert "fund" instead of "stock"
+              // in the URl. 
 
-        $("#yestCloseText").val(xhr.status);
-      }
-      });  // End of AJAX to get E*TRADE API data 
-      $("div#left_top_container").css("background-color", "#F3F3FF");
+              if (etfStringLocation > -1)
+              {           
+                  stockOrFund = "fund"; 
+              }
+              else
+              {
+                  stockOrFund = "stock";
+              } 
+            } // yahoo success function 
+        });  // yahoo ajax   
 
-      CopyToClipboard();
+        $("div#right_top_container").css("background-color", "#F3F3FF");
 
-      $("div#bigcharts_chart_container").html("<a target='blank' style='cursor: pointer;' title='Click to open 5-day chart' onclick='return openPage(\"http://bigcharts.marketwatch.com/quickchart/quickchart.asp?symb=" + original_symbol + "&insttype=&freq=7&show=&time=3&rand=" + Math.random() + "\")'> <img style='max-width:100%; max-height:100%;' src='http://bigcharts.marketwatch.com/kaavio.Webhost/charts/big.chart?nosettings=1&symb=" + original_symbol + "&uf=0&type=2&size=2&freq=1&entitlementtoken=0c33378313484ba9b46b8e24ded87dd6&time=4&rand=" + Math.random() + "&compidx=&ma=0&maval=9&lf=1&lf2=0&lf3=0&height=335&width=579&mocktick=1)'></a>");
+            // AJAX call to marketwatch 
 
-      $("div#bigcharts_chart_container").css("background-color", "#BBDDFF");
-      $("div#right_bottom_container").css("background-color", "#BBDDFF");                   
-      $.ajax({
-          url: "proxy.php",
-          data: {symbol: original_symbol,
-              stockOrFund: stockOrFund, 
-              which_website: "bigcharts", 
-              host_name: "bigcharts.marketwatch.com"},
-          async: false, 
-          dataType: 'html',
-          success:  function (data) {
-            console.log(data);
-            // this is for the symbol's 5-day chart
-           $("div#bigcharts_yest_close").html(data + "<img style='max-width:100%; max-height:100%;' src='http://bigcharts.marketwatch.com/kaavio.Webhost/charts/big.chart?nosettings=1&symb=" + original_symbol + "&uf=0&type=2&size=2&freq=7&entitlementtoken=0c33378313484ba9b46b8e24ded87dd6&time=3&rand=" + Math.random() + "&compidx=&ma=0&maval=9&lf=1&lf2=0&lf3=0&height=335&width=579&mocktick=1'>"); 
-          }
-      });  // end of AJAX call to bigcharts   
-      $("div#bigcharts_chart_container").css("background-color", "#F3F3FF");                         
-      $("div#right_bottom_container").css("background-color", "#F3F3FF");                   
+            (function(){
+              var eTradeIFrame = '<br><iframe id="etrade_iframe" src="https://www.etrade.wallst.com/v1/stocks/news/search_results.asp?symbol=' + symbol + '&rsO=new#lastTradeTime" width="575px" height="340px"></iframe>';
 
-      // AJAX call to yahoo finance 
+              openPage('https://www.marketwatch.com/investing/' + stockOrFund + '/' + symbol); 
 
-      $("div#right_top_container").css("background-color", "#BBDDFF");                
-    	$.ajax({
-	    url: "proxy.php",
-	    data: {symbol: symbol,
-	    	   which_website: "yahoo", 
-	    	   host_name: "finance.yahoo.com",
-           company_name: yahooCompanyName,
-           ten_day_volume: yahoo10DayVolume, 
-           total_volume: totalVolume
-           },  
-      async: false, 
-	    dataType: 'html',
-	    success:  function (data) {
-	    	console.log(data);
+            // Keeping this commented out until I can get past their bot detectors
+            //  openPage('http://puppeteer-marketwatch.com/?symbol=' + symbol + '&stockOrFund=' + stockOrFund);
 
-        yahooCompanyName = " " + data.match(/<h1(.*?)h1>/g) + " "; 
+            //  $("div#left_bottom_container").css("background-color", "#BBDDFF");                     
+            //  $.ajax({
+            //      url: "proxy.php",
+            //      data: {symbol: symbol,
+            //           stockOrFund: stockOrFund, 
+            //           which_website: "marketwatch", 
+            //           host_name: "www.marketwatch.com"},
+            //       async: true, 
+            //      dataType: 'html',
+            //      success:  function (data) {
+            //        console.log(data);
+            //        $("div#left_bottom_container").html( data +  eTradeIFrame); 
+            //      }
+            //  });  // end of AJAX call to marketwatch    
 
-        google_keyword_string = yahooCompanyName;
-        google_keyword_string = $.trim(google_keyword_string); 
-        google_keyword_string = google_keyword_string.replace(/<h1>/ig, "");
-        google_keyword_string = google_keyword_string.replace(/<\/h1>/ig, "");
-        google_keyword_string = google_keyword_string.replace(/\(/ig, "");
-        google_keyword_string = google_keyword_string.replace(/\)/ig, "");
-        google_keyword_string = google_keyword_string.replace(/\,/ig, "");
-        google_keyword_string = google_keyword_string.replace(/ /ig, "+");
-        google_keyword_string = google_keyword_string.replace(/&/ig, "");
-        google_keyword_string = google_keyword_string.replace(/amp;/ig, "");
-        google_keyword_string = google_keyword_string.replace(/.international/ig, "");
-        google_keyword_string = google_keyword_string.replace(/inc\./ig, "");
-        google_keyword_string = google_keyword_string.replace(/ltd\./ig, "");
-
-	    	$("div#right_top_container").html(data);
-
-        yesterdaysClose = " " + data.match(/<h4(.*?)h4>/g) + " "; 
-        yesterdaysClose = yesterdaysClose.replace(/ <h4>/ig, "");
-        yesterdaysClose = yesterdaysClose.replace(/<\/h4> /ig, "");         
-
-        etfStringLocation =  yahooCompanyName.search(/ etf /i);
-
-        // if it is an ETF then we need to tell the proxy server that, so when it 
-        // searches for marketwatch information it can insert "fund" instead of "stock"
-        // in the URl. 
-
-        if (etfStringLocation > -1)
-        {           
-            stockOrFund = "fund"; 
-        }
-        else
-        {
-            stockOrFund = "stock";
-        } 
-    	} // yahoo success function 
-	});  // yahoo ajax   
-
-  $("div#right_top_container").css("background-color", "#F3F3FF");
-
-      // AJAX call to marketwatch 
-
-      (function(){
-        var eTradeIFrame = '<br><iframe id="etrade_iframe" src="https://www.etrade.wallst.com/v1/stocks/news/search_results.asp?symbol=' + symbol + '&rsO=new#lastTradeTime" width="575px" height="340px"></iframe>';
-
-        openPage('https://www.marketwatch.com/investing/' + stockOrFund + '/' + symbol); 
-
-      //  openPage('http://puppeteer-marketwatch.com/?symbol=' + symbol + '&stockOrFund=' + stockOrFund);
-
-      //  $("div#left_bottom_container").css("background-color", "#BBDDFF");                     
-      // 	$.ajax({
-      //	    url: "proxy.php",
-      //	    data: {symbol: symbol,
-      //           stockOrFund: stockOrFund, 
-      //	    	   which_website: "marketwatch", 
-      //	    	   host_name: "www.marketwatch.com"},
-      //       async: true, 
-      //	    dataType: 'html',
-      //	    success:  function (data) {
-      //	    	console.log(data);
-      //	    	$("div#left_bottom_container").html( data +  eTradeIFrame); 
-      //    	}
-      //	});  // end of AJAX call to marketwatch    
-
-        $("div#left_bottom_container").html(eTradeIFrame); 
+              $("div#left_bottom_container").html(eTradeIFrame); 
 
 
-        $("div#left_bottom_container").css("background-color", "#F3F3FF");   
-      })(1);
+              $("div#left_bottom_container").css("background-color", "#F3F3FF");   
+            })(1);
 
-  $("h1").css({"padding-top" : "0px", "margin-top" : "0px", "padding-bottom" : "0px", "margin-bottom" : "0px"}); 
+        $("h1").css({"padding-top" : "0px", "margin-top" : "0px", "padding-bottom" : "0px", "margin-bottom" : "0px"}); 
 
-  var myIframe = document.getElementById('etrade_iframe');
-      myIframe.contentWindow.scrollTo(75, 100); 
+        var myIframe = document.getElementById('etrade_iframe');
+            myIframe.contentWindow.scrollTo(75, 100); 
 
-}); // End of click function 
+    } // function startProcess()
+
+
+
+
+    // once the submit button is clicked
+   $("#submit_button").click(function(){
+
+      startProcess();
+
+    }); // End of click function 
 
 // email the trade to Jay 
 $("#email_trade").click(function(){
@@ -680,6 +702,9 @@ $("#entryPrice").click(function(){
     $("#amountSpending").val("-----");
     $("#orderStub").val("-----------------------");    
     $('input#check_offering').attr('checked', false);
+
+
+
 
 
 });  // End of the initial automatically called function
