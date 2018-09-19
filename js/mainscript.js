@@ -388,8 +388,8 @@ if ($.trim($("#quote_input").val()) != ""){
               $("#day2").html("");
               $("#day1").html("");
               $("#entryPrice").val(""); 
-              $("#entryPercentage").val(""); 
-              $("#amountSpending").val("1000");
+              $("#entryPercentage").val("");  
+              $("#amountSpending").val("600");
               $("#eTradeLowPercentage").html("");
               $("#orderStub").val("-----------------------"); 
 
@@ -649,7 +649,25 @@ $('#entryPercentage').keypress(function(e){
         var theLength = $("#entryPrice").val().length;
         var input = $("#entryPrice"); 
         input[0].setSelectionRange(theLength, theLength);   
+
+        var eTradeLowPercentage = parseFloat($("#eTradeLowPercentage").html());
+        var currentPercent = parseFloat($(this).val()); 
+        console.log("eTradeLowPercentage is " + eTradeLowPercentage + " and currentPercent is " + currentPercent);
+
+        if (currentPercent < eTradeLowPercentage)
+        {
+console.log("(currentPercent > eTradeLowPercentage)"); 
+          $("#orderStub").css("background-color", "#FF0000");  
+        }
+        else
+        {
+console.log("(currentPercent < eTradeLowPercentage)"); 
+          $("#orderStub").css("background-color", "#FFFFFF");  
+        }
       } 
+
+
+
 //      $('#submit_button').click();
 });  // end of entryPercentage change function
 
