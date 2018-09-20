@@ -8,7 +8,11 @@ $symbol=$_GET['symbol'];
 
 fopen("cookies.txt", "w");
 
-
+function getTodaysTradeDate()
+{
+    $todays_trade_day = date('Y-m-d');
+    return $todays_trade_day;
+}
 
 function grabHTML($function_host_name, $url)
 {
@@ -42,15 +46,12 @@ $header=array('GET /1575051 HTTP/1.1',
 
     $returnHTML = curl_exec($ch); 
 
-if($errno = curl_errno($ch)) {
-    $error_message = curl_strerror($errno);
-    echo "cURL error ({$errno}):\n {$error_message}";
-}   
-   curl_close($ch);
+    if($errno = curl_errno($ch)) {
+        $error_message = curl_strerror($errno);
+        echo "cURL error ({$errno}):\n {$error_message}";
+    }   
+    curl_close($ch);
     return $returnHTML; 
-
-
- 
 
 } // end of function grabHTML
 
@@ -75,37 +76,42 @@ foreach($fullJSON as $k => $v){
 $counter = 0; 
 $historicalDataArray = array();
 $returnArray = array();
+$todaysDate = getTodaysTradeDate();
+
 
 foreach($object as $k => $v){
-  $dailyObject = new stdClass();
 
-  foreach ($v as $key => $value)
-  {
-    if ($key == '1. open')
+    if ($k != $todaysDate)
     {
-      $dailyObject->open = $value; 
-    }
-    elseif ($key == '2. high')
-    {
-      $dailyObject->high = $value; 
-    }
-    elseif ($key == '3. low')
-    {
-      $dailyObject->low = $value; 
-    }
-    elseif ($key == '4. close')
-    {
-      $dailyObject->close = $value; 
-    }
-  }
+        $dailyObject = new stdClass();
 
-  $historicalDataArray[$counter] = $dailyObject; 
+        foreach ($v as $key => $value)
+        {
+          if ($key == '1. open')
+          {
+            $dailyObject->open = $value; 
+          }
+          elseif ($key == '2. high')
+          {
+            $dailyObject->high = $value; 
+          }
+          elseif ($key == '3. low')
+          {
+            $dailyObject->low = $value; 
+          }
+          elseif ($key == '4. close')
+          {
+            $dailyObject->close = $value; 
+          }
+        }
+        $historicalDataArray[$counter] = $dailyObject; 
 
-  if ($counter >= 7)
-  {
-    break;
-  }
-  $counter++;
+        if ($counter >= 7)
+        {
+          break;
+        }
+        $counter++;
+    }
 }
 
 if (isset($historicalDataArray[1]->close))
