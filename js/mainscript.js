@@ -336,12 +336,6 @@ if ($.trim($("#quote_input").val()) != ""){
 
           closeAllWindows();
 
-
-
-
-
-          
-        
           // first, clear all the DIVS to give the impression that it is refreshing 
 
           positionOfPeriod = original_symbol.indexOf(".");
@@ -459,6 +453,31 @@ if ($.trim($("#quote_input").val()) != ""){
               $("#yestCloseText").val(xhr.status);
             }
             });  // End of AJAX to get E*TRADE API data 
+
+
+            $.ajax({
+                url: "alphavantage_api_historical_data.php",
+                data: {symbol: original_symbol},
+                async: false, 
+                dataType: 'html',
+                success:  function (data) {
+
+                  var returnedObject = JSON.parse(data);
+
+                  $("#day1").html(returnedObject.day_1);
+                  $("#day2").html(returnedObject.day_2);
+                  $("#day3").html(returnedObject.day_3);
+                  $("#day4").html(returnedObject.day_4);
+                  $("#day5").html(returnedObject.day_5);
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                  console.log("there was an error in calling alphavantage_api_historical_data.php");
+                }
+
+            });
+
+
+
             $("div#left_top_container").css("background-color", "#F3F3FF");
 
             CopyToClipboard();
