@@ -100,11 +100,16 @@ function calcAll(){
     var finalNumShares = $("#amountSpending").val()/$("#entryPrice").val(); 
 
     var finalPriceDisplay =  $("#entryPrice").val()
+    finalPriceDisplay = parseFloat(finalPriceDisplay);
 
     if (finalPriceDisplay < 1.00)
     {
-        finalPriceDisplay = "0" + finalPriceDisplay.toString(); 
+        finalPriceDisplay = finalPriceDisplay.toFixed(4);
     }   
+    else
+    {
+        finalPriceDisplay = finalPriceDisplay.toFixed(2);
+    }
 
     var roundSharesOptionValue =  $("input[name=roundShares]:checked").val(); 
 
@@ -424,24 +429,40 @@ if ($.trim($("#quote_input").val()) != ""){
                           if (bid <= low)
                           {
                               defaultEntry = parseFloat(bid);
-                              if (defaultEntry == 0.9999)
-                              {
-                              defaultEntry = 1.00;
-                              }
-                              else if (defaultEntry < 0.9999)
-                              {
-                              defaultEntry += 0.0001
-                              }
-                              else if (defaultEntry >= 1.0)
-                              {
-                              defaultEntry += 0.01;
-                              }
-                              defaultEntry = defaultEntry.toString();
-                              defaultEntry = defaultEntry.replace(/^0\./gm, '.');
-
-                              $("#entryPrice").val(defaultEntry);
-                              calcAll(); 
+                          }    
+                          else
+                          {
+                              defaultEntry = parseFloat(low);
                           }
+                              
+                          if (defaultEntry == 0.9999)
+                          {
+                            defaultEntry = 1.00;
+                          }
+                          else if (defaultEntry < 0.9999)
+                          {
+                            defaultEntry += 0.0001
+                          }
+                          else if (defaultEntry >= 1.0)
+                          {
+                            defaultEntry += 0.01;
+                          }
+
+                          if (defaultEntry < 1.00)
+                          {
+                            defaultEntry = defaultEntry.toFixed(4);
+                          }
+                          else
+                          {
+                            defaultEntry = defaultEntry.toFixed(2);
+                          }
+
+                          defaultEntry = defaultEntry.toString();
+                          defaultEntry = defaultEntry.replace(/^0\./gm, '.');
+
+                          $("#entryPrice").val(defaultEntry);
+                          calcAll(); 
+
                           var newCalculatedPercentage=((jsonObject.prev_close-low)/jsonObject.prev_close)*100
                           $("#eTradeLowPercentage").html(newCalculatedPercentage.toFixed(2)); 
 
