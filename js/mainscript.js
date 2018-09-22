@@ -392,6 +392,9 @@ if ($.trim($("#quote_input").val()) != ""){
               $("#eTradeLowPercentage").html("");
               $("#orderStub").val("-----------------------"); 
 
+              $("#day1").css("background-color", "#ffffff");
+              $("#orderStub").css("background-color", "#ffffff");
+
               $("#roundShares_50").checked = true; 
               $("input[name=roundShares][value=50]").prop('checked', true);
 
@@ -415,6 +418,7 @@ if ($.trim($("#quote_input").val()) != ""){
                           jsonObject = JSON.parse(data);
                           low = jsonObject.low;
                           bid = jsonObject.bid;
+                          prev_close = jsonObject.prev_close; 
 
                           $("#yestCloseText").val(jsonObject.prev_close);
                           $("#eTradeLow").html(low);
@@ -426,48 +430,51 @@ if ($.trim($("#quote_input").val()) != ""){
 
                           defaultEntry = 0.0;
 
-                          if (bid <= low)
+                          var bidCalculatedPercentage=((prev_close-bid)/prev_close)*100; 
+                          var lowCalculatedPercentage=((prev_close-low)/prev_close)*100; 
+
+                          // if the bid is within a 2% range of the low, then we're going to set the default 
+                          // entry to the bid, just in case it dropped extremely fast and we only have a couple 
+                          // seconds to pull the trigger, have the order ready.
+
+                          if ((bid < prev_close) && (bidCalculatedPercentage >= (lowCalculatedPercentage - 2.00)))
                           {
                               defaultEntry = parseFloat(bid);
-                          }    
-                          else
-                          {
-                              defaultEntry = parseFloat(low);
-                          }
-                              
-                          if (defaultEntry == 0.9999)
-                          {
-                            defaultEntry = 1.00;
-                          }
-                          else if (defaultEntry < 0.9999)
-                          {
-                            defaultEntry += 0.0001
-                          }
-                          else if (defaultEntry >= 1.0)
-                          {
-                            defaultEntry += 0.01;
-                          }
 
-                          if (defaultEntry < 1.00)
-                          {
-                            defaultEntry = defaultEntry.toFixed(4);
-                          }
-                          else
-                          {
-                            defaultEntry = defaultEntry.toFixed(2);
-                          }
+                              if (defaultEntry == 0.9999)
+                              {
+                                defaultEntry = 1.00;
+                              }
+                              else if (defaultEntry < 0.9999)
+                              {
+                                defaultEntry += 0.0001
+                              }
+                              else if (defaultEntry >= 1.0)
+                              {
+                                defaultEntry += 0.01;
+                              }
+
+                              if (defaultEntry < 1.00)
+                              {
+                                defaultEntry = defaultEntry.toFixed(4);
+                              }
+                              else
+                              {
+                                defaultEntry = defaultEntry.toFixed(2);
+                              }
+                          }    
 
                           defaultEntry = defaultEntry.toString();
                           defaultEntry = defaultEntry.replace(/^0\./gm, '.');
 
                           $("#entryPrice").val(defaultEntry);
+
                           calcAll(); 
 
-                          var newCalculatedPercentage=((jsonObject.prev_close-low)/jsonObject.prev_close)*100
-                          $("#eTradeLowPercentage").html(newCalculatedPercentage.toFixed(2)); 
+                          var lowCalculatedPercentage=((prev_close-low)/prev_close)*100
+                          $("#eTradeLowPercentage").html(lowCalculatedPercentage.toFixed(2)); 
 
                       }
-                      console.log(data);
                   },
               error: function (xhr, ajaxOptions, thrownError) {
 
@@ -484,12 +491,25 @@ if ($.trim($("#quote_input").val()) != ""){
                 success:  function (data) {
 
                   var returnedObject = JSON.parse(data);
+                  var day1 = parseFloat(returnedObject.day_1);
 
                   $("#day1").html(returnedObject.day_1);
                   $("#day2").html(returnedObject.day_2);
                   $("#day3").html(returnedObject.day_3);
                   $("#day4").html(returnedObject.day_4);
                   $("#day5").html(returnedObject.day_5);
+
+                  // any previous-day spike greater than 15 will be considered high-risk 
+
+                  if (day1 > 15)
+                  {
+                    $("#day1").css("background-color", "#FF0000");  
+                  }
+                  else
+                  {
+                    $("#day1").css("background-color", "#FFFFFF");  
+                  }
+
                 },
                 error: function (xhr, ajaxOptions, thrownError) {
                   console.log("there was an error in calling alphavantage_api_historical_data.php");
@@ -696,12 +716,10 @@ $('#entryPercentage').keypress(function(e){
 
         if (currentPercent < eTradeLowPercentage)
         {
-console.log("(currentPercent > eTradeLowPercentage)"); 
           $("#orderStub").css("background-color", "#FF0000");  
         }
         else
         {
-console.log("(currentPercent < eTradeLowPercentage)"); 
           $("#orderStub").css("background-color", "#FFFFFF");  
         }
       } 
