@@ -1,11 +1,11 @@
 <?php 
 
-include 'config.php';
-
 require_once("simple_html_dom.php"); 
-error_reporting(0);
+error_reporting(1);
 
 $symbol=$_GET['symbol'];
+
+
 
 fopen("cookies.txt", "w");
 
@@ -128,11 +128,21 @@ $finalReturn = "";
 
       $url = "https://www.sec.gov/cgi-bin/browse-edgar?CIK=" . $symbol . "&owner=exclude&action=getcompany&Find=Search"; 
       $result = grabHTML('www.sec.gov', $url); 
-      $html = str_get_html($result);
 
-      echo "<table class='striped' border = 1>"; 
+      if (preg_match('/No matching Ticker Symbol/', $result))
+      {
+        echo "<title>SEC Filings (NONE)</title><h1>No matching ticker symbol</h1>";
+        return; 
+      }
+
+      $html = str_get_html($result);
+      $returnHtml = "";
+      $tableRows = "";
+      $recentNews = false;
 
           $tableRow1 = $html->find('.tableFile2 tbody tr'); 
+          $recentNews = false; 
+
 
           for ($i = 1; $i < 6; $i++)
            { 
@@ -159,17 +169,43 @@ $finalReturn = "";
                   $todays_date = date('l'); 
                   if ($todays_date == "Monday")
                   {
-                    $td3 = preg_replace('/(' .  get_friday_trade_date() . ')/', '<span style="font-size: 16px; background-color:#000080 ; color:white">$1</span>', $td3);
-                    $td3 = preg_replace('/(' .  get_saturday_trade_date() . ')/', '<span style="font-size: 16px; background-color:#000080 ; color:white">$1</span>', $td3);      
+                    if ((preg_match('/(' .  get_friday_trade_date() . ')/', $td3)) || (preg_match('/(' .  get_saturday_trade_date() . ')/', $td3))){
+                        $recentNews = true;
+                        $td3 = preg_replace('/(' .  get_friday_trade_date() . ')/', '<span style="font-size: 16px; background-color:#000080 ; color:white">$1</span>', $td3);
+                        $td3 = preg_replace('/(' .  get_saturday_trade_date() . ')/', '<span style="font-size: 16px; background-color:#000080 ; color:white">$1</span>', $td3);
+                    }
+
                   }  
 
-                  $td3 = preg_replace('/(' .  get_yesterday_trade_date() . ')/', '<span style="font-size: 16px; background-color:#000080 ; color:white">$1</span>', $td3);
-                  $td3 = preg_replace('/(' .  get_today_trade_date() . ')/', '<span style="font-size: 16px; background-color:black; color:white">$1</span>', $td3); 
+                  if ((preg_match('/(' .  get_yesterday_trade_date() . ')/', $td3)) || (preg_match('/(' .  get_today_trade_date() . ')/', $td3))){
+                      $recentNews = true;
+                      $td3 = preg_replace('/(' .  get_yesterday_trade_date() . ')/', '<span style="font-size: 16px; background-color:#000080 ; color:white">$1</span>', $td3);
+                      $td3 = preg_replace('/(' .  get_today_trade_date() . ')/', '<span style="font-size: 16px; background-color:black; color:white">$1</span>', $td3);
+                  }
 
                   $td2 = preg_replace('/ statement of acquisition of beneficial ownership/i', '<span style="font-size: 16px; background-color:red; color:black"><b>&nbsp;statement of acquisition of beneficial ownership - BACK OFF, COULD DECLARE CHAPTER 11</span></b>&nbsp;', $td2);      
 
-              echo "<tr>" . $td0 . '<td><a href ="' . $href2 . '">' . $td2 . '</a></td>' . $td3 . "</tr>"; 
+              $tableRows .=  "<tr>" . $td0 . '<td><a href ="' . $href2 . '">' . $td2 . '</a></td>' . $td3 . "</tr>"; 
             }
-      echo "</table>";
+
+
+      $returnHtml .= "<!DOCTYPE html>"; 
+      $returnHtml .= "<html>";
+      $returnHtml .= "<head>";
+      if ($recentNews){
+          $returnHtml .= "<title>SEC Filings</title>";  
+      }
+      else{
+          $returnHtml .= "<title>SEC Filings (NONE)</title>";   
+      }
+      
+      $returnHtml .= "<body>"; 
+      $returnHtml .= "<table class='striped' border = 1>"; 
+      $returnHtml .= $tableRows;
+      $returnHtml .=  "</table>";
+      $returnHtml .=  "</body>";
+      $returnHtml .=  "</html>";
+
+      echo $returnHtml; 
 
 ?>

@@ -495,14 +495,15 @@ if ($.trim($("#quote_input").val()) != ""){
 
                   $("#day1").html(returnedObject.day_1);
                   $("#day2").html(returnedObject.day_2);
-                  $("#day3").html(returnedObject.day_3);
                   $("#day4").html(returnedObject.day_4);
+                  $("#day3").html(returnedObject.day_3);
                   $("#day5").html(returnedObject.day_5);
 
                   // any previous-day spike greater than 15 will be considered high-risk 
 
                   if (day1 > 15)
                   {
+                    alert("This is a high-risk stock");
                     $("#day1").css("background-color", "#FF0000");  
                   }
                   else
@@ -607,28 +608,20 @@ if ($.trim($("#quote_input").val()) != ""){
             (function(){
               var eTradeIFrame = '<br><iframe id="etrade_iframe" src="https://www.etrade.wallst.com/v1/stocks/news/search_results.asp?symbol=' + symbol + '&rsO=new#lastTradeTime" width="575px" height="340px"></iframe>';
 
-              openPage('https://www.marketwatch.com/investing/' + stockOrFund + '/' + symbol); 
-
-            // Keeping this commented out until I can get past their bot detectors
-            //  openPage('http://puppeteer-marketwatch.com/?symbol=' + symbol + '&stockOrFund=' + stockOrFund);
-
-            //  $("div#left_bottom_container").css("background-color", "#BBDDFF");                     
-            //  $.ajax({
-            //      url: "proxy.php",
-            //      data: {symbol: symbol,
-            //           stockOrFund: stockOrFund, 
-            //           which_website: "marketwatch", 
-            //           host_name: "www.marketwatch.com"},
-            //       async: true, 
-            //      dataType: 'html',
-            //      success:  function (data) {
-            //        console.log(data);
-            //        $("div#left_bottom_container").html( data +  eTradeIFrame); 
-            //      }
-            //  });  // end of AJAX call to marketwatch    
-
-              $("div#left_bottom_container").html(eTradeIFrame); 
-
+              $("div#left_bottom_container").css("background-color", "#BBDDFF");                     
+                $.ajax({
+                    url: "proxy.php",
+                    data: {symbol: symbol,
+                         stockOrFund: stockOrFund, 
+                         which_website: "marketwatch", 
+                         host_name: "www.marketwatch.com"},
+                     async: true, 
+                    dataType: 'html',
+                    success:  function (data) {
+                     console.log(data);
+                      $("div#left_bottom_container").html( data +  eTradeIFrame); 
+                  }
+                });  // end of AJAX call to marketwatch    
 
               $("div#left_bottom_container").css("background-color", "#F3F3FF");   
             })(1);
@@ -639,9 +632,6 @@ if ($.trim($("#quote_input").val()) != ""){
             myIframe.contentWindow.scrollTo(75, 100); 
 
     } // function startProcess()
-
-
-
 
     // once the submit button is clicked
    $("#submit_button").click(function(){

@@ -265,15 +265,43 @@ $finalReturn = "";
 
 if ($which_website == "marketwatch")
 {
-//      $url="https://$host_name/investing/$stockOrFund/$symbol";
 
-//      $url = "http://ec2-52-41-122-145.us-west-2.compute.amazonaws.com/puppeteer-marketwatch/grab-news.php?stockOrFund=$stockOrFund&symbol=$symbol";
+      $url = "https://www.marketwatch.com/investing/$stockOrFund/$symbol"; 
 
-return;
+      $results = grabHTML("www.marketwatch.com", $url);
+      $results = str_replace(PHP_EOL, '', $results);
+      $results = preg_replace('/<head>(.*)<\/head>/', "", $results);
 
-      $result = curl_get_contents($url);
+      preg_match('/<div class="article__content">(.*)<\/div>/', $results, $arrayMatch);
 
-      $resultDecoded = json_decode($result, true);
+      $batchString = $arrayMatch[0];
+
+      preg_match_all('/<div class="article__content">(.*?)<\/div>/', $batchString, $individualArticleDiv);
+
+      $finalArray = array();
+
+      foreach ($individualArticleDiv[0] as $articleDiv)
+      {
+          $articleStruct = array();
+
+          preg_match('/href="(.*?)"/', $articleDiv, $linksArray);
+          $articleStruct['link'] = $linksArray[1];
+          preg_match('/<a.*>(.*?)<\/a>/', $articleDiv, $headlinesArray);
+          $articleStruct['headline'] = $headlinesArray[1];
+          preg_match('/data-est="(.*?)"/', $articleDiv, $timeStampArray);
+          $timeStamp = $timeStampArray[1];
+          preg_match('/article__timestamp">(.*?)<\/li>/', $articleDiv, $dateStringArray);
+          $articleStruct['date'] = $dateStringArray[1];
+
+          $timeStampInt = strtotime($timeStamp);
+
+          if ($articleStruct['link'] != "")
+          {
+              $finalArray[$timeStampInt] = $articleStruct; 
+          }
+      }
+
+      krsort($finalArray);
 
       $marketWatchNewsHTML = '<html><head><link rel="stylesheet" href="./css/combined-min-1.0.5754.css" type="text/css"/>
       <link type="text/css" href="./css/quote-layout.css" rel="stylesheet"/>
@@ -282,27 +310,35 @@ return;
       <body>
       '; 
 
-      $marketWatchNewsHTML = "<h1>Recent News</h1>";
-      $marketWatchNewsHTML .= '<div style="max-height: 200px; overflow: auto;">';
+      $marketWatchNewsHTML = "<h1>Marketwatch News</h1>";
+      $marketWatchNewsHTML .= '<div style="max-height: 300px; overflow: auto;">';
 
-      foreach ($resultDecoded['mw'] as $mw)
+      foreach ($individualArticleDiv[0] as $articleDiv)
       {
-        $marketWatchNewsHTML .= '<div>';
-        $marketWatchNewsHTML .= '<span>' . $mw['date'] . '</span>' . '<a target="blank" href="' . $mw['link'] . '" >' . $mw['headline'] . '</a>'; 
-        $marketWatchNewsHTML .= '</div>';
-      } 
-      $marketWatchNewsHTML .= '</div>';
+          $articleStruct = array();
 
-      $marketWatchNewsHTML .= "<h1>Other News</h1>";
-      $marketWatchNewsHTML .= '<div style="max-height: 250px; overflow: auto;">';
+          preg_match('/href="(.*?)"/', $articleDiv, $linksArray);
+          $articleStruct['link'] = $linksArray[1];
+          preg_match('/<a.*>(.*?)<\/a>/', $articleDiv, $headlinesArray);
+          $articleStruct['headline'] = $headlinesArray[1];
+          preg_match('/data-est="(.*?)"/', $articleDiv, $timeStampArray);
+          $timeStamp = $timeStampArray[1];
+          preg_match('/article__timestamp">(.*?)<\/li>/', $articleDiv, $dateStringArray);
+          $articleStruct['date'] = $dateStringArray[1];
 
-      foreach ($resultDecoded['other'] as $other)
+          $timeStampInt = strtotime($timeStamp);
+
+          if ($articleStruct['link'] != "")
+          {
+              $finalArray[$timeStampInt] = $articleStruct; 
+          }
+      }
+      krsort($finalArray);
+
+      foreach ($finalArray as $article)
       {
-        $marketWatchNewsHTML .= '<div>';
-        $marketWatchNewsHTML .= '<span>' . $other['date'] . '</span>' . '<a target="blank" href="' . $other['link'] . '" >' . $other['headline'] . '</a>'; 
-        $marketWatchNewsHTML .= '</div>';
-      } 
-
+          $marketWatchNewsHTML .= '<div>' . $article['date'] . '&nbsp;&nbsp;<a target="blank" href="' . $article['link'] . '">' . $article['headline'] . '</a></div>';
+      }
 
       $marketWatchNewsHTML .= '</div>';
 

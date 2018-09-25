@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>News/Chart lookup for Yahoo Finance and Marketwatch</title>	
+	<title>News Lookup</title>	
 	<meta content="text/html;charset=utf-8" http-equiv="Content-Type">
 	<meta content="utf-8" http-equiv="encoding">	
 	<script src="js/jquery-1.11.1.min.js"></script>
