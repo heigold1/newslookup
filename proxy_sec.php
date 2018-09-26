@@ -131,7 +131,7 @@ $finalReturn = "";
 
       if (preg_match('/No matching Ticker Symbol/', $result))
       {
-        echo "<title>SEC - " . $symbol . "(NONE)</title><h1>No matching ticker symbol</h1>";
+        echo "<title>SEC - " . $symbol . " (NONE)</title><h1>No matching ticker symbol</h1>";
         return; 
       }
 
