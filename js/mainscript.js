@@ -499,26 +499,12 @@ if ($.trim($("#quote_input").val()) != ""){
                 success:  function (data) {
 
                   var returnedObject = JSON.parse(data);
-                  var day1 = parseFloat(returnedObject.day_1);
 
                   $("#day1").html(returnedObject.day_1);
                   $("#day2").html(returnedObject.day_2);
                   $("#day4").html(returnedObject.day_4);
                   $("#day3").html(returnedObject.day_3);
                   $("#day5").html(returnedObject.day_5);
-
-                  // any previous-day spike greater than 15 will be considered high-risk 
-
-                  if (day1 > 15)
-                  {
-                    alert("This is a high-risk stock");
-                    $("#day1").css("background-color", "#FF0000");  
-                  }
-                  else
-                  {
-                    $("#day1").css("background-color", "#FFFFFF");  
-                  }
-
                 },
                 error: function (xhr, ajaxOptions, thrownError) {
                   console.log("there was an error in calling alphavantage_api_historical_data.php");
@@ -633,6 +619,20 @@ if ($.trim($("#quote_input").val()) != ""){
             })(1);
 
         $("h1").css({"padding-top" : "0px", "margin-top" : "0px", "padding-bottom" : "0px", "margin-bottom" : "0px"}); 
+
+
+        // any previous-day spike greater than 15% will be considered high-risk 
+        var day1 = parseFloat($("#day1").html());
+
+        if (day1 > 15)
+        {
+          alert("This is a high-risk stock");
+          $("#day1").css("background-color", "#FF0000");  
+        }
+        else
+        {
+          $("#day1").css("background-color", "#FFFFFF");  
+        }
 
         var myIframe = document.getElementById('etrade_iframe');
             myIframe.contentWindow.scrollTo(75, 100); 
