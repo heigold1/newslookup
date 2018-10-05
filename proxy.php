@@ -14,6 +14,19 @@ $google_keyword_string = $_GET['google_keyword_string'];
 
 fopen("cookies.txt", "w");
 
+
+function get_yahoo_trade_date($daysBack)
+{
+    $trade_date = "";
+
+    $week_day = date('l', strtotime("-" . $daysBack . " days"));
+    $week_day = mb_substr($week_day, 0, 3);
+    $month_day = date(', d M Y', strtotime("-" . $daysBack . " days"));
+    $trade_date = $week_day . $month_day;
+
+    return $trade_date;
+}
+
 function get_yahoo_friday_trade_date()
 {
     $friday_yahoo_trade_date = "";
@@ -61,6 +74,37 @@ function get_yahoo_todays_trade_date()
 
     return $todays_yahoo_trade_date;
 }
+
+
+function get_marketwatch_trade_date($daysBack)
+{
+    $trade_date = "";
+    $month = date('M',strtotime("-" . $daysBack . " days"));
+
+    if ($month == ('Mar'))
+    {
+      $trade_date = "March. " . date('d, Y',strtotime("-" . $daysBack . " days"));      
+    }
+    else if ($month == ('Apr'))
+    {
+      $trade_date = "April. " . date('d, Y',strtotime("-" . $daysBack . " days"));      
+    }
+    else if ($month == ('May'))
+    {
+      $trade_date = "May. " . date('d, Y',strtotime("-" . $daysBack . " days"));      
+    }
+    else 
+    {
+      $trade_date = date('M. d, Y',strtotime("-" . $daysBack . " days"));      
+    }
+
+    $trade_date = preg_replace('/0([1-9]),/', '$1,', $trade_date);
+
+    return $trade_date;
+}
+
+
+
 
 function get_marketwatch_friday_trade_date()
 {
@@ -342,12 +386,26 @@ if ($which_website == "marketwatch")
 
       $marketWatchNewsHTML .= '</div>';
 
-      $marketwatch_todays_date = date('l'/*, strtotime("-9 hours")*/); 
+      $marketwatch_todays_date = date('l'); 
       if ($marketwatch_todays_date == "Monday")
       {
         $marketWatchNewsHTML = preg_replace('/(' .  get_marketwatch_friday_trade_date() . ')/', '<span style="font-size: 10px; background-color:#000080 ; color:white">$1</span>', $marketWatchNewsHTML);
         $marketWatchNewsHTML = preg_replace('/(' .  get_marketwatch_saturday_trade_date() . ')/', '<span style="font-size: 10px; background-color:#000080 ; color:white">$1</span>', $marketWatchNewsHTML);      
+        for ($daysBack = 14; $daysBack >= 4; $daysBack--)
+        {
+            $marketWatchNewsHTML = preg_replace('/(' .  get_marketwatch_trade_date($daysBack) . ')/', '<span style="font-size: 10px; background-color:yellow ; color:black">$1</span>', $marketWatchNewsHTML);      
+            
+        }
+
       }  
+      else 
+      {
+        for ($daysBack = 14; $daysBack >= 2; $daysBack--)
+        {
+            $marketWatchNewsHTML = preg_replace('/(' .  get_marketwatch_trade_date($daysBack) . ')/', '<span style="font-size: 10px; background-color:yellow ; color:black">$1</span>', $marketWatchNewsHTML);      
+            
+        }
+      }
 
       $marketWatchNewsHTML = preg_replace('/(' .  get_marketwatch_yesterday_trade_date() . ')/', '<span style="font-size: 10px; background-color:#000080 ; color:white">$1</span>', $marketWatchNewsHTML);     
       $marketWatchNewsHTML = preg_replace('/(' .  get_marketwatch_today_trade_date() . ')/', '<span style="font-size: 10px; background-color:black; color:white">$1</span>', $marketWatchNewsHTML);           
@@ -404,6 +462,8 @@ if ($which_website == "marketwatch")
       $marketWatchNewsHTML = preg_replace('/ lease termination/i', '<span style="font-size: 12px; background-color:red; color:black"><b>&nbsp; DANGER - Chapter 7 warning - 90%</b></span>&nbsp;', $marketWatchNewsHTML);
       $marketWatchNewsHTML = preg_replace('/ redemption of public shares/i', '<span style="font-size: 12px; background-color:red; color:black"><b>&nbsp; Redemption of Public Shares - 92%</b></span>&nbsp;', $marketWatchNewsHTML);
       $marketWatchNewsHTML = preg_replace('/ phase 2/i', '<span style="font-size: 12px; background-color:red; color:black"><b>&nbsp; Phase 2 - 74% and set a stop loss of around 12%</b></span>&nbsp;', $marketWatchNewsHTML);
+      $marketWatchNewsHTML = preg_replace('/ investor call/i', '<span style="font-size: 12px; background-color:red; color:black"><b>&nbsp; INVESTOR CALL - CHECK THE DATE &nbsp;</b></span>&nbsp;', $marketWatchNewsHTML);
+      $marketWatchNewsHTML = preg_replace('/ strategic update/i', '<span style="font-size: 12px; background-color:red; color:black"><b>&nbsp; STRATEGIC UPDATE - BE CAREFUL &nbsp;</b></span>&nbsp;', $marketWatchNewsHTML);
 
       $marketWatchNewsHTML .= '</body></html>'; 
 
@@ -529,7 +589,24 @@ else if ($which_website == "yahoo")
       {
         $finalReturn = preg_replace('/(' .  get_yahoo_friday_trade_date() . ')/', '<span style="font-size: 12px; background-color:#000080 ; color:white"> $1</span> ', $finalReturn);
         $finalReturn = preg_replace('/(' .  get_yahoo_saturday_trade_date() . ')/', '<span style="font-size: 12px; background-color:#000080 ; color:white"> $1</span> ', $finalReturn);      
+
+        for ($daysBack = 14; $daysBack >= 4; $daysBack--)
+        {
+            $finalReturn = preg_replace('/(' .  get_yahoo_trade_date($daysBack) . ')/', '<span style="font-size: 12px; background-color:yellow ; color:black">$1</span>', $finalReturn);      
+            
+        }
+
       }
+      else
+      {
+        for ($daysBack = 14; $daysBack >= 2; $daysBack--)
+        {
+            $finalReturn = preg_replace('/(' .  get_yahoo_trade_date($daysBack) . ')/', '<span style="font-size: 12px; background-color:yellow ; color:black">$1</span>', $finalReturn);      
+            
+        }
+      }
+
+
 
       $finalReturn = preg_replace('/(' .  get_yahoo_yesterday_trade_date() . ')/', '<span style="font-size: 12px; background-color:   #000080; color:white"> $1</span> ', $finalReturn);
       $finalReturn = preg_replace('/(' .  get_yahoo_todays_trade_date() . ')/', '<span style="font-size: 12px; background-color:  black; color:white"> $1</span> ', $finalReturn);
@@ -581,6 +658,8 @@ else if ($which_website == "yahoo")
       $finalReturn = preg_replace('/ lease termination/i', '<span style="font-size: 12px; background-color:red; color:black"><b>&nbsp; DANGER - Chapter 7 warning - 90%</b></span>&nbsp;', $finalReturn);
       $finalReturn = preg_replace('/ redemption of public shares/i', '<span style="font-size: 12px; background-color:red; color:black"><b>&nbsp; Redemption of Public Shares - 92%</b></span>&nbsp;', $finalReturn);
       $finalReturn = preg_replace('/ phase 2/i', '<span style="font-size: 12px; background-color:red; color:black"><b>&nbsp; Phase 2 - 74% and set a stop loss of around 12%</b></span>&nbsp;', $finalReturn);
+      $finalReturn = preg_replace('/ investor call/i', '<span style="font-size: 12px; background-color:red; color:black"><b>&nbsp; INVESTOR CALL - CHECK THE DATE &nbsp;</b></span>&nbsp;', $finalReturn);
+      $finalReturn = preg_replace('/ strategic update/i', '<span style="font-size: 12px; background-color:red; color:black"><b>&nbsp; STRATEGIC UPDATE - BE CAREFUL &nbsp;</b></span>&nbsp;', $finalReturn);
 
       $message_board = '</font><a target="_blank" onclick="return openPage(this.href)" href="http://finance.yahoo.com/quote/' . $symbol . '/community?ltr=1"> Yahoo Message Boards</a>&nbsp;&nbsp;&nbsp;&nbsp;'; 
       $company_profile = '<a target="_blank" onclick="return openPage(this.href)" href="http://finance.yahoo.com/quote/' . $symbol . '/profile">Yahoo Company Profile for ' . $symbol . '</a><br>'; 
@@ -591,7 +670,7 @@ else if ($which_website == "yahoo")
         $google = preg_replace('/<h1>/', '', $google);
         $google = preg_replace('/<\/h1>/', '', $google);
 
-      $finalReturn = $returnCompanyName . $companyWebsite . $sectorCountry . $returnYesterdaysClose . $preMarketYesterdaysClose[0] . "<br>" . "<div style='display: inline-block;'>" . $currentVolume . $avgVol10days . $avgVol3Months . $company_profile . $message_board . $google . '<table width="575px"><tr width="575px">' . $finalReturn . '</tr></table>'; 
+      $finalReturn = $yahooDates . $returnCompanyName . $companyWebsite . $sectorCountry . $returnYesterdaysClose . $preMarketYesterdaysClose[0] . "<br>" . "<div style='display: inline-block;'>" . $currentVolume . $avgVol10days . $avgVol3Months . $company_profile . $message_board . $google . '<table width="575px"><tr width="575px">' . $finalReturn . '</tr></table>'; 
 
       echo $finalReturn; 
 
