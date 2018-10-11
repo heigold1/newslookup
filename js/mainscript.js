@@ -389,6 +389,7 @@ if ($.trim($("#quote_input").val()) != ""){
               $("#amountSpending").val("600");
               $("#eTradeLowPercentage").html("");
               $("#orderStub").val("-----------------------"); 
+              $("#foreign_country").html("");
 
               $("#day1").css("background-color", "#ffffff");
               $("#orderStub").css("background-color", "#ffffff");
@@ -406,6 +407,9 @@ if ($.trim($("#quote_input").val()) != ""){
                   async: false, 
                   dataType: 'html',
                   success:  function (data) {
+
+
+
                           returnData = data.match(/Caught exception/i); 
                           if (returnData || (data == '------') || (data == '------a') || (data == '------b'))
                           {
@@ -553,6 +557,15 @@ if ($.trim($("#quote_input").val()) != ""){
             dataType: 'html',
             success:  function (data) {
               console.log(data);
+
+                if (data.search(/geo_usa/) > 0)
+                {
+                    $("#foreign_country").html("0");
+                }
+                else
+                {
+                    $("#foreign_country").html("1");
+                }
 
               yahooCompanyName = " " + data.match(/<h1(.*?)h1>/g) + " "; 
 
@@ -717,6 +730,24 @@ $('#entryPercentage').keypress(function(e){
         else
         {
           $("#orderStub").css("background-color", "#FFFFFF");  
+        }
+
+        var warningMessage = ""; 
+
+        var vixValue = parseFloat(document.getElementById("vix-value").innerHTML); 
+        if (vixValue > 20)
+        {
+            warningMessage += "VIX is greater than 20, check the VIX -- "; 
+        }
+
+        if ($("#foreign_country").html() == "1")
+        {
+            warningMessage += "This is a foreign company"; 
+        }
+
+        if (warningMessage != "")
+        {
+          alert(warningMessage);
         }
       } 
 

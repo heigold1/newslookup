@@ -522,8 +522,9 @@ else if ($which_website == "yahoo")
 
       $sectorCountryArray = $html->find('table.fullview-title tbody tr td a');
       $sectorCountry = " " . $sectorCountryArray[2] . " - " . $sectorCountryArray[3] . " - " . $sectorCountryArray[4] . "<br>";
-      $sectorCountry = str_replace('<a', '<span', $sectorCountry);    
+      $sectorCountry = str_replace('<a', '<span id="geo_country"', $sectorCountry);    
       $sectorCountry = str_replace('\/a', '/span', $sectorCountry);   
+
 
       $returnCompanyName = '<h1>' . $_GET['company_name'] . '</h1>';      // $companyNameArray[0]; 
 
@@ -605,8 +606,6 @@ else if ($which_website == "yahoo")
             
         }
       }
-
-
 
       $finalReturn = preg_replace('/(' .  get_yahoo_yesterday_trade_date() . ')/', '<span style="font-size: 12px; background-color:   #000080; color:white"> $1</span> ', $finalReturn);
       $finalReturn = preg_replace('/(' .  get_yahoo_todays_trade_date() . ')/', '<span style="font-size: 12px; background-color:  black; color:white"> $1</span> ', $finalReturn);
@@ -715,7 +714,7 @@ else if ($which_website == "bigcharts")
 
       $vixTDArray[4] = preg_replace('/<div\>/', '', $vixTDArray[4]); 
       $vixTDArray[4] = preg_replace('/<\/div>/', '', $vixTDArray[4]); 
-      $vixTDReturn = "<br>Last VIX Value: " . $vixTDArray[4];
+      $vixTDReturn = "<br>Last VIX Value: <span id='vix-value'>" . $vixTDArray[4] . "</span>";
 
       $bigChartsReturn = preg_replace('/<\/div>/', $vixTDReturn . '</div>', $bigChartsReturn); 
 

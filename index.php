@@ -43,6 +43,7 @@
 	<div id="left_container" style="position: relative; background-color: #F3F3FF; border-style: solid; border-width: 1px; float: left; width: 49%;	height: 100%;
 	display: block; clear: both; border-style: solid; border-width: 1px;">
 		<div id="left_top_container">
+			<span id="foreign_country" style="display:none"></span>
 			<div id="enter_quote_div">
 					<table>
 						<tr>
