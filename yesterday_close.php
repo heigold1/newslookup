@@ -68,6 +68,7 @@ $ac_obj = new MarketClient($consumer);
 
   $mkt_responce_obj = json_decode($out);   // USE THIS ON THE Verio Server 
 
+
 //  $mkt_response_obj = etHttpUtils::GetResponseObject($out);   // Use this on localhost
 
   $current_time = date('Gis', strtotime("-3 hours")); 

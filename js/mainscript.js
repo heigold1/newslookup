@@ -732,17 +732,13 @@ $('#entryPercentage').keypress(function(e){
           $("#orderStub").css("background-color", "#FFFFFF");  
         }
 
-        var warningMessage = ""; 
+        var warningMessage = "Check the VIX"; 
 
         var vixValue = parseFloat(document.getElementById("vix-value").innerHTML); 
-        if (vixValue > 20)
-        {
-            warningMessage += "VIX is greater than 20, check the VIX -- "; 
-        }
 
         if ($("#foreign_country").html() == "1")
         {
-            warningMessage += "This is a foreign company"; 
+            warningMessage += "-- This is a foreign company"; 
         }
 
         if (warningMessage != "")
