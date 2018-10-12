@@ -743,6 +743,7 @@ $('#entryPercentage').keypress(function(e){
 
         if (warningMessage != "")
         {
+          calcAll(); 
           alert(warningMessage);
         }
       } 
