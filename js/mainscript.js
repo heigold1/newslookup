@@ -732,7 +732,7 @@ $('#entryPercentage').keypress(function(e){
           $("#orderStub").css("background-color", "#FFFFFF");  
         }
 
-        var warningMessage = "Check the VIX"; 
+        var warningMessage = "Check to see if the VIX is picking up.  "; 
 
         var vixValue = parseFloat(document.getElementById("vix-value").innerHTML); 
 
@@ -743,12 +743,12 @@ $('#entryPercentage').keypress(function(e){
 
         if (warningMessage != "")
         {
-          calcAll(); 
-          alert(warningMessage);
+            alert(warningMessage);
+            calcAll(); 
+            $('#copy_price_to_percentage').click();
+            CopyToClipboard();  
         }
       } 
-
-
 
 //      $('#submit_button').click();
 });  // end of entryPercentage change function
