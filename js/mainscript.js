@@ -732,7 +732,7 @@ $('#entryPercentage').keypress(function(e){
           $("#orderStub").css("background-color", "#FFFFFF");  
         }
 
-        var warningMessage = "Check to see if the VIX is picking up.  "; 
+        var warningMessage = "Check to see if the VIX is picking up.  Check the volumes."; 
 
         var vixValue = parseFloat(document.getElementById("vix-value").innerHTML); 
 
