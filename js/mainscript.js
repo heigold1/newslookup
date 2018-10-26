@@ -803,8 +803,7 @@ $("#entryPrice").click(function(){
     $("#orderStub").val("-----------------------");    
     $('input#check_offering').attr('checked', false);
 
-
-
-
+startProcess(); 
+CopyToClipboard(); 
 
 });  // End of the initial automatically called function
