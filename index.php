@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>News Lookup</title>	
+	<title>Lookup - <?php echo $_GET['symbol'] ?></title>	
 	<meta content="text/html;charset=utf-8" http-equiv="Content-Type">
 	<meta content="utf-8" http-equiv="encoding">	
 	<script src="js/jquery-1.11.1.min.js"></script>

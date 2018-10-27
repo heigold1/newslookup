@@ -208,8 +208,6 @@ Number.prototype.toFixedDown = function(digits) {
 
 $(function() {
 
-
-
 if ($.trim($("#quote_input").val()) != ""){
 //  alert("not blank");
 }
@@ -369,6 +367,8 @@ if ($.trim($("#quote_input").val()) != ""){
 
               original_symbol = original_symbol.replace(/\.p\./gi, ".P"); 
 
+              openPage('./proxy_sec.php?symbol=' + symbol); 
+
               // initialize everything
 
               $("#left_bottom_container").html("");
@@ -492,8 +492,6 @@ if ($.trim($("#quote_input").val()) != ""){
                 $("#prepare_order_only_checkbox").prop('checked', false);
                 return; 
             }
-
-            openPage('./proxy_sec.php?symbol=' + symbol); 
 
             $.ajax({
                 url: "alphavantage_api_historical_data.php",
