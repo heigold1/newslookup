@@ -131,7 +131,7 @@ $finalReturn = "";
 
       if (preg_match('/No matching Ticker Symbol/', $result))
       {
-        echo "<title>SEC - " . $symbol . " (NONE)</title><h1>No matching ticker symbol</h1>";
+        echo "<title>Sec Filings - " . $symbol . " (NONE)</title><h1>No matching ticker symbol</h1>";
         return; 
       }
 
@@ -193,10 +193,10 @@ $finalReturn = "";
       $returnHtml .= "<html>";
       $returnHtml .= "<head>";
       if ($recentNews){
-          $returnHtml .= "<title>SEC - " . $symbol . "</title>";  
+          $returnHtml .= "<title>Sec Filings - " . $symbol . "</title>";  
       }
       else{
-          $returnHtml .= "<title>SEC - " . $symbol . " (NONE)</title>";   
+          $returnHtml .= "<title>Sec Filings - " . $symbol . " (NONE)</title>";   
       }
       
       $returnHtml .= "<body>"; 
