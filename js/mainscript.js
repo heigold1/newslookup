@@ -367,6 +367,7 @@ if ($.trim($("#quote_input").val()) != ""){
 
               original_symbol = original_symbol.replace(/\.p\./gi, ".P"); 
 
+              document.title = "Lookup - " + symbol; 
               openPage('./proxy_sec.php?symbol=' + symbol); 
 
               // initialize everything
