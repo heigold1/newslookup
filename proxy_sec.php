@@ -131,7 +131,7 @@ $finalReturn = "";
 
       if (preg_match('/No matching Ticker Symbol/', $result))
       {
-        echo "<title>SecFiling - " . $symbol . " (NONE)</title><h1>No matching ticker symbol</h1>";
+        echo "<title>Filing - " . $symbol . " (NONE)</title><h1>No matching ticker symbol</h1>";
         return; 
       }
 
@@ -184,6 +184,9 @@ $finalReturn = "";
                   }
 
                   $td2 = preg_replace('/ statement of acquisition of beneficial ownership/i', '<span style="font-size: 16px; background-color:red; color:black"><b>&nbsp;statement of acquisition of beneficial ownership - BACK OFF, COULD DECLARE CHAPTER 11</span></b>&nbsp;', $td2);      
+                  $td2 = preg_replace('/registration statement/i', '<span style="font-size: 16px; background-color:red; color:black"><b>&nbsp;Registration statement - OFFERING COMING OUT, HOLD OFF</span></b>&nbsp;', $td2);      
+
+
 
               $tableRows .=  "<tr>" . $td0 . '<td><a href ="' . $href2 . '">' . $td2 . '</a></td>' . $td3 . "</tr>"; 
             }
@@ -193,10 +196,10 @@ $finalReturn = "";
       $returnHtml .= "<html>";
       $returnHtml .= "<head>";
       if ($recentNews){
-          $returnHtml .= "<title>SecFiling - " . $symbol . "</title>";  
+          $returnHtml .= "<title>Filing - " . $symbol . "</title>";  
       }
       else{
-          $returnHtml .= "<title>SecFiling - " . $symbol . " (NONE)</title>";   
+          $returnHtml .= "<title>Filing - " . $symbol . " (NONE)</title>";   
       }
       
       $returnHtml .= "<body>"; 
