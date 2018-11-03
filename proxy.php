@@ -3,7 +3,7 @@
 include 'config.php';
 
 require_once("simple_html_dom.php"); 
-error_reporting(0);
+error_reporting(1);
 
 // header('Content-type: text/html');
 $symbol=$_GET['symbol'];
@@ -490,7 +490,35 @@ else if ($which_website == "yahoo")
         $convertedDate = new DateTime(); 
         $convertedDate->setTimestamp($publicationDateStrToTime);
 
-        $feedItem->pubDate = preg_replace("/[0-9][0-9]\:[0-9][0-9]\:[0-9][0-9] \+0000/", "", $feedItem->pubDate); 
+        $publicationDate = $feedItem->pubDate;
+        $publicationDate = preg_replace("/[0-9][0-9]\:[0-9][0-9]\:[0-9][0-9] \+0000/", "", $publicationDate); 
+        $publicationTime = $convertedDate->format("g:i A");
+
+
+
+        $yahoo_todays_date = date('l'); 
+        if ($yahoo_todays_date == "Monday")
+        {
+            if (preg_match('/(' .  get_yahoo_friday_trade_date() . ')/', $publicationDate))
+            {
+                $publicationTime = preg_replace('/AM/', '<span style="background-color: lightgreen">AM</span>', $publicationTime); 
+                $publicationTime = preg_replace('/PM/', '<span style="background-color: red">PM</span>', $publicationTime); 
+            }
+            if (preg_match('/(' .  get_yahoo_saturday_trade_date() . ')/', $publicationDate) ||
+                preg_match('/(' .  get_yahoo_yesterday_trade_date() . ')/', $publicationDate)
+              )
+            {
+                $publicationTime = '<span style="background-color: red">' . $publicationTime . '</span>'; 
+            }
+        }
+        else
+        {
+            if (preg_match('/(' .  get_yahoo_yesterday_trade_date() . ')/', $publicationDate))
+            {
+                $publicationTime = preg_replace('/AM/', '<span style="background-color: lightgreen">AM</span>', $publicationTime); 
+                $publicationTime = preg_replace('/PM/', '<span style="background-color: red">PM</span>', $publicationTime); 
+            }
+        }
 
         if ($i % 2 == 1)
         {
@@ -504,7 +532,7 @@ else if ($which_website == "yahoo")
         $newsTitle = preg_replace('/ withdrawal(.*?)application/i', '<span style="font-size: 12px; background-color:red; color:black"><b> withdrawal $1 application (55%) </b></span> ', $newsTitle);
         $newsTitle = preg_replace('/nasdaq rejects(.*?)listing/i', '<span style="font-size: 12px; background-color:red; color:black"><b>Nasdaq rejects $1 listing</span> If delisting tomorrow 65%, if delisting days away then 50-55%</b>&nbsp;', $newsTitle);
 
-        $allNews .=  " ><a href='$feedItem->link' title='$feedItem->title'> " . $feedItem->pubDate . " " . $convertedDate->format("g:i A") . " - " . $newsTitle . "</a></li>";
+        $allNews .=  " ><a href='$feedItem->link' title='$feedItem->title'> " . $publicationDate . " " . $publicationTime . " - " . $newsTitle . "</a></li>";
     }
 
       $allNews .=  "</ul>";
