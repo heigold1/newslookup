@@ -50,38 +50,43 @@ function get_today_trade_date()
     return $todays_yahoo_trade_date;
 }
 
-function grabEtradeHTML($etrade_host_name, $url)
-{
-    $ch = curl_init();
-    $header=array('GET /1575051 HTTP/1.1',
-    "Host: www.etrade.wallst.com",
-    'Accept:text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
-    'Accept-Language:en-US,en;q=0.8',
-      'Cookie: oda_bsid=386242%3A%3A@@*; 1432%5F0=C3D1E46964D0597C69BAB2D9F8A3652F', // Saturday at 3:09 PM - this worked
-    'Cache-Control:max-age=0',
-    'Connection:keep-alive',
-    'User-Agent:Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/27.0.1453.116 Safari/537.36',
-);
+function getURLTimestamp($url){
+    $curl = curl_init($url);
 
-    curl_setopt($ch,CURLOPT_URL, $url);
-    curl_setopt($ch,CURLOPT_RETURNTRANSFER,true);
-    curl_setopt($ch,CURLOPT_CONNECTTIMEOUT,0);
-    curl_setopt( $ch, CURLOPT_COOKIESESSION, true );
+    //don't fetch the actual page, you only want headers
+    curl_setopt($curl, CURLOPT_NOBODY, true);
 
-    curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
-    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
+    //stop it from outputting stuff to stdout
+    curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
 
-    curl_setopt($ch, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
+    // attempt to retrieve the modification date
+    curl_setopt($curl, CURLOPT_FILETIME, true);
 
-    curl_setopt($ch,CURLOPT_COOKIEFILE,'cookies.txt');
-    curl_setopt($ch,CURLOPT_COOKIEJAR,'cookies.txt');
-    curl_setopt($ch,CURLOPT_HTTPHEADER,$header);
+    $result = curl_exec($curl);
 
-    $returnHTML = curl_exec($ch);
-    return $returnHTML;
+    if ($result === false) {
+        return "No timestamp";
+    }
 
-} // end of function grabEtradeHTML
+    $timestamp = curl_getinfo($curl, CURLINFO_FILETIME);
+    if ($timestamp != -1) { //otherwise unknown
+        return $timestamp; 
+    } 
+    else
+    {
+      return "No timestamp";
+    }
+}
 
+function timestampIsSafe($timestamp){
+    if (((int) date('H', $timestamp)) < 12){
+        return true;
+    }
+    else
+    {
+        return false; 
+    }
+}
 
 function grabHTML($function_host_name, $url)
 {
@@ -165,22 +170,41 @@ $finalReturn = "";
                   $a2 = $td2nd[2]->find('a');
                   $href2 = 'https://www.sec.gov' . $a2[0]->href;
 
+                  $time = "";
 
                   $todays_date = date('l'); 
                   if ($todays_date == "Monday")
                   {
                     if ((preg_match('/(' .  get_friday_trade_date() . ')/', $td3)) || (preg_match('/(' .  get_saturday_trade_date() . ')/', $td3))){
-                        $recentNews = true;
+
                         $td3 = preg_replace('/(' .  get_friday_trade_date() . ')/', '<span style="font-size: 16px; background-color:#000080 ; color:white">$1</span>', $td3);
                         $td3 = preg_replace('/(' .  get_saturday_trade_date() . ')/', '<span style="font-size: 16px; background-color:#000080 ; color:white">$1</span>', $td3);
+                        if (preg_match('/(' .  get_friday_trade_date() . ')/', $td3))
+                        {
+                            $timestamp = getURLTimestamp($href2);
+                            $time = date("g:i A", $timestamp);
+                            if (!timestampIsSafe($timestamp))
+                            {
+                                $recentNews = true;
+                            }
+                        }
                     }
 
                   }  
 
                   if ((preg_match('/(' .  get_yesterday_trade_date() . ')/', $td3)) || (preg_match('/(' .  get_today_trade_date() . ')/', $td3))){
-                      $recentNews = true;
                       $td3 = preg_replace('/(' .  get_yesterday_trade_date() . ')/', '<span style="font-size: 16px; background-color:#000080 ; color:white">$1</span>', $td3);
                       $td3 = preg_replace('/(' .  get_today_trade_date() . ')/', '<span style="font-size: 16px; background-color:black; color:white">$1</span>', $td3);
+                        if (preg_match('/(' .  get_yesterday_trade_date() . ')/', $td3))
+                        {
+                            $timestamp = getURLTimestamp($href2);
+                            $time = date("g:i A", $timestamp);
+                            if (!timestampIsSafe($timestamp))
+                            {
+                                $recentNews = true;
+                            }
+                        }
+
                   }
 
                   $td2 = preg_replace('/ statement of acquisition of beneficial ownership/i', '<span style="font-size: 16px; background-color:red; color:black"><b>&nbsp;statement of acquisition of beneficial ownership - BACK OFF, COULD DECLARE CHAPTER 11</span></b>&nbsp;', $td2);      
@@ -188,7 +212,7 @@ $finalReturn = "";
 
 
 
-              $tableRows .=  "<tr>" . $td0 . '<td><a href ="' . $href2 . '">' . $td2 . '</a></td>' . $td3 . "</tr>"; 
+              $tableRows .=  "<tr>" . $td0 . '<td><a href ="' . $href2 . '">' . $td2 . '</a></td>' . $td3 . "<td>" . $time . "</td></tr>"; 
             }
 
 
