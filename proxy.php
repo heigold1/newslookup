@@ -489,8 +489,6 @@ else if ($which_website == "yahoo")
         $publicationDateStrToTime = strtotime($feedItem->pubDate);
         $convertedDate = new DateTime(); 
         $convertedDate->setTimestamp($publicationDateStrToTime);
-        $interval = DateInterval::createFromDateString('-3 hours'); 
-        $convertedDate->add($interval); 
 
         $feedItem->pubDate = preg_replace("/[0-9][0-9]\:[0-9][0-9]\:[0-9][0-9] \+0000/", "", $feedItem->pubDate); 
 
