@@ -387,7 +387,7 @@ if ($.trim($("#quote_input").val()) != ""){
               $("#day1").html("");
               $("#entryPrice").val(""); 
               $("#entryPercentage").val("");  
-              $("#amountSpending").val("600");
+              $("#amountSpending").val("650");
               $("#eTradeLowPercentage").html("");
               $("#orderStub").val("-----------------------"); 
               $("#foreign_country").html("");

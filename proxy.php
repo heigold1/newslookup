@@ -214,6 +214,37 @@ function get_marketwatch_today_trade_date()
     return $today_marketwatch_trade_date;
 }
 
+function calcFinVizAvgVolume($string)
+{
+    $string = preg_replace('/.*Avg Volume/', '', $string);
+
+    $string = preg_replace('/Price.*$/', '', $string); 
+    $string = rtrim($string);  
+
+    $string = preg_replace('/string/', '', $string);
+
+    $thousands = false; 
+    $millions = false;
+
+    if (preg_match('/K/', $string)){ $thousands = true;}
+    if (preg_match('/M/', $string)){ $millions = true;}
+
+    $string = preg_replace('/M|K/', '', $string); 
+    $string = rtrim($string);
+
+    $string = preg_replace("/<.*?>/", "", $string);
+    $string = rtrim($string);
+
+    $string = floatval($string);
+
+    if ($thousands){ $string*= 1000;} elseif ($millions){ $string *= 1000000;}
+
+    $string = number_format($string);
+
+    return($string);
+}
+
+
 function curl_get_contents($url)
 {
     $ch = curl_init();
@@ -561,10 +592,12 @@ else if ($which_website == "yahoo")
 
       $currentVolume = '<span style="font-size: 12px; background-color:#ff9999; color: black; display: inline-block;"><b>Vol - ' . number_format((int) $_GET['total_volume']) . '</b></span>'; 
 
-      $avgVol3Months = "to do";  // $volumeArray[15];
+      // Calculate the finViz 3 month volume number
 
-      $avgVol10days = '<span style="font-size: 12px; background-color:#CCFF99; color: black; display: inline-block;"><b>10 day vol - ' . number_format((int) $_GET['ten_day_volume']) . '</b></span>'; 
+      $finVizTDArray = $html->find('table.snapshot-table2 tbody tr.table-dark-row');
+      $avgVolFinViz = "<span style='background-color: orange'><b>FinViz - " . calcFinVizAvgVolume($finVizTDArray[10]) . "</b></span>";
 
+      $avgVol10days = '<span style="font-size: 12px; background-color:#CCFF99; color: black; display: inline-block;"><b>10 day - ' . number_format((int) $_GET['ten_day_volume']) . '</b></span>'; 
 
       // todo - put in the avgVol3Months from finviz.com
       // $avgVol3Months = 
@@ -661,7 +694,9 @@ else if ($which_website == "yahoo")
       $finalReturn = preg_replace('/ abandon/i', '<span style="font-size: 12px; background-color:red; color:black"><b>&nbsp;abandon&nbsp;</span> (65-70%)</b>', $finalReturn);
       $finalReturn = preg_replace('/ bankrupt/i', '<span style="font-size: 12px; background-color:red; color:black"><b>&nbsp;bankrupt&nbsp;</span> (65%)</b>', $finalReturn);      
       $finalReturn = preg_replace('/ terminate| terminates| terminated| termination/i', '<span style="font-size: 12px; background-color:red; color:black"><b>&nbsp;terminate&nbsp;</span> (65%) </b>', $finalReturn);            
-      $finalReturn = preg_replace('/ drug/i', '<span style="font-size: 12px; background-color:red; color:black"><b>&nbsp;drug&nbsp;</span></b>', $finalReturn);
+
+      $finalReturn = preg_replace('/ drug/i', '<span style="font-size: 12px; background-color:red; color:black"><b>&nbsp;drug </span></b> ', $finalReturn);
+
       $finalReturn = preg_replace('/ guidance/i', '<span style="font-size: 12px; background-color:red; color:black"><b>&nbsp;guidance</span> (35-40% early)</b>&nbsp;', $finalReturn);
       $finalReturn = preg_replace('/ regulatory update/i', '<span style="font-size: 12px; background-color:red; color:black"><b>&nbsp;regulatory update (35% even if regulation is good)</span></b>&nbsp;', $finalReturn);
       $finalReturn = preg_replace('/ suspended/i', '<span style="font-size: 12px; background-color:red; color:black"><b>&nbsp;suspended</span> (65-70%)</b>&nbsp;', $finalReturn);
@@ -705,7 +740,7 @@ else if ($which_website == "yahoo")
         $google = preg_replace('/<h1>/', '', $google);
         $google = preg_replace('/<\/h1>/', '', $google);
 
-      $finalReturn = $yahooDates . $returnCompanyName . $companyWebsite . $sectorCountry . $returnYesterdaysClose . $preMarketYesterdaysClose[0] . "<br>" . "<div style='display: inline-block;'>" . $currentVolume . $avgVol10days . $avgVol3Months . $company_profile . $message_board . $google . '<table width="575px"><tr width="575px">' . $finalReturn . '</tr></table>'; 
+      $finalReturn = $yahooDates . $returnCompanyName . $companyWebsite . $sectorCountry . $returnYesterdaysClose . $preMarketYesterdaysClose[0] . "<br>" . "<div style='display: inline-block;'>" . $currentVolume . $avgVol10days . $avgVolFinViz .  $company_profile . $message_board . $google . '<table width="575px"><tr width="575px">' . $finalReturn . '</tr></table>'; 
 
       echo $finalReturn; 
 
