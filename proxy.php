@@ -590,14 +590,14 @@ else if ($which_website == "yahoo")
 
       $returnCompanyName = '<h1>' . $_GET['company_name'] . '</h1>';      // $companyNameArray[0]; 
 
-      $currentVolume = '<span style="font-size: 12px; background-color:#ff9999; color: black; display: inline-block;"><b>Vol - ' . number_format((int) $_GET['total_volume']) . '</b></span>'; 
+      $currentVolume = '<span id="vol_current" style="font-size: 12px; background-color:#ff9999; color: black; display: inline-block;"><b>Vol - ' . number_format((int) $_GET['total_volume']) . '</b></span>'; 
 
       // Calculate the finViz 3 month volume number
 
       $finVizTDArray = $html->find('table.snapshot-table2 tbody tr.table-dark-row');
-      $avgVolFinViz = "<span style='background-color: orange'><b>FinViz - " . calcFinVizAvgVolume($finVizTDArray[10]) . "</b></span>";
+      $avgVolFinViz = "<span id='vol_fin_viz' style='background-color: orange'><b>FinViz - " . calcFinVizAvgVolume($finVizTDArray[10]) . "</b></span>";
 
-      $avgVol10days = '<span style="font-size: 12px; background-color:#CCFF99; color: black; display: inline-block;"><b>10 day - ' . number_format((int) $_GET['ten_day_volume']) . '</b></span>'; 
+      $avgVol10days = '<span id="vol_10_day" style="font-size: 12px; background-color:#CCFF99; color: black; display: inline-block;"><b>10 day - ' . number_format((int) $_GET['ten_day_volume']) . '</b></span>'; 
 
       // todo - put in the avgVol3Months from finviz.com
       // $avgVol3Months = 
@@ -658,7 +658,6 @@ else if ($which_website == "yahoo")
         for ($daysBack = 14; $daysBack >= 4; $daysBack--)
         {
             $finalReturn = preg_replace('/(' .  get_yahoo_trade_date($daysBack) . ')/', '<span style="font-size: 12px; background-color:yellow ; color:black">$1</span>', $finalReturn);      
-            
         }
 
       }
@@ -667,7 +666,6 @@ else if ($which_website == "yahoo")
         for ($daysBack = 14; $daysBack >= 2; $daysBack--)
         {
             $finalReturn = preg_replace('/(' .  get_yahoo_trade_date($daysBack) . ')/', '<span style="font-size: 12px; background-color:yellow ; color:black">$1</span>', $finalReturn);      
-            
         }
       }
 

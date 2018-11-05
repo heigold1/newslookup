@@ -387,7 +387,7 @@ if ($.trim($("#quote_input").val()) != ""){
               $("#day1").html("");
               $("#entryPrice").val(""); 
               $("#entryPercentage").val("");  
-              $("#amountSpending").val("650");
+              $("#amountSpending").val("800");
               $("#eTradeLowPercentage").html("");
               $("#orderStub").val("-----------------------"); 
               $("#foreign_country").html("");
@@ -589,12 +589,13 @@ if ($.trim($("#quote_input").val()) != ""){
               yesterdaysClose = yesterdaysClose.replace(/<\/h4> /ig, "");         
 
               etfStringLocation =  yahooCompanyName.search(/ etf /i);
+              etnStringLocation =  yahooCompanyName.search(/ etn /i);
 
               // if it is an ETF then we need to tell the proxy server that, so when it 
               // searches for marketwatch information it can insert "fund" instead of "stock"
               // in the URl. 
 
-              if (etfStringLocation > -1)
+              if ((etfStringLocation > -1) || (etnStringLocation  > -1))
               {           
                   stockOrFund = "fund"; 
               }
