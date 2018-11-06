@@ -525,8 +525,6 @@ else if ($which_website == "yahoo")
         $publicationDate = preg_replace("/[0-9][0-9]\:[0-9][0-9]\:[0-9][0-9] \+0000/", "", $publicationDate); 
         $publicationTime = $convertedDate->format("g:i A");
 
-
-
         $yahoo_todays_date = date('l'); 
         if ($yahoo_todays_date == "Monday")
         {

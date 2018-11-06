@@ -175,10 +175,9 @@ $finalReturn = "";
                   $todays_date = date('l'); 
                   if ($todays_date == "Monday")
                   {
-                    if ((preg_match('/(' .  get_friday_trade_date() . ')/', $td3)) || (preg_match('/(' .  get_saturday_trade_date() . ')/', $td3))){
-
                         $td3 = preg_replace('/(' .  get_friday_trade_date() . ')/', '<span style="font-size: 16px; background-color:#000080 ; color:white">$1</span>', $td3);
                         $td3 = preg_replace('/(' .  get_saturday_trade_date() . ')/', '<span style="font-size: 16px; background-color:#000080 ; color:white">$1</span>', $td3);
+                        $td3 = preg_replace('/(' .  get_yesterday_trade_date() . ')/', '<span style="font-size: 16px; background-color:#000080 ; color:white">$1</span>', $td3);
 
 
                         if (preg_match('/(' .  get_friday_trade_date() . ')/', $td3))
@@ -194,28 +193,27 @@ $finalReturn = "";
                         {
                             $recentNews = true;
                         }
-                    }
-
                   }  
-                  elseif ((preg_match('/(' .  get_yesterday_trade_date() . ')/', $td3)) || (preg_match('/(' .  get_today_trade_date() . ')/', $td3))){
+                  else 
+                  {
                       $td3 = preg_replace('/(' .  get_yesterday_trade_date() . ')/', '<span style="font-size: 16px; background-color:#000080 ; color:white">$1</span>', $td3);
-                      $td3 = preg_replace('/(' .  get_today_trade_date() . ')/', '<span style="font-size: 16px; background-color:black; color:white">$1</span>', $td3);
-
-                        if (preg_match('/(' .  get_yesterday_trade_date() . ')/', $td3))
-                        {
-                            $timestamp = getURLTimestamp($href2);
-                            $time = date("g:i A", $timestamp);
-                            if (!timestampIsSafe($timestamp))
-                            {
-                                $recentNews = true;
-                            }
-                        }
-                        elseif (preg_match('/(' .  get_today_trade_date() . ')/', $td3))
-                        {
-                            $recentNews = true; 
-                        }
-
+                      if (preg_match('/(' .  get_yesterday_trade_date() . ')/', $td3))
+                      {
+                          $timestamp = getURLTimestamp($href2);
+                          $time = date("g:i A", $timestamp);
+                          if (!timestampIsSafe($timestamp))
+                          {
+                              $recentNews = true;
+                          }
+                      }
                   }
+
+                  if (preg_match('/(' .  get_today_trade_date() . ')/', $td3))
+                  {
+                      $recentNews = true; 
+                  }
+
+                  $td3 = preg_replace('/(' .  get_today_trade_date() . ')/', '<span style="font-size: 16px; background-color:black; color:white">$1</span>', $td3);
 
                   $td2 = preg_replace('/ statement of acquisition of beneficial ownership/i', '<span style="font-size: 16px; background-color:red; color:black"><b>&nbsp;statement of acquisition of beneficial ownership - BACK OFF, COULD DECLARE CHAPTER 11</span></b>&nbsp;', $td2);      
                   $td2 = preg_replace('/registration statement/i', '<span style="font-size: 16px; background-color:red; color:black"><b>&nbsp;Registration statement - OFFERING COMING OUT, HOLD OFF</span></b>&nbsp;', $td2);      
