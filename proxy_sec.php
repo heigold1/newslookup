@@ -179,6 +179,8 @@ $finalReturn = "";
 
                         $td3 = preg_replace('/(' .  get_friday_trade_date() . ')/', '<span style="font-size: 16px; background-color:#000080 ; color:white">$1</span>', $td3);
                         $td3 = preg_replace('/(' .  get_saturday_trade_date() . ')/', '<span style="font-size: 16px; background-color:#000080 ; color:white">$1</span>', $td3);
+
+
                         if (preg_match('/(' .  get_friday_trade_date() . ')/', $td3))
                         {
                             $timestamp = getURLTimestamp($href2);
@@ -188,6 +190,10 @@ $finalReturn = "";
                                 $recentNews = true;
                             }
                         }
+                        elseif (preg_match('/(' .  get_saturday_trade_date() . ')/', $td3))
+                        {
+                            $recentNews = true;
+                        }
                     }
 
                   }  
@@ -195,6 +201,7 @@ $finalReturn = "";
                   if ((preg_match('/(' .  get_yesterday_trade_date() . ')/', $td3)) || (preg_match('/(' .  get_today_trade_date() . ')/', $td3))){
                       $td3 = preg_replace('/(' .  get_yesterday_trade_date() . ')/', '<span style="font-size: 16px; background-color:#000080 ; color:white">$1</span>', $td3);
                       $td3 = preg_replace('/(' .  get_today_trade_date() . ')/', '<span style="font-size: 16px; background-color:black; color:white">$1</span>', $td3);
+
                         if (preg_match('/(' .  get_yesterday_trade_date() . ')/', $td3))
                         {
                             $timestamp = getURLTimestamp($href2);
@@ -203,6 +210,10 @@ $finalReturn = "";
                             {
                                 $recentNews = true;
                             }
+                        }
+                        elseif (preg_match('/(' .  get_today_trade_date() . ')/', $td3))
+                        {
+                            $recentNews = true; 
                         }
 
                   }
