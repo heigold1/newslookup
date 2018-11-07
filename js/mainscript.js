@@ -409,8 +409,6 @@ if ($.trim($("#quote_input").val()) != ""){
                   dataType: 'html',
                   success:  function (data) {
 
-
-
                           returnData = data.match(/Caught exception/i); 
                           if (returnData || (data == '------') || (data == '------a') || (data == '------b'))
                           {
@@ -419,12 +417,19 @@ if ($.trim($("#quote_input").val()) != ""){
                           else
                           {
                           jsonObject = JSON.parse(data);
-                          low = jsonObject.low;
-                          bid = jsonObject.bid;
-                          prev_close = jsonObject.prev_close; 
+                          low = parseFloat(jsonObject.low);
+                          bid = parseFloat(jsonObject.bid);
+                          prev_close = parseFloat(jsonObject.prev_close); 
 
                           $("#yestCloseText").val(jsonObject.prev_close);
-                          $("#eTradeLow").html(low);
+                          if (low > 1.00)
+                          {  
+                              $("#eTradeLow").html(low.toFixed(2));
+                          }
+                          else 
+                          {
+                              $("#eTradeLow").html(low.toFixed(4));
+                          }
                           $("#eTradeHigh").html(jsonObject.high);
 
                           yahooCompanyName = jsonObject.company_name;
@@ -436,11 +441,11 @@ if ($.trim($("#quote_input").val()) != ""){
                           var bidCalculatedPercentage=((prev_close-bid)/prev_close)*100; 
                           var lowCalculatedPercentage=((prev_close-low)/prev_close)*100; 
 
-                          // if the bid is within a 2% range of the low, then we're going to set the default 
+                          // if the bid is within a 3% range of the low, then we're going to set the default 
                           // entry to the bid, just in case it dropped extremely fast and we only have a couple 
                           // seconds to pull the trigger, have the order ready.
 
-                          if ((bid < prev_close) && (bidCalculatedPercentage >= (lowCalculatedPercentage - 2.00)))
+                          if ((bid < prev_close) && (bidCalculatedPercentage >= (lowCalculatedPercentage - 2.5)))
                           {
                               defaultEntry = parseFloat(bid);
 
@@ -465,14 +470,22 @@ if ($.trim($("#quote_input").val()) != ""){
                               {
                                 defaultEntry = defaultEntry.toFixed(2);
                               }
+
+                              defaultEntry = defaultEntry.toString();
+                              defaultEntry = defaultEntry.replace(/^0\./gm, '.');
+
+                              $("#entryPrice").val(defaultEntry);
+
+                              calcAll(); 
                           }    
-
-                          defaultEntry = defaultEntry.toString();
-                          defaultEntry = defaultEntry.replace(/^0\./gm, '.');
-
-                          $("#entryPrice").val(defaultEntry);
-
-                          calcAll(); 
+                          else
+                          {
+                            $("#entryPrice").val(low.toFixed(2));
+                            var bidLowDiff = lowCalculatedPercentage - bidCalculatedPercentage;
+console.log('bid is ' + bid.toFixed(2) + ' and low is ' + low.toFixed(2));
+console.log("Missed the low(" + low.toFixed(2) + "), bid(" + bid.toFixed(2) + ")/low(" + low.toFixed(2) + ") diff is "  + bidLowDiff.toFixed(2) + "%");
+                            $("#orderStub").val("bid/low diff - "  + bidLowDiff.toFixed(2) + "%" ); 
+                          }
 
                           var lowCalculatedPercentage=((prev_close-low)/prev_close)*100
                           $("#eTradeLowPercentage").html(lowCalculatedPercentage.toFixed(2)); 
@@ -648,7 +661,10 @@ if ($.trim($("#quote_input").val()) != ""){
         }
 
         var myIframe = document.getElementById('etrade_iframe');
+        if (myIframe != null)
+        {
             myIframe.contentWindow.scrollTo(75, 100); 
+        }
 
     } // function startProcess()
 

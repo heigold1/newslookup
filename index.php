@@ -10,31 +10,8 @@
 	<link type="text/css" href="./css/combined-min-1.0.5754.css" rel="stylesheet" />
 	<link type="text/css" href="./css/quote-layout.css" rel="stylesheet"/>
 	<link type="text/css" href="./css/quote-typography.css" rel="stylesheet"/>
-	<script>
-	  	window.addEventListener("beforeunload", function(e){
-    		alert("window closing");
-  		}, false);
-
-	  	window.addEventListener("onunload", function(e){
-    		alert("window closing");
-  		}, false);
-
-		window.onbeforeunload = closingCode;
-			function closingCode(){
-				alert("window closing");
-   			return null;
-		}
-
-		$(window).unload(function(){
-			alert("window closing");
-		});
-
-	</script>
-
 
 </head>
-
-<body onunload="function(){alert('window closing');}"> 
 
 <div id="volumeChecked" style="display: none">0</div>
 <div id="windowNumber" style="display: none">1</div>
