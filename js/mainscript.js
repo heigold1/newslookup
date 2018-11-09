@@ -336,6 +336,7 @@ if ($.trim($("#quote_input").val()) != ""){
           var stockOrFund = ""; 
           var yesterdaysClose; 
           var google_keyword_string= "";
+          var exchange = "";          
 
           closeAllWindows();
 
@@ -421,6 +422,8 @@ if ($.trim($("#quote_input").val()) != ""){
                           bid = parseFloat(jsonObject.bid);
                           prev_close = parseFloat(jsonObject.prev_close); 
 
+
+
                           $("#yestCloseText").val(jsonObject.prev_close);
                           if (low > 1.00)
                           {  
@@ -441,12 +444,26 @@ if ($.trim($("#quote_input").val()) != ""){
                           var bidCalculatedPercentage=((prev_close-bid)/prev_close)*100; 
                           var lowCalculatedPercentage=((prev_close-low)/prev_close)*100; 
 
-                          // if the bid is within a 3% range of the low, then we're going to set the default 
-                          // entry to the bid, just in case it dropped extremely fast and we only have a couple 
-                          // seconds to pull the trigger, have the order ready.
 
-                          if ((bid < prev_close) && (bidCalculatedPercentage >= (lowCalculatedPercentage - 2.5)))
+
+                          if ((exchange == "u") && (lowCalculatedPercentage < 30.00)) 
                           {
+                              // check if my broker's data is haywire 
+                              // any Pink Sheet that isn't down 30%, alert it in the orderStub window
+                              $("#orderStub").val("Pink Sheet - " + lowCalculatedPercentage.toFixed(2) + "%!!!  HAYWIRE!!"); 
+                          }
+                          else if ((exchange != "u") && (lowCalculatedPercentage < 13.00)) 
+                          {
+                              // check if my broker's data is haywire 
+                              // any Nasdaq/NYSE/AMEX that isn't down 13%, alert it in the orderStub window
+                              $("#orderStub").val("NASDAQ/NYSE/AMEX - " + lowCalculatedPercentage.toFixed(2) + "%!!!  HAYWIRE!!"); 
+                          }
+                          else if ((bid < prev_close) && (bidCalculatedPercentage >= (lowCalculatedPercentage - 2.5)))
+                          {
+                              // if the bid is within a 3% range of the low, then we're going to set the default 
+                              // entry to the bid, just in case it dropped extremely fast and we only have a couple 
+                              // seconds to pull the trigger, have the order ready.
+
                               defaultEntry = parseFloat(bid);
 
                               if (defaultEntry == 0.9999)
@@ -461,7 +478,6 @@ if ($.trim($("#quote_input").val()) != ""){
                               {
                                 defaultEntry += 0.01;
                               }
-
                               if (defaultEntry < 1.00)
                               {
                                 defaultEntry = defaultEntry.toFixed(4);
@@ -482,8 +498,6 @@ if ($.trim($("#quote_input").val()) != ""){
                           {
                             $("#entryPrice").val(low.toFixed(2));
                             var bidLowDiff = lowCalculatedPercentage - bidCalculatedPercentage;
-console.log('bid is ' + bid.toFixed(2) + ' and low is ' + low.toFixed(2));
-console.log("Missed the low(" + low.toFixed(2) + "), bid(" + bid.toFixed(2) + ")/low(" + low.toFixed(2) + ") diff is "  + bidLowDiff.toFixed(2) + "%");
                             $("#orderStub").val("bid/low diff - "  + bidLowDiff.toFixed(2) + "%" ); 
                           }
 

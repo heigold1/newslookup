@@ -66,8 +66,9 @@ $ac_obj = new MarketClient($consumer);
 
   }
 
-  $mkt_responce_obj = json_decode($out);   // USE THIS ON THE Verio Server 
 
+
+  $mkt_responce_obj = json_decode($out);   // USE THIS ON THE Verio Server 
 
 //  $mkt_response_obj = etHttpUtils::GetResponseObject($out);   // Use this on localhost
 
@@ -84,6 +85,7 @@ $ac_obj = new MarketClient($consumer);
         $low = (string) $mkt_responce_obj->quoteResponse->quoteData->all->low;
         $high = (string) $mkt_responce_obj->quoteResponse->quoteData->all->high;
         $bid = (string) $mkt_responce_obj->quoteResponse->quoteData->all->bid;
+        $exchange = trim((string) $mkt_responce_obj->quoteResponse->quoteData->product->exchange);
 
         if (preg_match('/E-4/', $last_trade))
         {
@@ -109,12 +111,9 @@ $ac_obj = new MarketClient($consumer);
         $dataArray['ten_day_volume'] = $ten_day_volume; 
         $dataArray['total_volume'] = $total_volume; 
         $dataArray['company_name'] = $company_name;
+        $dataArray['exchange'] = $exchange; 
 
         echo json_encode($dataArray);
-
-/*        echo '{"prev_close":"' . $last_trade . '",' . 
-           ' "low":"' . $low . '",' . 
-           ' "high":"' . $high . '"}'; */
       }
       else
       {
@@ -160,10 +159,6 @@ $ac_obj = new MarketClient($consumer);
         $dataArray['company_name'] = $company_name;
 
         echo json_encode($dataArray);
-        
-/*        echo '{"prev_close":"' . $prev_close . '",' . 
-           ' "low":"' . $low . '",' . 
-           ' "high":"' .(string) $mkt_responce_obj->quoteResponse->quoteData->all->volume10Day $high . '"}';  */ 
       }
       else
       {
