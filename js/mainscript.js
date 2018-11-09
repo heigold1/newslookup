@@ -450,12 +450,14 @@ if ($.trim($("#quote_input").val()) != ""){
                           {
                               // check if my broker's data is haywire 
                               // any Pink Sheet that isn't down 30%, alert it in the orderStub window
+                              $("#entryPrice").val("--------");
                               $("#orderStub").val("Pink Sheet - " + lowCalculatedPercentage.toFixed(2) + "%!!!  HAYWIRE!!"); 
                           }
                           else if ((exchange != "u") && (lowCalculatedPercentage < 13.00)) 
                           {
                               // check if my broker's data is haywire 
                               // any Nasdaq/NYSE/AMEX that isn't down 13%, alert it in the orderStub window
+                              $("#entryPrice").val("--------");
                               $("#orderStub").val("NASDAQ/NYSE/AMEX - " + lowCalculatedPercentage.toFixed(2) + "%!!!  HAYWIRE!!"); 
                           }
                           else if ((bid < prev_close) && (bidCalculatedPercentage >= (lowCalculatedPercentage - 2.5)))
