@@ -86,7 +86,7 @@ function closePage(){
 }
 
 function calcAll(){
-
+console.log("inside calcAll");
     var original_symbol = $.trim($("#quote_input").val()); 
     original_symbol = original_symbol.replace(/\.p\./gi, ".P"); 
     original_symbol = original_symbol.toUpperCase(); 
@@ -421,7 +421,7 @@ if ($.trim($("#quote_input").val()) != ""){
                           low = parseFloat(jsonObject.low);
                           bid = parseFloat(jsonObject.bid);
                           prev_close = parseFloat(jsonObject.prev_close); 
-
+                          exchange = jsonObject.exchange;
 
 
                           $("#yestCloseText").val(jsonObject.prev_close);
@@ -444,20 +444,20 @@ if ($.trim($("#quote_input").val()) != ""){
                           var bidCalculatedPercentage=((prev_close-bid)/prev_close)*100; 
                           var lowCalculatedPercentage=((prev_close-low)/prev_close)*100; 
 
-
+console.log("exchnage is *" + exchange + "*");
 
                           if ((exchange == "u") && (lowCalculatedPercentage < 30.00)) 
                           {
                               // check if my broker's data is haywire 
                               // any Pink Sheet that isn't down 30%, alert it in the orderStub window
-                              $("#entryPrice").val("--------");
+                              $("#entryPrice").val("!!HAYWIRE!!");
                               $("#orderStub").val("Pink Sheet - " + lowCalculatedPercentage.toFixed(2) + "%!!!  HAYWIRE!!"); 
                           }
                           else if ((exchange != "u") && (lowCalculatedPercentage < 13.00)) 
                           {
                               // check if my broker's data is haywire 
                               // any Nasdaq/NYSE/AMEX that isn't down 13%, alert it in the orderStub window
-                              $("#entryPrice").val("--------");
+                              $("#entryPrice").val("!!HAYWIRE!!");
                               $("#orderStub").val("NASDAQ/NYSE/AMEX - " + lowCalculatedPercentage.toFixed(2) + "%!!!  HAYWIRE!!"); 
                           }
                           else if ((bid < prev_close) && (bidCalculatedPercentage >= (lowCalculatedPercentage - 2.5)))
