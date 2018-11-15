@@ -180,7 +180,7 @@ $finalReturn = "";
                         $td3 = preg_replace('/(' .  get_yesterday_trade_date() . ')/', '<span style="font-size: 16px; background-color:#000080 ; color:white">$1</span>', $td3);
 
 
-                        if (preg_match('/(' .  get_friday_trade_date() . ')/', $td3))
+                        if (preg_match('/(' .  get_friday_trade_date() . ')/', $td3) || preg_match('/(' .  get_today_trade_date() . ')/', $td3))
                         {
                             $timestamp = getURLTimestamp($href2);
                             $time = date("g:i A", $timestamp);
@@ -197,7 +197,7 @@ $finalReturn = "";
                   else 
                   {
                       $td3 = preg_replace('/(' .  get_yesterday_trade_date() . ')/', '<span style="font-size: 16px; background-color:#000080 ; color:white">$1</span>', $td3);
-                      if (preg_match('/(' .  get_yesterday_trade_date() . ')/', $td3))
+                      if (preg_match('/(' .  get_yesterday_trade_date() . ')/', $td3) || preg_match('/(' .  get_today_trade_date() . ')/', $td3))
                       {
                           $timestamp = getURLTimestamp($href2);
                           $time = date("g:i A", $timestamp);

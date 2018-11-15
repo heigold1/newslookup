@@ -595,6 +595,15 @@ console.log("exchnage is *" + exchange + "*");
                     $("#foreign_country").html("1");
                 }
 
+                if (data.search(/geo_china/) > 0)
+                {
+                    $("#chinese_stock").html("1");
+                }
+                else
+                {
+                    $("#chinese_stock").html("0");
+                }
+
               yahooCompanyName = " " + data.match(/<h1(.*?)h1>/g) + " "; 
 
               google_keyword_string = yahooCompanyName;
@@ -641,6 +650,7 @@ console.log("exchnage is *" + exchange + "*");
 
             (function(){
               var eTradeIFrame = '<br><iframe id="etrade_iframe" src="https://www.etrade.wallst.com/v1/stocks/news/search_results.asp?symbol=' + symbol + '&rsO=new#lastTradeTime" width="575px" height="340px"></iframe>';
+              
 
               $("div#left_bottom_container").css("background-color", "#BBDDFF");                     
                 $.ajax({
@@ -663,12 +673,46 @@ console.log("exchnage is *" + exchange + "*");
         $("h1").css({"padding-top" : "0px", "margin-top" : "0px", "padding-bottom" : "0px", "margin-bottom" : "0px"}); 
 
 
+        var warningMessage = ""; 
+
         // any previous-day spike greater than 15% will be considered high-risk 
         var day1 = parseFloat($("#day1").html());
 
         if (day1 > 15)
         {
-          alert("This is a high-risk stock");
+            warningMessage += "This is a high-risk stock";
+        }
+
+        // check if it's a Chinese or foreign stock
+
+        if ($("#chinese_stock").html() == "1")
+        {
+            warningMessage += " ** CHINESE COMPANY - 58% ** ";
+        }
+        else if ($("#foreign_country").html() == "1")
+        {
+            warningMessage += " ** FOREIGN COMPANY ** ";
+        }
+
+        // check for any volume alerts
+
+        var finVizAvgVolume = parseInt(document.getElementById("vol_fin_viz").innerHTML.replace(/\D/g,''));
+        var eTradeAvgVolume = parseInt(document.getElementById("vol_10_day").innerHTML.replace(/\D/g,''));
+
+        if ((finVizAvgVolume < 60000) || (eTradeAvgVolume < 60000))
+        {
+          warningMessage += " ** LOW AVERAGE VOLUME ** ";
+        }
+
+
+        if (warningMessage != "")
+        {
+            alert(warningMessage);
+        }
+
+
+        if (day1 > 15)
+        {
           $("#day1").css("background-color", "#FF0000");  
         }
         else
