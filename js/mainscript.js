@@ -699,11 +699,10 @@ console.log("exchnage is *" + exchange + "*");
         var finVizAvgVolume = parseInt(document.getElementById("vol_fin_viz").innerHTML.replace(/\D/g,''));
         var eTradeAvgVolume = parseInt(document.getElementById("vol_10_day").innerHTML.replace(/\D/g,''));
 
-        if ((finVizAvgVolume < 60000) || (eTradeAvgVolume < 60000))
+        if ((finVizAvgVolume < 60000) && (eTradeAvgVolume < 60000))
         {
           warningMessage += " ** LOW AVERAGE VOLUME ** ";
         }
-
 
         if (warningMessage != "")
         {

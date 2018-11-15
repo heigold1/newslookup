@@ -595,7 +595,7 @@ else if ($which_website == "yahoo")
       $finVizTDArray = $html->find('table.snapshot-table2 tbody tr.table-dark-row');
       $avgVolFinViz = "<span id='vol_fin_viz' style='background-color: orange'><b>FinViz - " . calcFinVizAvgVolume($finVizTDArray[10]) . "</b></span>";
 
-      $avgVol10days = '<span id="vol_10_day" style="font-size: 12px; background-color:#CCFF99; color: black; display: inline-block;"><b>10 day - ' . number_format((int) $_GET['ten_day_volume']) . '</b></span>'; 
+      $avgVol10days = '<span id="vol_10_day" style="font-size: 12px; background-color:#CCFF99; color: black; display: inline-block;"><b>eTrade - ' . number_format((int) $_GET['ten_day_volume']) . '</b></span>'; 
 
       // todo - put in the avgVol3Months from finviz.com
       // $avgVol3Months = 
