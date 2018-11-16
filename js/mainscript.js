@@ -333,6 +333,7 @@ if ($.trim($("#quote_input").val()) != ""){
           var yahooCompanyName = ""; 
           var yahoo10DayVolume = "";
           var totalVolume = "";
+          var yesterdayVolume = ""; 
           var stockOrFund = ""; 
           var yesterdaysClose; 
           var google_keyword_string= "";
@@ -401,7 +402,7 @@ if ($.trim($("#quote_input").val()) != ""){
 
               $("#yestCloseText").focus();
 
-              // E*TRADE API data
+                // E*TRADE API data
               $("div#left_top_container").css("background-color", "#BBDDFF");
               $.ajax({
                   url: "yesterday_close.php",
@@ -444,7 +445,7 @@ if ($.trim($("#quote_input").val()) != ""){
                           var bidCalculatedPercentage=((prev_close-bid)/prev_close)*100; 
                           var lowCalculatedPercentage=((prev_close-low)/prev_close)*100; 
 
-console.log("exchnage is *" + exchange + "*");
+                          console.log("exchnage is *" + exchange + "*");
 
                           if ((exchange == "u") && (lowCalculatedPercentage < 30.00)) 
                           {
@@ -532,6 +533,8 @@ console.log("exchnage is *" + exchange + "*");
 
                   var returnedObject = JSON.parse(data);
 
+                  yesterdayVolume = returnedObject.yest_volume; 
+
                   $("#day1").html(returnedObject.day_1);
                   $("#day2").html(returnedObject.day_2);
                   $("#day4").html(returnedObject.day_4);
@@ -579,7 +582,8 @@ console.log("exchnage is *" + exchange + "*");
                  host_name: "finance.yahoo.com",
                  company_name: yahooCompanyName,
                  ten_day_volume: yahoo10DayVolume, 
-                 total_volume: totalVolume
+                 total_volume: totalVolume, 
+                 yesterday_volume: yesterdayVolume
                  },  
             async: false, 
             dataType: 'html',
@@ -698,11 +702,18 @@ console.log("exchnage is *" + exchange + "*");
 
         var finVizAvgVolume = parseInt(document.getElementById("vol_fin_viz").innerHTML.replace(/\D/g,''));
         var eTradeAvgVolume = parseInt(document.getElementById("vol_10_day").innerHTML.replace(/\D/g,''));
+        var volumeRatio = parseFloat(document.getElementById("vol_ratio").innerHTML.replace(/\D/g,''))/100;
 
         if ((finVizAvgVolume < 60000) && (eTradeAvgVolume < 60000))
         {
           warningMessage += " ** LOW AVERAGE VOLUME ** ";
         }
+
+        if (volumeRatio > 0.0)
+        {
+          warningMessage += " ** VOLUME RATIO IS " + volumeRatio + " ** ";
+        }
+
 
         if (warningMessage != "")
         {

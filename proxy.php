@@ -578,7 +578,7 @@ else if ($which_website == "yahoo")
       $companyWebsiteArray = $html->find('table.fullview-title tbody tr td a');
       $companyWebsite = $companyWebsiteArray[1];
       $companyWebsite = preg_replace('/<b>.*<\/b>/', '<b>Website</b>', $companyWebsite);
-      $companyWebsite = str_replace('<a ', '<a target="_blank" onclick="return openPage(this.href)" ', $companyWebsite);    
+      $companyWebsite = str_replace('<a ', '<a target="_blank" onclick="return openPage(this.href)" ', $companyWebsite);
 
       $sectorCountryArray = $html->find('table.fullview-title tbody tr td a');
       $sectorCountry = " " . $sectorCountryArray[2] . " - " . $sectorCountryArray[3] . " - " . $sectorCountryArray[4] . "<br>";
@@ -588,14 +588,30 @@ else if ($which_website == "yahoo")
 
       $returnCompanyName = '<h1>' . $_GET['company_name'] . '</h1>';      // $companyNameArray[0]; 
 
-      $currentVolume = '<span id="vol_current" style="font-size: 12px; background-color:#ff9999; color: black; display: inline-block;"><b>Vol - ' . number_format((int) $_GET['total_volume']) . '</b></span>'; 
+      $yesterdayVolume = number_format((int) $_GET['yesterday_volume']);
+      $currentVolume = number_format((int) $_GET['total_volume']);
+      $volumeRatio = 0; 
+
+      $yesterdayVolumeHTML = '<span id="vol_yesterday" style="font-size: 12px; background-color:lightgrey; color: black; display: inline-block;"><b>YEST Vol - ' . $yesterdayVolume . '</b></span>'; 
+
+      $currentVolumeHTML = '<span id="vol_current" style="font-size: 12px; background-color:#ff9999; color: black; display: inline-block;"><b>Vol - ' . $currentVolume . '</b></span>'; 
+
+      // if the current volume is greater than yesterday's, then by what ratio? 
+
+      if  ($currentVolume > $yesterdayVolume)
+      {
+          $volumeRatio = $currentVolume/$yesterdayVolume; 
+          $volumeRatio = number_format((float)$volumeRatio, 2, '.', '');
+      }
+
+      $volumeRatioHTML = '<span id="vol_ratio" style="font-size: 20px; display: inline-block;"><b>&nbsp;' . $volumeRatio . '&nbsp;</b></span>';
 
       // Calculate the finViz 3 month volume number
 
       $finVizTDArray = $html->find('table.snapshot-table2 tbody tr.table-dark-row');
-      $avgVolFinViz = "<span id='vol_fin_viz' style='background-color: orange'><b>FinViz - " . calcFinVizAvgVolume($finVizTDArray[10]) . "</b></span>";
+      $avgVolFinViz = "<span id='vol_fin_viz' style='background-color: orange'><b>FinVizAVG - " . calcFinVizAvgVolume($finVizTDArray[10]) . "</b></span>";
 
-      $avgVol10days = '<span id="vol_10_day" style="font-size: 12px; background-color:#CCFF99; color: black; display: inline-block;"><b>eTrade - ' . number_format((int) $_GET['ten_day_volume']) . '</b></span>'; 
+      $avgVol10days = '<span id="vol_10_day" style="font-size: 12px; background-color:#CCFF99; color: black; display: inline-block;"><b>eTradeAVG - ' . number_format((int) $_GET['ten_day_volume']) . '</b></span>'; 
 
       // todo - put in the avgVol3Months from finviz.com
       // $avgVol3Months = 
@@ -736,7 +752,7 @@ else if ($which_website == "yahoo")
         $google = preg_replace('/<h1>/', '', $google);
         $google = preg_replace('/<\/h1>/', '', $google);
 
-      $finalReturn = $yahooDates . $returnCompanyName . $companyWebsite . $sectorCountry . $returnYesterdaysClose . $preMarketYesterdaysClose[0] . "<br>" . "<div style='display: inline-block;'>" . $currentVolume . $avgVol10days . $avgVolFinViz .  $company_profile . $message_board . $google . '<table width="575px"><tr width="575px">' . $finalReturn . '</tr></table>'; 
+      $finalReturn = $yahooDates . $returnCompanyName . $companyWebsite . $sectorCountry . $returnYesterdaysClose . $preMarketYesterdaysClose[0] . "<br>" . "<div style='display: inline-block;'>" . $yesterdayVolumeHTML . $currentVolumeHTML . $volumeRatioHTML . $avgVol10days . $avgVolFinViz .  $company_profile . $message_board . $google . '<table width="575px"><tr width="575px">' . $finalReturn . '</tr></table>'; 
 
       echo $finalReturn; 
 

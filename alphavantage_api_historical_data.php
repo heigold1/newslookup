@@ -103,6 +103,10 @@ foreach($object as $k => $v){
           {
             $dailyObject->close = $value; 
           }
+          elseif ($key =='5. volume')
+          {
+            $dailyObject->volume = $value; 
+          }
         }
         $historicalDataArray[$counter] = $dailyObject; 
 
@@ -112,6 +116,15 @@ foreach($object as $k => $v){
         }
         $counter++;
     }
+}
+
+if (isset($historicalDataArray[0]->volume))
+{
+    $returnArray['yest_volume'] = (int)$historicalDataArray[0]->volume;
+}
+else
+{
+    $returnArray['yest_volume'] = 'not_found';
 }
 
 if (isset($historicalDataArray[1]->close))
