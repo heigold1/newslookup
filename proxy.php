@@ -596,13 +596,10 @@ else if ($which_website == "yahoo")
 
       $currentVolumeHTML = '<span id="vol_current" style="font-size: 12px; background-color:#ff9999; color: black; display: inline-block;"><b>Vol - ' . $currentVolume . '</b></span>'; 
 
-      // if the current volume is greater than yesterday's, then by what ratio? 
+      // what percentage of yesterday's volume is the current volume?
 
-      if  ($currentVolume > $yesterdayVolume)
-      {
-          $volumeRatio = $currentVolume/$yesterdayVolume; 
-          $volumeRatio = number_format((float)$volumeRatio, 2, '.', '');
-      }
+      $volumeRatio = $currentVolume/$yesterdayVolume; 
+      $volumeRatio = number_format((float)$volumeRatio, 2, '.', '');
 
       $volumeRatioHTML = '<span id="vol_ratio" style="font-size: 20px; display: inline-block;"><b>&nbsp;' . $volumeRatio . '&nbsp;</b></span>';
 

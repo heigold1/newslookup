@@ -709,7 +709,7 @@ if ($.trim($("#quote_input").val()) != ""){
           warningMessage += " ** LOW AVERAGE VOLUME ** ";
         }
 
-        if (volumeRatio > 0.0)
+        if (volumeRatio > 0.175)
         {
           warningMessage += " ** VOLUME RATIO IS " + volumeRatio + " ** ";
         }
