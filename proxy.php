@@ -588,9 +588,16 @@ else if ($which_website == "yahoo")
 
       $returnCompanyName = '<h1>' . $_GET['company_name'] . '</h1>';      // $companyNameArray[0]; 
 
-      $yesterdayVolume = number_format((int) $_GET['yesterday_volume']);
-      $currentVolume = number_format((int) $_GET['total_volume']);
+      $yesterdayVolume = (int) $_GET['yesterday_volume'];
+      $currentVolume = (int) $_GET['total_volume'];
       $volumeRatio = 0; 
+
+      $volumeRatio = $currentVolume/$yesterdayVolume; 
+      $volumeRatio = number_format((float)$volumeRatio, 2, '.', '');
+      $yesterdayVolume = number_format($yesterdayVolume);
+      $currentVolume = number_format($currentVolume);
+
+      $volumeRatioHTML = '<span id="vol_ratio" style="font-size: 20px; display: inline-block;"><b>&nbsp;' . $volumeRatio . '&nbsp;</b></span>';
 
       $yesterdayVolumeHTML = '<span id="vol_yesterday" style="font-size: 12px; background-color:lightgrey; color: black; display: inline-block;"><b>YEST Vol - ' . $yesterdayVolume . '</b></span>'; 
 
@@ -598,10 +605,9 @@ else if ($which_website == "yahoo")
 
       // what percentage of yesterday's volume is the current volume?
 
-      $volumeRatio = $currentVolume/$yesterdayVolume; 
-      $volumeRatio = number_format((float)$volumeRatio, 2, '.', '');
 
-      $volumeRatioHTML = '<span id="vol_ratio" style="font-size: 20px; display: inline-block;"><b>&nbsp;' . $volumeRatio . '&nbsp;</b></span>';
+
+      
 
       // Calculate the finViz 3 month volume number
 
