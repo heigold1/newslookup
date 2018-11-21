@@ -653,7 +653,7 @@ if ($.trim($("#quote_input").val()) != ""){
             // AJAX call to marketwatch 
 
             (function(){
-              var eTradeIFrame = '<br><iframe id="etrade_iframe" src="https://www.etrade.wallst.com/v1/stocks/news/search_results.asp?symbol=' + symbol + '&rsO=new#lastTradeTime" width="575px" height="340px"></iframe>';
+              var eTradeIFrame = '<br><iframe id="etrade_iframe" src="https://www.etrade.wallst.com/v1/stocks/news/search_results.asp?symbol=' + symbol + '&rsO=new#lastTradeTime" width="675px" height="340px"></iframe>';
               
 
               $("div#left_bottom_container").css("background-color", "#BBDDFF");                     
