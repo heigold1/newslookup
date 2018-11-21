@@ -5,12 +5,12 @@
 	<meta content="text/html;charset=utf-8" http-equiv="Content-Type">
 	<meta content="utf-8" http-equiv="encoding">	
 	<script src="js/jquery-1.11.1.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.15.1/moment.min.js"></script>
 	<script src="js/mainscript.js"></script>   
 	<link type="text/css" href="./css/main.css" rel="stylesheet"/>
 	<link type="text/css" href="./css/combined-min-1.0.5754.css" rel="stylesheet" />
 	<link type="text/css" href="./css/quote-layout.css" rel="stylesheet"/>
 	<link type="text/css" href="./css/quote-typography.css" rel="stylesheet"/>
-
 </head>
 
 <div id="volumeChecked" style="display: none">0</div>
@@ -55,7 +55,7 @@
 							<td style="width:140px"># shrs <span id="numShares">000,000,000</span></td>
 							<td style="width:330px">
 
-							<input tabindex="6" id="orderStub" style="width: 305px;"><button id="email_trade" type="button">..</button>
+							<input tabindex="6" id="orderStub" style="width: 305px;"><button id="email_trade" type="button">..</button><span id="time_of_day_percentage">N/A</span>
 
 							</td>
 							<td style="width:130px"><input type="radio" name="roundShares" id="roundShares" value="1000">Round 1,000</td> 						
