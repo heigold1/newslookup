@@ -422,6 +422,7 @@ if ($.trim($("#quote_input").val()) != ""){
               $("#eTradeLowPercentage").html("");
               $("#orderStub").val("-----------------------"); 
               $("#foreign_country").html("");
+              $("#chinese_stock").html("");
 
               $("#day1").css("background-color", "#ffffff");
               $("#orderStub").css("background-color", "#ffffff");
@@ -430,8 +431,6 @@ if ($.trim($("#quote_input").val()) != ""){
               $("input[name=roundShares][value=50]").prop('checked', true);
 
               $("#yestCloseText").focus();
-
-//              alert("determineTimeOfDayPercentage is *" + determineTimeOfDayPercentage() + "*");
 
               $("#time_of_day_percentage").html(determineTimeOfDayPercentage());
 
@@ -686,7 +685,7 @@ if ($.trim($("#quote_input").val()) != ""){
             // AJAX call to marketwatch 
 
             (function(){
-              var eTradeIFrame = '<br><iframe id="etrade_iframe" src="https://www.etrade.wallst.com/v1/stocks/news/search_results.asp?symbol=' + symbol + '&rsO=new#lastTradeTime" width="675px" height="340px"></iframe>';
+              var eTradeIFrame = '<br><iframe id="etrade_iframe" src="https://www.etrade.wallst.com/v1/stocks/news/search_results.asp?symbol=' + symbol + '&rsO=new#lastTradeTime" width="675px" height="500px"></iframe>';
               
 
               $("div#left_bottom_container").css("background-color", "#BBDDFF");                     
@@ -851,6 +850,7 @@ $('#entryPercentage').keypress(function(e){
           $("#orderStub").css("background-color", "#FFFFFF");  
         }
 
+/*
         var warningMessage = "Check to see if the VIX is picking up.  Check the volumes."; 
 
         var vixValue = parseFloat(document.getElementById("vix-value").innerHTML); 
@@ -867,6 +867,7 @@ $('#entryPercentage').keypress(function(e){
             $('#copy_price_to_percentage').click();
             CopyToClipboard();  
         }
+*/ 
       } 
 
 //      $('#submit_button').click();
