@@ -634,14 +634,74 @@ else if ($which_website == "yahoo")
       $google_keyword_string = preg_replace('/inc\./i', "+", $google_keyword_string);
       $google_keyword_string = preg_replace('/ltd\./i', "+", $google_keyword_string);
 
-
       // URL of Google News RSS feed
       $googleNewsRSSFeed = simplexml_load_file('https://news.google.com/news/feeds?hl=en&gl=ca&q='.$google_keyword_string.'&um=1&ie=UTF-8&output=rss'); 
 
 
+      $googleRSSArray = array();
+
+      foreach ($googleNewsRSSFeed->channel->item as $feedItem) {
+          if (!preg_match('/This RSS feed URL is deprecated/', $feedItem->title))
+          {
+              $time = strToTime($feedItem->pubDate);
+
+              $publicationDateStrToTime = strtotime($feedItem->pubDate);
+              $convertedDate = new DateTime(); 
+              $convertedDate->setTimestamp($publicationDateStrToTime);
+
+              $publicationDate = $feedItem->pubDate;
+              $publicationDate = preg_replace("/[0-9][0-9]\:[0-9][0-9]\:[0-9][0-9] GMT/", "", $publicationDate); 
+              $publicationTime = $convertedDate->format("g:i A");
+
+              $yahoo_todays_date = date('l'); 
+              if ($yahoo_todays_date == "Monday")
+              {
+                  if (preg_match('/(' .  get_yahoo_friday_trade_date() . ')/', $publicationDate))
+                  {
+                      $publicationTime = preg_replace('/AM/', '<span style="background-color: lightgreen">AM</span>', $publicationTime); 
+                      $publicationTime = preg_replace('/PM/', '<span style="background-color: red">PM</span>', $publicationTime); 
+                  }
+                  if (preg_match('/(' .  get_yahoo_saturday_trade_date() . ')/', $publicationDate) ||
+                      preg_match('/(' .  get_yahoo_yesterday_trade_date() . ')/', $publicationDate)
+                    )
+                  {
+                      $publicationTime = '<span style="background-color: red">' . $publicationTime . '</span>'; 
+                  }
+              }
+              else
+              {
+                  if (preg_match('/(' .  get_yahoo_yesterday_trade_date() . ')/', $publicationDate))
+                  {
+                      $publicationTime = preg_replace('/AM/', '<span style="background-color: lightgreen">AM</span>', $publicationTime); 
+                      $publicationTime = preg_replace('/PM/', '<span style="background-color: red">PM</span>', $publicationTime); 
+                  }
+              }
+
+              $link = $feedItem->link; 
+              $title = $feedItem->title; 
+              $pubDate = $feedItem->pubDate; 
+              $googleStruct = array();
+
+              $googleStruct['link'] =  strval($feedItem->link);
+              $googleStruct['title'] =  strval($feedItem->title);
+              $googleStruct['pub-date'] =  strval($publicationDate . " " . $publicationTime);
+
+              $googleRSSArray[$time] = $googleStruct;
+          }
+      }
+
+
+//die();
+
+      krsort($googleRSSArray);
+
+
+//echo "<pre>";
+
       $googleNews = "<ul class='newsSide'>";
       $i = 0;
-      foreach ($googleNewsRSSFeed->channel->item as $feedItem) {
+      foreach ($googleRSSArray as $feedItem) {
+
           $i++;
           $googleNews .= "<li "; 
 
@@ -650,7 +710,7 @@ else if ($which_website == "yahoo")
             $googleNews .=  "style='background-color: #FFFFFF; '"; 
           };
           
-          $googleNews .=  " ><a href='$feedItem->link' title='$feedItem->title'> " . $feedItem->pubDate . " " . $feedItem->title . "</a></li>";
+          $googleNews .=  " ><a href='" . $feedItem['link'] . "'>" . $feedItem['pub-date'] . " - " . $feedItem['title'] . "</a></li>";
       }
       $googleNews .=  "</ul>";
 
@@ -744,6 +804,7 @@ else if ($which_website == "yahoo")
       $finalReturn = preg_replace('/ merger/i', '<span style="font-size: 12px; background-color:red; color:black"><b>&nbsp; merger - if changing deadline (or update in general, 35%) &nbsp;</b></span>&nbsp;', $finalReturn);
       $finalReturn = preg_replace('/ preliminary(.*?)outlook/i', '<span style="font-size: 12px; background-color:red; color:black"><b>&nbsp; Preliminary$1Outlook -</span> <span style="font-size: 12px; background-color:lightgreen; color:black">41% right off the bat, then 48% literally 3 minutes later.  TAKE NO MORE THAN 5% AND BAIL &nbsp;</b></span>&nbsp;', $finalReturn);
       $finalReturn = preg_replace('/ conference call to provide update/i', '<span style="font-size: 12px; background-color:red; color:black"><b>&nbsp; Conference Call to Provide Update -</span> <span style="font-size: 12px; background-color:lightgreen; color:black">CHECK THE DATE/TIME OF THE CALL &nbsp;</b></span>&nbsp;', $finalReturn);
+      $finalReturn = preg_replace('/ seeking alpha/i', '<span style="font-size: 25px; background-color:red; color:black">SEEKING ALPHA &nbsp;</b></span>&nbsp;', $finalReturn);
 
 
       $message_board = '</font><a target="_blank" onclick="return openPage(this.href)" href="http://finance.yahoo.com/quote/' . $symbol . '/community?ltr=1"> Yahoo Message Boards</a>&nbsp;&nbsp;&nbsp;&nbsp;'; 

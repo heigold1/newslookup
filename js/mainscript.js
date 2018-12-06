@@ -24,6 +24,26 @@ function CopyToClipboard() {
   }
 }
 
+function playChineseStock(){
+  var chineseStock = new Audio('./wav/china.wav');
+  chineseStock.play();
+}
+
+function playHighRiskStock(){
+  var highRiskStock = new Audio('./wav/high-risk.wav');
+  highRiskStock.play();
+}
+
+function playLowVolumeStock(){
+  var lowVolumeStock = new Audio('./wav/low-volume.wav');
+  lowVolumeStock.play();
+}
+
+function playForeignStock(){
+  var foreignStock = new Audio('./wav/foreign.wav');
+  foreignStock.play();
+}
+
 
 // when someone clicks to open up a link for marketwatch or yahoo finance.
 function openPage(link){
@@ -716,17 +736,20 @@ if ($.trim($("#quote_input").val()) != ""){
 
         if (day1 > 15)
         {
-            warningMessage += "This is a high-risk stock";
+            playHighRiskStock(); 
+            warningMessage += " ** HIGH RISK STOCK!!! ** ";
         }
 
         // check if it's a Chinese or foreign stock
 
         if ($("#chinese_stock").html() == "1")
         {
+            playChineseStock(); 
             warningMessage += " ** CHINESE COMPANY - 58% ** ";
         }
         else if ($("#foreign_country").html() == "1")
         {
+            playForeignStock();
             warningMessage += " ** FOREIGN COMPANY ** ";
         }
 
@@ -738,6 +761,7 @@ if ($.trim($("#quote_input").val()) != ""){
 
         if ((finVizAvgVolume < 60000) && (eTradeAvgVolume < 60000))
         {
+          playLowVolumeStock();
           warningMessage += " ** LOW AVERAGE VOLUME ** ";
         }
 
