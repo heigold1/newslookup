@@ -511,6 +511,8 @@ else if ($which_website == "yahoo")
 
     $rss = simplexml_load_file("http://feeds.finance.yahoo.com/rss/2.0/headline?s=$symbol&region=US&lang=en-US");
     $allNews = "<ul class='newsSide'>";
+    $allNews .= "<li>Yahoo Finance News</li>";
+
     $i = 0;
     foreach ($rss->channel->item as $feedItem) {
         $i++;
@@ -603,12 +605,6 @@ else if ($which_website == "yahoo")
 
       $currentVolumeHTML = '<span id="vol_current" style="font-size: 12px; background-color:#ff9999; color: black; display: inline-block;"><b>Vol - ' . $currentVolume . '</b></span>'; 
 
-      // what percentage of yesterday's volume is the current volume?
-
-
-
-      
-
       // Calculate the finViz 3 month volume number
 
       $finVizTDArray = $html->find('table.snapshot-table2 tbody tr.table-dark-row');
@@ -690,15 +686,10 @@ else if ($which_website == "yahoo")
           }
       }
 
-
-//die();
-
       krsort($googleRSSArray);
 
-
-//echo "<pre>";
-
       $googleNews = "<ul class='newsSide'>";
+      $googleNews .= "<li>Google News</li>";
       $i = 0;
       foreach ($googleRSSArray as $feedItem) {
 
@@ -816,7 +807,7 @@ else if ($which_website == "yahoo")
         $google = preg_replace('/<h1>/', '', $google);
         $google = preg_replace('/<\/h1>/', '', $google);
 
-      $finalReturn = $yahooDates . $returnCompanyName . $companyWebsite . $sectorCountry . $returnYesterdaysClose . $preMarketYesterdaysClose[0] . "<br>" . "<div style='display: inline-block;'>" . $yesterdayVolumeHTML . $currentVolumeHTML . $volumeRatioHTML . $avgVol10days . $avgVolFinViz .  $company_profile . $message_board . $google . '<table width="575px"><tr width="575px">' . $finalReturn . '</tr></table>'; 
+      $finalReturn = $yahooDates . $returnCompanyName . $companyWebsite . $sectorCountry . $returnYesterdaysClose . $preMarketYesterdaysClose[0] . "<br>" . "<div style='display: inline-block;'>" . $yesterdayVolumeHTML . $currentVolumeHTML . $volumeRatioHTML . $avgVol10days . $avgVolFinViz .  $company_profile . $message_board . $google . '<table width="700px"><tr width="575px">' . $finalReturn . '</tr></table>'; 
 
       echo $finalReturn; 
 
