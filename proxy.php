@@ -509,6 +509,9 @@ else if ($which_website == "yahoo")
 {
     // grab the news 
 
+    $companyName = $_GET['company_name']; 
+    $companyNameArray = explode(" ", $companyName);
+
     $rss = simplexml_load_file("http://feeds.finance.yahoo.com/rss/2.0/headline?s=$symbol&region=US&lang=en-US");
     $allNews = "<ul class='newsSide'>";
     $allNews .= "<li>Yahoo Finance News</li>";
@@ -588,7 +591,7 @@ else if ($which_website == "yahoo")
       $sectorCountry = str_replace('\/a', '/span', $sectorCountry);   
 
 
-      $returnCompanyName = '<h1>' . $_GET['company_name'] . '</h1>';      // $companyNameArray[0]; 
+      $returnCompanyName = '<h1>' . $companyName . '</h1>';
 
       $yesterdayVolume = (int) $_GET['yesterday_volume'];
       $currentVolume = (int) $_GET['total_volume'];
@@ -675,11 +678,16 @@ else if ($which_website == "yahoo")
 
               $link = $feedItem->link; 
               $title = $feedItem->title; 
+
+              $title = preg_replace('/' . $companyNameArray[0] . '/i', '<span style="font-size: 12px; background-color:lightblue; color:black"><b>' . $companyNameArray[0] . '</b></span>', $title);              
+
+              $title = preg_replace('/' . $symbol . '/i', '<span style="font-size: 12px; background-color:lightblue; color:black"><b>' . $symbol . '</b></span>', $title);              
+
               $pubDate = $feedItem->pubDate; 
               $googleStruct = array();
 
               $googleStruct['link'] =  strval($feedItem->link);
-              $googleStruct['title'] =  strval($feedItem->title);
+              $googleStruct['title'] =  strval($title);
               $googleStruct['pub-date'] =  strval($publicationDate . " " . $publicationTime);
 
               $googleRSSArray[$time] = $googleStruct;
