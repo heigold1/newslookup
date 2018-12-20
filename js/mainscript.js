@@ -759,7 +759,7 @@ if ($.trim($("#quote_input").val()) != ""){
         var eTradeAvgVolume = parseInt(document.getElementById("vol_10_day").innerHTML.replace(/\D/g,''));
         var volumeRatio = parseFloat(document.getElementById("vol_ratio").innerHTML.replace(/\D/g,''))/100;
 
-        if ((finVizAvgVolume < 60000) && (eTradeAvgVolume < 60000))
+        if ((finVizAvgVolume < 110000) && (eTradeAvgVolume < 110000))
         {
           playLowVolumeStock();
           warningMessage += " ** LOW AVERAGE VOLUME ** ";
