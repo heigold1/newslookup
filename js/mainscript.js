@@ -773,7 +773,7 @@ if ($.trim($("#quote_input").val()) != ""){
 
         if (warningMessage != "")
         {
-            alert(warningMessage);
+//            alert(warningMessage);
         }
 
 
