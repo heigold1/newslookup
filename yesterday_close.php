@@ -18,7 +18,7 @@ require_once(dirname(__FILE__) . '/Common/Common.php');
 require_once(dirname(__FILE__) . '/OAuth/etOAuth.class.php');
 require_once(dirname(__FILE__) . '/Market/MarketClient.class.php'); */
 
-include './Samples/Config.php';
+include './config.php';
 include './Common/Common.php';
 include './OAuth/etOAuth.class.php';
 include './Market/MarketClient.class.php';
