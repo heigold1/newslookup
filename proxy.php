@@ -3,6 +3,9 @@
 include './Samples/config.php';
 
 require_once("simple_html_dom.php"); 
+
+$yesterdayDays = 3; 
+
 error_reporting(1);
 
 // header('Content-type: text/html');
@@ -340,8 +343,8 @@ $finalReturn = "";
 
 if ($which_website == "marketwatch")
 {
-
       $url = "https://www.marketwatch.com/investing/$stockOrFund/$symbol"; 
+      $marketwatch_todays_date = date('l'); 
 
       $results = grabHTML("www.marketwatch.com", $url);
       $results = str_replace(PHP_EOL, '', $results);
@@ -401,6 +404,24 @@ if ($which_website == "marketwatch")
           preg_match('/article__timestamp">(.*?)<\/li>/', $articleDiv, $dateStringArray);
           $articleStruct['date'] = $dateStringArray[1];
 
+          // am/pm  red green highlighting  
+          for ($i = $yesterdayDays; $i >= 1; $i--)
+          {
+              if (preg_match('/(' .  get_marketwatch_trade_date($i) . ')/', $articleStruct['date']))
+              {
+                  $articleStruct['date'] = preg_replace('/p\.m\./', '<span style="background-color: red">p.m.</span>', $articleStruct['date']); 
+                  if ($i == $yesterdayDays) 
+                  {
+                      $articleStruct['date'] = preg_replace('/a\.m\./', '<span style="background-color: lightgreen">a.m.</span>', $articleStruct['date']); 
+                
+                  }
+                  else
+                  {
+                      $articleStruct['date'] = preg_replace('/a\.m\./', '<span style="background-color: red">a.m.</span>', $articleStruct['date']); 
+                  }  
+              }
+          }
+
           $timeStampInt = strtotime($timeStamp);
 
           if ($articleStruct['link'] != "")
@@ -417,28 +438,18 @@ if ($which_website == "marketwatch")
 
       $marketWatchNewsHTML .= '</div>';
 
-      $marketwatch_todays_date = date('l'); 
-      if ($marketwatch_todays_date == "Monday")
+      // yellow highlighting for before yesterday
+      for ($daysBack = 14; $daysBack > $yesterdayDays; $daysBack--)
       {
-        $marketWatchNewsHTML = preg_replace('/(' .  get_marketwatch_friday_trade_date() . ')/', '<span style="font-size: 10px; background-color:#000080 ; color:white">$1</span>', $marketWatchNewsHTML);
-        $marketWatchNewsHTML = preg_replace('/(' .  get_marketwatch_saturday_trade_date() . ')/', '<span style="font-size: 10px; background-color:#000080 ; color:white">$1</span>', $marketWatchNewsHTML);      
-        for ($daysBack = 14; $daysBack >= 4; $daysBack--)
-        {
-            $marketWatchNewsHTML = preg_replace('/(' .  get_marketwatch_trade_date($daysBack) . ')/', '<span style="font-size: 10px; background-color:yellow ; color:black">$1</span>', $marketWatchNewsHTML);      
-            
-        }
-
-      }  
-      else 
+          $marketWatchNewsHTML = preg_replace('/(' .  get_marketwatch_trade_date($daysBack) . ')/', '<span style="font-size: 10px; background-color:yellow ; color:black">$1</span>', $marketWatchNewsHTML);      
+          
+      }
+      // blue highlighting for yesterday
+      for ($daysBack = $yesterdayDays; $daysBack >= 1; $daysBack--)
       {
-        for ($daysBack = 14; $daysBack >= 2; $daysBack--)
-        {
-            $marketWatchNewsHTML = preg_replace('/(' .  get_marketwatch_trade_date($daysBack) . ')/', '<span style="font-size: 10px; background-color:yellow ; color:black">$1</span>', $marketWatchNewsHTML);      
-            
-        }
+          $marketWatchNewsHTML = preg_replace('/(' .  get_marketwatch_trade_date($daysBack) . ')/', '<span style="font-size: 10px; background-color:#000080 ; color:white">$1</span>', $marketWatchNewsHTML);
       }
 
-      $marketWatchNewsHTML = preg_replace('/(' .  get_marketwatch_yesterday_trade_date() . ')/', '<span style="font-size: 10px; background-color:#000080 ; color:white">$1</span>', $marketWatchNewsHTML);     
       $marketWatchNewsHTML = preg_replace('/(' .  get_marketwatch_today_trade_date() . ')/', '<span style="font-size: 10px; background-color:black; color:white">$1</span>', $marketWatchNewsHTML);           
 
       $marketWatchNewsHTML = preg_replace('/([0-9][0-9]:[0-9][0-9] [a-z]\.m\.  Today)|([0-9]:[0-9][0-9] [a-z]\.m\.  Today)/', '<span style="font-size: 8px; background-color:black; color:white">$1$2</span>', $marketWatchNewsHTML);
@@ -531,27 +542,21 @@ else if ($which_website == "yahoo")
         $publicationDate = preg_replace("/[0-9][0-9]\:[0-9][0-9]\:[0-9][0-9] \+0000/", "", $publicationDate); 
         $publicationTime = $convertedDate->format("g:i A");
 
-        $yahoo_todays_date = date('l'); 
-        if ($yahoo_todays_date == "Monday")
+        // red/green highlighting for yesterday/today
+        for ($i = $yesterdayDays; $i >= 1; $i--)
         {
-            if (preg_match('/(' .  get_yahoo_friday_trade_date() . ')/', $publicationDate))
+            if (preg_match('/(' .  get_yahoo_trade_date($i) . ')/', $publicationDate))
             {
-                $publicationTime = preg_replace('/AM/', '<span style="background-color: lightgreen">AM</span>', $publicationTime); 
                 $publicationTime = preg_replace('/PM/', '<span style="background-color: red">PM</span>', $publicationTime); 
-            }
-            if (preg_match('/(' .  get_yahoo_saturday_trade_date() . ')/', $publicationDate) ||
-                preg_match('/(' .  get_yahoo_yesterday_trade_date() . ')/', $publicationDate)
-              )
-            {
-                $publicationTime = '<span style="background-color: red">' . $publicationTime . '</span>'; 
-            }
-        }
-        else
-        {
-            if (preg_match('/(' .  get_yahoo_yesterday_trade_date() . ')/', $publicationDate))
-            {
-                $publicationTime = preg_replace('/AM/', '<span style="background-color: lightgreen">AM</span>', $publicationTime); 
-                $publicationTime = preg_replace('/PM/', '<span style="background-color: red">PM</span>', $publicationTime); 
+                if ($i == $yesterdayDays) 
+                {
+                    $publicationTime = preg_replace('/AM/', '<span style="background-color: lightgreen">AM</span>', $publicationTime); 
+              
+                }
+                else
+                {
+                    $publicationTime = preg_replace('/AM/', '<span style="background-color: red">AM</span>', $publicationTime); 
+                }  
             }
         }
 
@@ -653,27 +658,21 @@ else if ($which_website == "yahoo")
               $publicationDate = preg_replace("/[0-9][0-9]\:[0-9][0-9]\:[0-9][0-9] GMT/", "", $publicationDate); 
               $publicationTime = $convertedDate->format("g:i A");
 
-              $yahoo_todays_date = date('l'); 
-              if ($yahoo_todays_date == "Monday")
+              // red/green highlighting for AM/PM 
+              for ($i = $yesterdayDays; $i >= 1; $i--)
               {
-                  if (preg_match('/(' .  get_yahoo_friday_trade_date() . ')/', $publicationDate))
+                  if (preg_match('/(' .  get_yahoo_trade_date($i) . ')/', $publicationDate))
                   {
-                      $publicationTime = preg_replace('/AM/', '<span style="background-color: lightgreen">AM</span>', $publicationTime); 
                       $publicationTime = preg_replace('/PM/', '<span style="background-color: red">PM</span>', $publicationTime); 
-                  }
-                  if (preg_match('/(' .  get_yahoo_saturday_trade_date() . ')/', $publicationDate) ||
-                      preg_match('/(' .  get_yahoo_yesterday_trade_date() . ')/', $publicationDate)
-                    )
-                  {
-                      $publicationTime = '<span style="background-color: red">' . $publicationTime . '</span>'; 
-                  }
-              }
-              else
-              {
-                  if (preg_match('/(' .  get_yahoo_yesterday_trade_date() . ')/', $publicationDate))
-                  {
-                      $publicationTime = preg_replace('/AM/', '<span style="background-color: lightgreen">AM</span>', $publicationTime); 
-                      $publicationTime = preg_replace('/PM/', '<span style="background-color: red">PM</span>', $publicationTime); 
+                      if ($i == $yesterdayDays) 
+                      {
+                          $publicationTime = preg_replace('/AM/', '<span style="background-color: lightgreen">AM</span>', $publicationTime); 
+                    
+                      }
+                      else
+                      {
+                          $publicationTime = preg_replace('/AM/', '<span style="background-color: red">AM</span>', $publicationTime); 
+                      }  
                   }
               }
 
@@ -726,24 +725,15 @@ else if ($which_website == "yahoo")
       $finalReturn = preg_replace('/([A-Z][a-z][a-z] [0-9][0-9]:[0-9][0-9][A-Z]M EDT)|([A-Z][a-z][a-z] [0-9]:[0-9][0-9][A-Z]M EDT)/', '<span style="font-size: 12px; background-color:black; color:white">$1$2</span> ', $finalReturn);
       $finalReturn = preg_replace('/([A-Z][a-z][a-z] [0-9][0-9]:[0-9][0-9][A-Z]M EST)|([A-Z][a-z][a-z] [0-9]:[0-9][0-9][A-Z]M EST)/', '<span style="font-size: 12px; background-color:black; color:white">$1$2</span> ', $finalReturn);
 
-      $yahoo_todays_date = date('l' /*, strtotime("-9 hours") */); 
-      if ($yahoo_todays_date == "Monday")
+      // yellow highlighting for before yesterday
+      for ($daysBack = 14; $daysBack > $yesterdayDays; $daysBack--)
       {
-        $finalReturn = preg_replace('/(' .  get_yahoo_friday_trade_date() . ')/', '<span style="font-size: 12px; background-color:#000080 ; color:white"> $1</span> ', $finalReturn);
-        $finalReturn = preg_replace('/(' .  get_yahoo_saturday_trade_date() . ')/', '<span style="font-size: 12px; background-color:#000080 ; color:white"> $1</span> ', $finalReturn);      
-
-        for ($daysBack = 14; $daysBack >= 4; $daysBack--)
-        {
-            $finalReturn = preg_replace('/(' .  get_yahoo_trade_date($daysBack) . ')/', '<span style="font-size: 12px; background-color:yellow ; color:black">$1</span>', $finalReturn);      
-        }
-
+          $finalReturn = preg_replace('/(' .  get_yahoo_trade_date($daysBack) . ')/', '<span style="font-size: 10px; background-color:yellow ; color:black">$1</span>', $finalReturn);      
       }
-      else
+      // blue highlighting for yesterday
+      for ($daysBack = $yesterdayDays; $daysBack >= 1; $daysBack--)
       {
-        for ($daysBack = 14; $daysBack >= 2; $daysBack--)
-        {
-            $finalReturn = preg_replace('/(' .  get_yahoo_trade_date($daysBack) . ')/', '<span style="font-size: 12px; background-color:yellow ; color:black">$1</span>', $finalReturn);      
-        }
+          $finalReturn = preg_replace('/(' .  get_yahoo_trade_date($daysBack) . ')/', '<span style="font-size: 10px; background-color:#000080 ; color:white">$1</span>', $finalReturn);
       }
 
       $finalReturn = preg_replace('/(' .  get_yahoo_yesterday_trade_date() . ')/', '<span style="font-size: 12px; background-color:   #000080; color:white"> $1</span> ', $finalReturn);
