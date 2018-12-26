@@ -5,7 +5,7 @@ error_reporting(1);
 
 $symbol=$_GET['symbol'];
 
-
+$yesterdayDays = 5; 
 
 fopen("cookies.txt", "w");
 
@@ -48,6 +48,16 @@ function get_today_trade_date()
     $todays_yahoo_trade_date = $todays_yahoo_trade_month_day;
 
     return $todays_yahoo_trade_date;
+}
+
+function get_trade_date($daysBack)
+{
+    $trade_date = "";
+
+    $trade_month_day = date('Y-m-d', strtotime("-" . $daysBack . " days"));
+    $trade_date = $trade_month_day;
+
+    return $trade_date;
 }
 
 function getURLTimestamp($url){
@@ -172,40 +182,43 @@ $finalReturn = "";
 
                   $time = "";
 
-                  $todays_date = date('l'); 
-                  if ($todays_date == "Monday")
+                  for ($j = $yesterdayDays; $j >= 1; $j--)
                   {
-                        $td3 = preg_replace('/(' .  get_friday_trade_date() . ')/', '<span style="font-size: 16px; background-color:#000080 ; color:white">$1</span>', $td3);
-                        $td3 = preg_replace('/(' .  get_saturday_trade_date() . ')/', '<span style="font-size: 16px; background-color:#000080 ; color:white">$1</span>', $td3);
-                        $td3 = preg_replace('/(' .  get_yesterday_trade_date() . ')/', '<span style="font-size: 16px; background-color:#000080 ; color:white">$1</span>', $td3);
-
-
-                        if (preg_match('/(' .  get_friday_trade_date() . ')/', $td3) || preg_match('/(' .  get_today_trade_date() . ')/', $td3))
-                        {
-                            $timestamp = getURLTimestamp($href2);
-                            $time = date("g:i A", $timestamp);
-                            if (!timestampIsSafe($timestamp))
-                            {
-                                $recentNews = true;
-                            }
-                        }
-                        if (preg_match('/(' .  get_saturday_trade_date() . ')/', $td3) || preg_match('/(' .  get_yesterday_trade_date() . ')/', $td3))
-                        {
-                            $recentNews = true;
-                        }
-                  }  
-                  else 
-                  {
-                      $td3 = preg_replace('/(' .  get_yesterday_trade_date() . ')/', '<span style="font-size: 16px; background-color:#000080 ; color:white">$1</span>', $td3);
-                      if (preg_match('/(' .  get_yesterday_trade_date() . ')/', $td3) || preg_match('/(' .  get_today_trade_date() . ')/', $td3))
+                      $td3 = preg_replace('/(' .  get_trade_date($j) . ')/', '<span style="font-size: 16px; background-color:#000080 ; color:white">$1</span>', $td3);
+                      if (preg_match('/(' .  get_trade_date($j) . ')/', $td3))
                       {
                           $timestamp = getURLTimestamp($href2);
                           $time = date("g:i A", $timestamp);
-                          if (!timestampIsSafe($timestamp))
+
+                          if ($j == $yesterdayDays)
+                          {
+                              if (!timestampIsSafe($timestamp))
+                              {
+                                  $recentNews = true;
+                              }
+                              $time = preg_replace('/AM/', '<span style="background-color: lightgreen">AM</span>', $time); 
+                          }
+                          else
                           {
                               $recentNews = true;
+                              $time = preg_replace('/AM/', '<span style="background-color: red">AM</span>', $time); 
                           }
+                          $time = preg_replace('/PM/', '<span style="background-color: red">PM</span>', $time); 
                       }
+                  } // for ($j = $yesterdayDays; $j >= 1; $j--)
+                  if (preg_match('/(' .  get_today_trade_date() . ')/', $td3))
+                  {
+                      $timestamp = getURLTimestamp($href2);
+                      $time = date("g:i A", $timestamp);
+                      if (!timestampIsSafe($timestamp))
+                      {
+                          $recentNews = true;
+                      }
+                  }
+
+                  if (preg_match('/(' .  get_today_trade_date() . ')/', $td3))
+                  {
+                      $recentNews = true; 
                   }
 
                   if (preg_match('/(' .  get_today_trade_date() . ')/', $td3))

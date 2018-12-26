@@ -4,7 +4,7 @@ include './Samples/config.php';
 
 require_once("simple_html_dom.php"); 
 
-$yesterdayDays = 3; 
+$yesterdayDays = 5; 
 
 error_reporting(1);
 
