@@ -5,7 +5,7 @@ error_reporting(1);
 
 $symbol=$_GET['symbol'];
 
-$yesterdayDays = 5; 
+$yesterdayDays = 1; 
 
 fopen("cookies.txt", "w");
 
@@ -228,7 +228,6 @@ $finalReturn = "";
 
                   $td3 = preg_replace('/(' .  get_today_trade_date() . ')/', '<span style="font-size: 16px; background-color:black; color:white">$1</span>', $td3);
 
-                  $td2 = preg_replace('/ statement of acquisition of beneficial ownership/i', '<span style="font-size: 16px; background-color:red; color:black"><b>&nbsp;statement of acquisition of beneficial ownership - BACK OFF, COULD DECLARE CHAPTER 11</span></b>&nbsp;', $td2);      
                   $td2 = preg_replace('/registration statement/i', '<span style="font-size: 16px; background-color:red; color:black"><b>&nbsp;Registration statement - OFFERING COMING OUT, HOLD OFF</span></b>&nbsp;', $td2);      
 
 
