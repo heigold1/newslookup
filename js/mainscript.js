@@ -44,6 +44,11 @@ function playForeignStock(){
   foreignStock.play();
 }
 
+function playReverseStockSplit(){
+  var reverseStockSplit = new Audio('./wav/reverse-stock-split.wav');
+  reverseStockSplit.play();
+}
+
 
 // when someone clicks to open up a link for marketwatch or yahoo finance.
 function openPage(link){
@@ -387,6 +392,7 @@ if ($.trim($("#quote_input").val()) != ""){
           var yesterdaysClose; 
           var google_keyword_string= "";
           var exchange = "";          
+          var reverseStockSplit = false; 
 
           closeAllWindows();
 
@@ -642,6 +648,11 @@ if ($.trim($("#quote_input").val()) != ""){
             success:  function (data) {
               console.log(data);
 
+                if (data.search(/reverse split|reverse stock split/gi) > 0)
+                {
+                    reverseStockSplit = true; 
+                }
+
                 if (data.search(/geo_usa/) > 0)
                 {
                     $("#foreign_country").html("0");
@@ -718,7 +729,13 @@ if ($.trim($("#quote_input").val()) != ""){
                      async: true, 
                     dataType: 'html',
                     success:  function (data) {
-                     console.log(data);
+                      console.log(data);
+
+                      if (data.search(/reverse split|reverse stock split/gi) > 0)
+                      {
+                          reverseStockSplit = true; 
+                      }
+
                       $("div#left_bottom_container").html( data +  eTradeIFrame); 
                   }
                 });  // end of AJAX call to marketwatch    
@@ -763,6 +780,11 @@ if ($.trim($("#quote_input").val()) != ""){
         {
           playLowVolumeStock();
           warningMessage += " ** LOW AVERAGE VOLUME ** ";
+        }
+
+        if (reverseStockSplit == true)
+        {
+          playReverseStockSplit(); 
         }
 
         if (volumeRatio > 0.175)
