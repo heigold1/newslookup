@@ -45,19 +45,22 @@ $ac_obj = new MarketClient($consumer);
   try{
           
     $request_params = new getQuoteParams();
+
     //    $request_params->__set('symbolList', array('GOOG','CSCO'));
     $request_params->__set('symbolList', array($symbol));
+    $request_params->__set('afterhourFlag', true);
     $request_params->__set('detailFlag', 'All');
+
     $out  = $ac_obj->getQuote($request_params);
 
   }catch(ETWSException $e){
-    echo  "***Caught exception***  \n".
+    echo  "***Caught exception*** 1 \n".
         "Error Code   : " . $e->getErrorCode()."\n" .
         "Error Message  : " . $e->getErrorMessage() . "\n" ;
     if(DEBUG_MODE) echo $e->getTraceAsString() . "\n" ;
     exit;
   }catch(Exception $e){
-    echo  "***Caught exception***  \n".
+    echo  "***Caught exception*** 2 \n".
         "Error Code   : " . $e->getCode()."\n" .
         "Error Message  : " . $e->getMessage() . "\n" ;
     if(DEBUG_MODE) echo $e->getTraceAsString() . "\n" ;
@@ -66,24 +69,29 @@ $ac_obj = new MarketClient($consumer);
 
   }
 
-  $mkt_responce_obj = json_decode($out);   // USE THIS ON THE Verio Server 
+//  $mkt_responce_obj = json_decode($out);   // USE THIS ON THE Verio Server 
+// $mkt_response_obj = etHttpUtils::GetResponseObject($out);   // Use this on localhost
 
-//  $mkt_response_obj = etHttpUtils::GetResponseObject($out);   // Use this on localhost
+$mkt_response_obj = simplexml_load_string($out);
 
   $current_time = date('Gis', strtotime("-3 hours")); 
 
     if ($current_time > 130000)  // 1:00 PM 
     {
-      if (isset($mkt_responce_obj->quoteResponse->quoteData->all->lastTrade))
+
+
+
+
+      if (isset($mkt_response_obj->QuoteData->All->lastTrade))
       {
-        $company_name = (string) $mkt_responce_obj->quoteResponse->quoteData->all->companyName;
-        $ten_day_volume = (string) $mkt_responce_obj->quoteResponse->quoteData->all->volume10Day; 
-        $total_volume = (string) $mkt_responce_obj->quoteResponse->quoteData->all->totalVolume;
-        $last_trade = (string) $mkt_responce_obj->quoteResponse->quoteData->all->lastTrade;
-        $low = (string) $mkt_responce_obj->quoteResponse->quoteData->all->low;
-        $high = (string) $mkt_responce_obj->quoteResponse->quoteData->all->high;
-        $bid = (string) $mkt_responce_obj->quoteResponse->quoteData->all->bid;
-        $exchange = trim((string) $mkt_responce_obj->quoteResponse->quoteData->product->exchange);
+        $company_name = (string) $mkt_response_obj->QuoteData->All->companyName;
+        $ten_day_volume = (string) $mkt_response_obj->QuoteData->All->volume10Day; 
+        $total_volume = (string) $mkt_response_obj->QuoteData->All->totalVolume;
+        $last_trade = (string) $mkt_response_obj->QuoteData->All->lastTrade;
+        $low = (string) $mkt_response_obj->QuoteData->All->low;
+        $high = (string) $mkt_response_obj->QuoteData->All->high;
+        $bid = (string) $mkt_response_obj->QuoteData->All->bid;
+        $exchange = trim((string) $mkt_response_obj->QuoteData->All->exchange);
 
         if (preg_match('/E-4/', $last_trade))
         {
@@ -121,15 +129,15 @@ $ac_obj = new MarketClient($consumer);
     else
     {
 
-      if (isset($mkt_responce_obj->quoteResponse->quoteData->all->prevClose))
+      if (isset($mkt_response_obj->QuoteData->All->prevClose))
       {
-        $prev_close = (string) $mkt_responce_obj->quoteResponse->quoteData->all->prevClose;
-        $ten_day_volume = (string) $mkt_responce_obj->quoteResponse->quoteData->all->volume10Day; 
-        $total_volume = (string) $mkt_responce_obj->quoteResponse->quoteData->all->totalVolume;
-        $company_name = (string) $mkt_responce_obj->quoteResponse->quoteData->all->companyName;
-        $low = (string) $mkt_responce_obj->quoteResponse->quoteData->all->low;
-        $high = (string) $mkt_responce_obj->quoteResponse->quoteData->all->high;
-        $bid = (string) $mkt_responce_obj->quoteResponse->quoteData->all->bid;
+        $prev_close = (string) $mkt_response_obj->QuoteData->All->prevClose;
+        $ten_day_volume = (string) $mkt_response_obj->QuoteData->All->volume10Day; 
+        $total_volume = (string) $mkt_response_obj->QuoteData->All->totalVolume;
+        $company_name = (string) $mkt_response_obj->QuoteData->All->companyName;
+        $low = (string) $mkt_response_obj->QuoteData->All->low;
+        $high = (string) $mkt_response_obj->QuoteData->All->high;
+        $bid = (string) $mkt_response_obj->QuoteData->All->bid;
 
         if (preg_match('/E-4/', $prev_close))
         {

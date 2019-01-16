@@ -27,7 +27,7 @@ if (!function_exists('setConst')) {
 	}
 }
 //Server specific config:
-$str = 'sandbox' ;// options : prod, sandbox
+$str = 'prod' ;// options : prod, sandbox
 switch($str)
 {
 	case 'prod' :
@@ -35,9 +35,15 @@ switch($str)
                 //===========<PROD - Fill out consumerKey(APP_KEY), secret(APP_SECRET), oauth access token & secret below>============
                 setConst('ETWS_APP_KEY',                        '');
                 setConst('ETWS_APP_SECRET',                     '');
-                setConst('ETRADE_OAUTH_SERVER',         'https://etws.etrade.com');
+//                setConst('ETRADE_OAUTH_SERVER',         'https://etws.etrade.com');
+                setConst('ETRADE_OAUTH_SERVER',         'https://api.etrade.com');                
                 setConst('AUTHORIZE_URL',                       'https://us.etrade.com/e/t/etws/authorize');
-                setConst('ETRADE_SERVER',                       'https://etws.etrade.com');
+//                setConst('ETRADE_SERVER',                       'https://etws.etrade.com');
+                setConst('ETRADE_SERVER',                       'https://api.etrade.com');
+
+
+
+
                 setConst('OAUTH_ACCESS_TOKEN',          '');
                 setConst('OAUTH_ACCESS_TOKEN_SECRET','');
                 setConst('PUSH_URL', 'https://etwspush.etrade.com/apistream/cometd/oauth/');
@@ -83,7 +89,9 @@ setConst('URL_TRANSACTION_HISTORY',	ETRADE_SERVER . '/accounts/'.$url_str_part.'
 setConst('URL_OPTIONCHAINS',	ETRADE_SERVER . '/market/'.$url_str_part.'rest/optionchains');
 setConst('URL_MARKETINDICES',	ETRADE_SERVER . '/market/'.$url_str_part.'rest/marketindices');
 setConst('URL_PRODUCTLOOKUP',	ETRADE_SERVER . '/market/'.$url_str_part.'rest/productlookup');
-setConst('URL_GETQUOTE',		ETRADE_SERVER . '/market/'.$url_str_part.'rest/quote');
+// setConst('URL_GETQUOTE',		ETRADE_SERVER . '/market/'.$url_str_part.'rest/quote');
+setConst('URL_GETQUOTE',			ETRADE_SERVER . '/v1/market/quote');
+
 setConst('URL_EXPIRYDATES',		ETRADE_SERVER . '/market/'.$url_str_part.'rest/optionexpiredate');
 
 
