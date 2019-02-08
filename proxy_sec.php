@@ -5,7 +5,7 @@ error_reporting(1);
 
 $symbol=$_GET['symbol'];
 
-$yesterdayDays = 3; 
+$yesterdayDays = 1; 
 
 fopen("cookies.txt", "w");
 
@@ -140,6 +140,9 @@ function grabHTML($function_host_name, $url)
 
 $ret = "";
 $finalReturn = "";
+
+  
+      // try https://www.nasdaq.com/symbol/staf/sec-filings
 
       $url = "https://www.sec.gov/cgi-bin/browse-edgar?CIK=" . $symbol . "&owner=exclude&action=getcompany&Find=Search"; 
       $result = grabHTML('www.sec.gov', $url); 

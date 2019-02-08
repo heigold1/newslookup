@@ -18,7 +18,7 @@ require_once(dirname(__FILE__) . '/Common/Common.php');
 require_once(dirname(__FILE__) . '/OAuth/etOAuth.class.php');
 require_once(dirname(__FILE__) . '/Market/MarketClient.class.php'); */
 
-include './config.php';
+include './Samples/config.php';
 include './Common/Common.php';
 include './OAuth/etOAuth.class.php';
 include './Market/MarketClient.class.php';
@@ -79,13 +79,10 @@ $mkt_response_obj = simplexml_load_string($out);
     if ($current_time > 130000)  // 1:00 PM 
     {
 
-
-
-
       if (isset($mkt_response_obj->QuoteData->All->lastTrade))
       {
         $company_name = (string) $mkt_response_obj->QuoteData->All->companyName;
-        $ten_day_volume = (string) $mkt_response_obj->QuoteData->All->volume10Day; 
+        $ten_day_volume = (string) $mkt_response_obj->QuoteData->All->averageVolume; 
         $total_volume = (string) $mkt_response_obj->QuoteData->All->totalVolume;
         $last_trade = (string) $mkt_response_obj->QuoteData->All->lastTrade;
         $low = (string) $mkt_response_obj->QuoteData->All->low;
@@ -129,10 +126,10 @@ $mkt_response_obj = simplexml_load_string($out);
     else
     {
 
-      if (isset($mkt_response_obj->QuoteData->All->prevClose))
+      if (isset($mkt_response_obj->QuoteData->All->previousClose))
       {
-        $prev_close = (string) $mkt_response_obj->QuoteData->All->prevClose;
-        $ten_day_volume = (string) $mkt_response_obj->QuoteData->All->volume10Day; 
+        $prev_close = (string) $mkt_response_obj->QuoteData->All->previousClose;
+        $ten_day_volume = (string) $mkt_response_obj->QuoteData->All->averageVolume; 
         $total_volume = (string) $mkt_response_obj->QuoteData->All->totalVolume;
         $company_name = (string) $mkt_response_obj->QuoteData->All->companyName;
         $low = (string) $mkt_response_obj->QuoteData->All->low;
