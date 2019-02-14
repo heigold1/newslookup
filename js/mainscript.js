@@ -632,7 +632,7 @@ if ($.trim($("#quote_input").val()) != ""){
 
             if ($('input#redo_localhost_checkbox').is(':checked')) 
             {
-                openPage("http://www.heigoldinvestments.com/newslookup/proxy.php?symbol=" + symbol + "&which_website=yahoo&host_name=finance.yahoo.com&company_name=" + yahooCompanyName + "&ten_day_volume=" + yahoo10DayVolume + "&total_volume=" + totalVolume + "&yesterday_volume=" + yesterdayVolume);
+                openPage("http://localhost/newslookup/proxy.php?symbol=" + symbol + "&which_website=yahoo&host_name=finance.yahoo.com&company_name=" + yahooCompanyName + "&ten_day_volume=" + yahoo10DayVolume + "&total_volume=" + totalVolume + "&yesterday_volume=" + yesterdayVolume);
             }
 
             $("div#right_top_container").css("background-color", "#BBDDFF");                
