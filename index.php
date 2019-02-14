@@ -31,10 +31,13 @@
 							</td>
 							<td style="width:450px"> 
 								<span id="strip_last_character">
-									<input type="checkbox" id="strip_last_character_checkbox" value="1" checked="checked">Truncate 5th "W/R/Z" character
-								</span> 
+									<input type="checkbox"id="strip_last_character_checkbox" value="1" checked="checked">Truncate 5th "W/R/Z" character
+								</span>  
 								<span id="prepare_order_only">
-									<input type="checkbox" id="prepare_order_only_checkbox" value="0">Only prepare the order
+									<input type="checkbox" id="prepare_order_only_checkbox" value="0">Only prep order
+								</span> 
+								<span>
+									<input type="checkbox" id="redo_localhost_checkbox" value="0">Redo local
 								</span> 
 							</td>
 						</tr>

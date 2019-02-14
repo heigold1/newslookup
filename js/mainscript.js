@@ -605,8 +605,6 @@ if ($.trim($("#quote_input").val()) != ""){
 
             });
 
-
-
             $("div#left_top_container").css("background-color", "#F3F3FF");
 
             $("div#bigcharts_chart_container").html("<a target='blank' style='cursor: pointer;' title='Click to open 5-day chart' onclick='return openPage(\"http://bigcharts.marketwatch.com/quickchart/quickchart.asp?symb=" + original_symbol + "&insttype=&freq=7&show=&time=3&rand=" + Math.random() + "\")'> <img style='max-width:100%; max-height:100%;' src='http://bigcharts.marketwatch.com/kaavio.Webhost/charts/big.chart?nosettings=1&symb=" + original_symbol + "&uf=0&type=2&size=2&freq=1&entitlementtoken=0c33378313484ba9b46b8e24ded87dd6&time=4&rand=" + Math.random() + "&compidx=&ma=0&maval=9&lf=1&lf2=0&lf3=0&height=335&width=579&mocktick=1)'></a>");
@@ -632,6 +630,11 @@ if ($.trim($("#quote_input").val()) != ""){
 
             // AJAX call to yahoo finance 
 
+            if ($('input#redo_localhost_checkbox').is(':checked')) 
+            {
+                openPage("http://www.heigoldinvestments.com/newslookup/proxy.php?symbol=" + symbol + "&which_website=yahoo&host_name=finance.yahoo.com&company_name=" + yahooCompanyName + "&ten_day_volume=" + yahoo10DayVolume + "&total_volume=" + totalVolume + "&yesterday_volume=" + yesterdayVolume);
+            }
+
             $("div#right_top_container").css("background-color", "#BBDDFF");                
             $.ajax({
             url: "proxy.php",
@@ -646,6 +649,7 @@ if ($.trim($("#quote_input").val()) != ""){
             async: false, 
             dataType: 'html',
             success:  function (data) {
+
               console.log(data);
 
                 if (data.search(/reverse split|reverse stock split/gi) > 0)
@@ -708,7 +712,7 @@ if ($.trim($("#quote_input").val()) != ""){
               {
                   stockOrFund = "stock";
               } 
-            } // yahoo success function 
+            }  // yahoo success function 
         });  // yahoo ajax   
 
         $("div#right_top_container").css("background-color", "#F3F3FF");
