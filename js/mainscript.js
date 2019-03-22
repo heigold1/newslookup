@@ -444,7 +444,7 @@ if ($.trim($("#quote_input").val()) != ""){
               $("#day1").html("");
               $("#entryPrice").val(""); 
               $("#entryPercentage").val("");  
-              $("#amountSpending").val("800");
+              $("#amountSpending").val("1000");
               $("#eTradeLowPercentage").html("");
               $("#orderStub").val("-----------------------"); 
               $("#foreign_country").html("");
@@ -649,6 +649,11 @@ if ($.trim($("#quote_input").val()) != ""){
             async: false, 
             dataType: 'html',
             success:  function (data) {
+
+              if (data.toLowerCase().search("couldn't resolve host name") != -1)
+              {
+                  openPage("http://localhost/newslookup/proxy.php?symbol=" + symbol + "&which_website=yahoo&host_name=finance.yahoo.com&company_name=" + yahooCompanyName + "&ten_day_volume=" + yahoo10DayVolume + "&total_volume=" + totalVolume + "&yesterday_volume=" + yesterdayVolume);
+              }
 
               console.log(data);
 

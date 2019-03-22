@@ -86,8 +86,8 @@ function get_marketwatch_trade_date($daysBack)
 
     if ($month == ('Mar'))
     {
-      $trade_date = "March. " . date('d, Y',strtotime("-" . $daysBack . " days"));      
-    }
+      $trade_date = "Mar. " . date('d, Y',strtotime("-" . $daysBack . " days"));      
+    } 
     else if ($month == ('Apr'))
     {
       $trade_date = "April. " . date('d, Y',strtotime("-" . $daysBack . " days"));      
@@ -197,7 +197,7 @@ function get_marketwatch_today_trade_date()
 
     if ($month == ('Mar'))
     {
-      $today_marketwatch_trade_date = "March. " . date('d, Y');
+      $today_marketwatch_trade_date = "Mar. " . date('d, Y');
     }
     else if ($month == ('Apr'))
     {
@@ -404,6 +404,8 @@ if ($which_website == "marketwatch")
           preg_match('/article__timestamp">(.*?)<\/li>/', $articleDiv, $dateStringArray);
           $articleStruct['date'] = $dateStringArray[1];
 
+
+
           // am/pm  red green highlighting  
           for ($i = $yesterdayDays; $i >= 1; $i--)
           {
@@ -512,6 +514,8 @@ if ($which_website == "marketwatch")
       $marketWatchNewsHTML = preg_replace('/ conference call to provide update/i', '<span style="font-size: 12px; background-color:red; color:black"><b>&nbsp; Conference Call to Provide Update -</span> <span style="font-size: 12px; background-color:lightgreen; color:black">CHECK THE DATE/TIME OF THE CALL &nbsp;</b></span>&nbsp;', $marketWatchNewsHTML);
       $marketWatchNewsHTML = preg_replace('/ fictitious sales/i', '<span style="font-size: 12px; background-color:red; color:black"><b>&nbsp; fictitious sales - STAY AWAY </b></span> &nbsp;', $marketWatchNewsHTML);
       $marketWatchNewsHTML = preg_replace('/ board of directors/i', '<span style="font-size: 12px; background-color:red; color:black"><b>&nbsp; board of directors - if change to board of directors - 20%, China 25% </b></span> &nbsp;', $marketWatchNewsHTML);
+      $marketWatchNewsHTML = preg_replace('/ class action/i', '<span style="font-size: 12px; background-color:red; color:black"><b>&nbsp; class action - 20%, if penny then 35% </b></span> &nbsp;', $marketWatchNewsHTML);
+      $marketWatchNewsHTML = preg_replace('/ business combination/i', '<span style="font-size: 12px; background-color:red; color:black"><b>&nbsp; business combination - BE CAREFUL, could get de-listed </b></span> &nbsp;', $marketWatchNewsHTML);
 
 
       $marketWatchNewsHTML .= '</body></html>'; 
@@ -798,6 +802,8 @@ else if ($which_website == "yahoo")
       $finalReturn = preg_replace('/ seeking alpha/i', '<span style="font-size: 25px; background-color:red; color:black">SEEKING ALPHA &nbsp;</b></span>&nbsp;', $finalReturn);
       $finalReturn = preg_replace('/ fictitious sales/i', '<span style="font-size: 12px; background-color:red; color:black"><b>&nbsp; fictitious sales - STAY AWAY </b></span> &nbsp;', $finalReturn);     
       $finalReturn = preg_replace('/ board of directors/i', '<span style="font-size: 12px; background-color:red; color:black"><b>&nbsp; board of directors - if change to board of directors - 20%, China 25% </b></span> &nbsp;', $finalReturn);
+      $finalReturn = preg_replace('/ class action/i', '<span style="font-size: 12px; background-color:red; color:black"><b>&nbsp; class action - 20%, if penny then 35% </b></span> &nbsp;', $finalReturn);
+      $finalReturn = preg_replace('/ business combination/i', '<span style="font-size: 12px; background-color:red; color:black"><b>&nbsp; business combination - BE CAREFUL, could get de-listed </b></span> &nbsp;', $finalReturn);
 
 
       $message_board = '</font><a target="_blank" onclick="return openPage(this.href)" href="http://finance.yahoo.com/quote/' . $symbol . '/community?ltr=1"> Yahoo Message Boards</a>&nbsp;&nbsp;&nbsp;&nbsp;'; 
