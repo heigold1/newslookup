@@ -49,6 +49,10 @@ function playReverseStockSplit(){
   reverseStockSplit.play();
 }
 
+function playDelist(){
+  var delist = new Audio('./wav/delist.wav');
+  delist.play();
+}
 
 // when someone clicks to open up a link for marketwatch or yahoo finance.
 function openPage(link){
@@ -393,6 +397,8 @@ if ($.trim($("#quote_input").val()) != ""){
           var google_keyword_string= "";
           var exchange = "";          
           var reverseStockSplit = false; 
+          var varDelist = false;
+
 
           closeAllWindows();
 
@@ -444,7 +450,7 @@ if ($.trim($("#quote_input").val()) != ""){
               $("#day1").html("");
               $("#entryPrice").val(""); 
               $("#entryPercentage").val("");  
-              $("#amountSpending").val("1000");
+              $("#amountSpending").val("1300");
               $("#eTradeLowPercentage").html("");
               $("#orderStub").val("-----------------------"); 
               $("#foreign_country").html("");
@@ -662,6 +668,11 @@ if ($.trim($("#quote_input").val()) != ""){
                     reverseStockSplit = true; 
                 }
 
+                if (data.search(/delist|de-list/gi) > 0)
+                {
+                    varDelist = true;
+                }
+
                 if (data.search(/geo_usa/) > 0)
                 {
                     $("#foreign_country").html("0");
@@ -740,9 +751,18 @@ if ($.trim($("#quote_input").val()) != ""){
                     success:  function (data) {
                       console.log(data);
 
+
+
                       if (data.search(/reverse split|reverse stock split/gi) > 0)
                       {
                           reverseStockSplit = true; 
+                          playReverseStockSplit();
+                      }
+
+                      if (data.search(/delist|de-list/gi) > 0)
+                      {
+                          varDelist = true;
+                          playDelist(); 
                       }
 
                       $("div#left_bottom_container").html( data +  eTradeIFrame); 
@@ -794,6 +814,16 @@ if ($.trim($("#quote_input").val()) != ""){
         if (reverseStockSplit == true)
         {
           playReverseStockSplit(); 
+        }
+
+        if (varDelist == true)
+        {
+alert("delist is true, it is " + varDelist);
+          playDelist();
+        }
+        else
+        {
+alert("delist is not true, it is " + varDelist);
         }
 
         if (volumeRatio > 0.175)
