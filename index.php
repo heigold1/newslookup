@@ -20,8 +20,8 @@
 	<div id="left_container" style="position: relative; background-color: #F3F3FF; border-style: solid; border-width: 1px; float: left; width: 49%;	height: 100%;
 	display: block; clear: both; border-style: solid; border-width: 1px;">
 		<div id="left_top_container">
-			<span id="foreign_country" style="display:none"></span>
-			<span id="chinese_stock" style="display:none"></span>
+<!--			<span id="foreign_country" style="display:none"></span>   -->
+<!--			<span id="chinese_stock" style="display:none"></span>   -->
 			<div id="enter_quote_div">
 					<table>
 						<tr>
@@ -58,7 +58,7 @@
 							<td style="width:140px"># shrs <span id="numShares">000,000,000</span></td>
 							<td style="width:330px">
 
-							<input tabindex="6" id="orderStub" style="width: 305px;"><button id="email_trade" type="button">..</button><span id="time_of_day_percentage">N/A</span>
+							<input tabindex="6" id="orderStub" style="width: 305px;"><!-- <button id="email_trade" type="button">..</button> --><span id="time_of_day_percentage">N/A</span>
 
 							</td>
 							<td style="width:130px"><input type="radio" name="roundShares" id="roundShares" value="1000">Round 1,000</td> 						

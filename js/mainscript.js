@@ -398,6 +398,9 @@ if ($.trim($("#quote_input").val()) != ""){
           var exchange = "";          
           var reverseStockSplit = false; 
           var varDelist = false;
+          var foreignCountry = true; 
+          var chineseStock = false;
+          var yahooHtmlResults = "";
 
 
           closeAllWindows();
@@ -656,40 +659,14 @@ if ($.trim($("#quote_input").val()) != ""){
             dataType: 'html',
             success:  function (data) {
 
+              yahooHtmlResults = data; 
+
               if (data.toLowerCase().search("couldn't resolve host name") != -1)
               {
                   openPage("http://localhost/newslookup/proxy.php?symbol=" + symbol + "&which_website=yahoo&host_name=finance.yahoo.com&company_name=" + yahooCompanyName + "&ten_day_volume=" + yahoo10DayVolume + "&total_volume=" + totalVolume + "&yesterday_volume=" + yesterdayVolume);
               }
 
               console.log(data);
-
-                if (data.search(/reverse split|reverse stock split/gi) > 0)
-                {
-                    reverseStockSplit = true; 
-                }
-
-                if (data.search(/delist|de-list/gi) > 0)
-                {
-                    varDelist = true;
-                }
-
-                if (data.search(/geo_usa/) > 0)
-                {
-                    $("#foreign_country").html("0");
-                }
-                else
-                {
-                    $("#foreign_country").html("1");
-                }
-
-                if (data.search(/geo_china/) > 0)
-                {
-                    $("#chinese_stock").html("1");
-                }
-                else
-                {
-                    $("#chinese_stock").html("0");
-                }
 
               yahooCompanyName = " " + data.match(/<h1(.*?)h1>/g) + " "; 
 
@@ -751,18 +728,30 @@ if ($.trim($("#quote_input").val()) != ""){
                     success:  function (data) {
                       console.log(data);
 
-
-
-                      if (data.search(/reverse split|reverse stock split/gi) > 0)
+                      if (
+                        (yahooHtmlResults.search(/reverse split|reverse stock split/gi) > 0) ||
+                        (data.search(/reverse split|reverse stock split/gi) > 0)
+                        )
                       {
                           reverseStockSplit = true; 
-                          playReverseStockSplit();
                       }
 
-                      if (data.search(/delist|de-list/gi) > 0)
+                      if (
+                        (yahooHtmlResults.search(/delist|de-list/gi) > 0) || 
+                        (data.search(/delist|de-list/gi) > 0)
+                        )
                       {
                           varDelist = true;
-                          playDelist(); 
+                      }
+
+                      if (reverseStockSplit == true)
+                      {
+                        playReverseStockSplit(); 
+                      }
+
+                      if (varDelist == true)
+                      {
+                        playDelist();
                       }
 
                       $("div#left_bottom_container").html( data +  eTradeIFrame); 
@@ -788,12 +777,22 @@ if ($.trim($("#quote_input").val()) != ""){
 
         // check if it's a Chinese or foreign stock
 
-        if ($("#chinese_stock").html() == "1")
+        if (yahooHtmlResults.search(/geo_usa/) > 0)
+        {
+            foreignCountry = false;
+        }
+
+        if (yahooHtmlResults.search(/geo_china/) > 0)
+        {
+            chineseStock = true;
+        }
+
+        if (chineseStock == true)
         {
             playChineseStock(); 
-            warningMessage += " ** CHINESE COMPANY - 58% ** ";
+            warningMessage += " ** CHINESE COMPANY - 58% ** ";          
         }
-        else if ($("#foreign_country").html() == "1")
+        else if (foreignCountry == true)
         {
             playForeignStock();
             warningMessage += " ** FOREIGN COMPANY ** ";
@@ -811,32 +810,15 @@ if ($.trim($("#quote_input").val()) != ""){
           warningMessage += " ** LOW AVERAGE VOLUME ** ";
         }
 
-        if (reverseStockSplit == true)
-        {
-          playReverseStockSplit(); 
-        }
-
-        if (varDelist == true)
-        {
-alert("delist is true, it is " + varDelist);
-          playDelist();
-        }
-        else
-        {
-alert("delist is not true, it is " + varDelist);
-        }
-
         if (volumeRatio > 0.175)
         {
           warningMessage += " ** VOLUME RATIO IS " + volumeRatio + " ** ";
         }
 
-
         if (warningMessage != "")
         {
 //            alert(warningMessage);
         }
-
 
         if (day1 > 15)
         {

@@ -7,6 +7,7 @@ require_once("simple_html_dom.php");
 $yesterdayDays = 1; 
 
 error_reporting(1);
+//ini_set('display_errors', 1);
 
 // header('Content-type: text/html');
 $symbol=$_GET['symbol'];
@@ -90,7 +91,7 @@ function get_marketwatch_trade_date($daysBack)
     } 
     else if ($month == ('Apr'))
     {
-      $trade_date = "April. " . date('d, Y',strtotime("-" . $daysBack . " days"));      
+      $trade_date = "Apr. " . date('d, Y',strtotime("-" . $daysBack . " days"));      
     }
     else if ($month == ('May'))
     {
@@ -120,7 +121,7 @@ function get_marketwatch_friday_trade_date()
     }
     else if ($month == ('Apr'))
     {
-      $friday_marketwatch_trade_date = "April. " . date('d, Y',strtotime("-3 days"));      
+      $friday_marketwatch_trade_date = "Apr. " . date('d, Y',strtotime("-3 days"));      
     }
     else if ($month == ('May'))
     {
@@ -147,7 +148,7 @@ function get_marketwatch_saturday_trade_date()
     }
     else if ($month == ('Apr'))
     {
-      $saturday_marketwatch_trade_date = "April. " . date('d, Y',strtotime("-2 days"));
+      $saturday_marketwatch_trade_date = "Apr. " . date('d, Y',strtotime("-2 days"));
     }
     else if ($month == ('May'))
     {
@@ -174,7 +175,7 @@ function get_marketwatch_yesterday_trade_date()
     }
     else if ($month == ('Apr'))
     {
-      $yesterday_marketwatch_trade_date = "April. " . date('d, Y',strtotime("-1 days"));
+      $yesterday_marketwatch_trade_date = "Apr. " . date('d, Y',strtotime("-1 days"));
     }
     else if ($month == ('May'))
     {
@@ -201,7 +202,7 @@ function get_marketwatch_today_trade_date()
     }
     else if ($month == ('Apr'))
     {
-      $today_marketwatch_trade_date = "April. " . date('d, Y');
+      $today_marketwatch_trade_date = "Apr. " . date('d, Y');
     }
     else if ($month == ('May'))
     {
@@ -456,7 +457,8 @@ if ($which_website == "marketwatch")
 
       $marketWatchNewsHTML = preg_replace('/([0-9][0-9]:[0-9][0-9] [a-z]\.m\.  Today)|([0-9]:[0-9][0-9] [a-z]\.m\.  Today)/', '<span style="font-size: 8px; background-color:black; color:white">$1$2</span>', $marketWatchNewsHTML);
       $marketWatchNewsHTML = preg_replace('/([0-9][0-9] min ago)|([0-9] min ago)/', '<span style="font-size: 8px; background-color:black; color:white">$1$2</span>', $marketWatchNewsHTML);      
-      $marketWatchNewsHTML = preg_replace('/ delist/i', '<span style="font-size: 12px; background-color:red; color:black"><b> delist</span> If delisting tomorrow 65%, if days away then 50-55%</b>', $marketWatchNewsHTML);
+      $marketWatchNewsHTML = preg_replace('/ delist/i', '<span style="font-size: 12px; background-color:red; color:black"><b> delist If delisting tomorrow 65%, if days away then 50-55%</b></span>', $marketWatchNewsHTML);
+      $marketWatchNewsHTML = preg_replace('/Delist/', '<span style="font-size: 12px; background-color:red; color:black"><b> delist If delisting tomorrow 65%, if days away then 50-55%</b></span>', $marketWatchNewsHTML);
       $marketWatchNewsHTML = preg_replace('/ chapter 11|chapter 11 /i', '<span style="font-size: 12px; background-color:red; color:black"><b> &nbsp;CHAPTER 11</b>&nbsp;</span>', $marketWatchNewsHTML);
       $marketWatchNewsHTML = preg_replace('/ reverse split|reverse split /i', '<span style="font-size: 12px; background-color:red; color:black"><b> &nbsp;REVERSE SPLIT</b>&nbsp;</span>', $marketWatchNewsHTML);
       $marketWatchNewsHTML = preg_replace('/ reverse.stock split|reverse stock split /i', '<span style="font-size: 12px; background-color:red; color:black"><b> &nbsp;REVERSE STOCK SPLIT</b>&nbsp;</span>', $marketWatchNewsHTML);
@@ -577,7 +579,7 @@ else if ($which_website == "yahoo")
         $newsTitle = preg_replace('/ withdrawal(.*?)application/i', '<span style="font-size: 12px; background-color:red; color:black"><b> withdrawal $1 application (55%) </b></span> ', $newsTitle);
         $newsTitle = preg_replace('/nasdaq rejects(.*?)listing/i', '<span style="font-size: 12px; background-color:red; color:black"><b>Nasdaq rejects $1 listing</span> If delisting tomorrow 65%, if delisting days away then 50-55%</b>&nbsp;', $newsTitle);
 
-        $allNews .=  " ><a href='$feedItem->link' title='$feedItem->title'> " . $publicationDate . " " . $publicationTime . " - " . $newsTitle . "</a></li>";
+        $allNews .=  " ><a href='$feedItem->link'> " . $publicationDate . " " . $publicationTime . " - " . $newsTitle . "</a></li>";
     }
 
       $allNews .=  "</ul>";
@@ -744,7 +746,8 @@ else if ($which_website == "yahoo")
       $finalReturn = preg_replace('/(' .  get_yahoo_yesterday_trade_date() . ')/', '<span style="font-size: 12px; background-color:   #000080; color:white"> $1</span> ', $finalReturn);
       $finalReturn = preg_replace('/(' .  get_yahoo_todays_trade_date() . ')/', '<span style="font-size: 12px; background-color:  black; color:white"> $1</span> ', $finalReturn);
 
-      $finalReturn = preg_replace('/ delist/i', '<span style="font-size: 12px; background-color:red; color:black"><b> delist</span> If delisting tomorrow 65%, if days away then 50-55%</b>', $finalReturn);
+      $finalReturn = preg_replace('/ delist/i', '<span style="font-size: 12px; background-color:red; color:black"><b> delist If delisting tomorrow 65%, if days away then 50-55%</b></span>', $finalReturn);
+      $finalReturn = preg_replace('/Delist/', '<span style="font-size: 12px; background-color:red; color:black"><b> delist If delisting tomorrow 65%, if days away then 50-55%</b></span>', $finalReturn);
       $finalReturn = preg_replace('/ chapter 11|chapter 11 /i', '<span style="font-size: 12px; background-color:red; color:black"><b> &nbsp;CHAPTER 11</b></span>', $finalReturn);
       $finalReturn = preg_replace('/ reverse split|reverse split /i', '<span style="font-size: 12px; background-color:red; color:black"><b> &nbsp;REVERSE SPLIT</b></span>', $finalReturn);
       $finalReturn = preg_replace('/ reverse.stock split|reverse stock split /i', '<div style="font-size: 12px; background-color:red; display: inline-block;">REVERSE STOCK SPLIT</div>', $finalReturn);
