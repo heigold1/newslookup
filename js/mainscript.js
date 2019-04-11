@@ -646,7 +646,7 @@ if ($.trim($("#quote_input").val()) != ""){
 
             $("div#right_top_container").css("background-color", "#BBDDFF");                
             $.ajax({
-            url: "proxy.php",
+            url: "http://www.heigoldinvestments.com/newslookup/proxy.php",
             data: {symbol: symbol,
                  which_website: "yahoo", 
                  host_name: "finance.yahoo.com",
@@ -663,7 +663,7 @@ if ($.trim($("#quote_input").val()) != ""){
 
               if (data.toLowerCase().search("couldn't resolve host name") != -1)
               {
-                  openPage("http://localhost/newslookup/proxy.php?symbol=" + symbol + "&which_website=yahoo&host_name=finance.yahoo.com&company_name=" + yahooCompanyName + "&ten_day_volume=" + yahoo10DayVolume + "&total_volume=" + totalVolume + "&yesterday_volume=" + yesterdayVolume);
+                  openPage("http://ec2-54-210-42-143.compute-1.amazonaws.com/newslookup/proxy.php?symbol=" + symbol + "&which_website=yahoo&host_name=finance.yahoo.com&company_name=" + yahooCompanyName + "&ten_day_volume=" + yahoo10DayVolume + "&total_volume=" + totalVolume + "&yesterday_volume=" + yesterdayVolume);
               }
 
               console.log(data);

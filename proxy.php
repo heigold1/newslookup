@@ -284,6 +284,8 @@ function grabEtradeHTML($etrade_host_name, $url)
 
         curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
+        curl_setopt($_h, CURLOPT_IPRESOLVE, CURL_IPRESOLVE_V4 );
+        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
 
     curl_setopt($ch, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
 
@@ -318,6 +320,7 @@ function grabHTML($function_host_name, $url)
     curl_setopt($ch,CURLOPT_RETURNTRANSFER,true);
     curl_setopt($ch,CURLOPT_CONNECTTIMEOUT, 300);
     curl_setopt( $ch, CURLOPT_COOKIESESSION, true );
+    curl_setopt($ch, CURLOPT_IPRESOLVE, CURL_IPRESOLVE_V4 );
 
     curl_setopt($ch, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
 
