@@ -1,8 +1,8 @@
 <?php 
 
+error_reporting(1);
 
-
-require_once "Mail.php";
+require_once "/var/www/html/pear/share/pear/Mail.php";
 
 if (isset($_GET['trade']))
 {

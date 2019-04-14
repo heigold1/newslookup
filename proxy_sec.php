@@ -1,7 +1,7 @@
 <?php 
 
 require_once("simple_html_dom.php"); 
-error_reporting(3);
+error_reporting(1);
 
 $symbol=$_GET['symbol'];
 
@@ -154,6 +154,7 @@ $finalReturn = "";
       }
 
       $html = str_get_html($result);
+
       $returnHtml = "";
       $tableRows = "";
       $recentNews = false;
@@ -161,10 +162,15 @@ $finalReturn = "";
           $tableRow1 = $html->find('.tableFile2 tbody tr'); 
           $recentNews = false; 
 
-
           for ($i = 1; $i < 6; $i++)
            { 
               $row = str_get_html($tableRow1[$i]);
+
+              if (!$row)
+              {
+                  break;
+              }
+
               $td = $row->find('td'); 
               $linkTd = $td[1]->find('a');  
 

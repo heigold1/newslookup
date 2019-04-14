@@ -58,7 +58,7 @@
 							<td style="width:140px"># shrs <span id="numShares">000,000,000</span></td>
 							<td style="width:330px">
 
-							<input tabindex="6" id="orderStub" style="width: 305px;"><!-- <button id="email_trade" type="button">..</button> --><span id="time_of_day_percentage">N/A</span>
+							<input tabindex="6" id="orderStub" style="width: 305px;"><button id="email_trade" type="button">..</button><span id="time_of_day_percentage">N/A</span>
 
 							</td>
 							<td style="width:130px"><input type="radio" name="roundShares" id="roundShares" value="1000">Round 1,000</td> 						
