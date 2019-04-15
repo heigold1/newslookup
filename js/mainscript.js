@@ -646,7 +646,7 @@ if ($.trim($("#quote_input").val()) != ""){
 
             $("div#right_top_container").css("background-color", "#BBDDFF");                
             $.ajax({
-            url: "http://www.heigoldinvestments.com/newslookup/proxy.php",
+            url: "proxy.php",
             data: {symbol: symbol,
                  which_website: "yahoo", 
                  host_name: "finance.yahoo.com",
@@ -990,7 +990,7 @@ $("#entryPrice").click(function(){
     $("#orderStub").val("-----------------------");    
     $('input#check_offering').attr('checked', false);
 
-startProcess(); 
-CopyToClipboard(); 
+        startProcess(); 
+        CopyToClipboard(); 
 
 });  // End of the initial automatically called function
