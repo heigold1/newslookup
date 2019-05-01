@@ -74,9 +74,9 @@ $ac_obj = new MarketClient($consumer);
 
 $mkt_response_obj = simplexml_load_string($out);
 
-  $current_time = date('Gis', strtotime("-3 hours")); 
+  $current_time = date('Gis'); 
 
-    if ($current_time > 130000)  // 1:00 PM 
+    if ($current_time > 200000)  // 1:00 PM 
     {
 
       if (isset($mkt_response_obj->QuoteData->All->lastTrade))

@@ -521,6 +521,7 @@ if ($which_website == "marketwatch")
       $marketWatchNewsHTML = preg_replace('/ board of directors/i', '<span style="font-size: 12px; background-color:red; color:black"><b>&nbsp; board of directors - if change to board of directors - 20%, China 25% </b></span> &nbsp;', $marketWatchNewsHTML);
       $marketWatchNewsHTML = preg_replace('/ class action/i', '<span style="font-size: 12px; background-color:red; color:black"><b>&nbsp; class action - 20%, if penny then 35% </b></span> &nbsp;', $marketWatchNewsHTML);
       $marketWatchNewsHTML = preg_replace('/ business combination/i', '<span style="font-size: 12px; background-color:red; color:black"><b>&nbsp; business combination - BE CAREFUL, could get de-listed </b></span> &nbsp;', $marketWatchNewsHTML);
+      $marketWatchNewsHTML = preg_replace('/ annual meeting of shareholders/i', '<span style="font-size: 12px; background-color:red; color:black"><b>&nbsp; annual meeting of shareholders - 40% early </b></span> &nbsp;', $marketWatchNewsHTML);
 
 
       $marketWatchNewsHTML .= '</body></html>'; 
@@ -810,6 +811,7 @@ else if ($which_website == "yahoo")
       $finalReturn = preg_replace('/ board of directors/i', '<span style="font-size: 12px; background-color:red; color:black"><b>&nbsp; board of directors - if change to board of directors - 20%, China 25% </b></span> &nbsp;', $finalReturn);
       $finalReturn = preg_replace('/ class action/i', '<span style="font-size: 12px; background-color:red; color:black"><b>&nbsp; class action - 20%, if penny then 35% </b></span> &nbsp;', $finalReturn);
       $finalReturn = preg_replace('/ business combination/i', '<span style="font-size: 12px; background-color:red; color:black"><b>&nbsp; business combination - BE CAREFUL, could get de-listed </b></span> &nbsp;', $finalReturn);
+      $finalReturn = preg_replace('/ annual meeting of shareholders/i', '<span style="font-size: 12px; background-color:red; color:black"><b>&nbsp; annual meeting of shareholders - 40% early</b></span> &nbsp;', $finalReturn);
 
 
       $message_board = '</font><a target="_blank" onclick="return openPage(this.href)" href="http://finance.yahoo.com/quote/' . $symbol . '/community?ltr=1"> Yahoo Message Boards</a>&nbsp;&nbsp;&nbsp;&nbsp;'; 

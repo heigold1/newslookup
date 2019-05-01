@@ -782,7 +782,7 @@ if ($.trim($("#quote_input").val()) != ""){
             foreignCountry = false;
         }
 
-        if (yahooHtmlResults.search(/geo_china/) > 0)
+        if ((yahooHtmlResults.search(/geo_china/) > 0) || (yahooHtmlResults.search(/geo_hongkong/) > 0))
         {
             chineseStock = true;
         }
@@ -990,7 +990,11 @@ $("#entryPrice").click(function(){
     $("#orderStub").val("-----------------------");    
     $('input#check_offering').attr('checked', false);
 
+    var tickerSymbol = $.trim($("#quote_input").val()); 
+    if (tickerSymbol.toLowerCase().search("undefined index") == -1)
+    {
         startProcess(); 
         CopyToClipboard(); 
+    }
 
 });  // End of the initial automatically called function
