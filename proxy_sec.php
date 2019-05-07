@@ -98,6 +98,18 @@ function timestampIsSafe($timestamp){
     }
 }
 
+function timestampIsSafeDateColumn($dateValue){
+    preg_match("/(\d{2}):\d{2}:\d{2}/", $dateValue, $date_time); 
+    if ((int)$date_time[1] > 12)
+    {
+        return false;
+    }
+    else
+    {
+        return true;
+    }
+}
+
 function grabHTML($function_host_name, $url)
 {
 
@@ -193,7 +205,7 @@ $finalReturn = "";
 
                   for ($j = $yesterdayDays; $j >= 1; $j--)
                   {
-                      $td3 = preg_replace('/(' .  get_trade_date($j) . ')/', '<span style="font-size: 16px; background-color:#000080 ; color:white">$1</span>', $td3);
+                      $td3 = preg_replace('/(' .  get_trade_date($j) . ')/', '<span style="font-size: 16px; background-color:#000080; color:white">$1</span>', $td3);
                       if (preg_match('/(' .  get_trade_date($j) . ')/', $td3))
                       {
                           $timestamp = getURLTimestamp($href2);
@@ -201,9 +213,19 @@ $finalReturn = "";
 
                           if ($j == $yesterdayDays)
                           {
-                              if (!timestampIsSafe($timestamp))
+                              if (!timestampIsSafe($timestamp) || !timestampIsSafeDateColumn($td3))
                               {
                                   $recentNews = true;
+
+                                  // if there happens to be a 24-hour timestamp in the date field then highlight the HH: section red if it's > 12
+                                  if (!timestampIsSafeDateColumn($td3))
+                                  {
+                                    $td3 = preg_replace('/ (\d{2}):/i', ' <span style="font-size: 15px; background-color:red; color:black">$1</span>:', $td3);
+                                  }
+                                  else
+                                  {
+                                    $td3 = preg_replace('/ (\d{2}):/i', ' <span style="font-size: 15px; background-color:#00FF00; color:black">$1</span>:', $td3);
+                                  }
                               }
                               $time = preg_replace('/AM/', '<span style="background-color: lightgreen">AM</span>', $time); 
                           }
@@ -223,11 +245,6 @@ $finalReturn = "";
                       {
                           $recentNews = true;
                       }
-                  }
-
-                  if (preg_match('/(' .  get_today_trade_date() . ')/', $td3))
-                  {
-                      $recentNews = true; 
                   }
 
                   if (preg_match('/(' .  get_today_trade_date() . ')/', $td3))
