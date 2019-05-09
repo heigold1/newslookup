@@ -491,6 +491,10 @@ if ($.trim($("#quote_input").val()) != ""){
                           prev_close = parseFloat(jsonObject.prev_close); 
                           exchange = jsonObject.exchange;
 
+                          if (exchange == "PK")
+                          {
+                            $("#amountSpending").val("700");
+                          }
 
                           $("#yestCloseText").val(jsonObject.prev_close);
                           if (low > 1.00)
