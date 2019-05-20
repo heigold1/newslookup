@@ -4,8 +4,10 @@ require_once("simple_html_dom.php");
 error_reporting(1);
 
 $symbol=$_GET['symbol'];
+$secCompanyName = $_GET['secCompanyName'];
+$secCompanyName = preg_replace('/ /', '+', $secCompanyName);
 
-$yesterdayDays = 1; 
+$yesterdayDays = 3; 
 
 fopen("cookies.txt", "w");
 
@@ -152,17 +154,25 @@ function grabHTML($function_host_name, $url)
 
 $ret = "";
 $finalReturn = "";
-
   
       // try https://www.nasdaq.com/symbol/staf/sec-filings
 
-      $url = "https://www.sec.gov/cgi-bin/browse-edgar?CIK=" . $symbol . "&owner=exclude&action=getcompany&Find=Search"; 
+      $url = "https://www.sec.gov/cgi-bin/browse-edgar?CIK=" . $symbol . "&owner=include&action=getcompany"; 
       $result = grabHTML('www.sec.gov', $url); 
 
       if (preg_match('/No matching Ticker Symbol/', $result))
       {
-        echo "<title>Filing - " . $symbol . " (NONE)</title><h1>No matching ticker symbol</h1>";
+/*
+        echo "<title>Filing - " . $symbol . " (No match)</title><h1>No matching ticker symbol</h1>";
         return; 
+*/
+          $url = "https://www.sec.gov/cgi-bin/browse-edgar?company=" . $secCompanyName . "&owner=include&action=getcompany"; 
+          $result = grabHTML('www.sec.gov', $url); 
+          if (preg_match('/Companies with names matching/', $result))
+          {
+              echo "<title>Filing - " . $symbol . " (AMBIGUOUS)</title>" . $result;
+              return; 
+          }
       }
 
       $html = str_get_html($result);

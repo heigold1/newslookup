@@ -381,6 +381,38 @@ if ($.trim($("#quote_input").val()) != ""){
         }
     }
 
+    function createSECCompanyName(companyName)
+    {
+        var companyName = companyName.toString();
+
+        companyName = companyName.replace(/ INC.*/, '');
+        companyName = companyName.replace(/ HLDG.*/, '');
+        companyName = companyName.replace(/ COM.*/, '');
+        companyName = companyName.replace(/ LTD.*/, '');
+        companyName = companyName.replace(/ NEW.*/, '');
+
+        companyNameArray = companyName.split(" ");
+        var arrayLength = companyNameArray.length;
+
+        if (arrayLength == 1)
+        {
+            return companyName;
+        }
+        else
+        {
+            // build out the "outlook+theraputics"
+            var returnCompanyName = "";
+            for (var i = 0; i < arrayLength; i++) {
+                returnCompanyName += companyNameArray[i];
+                if (i + 1 < arrayLength)
+                {
+                   returnCompanyName += "+";
+                }
+            }
+            return returnCompanyName; 
+        }
+    }
+
 
 
     function startProcess(){
@@ -389,6 +421,7 @@ if ($.trim($("#quote_input").val()) != ""){
           var symbol;
           var positionOfPeriod; 
           var yahooCompanyName = ""; 
+          var secCompanyName = "";
           var yahoo10DayVolume = "";
           var totalVolume = "";
           var yesterdayVolume = ""; 
@@ -434,7 +467,7 @@ if ($.trim($("#quote_input").val()) != ""){
               original_symbol = original_symbol.replace(/\.p\./gi, ".P"); 
 
               document.title = "Lookup - " + symbol; 
-              openPage('./proxy_sec.php?symbol=' + symbol); 
+              openPage("https://www.nasdaq.com/symbol/" + symbol + "/sec-filings");
 
               // initialize everything
 
@@ -493,9 +526,9 @@ if ($.trim($("#quote_input").val()) != ""){
 
                           if (exchange == "PK")
                           {
-                            $("#amountSpending").val("700");
-                          }
+                            $("#amountSpending").val("250");
 
+                          }
                           $("#yestCloseText").val(jsonObject.prev_close);
                           if (low > 1.00)
                           {  
@@ -508,6 +541,14 @@ if ($.trim($("#quote_input").val()) != ""){
                           $("#eTradeHigh").html(jsonObject.high);
 
                           yahooCompanyName = jsonObject.company_name;
+
+                          secCompanyName = jsonObject.company_name;
+                          secCompanyName = createSECCompanyName(secCompanyName);
+
+                          console.log("SEC company name is *" + secCompanyName + "*");
+
+                          openPage('./proxy_sec.php?symbol=' + symbol + '&secCompanyName=' + secCompanyName);
+
                           yahoo10DayVolume = jsonObject.ten_day_volume; 
                           totalVolume = jsonObject.total_volume; 
 
@@ -622,6 +663,13 @@ if ($.trim($("#quote_input").val()) != ""){
 
             $("div#bigcharts_chart_container").html("<a target='blank' style='cursor: pointer;' title='Click to open 5-day chart' onclick='return openPage(\"http://bigcharts.marketwatch.com/quickchart/quickchart.asp?symb=" + original_symbol + "&insttype=&freq=7&show=&time=3&rand=" + Math.random() + "\")'> <img style='max-width:100%; max-height:100%;' src='http://bigcharts.marketwatch.com/kaavio.Webhost/charts/big.chart?nosettings=1&symb=" + original_symbol + "&uf=0&type=2&size=2&freq=1&entitlementtoken=0c33378313484ba9b46b8e24ded87dd6&time=4&rand=" + Math.random() + "&compidx=&ma=0&maval=9&lf=1&lf2=0&lf3=0&height=335&width=579&mocktick=1)'></a>");
 
+
+
+
+
+$("div#bigcharts_yest_close").html("<img style='max-width:100%; max-height:100%;' src='http://bigcharts.marketwatch.com/kaavio.Webhost/charts/big.chart?nosettings=1&symb=VIX&uf=0&type=2&size=2&sid=1704273&style=320&freq=9&entitlementtoken=0c33378313484ba9b46b8e24ded87dd6&time=1&rand=" + Math.random() + "&compidx=&ma=0&maval=9&lf=1&lf2=0&lf3=0&height=335&width=579&mocktick=1'>");
+/*
+This just gets the yesterday close and last vix values, we don't need these yet, can always bring them back
             $("div#bigcharts_chart_container").css("background-color", "#BBDDFF");
             $("div#right_bottom_container").css("background-color", "#BBDDFF");                   
             $.ajax({
@@ -640,6 +688,13 @@ if ($.trim($("#quote_input").val()) != ""){
             });  // end of AJAX call to bigcharts   
             $("div#bigcharts_chart_container").css("background-color", "#F3F3FF");                         
             $("div#right_bottom_container").css("background-color", "#F3F3FF");                   
+*/
+
+
+
+
+
+
 
             // AJAX call to yahoo finance 
 
