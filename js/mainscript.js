@@ -467,7 +467,7 @@ if ($.trim($("#quote_input").val()) != ""){
               original_symbol = original_symbol.replace(/\.p\./gi, ".P"); 
 
               document.title = "Lookup - " + symbol; 
-              openPage("https://www.nasdaq.com/symbol/" + symbol + "/sec-filings");
+//              openPage("https://www.nasdaq.com/symbol/" + symbol + "/sec-filings");
 
               // initialize everything
 
@@ -486,7 +486,7 @@ if ($.trim($("#quote_input").val()) != ""){
               $("#day1").html("");
               $("#entryPrice").val(""); 
               $("#entryPercentage").val("");  
-              $("#amountSpending").val("1300");
+              $("#amountSpending").val("1400");
               $("#eTradeLowPercentage").html("");
               $("#orderStub").val("-----------------------"); 
               $("#foreign_country").html("");
