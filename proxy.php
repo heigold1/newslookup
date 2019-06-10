@@ -540,9 +540,9 @@ else if ($which_website == "yahoo")
     $allNews = "<ul class='newsSide'>";
     $allNews .= "<li>Yahoo Finance News</li>";
 
-    $i = 0;
+    $j = 0;
     foreach ($rss->channel->item as $feedItem) {
-        $i++;
+        $j++;
         $allNews .= "<li "; 
 
         // Convert time from GMT to  AM/PM New York
@@ -572,7 +572,7 @@ else if ($which_website == "yahoo")
             }
         }
 
-        if ($i % 2 == 1)
+        if ($j % 2 == 1)
         {
           $allNews .=  "style='background-color: #FFFFFF; '"; 
         };
