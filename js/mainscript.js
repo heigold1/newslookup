@@ -237,9 +237,9 @@ Number.prototype.toFixedDown = function(digits) {
 
 $(function() {
 
-if ($.trim($("#quote_input").val()) != ""){
-//  alert("not blank");
-}
+    if ($.trim($("#quote_input").val()) != ""){
+    //  alert("not blank");
+    }
 
   setInterval(blink, 3000);
 
@@ -449,11 +449,10 @@ if ($.trim($("#quote_input").val()) != ""){
 
           // take out the 5th "W/R/Z" for symbols like CBSTZ. 
 
-          if ( $("#strip_last_character_checkbox").prop('checked') && (positionOfPeriod > -1) )
-          {
-              // if any stocks have a ".PD" or a ".WS", etc... 
-
-              symbol = original_symbol.substr(0, positionOfPeriod); 
+              if ( $("#strip_last_character_checkbox").prop('checked') && (positionOfPeriod > -1) )
+              {
+                // if any stocks have a ".PD" or a ".WS", etc... 
+                symbol = original_symbol.substr(0, positionOfPeriod); 
               }
               else if ( $("#strip_last_character_checkbox").prop('checked') && (original_symbol.length == 5) )
               {
@@ -486,7 +485,7 @@ if ($.trim($("#quote_input").val()) != ""){
               $("#day1").html("");
               $("#entryPrice").val(""); 
               $("#entryPercentage").val("");  
-              $("#amountSpending").val("1400");
+              $("#amountSpending").val("1500");
               $("#eTradeLowPercentage").html("");
               $("#orderStub").val("-----------------------"); 
               $("#foreign_country").html("");
@@ -506,7 +505,7 @@ if ($.trim($("#quote_input").val()) != ""){
               $("div#left_top_container").css("background-color", "#BBDDFF");
               $.ajax({
                   url: "yesterday_close.php",
-                  data: {symbol: original_symbol},
+                  data: {symbol: symbol},
                   async: false, 
                   dataType: 'html',
                   success:  function (data) {
@@ -720,6 +719,8 @@ This just gets the yesterday close and last vix values, we don't need these yet,
 
               yahooHtmlResults = data; 
 
+              data = data.replace('>China<', '<span style="font-size:300px; background-color:red"><br><br>China<br><br></span>');
+
               if (data.toLowerCase().search("couldn't resolve host name") != -1)
               {
                   openPage("http://ec2-54-210-42-143.compute-1.amazonaws.com/newslookup/proxy.php?symbol=" + symbol + "&which_website=yahoo&host_name=finance.yahoo.com&company_name=" + yahooCompanyName + "&ten_day_volume=" + yahoo10DayVolume + "&total_volume=" + totalVolume + "&yesterday_volume=" + yesterdayVolume);
@@ -903,137 +904,146 @@ This just gets the yesterday close and last vix values, we don't need these yet,
 
     }); // End of click function 
 
-// email the trade to Jay 
-$("#email_trade").click(function(){
-  
-var orderString = $("#orderStub").val();
+    // email the trade to Jay 
+    $("#email_trade").click(function(){
+      
+    var orderString = $("#orderStub").val();
 
-if ($('input#check_offering').is(':checked')) 
-{
-  var yestClose = $('#yestCloseText').val();
-  var yestCloseDecimal = yestClose.substr(yestClose.indexOf("."), yestClose.length - yestClose.indexOf("."));
-  if (yestCloseDecimal.length == 2)
-  {
-    yestClose = yestClose + "0";
-  }
-  orderString = orderString.replace(")", " down from offer price of $" + yestClose + ")"); 
-  $('input#check_offering').attr('checked', false);
-}   
-
-  $.ajax({
-      url: "email.php",
-      data: {trade: orderString},
-       async: false, 
-      dataType: 'html',
-      success:  function (data) {
-        alert(data);
-      }
-  });  // end of AJAX call 
-
-}); // end of e-mail trade button 
-
-$('#quote_input').keypress(function(e){
-      if(e.keyCode==13)
-      $('#submit_button').click();
-	});
-
-
-$('#entryPercentage').keypress(function(e){
-
-      var volumeChecked = $("#volumeChecked").html();
-      if (volumeChecked == "0")
+    if ($('input#check_offering').is(':checked')) 
+    {
+      var yestClose = $('#yestCloseText').val();
+      var yestCloseDecimal = yestClose.substr(yestClose.indexOf("."), yestClose.length - yestClose.indexOf("."));
+      if (yestCloseDecimal.length == 2)
       {
-        var modal = document.getElementById('myModal');
-        modal.style.display = "block";
-        setTimeout(function(){ 
-          var modal = document.getElementById('myModal');
-          modal.style.display = "none";
-        }, 750);
-
-        $("#volumeChecked").html("1");
+        yestClose = yestClose + "0";
       }
+      orderString = orderString.replace(")", " down from offer price of $" + yestClose + ")"); 
+      $('input#check_offering').attr('checked', false);
+    }   
 
-      if(e.keyCode==13)
-      {
-        calcAll(); 
-        $('#copy_price_to_percentage').click();
-        CopyToClipboard();  
-        $("#entryPrice").focus();   
-        var theLength = $("#entryPrice").val().length;
-        var input = $("#entryPrice"); 
-        input[0].setSelectionRange(theLength, theLength);   
+      $.ajax({
+          url: "email.php",
+          data: {trade: orderString},
+           async: false, 
+          dataType: 'html',
+          success:  function (data) {
+            alert(data);
+          }
+      });  // end of AJAX call 
 
-        var eTradeLowPercentage = parseFloat($("#eTradeLowPercentage").html());
-        var currentPercent = parseFloat($(this).val()); 
-        console.log("eTradeLowPercentage is " + eTradeLowPercentage + " and currentPercent is " + currentPercent);
+    }); // end of e-mail trade button 
 
-        if (currentPercent < eTradeLowPercentage)
-        {
-          $("#orderStub").css("background-color", "#FF0000");  
-        }
-        else
-        {
-          $("#orderStub").css("background-color", "#FFFFFF");  
-        }
+    $('#quote_input').keypress(function(e){
+          if(e.keyCode==13)
+          $('#submit_button').click();
+    	});
 
-/*
-        var warningMessage = "Check to see if the VIX is picking up.  Check the volumes."; 
 
-        var vixValue = parseFloat(document.getElementById("vix-value").innerHTML); 
+    $('#entryPercentage').keypress(function(e){
 
-        if ($("#foreign_country").html() == "1")
-        {
-            warningMessage += "-- This is a foreign company"; 
-        }
+          var volumeChecked = $("#volumeChecked").html();
+          if (volumeChecked == "0")
+          {
+            var modal = document.getElementById('myModal');
+            modal.style.display = "block";
+            setTimeout(function(){ 
+              var modal = document.getElementById('myModal');
+              modal.style.display = "none";
+            }, 750);
 
-        if (warningMessage != "")
-        {
-            alert(warningMessage);
+            $("#volumeChecked").html("1");
+          }
+
+          if(e.keyCode==13)
+          {
             calcAll(); 
             $('#copy_price_to_percentage').click();
             CopyToClipboard();  
-        }
-*/ 
-      } 
+            $("#entryPrice").focus();   
+            var theLength = $("#entryPrice").val().length;
+            var input = $("#entryPrice"); 
+            input[0].setSelectionRange(theLength, theLength);   
 
-//      $('#submit_button').click();
-});  // end of entryPercentage change function
+            var eTradeLowPercentage = parseFloat($("#eTradeLowPercentage").html());
+            var currentPercent = parseFloat($(this).val()); 
+            console.log("eTradeLowPercentage is " + eTradeLowPercentage + " and currentPercent is " + currentPercent);
 
-$(document.body).on('keyup', "#entryPrice", function(){
-      calcAll(); 
-      CopyToClipboard();
-      $("#entryPrice").focus();
-});  // end of entryPrice change function
+            if (currentPercent < eTradeLowPercentage)
+            {
+              $("#orderStub").css("background-color", "#FF0000");  
+            }
+            else
+            {
+              $("#orderStub").css("background-color", "#FFFFFF");  
+            }
 
-$('#yestCloseText').keypress(function(e){
+    /*
+            var warningMessage = "Check to see if the VIX is picking up.  Check the volumes."; 
 
-});  // end of yestCloseText keypress function
+            var vixValue = parseFloat(document.getElementById("vix-value").innerHTML); 
 
-$(document.body).on('keyup', "#yestCloseText", function(e){
-      calcAll(); 
-});  // when yesterday close changes 
+            if ($("#foreign_country").html() == "1")
+            {
+                warningMessage += "-- This is a foreign company"; 
+            }
 
-$(document.body).on('keyup', "#amountSpending", function(){
-      calcAll(); 
-      CopyToClipboard();
-      $("#amountSpending").focus();
+            if (warningMessage != "")
+            {
+                alert(warningMessage);
+                calcAll(); 
+                $('#copy_price_to_percentage').click();
+                CopyToClipboard();  
+            }
+    */ 
+          } 
 
-});  // when you change the amount you are putting down changes 
+    //      $('#submit_button').click();
+    });  // end of entryPercentage change function
 
-$(document.body).on('change', "input[type=radio][name=roundShares]", function(){
-      calcAll(); 
-      CopyToClipboard();
-     $("#roundShares").focus();
-});  // when one of the round-to-nearest radio buttons changes
+    $(document.body).on('keyup', "#entryPrice", function(){
+          calcAll(); 
+          CopyToClipboard();
+          $("#entryPrice").focus();
+    });  // end of entryPrice change function
 
-$(document.body).on('keyup', "#orderStub", function(){
-       reCalcOrderStub(); 
-});  // when one of the round-to-nearest radio buttons changes
+    $('#yestCloseText').keypress(function(e){
+
+    });  // end of yestCloseText keypress function
+
+    $(document.body).on('keyup', "#yestCloseText", function(e){
+          calcAll(); 
+    });  // when yesterday close changes 
+
+    $(document.body).on('keyup', "#amountSpending", function(){
+
+          // in case I accidentally type in more than I should be trading with
+          var thisValue = parseInt($(this).val()); 
+          if (thisValue > 1500)
+          {
+            thisValue = 1500;
+            $(this).val(thisValue);
+          }
+
+          calcAll(); 
+          CopyToClipboard();
+          $("#amountSpending").focus();
+
+    });  // when you change the amount you are putting down changes 
+
+    $(document.body).on('change', "input[type=radio][name=roundShares]", function(){
+          calcAll(); 
+          CopyToClipboard();
+         $("#roundShares").focus();
+    });  // when one of the round-to-nearest radio buttons changes
+
+    $(document.body).on('keyup', "#orderStub", function(){
+           reCalcOrderStub(); 
+    });  // when one of the round-to-nearest radio buttons changes
 
 
-$("#entryPrice").click(function(){
-  var volumeChecked = $("#volumeChecked").html();
-});
+    $("#entryPrice").click(function(){
+      var volumeChecked = $("#volumeChecked").html();
+    });
 
     $("#yestCloseText").val("");
     $("#entryPrice").val("-----"); 
