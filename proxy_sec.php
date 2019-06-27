@@ -154,6 +154,8 @@ function grabHTML($function_host_name, $url)
 
 $ret = "";
 $finalReturn = "";
+$noTimeFound = false;
+
   
       // try https://www.nasdaq.com/symbol/staf/sec-filings
 
@@ -220,6 +222,10 @@ $finalReturn = "";
                       {
                           $timestamp = getURLTimestamp($href2);
                           $time = date("g:i A", $timestamp);
+                          if ($time == '')
+                          {
+                              $noTimeFound = true; 
+                          }
 
                           if ($j == $yesterdayDays)
                           {
@@ -268,8 +274,6 @@ $finalReturn = "";
                   $td2 = preg_replace('/statement of acquisition of beneficial ownership by individuals/i', '<span style="font-size: 16px; background-color:red; color:black"><b>&nbsp;Statement of acquisition of beneficial ownership by individuals - 35%, penny 39%</span></b>&nbsp;', $td2);
                   $td2 = preg_replace('/inability to timely file form/i', '<span style="font-size: 16px; background-color:red; color:black"><b>&nbsp;inability to timely file form - 84%</span></b>&nbsp;', $td2);
 
-
-
               $tableRows .=  "<tr>" . $td0 . '<td><a href ="' . $href2 . '">' . $td2 . '</a></td>' . $td3 . "<td>" . $time . "</td></tr>"; 
             }
 
@@ -277,7 +281,12 @@ $finalReturn = "";
       $returnHtml .= "<!DOCTYPE html>"; 
       $returnHtml .= "<html>";
       $returnHtml .= "<head>";
-      if ($recentNews){
+
+      if ($noTimeFound == true)
+      {
+          $returnHtml .= "<title>Filing - " . $symbol . "(CHECK TIME)</title>";  
+      }
+      elseif ($recentNews){
           $returnHtml .= "<title>Filing - " . $symbol . "</title>";  
       }
       else{

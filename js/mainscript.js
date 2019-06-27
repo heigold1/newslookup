@@ -485,7 +485,7 @@ $(function() {
               $("#day1").html("");
               $("#entryPrice").val(""); 
               $("#entryPercentage").val("");  
-              $("#amountSpending").val("1500");
+              $("#amountSpending").val("1600");
               $("#eTradeLowPercentage").html("");
               $("#orderStub").val("-----------------------"); 
               $("#foreign_country").html("");
@@ -1018,9 +1018,9 @@ This just gets the yesterday close and last vix values, we don't need these yet,
 
           // in case I accidentally type in more than I should be trading with
           var thisValue = parseInt($(this).val()); 
-          if (thisValue > 1500)
+          if (thisValue > 1600)
           {
-            thisValue = 1500;
+            thisValue = 1600;
             $(this).val(thisValue);
           }
 
