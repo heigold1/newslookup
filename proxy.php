@@ -460,11 +460,11 @@ if ($which_website == "marketwatch")
 
       $marketWatchNewsHTML = preg_replace('/([0-9][0-9]:[0-9][0-9] [a-z]\.m\.  Today)|([0-9]:[0-9][0-9] [a-z]\.m\.  Today)/', '<span style="font-size: 8px; background-color:black; color:white">$1$2</span>', $marketWatchNewsHTML);
       $marketWatchNewsHTML = preg_replace('/([0-9][0-9] min ago)|([0-9] min ago)/', '<span style="font-size: 8px; background-color:black; color:white">$1$2</span>', $marketWatchNewsHTML);      
-      $marketWatchNewsHTML = preg_replace('/ delist/i', '<span style="font-size: 12px; background-color:red; color:black"><b> delist If delisting tomorrow 65%, if days away then 50-55%</b></span>', $marketWatchNewsHTML);
-      $marketWatchNewsHTML = preg_replace('/Delist/', '<span style="font-size: 12px; background-color:red; color:black"><b> delist If delisting tomorrow 65%, if days away then 50-55%</b></span>', $marketWatchNewsHTML);
+      $marketWatchNewsHTML = preg_replace('/ delist/i', '<span style="font-size: 25px; background-color:red; color:black"><b> delist If delisting tomorrow 65%, if days away then 50-55%</b></span>', $marketWatchNewsHTML);
+      $marketWatchNewsHTML = preg_replace('/Delist/', '<span style="font-size: 25px; background-color:red; color:black"><b> delist If delisting tomorrow 65%, if days away then 50-55%</b></span>', $marketWatchNewsHTML);
       $marketWatchNewsHTML = preg_replace('/ chapter 11|chapter 11 /i', '<span style="font-size: 12px; background-color:red; color:black"><b> &nbsp;CHAPTER 11</b>&nbsp;</span>', $marketWatchNewsHTML);
-      $marketWatchNewsHTML = preg_replace('/ reverse split|reverse split /i', '<span style="font-size: 12px; background-color:red; color:black"><b> &nbsp;REVERSE SPLIT</b>&nbsp;</span>', $marketWatchNewsHTML);
-      $marketWatchNewsHTML = preg_replace('/ reverse.stock split|reverse stock split /i', '<span style="font-size: 12px; background-color:red; color:black"><b> &nbsp;REVERSE STOCK SPLIT</b>&nbsp;</span>', $marketWatchNewsHTML);
+      $marketWatchNewsHTML = preg_replace('/ reverse split|reverse split /i', '<span style="font-size: 25px; background-color:red; color:black"><b> &nbsp;REVERSE SPLIT</b>&nbsp;</span>', $marketWatchNewsHTML);
+      $marketWatchNewsHTML = preg_replace('/ reverse.stock split|reverse stock split /i', '<span style="font-size: 25px; background-color:red; color:black"><b> &nbsp;REVERSE STOCK SPLIT</b>&nbsp;</span>', $marketWatchNewsHTML);
       $marketWatchNewsHTML = preg_replace('/ seeking alpha|seeking alpha /i', '<font size="3" style="font-size: 12px; background-color:#CCFF99; color: black; display: inline-block;">&nbsp;<b>Seeking Alpha</b>&nbsp;</font>', $marketWatchNewsHTML);      
       $marketWatchNewsHTML = preg_replace('/ downgrade|downgrade /i', '<span style="font-size: 12px; background-color:red; color:black"><b> &nbsp;DOWNGRADE</b>&nbsp;</span>', $marketWatchNewsHTML);
       $marketWatchNewsHTML = preg_replace('/ ex-dividend|ex-dividend /i', '<span style="font-size: 12px; background-color:red; color:black"><b> &nbsp;EX-DIVIDEND (chase at 25%)</b>&nbsp;</span>', $marketWatchNewsHTML);
@@ -523,6 +523,7 @@ if ($which_website == "marketwatch")
       $marketWatchNewsHTML = preg_replace('/ business combination/i', '<span style="font-size: 12px; background-color:red; color:black"><b>&nbsp; business combination - BE CAREFUL, could get de-listed </b></span> &nbsp;', $marketWatchNewsHTML);
       $marketWatchNewsHTML = preg_replace('/ annual meeting of shareholders/i', '<span style="font-size: 12px; background-color:red; color:black"><b>&nbsp; annual meeting of shareholders - 40% early </b></span> &nbsp;', $marketWatchNewsHTML);
       $marketWatchNewsHTML = preg_replace('/ transcript/i', '<span style="font-size: 12px; background-color:red; color:black"><b>&nbsp; transcript - treat it as though the earnings just came out </b></span> &nbsp;', $marketWatchNewsHTML);
+      $marketWatchNewsHTML = preg_replace('/ share consolidation/i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp; share consolidation - REVERSE STOCK SPLIT </b></span> &nbsp;', $marketWatchNewsHTML);
 
 
       $marketWatchNewsHTML .= '</body></html>'; 
@@ -751,11 +752,11 @@ else if ($which_website == "yahoo")
       $finalReturn = preg_replace('/(' .  get_yahoo_yesterday_trade_date() . ')/', '<span style="font-size: 12px; background-color:   #000080; color:white"> $1</span> ', $finalReturn);
       $finalReturn = preg_replace('/(' .  get_yahoo_todays_trade_date() . ')/', '<span style="font-size: 12px; background-color:  black; color:white"> $1</span> ', $finalReturn);
 
-      $finalReturn = preg_replace('/ delist/i', '<span style="font-size: 12px; background-color:red; color:black"><b> delist If delisting tomorrow 65%, if days away then 50-55%</b></span>', $finalReturn);
-      $finalReturn = preg_replace('/Delist/', '<span style="font-size: 12px; background-color:red; color:black"><b> delist If delisting tomorrow 65%, if days away then 50-55%</b></span>', $finalReturn);
+      $finalReturn = preg_replace('/ delist/i', '<span style="font-size: 25px; background-color:red; color:black"><b> delist If delisting tomorrow 65%, if days away then 50-55%</b></span>', $finalReturn);
+      $finalReturn = preg_replace('/Delist/', '<span style="font-size: 25px; background-color:red; color:black"><b> delist If delisting tomorrow 65%, if days away then 50-55%</b></span>', $finalReturn);
       $finalReturn = preg_replace('/ chapter 11|chapter 11 /i', '<span style="font-size: 12px; background-color:red; color:black"><b> &nbsp;CHAPTER 11</b></span>', $finalReturn);
-      $finalReturn = preg_replace('/ reverse split|reverse split /i', '<span style="font-size: 12px; background-color:red; color:black"><b> &nbsp;REVERSE SPLIT</b></span>', $finalReturn);
-      $finalReturn = preg_replace('/ reverse.stock split|reverse stock split /i', '<div style="font-size: 12px; background-color:red; display: inline-block;">REVERSE STOCK SPLIT</div>', $finalReturn);
+      $finalReturn = preg_replace('/ reverse split|reverse split /i', '<span style="font-size: 25px; background-color:red; color:black"><b> &nbsp;REVERSE SPLIT</b></span>', $finalReturn);
+      $finalReturn = preg_replace('/ reverse.stock split|reverse stock split /i', '<div style="font-size: 25px; background-color:red; display: inline-block;">REVERSE STOCK SPLIT</div>', $finalReturn);
       $finalReturn = preg_replace('/ downgrade|downgrade /i', '<span style="font-size: 12px; background-color:red; color:black"><b> &nbsp;DOWNGRADE</b></span>', $finalReturn);      
       $finalReturn = preg_replace('/ ex-dividend|ex-dividend /i', '<div style="font-size: 12px; background-color:red; display: inline-block;">EX-DIVIDEND (chase at 25%)</div>', $finalReturn);
       $finalReturn = preg_replace('/ sales miss|sales miss /i', '<span style="font-size: 12px; background-color:red; color:black"><b> &nbsp;SALES MISS (Chase at 65-70%)</b>&nbsp;</span>', $finalReturn);      
@@ -814,6 +815,9 @@ else if ($which_website == "yahoo")
       $finalReturn = preg_replace('/ business combination/i', '<span style="font-size: 12px; background-color:red; color:black"><b>&nbsp; business combination - BE CAREFUL, could get de-listed </b></span> &nbsp;', $finalReturn);
       $finalReturn = preg_replace('/ annual meeting of shareholders/i', '<span style="font-size: 12px; background-color:red; color:black"><b>&nbsp; annual meeting of shareholders - 40% early</b></span> &nbsp;', $finalReturn);
       $finalReturn = preg_replace('/ transcript/i', '<span style="font-size: 12px; background-color:red; color:black"><b>&nbsp; transcript - treat it as though the earnings just came out </b></span> &nbsp;', $finalReturn);
+      $finalReturn = preg_replace('/ share consolidation/i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp; share consolidation - REVERSE STOCK SPLIT </b></span> &nbsp;', $finalReturn);
+
+
 
 
       $message_board = '</font><a target="_blank" onclick="return openPage(this.href)" href="http://finance.yahoo.com/quote/' . $symbol . '/community?ltr=1"> Yahoo Message Boards</a>&nbsp;&nbsp;&nbsp;&nbsp;'; 

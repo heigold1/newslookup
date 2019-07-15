@@ -111,6 +111,7 @@ $mkt_response_obj = simplexml_load_string($out);
         $dataArray['low'] = $low; 
         $dataArray['high'] = $high; 
         $dataArray['bid'] = $bid; 
+        $dataArray['last_trade'] = $last_trade; 
         $dataArray['ten_day_volume'] = $ten_day_volume; 
         $dataArray['total_volume'] = $total_volume; 
         $dataArray['company_name'] = $company_name;
@@ -135,6 +136,7 @@ $mkt_response_obj = simplexml_load_string($out);
         $low = (string) $mkt_response_obj->QuoteData->All->low;
         $high = (string) $mkt_response_obj->QuoteData->All->high;
         $bid = (string) $mkt_response_obj->QuoteData->All->bid;
+        $last_trade = (string) $mkt_response_obj->QuoteData->All->lastTrade;
         $exchange = trim((string) $mkt_response_obj->QuoteData->All->primaryExchange);
 
         if (preg_match('/E-4/', $prev_close))
@@ -158,6 +160,7 @@ $mkt_response_obj = simplexml_load_string($out);
         $dataArray['low'] = $low; 
         $dataArray['high'] = $high; 
         $dataArray['bid'] = $bid; 
+        $dataArray['last_trade'] = $last_trade; 
         $dataArray['ten_day_volume'] = $ten_day_volume; 
         $dataArray['total_volume'] = $total_volume; 
         $dataArray['company_name'] = $company_name;

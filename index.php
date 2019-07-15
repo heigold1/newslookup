@@ -76,6 +76,19 @@
 								<span id="yahoo_historical_data_link">&nbsp;&nbsp;&nbsp;</span>						
 							</td> 						
 						</tr>
+						<tr style="height:15px">
+							<td style="width:140px"></td>
+							<td style="width:460px" colspan="2">
+								E*T High $<span id="eTradeHigh">&nbsp;&nbsp;&nbsp;</span>
+
+								<label class="historical_data_label">&nbsp;&nbsp;&nbsp;</label><span id="day5" class="historical_data_days">&nbsp;&nbsp;&nbsp;</span>
+								<label class="historical_data_label">&nbsp;&nbsp;&nbsp;</label><span id="day4" class="historical_data_days">&nbsp;&nbsp;&nbsp;</span>
+								<label class="historical_data_label">&nbsp;&nbsp;&nbsp;</label><span id="day3" class="historical_data_days">&nbsp;&nbsp;&nbsp;</span>
+								<label class="historical_data_label">&nbsp;&nbsp;&nbsp;</label><span id="day2" class="historical_data_days">&nbsp;&nbsp;&nbsp;</span>
+								<label class="historical_data_label">&nbsp;&nbsp;&nbsp;</label><span id="day1" class="historical_data_days">&nbsp;&nbsp;&nbsp;</span>		
+								<span id="yahoo_historical_data_link">&nbsp;&nbsp;&nbsp;</span>						
+							</td> 						
+						</tr>
 					</table> <!-- Order entry information (yest. close, etc...) --> 
 
 			</div> <!-- Enter Quote Div -->
