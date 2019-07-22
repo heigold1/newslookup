@@ -651,6 +651,12 @@ $(function() {
                   $("#day4").html(returnedObject.day_4);
                   $("#day3").html(returnedObject.day_3);
                   $("#day5").html(returnedObject.day_5);
+
+                  $("#day1_low").html(returnedObject.day_1_low);
+                  $("#day2_low").html(returnedObject.day_2_low);
+                  $("#day4_low").html(returnedObject.day_4_low);
+                  $("#day3_low").html(returnedObject.day_3_low);
+                  $("#day5_low").html(returnedObject.day_5_low);
                 },
                 error: function (xhr, ajaxOptions, thrownError) {
                   console.log("there was an error in calling alphavantage_api_historical_data.php");

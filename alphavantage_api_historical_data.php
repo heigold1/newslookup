@@ -130,7 +130,9 @@ else
 if (isset($historicalDataArray[1]->close))
 {
   $day_1_percentage = (($historicalDataArray[0]->close - $historicalDataArray[1]->close)/$historicalDataArray[1]->close)*100; 
-    $returnArray['day_1'] = number_format((float)$day_1_percentage, 2, '.', '');
+  $day_1_percentage_low = (($historicalDataArray[0]->low - $historicalDataArray[1]->close)/$historicalDataArray[1]->close)*100; 
+      $returnArray['day_1'] = number_format((float)$day_1_percentage, 2, '.', '');
+      $returnArray['day_1_low'] = number_format((float)$day_1_percentage_low, 2, '.', '');
 }
 else
 {
@@ -140,7 +142,9 @@ else
 if (isset($historicalDataArray[2]->close))
 {
   $day_2_percentage = (($historicalDataArray[1]->close - $historicalDataArray[2]->close)/$historicalDataArray[2]->close)*100; 
+  $day_2_percentage_low = (($historicalDataArray[1]->low - $historicalDataArray[2]->close)/$historicalDataArray[2]->close)*100; 
     $returnArray['day_2'] = number_format((float)$day_2_percentage, 2, '.', '');
+    $returnArray['day_2_low'] = number_format((float)$day_2_percentage_low, 2, '.', '');
 }
 else
 {
@@ -150,7 +154,9 @@ else
 if (isset($historicalDataArray[3]->close))
 {
   $day_3_percentage = (($historicalDataArray[2]->close - $historicalDataArray[3]->close)/$historicalDataArray[3]->close)*100; 
+  $day_3_percentage_low = (($historicalDataArray[2]->low - $historicalDataArray[3]->close)/$historicalDataArray[3]->close)*100; 
     $returnArray['day_3'] = number_format((float)$day_3_percentage, 2, '.', '');
+    $returnArray['day_3_low'] = number_format((float)$day_3_percentage_low, 2, '.', '');
 }
 else
 {
@@ -160,8 +166,9 @@ else
 if (isset($historicalDataArray[4]->close))
 {
   $day_4_percentage = (($historicalDataArray[3]->close - $historicalDataArray[4]->close)/$historicalDataArray[4]->close)*100; 
-
+  $day_4_percentage_low = (($historicalDataArray[3]->low - $historicalDataArray[4]->close)/$historicalDataArray[4]->close)*100; 
     $returnArray['day_4'] = number_format((float)$day_4_percentage, 2, '.', '');
+    $returnArray['day_4_low'] = number_format((float)$day_4_percentage_low, 2, '.', '');
 }
 else
 {
@@ -171,11 +178,29 @@ else
 if (isset($historicalDataArray[5]->close))
 {
   $day_5_percentage = (($historicalDataArray[4]->close - $historicalDataArray[5]->close)/$historicalDataArray[5]->close)*100; 
+  $day_5_percentage_low = (($historicalDataArray[4]->low - $historicalDataArray[5]->close)/$historicalDataArray[5]->close)*100; 
      $returnArray['day_5'] = number_format((float)$day_5_percentage, 2, '.', '');
+     $returnArray['day_5_low'] = number_format((float)$day_5_percentage_low, 2, '.', '');
 }
 else
 {
   $returnArray['day_5'] = "N/A";
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 echo json_encode($returnArray);
