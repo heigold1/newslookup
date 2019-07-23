@@ -492,6 +492,10 @@ $(function() {
               $("#chinese_stock").html("");
 
               $("#day1").css("background-color", "#ffffff");
+
+              $("#day1").css({'background-color' : 'white', 'font-size' : '15px'});
+              $("#day1_low").css({'background-color' : 'white', 'font-size' : '15px'});
+
               $("#orderStub").css("background-color", "#ffffff");
 
               $("#roundShares_50").checked = true; 
@@ -779,8 +783,7 @@ This just gets the yesterday close and last vix values, we don't need these yet,
             // AJAX call to marketwatch 
 
             (function(){
-              var eTradeIFrame = '<br><iframe id="etrade_iframe" src="https://www.etrade.wallst.com/v1/stocks/news/search_results.asp?symbol=' + symbol + '&rsO=new#lastTradeTime" width="675px" height="500px"></iframe>';
-              
+               var eTradeIFrame = '<br><iframe id="etrade_iframe" src="https://www.etrade.wallst.com/v1/stocks/news/search_results.asp?symbol=' + symbol + '&rsO=new#lastTradeTime" width="675px" height="500px"></iframe>';
 
               $("div#left_bottom_container").css("background-color", "#BBDDFF");                     
                 $.ajax({
@@ -839,6 +842,15 @@ This just gets the yesterday close and last vix values, we don't need these yet,
         {
             playHighRiskStock(); 
             warningMessage += " ** HIGH RISK STOCK!!! ** ";
+            $("#day1").css({'background-color' : 'red', 'font-size' : '19px'});
+        }
+
+        var day1_low = parseFloat($("#day1_low").html());
+
+        if (day1_low < -20)
+        {
+            warningMessage += " ** HIGH RISK STOCK!!! ** ";
+            $("#day1_low").css({'background-color' : 'red', 'font-size' : '19px'});
         }
 
         // check if it's a Chinese or foreign stock
