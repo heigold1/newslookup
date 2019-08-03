@@ -362,6 +362,8 @@ if ($which_website == "marketwatch")
 
       $finalArray = array();
 
+      $classActionAdded == false;
+
       foreach ($individualArticleDiv[0] as $articleDiv)
       {
           $articleStruct = array();
@@ -395,6 +397,8 @@ if ($which_website == "marketwatch")
       $marketWatchNewsHTML = "<h1>Marketwatch News</h1>";
       $marketWatchNewsHTML .= '<div style="max-height: 300px; overflow: auto;">';
 
+      $classActionAdded = false; 
+
       foreach ($individualArticleDiv[0] as $articleDiv)
       {
           $articleStruct = array();
@@ -407,8 +411,6 @@ if ($which_website == "marketwatch")
           $timeStamp = $timeStampArray[1];
           preg_match('/article__timestamp">(.*?)<\/li>/', $articleDiv, $dateStringArray);
           $articleStruct['date'] = $dateStringArray[1];
-
-
 
           // am/pm  red green highlighting  
           for ($i = $yesterdayDays; $i >= 1; $i--)
@@ -437,8 +439,22 @@ if ($which_website == "marketwatch")
       }
       krsort($finalArray);
 
+      $classActionAdded = false;
+
       foreach ($finalArray as $article)
       {
+          if (preg_match('/class.action/i', $article['headline']))
+          {
+              if ($classActionAdded == true)
+              {
+                continue;              
+              }
+              else
+              {
+                $classActionAdded = true;
+              }
+          }
+
           $marketWatchNewsHTML .= '<div>' . $article['date'] . '&nbsp;&nbsp;<a target="blank" href="' . $article['link'] . '">' . $article['headline'] . '</a></div>';
       }
 
@@ -510,7 +526,7 @@ if ($which_website == "marketwatch")
       $marketWatchNewsHTML = preg_replace('/ equity investment/i', '<span style="font-size: 12px; background-color:red; color:black"><b>&nbsp; equity investment - look for price of new shares</b></span>&nbsp;', $marketWatchNewsHTML);
       $marketWatchNewsHTML = preg_replace('/ lease termination/i', '<span style="font-size: 12px; background-color:red; color:black"><b>&nbsp; DANGER - Chapter 7 warning - 90%</b></span>&nbsp;', $marketWatchNewsHTML);
       $marketWatchNewsHTML = preg_replace('/ redemption of public shares/i', '<span style="font-size: 12px; background-color:red; color:black"><b>&nbsp; Redemption of Public Shares - 92%</b></span>&nbsp;', $marketWatchNewsHTML);
-      $marketWatchNewsHTML = preg_replace('/ phase 2/i', '<span style="font-size: 12px; background-color:red; color:black"><b>&nbsp; Phase 2 - 74% and set a stop loss of around 12%</b></span>&nbsp;', $marketWatchNewsHTML);
+      $marketWatchNewsHTML = preg_replace('/ phase 2/i', '<span style="font-size: 12px; background-color:red; color:black"><b>&nbsp; Phase 2 - 82% and set a stop loss of around 12%</b></span>&nbsp;', $marketWatchNewsHTML);
       $marketWatchNewsHTML = preg_replace('/ investor call/i', '<span style="font-size: 12px; background-color:red; color:black"><b>&nbsp; INVESTOR CALL - CHECK THE DATE &nbsp;</b></span>&nbsp;', $marketWatchNewsHTML);
       $marketWatchNewsHTML = preg_replace('/ strategic update/i', '<span style="font-size: 12px; background-color:red; color:black"><b>&nbsp; STRATEGIC UPDATE - BE CAREFUL &nbsp;</b></span>&nbsp;', $marketWatchNewsHTML);
       $marketWatchNewsHTML = preg_replace('/ attorney general/i', '<span style="font-size: 12px; background-color:red; color:black"><b>&nbsp; attorney general (if there is an attorney general probe then 45-50%) &nbsp;</b></span>&nbsp;', $marketWatchNewsHTML);
@@ -519,14 +535,23 @@ if ($which_website == "marketwatch")
       $marketWatchNewsHTML = preg_replace('/ conference call to provide update/i', '<span style="font-size: 12px; background-color:red; color:black"><b>&nbsp; Conference Call to Provide Update -</span> <span style="font-size: 12px; background-color:lightgreen; color:black">CHECK THE DATE/TIME OF THE CALL &nbsp;</b></span>&nbsp;', $marketWatchNewsHTML);
       $marketWatchNewsHTML = preg_replace('/ fictitious sales/i', '<span style="font-size: 12px; background-color:red; color:black"><b>&nbsp; fictitious sales - STAY AWAY </b></span> &nbsp;', $marketWatchNewsHTML);
       $marketWatchNewsHTML = preg_replace('/ board of directors/i', '<span style="font-size: 12px; background-color:red; color:black"><b>&nbsp; board of directors - if change to board of directors - 20%, China 25, if penny then for China 39% </b></span> &nbsp;', $marketWatchNewsHTML);
-      $marketWatchNewsHTML = preg_replace('/ class action/i', '<span style="font-size: 12px; background-color:red; color:black"><b>&nbsp; class action - 20%, if penny then 35% </b></span> &nbsp;', $marketWatchNewsHTML);
+      $marketWatchNewsHTML = preg_replace('/ class action/i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp; class action - 20%, if penny then 35% </b></span> &nbsp;', $marketWatchNewsHTML);
       $marketWatchNewsHTML = preg_replace('/ business combination/i', '<span style="font-size: 12px; background-color:red; color:black"><b>&nbsp; business combination - BE CAREFUL, could get de-listed </b></span> &nbsp;', $marketWatchNewsHTML);
       $marketWatchNewsHTML = preg_replace('/ annual meeting of shareholders/i', '<span style="font-size: 12px; background-color:red; color:black"><b>&nbsp; annual meeting of shareholders - 40% early </b></span> &nbsp;', $marketWatchNewsHTML);
-      $marketWatchNewsHTML = preg_replace('/ transcript/i', '<span style="font-size: 12px; background-color:red; color:black"><b>&nbsp; transcript - treat it as though the earnings just came out </b></span> &nbsp;', $marketWatchNewsHTML);
+      $marketWatchNewsHTML = preg_replace('/ transcript/i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp; transcript  </b></span> &nbsp;', $marketWatchNewsHTML);
       $marketWatchNewsHTML = preg_replace('/ share consolidation/i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp; share consolidation - REVERSE STOCK SPLIT </b></span> &nbsp;', $marketWatchNewsHTML);
       $marketWatchNewsHTML = preg_replace('/ share exchange transaction/i', '<span style="font-size: 20px; background-color:red; color:black"><b>&nbsp; share exchange transaction - 47% </b></span> &nbsp;', $marketWatchNewsHTML);
       $marketWatchNewsHTML = preg_replace('/ closes(.*)offering/i', '<span style="font-size: 22px; background-color:red; color:black"><b>&nbsp; closes offering - be careful, 24%</b></span>&nbsp;', $marketWatchNewsHTML);
       $marketWatchNewsHTML = preg_replace('/ announces pricing/i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp; Announces Pricing </b></span>&nbsp;', $marketWatchNewsHTML);
+      $marketWatchNewsHTML = preg_replace('/ late interest payment/i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp; late interest payment - BACK OFF, POSSIBLE CHAPTER 11 </b></span>&nbsp;', $marketWatchNewsHTML);
+      $marketWatchNewsHTML = preg_replace('/ q1 loss/i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp; Q1 LOSS </b></span>&nbsp;', $marketWatchNewsHTML);
+      $marketWatchNewsHTML = preg_replace('/ q2 loss/i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp; Q2 LOSS </b></span>&nbsp;', $marketWatchNewsHTML);
+      $marketWatchNewsHTML = preg_replace('/ q3 loss/i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp; Q3 LOSS </b></span>&nbsp;', $marketWatchNewsHTML);
+      $marketWatchNewsHTML = preg_replace('/ q4 loss/i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp; Q4 LOSS </b></span>&nbsp;', $marketWatchNewsHTML);
+      $marketWatchNewsHTML = preg_replace('/ first quarter/i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp; FIRST QUARTER </b></span>&nbsp;', $marketWatchNewsHTML);
+      $marketWatchNewsHTML = preg_replace('/ second quarter/i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp; SECOND QUARTER </b></span>&nbsp;', $marketWatchNewsHTML);
+      $marketWatchNewsHTML = preg_replace('/ third quarter/i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp; THIRD QUARTER </b></span>&nbsp;', $marketWatchNewsHTML);
+      $marketWatchNewsHTML = preg_replace('/ fourth quarter/i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp; FOURTH QUARTER </b></span>&nbsp;', $marketWatchNewsHTML);
 
 
       $marketWatchNewsHTML .= '</body></html>'; 
@@ -544,10 +569,10 @@ else if ($which_website == "yahoo")
     $allNews = "<ul class='newsSide'>";
     $allNews .= "<li>Yahoo Finance News</li>";
 
+    $classActionAdded = false;
     $j = 0;
     foreach ($rss->channel->item as $feedItem) {
         $j++;
-        $allNews .= "<li "; 
 
         // Convert time from GMT to  AM/PM New York
         $publicationDateStrToTime = strtotime($feedItem->pubDate);
@@ -557,6 +582,22 @@ else if ($which_website == "yahoo")
         $publicationDate = $feedItem->pubDate;
         $publicationDate = preg_replace("/[0-9][0-9]\:[0-9][0-9]\:[0-9][0-9] \+0000/", "", $publicationDate); 
         $publicationTime = $convertedDate->format("g:i A");
+
+        $newsTitle = $feedItem->title; 
+
+        if (preg_match('/class.action/i', $newsTitle))
+        {
+            if ($classActionAdded == true)
+            {
+              continue;              
+            }
+            else
+            {
+              $classActionAdded = true;
+            }
+        }
+
+        $allNews .= "<li "; 
 
         // red/green highlighting for yesterday/today
         for ($i = $yesterdayDays; $i >= 1; $i--)
@@ -581,14 +622,12 @@ else if ($which_website == "yahoo")
           $allNews .=  "style='background-color: #FFFFFF; '"; 
         };
         
-        $newsTitle = $feedItem->title; 
-
         // if the regular expression contains (.*) then we need to do it per title, to avoid greedy regular expressions
 
         $newsTitle = preg_replace('/ withdrawal(.*?)application/i', '<span style="font-size: 12px; background-color:red; color:black"><b> withdrawal $1 application (55%) </b></span> ', $newsTitle);
         $newsTitle = preg_replace('/nasdaq rejects(.*?)listing/i', '<span style="font-size: 12px; background-color:red; color:black"><b>Nasdaq rejects $1 listing</span> If delisting tomorrow 65%, if delisting days away then 50-55%</b>&nbsp;', $newsTitle);
 
-        $allNews .=  " ><a href='$feedItem->link'> " . $publicationDate . " " . $publicationTime . " - " . $newsTitle . "</a></li>";
+        $allNews .=  " ><a href='$feedItem->link'> " . $publicationDate . " " . $publicationTime . " - " . $newsTitle;
     }
 
       $allNews .=  "</ul>";
@@ -804,7 +843,7 @@ else if ($which_website == "yahoo")
       $finalReturn = preg_replace('/ equity investment/i', '<span style="font-size: 12px; background-color:red; color:black"><b>&nbsp; equity investment - look for price of new shares</b></span>&nbsp;', $finalReturn);
       $finalReturn = preg_replace('/ lease termination/i', '<span style="font-size: 12px; background-color:red; color:black"><b>&nbsp; DANGER - Chapter 7 warning - 90%</b></span>&nbsp;', $finalReturn);
       $finalReturn = preg_replace('/ redemption of public shares/i', '<span style="font-size: 12px; background-color:red; color:black"><b>&nbsp; Redemption of Public Shares - 92%</b></span>&nbsp;', $finalReturn);
-      $finalReturn = preg_replace('/ phase 2/i', '<span style="font-size: 12px; background-color:red; color:black"><b>&nbsp; Phase 2 - 74% and set a stop loss of around 12%</b></span>&nbsp;', $finalReturn);
+      $finalReturn = preg_replace('/ phase 2/i', '<span style="font-size: 12px; background-color:red; color:black"><b>&nbsp; Phase 2 - 82% and set a stop loss of around 12%</b></span>&nbsp;', $finalReturn);
       $finalReturn = preg_replace('/ investor call/i', '<span style="font-size: 12px; background-color:red; color:black"><b>&nbsp; INVESTOR CALL - CHECK THE DATE &nbsp;</b></span>&nbsp;', $finalReturn);
       $finalReturn = preg_replace('/ strategic update/i', '<span style="font-size: 12px; background-color:red; color:black"><b>&nbsp; STRATEGIC UPDATE - BE CAREFUL &nbsp;</b></span>&nbsp;', $finalReturn);
       $finalReturn = preg_replace('/ attorney general/i', '<span style="font-size: 12px; background-color:red; color:black"><b>&nbsp; attorney general (if there is an attorney general probe then 45-50%) &nbsp;</b></span>&nbsp;', $finalReturn);
@@ -814,14 +853,24 @@ else if ($which_website == "yahoo")
       $finalReturn = preg_replace('/ seeking alpha/i', '<span style="font-size: 25px; background-color:red; color:black">SEEKING ALPHA &nbsp;</b></span>&nbsp;', $finalReturn);
       $finalReturn = preg_replace('/ fictitious sales/i', '<span style="font-size: 12px; background-color:red; color:black"><b>&nbsp; fictitious sales - STAY AWAY </b></span> &nbsp;', $finalReturn);     
       $finalReturn = preg_replace('/ board of directors/i', '<span style="font-size: 12px; background-color:red; color:black"><b>&nbsp; board of directors - if change to board of directors - 20%, China 25%, if penny then for China 39%  </b></span> &nbsp;', $finalReturn);
-      $finalReturn = preg_replace('/ class action/i', '<span style="font-size: 12px; background-color:red; color:black"><b>&nbsp; class action - 20%, if penny then 35% </b></span> &nbsp;', $finalReturn);
+      $finalReturn = preg_replace('/ class action/i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp; class action - 20%, if penny then 35% </b></span> &nbsp;', $finalReturn);
       $finalReturn = preg_replace('/ business combination/i', '<span style="font-size: 12px; background-color:red; color:black"><b>&nbsp; business combination - BE CAREFUL, could get de-listed </b></span> &nbsp;', $finalReturn);
       $finalReturn = preg_replace('/ annual meeting of shareholders/i', '<span style="font-size: 12px; background-color:red; color:black"><b>&nbsp; annual meeting of shareholders - 40% early</b></span> &nbsp;', $finalReturn);
-      $finalReturn = preg_replace('/ transcript/i', '<span style="font-size: 12px; background-color:red; color:black"><b>&nbsp; transcript - treat it as though the earnings just came out </b></span> &nbsp;', $finalReturn);
+      $finalReturn = preg_replace('/ transcript/i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp; transcript - </b></span> &nbsp;', $finalReturn);
       $finalReturn = preg_replace('/ share consolidation/i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp; share consolidation - REVERSE STOCK SPLIT </b></span> &nbsp;', $finalReturn);
       $finalReturn = preg_replace('/ share exchange transaction/i', '<span style="font-size: 20px; background-color:red; color:black"><b>&nbsp; share exchange transaction - 47% </b></span> &nbsp;', $finalReturn);
       $finalReturn = preg_replace('/ closes(.*)offering/i', '<span style="font-size: 22px; background-color:red; color:black"><b>&nbsp; closes offering - be careful, 24%</b></span>&nbsp;', $finalReturn);
       $finalReturn = preg_replace('/ announces pricing/i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp; Announces Pricing </b></span>&nbsp;', $finalReturn);
+      $finalReturn = preg_replace('/ late interest payment/i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp; late interest payment - BACK OFF, POSSIBLE CHAPTER 11 </b></span>&nbsp;', $finalReturn);
+      $finalReturn = preg_replace('/ q1 loss/i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp; Q1 LOSS </b></span>&nbsp;', $finalReturn);
+      $finalReturn = preg_replace('/ q2 loss/i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp; Q2 LOSS </b></span>&nbsp;', $finalReturn);
+      $finalReturn = preg_replace('/ q3 loss/i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp; Q3 LOSS </b></span>&nbsp;', $finalReturn);
+      $finalReturn = preg_replace('/ q4 loss/i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp; Q4 LOSS </b></span>&nbsp;', $finalReturn);
+      $finalReturn = preg_replace('/ first quarter/i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp; FIRST QUARTER </b></span>&nbsp;', $finalReturn);
+      $finalReturn = preg_replace('/ second quarter/i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp; SECOND QUARTER </b></span>&nbsp;', $finalReturn);
+      $finalReturn = preg_replace('/ third quarter/i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp; THIRD QUARTER </b></span>&nbsp;', $finalReturn);
+      $finalReturn = preg_replace('/ fourth quarter/i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp; FOURTH QUARTER </b></span>&nbsp;', $finalReturn);
+
 
 
       $message_board = '</font><a target="_blank" onclick="return openPage(this.href)" href="http://finance.yahoo.com/quote/' . $symbol . '/community?ltr=1"> Yahoo Message Boards</a>&nbsp;&nbsp;&nbsp;&nbsp;'; 
