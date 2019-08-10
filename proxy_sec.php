@@ -7,7 +7,7 @@ $symbol=$_GET['symbol'];
 $secCompanyName = $_GET['secCompanyName'];
 $secCompanyName = preg_replace('/ /', '+', $secCompanyName);
 
-$yesterdayDays = 1; 
+$yesterdayDays = 3; 
 
 fopen("cookies.txt", "w");
 
@@ -186,6 +186,8 @@ $noTimeFound = false;
           $tableRow1 = $html->find('.tableFile2 tbody tr'); 
           $recentNews = false; 
 
+          $registrationOffering = "";
+
           for ($i = 1; $i < 6; $i++)
            { 
               $row = str_get_html($tableRow1[$i]);
@@ -274,6 +276,12 @@ $noTimeFound = false;
                   $td2 = preg_replace('/statement of acquisition of beneficial ownership by individuals/i', '<span style="font-size: 16px; background-color:red; color:black"><b>&nbsp;Statement of acquisition of beneficial ownership by individuals - 35%, penny 39%</span></b>&nbsp;', $td2);
                   $td2 = preg_replace('/inability to timely file form/i', '<span style="font-size: 16px; background-color:red; color:black"><b>&nbsp;inability to timely file form - 84%</span></b>&nbsp;', $td2);
 
+
+                  if (preg_match('/registration/i', $td2) || preg_match('/offering/i', $td2))
+                  {
+                      $registrationOffering = " - REGISTRATION";
+                  }
+
               $tableRows .=  "<tr>" . $td0 . '<td><a href ="' . $href2 . '">' . $td2 . '</a></td>' . $td3 . "<td>" . $time . "</td></tr>"; 
             }
 
@@ -284,13 +292,13 @@ $noTimeFound = false;
 
       if ($noTimeFound == true)
       {
-          $returnHtml .= "<title>Filing - " . $symbol . "(CHECK TIME)</title>";  
+          $returnHtml .= "<title>Filing - " . $symbol . "(CHECK TIME)" . $registrationOffering . "</title>";  
       }
       elseif ($recentNews){
           $returnHtml .= "<title>Filing - " . $symbol . "</title>";  
       }
       else{
-          $returnHtml .= "<title>Filing - " . $symbol . " (NONE)</title>";   
+          $returnHtml .= "<title>Filing - " . $symbol . " (NONE)" . $registrationOffering . "</title>";   
       }
       
       $returnHtml .= "<body>"; 

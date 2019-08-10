@@ -224,6 +224,30 @@ var blink = function(){
     $('#bigcharts_chart_container').fadeOut(200).fadeIn(200);
 };
 
+function saveEarnings(){
+
+    var original_symbol = $.trim($("#quote_input").val()); 
+
+    $.ajax({
+        url: './save-earnings-stocks.php',
+        data: {symbol: original_symbol},
+        async: true, 
+        dataType: 'html',
+        success:  function (data) {
+
+          var returnedObject = JSON.parse(data);
+          alert(original_symbol + " written to file."); 
+
+        },
+        error: function (xhr, ajaxOptions, thrownError) {
+          console.log("there was an error in calling save-earnings-stocks.php");
+          alert("ERROR in writing " + original_symbol + " to file.");
+        }
+
+    });
+
+}
+
 
 // a function to set a fixed decimal without rounding 
 
@@ -922,6 +946,13 @@ This just gets the yesterday close and last vix values, we don't need these yet,
 
     }); // End of click function 
 
+
+   $("#earnings_button").click(function(){
+
+      saveEarnings();
+
+    }); // End of click function 
+
     // email the trade to Jay 
     $("#email_trade").click(function(){
       
@@ -1017,6 +1048,10 @@ This just gets the yesterday close and last vix values, we don't need these yet,
 
     //      $('#submit_button').click();
     });  // end of entryPercentage change function
+
+
+
+
 
     $(document.body).on('keyup', "#entryPrice", function(){
           calcAll(); 

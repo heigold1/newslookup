@@ -265,3 +265,8 @@ li.indent{
     width: 80%; /* Could be more or less, depending on screen size */
     height: 30%;
 }
+
+#earnings_button{
+	display: inline-block;
+	width: 30px;
+}

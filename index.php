@@ -28,6 +28,7 @@
 							<td style="width:200px">
 <input tabindex ="1" style="text-align: left;" id="quote_input" class="textbox" type="text" size="10" value="<?php echo $_GET['symbol'] ?>">
 								<input id="submit_button" type="submit" value="Submit">
+								<input id="earnings_button" type="submit" value="E">
 							</td>
 							<td style="width:450px"> 
 								<span id="strip_last_character">
