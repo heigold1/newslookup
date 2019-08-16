@@ -754,6 +754,7 @@ This just gets the yesterday close and last vix values, we don't need these yet,
               yahooHtmlResults = data; 
 
               data = data.replace('>China<', '<span style="font-size:300px; background-color:red"><br><br>China<br><br></span>');
+              data = data.replace('>Argentina<', '<span style="font-size:200px; background-color:red"><br><br>Argentina<br><br></span>');
 
               if (data.toLowerCase().search("couldn't resolve host name") != -1)
               {

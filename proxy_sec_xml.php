@@ -90,13 +90,45 @@ function getURLTimestamp($url){
     }
 }
 
-function timestampIsSafe($timestamp){
-    if (((int) date('H', $timestamp)) < 12){
-        return true;
+function getDateFromUTC($utcDate)
+{
+  return date("Y-m-d", strtotime($utcDate));
+}
+
+function getAMPMTimeFromUTC($utcDate)
+{
+    $amPm = "";
+
+    preg_match("/T(\d{2})/", $utcDate, $hh); 
+
+    if ($hh[1] > 12)
+    {
+      $hh[1] -= 12; 
+      $amPm = "PM"; 
     }
     else
     {
-        return false; 
+      $hh[1] -= 0;       
+      $amPm = "AM";
+    }
+
+    preg_match("/T\d{2}:(\d{2})/", $utcDate, $mm); 
+
+    $returnTime = $hh[1] . ":" . $mm[1] . " " . $amPm; 
+    return $returnTime;
+}
+
+function timestampIsSafe($utcDate)
+{
+    preg_match("/T(\d{2})/", $utcDate, $hh); 
+
+    if ($hh[1] > 12)
+    {
+      return false; 
+    }
+    else
+    {
+      return true;
     }
 }
 
@@ -164,10 +196,6 @@ $noTimeFound = false;
 
       if (preg_match('/No matching Ticker Symbol/', $result))
       {
-/*
-        echo "<title>Filing - " . $symbol . " (No match)</title><h1>No matching ticker symbol</h1>";
-        return; 
-*/
           $url = "https://www.sec.gov/cgi-bin/browse-edgar?company=" . $secCompanyName . "&owner=include&action=getcompany"; 
           $result = grabHTML('www.sec.gov', $url); 
           if (preg_match('/Companies with names matching/', $result))
@@ -179,131 +207,110 @@ $noTimeFound = false;
 
       $html = str_get_html($result);
 
+      $rssTableRow = $html->find(' form table tbody tr'); 
+
+      $rssLink = $rssTableRow[1]->find('a');
+
+      $rssFullLink = "https://www.sec.gov" . $rssLink[0]->href; 
+
       $returnHtml = "";
       $tableRows = "";
       $recentNews = false;
 
-          $tableRow1 = $html->find('.tableFile2 tbody tr'); 
+          $xmlFinalString=simplexml_load_file($rssFullLink);
 
           $recentNews = false; 
 
           $registrationOffering = "";
 
-          for ($i = 1; $i < 6; $i++)
+          for ($i = 0; $i < 5; $i++)
            { 
-              $row = str_get_html($tableRow1[$i]);
+              $entryRowObject = $xmlFinalString->entry[0];
+              $filingType = "";
 
-              if (!$row)
+              if (!$entryRowObject)
               {
                   break;
               }
 
-              $td = $row->find('td'); 
+              $entryContent = $xmlFinalString->entry[$i]->content; 
+              $title = ""; 
+              $datestamp = getDateFromUTC($xmlFinalString->entry[$i]->updated);
+              $itemDescription = ""; 
 
-              $linkTd = $td[1]->find('a');  
-
-              $td0 = $td[0]; 
-              $td2 = $td[2]->plaintext;
-
-              $td2 = preg_replace('/Acc-no.*MB/', '', $td2);
-              $td2 = preg_replace('/Acc-no.*KB/', '', $td2);
-              $td3 = $td[3];
-
-                  $firstLink  = 'https://www.sec.gov' . $linkTd[0]->href; 
-
-                  $firstLinkResults = grabHTML('www.sec.gov', $firstLink); 
-
-
-
-
-                  $html2 = str_get_html($firstLinkResults);
-
-                  $tableRow2 = $html2->find('tr'); 
-
-//echo "tableRow2 is " . $tableRow2[1] . "<br>";
-
-
-// DO NOT DELETE THE NEXT TWO COMMENTED LINES.  YOU MAY HAVE TO COME BACK TO THIS
-//                  $td2nd = $tableRow2[1]->find('td'); 
-//                  $a2 = $td2nd[2]->find('a');
-                  $a2 = $tableRow2[1]->find('a');
-
-
-// echo "** a2[0]->href is " . $a2[0]->href . "<br><br>"; 
-//die();
-
-
-                  $href2 = 'https://www.sec.gov' . $a2[0]->href;
-
-                  $time = "";
-
-                  for ($j = $yesterdayDays; $j >= 1; $j--)
+              foreach($entryContent as $k => $v){
+                  foreach ($v as $key => $value)
                   {
-                      $td3 = preg_replace('/(' .  get_trade_date($j) . ')/', '<span style="font-size: 16px; background-color:#000080; color:white">$1</span>', $td3);
-                      if (preg_match('/(' .  get_trade_date($j) . ')/', $td3))
+                      if ($key == 'filing-type')
                       {
-                          $timestamp = getURLTimestamp($href2);
-                          $time = date("g:i A", $timestamp);
-                          if ($time == '')
-                          {
-                              $noTimeFound = true; 
-                          }
 
-                          if ($j == $yesterdayDays)
-                          {
-                              if (!timestampIsSafe($timestamp) || !timestampIsSafeDateColumn($td3))
-                              {
-                                  $recentNews = true;
+                        $filingType = $value; 
+                      }
+                      elseif ($key == 'form-name')
+                      {
+                        $title = $value; 
+                      }
+                      elseif ($key == 'items-desc')
+                      {
+                        $itemDescription = $value; 
+                      }
+                  }
+              }
 
-                                  // if there happens to be a 24-hour timestamp in the date field then highlight the HH: section red if it's > 12
-                                  if (!timestampIsSafeDateColumn($td3))
-                                  {
-                                    $td3 = preg_replace('/ (\d{2}):/i', ' <span style="font-size: 15px; background-color:red; color:black">$1</span>:', $td3);
-                                  }
-                                  else
-                                  {
-                                    $td3 = preg_replace('/ (\d{2}):/i', ' <span style="font-size: 15px; background-color:#00FF00; color:black">$1</span>:', $td3);
-                                  }
-                              }
-                              $time = preg_replace('/AM/', '<span style="background-color: lightgreen">AM</span>', $time); 
-                          }
-                          else
+              $time = getAMPMTimeFromUTC($xmlFinalString->entry[$i]->updated);
+
+              $firstLink  = $xmlFinalString->entry[$i]->link['href']; 
+              $firstLinkResults = grabHTML('www.sec.gov', $firstLink); 
+
+              $html2 = str_get_html($firstLinkResults);
+
+              $tableRow2 = $html2->find('tr'); 
+
+              $a2 = $tableRow2[1]->find('a');
+
+              $href2 = 'https://www.sec.gov' . $a2[0]->href;
+
+              $time = getAMPMTimeFromUTC($xmlFinalString->entry[$i]->updated);
+              for ($j = $yesterdayDays; $j >= 1; $j--)
+              {
+                  $datestamp = preg_replace('/(' .  get_trade_date($j) . ')/', '<span style="font-size: 16px; background-color:#000080; color:white">$1</span>', $datestamp);
+                  if (preg_match('/(' .  get_trade_date($j) . ')/', $datestamp))
+                  {
+
+                      if ($j == $yesterdayDays)
+                      {
+                          if (!timestampIsSafe($xmlFinalString->entry[$i]->updated))
                           {
                               $recentNews = true;
-                              $time = preg_replace('/AM/', '<span style="background-color: red">AM</span>', $time); 
                           }
-                          $time = preg_replace('/PM/', '<span style="background-color: red">PM</span>', $time); 
+                          $time = preg_replace('/AM/', '<span style="background-color: lightgreen">AM</span>', $time); 
                       }
-                  } // for ($j = $yesterdayDays; $j >= 1; $j--)
-                  if (preg_match('/(' .  get_today_trade_date() . ')/', $td3))
-                  {
-                      $timestamp = getURLTimestamp($href2);
-                      $time = date("g:i A", $timestamp);
-                      if (!timestampIsSafe($timestamp))
+                      else
                       {
                           $recentNews = true;
+                          $time = preg_replace('/AM/', '<span style="background-color: red">AM</span>', $time); 
                       }
+                      $time = preg_replace('/PM/', '<span style="background-color: red">PM</span>', $time); 
                   }
+              } // for ($j = $yesterdayDays; $j >= 1; $j--)
 
-                  if (preg_match('/(' .  get_today_trade_date() . ')/', $td3))
-                  {
-                      $recentNews = true; 
-                  }
+              if (preg_match('/(' .  get_today_trade_date() . ')/', $datestamp))
+              {
+                  $recentNews = true; 
+              }
 
-                  $td3 = preg_replace('/(' .  get_today_trade_date() . ')/', '<span style="font-size: 16px; background-color:black; color:white">$1</span>', $td3);
+              $datestamp = preg_replace('/(' .  get_today_trade_date() . ')/', '<span style="font-size: 16px; background-color:black; color:white">$1</span>', $datestamp);
 
-                  $td2 = preg_replace('/registration statement/i', '<span style="font-size: 16px; background-color:red; color:black"><b>&nbsp;Registration statement - OFFERING COMING OUT, HOLD OFF</span></b>&nbsp;', $td2);      
-                  $td2 = preg_replace('/statement of acquisition of beneficial ownership by individuals/i', '<span style="font-size: 16px; background-color:red; color:black"><b>&nbsp;Statement of acquisition of beneficial ownership by individuals - 35%, penny 39%</span></b>&nbsp;', $td2);
-                  $td2 = preg_replace('/inability to timely file form/i', '<span style="font-size: 16px; background-color:red; color:black"><b>&nbsp;inability to timely file form - 84%</span></b>&nbsp;', $td2);
-                  
+              $title = preg_replace('/registration statement/i', '<span style="font-size: 16px; background-color:red; color:black"><b>&nbsp;Registration statement - OFFERING COMING OUT, HOLD OFF</span></b>&nbsp;', $title);      
+              $title = preg_replace('/statement of acquisition of beneficial ownership by individuals/i', '<span style="font-size: 16px; background-color:red; color:black"><b>&nbsp;Statement of acquisition of beneficial ownership by individuals - 35%, penny 39%</span></b>&nbsp;', $title);
+              $title = preg_replace('/inability to timely file form/i', '<span style="font-size: 16px; background-color:red; color:black"><b>&nbsp;inability to timely file form - 84%</span></b>&nbsp;', $title);
 
+              if (preg_match('/registration/i', $title) || preg_match('/offering/i', $title))
+              {
+                  $registrationOffering = " - REGISTRATION";
+              }
 
-                  if (preg_match('/registration/i', $td2) || preg_match('/offering/i', $td2))
-                  {
-                      $registrationOffering = " - REGISTRATION";
-                  }
-
-              $tableRows .=  "<tr>" . $td0 . '<td><a href ="' . $href2 . '">' . $td2 . '</a></td>' . $td3 . "<td>" . $time . "</td></tr>"; 
+              $tableRows .=  "<tr><td>" . $filingType . '</td><td><a href ="' . $href2 . '">' . $title . ', '. $itemDescription .  '</a></td><td>' . $datestamp . "</td><td>" . $time . "</td></tr>"; 
             }
 
 
