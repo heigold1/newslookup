@@ -170,6 +170,15 @@ $noTimeFound = false;
 */
           $url = "https://www.sec.gov/cgi-bin/browse-edgar?company=" . $secCompanyName . "&owner=include&action=getcompany"; 
           $result = grabHTML('www.sec.gov', $url); 
+
+          if (preg_match('/No matching companies/', $result))
+          {
+              echo "<title>Filing - " . $symbol . " (NO MATCH)</title>" . $result;
+              return; 
+          }
+
+
+
           if (preg_match('/Companies with names matching/', $result))
           {
               echo "<title>Filing - " . $symbol . " (AMBIGUOUS)</title>" . $result;
