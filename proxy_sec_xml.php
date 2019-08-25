@@ -188,7 +188,6 @@ $ret = "";
 $finalReturn = "";
 $noTimeFound = false;
 
-  
       // try https://www.nasdaq.com/symbol/staf/sec-filings
 
       $url = "https://www.sec.gov/cgi-bin/browse-edgar?CIK=" . $symbol . "&owner=include&action=getcompany"; 

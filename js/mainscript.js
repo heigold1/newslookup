@@ -574,6 +574,7 @@ $(function() {
 
                           console.log("SEC company name is *" + secCompanyName + "*");
 
+//                          openPage('https://www.nasdaq.com/symbol/' + symbol + '/sec-filings');
                           openPage('./proxy_sec.php?symbol=' + symbol + '&secCompanyName=' + secCompanyName);
 
                           yahoo10DayVolume = jsonObject.ten_day_volume; 
@@ -723,12 +724,6 @@ This just gets the yesterday close and last vix values, we don't need these yet,
             $("div#right_bottom_container").css("background-color", "#F3F3FF");                   
 */
 
-
-
-
-
-
-
             // AJAX call to yahoo finance 
 
             if ($('input#redo_localhost_checkbox').is(':checked')) 
@@ -754,7 +749,6 @@ This just gets the yesterday close and last vix values, we don't need these yet,
               yahooHtmlResults = data; 
 
               data = data.replace('>China<', '<span style="font-size:300px; background-color:red"><br><br>China<br><br></span>');
-              data = data.replace('>Argentina<', '<span style="font-size:200px; background-color:red"><br><br>Argentina<br><br></span>');
 
               if (data.toLowerCase().search("couldn't resolve host name") != -1)
               {

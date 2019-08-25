@@ -563,6 +563,7 @@ if ($which_website == "marketwatch")
       $marketWatchNewsHTML = preg_replace('/ withdrawal of auditors\' report/i', "<span style=\"font-size: 25px; background-color:red; color:black\"><b>&nbsp; Withdrawal of Auditors' Report - 40\% </b></span>&nbsp;", $marketWatchNewsHTML);
       $marketWatchNewsHTML = preg_replace('/ withdraws audit report/i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp; withdraws audit report - 40% </b></span>&nbsp;', $marketWatchNewsHTML);
       $marketWatchNewsHTML = preg_replace('/ withdrawing audits/i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp; withdrawing audits - 40% </b></span>&nbsp;', $marketWatchNewsHTML);
+      $marketWatchNewsHTML = preg_replace('/ move to otc/i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp; MOVE TO OTC - DELISTING - BE CAREFUL </b></span>&nbsp;', $marketWatchNewsHTML);
 
 
       $marketWatchNewsHTML .= '</body></html>'; 
@@ -892,6 +893,7 @@ else if ($which_website == "yahoo")
       $finalReturn = preg_replace('/ withdrawal of auditors\' report/i', "<span style=\"font-size: 25px; background-color:red; color:black\"><b>&nbsp; Withdrawal of Auditors' Report - 40\% </b></span>&nbsp;", $finalReturn);
       $finalReturn = preg_replace('/ withdraws audit report/i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp; withdraws audit report - 40% </b></span>&nbsp;', $finalReturn);
       $finalReturn = preg_replace('/ withdrawing audits/i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp; withdrawing audits - 40% </b></span>&nbsp;', $finalReturn);
+      $finalReturn = preg_replace('/ move to otc/i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp; MOVE TO OTC - DELISTING - BE CAREFUL </b></span>&nbsp;', $finalReturn);
 
 
       $message_board = '</font><a target="_blank" onclick="return openPage(this.href)" href="http://finance.yahoo.com/quote/' . $symbol . '/community?ltr=1"> Yahoo Message Boards</a>&nbsp;&nbsp;&nbsp;&nbsp;'; 
@@ -899,11 +901,13 @@ else if ($which_website == "yahoo")
       $yahoo_main_page = '<a target="_blank" href="http://finance.yahoo.com/q?s=' . $symbol . '&ql=1">Yahoo Main Page for ' . $symbol . '</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
       $yahoo_5_day_chart = '<a target="_blank" href="http://finance.yahoo.com/echarts?s=' . $symbol . '+Interactive#symbol=' . $symbol . ';range=5d">5-day Chart for ' . $symbol . '</a><br><br>';
       $eTrade = '<a target="_blank" href="https://www.etrade.wallst.com/v1/stocks/news/search_results.asp?symbol=' . $symbol . '">E*TRADE news for ' . $symbol . '</a>';
-      $google = '<a target="_blank" onclick="return openPage(this.href)" href="https://www.google.com/search?hl=en&gl=us&tbm=nws&authuser=1&q=' . $google_keyword_string . '">Google news for ' . $symbol . '</a><br>';
+      $google = '<a target="_blank" onclick="return openPage(this.href)" href="https://www.google.com/search?hl=en&gl=us&tbm=nws&authuser=1&q=' . $google_keyword_string . '">Google news for ' . $symbol . '</a>';
         $google = preg_replace('/<h1>/', '', $google);
         $google = preg_replace('/<\/h1>/', '', $google);
+      $nasdaqInfo = '&nbsp;&nbsp;<a target="_blank" onclick="return openPage(this.href)" href="https://www.nasdaq.com/symbol/' . $symbol . '/sec-filings"> Nasdaq Info</a>&nbsp;&nbsp;&nbsp;&nbsp;'; 
+      $streetInsider = '&nbsp;&nbsp;<a target="_blank" onclick="return openPage(this.href)" href="https://www.streetinsider.com/stock_lookup.php?LookUp=Get+Quote&q=' . $symbol . '"> Street Insider</a>&nbsp;&nbsp;&nbsp;&nbsp;'; 
 
-      $finalReturn = $yahooDates . $returnCompanyName . $companyWebsite . $sectorCountry . $returnYesterdaysClose . $preMarketYesterdaysClose[0] . "<br>" . "<div style='display: inline-block;'>" . $yesterdayVolumeHTML . $currentVolumeHTML . $volumeRatioHTML . $avgVol10days . $avgVolFinViz .  $company_profile . $yahoo_main_page . $message_board . $google . '<table width="700px"><tr width="575px">' . $finalReturn . '</tr></table>'; 
+      $finalReturn = $yahooDates . $returnCompanyName . $companyWebsite . $sectorCountry . $returnYesterdaysClose . $preMarketYesterdaysClose[0] . "<br>" . "<div style='display: inline-block;'>" . $yesterdayVolumeHTML . $currentVolumeHTML . $volumeRatioHTML . $avgVol10days . $avgVolFinViz .  $company_profile . $yahoo_main_page . $message_board . $google . $nasdaqInfo . $streetInsider . '<table width="700px"><tr width="575px">' . $finalReturn . '</tr></table>'; 
 
       echo $finalReturn; 
 
