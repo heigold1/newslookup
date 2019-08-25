@@ -748,7 +748,19 @@ This just gets the yesterday close and last vix values, we don't need these yet,
 
               yahooHtmlResults = data; 
 
-              data = data.replace('>China<', '<span style="font-size:300px; background-color:red"><br><br>China<br><br></span>');
+                      // check if it's a Chinese or foreign stock
+
+              if (yahooHtmlResults.search(/>United States</) > 0)
+              {
+                  foreignCountry = false;
+              }
+
+              if ((yahooHtmlResults.search(/>China</) > 0) || (yahooHtmlResults.search(/>Hong Kong</) > 0))
+              {
+                  chineseStock = true;
+              }
+
+              data = data.replace('<span>China', '<span style="font-size:300px; background-color:red"><br><br>China<br>');
 
               if (data.toLowerCase().search("couldn't resolve host name") != -1)
               {
@@ -872,18 +884,6 @@ This just gets the yesterday close and last vix values, we don't need these yet,
             $("#day1_low").css({'background-color' : 'red', 'font-size' : '19px'});
         }
 
-        // check if it's a Chinese or foreign stock
-
-        if (yahooHtmlResults.search(/geo_usa/) > 0)
-        {
-            foreignCountry = false;
-        }
-
-        if ((yahooHtmlResults.search(/geo_china/) > 0) || (yahooHtmlResults.search(/geo_hongkong/) > 0))
-        {
-            chineseStock = true;
-        }
-
         if (chineseStock == true)
         {
             playChineseStock(); 
@@ -897,11 +897,11 @@ This just gets the yesterday close and last vix values, we don't need these yet,
 
         // check for any volume alerts
 
-        var finVizAvgVolume = parseInt(document.getElementById("vol_fin_viz").innerHTML.replace(/\D/g,''));
+        var yahooAvgVolume = parseInt(document.getElementById("vol_yahoo").innerHTML.replace(/\D/g,''));
         var eTradeAvgVolume = parseInt(document.getElementById("vol_10_day").innerHTML.replace(/\D/g,''));
         var volumeRatio = parseFloat(document.getElementById("vol_ratio").innerHTML.replace(/\D/g,''))/100;
 
-        if ((finVizAvgVolume < 110000) && (eTradeAvgVolume < 110000))
+        if ((yahooAvgVolume < 110000) && (eTradeAvgVolume < 110000))
         {
           playLowVolumeStock();
           warningMessage += " ** LOW AVERAGE VOLUME ** ";

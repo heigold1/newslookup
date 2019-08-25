@@ -646,23 +646,39 @@ else if ($which_website == "yahoo")
 
       // grab the finanicals 
 
-      // Now we grab website, sector, and company from finviz.com
 
-      $url="https://www.finviz.com/quote.ashx?t=$symbol";
-      $host_name = "www.finviz.com";
-      $result = grabHTML($host_name, $url);
-      $html = str_get_html($result);
- 
-      $companyWebsiteArray = $html->find('table.fullview-title tbody tr td a');
-      $companyWebsite = $companyWebsiteArray[1];
-      $companyWebsite = preg_replace('/<b>.*<\/b>/', '<b>Website</b>', $companyWebsite);
-      $companyWebsite = str_replace('<a ', '<a target="_blank" onclick="return openPage(this.href)" ', $companyWebsite);
+                      // Now we grab website, sector, and company from finviz.com
+/*
+                      $url="https://www.finviz.com/quote.ashx?t=$symbol";
+                      $host_name = "www.finviz.com";
+                      $result = grabHTML($host_name, $url);
+                      $html = str_get_html($result);
+                 
+                      $companyWebsiteArray = $html->find('table.fullview-title tbody tr td a');
+                      $companyWebsite = $companyWebsiteArray[1];
+                      $companyWebsite = preg_replace('/<b>.*<\/b>/', '<b>Website</b>', $companyWebsite);
+                      $companyWebsite = str_replace('<a ', '<a target="_blank" onclick="return openPage(this.href)" ', $companyWebsite);
 
-      $sectorCountryArray = $html->find('table.fullview-title tbody tr td a');
-      $sectorCountry = " " . $sectorCountryArray[2] . " - " . $sectorCountryArray[3] . " - " . $sectorCountryArray[4] . "<br>";
-      $sectorCountry = str_replace('<a', '<span id="geo_country"', $sectorCountry);    
-      $sectorCountry = str_replace('\/a', '/span', $sectorCountry);   
+                      $sectorCountryArray = $html->find('table.fullview-title tbody tr td a');
+                      $sectorCountry = " " . $sectorCountryArray[2] . " - " . $sectorCountryArray[3] . " - " . $sectorCountryArray[4] . "<br>";
+                      $sectorCountry = str_replace('<a', '<span id="geo_country"', $sectorCountry);    
+                      $sectorCountry = str_replace('\/a', '/span', $sectorCountry);   
+*/
 
+
+
+      $command = escapeshellcmd('python3 ../pythonscrape/scrape-yahoo-finance-company-profile.py ' . $symbol);
+      $yahooFinanceJson = shell_exec($command);
+
+      $yahooFinanceObject = json_decode($yahooFinanceJson);
+
+      $companyWebsite = '<a target="_blank" onclick="return openPage(this.href)" href="' . $yahooFinanceObject->website . '" class="tab-link"><b>Website</b></a>&nbsp;&nbsp;';
+
+      $countryPipeString = $yahooFinanceObject->address; 
+      $countryPipeArray = explode('|', $countryPipeString);
+      $countryPipeArrayLength = count($countryPipeArray);
+
+      $sectorCountry = '<span>SECTOR - ' . $yahooFinanceObject->sector . '</span>&nbsp;&nbsp;<span>INDUSTRY - ' . $yahooFinanceObject->industry . ' Business</span>&nbsp;&nbsp;COUNTRY - <span>' . $countryPipeArray[$countryPipeArrayLength - 1] . '<br></span>'; 
 
       $returnCompanyName = '<h1>' . $companyName . '</h1>';
 
@@ -682,9 +698,21 @@ else if ($which_website == "yahoo")
       $currentVolumeHTML = '<span id="vol_current" style="font-size: 12px; background-color:#ff9999; color: black; display: inline-block;"><b>Vol - ' . $currentVolume . '</b></span>'; 
 
       // Calculate the finViz 3 month volume number
+/*
+                $finVizTDArray = $html->find('table.snapshot-table2 tbody tr.table-dark-row');
+                $avgVolFinViz = "<span id='vol_fin_viz' style='background-color: orange'><b>FinVizAVG - " . calcFinVizAvgVolume($finVizTDArray[10]) . "</b></span>";
+*/
 
-      $finVizTDArray = $html->find('table.snapshot-table2 tbody tr.table-dark-row');
-      $avgVolFinViz = "<span id='vol_fin_viz' style='background-color: orange'><b>FinVizAVG - " . calcFinVizAvgVolume($finVizTDArray[10]) . "</b></span>";
+      // get Yahoo Finance average volume number
+      $command = escapeshellcmd('python3 ../pythonscrape/scrape-yahoo-finance-summary.py ' . $symbol);
+      $yahooFinanceJson = shell_exec($command);
+
+      $yahooFinanceObject = json_decode($yahooFinanceJson);
+
+      $avgVolYahoo =  '<span id="vol_yahoo" style="background-color: orange; font-size: 12px;"><b>YahooAVG - ' . $yahooFinanceObject->avgvol . '</b></span>'; 
+
+
+
 
       $avgVol10days = '<span id="vol_10_day" style="font-size: 12px; background-color:#CCFF99; color: black; display: inline-block;"><b>eTradeAVG - ' . number_format((int) $_GET['ten_day_volume']) . '</b></span>'; 
 
@@ -907,7 +935,7 @@ else if ($which_website == "yahoo")
       $nasdaqInfo = '&nbsp;&nbsp;<a target="_blank" onclick="return openPage(this.href)" href="https://www.nasdaq.com/symbol/' . $symbol . '/sec-filings"> Nasdaq Info</a>&nbsp;&nbsp;&nbsp;&nbsp;'; 
       $streetInsider = '&nbsp;&nbsp;<a target="_blank" onclick="return openPage(this.href)" href="https://www.streetinsider.com/stock_lookup.php?LookUp=Get+Quote&q=' . $symbol . '"> Street Insider</a>&nbsp;&nbsp;&nbsp;&nbsp;'; 
 
-      $finalReturn = $yahooDates . $returnCompanyName . $companyWebsite . $sectorCountry . $returnYesterdaysClose . $preMarketYesterdaysClose[0] . "<br>" . "<div style='display: inline-block;'>" . $yesterdayVolumeHTML . $currentVolumeHTML . $volumeRatioHTML . $avgVol10days . $avgVolFinViz .  $company_profile . $yahoo_main_page . $message_board . $google . $nasdaqInfo . $streetInsider . '<table width="700px"><tr width="575px">' . $finalReturn . '</tr></table>'; 
+      $finalReturn = $yahooDates . $returnCompanyName . $companyWebsite . $sectorCountry . $returnYesterdaysClose . $preMarketYesterdaysClose[0] . "<br>" . "<div style='display: inline-block;'>" . $yesterdayVolumeHTML . $currentVolumeHTML . $volumeRatioHTML . $avgVol10days . $avgVolYahoo .  $company_profile . $yahoo_main_page . $message_board . $google . $nasdaqInfo . $streetInsider . '<table width="700px"><tr width="575px">' . $finalReturn . '</tr></table>'; 
 
       echo $finalReturn; 
 
