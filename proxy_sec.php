@@ -173,7 +173,12 @@ $noTimeFound = false;
 
           if (preg_match('/No matching companies/', $result))
           {
-              echo "<title>Filing - " . $symbol . " (NO MATCH)</title>" . $result;
+              echo '<!DOCTYPE html><html><title>Filing - ' . $symbol . ' (AMBIGUOUS)</title><body>
+                  <a style="font-size: 35px" target="_blank" href="https://www.nasdaq.com/symbol/' . $symbol . '/sec-filings">Nasdaq</a><br>
+                  <a style="font-size: 35px" target="_blank" href="http://ec2-54-210-42-143.compute-1.amazonaws.com/newslookup/scrape-street-insider.php?symbol=' . $symbol . '">Street Insider</a>
+                <br>
+                <br>' . $result . 
+                '</body></html>';  
               return; 
           }
 
@@ -181,7 +186,12 @@ $noTimeFound = false;
 
           if (preg_match('/Companies with names matching/', $result))
           {
-              echo "<title>Filing - " . $symbol . " (AMBIGUOUS)</title>" . $result;
+              echo '<!DOCTYPE html><html><title>Filing - ' . $symbol . ' (AMBIGUOUS)</title><body>
+                  <a style="font-size: 35px" target="_blank" href="https://www.nasdaq.com/symbol/' . $symbol . '/sec-filings">Nasdaq</a><br>
+                  <a style="font-size: 35px" target="_blank" href="http://ec2-54-210-42-143.compute-1.amazonaws.com/newslookup/scrape-street-insider.php?symbol=' . $symbol . '">Street Insider</a>
+                <br>
+                <br>' . $result . 
+                '</body></html>';  
               return; 
           }
       }
@@ -337,6 +347,7 @@ $noTimeFound = false;
       $returnHtml .= "<table class='striped' border = 1>"; 
       $returnHtml .= $tableRows;
       $returnHtml .=  "</table>";
+      $returnHtml .=  '<a style="font-size: 35px" target="_blank" href="http://ec2-54-210-42-143.compute-1.amazonaws.com/newslookup/scrape-street-insider.php?symbol=' . $symbol . '">Street Insider</a><br> <a style="font-size: 35px" target="_blank" href="https://www.nasdaq.com/symbol/' . $symbol . '/sec-filings">Nasdaq</a>'; 
       $returnHtml .=  "</body>";
       $returnHtml .=  "</html>";
 
