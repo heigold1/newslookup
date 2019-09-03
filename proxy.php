@@ -363,7 +363,7 @@ if ($which_website == "marketwatch")
       $finalArray = array();
 
       $classActionAdded == false;
-
+/*
       foreach ($individualArticleDiv[0] as $articleDiv)
       {
           $articleStruct = array();
@@ -386,6 +386,8 @@ if ($which_website == "marketwatch")
       }
 
       krsort($finalArray);
+
+*/
 
       $marketWatchNewsHTML = '<html><head><link rel="stylesheet" href="./css/combined-min-1.0.5754.css" type="text/css"/>
       <link type="text/css" href="./css/quote-layout.css" rel="stylesheet"/>
