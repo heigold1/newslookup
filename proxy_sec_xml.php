@@ -197,9 +197,30 @@ $noTimeFound = false;
       {
           $url = "https://www.sec.gov/cgi-bin/browse-edgar?company=" . $secCompanyName . "&owner=include&action=getcompany"; 
           $result = grabHTML('www.sec.gov', $url); 
+
+          if (preg_match('/No matching companies/', $result))
+          {
+              echo '<!DOCTYPE html><html><title>Filing - ' . $symbol . ' (NOT FOUND)</title><body>
+                  <a style="font-size: 35px" target="_blank" href="https://www.nasdaq.com/symbol/' . $symbol . '/sec-filings">Nasdaq</a><br>
+                  <a style="font-size: 35px" target="_blank" href="http://ec2-54-210-42-143.compute-1.amazonaws.com/newslookup/scrape-street-insider.php?symbol=' . $symbol . '">Street Insider Scrape</a><br>
+                  <a style="font-size: 35px" target="_blank" href="https://www.streetinsider.com/stock_lookup.php?LookUp=Get+Quote&q=MSFT' . $symbol . '">Street Insider Actual Page</a>
+                <br>
+                <br>' . $result . 
+                '</body></html>';  
+              return; 
+          }
+
+
+
           if (preg_match('/Companies with names matching/', $result))
           {
-              echo "<title>Filing - " . $symbol . " (AMBIGUOUS)</title>" . $result;
+              echo '<!DOCTYPE html><html><title>Filing - ' . $symbol . ' (AMBIGUOUS)</title><body>
+                  <a style="font-size: 35px" target="_blank" href="https://www.nasdaq.com/symbol/' . $symbol . '/sec-filings">Nasdaq</a><br>
+                  <a style="font-size: 35px" target="_blank" href="http://ec2-54-210-42-143.compute-1.amazonaws.com/newslookup/scrape-street-insider.php?symbol=' . $symbol . '">Street Insider Scrape</a><br>
+                  <a style="font-size: 35px" target="_blank" href="https://www.streetinsider.com/stock_lookup.php?LookUp=Get+Quote&q=MSFT' . $symbol . '">Street Insider Actual Page</a>
+                <br>
+                <br>' . $result . 
+                '</body></html>';  
               return; 
           }
       }
@@ -301,7 +322,7 @@ $noTimeFound = false;
               $datestamp = preg_replace('/(' .  get_today_trade_date() . ')/', '<span style="font-size: 16px; background-color:black; color:white">$1</span>', $datestamp);
 
               $title = preg_replace('/registration statement/i', '<span style="font-size: 16px; background-color:red; color:black"><b>&nbsp;Registration statement - OFFERING COMING OUT, HOLD OFF</span></b>&nbsp;', $title);      
-              $title = preg_replace('/statement of acquisition of beneficial ownership by individuals/i', '<span style="font-size: 16px; background-color:red; color:black"><b>&nbsp;Statement of acquisition of beneficial ownership by individuals - 35%, penny 39%</span></b>&nbsp;', $title);
+              $title = preg_replace('/Statement of acquisition of beneficial ownership/i', '<span style="font-size: 16px; background-color:red; color:black"><b>&nbsp;Statement of acquisition of beneficial ownership - 35%, penny 39%</span></b>&nbsp;', $title);
               $title = preg_replace('/inability to timely file form/i', '<span style="font-size: 16px; background-color:red; color:black"><b>&nbsp;inability to timely file form - 84%</span></b>&nbsp;', $title);
 
               if (preg_match('/registration/i', $title) || preg_match('/offering/i', $title))
@@ -332,6 +353,11 @@ $noTimeFound = false;
       $returnHtml .= "<table class='striped' border = 1>"; 
       $returnHtml .= $tableRows;
       $returnHtml .=  "</table>";
+
+      $returnHtml .=  '<a style="font-size: 35px" target="_blank" href="http://ec2-54-210-42-143.compute-1.amazonaws.com/newslookup/scrape-street-insider.php?symbol=' . $symbol . '">Street Insider Scrape</a><br> 
+        <a style="font-size: 35px" target="_blank" href="https://www.streetinsider.com/stock_lookup.php?LookUp=Get+Quote&q=' . $symbol . '">Street Insider Actual Page</a><br>
+        <a style="font-size: 35px" target="_blank" href="https://www.nasdaq.com/symbol/' . $symbol . '/sec-filings">Nasdaq</a><br>'; 
+
       $returnHtml .=  "</body>";
       $returnHtml .=  "</html>";
 

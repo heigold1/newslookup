@@ -210,8 +210,8 @@ $noTimeFound = false;
 
           $registrationOffering = "";
 
-          for ($i = 1; $i < 6; $i++)
-           { 
+            for ($i = 1; $i < 6; $i++)
+            { 
               $row = str_get_html($tableRow1[$i]);
 
               if (!$row)
@@ -253,9 +253,7 @@ $noTimeFound = false;
 // echo "** a2[0]->href is " . $a2[0]->href . "<br><br>"; 
 //die();
 
-
                   $href2 = 'https://www.sec.gov' . $a2[0]->href;
-
                   $time = "";
 
                   for ($j = $yesterdayDays; $j >= 1; $j--)
@@ -264,11 +262,18 @@ $noTimeFound = false;
                       if (preg_match('/(' .  get_trade_date($j) . ')/', $td3))
                       {
                           $timestamp = getURLTimestamp($href2);
-                          // 10800 is adding 3 hours offset 
-                          $time = date("g:i A", $timestamp + 10800);
-                          if ($time == '')
+                          if ($timestamp == "No timestamp")
                           {
                               $noTimeFound = true; 
+                          }
+                          else
+                          {
+                              // 10800 is adding 3 hours offset 
+                              $time = date("g:i A", $timestamp + 10800);
+                              if ($time == '')
+                              {
+                                  $noTimeFound = true; 
+                              }
                           }
 
                           if ($j == $yesterdayDays)
@@ -300,11 +305,18 @@ $noTimeFound = false;
                   if (preg_match('/(' .  get_today_trade_date() . ')/', $td3))
                   {
                       $timestamp = getURLTimestamp($href2);
-                      // 10800 is adding 3 hours offset 
-                      $time = date("g:i A", $timestamp + 10800);
-                      if (!timestampIsSafe($timestamp))
+                      if ($timestamp == "No timestamp")
                       {
-                          $recentNews = true;
+                          $noTimeFound = true; 
+                      }
+                      else
+                      {
+                          // 10800 is adding 3 hours offset 
+                          $time = date("g:i A", $timestamp + 10800);
+                          if ($time == '')
+                          {
+                              $noTimeFound = true; 
+                          }
                       }
                   }
 
@@ -349,9 +361,6 @@ $noTimeFound = false;
       $returnHtml .= "<table class='striped' border = 1>"; 
       $returnHtml .= $tableRows;
       $returnHtml .=  "</table>";
-      $returnHtml .=  '<a style="font-size: 35px" target="_blank" href="http://ec2-54-210-42-143.compute-1.amazonaws.com/newslookup/scrape-street-insider.php?symbol=' . $symbol . '">Street Insider Scrape</a><br> 
-        <a style="font-size: 35px" target="_blank" href="https://www.streetinsider.com/stock_lookup.php?LookUp=Get+Quote&q=' . $symbol . '">Street Insider Actual Page</a><br>
-        <a style="font-size: 35px" target="_blank" href="https://www.nasdaq.com/symbol/' . $symbol . '/sec-filings">Nasdaq</a><br>'; 
       $returnHtml .=  "</body>";
       $returnHtml .=  "</html>";
 
