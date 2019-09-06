@@ -239,8 +239,6 @@ $noTimeFound = false;
 
           $xmlFinalString=simplexml_load_file($rssFullLink);
 
-          $recentNews = false; 
-
           $registrationOffering = "";
 
           for ($i = 0; $i < 5; $i++)
