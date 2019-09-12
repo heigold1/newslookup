@@ -748,25 +748,6 @@ This just gets the yesterday close and last vix values, we don't need these yet,
 
               yahooHtmlResults = data; 
 
-                      // check if it's a Chinese or foreign stock
-
-              if (yahooHtmlResults.search(/>United States</) > 0)
-              {
-                  foreignCountry = false;
-              }
-
-              if ((yahooHtmlResults.search(/>China</) > 0) || (yahooHtmlResults.search(/>Hong Kong</) > 0))
-              {
-                  chineseStock = true;
-              }
-
-              data = data.replace('<span>China', '<span style="font-size:300px; background-color:red"><br><br>China<br>');
-
-              if (data.toLowerCase().search("couldn't resolve host name") != -1)
-              {
-                  openPage("http://ec2-54-210-42-143.compute-1.amazonaws.com/newslookup/proxy.php?symbol=" + symbol + "&which_website=yahoo&host_name=finance.yahoo.com&company_name=" + yahooCompanyName + "&ten_day_volume=" + yahoo10DayVolume + "&total_volume=" + totalVolume + "&yesterday_volume=" + yesterdayVolume);
-              }
-
               console.log(data);
 
               yahooCompanyName = " " + data.match(/<h1(.*?)h1>/g) + " "; 
@@ -786,6 +767,42 @@ This just gets the yesterday close and last vix values, we don't need these yet,
               google_keyword_string = google_keyword_string.replace(/ltd\./ig, "");
 
               $("div#right_top_container").html(data);
+
+
+              // check if it's a Chinese or foreign stock
+
+              if (yahooHtmlResults.search(/>United States</) > 0)
+              {
+                  foreignCountry = false;
+              }
+
+              if ((yahooHtmlResults.search(/>China</) > 0) || (yahooHtmlResults.search(/>Hong Kong</) > 0))
+              {
+                  chineseStock = true;
+
+              }
+
+//              data = data.replace('<span id="country">China', '<span id="country" style="font-size:300px; background-color:red"><br><br>China<br>');
+
+              if (data.toLowerCase().search("couldn't resolve host name") != -1)
+              {
+                  openPage("http://ec2-54-210-42-143.compute-1.amazonaws.com/newslookup/proxy.php?symbol=" + symbol + "&which_website=yahoo&host_name=finance.yahoo.com&company_name=" + yahooCompanyName + "&ten_day_volume=" + yahoo10DayVolume + "&total_volume=" + totalVolume + "&yesterday_volume=" + yesterdayVolume);
+              }
+
+              var country = document.getElementById('country').innerHTML; 
+
+              if (country == "China")
+              {
+                  document.getElementById('country').style.fontSize = "250px"; 
+                  document.getElementById('country').style.backgroundColor = "red";
+                  document.getElementById('country').style.height = "100px"; 
+              }
+              else if (country != "United States")
+              {
+                  document.getElementById('country').style.fontSize = "75px"; 
+                  document.getElementById('country').style.backgroundColor = "red";
+                  document.getElementById('country').style.height = "35px"; 
+              }    
 
               yesterdaysClose = " " + data.match(/<h4(.*?)h4>/g) + " "; 
               yesterdaysClose = yesterdaysClose.replace(/ <h4>/ig, "");

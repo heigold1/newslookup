@@ -681,7 +681,9 @@ else if ($which_website == "yahoo")
       $countryPipeArray = explode('|', $countryPipeString);
       $countryPipeArrayLength = count($countryPipeArray);
 
-      $sectorCountry = '<span>SECTOR - ' . $yahooFinanceObject->sector . '</span>&nbsp;&nbsp;<span>INDUSTRY - ' . $yahooFinanceObject->industry . ' Business</span>&nbsp;&nbsp;COUNTRY - <span>' . $countryPipeArray[$countryPipeArrayLength - 1] . '<br></span>'; 
+      $country = trim($countryPipeArray[$countryPipeArrayLength - 1]); 
+
+      $sectorCountry = '<span>SECTOR - ' . $yahooFinanceObject->sector . '</span>&nbsp;&nbsp;<span>INDUSTRY - ' . $yahooFinanceObject->industry . ' Business</span><br><br><div id="country">' . $country . '</div>'; 
 
       $returnCompanyName = '<h1>' . $companyName . '</h1>';
 
