@@ -60,7 +60,7 @@
 							<td style="width:330px">
 
 							<input tabindex="6" id="orderStub" style="width: 305px;">
-							<!-- <button id="email_trade" type="button">..</button> --> 
+							<button id="email_trade" type="button">..</button>
 							<span id="time_of_day_percentage">N/A</span>
 
 							</td>
