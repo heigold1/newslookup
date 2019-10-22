@@ -571,6 +571,7 @@ if ($which_website == "marketwatch")
       $marketWatchNewsHTML = preg_replace('/ external advisor| external adviser/i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp; EXTERNAL ADVISOR - BACK OFF </b></span>&nbsp;', $marketWatchNewsHTML);
       $marketWatchNewsHTML = preg_replace('/ turnaround/i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp; TURNAROUND - BACK OFF </b></span>&nbsp;', $marketWatchNewsHTML);
       $marketWatchNewsHTML = preg_replace('/ clinical.stage/i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp; CLINICAL STAGE - BACK OFF </b></span>&nbsp;', $marketWatchNewsHTML);
+      $marketWatchNewsHTML = preg_replace('/ ratio change/i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp; RATIO CHANGE - REVERSE SPLIT </b></span>&nbsp;', $marketWatchNewsHTML);
 
 
       $marketWatchNewsHTML .= '</body></html>'; 
@@ -936,6 +937,7 @@ else if ($which_website == "yahoo")
       $finalReturn = preg_replace('/ external advisor| external adviser/i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp; EXTERNAL ADVISOR - BACK OFF </b></span>&nbsp;', $finalReturn);
       $finalReturn = preg_replace('/ turnaround/i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp; TURNAROUND - BACK OFF </b></span>&nbsp;', $finalReturn);
       $finalReturn = preg_replace('/ clinical.stage/i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp; CLINICAL STAGE - BACK OFF </b></span>&nbsp;', $finalReturn);      
+      $finalReturn = preg_replace('/ ratio change/i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp; RATIO CHANGE - REVERSE SPLIT </b></span>&nbsp;', $finalReturn);
 
 
       $message_board = '</font><a target="_blank" onclick="return openPage(this.href)" href="http://finance.yahoo.com/quote/' . $symbol . '/community?ltr=1"> Yahoo Message Boards</a>&nbsp;&nbsp;&nbsp;&nbsp;'; 
