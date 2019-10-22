@@ -509,7 +509,7 @@ $(function() {
               $("#day1").html("");
               $("#entryPrice").val(""); 
               $("#entryPercentage").val("");  
-              $("#amountSpending").val("2500");
+              $("#amountSpending").val("1500");
               $("#eTradeLowPercentage").html("");
               $("#orderStub").val("-----------------------"); 
               $("#foreign_country").html("");
@@ -918,7 +918,7 @@ This just gets the yesterday close and last vix values, we don't need these yet,
         var eTradeAvgVolume = parseInt(document.getElementById("vol_10_day").innerHTML.replace(/\D/g,''));
         var volumeRatio = parseFloat(document.getElementById("vol_ratio").innerHTML.replace(/\D/g,''))/100;
 
-        if ((yahooAvgVolume < 110000) && (eTradeAvgVolume < 110000))
+        if ((yahooAvgVolume < 110000) || (eTradeAvgVolume < 110000))
         {
           playLowVolumeStock();
           warningMessage += " ** LOW AVERAGE VOLUME ** ";
@@ -1083,9 +1083,9 @@ This just gets the yesterday close and last vix values, we don't need these yet,
 
           // in case I accidentally type in more than I should be trading with
           var thisValue = parseInt($(this).val()); 
-          if (thisValue > 2500)
+          if (thisValue >  1500)
           {
-            thisValue = 2500;
+            thisValue = 1500;
             $(this).val(thisValue);
           }
 
