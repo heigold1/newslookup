@@ -411,7 +411,7 @@ if ($which_website == "marketwatch")
           $articleStruct['headline'] = $headlinesArray[1];
           preg_match('/data-est="(.*?)"/', $articleDiv, $timeStampArray);
           $timeStamp = $timeStampArray[1];
-          preg_match('/article__timestamp">(.*?)<\/li>/', $articleDiv, $dateStringArray);
+          preg_match('/data-est=".*?">(.*?)<\/span>/', $articleDiv, $dateStringArray);
           $articleStruct['date'] = $dateStringArray[1];
 
           // am/pm  red green highlighting  
