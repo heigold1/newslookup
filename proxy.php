@@ -801,7 +801,16 @@ else if ($which_website == "yahoo")
 
       krsort($googleRSSArray);
 
-      $googleNews = "<ul class='newsSide'>";
+      $url = "https://www.stocksplithistory.com/?symbol=" . $symbol; 
+
+      $results = grabHTML("www.stocksplithistory.com", $url);
+
+      $html = str_get_html($results);  
+      $splitsTable = $html->find('body center div table tbody tr td table'); 
+
+      $stockSplitsTable = $splitsTable[4]; 
+
+      $googleNews = $stockSplitsTable . "<ul class='newsSide'>";
       $googleNews .= "<li>Google News</li>";
       $i = 0;
       foreach ($googleRSSArray as $feedItem) {
@@ -950,8 +959,9 @@ else if ($which_website == "yahoo")
         $google = preg_replace('/<\/h1>/', '', $google);
       $nasdaqInfo = '&nbsp;&nbsp;<a target="_blank" onclick="return openPage(this.href)" href="https://www.nasdaq.com/symbol/' . $symbol . '/sec-filings"> Nasdaq Info</a>&nbsp;&nbsp;&nbsp;&nbsp;'; 
       $streetInsider = '&nbsp;&nbsp;<a target="_blank" onclick="return openPage(this.href)" href="https://www.streetinsider.com/stock_lookup.php?LookUp=Get+Quote&q=' . $symbol . '"> Street Insider</a>&nbsp;&nbsp;&nbsp;&nbsp;'; 
+      $splits = '&nbsp;&nbsp;<a target="_blank" onclick="return openPage(this.href)" href="https://www.stocksplithistory.com/?symbol=' . $symbol . '"> Splits</a>&nbsp;&nbsp;&nbsp;&nbsp;'; 
 
-      $finalReturn = $yahooDates . $returnCompanyName . $companyWebsite . $sectorCountry . $returnYesterdaysClose . $preMarketYesterdaysClose[0] . "<br>" . "<div style='display: inline-block;'>" . $yesterdayVolumeHTML . $currentVolumeHTML . $volumeRatioHTML . $avgVol10days . $avgVolYahoo .  $company_profile . $yahoo_main_page . $message_board . $google . $nasdaqInfo . $streetInsider . '<table width="700px"><tr width="575px">' . $finalReturn . '</tr></table>'; 
+      $finalReturn = $yahooDates . $returnCompanyName . $companyWebsite . $sectorCountry . $returnYesterdaysClose . $preMarketYesterdaysClose[0] . "<br>" . "<div style='display: inline-block;'>" . $yesterdayVolumeHTML . $currentVolumeHTML . $volumeRatioHTML . $avgVol10days . $avgVolYahoo .  $company_profile . $yahoo_main_page . $message_board . $google . $nasdaqInfo . $streetInsider . $splits . '<table width="700px"><tr width="575px">' . $finalReturn . '</tr></table>'; 
 
       echo $finalReturn; 
 
