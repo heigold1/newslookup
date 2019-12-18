@@ -64,6 +64,9 @@ $results = grabHTML("www.alphavantage.co", $url);
 
 $fullJSON = json_decode($results);
 
+var_dump($fullJSON); 
+die(); 
+
 $object = null;
 
 foreach($fullJSON as $k => $v){

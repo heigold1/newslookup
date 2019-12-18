@@ -7,7 +7,7 @@ $symbol=$_GET['symbol'];
 $secCompanyName = $_GET['secCompanyName'];
 $secCompanyName = preg_replace('/ /', '+', $secCompanyName);
 
-$yesterdayDays = 1; 
+$yesterdayDays = 1;
 
 fopen("cookies.txt", "w");
 
