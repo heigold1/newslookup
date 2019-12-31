@@ -12,6 +12,16 @@ $yesterdayDays = 1;
 fopen("cookies.txt", "w");
 
 
+function buildNewsNotes()
+{
+    $newsNotes = '<ul style="font-family: arial;">
+                      <li>Entry into a Material Definitive Agreement - STAY AWAY, SHARE PRICE COMING OUT</li>
+                      </ul>
+                      '; 
+    return $newsNotes; 
+}
+
+
 function get_friday_trade_date()
 {
     $friday_yahoo_trade_date = "";
@@ -188,6 +198,9 @@ $ret = "";
 $finalReturn = "";
 $noTimeFound = false;
 
+
+
+
       // try https://www.nasdaq.com/symbol/staf/sec-filings
 
       $url = "https://www.sec.gov/cgi-bin/browse-edgar?CIK=" . $symbol . "&owner=include&action=getcompany"; 
@@ -334,7 +347,9 @@ $noTimeFound = false;
 
       $returnHtml .= "<!DOCTYPE html>"; 
       $returnHtml .= "<html>";
-      $returnHtml .= "<head>";
+      $returnHtml .= '<head>
+        <link type="text/css" href="./css/main.css" rel="stylesheet"/>
+      </head>';
 
       if ($noTimeFound == true)
       {
@@ -348,6 +363,9 @@ $noTimeFound = false;
       }
       
       $returnHtml .= "<body>"; 
+
+      $returnHtml .= buildNewsNotes(); 
+
       $returnHtml .= "<table class='striped' border = 1>"; 
       $returnHtml .= $tableRows;
       $returnHtml .=  "</table>";
@@ -362,3 +380,7 @@ $noTimeFound = false;
       echo $returnHtml; 
 
 ?>
+
+
+
+

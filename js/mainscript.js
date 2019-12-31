@@ -473,12 +473,12 @@ $(function() {
 
           // take out the 5th "W/R/Z" for symbols like CBSTZ. 
 
-              if ( $("#strip_last_character_checkbox").prop('checked') && (positionOfPeriod > -1) )
+              if (positionOfPeriod > -1)
               {
                 // if any stocks have a ".PD" or a ".WS", etc... 
                 symbol = original_symbol.substr(0, positionOfPeriod); 
               }
-              else if ( $("#strip_last_character_checkbox").prop('checked') && (original_symbol.length == 5) )
+              else if (original_symbol.length == 5)
               {
                 symbol = original_symbol.slice(0,-1); 
               }
