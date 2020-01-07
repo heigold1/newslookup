@@ -16,6 +16,8 @@ function buildNewsNotes()
 {
     $newsNotes = '<ul style="font-family: arial;">
                       <li>Entry into a Material Definitive Agreement - STAY AWAY, SHARE PRICE COMING OUT</li>
+                      <li>Statement of acquisition of beneficial ownership by individuals - Not that bad, just wait until 20%</li>
+                      <li>Statement of changes in beneficial ownership of securities - Not that bad, just wait until 20%</li>
                       </ul>
                       '; 
     return $newsNotes; 
@@ -333,7 +335,6 @@ $noTimeFound = false;
               $datestamp = preg_replace('/(' .  get_today_trade_date() . ')/', '<span style="font-size: 16px; background-color:black; color:white">$1</span>', $datestamp);
 
               $title = preg_replace('/registration statement/i', '<span style="font-size: 16px; background-color:red; color:black"><b>&nbsp;Registration statement - OFFERING COMING OUT, HOLD OFF</span></b>&nbsp;', $title);      
-              $title = preg_replace('/Statement of acquisition of beneficial ownership/i', '<span style="font-size: 16px; background-color:red; color:black"><b>&nbsp;Statement of acquisition of beneficial ownership - 35%, penny 39%</span></b>&nbsp;', $title);
               $title = preg_replace('/inability to timely file form/i', '<span style="font-size: 16px; background-color:red; color:black"><b>&nbsp;inability to timely file form - 84%</span></b>&nbsp;', $title);
 
               if (preg_match('/registration/i', $title) || preg_match('/offering/i', $title))
