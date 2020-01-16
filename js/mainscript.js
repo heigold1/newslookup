@@ -574,7 +574,7 @@ $(function() {
 
                           console.log("SEC company name is *" + secCompanyName + "*");
 
-//                          openPage('https://www.nasdaq.com/symbol/' + symbol + '/sec-filings');
+                          openPage('https://www.nasdaq.com/symbol/' + symbol + '/sec-filings');
                           openPage('./proxy_sec_xml.php?symbol=' + symbol + '&secCompanyName=' + secCompanyName);
 
                           yahoo10DayVolume = jsonObject.ten_day_volume; 
