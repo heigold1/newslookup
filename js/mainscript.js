@@ -553,7 +553,7 @@ $(function() {
 
                           if (exchange == "PK")
                           {
-                            $("#amountSpending").val("250");
+                            $("#amountSpending").val("350");
 
                           }
                           $("#yestCloseText").val(jsonObject.prev_close);
