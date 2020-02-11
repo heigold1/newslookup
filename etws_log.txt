@@ -1,0 +1,229 @@
+[20161001 02:36:55][::1] <html><head><title> - Error report</title><style><!--H1 {font-family:Tahoma,Arial,sans-serif;color:white;background-color:#525D76;font-size:22px;} H2 {font-family:Tahoma,Arial,sans-serif;color:white;background-color:#525D76;font-size:16px;} H3 {font-family:Tahoma,Arial,sans-serif;color:white;background-color:#525D76;font-size:14px;} BODY {font-family:Tahoma,Arial,sans-serif;color:black;background-color:white;} B {font-family:Tahoma,Arial,sans-serif;color:white;background-color:#525D76;} P {font-family:Tahoma,Arial,sans-serif;background:white;color:black;font-size:12px;}A {color : black;}A.name {color : black;}HR {color : #525D76;}--></style> </head><body><h1>HTTP Status 500 - </h1><HR size="1" noshade="noshade"><p><b>type</b> Exception report</p><p><b>message</b> <u></u></p><p><b>description</b> <u>The server encountered an internal error () that prevented it from fulfilling this request.</u></p><p><b>exception</b> <pre>java.lang.IllegalArgumentException: consumerKey is empty
+	com.etrade.etws.oauth.manager.ConsumerManager.getConsumerKey(ConsumerManager.java:243)
+	com.etrade.etws.oauth.OAuthValidator.validateConsumer(OAuthValidator.java:496)
+	com.etrade.etws.oauth.common.OAuthCommons.validateConsumer(OAuthCommons.java:259)
+	com.etrade.etws.oauth.bean.OAuthAuditBean.validateAuditParameters(OAuthAuditBean.java:73)
+	com.etrade.etws.common.audit.AuditFilter.doFilter(AuditFilter.java:70)
+	com.etrade.api.filter.preflightfilter.PreflightFilter.doFilter(PreflightFilter.java:63)
+	org.eclipse.jetty.servlets.CrossOriginFilter.handle(CrossOriginFilter.java:212)
+	org.eclipse.jetty.servlets.CrossOriginFilter.doFilter(CrossOriginFilter.java:179)
+	com.etrade.api.filter.preflightfilter.CORSMobileOriginFilter.doFilter(CORSMobileOriginFilter.java:57)
+</pre></p><p><b>note</b> <u>The full stack trace of the root cause is available in the  logs.</u></p><HR size="1" noshade="noshade"><h3></h3></body></html>
+[20161003 13:58:45][] <html><head><title> - Error report</title><style><!--H1 {font-family:Tahoma,Arial,sans-serif;color:white;background-color:#525D76;font-size:22px;} H2 {font-family:Tahoma,Arial,sans-serif;color:white;background-color:#525D76;font-size:16px;} H3 {font-family:Tahoma,Arial,sans-serif;color:white;background-color:#525D76;font-size:14px;} BODY {font-family:Tahoma,Arial,sans-serif;color:black;background-color:white;} B {font-family:Tahoma,Arial,sans-serif;color:white;background-color:#525D76;} P {font-family:Tahoma,Arial,sans-serif;background:white;color:black;font-size:12px;}A {color : black;}A.name {color : black;}HR {color : #525D76;}--></style> </head><body><h1>HTTP Status 401 - oauth_problem=token_expired</h1><HR size="1" noshade="noshade"><p><b>type</b> Status report</p><p><b>message</b> <u>oauth_problem=token_expired</u></p><p><b>description</b> <u>This request requires HTTP authentication (oauth_problem=token_expired).</u></p><HR size="1" noshade="noshade"><h3></h3></body></html>
+[20161007 14:28:48][] <html><head><title> - Error report</title><style><!--H1 {font-family:Tahoma,Arial,sans-serif;color:white;background-color:#525D76;font-size:22px;} H2 {font-family:Tahoma,Arial,sans-serif;color:white;background-color:#525D76;font-size:16px;} H3 {font-family:Tahoma,Arial,sans-serif;color:white;background-color:#525D76;font-size:14px;} BODY {font-family:Tahoma,Arial,sans-serif;color:black;background-color:white;} B {font-family:Tahoma,Arial,sans-serif;color:white;background-color:#525D76;} P {font-family:Tahoma,Arial,sans-serif;background:white;color:black;font-size:12px;}A {color : black;}A.name {color : black;}HR {color : #525D76;}--></style> </head><body><h1>HTTP Status 401 - oauth_problem=token_expired</h1><HR size="1" noshade="noshade"><p><b>type</b> Status report</p><p><b>message</b> <u>oauth_problem=token_expired</u></p><p><b>description</b> <u>This request requires HTTP authentication (oauth_problem=token_expired).</u></p><HR size="1" noshade="noshade"><h3></h3></body></html>
+[20161008 09:05:13][] <html><head><title> - Error report</title><style><!--H1 {font-family:Tahoma,Arial,sans-serif;color:white;background-color:#525D76;font-size:22px;} H2 {font-family:Tahoma,Arial,sans-serif;color:white;background-color:#525D76;font-size:16px;} H3 {font-family:Tahoma,Arial,sans-serif;color:white;background-color:#525D76;font-size:14px;} BODY {font-family:Tahoma,Arial,sans-serif;color:black;background-color:white;} B {font-family:Tahoma,Arial,sans-serif;color:white;background-color:#525D76;} P {font-family:Tahoma,Arial,sans-serif;background:white;color:black;font-size:12px;}A {color : black;}A.name {color : black;}HR {color : #525D76;}--></style> </head><body><h1>HTTP Status 401 - oauth_problem=token_expired</h1><HR size="1" noshade="noshade"><p><b>type</b> Status report</p><p><b>message</b> <u>oauth_problem=token_expired</u></p><p><b>description</b> <u>This request requires HTTP authentication (oauth_problem=token_expired).</u></p><HR size="1" noshade="noshade"><h3></h3></body></html>
+[20161009 20:40:28][::1] <Error>
+  <message>oauth_problem=token_expired</message>
+</Error>
+[20161009 14:41:11][] <html><head><title> - Error report</title><style><!--H1 {font-family:Tahoma,Arial,sans-serif;color:white;background-color:#525D76;font-size:22px;} H2 {font-family:Tahoma,Arial,sans-serif;color:white;background-color:#525D76;font-size:16px;} H3 {font-family:Tahoma,Arial,sans-serif;color:white;background-color:#525D76;font-size:14px;} BODY {font-family:Tahoma,Arial,sans-serif;color:black;background-color:white;} B {font-family:Tahoma,Arial,sans-serif;color:white;background-color:#525D76;} P {font-family:Tahoma,Arial,sans-serif;background:white;color:black;font-size:12px;}A {color : black;}A.name {color : black;}HR {color : #525D76;}--></style> </head><body><h1>HTTP Status 401 - oauth_problem=token_expired</h1><HR size="1" noshade="noshade"><p><b>type</b> Status report</p><p><b>message</b> <u>oauth_problem=token_expired</u></p><p><b>description</b> <u>This request requires HTTP authentication (oauth_problem=token_expired).</u></p><HR size="1" noshade="noshade"><h3></h3></body></html>
+[20161012 08:48:08][] <html><head><title> - Error report</title><style><!--H1 {font-family:Tahoma,Arial,sans-serif;color:white;background-color:#525D76;font-size:22px;} H2 {font-family:Tahoma,Arial,sans-serif;color:white;background-color:#525D76;font-size:16px;} H3 {font-family:Tahoma,Arial,sans-serif;color:white;background-color:#525D76;font-size:14px;} BODY {font-family:Tahoma,Arial,sans-serif;color:black;background-color:white;} B {font-family:Tahoma,Arial,sans-serif;color:white;background-color:#525D76;} P {font-family:Tahoma,Arial,sans-serif;background:white;color:black;font-size:12px;}A {color : black;}A.name {color : black;}HR {color : #525D76;}--></style> </head><body><h1>HTTP Status 401 - oauth_problem=token_expired</h1><HR size="1" noshade="noshade"><p><b>type</b> Status report</p><p><b>message</b> <u>oauth_problem=token_expired</u></p><p><b>description</b> <u>This request requires HTTP authentication (oauth_problem=token_expired).</u></p><HR size="1" noshade="noshade"><h3></h3></body></html>
+[20161013 19:59:35][] <html><head><title> - Error report</title><style><!--H1 {font-family:Tahoma,Arial,sans-serif;color:white;background-color:#525D76;font-size:22px;} H2 {font-family:Tahoma,Arial,sans-serif;color:white;background-color:#525D76;font-size:16px;} H3 {font-family:Tahoma,Arial,sans-serif;color:white;background-color:#525D76;font-size:14px;} BODY {font-family:Tahoma,Arial,sans-serif;color:black;background-color:white;} B {font-family:Tahoma,Arial,sans-serif;color:white;background-color:#525D76;} P {font-family:Tahoma,Arial,sans-serif;background:white;color:black;font-size:12px;}A {color : black;}A.name {color : black;}HR {color : #525D76;}--></style> </head><body><h1>HTTP Status 401 - Invalid access token used</h1><HR size="1" noshade="noshade"><p><b>type</b> Status report</p><p><b>message</b> <u>Invalid access token used</u></p><p><b>description</b> <u>This request requires HTTP authentication (Invalid access token used).</u></p><HR size="1" noshade="noshade"><h3></h3></body></html>
+[20170504 02:25:20][::1] <Error>
+  <message>Resource not found</message>
+</Error>
+[20170504 02:25:39][::1] <Error>
+  <message>oauth_problem=token_expired</message>
+</Error>
+[20170504 02:25:58][::1] <Error>
+  <message>oauth_problem=token_expired</message>
+</Error>
+[20170504 02:30:34][::1] <Error>
+  <message>oauth_problem=token_expired</message>
+</Error>
+[20170504 03:01:22][::1] <Error>
+  <message>oauth_problem=token_expired</message>
+</Error>
+[20170504 03:04:07][::1] <Error>
+  <message>oauth_problem=token_expired</message>
+</Error>
+[20170504 03:06:40][::1] <Error>
+  <message>oauth_problem=token_expired</message>
+</Error>
+[20170504 03:11:30][::1] <Error>
+  <message>oauth_problem=token_expired</message>
+</Error>
+[20170504 15:08:42][::1] <Error>
+  <message>oauth_problem=token_expired</message>
+</Error>
+[20170504 15:23:01][::1] <Error>
+  <message>oauth_problem=token_expired</message>
+</Error>
+[20170504 15:24:06][::1] <Error>
+  <message>oauth_problem=token_expired</message>
+</Error>
+[20170504 15:28:46][::1] <Error>
+  <message>oauth_problem=token_expired</message>
+</Error>
+[20170504 15:31:40][::1] <Error>
+  <message>oauth_problem=token_expired</message>
+</Error>
+[20170504 15:32:07][::1] <Error>
+  <message>oauth_problem=token_expired</message>
+</Error>
+[20170504 15:32:29][::1] <Error>
+  <message>oauth_problem=token_expired</message>
+</Error>
+[20170504 15:39:13][::1] <Error>
+  <message>oauth_problem=token_expired</message>
+</Error>
+[20170504 15:39:40][::1] <Error>
+  <message>oauth_problem=token_expired</message>
+</Error>
+[20170504 15:40:04][::1] <Error>
+  <message>oauth_problem=token_expired</message>
+</Error>
+[20170504 15:40:39][::1] <Error>
+  <message>oauth_problem=token_expired</message>
+</Error>
+[20170504 15:41:08][::1] <Error>
+  <message>oauth_problem=token_expired</message>
+</Error>
+[20170504 15:55:32][::1] <Error>
+  <message>oauth_problem=token_expired</message>
+</Error>
+[20170504 15:55:45][::1] <Error>
+  <message>oauth_problem=token_expired</message>
+</Error>
+[20170504 15:58:37][::1] <Error>
+  <message>oauth_problem=token_expired</message>
+</Error>
+[20170504 16:00:17][::1] <Error>
+  <message>oauth_problem=token_expired</message>
+</Error>
+[20170504 16:01:23][::1] <Error>
+  <message>oauth_problem=token_expired</message>
+</Error>
+[20170504 16:02:01][::1] <Error>
+  <message>oauth_problem=token_expired</message>
+</Error>
+[20170504 16:04:32][::1] <Error>
+  <message>oauth_problem=token_expired</message>
+</Error>
+[20170504 16:11:49][::1] <Error>
+  <message>oauth_problem=token_expired</message>
+</Error>
+[20170504 16:19:47][::1] <Error>
+  <message>oauth_problem=token_expired</message>
+</Error>
+[20170504 16:22:13][::1] <Error>
+  <message>oauth_problem=token_expired</message>
+</Error>
+[20170504 16:23:58][::1] <Error>
+  <message>oauth_problem=token_expired</message>
+</Error>
+[20170504 16:24:59][::1] <Error>
+  <message>oauth_problem=token_expired</message>
+</Error>
+[20170504 16:25:42][::1] <Error>
+  <message>oauth_problem=token_expired</message>
+</Error>
+[20170505 02:48:49][::1] <Error>
+  <message>oauth_problem=token_expired</message>
+</Error>
+[20170505 02:50:50][::1] <Error>
+  <message>oauth_problem=token_expired</message>
+</Error>
+[20170505 02:51:42][::1] <Error>
+  <message>oauth_problem=token_expired</message>
+</Error>
+[20170509 02:15:25][::1] <Error>
+  <message>oauth_problem=token_rejected</message>
+</Error>
+[20170509 02:23:03][::1] <Error>
+  <message>oauth_problem=token_rejected</message>
+</Error>
+[20171011 08:51:48][] <html><head><title> - Error report</title><style><!--H1 {font-family:Tahoma,Arial,sans-serif;color:white;background-color:#525D76;font-size:22px;} H2 {font-family:Tahoma,Arial,sans-serif;color:white;background-color:#525D76;font-size:16px;} H3 {font-family:Tahoma,Arial,sans-serif;color:white;background-color:#525D76;font-size:14px;} BODY {font-family:Tahoma,Arial,sans-serif;color:black;background-color:white;} B {font-family:Tahoma,Arial,sans-serif;color:white;background-color:#525D76;} P {font-family:Tahoma,Arial,sans-serif;background:white;color:black;font-size:12px;}A {color : black;}A.name {color : black;}HR {color : #525D76;}--></style> </head><body><h1>HTTP Status 401 - Token 0yqtr3SYiW9W0RlDeWkSDk43WqPtLDOQ78auQ+NuLg4= is invalid, or has expired</h1><HR size="1" noshade="noshade"><p><b>type</b> Status report</p><p><b>message</b> <u>Token 0yqtr3SYiW9W0RlDeWkSDk43WqPtLDOQ78auQ+NuLg4= is invalid, or has expired</u></p><p><b>description</b> <u>This request requires HTTP authentication (Token 0yqtr3SYiW9W0RlDeWkSDk43WqPtLDOQ78auQ+NuLg4= is invalid, or has expired).</u></p><HR size="1" noshade="noshade"><h3></h3></body></html>
+[20171018 02:08:36][::1] <Error>
+  <message>oauth_problem=token_expired</message>
+</Error>
+[20171018 02:09:23][::1] <Error>
+  <message>oauth_problem=token_expired</message>
+</Error>
+[20171018 02:16:11][::1] <Error>
+  <message>oauth_problem=token_expired</message>
+</Error>
+[20171019 08:25:55][::1] <Error>
+  <message>oauth_problem=token_expired</message>
+</Error>
+[20171020 02:50:15][::1] <Error>
+  <message>oauth_problem=token_rejected</message>
+</Error>
+[20180804 16:43:21][::1] <Error>
+  <message>oauth_problem=token_expired</message>
+</Error>
+[20180809 23:30:15][] <Error>
+  <message>oauth_problem=token_rejected</message>
+</Error>
+[20180825 10:11:43][::1] <Error>
+  <message>oauth_problem=token_expired</message>
+</Error>
+[20180921 21:23:18][] <html><head><title> - Error report</title><style><!--H1 {font-family:Tahoma,Arial,sans-serif;color:white;background-color:#525D76;font-size:22px;} H2 {font-family:Tahoma,Arial,sans-serif;color:white;background-color:#525D76;font-size:16px;} H3 {font-family:Tahoma,Arial,sans-serif;color:white;background-color:#525D76;font-size:14px;} BODY {font-family:Tahoma,Arial,sans-serif;color:black;background-color:white;} B {font-family:Tahoma,Arial,sans-serif;color:white;background-color:#525D76;} P {font-family:Tahoma,Arial,sans-serif;background:white;color:black;font-size:12px;}A {color : black;}A.name {color : black;}HR {color : #525D76;}--></style> </head><body><h1>HTTP Status 500 - </h1><HR size="1" noshade="noshade"><p><b>type</b> Exception report</p><p><b>message</b> <u></u></p><p><b>description</b> <u>The server encountered an internal error () that prevented it from fulfilling this request.</u></p><p><b>exception</b> <pre>java.lang.IllegalArgumentException: consumerKey is empty
+	com.etrade.etws.oauth.manager.ConsumerManager.getConsumerKey(ConsumerManager.java:243)
+	com.etrade.etws.oauth.OAuthValidator.validateConsumer(OAuthValidator.java:496)
+	com.etrade.etws.oauth.common.OAuthCommons.validateConsumer(OAuthCommons.java:259)
+	com.etrade.etws.oauth.bean.OAuthAuditBean.validateAuditParameters(OAuthAuditBean.java:73)
+	com.etrade.etws.common.audit.AuditFilter.doFilter(AuditFilter.java:70)
+	com.etrade.api.filter.preflightfilter.PreflightFilter.doFilter(PreflightFilter.java:63)
+	org.eclipse.jetty.servlets.CrossOriginFilter.handle(CrossOriginFilter.java:212)
+	org.eclipse.jetty.servlets.CrossOriginFilter.doFilter(CrossOriginFilter.java:179)
+	com.etrade.api.filter.preflightfilter.CORSMobileOriginFilter.doFilter(CORSMobileOriginFilter.java:57)
+</pre></p><p><b>note</b> <u>The full stack trace of the root cause is available in the  logs.</u></p><HR size="1" noshade="noshade"><h3></h3></body></html>
+[20181001 08:41:19][] <html><head><title> - Error report</title><style><!--H1 {font-family:Tahoma,Arial,sans-serif;color:white;background-color:#525D76;font-size:22px;} H2 {font-family:Tahoma,Arial,sans-serif;color:white;background-color:#525D76;font-size:16px;} H3 {font-family:Tahoma,Arial,sans-serif;color:white;background-color:#525D76;font-size:14px;} BODY {font-family:Tahoma,Arial,sans-serif;color:black;background-color:white;} B {font-family:Tahoma,Arial,sans-serif;color:white;background-color:#525D76;} P {font-family:Tahoma,Arial,sans-serif;background:white;color:black;font-size:12px;}A {color : black;}A.name {color : black;}HR {color : #525D76;}--></style> </head><body><h1>HTTP Status 401 - oauth_problem=consumer_key_rejected</h1><HR size="1" noshade="noshade"><p><b>type</b> Status report</p><p><b>message</b> <u>oauth_problem=consumer_key_rejected</u></p><p><b>description</b> <u>This request requires HTTP authentication (oauth_problem=consumer_key_rejected).</u></p><HR size="1" noshade="noshade"><h3></h3></body></html>
+[20181001 08:41:31][] <html><head><title> - Error report</title><style><!--H1 {font-family:Tahoma,Arial,sans-serif;color:white;background-color:#525D76;font-size:22px;} H2 {font-family:Tahoma,Arial,sans-serif;color:white;background-color:#525D76;font-size:16px;} H3 {font-family:Tahoma,Arial,sans-serif;color:white;background-color:#525D76;font-size:14px;} BODY {font-family:Tahoma,Arial,sans-serif;color:black;background-color:white;} B {font-family:Tahoma,Arial,sans-serif;color:white;background-color:#525D76;} P {font-family:Tahoma,Arial,sans-serif;background:white;color:black;font-size:12px;}A {color : black;}A.name {color : black;}HR {color : #525D76;}--></style> </head><body><h1>HTTP Status 401 - oauth_problem=consumer_key_rejected</h1><HR size="1" noshade="noshade"><p><b>type</b> Status report</p><p><b>message</b> <u>oauth_problem=consumer_key_rejected</u></p><p><b>description</b> <u>This request requires HTTP authentication (oauth_problem=consumer_key_rejected).</u></p><HR size="1" noshade="noshade"><h3></h3></body></html>
+[20181001 08:41:55][] <html><head><title> - Error report</title><style><!--H1 {font-family:Tahoma,Arial,sans-serif;color:white;background-color:#525D76;font-size:22px;} H2 {font-family:Tahoma,Arial,sans-serif;color:white;background-color:#525D76;font-size:16px;} H3 {font-family:Tahoma,Arial,sans-serif;color:white;background-color:#525D76;font-size:14px;} BODY {font-family:Tahoma,Arial,sans-serif;color:black;background-color:white;} B {font-family:Tahoma,Arial,sans-serif;color:white;background-color:#525D76;} P {font-family:Tahoma,Arial,sans-serif;background:white;color:black;font-size:12px;}A {color : black;}A.name {color : black;}HR {color : #525D76;}--></style> </head><body><h1>HTTP Status 401 - oauth_problem=consumer_key_rejected</h1><HR size="1" noshade="noshade"><p><b>type</b> Status report</p><p><b>message</b> <u>oauth_problem=consumer_key_rejected</u></p><p><b>description</b> <u>This request requires HTTP authentication (oauth_problem=consumer_key_rejected).</u></p><HR size="1" noshade="noshade"><h3></h3></body></html>
+[20181001 08:43:23][] <html><head><title> - Error report</title><style><!--H1 {font-family:Tahoma,Arial,sans-serif;color:white;background-color:#525D76;font-size:22px;} H2 {font-family:Tahoma,Arial,sans-serif;color:white;background-color:#525D76;font-size:16px;} H3 {font-family:Tahoma,Arial,sans-serif;color:white;background-color:#525D76;font-size:14px;} BODY {font-family:Tahoma,Arial,sans-serif;color:black;background-color:white;} B {font-family:Tahoma,Arial,sans-serif;color:white;background-color:#525D76;} P {font-family:Tahoma,Arial,sans-serif;background:white;color:black;font-size:12px;}A {color : black;}A.name {color : black;}HR {color : #525D76;}--></style> </head><body><h1>HTTP Status 401 - oauth_problem=consumer_key_rejected</h1><HR size="1" noshade="noshade"><p><b>type</b> Status report</p><p><b>message</b> <u>oauth_problem=consumer_key_rejected</u></p><p><b>description</b> <u>This request requires HTTP authentication (oauth_problem=consumer_key_rejected).</u></p><HR size="1" noshade="noshade"><h3></h3></body></html>
+[20181002 08:08:08][] <html><head><title> - Error report</title><style><!--H1 {font-family:Tahoma,Arial,sans-serif;color:white;background-color:#525D76;font-size:22px;} H2 {font-family:Tahoma,Arial,sans-serif;color:white;background-color:#525D76;font-size:16px;} H3 {font-family:Tahoma,Arial,sans-serif;color:white;background-color:#525D76;font-size:14px;} BODY {font-family:Tahoma,Arial,sans-serif;color:black;background-color:white;} B {font-family:Tahoma,Arial,sans-serif;color:white;background-color:#525D76;} P {font-family:Tahoma,Arial,sans-serif;background:white;color:black;font-size:12px;}A {color : black;}A.name {color : black;}HR {color : #525D76;}--></style> </head><body><h1>HTTP Status 401 - oauth_problem=consumer_key_rejected</h1><HR size="1" noshade="noshade"><p><b>type</b> Status report</p><p><b>message</b> <u>oauth_problem=consumer_key_rejected</u></p><p><b>description</b> <u>This request requires HTTP authentication (oauth_problem=consumer_key_rejected).</u></p><HR size="1" noshade="noshade"><h3></h3></body></html>
+[20181002 09:06:00][] <html><head><title> - Error report</title><style><!--H1 {font-family:Tahoma,Arial,sans-serif;color:white;background-color:#525D76;font-size:22px;} H2 {font-family:Tahoma,Arial,sans-serif;color:white;background-color:#525D76;font-size:16px;} H3 {font-family:Tahoma,Arial,sans-serif;color:white;background-color:#525D76;font-size:14px;} BODY {font-family:Tahoma,Arial,sans-serif;color:black;background-color:white;} B {font-family:Tahoma,Arial,sans-serif;color:white;background-color:#525D76;} P {font-family:Tahoma,Arial,sans-serif;background:white;color:black;font-size:12px;}A {color : black;}A.name {color : black;}HR {color : #525D76;}--></style> </head><body><h1>HTTP Status 401 - oauth_problem=consumer_key_rejected</h1><HR size="1" noshade="noshade"><p><b>type</b> Status report</p><p><b>message</b> <u>oauth_problem=consumer_key_rejected</u></p><p><b>description</b> <u>This request requires HTTP authentication (oauth_problem=consumer_key_rejected).</u></p><HR size="1" noshade="noshade"><h3></h3></body></html>
+[20181224 21:08:00][] <html><head><title> - Error report</title><style><!--H1 {font-family:Tahoma,Arial,sans-serif;color:white;background-color:#525D76;font-size:22px;} H2 {font-family:Tahoma,Arial,sans-serif;color:white;background-color:#525D76;font-size:16px;} H3 {font-family:Tahoma,Arial,sans-serif;color:white;background-color:#525D76;font-size:14px;} BODY {font-family:Tahoma,Arial,sans-serif;color:black;background-color:white;} B {font-family:Tahoma,Arial,sans-serif;color:white;background-color:#525D76;} P {font-family:Tahoma,Arial,sans-serif;background:white;color:black;font-size:12px;}A {color : black;}A.name {color : black;}HR {color : #525D76;}--></style> </head><body><h1>HTTP Status 401 - Token uQyOwq/ldppJAvik/Qo7yJDXjoMC9C1McCEOtc65w4s= is invalid, or has expired</h1><HR size="1" noshade="noshade"><p><b>type</b> Status report</p><p><b>message</b> <u>Token uQyOwq/ldppJAvik/Qo7yJDXjoMC9C1McCEOtc65w4s= is invalid, or has expired</u></p><p><b>description</b> <u>This request requires HTTP authentication (Token uQyOwq/ldppJAvik/Qo7yJDXjoMC9C1McCEOtc65w4s= is invalid, or has expired).</u></p><HR size="1" noshade="noshade"><h3></h3></body></html>
+[20190112 15:14:14][::1] <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 2.0//EN">
+<html><head>
+<title>400 Bad Request</title>
+</head><body>
+<h1>Bad Request</h1>
+<p>Your browser sent a request that this server could not understand.<br />
+</p>
+</body></html>
+
+[20190112 15:15:04][::1] <Error>
+  <message>Unauthorized request</message>
+</Error>
+[20190112 15:15:28][::1] <Error>
+  <message>Unauthorized request</message>
+</Error>
+[20190112 15:15:45][::1] <Error>
+  <message>Unauthorized request</message>
+</Error>
+[20190112 15:16:34][::1] <Error>
+  <message>Unauthorized request</message>
+</Error>
+[20190112 15:33:17][::1] <Error>
+  <message>Unauthorized request</message>
+</Error>
+[20190624 15:15:48][::1] <Error>
+  <message>Resource not found</message>
+</Error>
+[20190624 15:19:01][::1] <Error>
+  <message>Resource not found</message>
+</Error>
+[20190624 15:21:01][::1] <Error>
+  <message>Resource not found</message>
+</Error>
+[20190624 15:23:01][::1] <Error>
+  <message>Resource not found</message>
+</Error>
+[20190714 00:01:27][] <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 2.0//EN">
+<html><head>
+<title>302 Found</title>
+</head><body>
+<h1>Found</h1>
+<p>The document has moved <a href="https://us.etrade.com/pagenotfound.html">here</a>.</p>
+</body></html>
+
+[20190714 00:01:38][] <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 2.0//EN">
+<html><head>
+<title>302 Found</title>
+</head><body>
+<h1>Found</h1>
+<p>The document has moved <a href="https://us.etrade.com/pagenotfound.html">here</a>.</p>
+</body></html>
+
