@@ -198,7 +198,9 @@ else
 
 
 
-
+echo "<pre>";
+var_dump($returnArray); 
+echo "</pre>";
 
 
 
