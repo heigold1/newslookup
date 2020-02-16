@@ -64,9 +64,6 @@ $results = grabHTML("www.alphavantage.co", $url);
 
 $fullJSON = json_decode($results);
 
-var_dump($fullJSON); 
-die(); 
-
 $object = null;
 
 foreach($fullJSON as $k => $v){
@@ -189,23 +186,5 @@ else
 {
   $returnArray['day_5'] = "N/A";
 }
-
-
-
-
-
-
-
-
-
-echo "<pre>";
-var_dump($returnArray); 
-echo "</pre>";
-
-
-
-
-
-
 
 echo json_encode($returnArray);
