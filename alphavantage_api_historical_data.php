@@ -188,3 +188,5 @@ else
 }
 
 echo json_encode($returnArray);
+
+?>

@@ -227,3 +227,30 @@
 <p>The document has moved <a href="https://us.etrade.com/pagenotfound.html">here</a>.</p>
 </body></html>
 
+[20200211 19:24:43][108.210.66.3] <Error>
+  <message>oauth_problem=token_rejected</message>
+</Error>
+[20200211 19:25:09][108.210.66.3] <Error>
+  <message>oauth_problem=token_rejected</message>
+</Error>
+[20200211 19:27:02][108.210.66.3] <Error>
+  <message>oauth_problem=token_rejected</message>
+</Error>
+[20200211 19:27:51][108.210.66.3] <Error>
+  <message>oauth_problem=token_rejected</message>
+</Error>
+[20200211 19:28:19][108.210.66.3] <Error>
+  <message>oauth_problem=token_rejected</message>
+</Error>
+[20200214 14:26:10][108.210.66.3] <Error>
+  <code>9999</code>
+</Error>
+[20200216 21:44:50][108.210.66.3] <Error>
+  <code>9999</code>
+</Error>
+[20200219 05:29:17][108.210.66.3] <Error>
+  <message>oauth_problem=token_expired</message>
+</Error>
+[20200219 05:57:12][108.210.66.3] <Error>
+  <message>oauth_problem=token_expired</message>
+</Error>
