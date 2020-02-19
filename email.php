@@ -4,6 +4,7 @@ error_reporting(1);
 
 require_once "/var/www/html/pear/share/pear/Mail.php";
 
+
 if (isset($_GET['trade']))
 {
 	$full_order = $_GET['trade'];
@@ -11,7 +12,8 @@ if (isset($_GET['trade']))
 	$order_to_send = substr($full_order, 0, $location_of_dashes);
 
 	$from = '<brentheigold@gmail.com>';
-	$to = 'jayratliffdtf@gmail.com';
+	$to = 'brent@heigoldinvestments.com';
+//	$to = 'jayratliffdtf@gmail.com';
 
 	$subject = $order_to_send;
 	$body = "";
