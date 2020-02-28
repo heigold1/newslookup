@@ -1,3 +1,10 @@
+* {
+  -webkit-user-select: auto !important;
+  -moz-user-select: inherit  !important;
+  -ms-user-select: inherit  !important;
+  user-select: auto  !important;
+}
+
 div#main_container{
 	position: absolute;
 	background-color: #F3F3FF; 
