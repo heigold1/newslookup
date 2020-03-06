@@ -46,6 +46,18 @@
 							<td style="width:140px">Y. Close $<input tabindex ="2" id="yestCloseText" style="width: 60px;"></td>
 							<td style="width:330px">Percent <input tabindex = "3" id="entryPercentage" style="width: 40px;">%, price is $<span id="calculatedPrice">&nbsp; &nbsp; </span><button id="copy_price_to_percentage" type="button">...</button></td>
 							<td style="width:130px"><input type="radio" name="roundShares" id="roundShares" value="50">Round 50</td> 
+							<td rowspan=3>
+								
+								<div style="width: 120px; height: 80px; border:#000000 1px solid; text-align: center; padding-top: 15px" border=1 >
+									<div style="font-size: 20px;">
+										<b>VIX</b>
+									</div><br> 
+									<div style="font-size: 40px;" id="vixNumber">
+										<?php echo $_GET['vix'] ?>
+									</div>
+								</div>	
+
+							</td>
 						</tr>
 						<tr>
 							<td style="width:140px">Spend $<input tabindex = "5" id="amountSpending"><button id="changeAmountSpending" type="button">...</button></td>
@@ -75,6 +87,7 @@
 								<label class="historical_data_label">&nbsp;&nbsp;&nbsp;</label><span id="day1" class="historical_data_days">&nbsp;&nbsp;&nbsp;</span>		
 								<span id="yahoo_historical_data_link">&nbsp;&nbsp;&nbsp;</span>						
 							</td> 						
+							<td></td>
 						</tr>
 						<tr style="height:15px">
 							<td style="width:140px"></td>
@@ -88,6 +101,7 @@
 								<label class="historical_data_label">&nbsp;&nbsp;&nbsp;</label><span id="day1_low" class="historical_data_days">&nbsp;&nbsp;&nbsp;</span>		
 								<span id="yahoo_historical_data_link">&nbsp;&nbsp;&nbsp;</span>						
 							</td> 						
+							<td></td>
 						</tr>
 					</table> <!-- Order entry information (yest. close, etc...) --> 
 

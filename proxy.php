@@ -595,7 +595,7 @@ else if ($which_website == "yahoo")
 
     $rss = simplexml_load_file("http://feeds.finance.yahoo.com/rss/2.0/headline?s=$symbol&region=US&lang=en-US");
     $allNews = "<ul class='newsSide'>";
-    $allNews .= "<li>Yahoo Finance News</li>";
+    $allNews .= "<li style='font-size: 20px !important'>Yahoo Finance News</li>";
 
     $classActionAdded = false;
     $j = 0;
@@ -755,7 +755,6 @@ else if ($which_website == "yahoo")
       // URL of Google News RSS feed
       $googleNewsRSSFeed = simplexml_load_file('https://news.google.com/news/feeds?hl=en&gl=ca&q='.$google_keyword_string.'&um=1&ie=UTF-8&output=rss'); 
 
-
       $googleRSSArray = array();
 
       foreach ($googleNewsRSSFeed->channel->item as $feedItem) {
@@ -819,7 +818,7 @@ else if ($which_website == "yahoo")
       $stockSplitsTable = $splitsTable[4]; 
 
       $googleNews = $stockSplitsTable . "<ul class='newsSide'>";
-      $googleNews .= "<li>Google News</li>";
+      $googleNews .= "<li style='font-size: 20px !important'>Google News</li>";
       $i = 0;
       foreach ($googleRSSArray as $feedItem) {
 

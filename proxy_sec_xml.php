@@ -343,7 +343,7 @@ $noTimeFound = false;
                   $registrationOffering = " - REGISTRATION";
               }
 
-              $tableRows .=  "<tr><td>" . $filingType . '</td><td><a href ="' . $href2 . '">' . $title . ', '. $itemDescription .  '</a></td><td>' . $datestamp . "</td><td>" . $time . "</td></tr>"; 
+              $tableRows .=  "<tr style='border: 1px solid black !important'><td style='border: 1px solid black !important'>" . $filingType . '</td><td style="border: 1px solid black !important"><a href ="' . $href2 . '">' . $title . ', '. $itemDescription .  '</a></td><td style="border: 1px solid black !important">' . $datestamp . "</td><td style='border: 1px solid black !important'>" . $time . "</td></tr>"; 
             }
 
 
@@ -368,7 +368,7 @@ $noTimeFound = false;
 
       $returnHtml .= buildNewsNotes(); 
 
-      $returnHtml .= "<table class='striped' border = 1>"; 
+      $returnHtml .= "<table style='border: 1px solid black !important'>"; 
       $returnHtml .= $tableRows;
       $returnHtml .=  "</table>";
 

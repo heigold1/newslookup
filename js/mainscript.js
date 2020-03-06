@@ -574,8 +574,8 @@ $(function() {
 
                           console.log("SEC company name is *" + secCompanyName + "*");
 
-                          openPage('./proxy_sec_xml.php?symbol=' + symbol + '&secCompanyName=' + secCompanyName);
-                          openPage('https://www.nasdaq.com/symbol/' + symbol + '/sec-filings');
+/*                          openPage('./proxy_sec_xml.php?symbol=' + symbol + '&secCompanyName=' + secCompanyName);  */
+/*                          openPage('https://www.nasdaq.com/symbol/' + symbol + '/sec-filings');  */
 
                           yahoo10DayVolume = jsonObject.ten_day_volume; 
                           totalVolume = jsonObject.total_volume; 
@@ -790,9 +790,9 @@ This just gets the yesterday close and last vix values, we don't need these yet,
 
               if (country == "China")
               {
-                  document.getElementById('country').style.fontSize = "250px"; 
+                  document.getElementById('country').style.fontSize = "75px"; 
                   document.getElementById('country').style.backgroundColor = "red";
-                  document.getElementById('country').style.height = "100px"; 
+                  document.getElementById('country').style.height = "35px"; 
               }
               else if (country != "United States")
               {
@@ -828,19 +828,41 @@ This just gets the yesterday close and last vix values, we don't need these yet,
             // AJAX call to marketwatch 
 
             (function(){
-               var eTradeIFrame = '<br><iframe id="etrade_iframe" src="https://www.etrade.wallst.com/v1/stocks/news/search_results.asp?symbol=' + symbol + '&rsO=new#lastTradeTime" width="675px" height="500px"></iframe>';
 
-              $("div#left_bottom_container").css("background-color", "#BBDDFF");                     
+/*               var eTradeIFrame = '<br><iframe id="etrade_iframe" src="https://www.etrade.wallst.com/v1/stocks/news/search_results.asp?symbol=' + symbol + '&rsO=new#lastTradeTime" width="675px" height="500px"></iframe>';  */
+
+              $("div#left_bottom_container").css("background-color", "#BBDDFF");
                 $.ajax({
+                    url: "proxy_sec_xml.php",
+                    data: {symbol: symbol,
+                           secCompanyName : yahooCompanyName},
+
+/*
                     url: "proxy.php",
                     data: {symbol: symbol,
                          stockOrFund: stockOrFund, 
                          which_website: "marketwatch", 
                          host_name: "www.marketwatch.com"},
+*/ 
+
+
+
+
+
                      async: true, 
                     dataType: 'html',
                     success:  function (data) {
                       console.log(data);
+
+
+
+
+
+
+
+
+
+
 
                       if (
                         (yahooHtmlResults.search(/reverse split|reverse stock split/gi) > 0) ||
@@ -868,7 +890,7 @@ This just gets the yesterday close and last vix values, we don't need these yet,
                         playDelist();
                       }
 
-                      $("div#left_bottom_container").html( data +  eTradeIFrame); 
+                      $("div#left_bottom_container").html( data /* +  eTradeIFrame */); 
                   }
                 });  // end of AJAX call to marketwatch    
 
