@@ -462,6 +462,11 @@ $(function() {
 
           closeAllWindows();
 
+          $("#left_bottom_container").html("");
+          $("#bigcharts_chart_container").html("");
+          $("#bigcharts_yest_close").html("");
+          $("#right_top_container").html("");
+
           // first, clear all the DIVS to give the impression that it is refreshing 
 
           positionOfPeriod = original_symbol.indexOf(".");
@@ -494,10 +499,8 @@ $(function() {
 
               // initialize everything
 
-              $("#left_bottom_container").html("");
-              $("#bigcharts_chart_container").html("");
-              $("#bigcharts_yest_close").html("");
-              $("#right_top_container").html("");
+
+
 
               $("#yestCloseText").val("");
               $("#eTradeLow").html("");
@@ -845,24 +848,10 @@ This just gets the yesterday close and last vix values, we don't need these yet,
                          host_name: "www.marketwatch.com"},
 */ 
 
-
-
-
-
-                     async: true, 
+                     async: false, 
                     dataType: 'html',
                     success:  function (data) {
                       console.log(data);
-
-
-
-
-
-
-
-
-
-
 
                       if (
                         (yahooHtmlResults.search(/reverse split|reverse stock split/gi) > 0) ||
