@@ -11,7 +11,6 @@ $yesterdayDays = 1;
 
 fopen("cookies.txt", "w");
 
-
 function buildNewsNotes()
 {
     $newsNotes = '<ul style="font-family: arial;">
@@ -20,7 +19,6 @@ function buildNewsNotes()
                       '; 
     return $newsNotes; 
 }
-
 
 function get_friday_trade_date()
 {
@@ -194,12 +192,46 @@ function grabHTML($function_host_name, $url)
 
 } // end of function grabHTML
 
+
+function getSectorIndustry()
+{
+
+    $servername = "localhost";
+    $username = "superuser";
+    $password = "heimer27";
+    $db = "daytrade"; 
+    $mysqli = null;
+
+
+    // Check connection
+    try {
+        $mysqli = new mysqli($servername, $username, $password, $db);
+    } catch (mysqli_sql_exception $e) {
+
+    } 
+
+    $result = $mysqli->query("SELECT symbol, sector, industry, country FROM sector");
+
+    $html = "<br><div>";
+
+    if ($result->num_rows > 0) {
+        // output data of each row
+        while($row = $result->fetch_assoc()) {
+            $html .=  "<span style='font-size: 15px'>" . $row["symbol"] . " - " . $row["sector"] . " - " . $row["industry"] . " - " . $row["country"] . "</span><br>";
+        }
+    } else {
+        $html .= "<span style='font-size: 15px>Nothing yet</span>";
+    }
+
+    $html .= "</div>";
+
+    return $html;
+
+}
+
 $ret = "";
 $finalReturn = "";
 $noTimeFound = false;
-
-
-
 
       // try https://www.nasdaq.com/symbol/staf/sec-filings
 
@@ -216,7 +248,7 @@ $noTimeFound = false;
               echo '<!DOCTYPE html><html><title>Filing - ' . $symbol . ' (NOT FOUND)</title><body>
                   <a style="font-size: 35px" target="_blank" href="https://www.nasdaq.com/symbol/' . $symbol . '/sec-filings">Nasdaq</a><br>
                   <a style="font-size: 35px" target="_blank" href="http://ec2-54-210-42-143.compute-1.amazonaws.com/newslookup/scrape-street-insider.php?symbol=' . $symbol . '">Street Insider Scrape</a><br>
-                  <a style="font-size: 35px" target="_blank" href="https://www.streetinsider.com/stock_lookup.php?LookUp=Get+Quote&q=MSFT' . $symbol . '">Street Insider Actual Page</a>
+                  <a style="font-size: 35px" target="_blank" href="https://www.streetinsider.com/stock_lookup.php?LookUp=Get+Quote&q=' . $symbol . '">Street Insider Actual Page</a>
                 <br>
                 <br>' . $result . 
                 '</body></html>';  
@@ -230,7 +262,7 @@ $noTimeFound = false;
               echo '<!DOCTYPE html><html><title>Filing - ' . $symbol . ' (AMBIGUOUS)</title><body>
                   <a style="font-size: 35px" target="_blank" href="https://www.nasdaq.com/symbol/' . $symbol . '/sec-filings">Nasdaq</a><br>
                   <a style="font-size: 35px" target="_blank" href="http://ec2-54-210-42-143.compute-1.amazonaws.com/newslookup/scrape-street-insider.php?symbol=' . $symbol . '">Street Insider Scrape</a><br>
-                  <a style="font-size: 35px" target="_blank" href="https://www.streetinsider.com/stock_lookup.php?LookUp=Get+Quote&q=MSFT' . $symbol . '">Street Insider Actual Page</a>
+                  <a style="font-size: 35px" target="_blank" href="https://www.streetinsider.com/stock_lookup.php?LookUp=Get+Quote&q=' . $symbol . '">Street Insider Actual Page</a>
                 <br>
                 <br>' . $result . 
                 '</body></html>';  
@@ -346,7 +378,6 @@ $noTimeFound = false;
               $tableRows .=  "<tr style='border: 1px solid black !important'><td style='border: 1px solid black !important'>" . $filingType . '</td><td style="border: 1px solid black !important"><a href ="' . $href2 . '">' . $title . ', '. $itemDescription .  '</a></td><td style="border: 1px solid black !important">' . $datestamp . "</td><td style='border: 1px solid black !important'>" . $time . "</td></tr>"; 
             }
 
-
       $returnHtml .= "<!DOCTYPE html>"; 
       $returnHtml .= "<html>";
       $returnHtml .= '<head>
@@ -375,6 +406,8 @@ $noTimeFound = false;
       $returnHtml .=  '<a style="font-size: 35px" target="_blank" href="http://ec2-54-210-42-143.compute-1.amazonaws.com/newslookup/scrape-street-insider.php?symbol=' . $symbol . '">Street Insider Scrape</a><br> 
         <a style="font-size: 35px" target="_blank" href="https://www.streetinsider.com/stock_lookup.php?LookUp=Get+Quote&q=' . $symbol . '">Street Insider Actual Page</a><br>
         <a style="font-size: 35px" target="_blank" href="https://www.nasdaq.com/symbol/' . $symbol . '/sec-filings">Nasdaq</a><br>'; 
+
+      $returnHtml .= getSectorIndustry(); 
 
       $returnHtml .=  "</body>";
       $returnHtml .=  "</html>";

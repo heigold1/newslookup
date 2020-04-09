@@ -248,6 +248,29 @@ function calcFinVizAvgVolume($string)
     return($string);
 }
 
+function addYahooSectorIndustry($symbol, $sector, $industry, $country)
+{
+
+    $servername = "localhost";
+    $username = "superuser";
+    $password = "heimer27";
+    $db = "daytrade"; 
+    $mysqli = null;
+
+
+    // Check connection
+    try {
+        $mysqli = new mysqli($servername, $username, $password, $db);
+    } catch (mysqli_sql_exception $e) {
+
+    } 
+
+    $mysqli->query("REPLACE INTO sector (symbol, sector, industry, country) VALUES ('" . $symbol . "', '" . $sector . "', '" . $industry . "', '" . $country . "')");
+
+}
+
+
+
 
 function curl_get_contents($url)
 {
@@ -698,6 +721,8 @@ else if ($which_website == "yahoo")
 
       $sectorCountry = '<span>SECTOR - ' . $yahooFinanceObject->sector . '</span>&nbsp;&nbsp;<span>INDUSTRY - ' . $yahooFinanceObject->industry . ' Business</span><br><br><div id="country">' . $country . '</div>'; 
 
+      addYahooSectorIndustry($symbol, $yahooFinanceObject->sector, $yahooFinanceObject->industry, $country);
+
       $returnCompanyName = '<h1>' . $companyName . '</h1>';
 
       $yesterdayVolume = (int) $_GET['yesterday_volume'];
@@ -969,10 +994,13 @@ else if ($which_website == "yahoo")
         $google = preg_replace('/<h1>/', '', $google);
         $google = preg_replace('/<\/h1>/', '', $google);
       $nasdaqInfo = '&nbsp;&nbsp;<a target="_blank" onclick="return openPage(this.href)" href="https://www.nasdaq.com/symbol/' . $symbol . '/sec-filings"> Nasdaq Info</a>&nbsp;&nbsp;&nbsp;&nbsp;'; 
-      $streetInsider = '&nbsp;&nbsp;<a target="_blank" onclick="return openPage(this.href)" href="https://www.streetinsider.com/stock_lookup.php?LookUp=Get+Quote&q=' . $symbol . '"> Street Insider</a>&nbsp;&nbsp;&nbsp;&nbsp;'; 
+      $streetInsider = '&nbsp;&nbsp;<a target="_blank" onclick="return openPage(this.href)" href="https://www.streetinsider.com/stock_lookup.php?LookUp=Get+Quote&q=' . $symbol . '"> SI</a>&nbsp;&nbsp;&nbsp;&nbsp;'; 
+
+      $streetInsiderScrape = '&nbsp;&nbsp;<a target="_blank" onclick="return openPage(this.href)" href="http://ec2-54-210-42-143.compute-1.amazonaws.com/newslookup/scrape-street-insider.php?symbol=' . $symbol . '"> SI Scrape</a>&nbsp;&nbsp;&nbsp;&nbsp;'; 
+
       $splits = '&nbsp;&nbsp;<a target="_blank" onclick="return openPage(this.href)" href="https://www.stocksplithistory.com/?symbol=' . $symbol . '"> Splits</a>&nbsp;&nbsp;&nbsp;&nbsp;'; 
 
-      $finalReturn = $yahooDates . $returnCompanyName . $companyWebsite . $sectorCountry . $returnYesterdaysClose . $preMarketYesterdaysClose[0] . "<br>" . "<div style='display: inline-block;'>" . $yesterdayVolumeHTML . $currentVolumeHTML . $volumeRatioHTML . $avgVol10days . $avgVolYahoo .  $company_profile . $yahoo_main_page . $message_board . $google . $nasdaqInfo . $streetInsider . $splits . '<table width="700px"><tr width="575px">' . $finalReturn . '</tr></table>'; 
+      $finalReturn = $yahooDates . $returnCompanyName . $companyWebsite . $sectorCountry . $returnYesterdaysClose . $preMarketYesterdaysClose[0] . "<br>" . "<div style='display: inline-block;'>" . $yesterdayVolumeHTML . $currentVolumeHTML . $volumeRatioHTML . $avgVol10days . $avgVolYahoo .  $company_profile . $yahoo_main_page . $message_board . $google . $nasdaqInfo . $streetInsider . $streetInsiderScrape . $splits . '<table width="700px"><tr width="575px">' . $finalReturn . '</tr></table>'; 
 
       echo $finalReturn; 
 
