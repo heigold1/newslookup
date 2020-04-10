@@ -248,8 +248,17 @@ function calcFinVizAvgVolume($string)
     return($string);
 }
 
-function addYahooSectorIndustry($symbol, $sector, $industry, $country)
+function addYahooSectorIndustry($symbol, $sector, $industry, $country, $companyName)
 {
+    if (preg_match('/NO SECTOR/', $sector))
+    {
+        return;
+    }
+
+    if (preg_match('/ETF\/ETN/', $sector)) 
+    {
+        $industry .= " " . $companyName; 
+    }
 
     $servername = "localhost";
     $username = "superuser";
@@ -721,7 +730,9 @@ else if ($which_website == "yahoo")
 
       $sectorCountry = '<span>SECTOR - ' . $yahooFinanceObject->sector . '</span>&nbsp;&nbsp;<span>INDUSTRY - ' . $yahooFinanceObject->industry . ' Business</span><br><br><div id="country">' . $country . '</div>'; 
 
-      addYahooSectorIndustry($symbol, $yahooFinanceObject->sector, $yahooFinanceObject->industry, $country);
+
+
+      addYahooSectorIndustry($symbol, $yahooFinanceObject->sector, $yahooFinanceObject->industry, $country, $companyName);
 
       $returnCompanyName = '<h1>' . $companyName . '</h1>';
 

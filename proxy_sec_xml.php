@@ -210,7 +210,7 @@ function getSectorIndustry()
 
     } 
 
-    $result = $mysqli->query("SELECT symbol, sector, industry, country FROM sector");
+    $result = $mysqli->query("SELECT symbol, sector, industry, country FROM sector GROUP BY sector, industry");
 
     $html = "";
 
@@ -219,7 +219,7 @@ function getSectorIndustry()
         $html = "<div><table style='border: 1px solid black !important;'><tbody>";
         // output data of each row
         while($row = $result->fetch_assoc()) {
-            $html .=  "<tr style='font-size: 15px;'><td style='border: 1px solid black !important;'>" . $row["symbol"] . "</td><td style='border: 1px solid black !important;'>&nbsp;SECTOR: <b>" . $row["sector"] . "</b></td><td style='border: 1px solid black !important;'>&nbsp;INDUSTRY: <b>" . $row["industry"] . "</b></td><td style='border: 1px solid black !important;'>&nbsp;COUNTRY: <b>" . $row["country"] . "<b></td></tr>";
+            $html .=  "<tr style='font-size: 11px;'><td style='border: 1px solid black !important;'>" . $row["symbol"] . "</td><td style='border: 1px solid black !important;'>&nbsp;SECTOR: <b>" . $row["sector"] . "</b></td><td style='border: 1px solid black !important;'>&nbsp;INDUSTRY: <b>" . $row["industry"] . "</b></td><td style='border: 1px solid black !important;'>&nbsp;COUNTRY: <b>" . $row["country"] . "<b></td></tr>";
         }
         $html .= "</tbody><table></div>";
     } else {
