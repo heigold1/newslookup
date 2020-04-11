@@ -250,7 +250,19 @@ function calcFinVizAvgVolume($string)
 
 function addYahooSectorIndustry($symbol, $sector, $industry, $country, $companyName)
 {
-    if (preg_match('/NO SECTOR/', $sector))
+
+
+/*
+echo "symbol is: " . $symbol . "<br>"; 
+echo "sector is: " . $sector . "<br>"; 
+echo "country is: " . $country . "<br>"; 
+echo "companyName is: " . $companyName . "<br>"; 
+
+die();
+*/ 
+
+
+    if (preg_match('/NO SECTOR/', $sector) || preg_match('/COMPANY NOT FOUND/', $sector))
     {
         return;
     }

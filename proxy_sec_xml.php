@@ -210,7 +210,10 @@ function getSectorIndustry()
 
     } 
 
-    $result = $mysqli->query("SELECT symbol, sector, industry, country FROM sector GROUP BY sector, industry");
+
+
+
+    $result = $mysqli->query("SELECT symbol, sector, industry, country FROM sector ORDER BY sector, industry");
 
     $html = "";
 
@@ -228,7 +231,7 @@ function getSectorIndustry()
 
     return $html;
 
-}
+}  // end of getSectorIndustry
 
 $ret = "";
 $finalReturn = "";
@@ -251,7 +254,7 @@ $noTimeFound = false;
                   <a style="font-size: 35px" target="_blank" href="http://ec2-54-210-42-143.compute-1.amazonaws.com/newslookup/scrape-street-insider.php?symbol=' . $symbol . '">Street Insider Scrape</a><br>
                   <a style="font-size: 35px" target="_blank" href="https://www.streetinsider.com/stock_lookup.php?LookUp=Get+Quote&q=' . $symbol . '">Street Insider Actual Page</a>
                 <br>
-                <br>' . $result . 
+                <br>NO MATCHING COMPANIES' . getSectorIndustry() . 
                 '</body></html>';  
               return; 
           }
@@ -265,7 +268,7 @@ $noTimeFound = false;
                   <a style="font-size: 35px" target="_blank" href="http://ec2-54-210-42-143.compute-1.amazonaws.com/newslookup/scrape-street-insider.php?symbol=' . $symbol . '">Street Insider Scrape</a><br>
                   <a style="font-size: 35px" target="_blank" href="https://www.streetinsider.com/stock_lookup.php?LookUp=Get+Quote&q=' . $symbol . '">Street Insider Actual Page</a>
                 <br>
-                <br>' . $result . 
+                <br>' . $result . getSectorIndustry() . 
                 '</body></html>';  
               return; 
           }
