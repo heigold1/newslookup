@@ -201,6 +201,7 @@ function getSectorIndustry()
     $password = "heimer27";
     $db = "daytrade"; 
     $mysqli = null;
+    $date = date("Y-m-d"); 
 
 
     // Check connection
@@ -210,10 +211,10 @@ function getSectorIndustry()
 
     } 
 
-
-
-
-    $result = $mysqli->query("SELECT symbol, sector, industry, country FROM sector ORDER BY sector, industry");
+    $result = $mysqli->query("SELECT symbol, sector, industry, country 
+                              FROM sector 
+                              WHERE date = '" . $date . "'
+                              ORDER BY sector, industry");
 
     $html = "";
 
@@ -222,7 +223,7 @@ function getSectorIndustry()
         $html = "<div><table style='border: 1px solid black !important;'><tbody>";
         // output data of each row
         while($row = $result->fetch_assoc()) {
-            $html .=  "<tr style='font-size: 11px;'><td style='border: 1px solid black !important;'>" . $row["symbol"] . "</td><td style='border: 1px solid black !important;'>&nbsp;SECTOR: <b>" . $row["sector"] . "</b></td><td style='border: 1px solid black !important;'>&nbsp;INDUSTRY: <b>" . $row["industry"] . "</b></td><td style='border: 1px solid black !important;'>&nbsp;COUNTRY: <b>" . $row["country"] . "<b></td></tr>";
+            $html .=  "<tr style='font-size: 11px;'><td style='border: 1px solid black !important;'>" . $row["symbol"] . "</td><td style='border: 1px solid black !important;'>&nbsp;SECTOR: <b>" . $row["sector"] . "</b></td><td style='border: 1px solid black !important; width: 400px;'>&nbsp;INDUSTRY: <b>" . $row["industry"] . "</b></td><td style='border: 1px solid black !important;'>&nbsp;COUNTRY: <b>" . $row["country"] . "<b></td></tr>";
         }
         $html .= "</tbody><table></div>";
     } else {
@@ -241,6 +242,19 @@ $noTimeFound = false;
 
       $url = "https://www.sec.gov/cgi-bin/browse-edgar?CIK=" . $symbol . "&owner=include&action=getcompany"; 
       $result = grabHTML('www.sec.gov', $url); 
+
+
+      if (preg_match('/This page is temporarily unavailable/', $result))
+      {
+          echo '<!DOCTYPE html><html><title>Filing - ' . $symbol . ' (NOT FOUND)</title><body>
+              <a style="font-size: 35px" target="_blank" href="https://www.nasdaq.com/symbol/' . $symbol . '/sec-filings">Nasdaq</a><br>
+                  <a style="font-size: 35px" target="_blank" href="http://ec2-54-210-42-143.compute-1.amazonaws.com/newslookup/scrape-street-insider.php?symbol=' . $symbol . '">Street Insider Scrape</a><br>
+                  <a style="font-size: 35px" target="_blank" href="https://www.streetinsider.com/stock_lookup.php?LookUp=Get+Quote&q=' . $symbol . '">Street Insider Actual Page</a>
+                <br>
+                <br>SEC WEBSITE IS DOWN' . getSectorIndustry() . 
+                '</body></html>';  
+          return; 
+      }
 
       if (preg_match('/No matching Ticker Symbol/', $result))
       {

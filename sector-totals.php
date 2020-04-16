@@ -26,7 +26,7 @@
 
         // output data of each row
         while($row = $result->fetch_assoc()) {
-            $html .=  "<tr style='font-size: 11px;'><td style='border: 1px solid black !important;'><b>" . $row["sector"] . "</b></td><td style='border: 1px solid black !important; width: 400px;'><b>" . $row["industry"] . "</b></td><td style='border: 1px solid black !important;'><b>" . $row["count"] . "<b></td></tr>";
+            $html .=  "<tr style='font-size: 11px;'><td style='border: 1px solid black !important;'>&nbsp;<b>" . $row["sector"] . "</b>&nbsp;</td><td style='border: 1px solid black !important; width: 400px;'>&nbsp;<b>" . $row["industry"] . "</b>&nbsp;</td><td style=\"border: 1px solid black !important; align='center';\">&nbsp;<b>" . $row["count"] . "<b>&nbsp;</td></tr>";
         }
         $html .= "</tbody><table></div>";
     } else {

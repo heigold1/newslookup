@@ -251,17 +251,6 @@ function calcFinVizAvgVolume($string)
 function addYahooSectorIndustry($symbol, $sector, $industry, $country, $companyName)
 {
 
-
-/*
-echo "symbol is: " . $symbol . "<br>"; 
-echo "sector is: " . $sector . "<br>"; 
-echo "country is: " . $country . "<br>"; 
-echo "companyName is: " . $companyName . "<br>"; 
-
-die();
-*/ 
-
-
     if (preg_match('/NO SECTOR/', $sector) || preg_match('/COMPANY NOT FOUND/', $sector))
     {
         return;
@@ -277,7 +266,7 @@ die();
     $password = "heimer27";
     $db = "daytrade"; 
     $mysqli = null;
-
+    $date = date("Y-m-d"); 
 
     // Check connection
     try {
@@ -286,7 +275,7 @@ die();
 
     } 
 
-    $mysqli->query("REPLACE INTO sector (symbol, sector, industry, country) VALUES ('" . $symbol . "', '" . $sector . "', '" . $industry . "', '" . $country . "')");
+    $mysqli->query("REPLACE INTO sector (symbol, sector, industry, country, date) VALUES ('" . $symbol . "', '" . $sector . "', '" . $industry . "', '" . $country . "','" . $date . "')");
 
 }
 
