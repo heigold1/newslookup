@@ -249,8 +249,8 @@ $noTimeFound = false;
           echo '<!DOCTYPE html><html><title>Filing - ' . $symbol . ' (NOT FOUND)</title><body>
               <a style="font-size: 35px" target="_blank" href="https://www.nasdaq.com/symbol/' . $symbol . '/sec-filings">Nasdaq</a><br>
                   <a style="font-size: 35px" target="_blank" href="http://ec2-54-210-42-143.compute-1.amazonaws.com/newslookup/scrape-street-insider.php?symbol=' . $symbol . '">Street Insider Scrape</a><br>
-                  <a style="font-size: 35px" target="_blank" href="https://www.streetinsider.com/stock_lookup.php?LookUp=Get+Quote&q=' . $symbol . '">Street Insider Actual Page</a>
-                <br>
+                  <a style="font-size: 35px" target="_blank" href="https://www.streetinsider.com/stock_lookup.php?LookUp=Get+Quote&q=' . $symbol . '">Street Insider Actual Page</a><br>
+                  <a style="font-size: 35px" target="_blank" href="https://seekingalpha.com/symbol/' . $symbol . '?s=' . $symbol . '">Seeking Alpha</a>
                 <br>SEC WEBSITE IS DOWN' . getSectorIndustry() . 
                 '</body></html>';  
           return; 
@@ -266,7 +266,8 @@ $noTimeFound = false;
               echo '<!DOCTYPE html><html><title>Filing - ' . $symbol . ' (NOT FOUND)</title><body>
                   <a style="font-size: 35px" target="_blank" href="https://www.nasdaq.com/symbol/' . $symbol . '/sec-filings">Nasdaq</a><br>
                   <a style="font-size: 35px" target="_blank" href="http://ec2-54-210-42-143.compute-1.amazonaws.com/newslookup/scrape-street-insider.php?symbol=' . $symbol . '">Street Insider Scrape</a><br>
-                  <a style="font-size: 35px" target="_blank" href="https://www.streetinsider.com/stock_lookup.php?LookUp=Get+Quote&q=' . $symbol . '">Street Insider Actual Page</a>
+                  <a style="font-size: 35px" target="_blank" href="https://www.streetinsider.com/stock_lookup.php?LookUp=Get+Quote&q=' . $symbol . '">Street Insider Actual Page</a><br>
+                  <a style="font-size: 35px" target="_blank" href="https://seekingalpha.com/symbol/' . $symbol . '?s=' . $symbol . '">Seeking Alpha</a>
                 <br>
                 <br>NO MATCHING COMPANIES' . getSectorIndustry() . 
                 '</body></html>';  
@@ -280,8 +281,8 @@ $noTimeFound = false;
               echo '<!DOCTYPE html><html><title>Filing - ' . $symbol . ' (AMBIGUOUS)</title><body>
                   <a style="font-size: 35px" target="_blank" href="https://www.nasdaq.com/symbol/' . $symbol . '/sec-filings">Nasdaq</a><br>
                   <a style="font-size: 35px" target="_blank" href="http://ec2-54-210-42-143.compute-1.amazonaws.com/newslookup/scrape-street-insider.php?symbol=' . $symbol . '">Street Insider Scrape</a><br>
-                  <a style="font-size: 35px" target="_blank" href="https://www.streetinsider.com/stock_lookup.php?LookUp=Get+Quote&q=' . $symbol . '">Street Insider Actual Page</a>
-                <br>
+                  <a style="font-size: 35px" target="_blank" href="https://www.streetinsider.com/stock_lookup.php?LookUp=Get+Quote&q=' . $symbol . '">Street Insider Actual Page</a><br>
+                  <a style="font-size: 35px" target="_blank" href="https://seekingalpha.com/symbol/' . $symbol . '?s=' . $symbol . '">Seeking Alpha</a>
                 <br>' . $result . getSectorIndustry() . 
                 '</body></html>';  
               return; 
@@ -423,7 +424,11 @@ $noTimeFound = false;
 
       $returnHtml .=  '<a style="font-size: 35px" target="_blank" href="http://ec2-54-210-42-143.compute-1.amazonaws.com/newslookup/scrape-street-insider.php?symbol=' . $symbol . '">Street Insider Scrape</a><br> 
         <a style="font-size: 35px" target="_blank" href="https://www.streetinsider.com/stock_lookup.php?LookUp=Get+Quote&q=' . $symbol . '">Street Insider Actual Page</a><br>
-        <a style="font-size: 35px" target="_blank" href="https://www.nasdaq.com/symbol/' . $symbol . '/sec-filings">Nasdaq</a><br>'; 
+        <a style="font-size: 35px" target="_blank" href="https://www.nasdaq.com/symbol/' . $symbol . '/sec-filings">Nasdaq</a><br>
+        <a style="font-size: 35px" target="_blank" href="https://seekingalpha.com/symbol/' . $symbol . '?s=' . $symbol . '">Seeking Alpha</a><br>
+
+
+        '; 
 
       $returnHtml .= getSectorIndustry(); 
 
