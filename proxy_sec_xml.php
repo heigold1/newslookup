@@ -211,10 +211,15 @@ function getSectorIndustry()
 
     } 
 
+/*
     $result = $mysqli->query("SELECT symbol, sector, industry, country 
                               FROM sector 
                               WHERE date = '" . $date . "'
                               ORDER BY sector, industry");
+*/
+
+    $result = $mysqli->query("SELECT sector, industry, count(*) as count FROM sector GROUP BY sector, industry");
+
 
     $html = "";
 
@@ -223,12 +228,28 @@ function getSectorIndustry()
         $html = "<div><table style='border: 1px solid black !important;'><tbody>";
         // output data of each row
         while($row = $result->fetch_assoc()) {
-            $html .=  "<tr style='font-size: 11px;'><td style='border: 1px solid black !important;'>" . $row["symbol"] . "</td><td style='border: 1px solid black !important;'>&nbsp;SECTOR: <b>" . $row["sector"] . "</b></td><td style='border: 1px solid black !important; width: 400px;'>&nbsp;INDUSTRY: <b>" . $row["industry"] . "</b></td><td style='border: 1px solid black !important;'>&nbsp;COUNTRY: <b>" . $row["country"] . "<b></td></tr>";
+            $html .=  "<tr style='font-size: 11px;'><td style='border: 1px solid black !important;'>&nbsp;SECTOR: <b>" . $row["sector"] . "</b></td><td style='border: 1px solid black !important; width: 400px;'>&nbsp;INDUSTRY: <b>" . $row["industry"] . "</b></td><td style='border: 1px solid black !important;'>&nbsp;COUNT: <b>" . $row["count"] . "<b></td></tr>";
         }
         $html .= "</tbody><table></div>";
     } else {
         $html = "<span style='font-size: 15px>Nothing yet</span>";
     }
+
+    $result = $mysqli->query("SELECT country, count(*) as count FROM sector GROUP BY country");
+
+    if ($result->num_rows > 0) {
+
+        $html .= "<div><table style='border: 1px solid black !important;'><tbody>";
+        // output data of each row
+        while($row = $result->fetch_assoc()) {
+            $html .=  "<tr style='font-size: 11px;'><td style='border: 1px solid black !important;'>&nbsp;COUNTRY: <b>" . $row["country"] . "</b></td><td style='border: 1px solid black !important; width: 400px;'>&nbsp;COUNT: <b>" . $row["count"] . "</b></td></tr>";
+        }
+        $html .= "</tbody><table></div>";
+    } else {
+        $html .= "<span style='font-size: 15px>Nothing yet for countries</span>";
+    }
+
+
 
     return $html;
 
