@@ -211,13 +211,6 @@ function getSectorIndustry()
 
     } 
 
-/*
-    $result = $mysqli->query("SELECT symbol, sector, industry, country 
-                              FROM sector 
-                              WHERE date = '" . $date . "'
-                              ORDER BY sector, industry");
-*/
-
     $result = $mysqli->query("SELECT sector, industry, count(*) as count FROM sector GROUP BY sector, industry");
 
 
