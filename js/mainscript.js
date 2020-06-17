@@ -168,13 +168,12 @@ console.log("inside calcAll");
   
     var orderType = "";
 
-    if ($("#entryPercentage").val().match(/.53/g))
+    if (parseInt($("#day1").html()) > 15.00)
     {
-      orderType += " LOSS";
+      orderType += " HR_" + parseInt($("#day1").html());
     }
 
     $("#orderStub").val(original_symbol + " BUY " + finalSharesRoundedWithCommas + " $" + finalPriceDisplay + " (" + newCalculatedPercentage.toFixed(2) + "%) -- $" + totalValueString + orderType); 
-
 
 } // end of calcAll() function 
 
