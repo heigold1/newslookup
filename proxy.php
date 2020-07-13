@@ -4,7 +4,7 @@ include './Samples/config.php';
 
 require_once("simple_html_dom.php"); 
 
-$yesterdayDays = 1;
+$yesterdayDays = 3;
 
 error_reporting(1);
 //ini_set('display_errors', 1);
@@ -610,10 +610,10 @@ if ($which_website == "marketwatch")
       $marketWatchNewsHTML = preg_replace('/ fda clearance/i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp; FDA Clearance - back off </b></span>&nbsp;', $marketWatchNewsHTML);
       $marketWatchNewsHTML = preg_replace('/ deficiency in compliance/i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp; Deficiency in Compliance - CHECK FOR DELISTING</b></span>&nbsp;', $marketWatchNewsHTML);
       $marketWatchNewsHTML = preg_replace('/ net asset value/i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp; NET ASSET VALUE - 25%</b></span>&nbsp;', $marketWatchNewsHTML);
-
-
-
-
+      $marketWatchNewsHTML = preg_replace('/ efficacy data/i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp; EFFICACY DATA - DRUG NEWS</b></span>&nbsp;', $marketWatchNewsHTML);
+      $marketWatchNewsHTML = preg_replace('/ phase 1/i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp; PHASE 1!!!!</b></span>&nbsp;', $marketWatchNewsHTML);
+      $marketWatchNewsHTML = preg_replace('/ phase 2/i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp; PHASE 2!!!!</b></span>&nbsp;', $marketWatchNewsHTML);
+      $marketWatchNewsHTML = preg_replace('/ phase 3/i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp; PHASE 3!!!!</b></span>&nbsp;', $marketWatchNewsHTML);
 
 
 
@@ -998,6 +998,11 @@ else if ($which_website == "yahoo")
       $finalReturn = preg_replace('/ fda clearance/i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp; FDA Clearance - back off </b></span>&nbsp;', $finalReturn);
       $finalReturn = preg_replace('/ deficiency in compliance/i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp; Deficiency in Compliance - CHECK FOR DELISTING</b></span>&nbsp;', $finalReturn);
       $finalReturn = preg_replace('/ net asset value/i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp; NET ASSET VALUE - 25%</b></span>&nbsp;', $finalReturn);
+      $finalReturn = preg_replace('/ efficacy data/i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp; EFFICACY DATA - DRUG NEWS</b></span>&nbsp;', $finalReturn);
+      $finalReturn = preg_replace('/ phase 1/i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp; PHASE 1!!!!</b></span>&nbsp;', $finalReturn);
+      $finalReturn = preg_replace('/ phase 2/i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp; PHASE 2!!!!</b></span>&nbsp;', $finalReturn); 
+      $finalReturn = preg_replace('/ phase 3/i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp; PHASE 3!!!!</b></span>&nbsp;', $finalReturn); 
+
 
 
       $message_board = '</font><a target="_blank" onclick="return openPage(this.href)" href="http://finance.yahoo.com/quote/' . $symbol . '/community?ltr=1"> Yahoo Message Boards</a>&nbsp;&nbsp;&nbsp;&nbsp;'; 

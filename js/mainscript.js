@@ -466,6 +466,10 @@ $(function() {
           $("#bigcharts_yest_close").html("");
           $("#right_top_container").html("");
 
+
+          $("#left_bottom_container").css("background-color", "#F3F3FF");  
+          $("#right_top_container").css("background-color", "#F3F3FF");            
+
           // first, clear all the DIVS to give the impression that it is refreshing 
 
           positionOfPeriod = original_symbol.indexOf(".");
@@ -949,6 +953,13 @@ This just gets the yesterday close and last vix values, we don't need these yet,
         {
           $("#day1").css("background-color", "#FFFFFF");  
         }
+
+        if (exchange == "PK")
+        {
+          $("#left_bottom_container").css("background-color", "#FFC0CB");  
+          $("#right_top_container").css("background-color", "#FFC0CB");            
+        }
+
 
         var myIframe = document.getElementById('etrade_iframe');
         if (myIframe != null)
