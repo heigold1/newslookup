@@ -929,7 +929,7 @@ This just gets the yesterday close and last vix values, we don't need these yet,
         var eTradeAvgVolume = parseInt(document.getElementById("vol_10_day").innerHTML.replace(/\D/g,''));
         var volumeRatio = parseFloat(document.getElementById("vol_ratio").innerHTML.replace(/\D/g,''))/100;
 
-        if ((yahooAvgVolume < 110000) || (eTradeAvgVolume < 110000))
+        if ((yahooAvgVolume < 250000) || (eTradeAvgVolume < 250000))
         {
           playLowVolumeStock();
           warningMessage += " ** LOW AVERAGE VOLUME ** ";
