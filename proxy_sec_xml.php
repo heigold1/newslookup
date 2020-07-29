@@ -7,7 +7,7 @@ $symbol=$_GET['symbol'];
 $secCompanyName = $_GET['secCompanyName'];
 $secCompanyName = preg_replace('/ /', '+', $secCompanyName);
 
-$yesterdayDays = 3;
+$yesterdayDays = 1;
 
 fopen("cookies.txt", "w");
 
@@ -257,7 +257,6 @@ $noTimeFound = false;
       $url = "https://www.sec.gov/cgi-bin/browse-edgar?CIK=" . $symbol . "&owner=include&action=getcompany"; 
       $result = grabHTML('www.sec.gov', $url); 
 
-
       if (preg_match('/This page is temporarily unavailable/', $result))
       {
           echo '<!DOCTYPE html><html><title>Filing - ' . $symbol . ' (NOT FOUND)</title><body>
@@ -305,9 +304,9 @@ $noTimeFound = false;
 
       $html = str_get_html($result);
 
-      $rssTableRow = $html->find(' form table tbody tr'); 
+      $rssTableRow = $html->find(' div table tbody tr'); 
 
-      $rssLink = $rssTableRow[1]->find('a');
+      $rssLink = $rssTableRow[3]->find('a');
 
       $rssFullLink = "https://www.sec.gov" . $rssLink[0]->href; 
 
@@ -321,6 +320,7 @@ $noTimeFound = false;
 
           for ($i = 0; $i < 5; $i++)
            { 
+
               $entryRowObject = $xmlFinalString->entry[0];
               $filingType = "";
 
@@ -330,6 +330,7 @@ $noTimeFound = false;
               }
 
               $entryContent = $xmlFinalString->entry[$i]->content; 
+
               $title = ""; 
               $datestamp = getDateFromUTC($xmlFinalString->entry[$i]->updated);
               $itemDescription = ""; 
@@ -416,6 +417,8 @@ $noTimeFound = false;
       $returnHtml .= '<head>
         <link type="text/css" href="./css/main.css" rel="stylesheet"/>
       </head>';
+
+
 
       if ($noTimeFound == true)
       {
