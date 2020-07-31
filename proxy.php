@@ -614,7 +614,7 @@ if ($which_website == "marketwatch")
       $marketWatchNewsHTML = preg_replace('/ phase 1/i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp; PHASE 1!!!!</b></span>&nbsp;', $marketWatchNewsHTML);
       $marketWatchNewsHTML = preg_replace('/ phase 2/i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp; PHASE 2!!!!</b></span>&nbsp;', $marketWatchNewsHTML);
       $marketWatchNewsHTML = preg_replace('/ phase 3/i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp; PHASE 3!!!!</b></span>&nbsp;', $marketWatchNewsHTML);
-      $marketWatchNewsHTML = preg_replace('/ to present/i', '<span style="font-size: 25px; background-color:lightgreen; color:black"><b>&nbsp; TO PRESENT - OK TO CHASE EARLY</b></span>&nbsp;', $marketWatchNewsHTML);
+      $marketWatchNewsHTML = preg_replace('/ to present/i', '<span style="font-size: 25px; background-color:lightgreen; color:black"><b>&nbsp; TO PRESENT - IF EARNINGS THEN OK TO CHASE AROUND 21-23%</b></span>&nbsp;', $marketWatchNewsHTML);
 
 
 
@@ -1003,7 +1003,7 @@ else if ($which_website == "yahoo")
       $finalReturn = preg_replace('/ phase 1/i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp; PHASE 1!!!!</b></span>&nbsp;', $finalReturn);
       $finalReturn = preg_replace('/ phase 2/i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp; PHASE 2!!!!</b></span>&nbsp;', $finalReturn); 
       $finalReturn = preg_replace('/ phase 3/i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp; PHASE 3!!!!</b></span>&nbsp;', $finalReturn); 
-      $finalReturn = preg_replace('/ to present/i', '<span style="font-size: 25px; background-color:lightgreen; color:black"><b>&nbsp; TO PRESENT - OK TO CHASE EARLY</b></span>&nbsp;', $finalReturn); 
+      $finalReturn = preg_replace('/ to present/i', '<span style="font-size: 25px; background-color:lightgreen; color:black"><b>&nbsp; TO PRESENT - IF EARNINGS THEN OK TO CHASE AROUND 21-23%</b></span>&nbsp;', $finalReturn); 
 
 
 
