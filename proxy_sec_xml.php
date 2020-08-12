@@ -221,7 +221,14 @@ function getSectorIndustry()
         $html = "<div><table style='border: 1px solid black !important;'><tbody>";
         // output data of each row
         while($row = $result->fetch_assoc()) {
-            $html .=  "<tr style='font-size: 11px;'><td style='border: 1px solid black !important;'>&nbsp;SECTOR: <b>" . $row["sector"] . "</b></td><td style='border: 1px solid black !important; width: 400px;'>&nbsp;INDUSTRY: <b>" . $row["industry"] . "</b></td><td style='border: 1px solid black !important;'>&nbsp;COUNT: <b>" . $row["count"] . "<b></td></tr>";
+            $html .=  "<tr style='font-size: 11px;";
+
+            if ($row["count"] > 5)
+            {
+                $html .= " background-color: red; "; 
+            }
+
+            $html .= "'><td style='border: 1px solid black !important;'>&nbsp;SECTOR: <b>" . $row["sector"] . "</b></td><td style='border: 1px solid black !important; width: 400px;'>&nbsp;INDUSTRY: <b>" . $row["industry"] . "</b></td><td style='border: 1px solid black !important;'>&nbsp;COUNT: <b>" . $row["count"] . "<b></td></tr>";
         }
         $html .= "</tbody><table></div>";
     } else {
