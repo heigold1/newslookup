@@ -735,7 +735,7 @@ else if ($which_website == "yahoo")
 
       $country = trim($countryPipeArray[$countryPipeArrayLength - 1]); 
 
-      $sectorCountry = '<span>SECTOR - ' . $yahooFinanceObject->sector . '</span>&nbsp;&nbsp;<span>INDUSTRY - ' . $yahooFinanceObject->industry . ' Business</span><br><br><div id="country">' . $country . '</div>'; 
+      $sectorCountry = '<span>SECTOR - ' . $yahooFinanceObject->sector . '</span>&nbsp;&nbsp;<span id="industry">INDUSTRY - ' . $yahooFinanceObject->industry . '</span><br><br><div id="country">' . $country . '</div>'; 
 
 
 
