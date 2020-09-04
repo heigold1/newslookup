@@ -515,7 +515,7 @@ $(function() {
               $("#day1").html("");
               $("#entryPrice").val(""); 
               $("#entryPercentage").val("");  
-              $("#amountSpending").val("2000");
+              $("#amountSpending").val("3000");
               $("#eTradeLowPercentage").html("");
               $("#orderStub").val("-----------------------"); 
               $("#foreign_country").html("");

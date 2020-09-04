@@ -406,8 +406,8 @@ $noTimeFound = false;
               $datestamp = preg_replace('/(' .  get_today_trade_date() . ')/', '<span style="font-size: 16px; background-color:black; color:white">$1</span>', $datestamp);
 
               $title = preg_replace('/registration statement/i', '<span style="font-size: 16px; background-color:red; color:black"><b>&nbsp;Registration statement - OFFERING COMING OUT, HOLD OFF</span></b>&nbsp;', $title);      
-              $title = preg_replace('/statement of acquisition of beneficial ownership by individuals/i', '<span style="font-size: 16px; background-color:red; color:black"><b>&nbsp;Statement of acquisition of beneficial ownership by individuals - 20% - 22%</span></b>&nbsp;', $title);
-              $title = preg_replace('/statement of changes in beneficial ownership of securities/i', '<span style="font-size: 16px; background-color:red; color:black"><b>&nbsp;Statement of changes in beneficial ownership of securities - 20% - 22%</span></b>&nbsp;', $title);
+              $title = preg_replace('/statement of acquisition of beneficial ownership by individuals/i', '<span style="font-size: 16px; background-color:red; color:black"><b>&nbsp;Statement of acquisition of beneficial ownership by individuals - 18% early</span></b>&nbsp;', $title);
+              $title = preg_replace('/statement of changes in beneficial ownership of securities/i', '<span style="font-size: 16px; background-color:red; color:black"><b>&nbsp;Statement of changes in beneficial ownership of securities - 18% early</span></b>&nbsp;', $title);
               $title = preg_replace('/inability to timely file form/i', '<span style="font-size: 16px; background-color:red; color:black"><b>&nbsp;inability to timely file form - 84%</span></b>&nbsp;', $title);
               $title = preg_replace('/exempt offering of securities/i', '<span style="font-size: 16px; background-color:red; color:black"><b>&nbsp;Exempt Offering of Securities - 20% and must be a fast drop</span></b>&nbsp;', $title);
 
