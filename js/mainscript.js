@@ -1109,9 +1109,9 @@ This just gets the yesterday close and last vix values, we don't need these yet,
 
           // in case I accidentally type in more than I should be trading with
           var thisValue = parseInt($(this).val()); 
-          if (thisValue >  1500)
+          if (thisValue >  4000)
           {
-            thisValue = 1500;
+            thisValue = 4000;
             $(this).val(thisValue);
           }
 
