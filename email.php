@@ -28,7 +28,7 @@ if (isset($_GET['trade']))
 	        'port' => '587',   // 465 or 587 
 	        'auth' => true,
 	        'username' => 'brentheigold@gmail.com',
-	        'password' => 'heimer27'
+	        'password' => 'Heimer27*'
 	    ));
 
 	$mail = $smtp->send($to, $headers, $body);
