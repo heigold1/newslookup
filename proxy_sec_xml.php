@@ -7,7 +7,7 @@ $symbol=$_GET['symbol'];
 $secCompanyName = $_GET['secCompanyName'];
 $secCompanyName = preg_replace('/ /', '+', $secCompanyName);
 
-$yesterdayDays = 3;
+$yesterdayDays = 1;
 
 fopen("cookies.txt", "w");
 
@@ -419,7 +419,7 @@ $noTimeFound = false;
                   $registrationOffering = " - REGISTRATION";
               }
 
-              $tableRows .=  "<tr style='border: 1px solid black !important'><td style='border: 1px solid black !important'>" . $filingType . '</td><td style="border: 1px solid black !important"><a href ="' . $href2 . '">' . $title . ', '. $itemDescription .  '</a></td><td style="border: 1px solid black !important">' . $datestamp . "</td><td style='border: 1px solid black !important'>" . $time . "</td></tr>"; 
+              $tableRows .=  "<tr style='border: 1px solid black !important; height: 20px;'><td style='border: 1px solid black !important'>" . $filingType . '</td><td style="border: 1px solid black !important"><a href ="' . $href2 . '">' . $title . ', '. $itemDescription .  '</a></td><td style="border: 1px solid black !important">' . $datestamp . "</td><td style='border: 1px solid black !important; font-size: 18px;'>" . $time . "</td></tr>"; 
             }
 
       $returnHtml .= "<!DOCTYPE html>"; 
