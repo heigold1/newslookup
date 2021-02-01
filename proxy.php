@@ -538,7 +538,7 @@ if ($which_website == "marketwatch")
       $marketWatchNewsHTML = preg_replace('/ regulatory update/i', '<span style="font-size: 12px; background-color:red; color:black"><b>&nbsp;regulatory update (35% even if regulation is good)</span></b>&nbsp;', $marketWatchNewsHTML);
       $marketWatchNewsHTML = preg_replace('/ susbended/i', '<span style="font-size: 12px; background-color:red; color:black"><b>&nbsp;suspended</span> (65-70%)</b>&nbsp;', $marketWatchNewsHTML);      
       $marketWatchNewsHTML = preg_replace('/ fraud/i', '<span style="font-size: 12px; background-color:red; color:black"><b>&nbsp;fraud</span></b>&nbsp;', $marketWatchNewsHTML);      
-      $marketWatchNewsHTML = preg_replace('/ dividend/i', '<span style="font-size: 12px; background-color:red; color:black"><b>&nbsp;dividend</span> (if cut, 65-70%)</b>&nbsp;', $marketWatchNewsHTML);            
+      $marketWatchNewsHTML = preg_replace('/ dividend/i', '<span style="font-size: 25px; background-color:black; color:white"><b>&nbsp;dividend (if cut, 35% ALSO CHECK THE ISSUING DATE)</span></b>&nbsp;', $marketWatchNewsHTML); 
       $marketWatchNewsHTML = preg_replace('/ strategic alternatives/i', '<span style="font-size: 12px; background-color:red; color:black"><b>&nbsp;strategic alternatives</span>**BANKRUPTCY**</b>&nbsp;', $marketWatchNewsHTML);                  
       $marketWatchNewsHTML = preg_replace('/ unpatentable/i', '<span style="font-size: 12px; background-color:red; color:black"><b>&nbsp;unpatentable</span> (65%)</b>&nbsp;', $marketWatchNewsHTML);
       $marketWatchNewsHTML = preg_replace('/ accelerate or increase/i', '<span style="font-size: 12px; background-color:red; color:black"><b>&nbsp;accelerate or increase</span> (Possible Chapter 11, stay away)</b>&nbsp;', $marketWatchNewsHTML);
@@ -623,7 +623,6 @@ if ($which_website == "marketwatch")
       $marketWatchNewsHTML = preg_replace('/ to report/i', '<span style="font-size: 25px; background-color: black; color:white"><b>&nbsp; TO REPORT - CHECK THE DATE </b></span>&nbsp;', $marketWatchNewsHTML);
       $marketWatchNewsHTML = preg_replace('/ to host/i', '<span style="font-size: 25px; background-color: black; color:white"><b>&nbsp; TO HOST - CHECK THE DATE </b></span>&nbsp;', $marketWatchNewsHTML);
       $marketWatchNewsHTML = preg_replace('/ sets date for the release of/i', '<span style="font-size: 25px; background-color: black; color:white"><b>&nbsp; SETS DATE FOR THE RELEASE OF - CHECK THE DATE </b></span>&nbsp;', $marketWatchNewsHTML);
-
 
 
 
@@ -937,7 +936,7 @@ else if ($which_website == "yahoo")
       $finalReturn = preg_replace('/ regulatory update/i', '<span style="font-size: 12px; background-color:red; color:black"><b>&nbsp;regulatory update (35% even if regulation is good)</span></b>&nbsp;', $finalReturn);
       $finalReturn = preg_replace('/ suspended/i', '<span style="font-size: 12px; background-color:red; color:black"><b>&nbsp;suspended</span> (65-70%)</b>&nbsp;', $finalReturn);
       $finalReturn = preg_replace('/ fraud/i', '<span style="font-size: 12px; background-color:red; color:black"><b>&nbsp;fraud</span></b>&nbsp;', $finalReturn);      
-      $finalReturn = preg_replace('/ dividend/i', '<span style="font-size: 12px; background-color:red; color:black"><b>&nbsp;dividend</span> (if cut, 65-70%)</b>&nbsp;', $finalReturn);            
+      $finalReturn = preg_replace('/ dividend/i', '<span style="font-size: 25px; background-color:black; color:white"><b>&nbsp;dividend (if cut, 35% ALSO CHECK THE ISSUEING DATE)</span></b>&nbsp;', $finalReturn);            
       $finalReturn = preg_replace('/ strategic alternatives/i', '<span style="font-size: 12px; background-color:red; color:black"><b>&nbsp;strategic alternatives</span></b>&nbsp;', $finalReturn);
       $finalReturn = preg_replace('/ unpatentable/i', '<span style="font-size: 12px; background-color:red; color:black"><b>&nbsp;unpatentable</span> (60%)</b>&nbsp;', $finalReturn);
       $finalReturn = preg_replace('/ accelerate or increase/i', '<span style="font-size: 12px; background-color:red; color:black"><b>&nbsp;accelerate or increase</span> (Possible Chapter 11, stay away)</b>&nbsp;', $finalReturn);

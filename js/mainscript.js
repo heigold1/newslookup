@@ -515,7 +515,7 @@ $(function() {
               $("#day1").html("");
               $("#entryPrice").val(""); 
               $("#entryPercentage").val("");  
-              $("#amountSpending").val("3500");
+              $("#amountSpending").val("4000");
               $("#eTradeLowPercentage").html("");
               $("#orderStub").val("-----------------------"); 
               $("#foreign_country").html("");
@@ -896,20 +896,70 @@ This just gets the yesterday close and last vix values, we don't need these yet,
 
         // any previous-day spike greater than 15% will be considered high-risk 
         var day1 = parseFloat($("#day1").html());
+        var day2 = parseFloat($("#day2").html());
+        var day3 = parseFloat($("#day3").html());
+
+        var highRiskFlag = 0; 
 
         if (day1 > 15)
         {
-            playHighRiskStock(); 
+            highRiskFlag = 1; 
             warningMessage += " ** HIGH RISK STOCK!!! ** ";
             $("#day1").css({'background-color' : 'red', 'font-size' : '19px'});
         }
+        else if (day1 < 15)
+        {
+            $("#day1").css({'background-color' : 'yellow', 'font-size' : '19px'});
+        }
+
+        if (day2 > 15)
+        {
+            highRiskFlag = 1; 
+            warningMessage += " ** HIGH RISK STOCK!!! ** ";
+            $("#day2").css({'background-color' : 'red', 'font-size' : '19px'});
+        }
+        else if (day2 < 15)
+        {
+            $("#day2").css({'background-color' : 'yellow', 'font-size' : '19px'});
+        }
+
+        if (day3 > 15)
+        {
+            highRiskFlag = 1; 
+            warningMessage += " ** HIGH RISK STOCK!!! ** ";
+            $("#day3").css({'background-color' : 'red', 'font-size' : '19px'});
+        }
+        else if (day3 < 15)
+        {
+            $("#day3").css({'background-color' : 'yellow', 'font-size' : '19px'});
+        }
+
+        if (highRiskFlag == 1)
+        {
+            playHighRiskStock(); 
+        }
+
 
         var day1_low = parseFloat($("#day1_low").html());
+        var day2_low = parseFloat($("#day2_low").html());
+        var day3_low = parseFloat($("#day3_low").html());
 
         if (day1_low < -20)
         {
-            warningMessage += " ** HIGH RISK STOCK!!! ** ";
+            warningMessage += " ** LOW DROP STOCK!!! ** ";
             $("#day1_low").css({'background-color' : 'red', 'font-size' : '19px'});
+        }
+
+        if (day2_low < -20)
+        {
+            warningMessage += " ** LOW DROP STOCK!!! ** ";
+            $("#day2_low").css({'background-color' : 'red', 'font-size' : '19px'});
+        }
+
+        if (day3_low < -20)
+        {
+            warningMessage += " ** LOW DROP STOCK!!! ** ";
+            $("#day3_low").css({'background-color' : 'red', 'font-size' : '19px'});
         }
 
         if (chineseStock == true)
@@ -943,15 +993,6 @@ This just gets the yesterday close and last vix values, we don't need these yet,
         if (warningMessage != "")
         {
 //            alert(warningMessage);
-        }
-
-        if (day1 > 15)
-        {
-          $("#day1").css("background-color", "#FF0000");  
-        }
-        else
-        {
-          $("#day1").css("background-color", "#FFFFFF");  
         }
 
         if (exchange == "PK")
@@ -1109,9 +1150,9 @@ This just gets the yesterday close and last vix values, we don't need these yet,
 
           // in case I accidentally type in more than I should be trading with
           var thisValue = parseInt($(this).val()); 
-          if (thisValue >  3000)
+          if (thisValue >  4000)
           {
-            thisValue = 3000;
+            thisValue = 4000;
             $(this).val(thisValue);
           }
 

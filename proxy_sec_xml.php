@@ -7,7 +7,7 @@ $symbol=$_GET['symbol'];
 $secCompanyName = $_GET['secCompanyName'];
 $secCompanyName = preg_replace('/ /', '+', $secCompanyName);
 
-$yesterdayDays = 1;
+$yesterdayDays = 3;
 
 fopen("cookies.txt", "w");
 
@@ -223,7 +223,7 @@ function getSectorIndustry()
         while($row = $result->fetch_assoc()) {
             $html .=  "<tr style='font-size: 11px;";
 
-            if ($row["count"] > 5)
+            if ($row["count"] >= 4)
             {
                 $html .= " background-color: red; "; 
             }
