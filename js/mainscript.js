@@ -907,7 +907,7 @@ This just gets the yesterday close and last vix values, we don't need these yet,
             warningMessage += " ** HIGH RISK STOCK!!! ** ";
             $("#day1").css({'background-color' : 'red', 'font-size' : '19px'});
         }
-        else if (day1 < 15)
+        else if (day1 < -15)
         {
             $("#day1").css({'background-color' : 'yellow', 'font-size' : '19px'});
         }
@@ -918,7 +918,7 @@ This just gets the yesterday close and last vix values, we don't need these yet,
             warningMessage += " ** HIGH RISK STOCK!!! ** ";
             $("#day2").css({'background-color' : 'red', 'font-size' : '19px'});
         }
-        else if (day2 < 15)
+        else if (day2 < -15)
         {
             $("#day2").css({'background-color' : 'yellow', 'font-size' : '19px'});
         }
@@ -929,7 +929,7 @@ This just gets the yesterday close and last vix values, we don't need these yet,
             warningMessage += " ** HIGH RISK STOCK!!! ** ";
             $("#day3").css({'background-color' : 'red', 'font-size' : '19px'});
         }
-        else if (day3 < 15)
+        else if (day3 < -15)
         {
             $("#day3").css({'background-color' : 'yellow', 'font-size' : '19px'});
         }

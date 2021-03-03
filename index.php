@@ -69,7 +69,7 @@
 							<td style="width:330px">
 
 							<input tabindex="6" id="orderStub" style="width: 305px;">
-							<button id="email_trade" type="button">..</button>
+							<!-- <button id="email_trade" type="button">..</button> -->
 							<span id="time_of_day_percentage">N/A</span>
 
 							</td>
@@ -122,17 +122,18 @@
 	</div> <!-- Left Container Div -->
 
 	<div id="right_container" style="position: relative; background-color: #F3F3FF; border-style: solid; border-width: 1px; float: right; width: 50%; height: 100%;	display: block; border-style: solid; border-width: 1px; 	">
-		<div id="right_top_container" style="	position: relative;	background-color: #F3F3FF; width: 100%; height: 65%; overflow: scroll; display: block;
-		border-style: solid; border-width: 1px;">
-		</div> <!-- Left Top Container Div -->
 
 		<div id="right_bottom_container"> 
 			<div id="bigcharts_chart_container" style="	position: relative;	width: 53%; height: 100%; display: inline-block; border-style: solid; border-width: 3px; 	border-color: red;">
-			</div> <!-- Left Bottom Container Div -->
+			</div> <!-- Right Bottom Container Div -->
 
 			<div id="bigcharts_yest_close" style="	display: inline-block; width: 44%; height: 100%; vertical-align: top; border-style: solid;">
 			</div> <!-- yesterday's close, also the "last" value of previous market close --> 
 		</div> <!-- right bottom container --> 
+
+		<div id="right_top_container" style="	position: relative;	background-color: #F3F3FF; width: 100%; height: 65%; overflow: scroll; display: block;
+		border-style: solid; border-width: 1px;">
+		</div> <!-- Right Top Container Div -->
 
 	</div> <!-- Right Container -->
 
