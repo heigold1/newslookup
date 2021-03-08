@@ -465,6 +465,8 @@ $(function() {
           $("#bigcharts_chart_container").html("");
           $("#bigcharts_yest_close").html("");
           $("#right_top_container").html("");
+          $("#right_top_container").hide();
+
 
 
           $("#left_bottom_container").css("background-color", "#F3F3FF");  
@@ -701,7 +703,7 @@ $(function() {
 
             $("div#left_top_container").css("background-color", "#F3F3FF");
 
-            $("div#bigcharts_chart_container").html("<a target='blank' style='cursor: pointer;' title='Click to open 5-day chart' onclick='return openPage(\"https://api.wsj.net/api/kaavio/charts/big.chart?nosettings=1&symb=" + original_symbol + "&uf=0&type=2&size=2&style=320&freq=7&entitlementtoken=0c33378313484ba9b46b8e24ded87dd6&time=3&rand=" + Math.random() + "&compidx=&ma=0&maval=9&lf=1&lf2=0&lf3=0&height=335&width=579&mocktick=1\")'> <img style='max-width:100%; max-height:100%;' src='https://api.wsj.net/api/kaavio/charts/big.chart?nosettings=1&symb=" + original_symbol + "&uf=0&type=2&size=2&style=320&freq=1&entitlementtoken=0c33378313484ba9b46b8e24ded87dd6&time=4&rand=" + Math.random() + "&compidx=&ma=0&maval=9&lf=1&lf2=0&lf3=0&height=335&width=579&mocktick=1)'></a>");
+            $("div#bigcharts_chart_container").html("<img style='max-width:100%; max-height:100%;' src='https://api.wsj.net/api/kaavio/charts/big.chart?nosettings=1&symb=" + original_symbol + "&uf=0&type=2&size=2&style=320&freq=1&entitlementtoken=0c33378313484ba9b46b8e24ded87dd6&time=4&rand=" + Math.random() + "&compidx=&ma=0&maval=9&lf=1&lf2=0&lf3=0&height=335&width=579&mocktick=1)'>");
 
 $("div#bigcharts_yest_close").html("<img style='max-width:100%; max-height:100%;' src='https://api.wsj.net/api/kaavio/charts/big.chart?nosettings=1&symb=VIX&uf=0&type=2&size=2&sid=1704273&style=320&freq=9&entitlementtoken=0c33378313484ba9b46b8e24ded87dd6&time=1&rand=" + Math.random() + "&compidx=&ma=0&maval=9&lf=1&lf2=0&lf3=0&height=335&width=579&mocktick=1'>");
 
@@ -1175,6 +1177,10 @@ This just gets the yesterday close and last vix values, we don't need these yet,
 
     $("#entryPrice").click(function(){
       var volumeChecked = $("#volumeChecked").html();
+    });
+
+    $("#bigcharts_chart_container").click(function(){
+        $("#right_top_container").show();
     });
 
     $("#yestCloseText").val("");
