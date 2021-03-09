@@ -219,9 +219,11 @@ function reCalcOrderStub()
 
 } // end of reCalcOrderStub 
 
+/*
 var blink = function(){
     $('#bigcharts_chart_container').fadeOut(200).fadeIn(200);
 };
+*/
 
 function saveEarnings(){
 
@@ -264,7 +266,7 @@ $(function() {
     //  alert("not blank");
     }
 
-  setInterval(blink, 3000);
+//   setInterval(blink, 3000);
 
     var modal = document.getElementById('myModal');
     modal.style.display = "none";
@@ -466,8 +468,7 @@ $(function() {
           $("#bigcharts_yest_close").html("");
           $("#right_top_container").html("");
           $("#right_top_container").hide();
-
-
+          $("#left_bottom_container").hide();
 
           $("#left_bottom_container").css("background-color", "#F3F3FF");  
           $("#right_top_container").css("background-color", "#F3F3FF");            
@@ -1181,6 +1182,7 @@ This just gets the yesterday close and last vix values, we don't need these yet,
 
     $("#bigcharts_chart_container").click(function(){
         $("#right_top_container").show();
+        $("#left_bottom_container").show();
     });
 
     $("#yestCloseText").val("");
