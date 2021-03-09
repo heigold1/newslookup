@@ -1074,8 +1074,8 @@ This just gets the yesterday close and last vix values, we don't need these yet,
 
           if ($("#right_top_container").is(":hidden") && ($("#left_bottom_container").is(":hidden")))
           {
-            alert("unlock the news"); 
-            $("#entryPercentage").text(""); 
+            $("#entryPercentage").val(""); 
+             alert("unlock the news"); 
             return; 
           }
 
@@ -1190,6 +1190,7 @@ This just gets the yesterday close and last vix values, we don't need these yet,
     $("#bigcharts_chart_container").click(function(){
         $("#right_top_container").show();
         $("#left_bottom_container").show();
+        $("#entryPercentage").val(""); 
     });
 
     $("#yestCloseText").val("");
