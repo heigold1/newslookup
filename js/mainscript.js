@@ -1072,6 +1072,13 @@ This just gets the yesterday close and last vix values, we don't need these yet,
 
     $('#entryPercentage').keypress(function(e){
 
+          if ($("#right_top_container").is(":hidden") && ($("#left_bottom_container").is(":hidden")))
+          {
+            alert("unlock the news"); 
+            $("#entryPercentage").text(""); 
+            return; 
+          }
+
           var volumeChecked = $("#volumeChecked").html();
           if (volumeChecked == "0")
           {
