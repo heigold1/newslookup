@@ -44,6 +44,11 @@ function playForeignStock(){
   foreignStock.play();
 }
 
+function playCheckTradeHalts(){
+  var chineseStock = new Audio('./wav/check-trade-halts.wav');
+  chineseStock.play();
+}
+
 function playReverseStockSplit(){
   var reverseStockSplit = new Audio('./wav/reverse-stock-split.wav');
   reverseStockSplit.play();
@@ -459,9 +464,15 @@ $(function() {
           var foreignCountry = true; 
           var chineseStock = false;
           var yahooHtmlResults = "";
-
+          var date = new Date(); 
+          var currentMinutes = parseInt(date.getMinutes()); 
 
           closeAllWindows();
+
+          if (currentMinutes % 5 === 0)
+          {
+            playCheckTradeHalts(); 
+          }
 
           $("#left_bottom_container").html("");
           $("#bigcharts_chart_container").html("");
