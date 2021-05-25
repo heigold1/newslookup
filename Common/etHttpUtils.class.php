@@ -85,6 +85,9 @@ class etHttpUtils
 		}else{
 			$token_obj 	= null;
 		}
+
+
+
 		$request_obj = OAuthRequest::from_consumer_and_token($this->consumer,
 															$token_obj,
 															$this->method,
