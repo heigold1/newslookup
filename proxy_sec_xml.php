@@ -162,7 +162,7 @@ function grabHTML($function_host_name, $url)
     'Accept-Language:en-US,en;q=0.8',
     'Cache-Control:max-age=0',
     'Connection:keep-alive',
-    'User-Agent:Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/27.0.1453.116 Safari/537.36',
+    'User-Agent:brent@heigoldinvestments.com',
     );
 
     curl_setopt($ch,CURLOPT_URL,$url);
@@ -311,13 +311,9 @@ $noTimeFound = false;
               return; 
           }
       }
-
       $html = str_get_html($result);
-
       $rssTableRow = $html->find(' div table tbody tr'); 
-
       $rssLink = $rssTableRow[3]->find('a');
-
       $rssFullLink = "https://www.sec.gov" . $rssLink[0]->href; 
 
       $returnHtml = "";
@@ -330,7 +326,6 @@ $noTimeFound = false;
 
           for ($i = 0; $i < 5; $i++)
            { 
-
               $entryRowObject = $xmlFinalString->entry[0];
               $filingType = "";
 
@@ -368,6 +363,8 @@ $noTimeFound = false;
 
               $firstLink  = $xmlFinalString->entry[$i]->link['href']; 
               $firstLinkResults = grabHTML('www.sec.gov', $firstLink); 
+
+
 
               $html2 = str_get_html($firstLinkResults);
 
@@ -427,8 +424,6 @@ $noTimeFound = false;
       $returnHtml .= '<head>
         <link type="text/css" href="./css/main.css" rel="stylesheet"/>
       </head>';
-
-
 
       if ($noTimeFound == true)
       {
