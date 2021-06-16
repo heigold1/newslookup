@@ -61,7 +61,7 @@
 						</tr>
 						<tr>
 							<td style="width:140px">Spend $<input tabindex = "5" id="amountSpending"><button id="changeAmountSpending" type="button">...</button></td>
-							<td style="width:330px">Price of $<input tabindex ="4" id="entryPrice" style="width: 75px;">, percent. is <span id="calculatedPercentage">&nbsp; &nbsp; </span>%<span id="offering">Of <input id="check_offering" type="checkbox"></span></td>
+							<td style="width:330px">Price of $<input tabindex ="4" id="entryPrice" style="width: 75px;">, percent. is <span id="calculatedPercentage">&nbsp; &nbsp; </span>%<span id="offering">O<input id="check_offering" type="checkbox"></span></td>
 							<td style="width:130px"><input type="radio" name="roundShares" id="roundShares" value="100" checked="true">Round 100</td> 						
 						</tr>
 						<tr style="height:15px">

@@ -272,7 +272,7 @@ $noTimeFound = false;
                   <a style="font-size: 35px" target="_blank" href="https://www.streetinsider.com/stock_lookup.php?LookUp=Get+Quote&q=' . $symbol . '">Street Insider Actual Page</a><br>
                   <a style="font-size: 35px" target="_blank" href="https://seekingalpha.com/symbol/' . $symbol . '?s=' . $symbol . '">Seeking Alpha</a><br>
                   <a style="font-size: 35px" target="_blank" href=https://www.etrade.wallst.com/v1/stocks/snapshot/snapshot.asp?ChallengeUrl=https://idp.etrade.com/idp/SSO.saml2&reinitiate-handshake=0&prospectnavyear=2011&AuthnContext=prospect&env=PRD&symbol=' . $symbol . '&rsO=new&country=US>E*TRADE</a>
-                <br>SEC WEBSITE IS DOWN' . getSectorIndustry() . 
+                <br><div style="background-color: red"><span style="font-size: 55px">SEC WEBSITE IS DOWN</span></div>' . getSectorIndustry() . 
                 '</body></html>';  
           return; 
       }
@@ -291,7 +291,7 @@ $noTimeFound = false;
                   <a style="font-size: 35px" target="_blank" href="https://seekingalpha.com/symbol/' . $symbol . '?s=' . $symbol . '">Seeking Alpha</a><br>
                   <a style="font-size: 35px" target="_blank" href=https://www.etrade.wallst.com/v1/stocks/snapshot/snapshot.asp?ChallengeUrl=https://idp.etrade.com/idp/SSO.saml2&reinitiate-handshake=0&prospectnavyear=2011&AuthnContext=prospect&env=PRD&symbol=' . $symbol . '&rsO=new&country=US>E*TRADE</a>
                 <br>
-                <br>NO MATCHING COMPANIES' . getSectorIndustry() . 
+                <br><div style="background-color: red"><span style="font-size: 55px">NO MATCHING COMPANIES</span></div>' . getSectorIndustry() . 
                 '</body></html>';  
               return; 
           }
@@ -306,7 +306,7 @@ $noTimeFound = false;
                   <a style="font-size: 35px" target="_blank" href="https://www.streetinsider.com/stock_lookup.php?LookUp=Get+Quote&q=' . $symbol . '">Street Insider Actual Page</a><br>
                   <a style="font-size: 35px" target="_blank" href="https://seekingalpha.com/symbol/' . $symbol . '?s=' . $symbol . '">Seeking Alpha</a>
                   <a style="font-size: 35px" target="_blank" href=https://www.etrade.wallst.com/v1/stocks/snapshot/snapshot.asp?ChallengeUrl=https://idp.etrade.com/idp/SSO.saml2&reinitiate-handshake=0&prospectnavyear=2011&AuthnContext=prospect&env=PRD&symbol=' . $symbol . '&rsO=new&country=US>E*TRADE</a>
-                <br>' . $result . getSectorIndustry() . 
+                <br><div style="background-color: red"><span style="font-size: 55px">AMBIGUOUS</span></div>' . $result . getSectorIndustry() . 
                 '</body></html>';  
               return; 
           }

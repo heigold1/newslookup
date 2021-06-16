@@ -529,7 +529,7 @@ $(function() {
               $("#day1").html("");
               $("#entryPrice").val(""); 
               $("#entryPercentage").val("");  
-              $("#amountSpending").val("4000");
+              $("#amountSpending").val("2000");
               $("#eTradeLowPercentage").html("");
               $("#orderStub").val("-----------------------"); 
               $("#foreign_country").html("");
@@ -850,6 +850,8 @@ This just gets the yesterday close and last vix values, we don't need these yet,
             (function(){
 
 /*               var eTradeIFrame = '<br><iframe id="etrade_iframe" src="https://www.etrade.wallst.com/v1/stocks/news/search_results.asp?symbol=' + symbol + '&rsO=new#lastTradeTime" width="675px" height="500px"></iframe>';  */
+               var streetInsiderIFrame = '<br><iframe src="https://www.streetinsider.com/stock_lookup.php?LookUp=Get+Quote&q=' + symbol + '#content_all" width="675px" height="500px"></iframe>'; 
+
 
               $("div#left_bottom_container").css("background-color", "#BBDDFF");
                 $.ajax({
@@ -896,7 +898,7 @@ This just gets the yesterday close and last vix values, we don't need these yet,
                         playDelist();
                       }
 
-                      $("div#left_bottom_container").html( data /* +  eTradeIFrame */); 
+                      $("div#left_bottom_container").html( data +  streetInsiderIFrame ); 
                   }
                 });  // end of AJAX call to marketwatch    
 
@@ -1016,7 +1018,7 @@ This just gets the yesterday close and last vix values, we don't need these yet,
         }
 
 
-        var myIframe = document.getElementById('etrade_iframe');
+        var myIframe = document.getElementById('streetInsiderIFrame');
         if (myIframe != null)
         {
             myIframe.contentWindow.scrollTo(75, 100); 
@@ -1171,9 +1173,9 @@ This just gets the yesterday close and last vix values, we don't need these yet,
 
           // in case I accidentally type in more than I should be trading with
           var thisValue = parseInt($(this).val()); 
-          if (thisValue >  4000)
+          if (thisValue >  2000)
           {
-            thisValue = 4000;
+            thisValue = 2000;
             $(this).val(thisValue);
           }
 
