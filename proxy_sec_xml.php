@@ -230,7 +230,7 @@ function getSectorIndustry()
 
             $html .= "'><td style='border: 1px solid black !important;'>&nbsp;SECTOR: <b>" . $row["sector"] . "</b></td><td style='border: 1px solid black !important; width: 400px;'>&nbsp;INDUSTRY: <b>" . $row["industry"] . "</b></td><td style='border: 1px solid black !important;'>&nbsp;COUNT: <b>" . $row["count"] . "<b></td></tr>";
         }
-        $html .= "</tbody><table></div>";
+        $html .= "</tbody></table></div>";
     } else {
         $html = "<span style='font-size: 15px>Nothing yet</span>";
     }
@@ -244,7 +244,7 @@ function getSectorIndustry()
         while($row = $result->fetch_assoc()) {
             $html .=  "<tr style='font-size: 11px;'><td style='border: 1px solid black !important;'>&nbsp;COUNTRY: <b>" . $row["country"] . "</b></td><td style='border: 1px solid black !important; width: 400px;'>&nbsp;COUNT: <b>" . $row["count"] . "</b></td></tr>";
         }
-        $html .= "</tbody><table></div>";
+        $html .= "</tbody></table></div>";
     } else {
         $html .= "<span style='font-size: 15px>Nothing yet for countries</span>";
     }
@@ -319,6 +319,7 @@ $noTimeFound = false;
       $returnHtml = "";
       $tableRows = "";
       $recentNews = false;
+      $secTableRowCount = 0; 
 
           $xmlFinalString=simplexml_load_file($rssFullLink);
 
@@ -417,6 +418,7 @@ $noTimeFound = false;
               }
 
               $tableRows .=  "<tr style='border: 1px solid black !important; height: 20px;'><td style='border: 1px solid black !important'>" . $filingType . '</td><td style="border: 1px solid black !important"><a href ="' . $href2 . '">' . $title . ', '. $itemDescription .  '</a></td><td style="border: 1px solid black !important">' . $datestamp . "</td><td style='border: 1px solid black !important; font-size: 18px;'>" . $time . "</td></tr>"; 
+              $secTableRowCount++; 
             }
 
       $returnHtml .= "<!DOCTYPE html>"; 
@@ -441,6 +443,14 @@ $noTimeFound = false;
       $returnHtml .= buildNewsNotes(); 
 
       $returnHtml .= "<table style='border: 1px solid black !important'>"; 
+
+      $secMessage = ""; 
+      if ($secTableRowCount == 0)
+      {
+        $secMessage = "<span style='font-size: 35px; background-color: red'> - CHECK STREET INSIDER</span>"; 
+      }
+
+      $returnHtml .= "<tr><td>Type</td><td>" . $secMessage . "</td><td>Date</td><td>Time</td></tr>"; 
       $returnHtml .= $tableRows;
       $returnHtml .=  "</table>";
 
