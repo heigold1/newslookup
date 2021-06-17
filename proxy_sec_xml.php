@@ -444,13 +444,13 @@ $noTimeFound = false;
 
       $returnHtml .= "<table style='border: 1px solid black !important'>"; 
 
-      $secMessage = ""; 
+      $secMessage = " rowcount is " . $secTableRowCount . " "; 
       if ($secTableRowCount == 0)
       {
-        $secMessage = "<span style='font-size: 35px; background-color: red'> - CHECK STREET INSIDER</span>"; 
+        $secMessage = "<span style='font-size: 25px; background-color: red'> - CHECK STREET INSIDER</span>"; 
       }
 
-      $returnHtml .= "<tr><td>Type</td><td>" . $secMessage . "</td><td>Date</td><td>Time</td></tr>"; 
+      $returnHtml .= "<tr><td>Type</td><td>Title" . $secMessage . "</td><td>Date</td><td>Time</td></tr>"; 
       $returnHtml .= $tableRows;
       $returnHtml .=  "</table>";
 

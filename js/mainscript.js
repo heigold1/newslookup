@@ -448,6 +448,7 @@ $(function() {
     function startProcess(){
 
           var original_symbol = $.trim($("#quote_input").val()); 
+          var eTradeSymbol = original_symbol; 
           var symbol;
           var positionOfPeriod; 
           var yahooCompanyName = ""; 
@@ -553,7 +554,7 @@ $(function() {
               $("div#left_top_container").css("background-color", "#BBDDFF");
               $.ajax({
                   url: "yesterday_close.php",
-                  data: {symbol: symbol},
+                  data: {symbol: eTradeSymbol},
                   async: false, 
                   dataType: 'html',
                   success:  function (data) {
@@ -1036,7 +1037,7 @@ This just gets the yesterday close and last vix values, we don't need these yet,
     // once the submit button is clicked
    $("#changeAmountSpending").click(function(){
 
-      $("#amountSpending").val("1500");
+      $("#amountSpending").val("1000");
       calcAll();
       CopyToClipboard();  
     }); // End of click function 
