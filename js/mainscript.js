@@ -530,7 +530,7 @@ $(function() {
               $("#day1").html("");
               $("#entryPrice").val(""); 
               $("#entryPercentage").val("");  
-              $("#amountSpending").val("2000");
+              $("#amountSpending").val("3000");
               $("#eTradeLowPercentage").html("");
               $("#orderStub").val("-----------------------"); 
               $("#foreign_country").html("");
@@ -1229,3 +1229,4 @@ This just gets the yesterday close and last vix values, we don't need these yet,
     }
 
 });  // End of the initial automatically called function
+
