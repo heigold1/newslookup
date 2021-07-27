@@ -395,7 +395,7 @@ $noTimeFound = false;
                           $recentNews = true;
                           $time = preg_replace('/AM/', '<span style="background-color: red">AM</span>', $time); 
                       }
-                      $time = preg_replace('/PM/', '<span style="background-color: red">PM</span>', $time); 
+                      $time = preg_replace('/PM/', '<span style="background-color: red; font-size: 35px;">PM CHECK NEWS</span>', $time); 
                   }
               } // for ($j = $yesterdayDays; $j >= 1; $j--)
 
