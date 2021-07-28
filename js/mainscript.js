@@ -530,7 +530,7 @@ $(function() {
               $("#day1").html("");
               $("#entryPrice").val(""); 
               $("#entryPercentage").val("");  
-              $("#amountSpending").val("1500");
+              $("#amountSpending").val("2000");
               $("#eTradeLowPercentage").html("");
               $("#orderStub").val("-----------------------"); 
               $("#foreign_country").html("");
@@ -575,7 +575,8 @@ $(function() {
                           if (exchange == "PK")
                           {
                             $("#amountSpending").val("350");
-
+                            $("#right_top_container").show();
+                            $("#left_bottom_container").show();
                           }
                           $("#yestCloseText").val(jsonObject.prev_close);
                           if (low > 1.00)

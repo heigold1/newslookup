@@ -395,7 +395,7 @@ $noTimeFound = false;
                           $recentNews = true;
                           $time = preg_replace('/AM/', '<span style="background-color: red">AM</span>', $time); 
                       }
-                      $time = preg_replace('/PM/', '<span style="background-color: red; font-size: 35px;">PM CHECK NEWS</span>', $time); 
+                      $time = preg_replace('/PM/', '<table><tr><td><span style="background-color: red; font-size: 25px;">PM CHECK NEWS</span></td></tr></table>', $time); 
                   }
               } // for ($j = $yesterdayDays; $j >= 1; $j--)
 
@@ -447,7 +447,7 @@ $noTimeFound = false;
       $secMessage = " rowcount is " . $secTableRowCount . " "; 
       if ($secTableRowCount == 0)
       {
-        $secMessage = "<span style='font-size: 25px; background-color: red'> - CHECK STREET INSIDER</span>"; 
+        $secMessage = "<span style='font-size: 50px; background-color: red'> - CHECK STREET INSIDER</span>"; 
       }
 
       $returnHtml .= "<tr><td>Type</td><td>Title" . $secMessage . "</td><td>Date</td><td>Time</td></tr>"; 
