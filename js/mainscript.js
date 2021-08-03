@@ -719,7 +719,9 @@ $(function() {
 
             $("div#bigcharts_chart_container").html("<img style='max-width:100%; max-height:100%;' src='https://api.wsj.net/api/kaavio/charts/big.chart?nosettings=1&symb=" + original_symbol + "&uf=0&type=2&size=2&style=320&freq=1&entitlementtoken=0c33378313484ba9b46b8e24ded87dd6&time=4&rand=" + Math.random() + "&compidx=&ma=0&maval=9&lf=1&lf2=0&lf3=0&height=335&width=579&mocktick=1)'>");
 
-                 $("div#bigcharts_yest_close").html("<img style='max-width:100%; max-height:100%;' src='https://api.wsj.net/api/kaavio/charts/big.chart?nosettings=1&symb=" + original_symbol + "&uf=0&type=2&size=2&style=320&freq=9&entitlementtoken=0c33378313484ba9b46b8e24ded87dd6&time=1&rand=" + Math.random() + "&compidx=&ma=0&maval=9&lf=1&lf2=0&lf3=0&height=335&width=579&mocktick=1'>");
+            $("div#bigcharts_yest_close").html("<img style='max-width:100%; max-height:100%;' src='https://api.wsj.net/api/kaavio/charts/big.chart?nosettings=1&symb=" + original_symbol + "&uf=0&type=2&size=2&style=320&freq=9&entitlementtoken=0c33378313484ba9b46b8e24ded87dd6&time=1&rand=" + Math.random() + "&compidx=&ma=0&maval=9&lf=1&lf2=0&lf3=0&height=335&width=579&mocktick=1'>");
+
+            $("#entryPercentage").focus();     
 
 /*
 This just gets the yesterday close and last vix values, we don't need these yet, can always bring them back
@@ -765,6 +767,7 @@ This just gets the yesterday close and last vix values, we don't need these yet,
             dataType: 'html',
             success:  function (data) {
 
+              $("#entryPercentage").focus();   
               yahooHtmlResults = data; 
 
               console.log(data);
@@ -786,6 +789,7 @@ This just gets the yesterday close and last vix values, we don't need these yet,
               google_keyword_string = google_keyword_string.replace(/ltd\./ig, "");
 
               $("div#right_top_container").html(data);
+              $("#entryPercentage").focus();   
 
 
               // check if it's a Chinese or foreign stock
@@ -846,6 +850,7 @@ This just gets the yesterday close and last vix values, we don't need these yet,
         });  // yahoo ajax   
 
         $("div#right_top_container").css("background-color", "#F3F3FF");
+        $("#entryPercentage").focus();   
 
             // AJAX call to marketwatch 
 
@@ -872,6 +877,7 @@ This just gets the yesterday close and last vix values, we don't need these yet,
                      async: false, 
                     dataType: 'html',
                     success:  function (data) {
+                      $("#entryPercentage").focus();   
                       console.log(data);
 
                       if (
@@ -908,7 +914,7 @@ This just gets the yesterday close and last vix values, we don't need these yet,
             })(1);
 
         $("h1").css({"padding-top" : "0px", "margin-top" : "0px", "padding-bottom" : "0px", "margin-bottom" : "0px"}); 
-
+        $("#entryPercentage").focus();
 
         var warningMessage = ""; 
 
@@ -1025,6 +1031,7 @@ This just gets the yesterday close and last vix values, we don't need these yet,
         {
             myIframe.contentWindow.scrollTo(75, 100); 
         }
+        $("#entryPercentage").focus();   
 
     } // function startProcess()
 
@@ -1083,7 +1090,6 @@ This just gets the yesterday close and last vix values, we don't need these yet,
           if(e.keyCode==13)
           $('#submit_button').click();
     	});
-
 
     $('#entryPercentage').keypress(function(e){
 
