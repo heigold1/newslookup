@@ -80,6 +80,10 @@ function get_yahoo_todays_trade_date()
 }
 
 
+
+
+
+
 function get_marketwatch_trade_date($daysBack)
 {
     $trade_date = "";
@@ -569,7 +573,7 @@ if ($which_website == "marketwatch")
       $marketWatchNewsHTML = preg_replace('/ preliminary(.*?)outlook/i', '<span style="font-size: 12px; background-color:red; color:black"><b>&nbsp; Preliminary$1Outlook -</span> <span style="font-size: 12px; background-color:lightgreen; color:black">41% right off the bat, then 48% literally 3 minutes later.  TAKE NO MORE THAN 5% AND BAIL &nbsp;</b></span>&nbsp;', $marketWatchNewsHTML);
       $marketWatchNewsHTML = preg_replace('/ conference call to provide update/i', '<span style="font-size: 12px; background-color:red; color:black"><b>&nbsp; Conference Call to Provide Update -</span> <span style="font-size: 12px; background-color:lightgreen; color:black">CHECK THE DATE/TIME OF THE CALL &nbsp;</b></span>&nbsp;', $marketWatchNewsHTML);
       $marketWatchNewsHTML = preg_replace('/ fictitious sales/i', '<span style="font-size: 12px; background-color:red; color:black"><b>&nbsp; fictitious sales - STAY AWAY </b></span> &nbsp;', $marketWatchNewsHTML);
-      $marketWatchNewsHTML = preg_replace('/ board of directors/i', '<span style="font-size: 12px; background-color:red; color:black"><b>&nbsp; board of directors - if change to board of directors - 20%, China 25, if penny then for China 39% </b></span> &nbsp;', $marketWatchNewsHTML);
+      $marketWatchNewsHTML = preg_replace('/ board of directors/i', '<span style="font-size: 12px; background-color:red; color:black"><b>&nbsp; board of directors - if change to board of directors - 20%  </b></span> &nbsp;', $marketWatchNewsHTML);
       $marketWatchNewsHTML = preg_replace('/ class action/i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp; class action</b></span> &nbsp;', $marketWatchNewsHTML);
       $marketWatchNewsHTML = preg_replace('/ business combination/i', '<span style="font-size: 12px; background-color:red; color:black"><b>&nbsp; business combination - BE CAREFUL, could get de-listed </b></span> &nbsp;', $marketWatchNewsHTML);
       $marketWatchNewsHTML = preg_replace('/ annual meeting of shareholders/i', '<span style="font-size: 12px; background-color:red; color:black"><b>&nbsp; annual meeting of shareholders - 40% early </b></span> &nbsp;', $marketWatchNewsHTML);
@@ -886,6 +890,25 @@ else if ($which_website == "yahoo")
       }
       $googleNews .=  "</ul>";
 
+
+      /*** Seeking Alpha RSS Parse ***/ 
+
+
+
+
+      /*** End of Seeking Alpha RSS Parse ***/ 
+
+
+
+
+
+
+
+
+
+
+
+
       $finalReturn = "<td valign='top' style='width: 50%' >" . str_replace('<a ', '<a target="_blank" onclick="return openPage(this.href)" ', $allNews) . '</td><td valign="top" style="width: 50%">' . str_replace('<a ', '<a target="_blank" onclick="return openPage(this.href)" ', $googleNews) . '</td>';
 
       $finalReturn = preg_replace($patterns = array("/<img[^>]+\>/i", "/<embed.+?<\/embed>/im", "/<iframe.+?<\/iframe>/im", "/<script.+?<\/script>/im"), $replace = array("", "", "", ""), $finalReturn);
@@ -970,7 +993,7 @@ else if ($which_website == "yahoo")
       $finalReturn = preg_replace('/ conference call to provide update/i', '<span style="font-size: 12px; background-color:red; color:black"><b>&nbsp; Conference Call to Provide Update -</span> <span style="font-size: 12px; background-color:lightgreen; color:black">CHECK THE DATE/TIME OF THE CALL &nbsp;</b></span>&nbsp;', $finalReturn);
       $finalReturn = preg_replace('/ seeking alpha/i', '<span style="font-size: 25px; background-color:red; color:black">SEEKING ALPHA &nbsp;</b></span>&nbsp;', $finalReturn);
       $finalReturn = preg_replace('/ fictitious sales/i', '<span style="font-size: 12px; background-color:red; color:black"><b>&nbsp; fictitious sales - STAY AWAY </b></span> &nbsp;', $finalReturn);     
-      $finalReturn = preg_replace('/ board of directors/i', '<span style="font-size: 12px; background-color:red; color:black"><b>&nbsp; board of directors - if change to board of directors - 20%, China 25%, if penny then for China 39%  </b></span> &nbsp;', $finalReturn);
+      $finalReturn = preg_replace('/ board of directors/i', '<span style="font-size: 12px; background-color:red; color:black"><b>&nbsp; board of directors - if change to board of directors - 20% </b></span> &nbsp;', $finalReturn);
       $finalReturn = preg_replace('/ class action/i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp; class action</b></span> &nbsp;', $finalReturn);
       $finalReturn = preg_replace('/ business combination/i', '<span style="font-size: 12px; background-color:red; color:black"><b>&nbsp; business combination - BE CAREFUL, could get de-listed </b></span> &nbsp;', $finalReturn);
       $finalReturn = preg_replace('/ annual meeting of shareholders/i', '<span style="font-size: 12px; background-color:red; color:black"><b>&nbsp; annual meeting of shareholders - 40% early</b></span> &nbsp;', $finalReturn);
@@ -1042,7 +1065,7 @@ else if ($which_website == "yahoo")
       $nasdaqInfo = '&nbsp;&nbsp;<a target="_blank" onclick="return openPage(this.href)" href="https://www.nasdaq.com/symbol/' . $symbol . '/sec-filings"> Nasdaq Info</a>&nbsp;&nbsp;&nbsp;&nbsp;'; 
       $streetInsider = '&nbsp;&nbsp;<a target="_blank" onclick="return openPage(this.href)" href="https://www.streetinsider.com/stock_lookup.php?LookUp=Get+Quote&q=' . $symbol . '"> SI</a>&nbsp;&nbsp;&nbsp;&nbsp;'; 
 
-      $streetInsiderScrape = '&nbsp;&nbsp;<a target="_blank" onclick="return openPage(this.href)" href="http://ec2-54-210-42-143.compute-1.amazonaws.com/newslookup/scrape-street-insider.php?symbol=' . $symbol . '"> SI Scrape</a>&nbsp;&nbsp;&nbsp;&nbsp;'; 
+      $streetInsiderScrape = '&nbsp;&nbsp;<a target="_blank" onclick="return openPage(this.href)" href="http://ec2-54-210-42-143.compute-1.amazonaws.com/newslookup/scrape-street-insider.php?symbol=' . $symbol . '"> SI Scrape</a>&nbsp;&nbsp;&nbsp;&nbsp;';  
 
       $splits = '&nbsp;&nbsp;<a target="_blank" onclick="return openPage(this.href)" href="https://www.stocksplithistory.com/?symbol=' . $symbol . '"> Splits</a>&nbsp;&nbsp;&nbsp;&nbsp;'; 
 

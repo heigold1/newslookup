@@ -799,10 +799,9 @@ This just gets the yesterday close and last vix values, we don't need these yet,
                   foreignCountry = false;
               }
 
-              if ((yahooHtmlResults.search(/>China</) > 0) || (yahooHtmlResults.search(/>Hong Kong</) > 0))
+              if ((yahooHtmlResults.search(/China/i) > 0) || (yahooHtmlResults.search(/Hong Kong/i) > 0) || (yahooHtmlResults.search(/Taiwan/i) > 0))
               {
                   chineseStock = true;
-
               }
 
 //              data = data.replace('<span id="country">China', '<span id="country" style="font-size:300px; background-color:red"><br><br>China<br>');
@@ -986,10 +985,17 @@ This just gets the yesterday close and last vix values, we don't need these yet,
             $("#day3_low").css({'background-color' : 'red', 'font-size' : '19px'});
         }
 
+        if (exchange == "PK")
+        {
+          $("#left_bottom_container").css("background-color", "#FFC0CB");  
+          $("#right_top_container").css("background-color", "#FFC0CB");            
+        }
+
         if (chineseStock == true)
         {
             playChineseStock(); 
-            warningMessage += " ** CHINESE COMPANY - 58% ** ";          
+            warningMessage += " ** CHINESE COMPANY - 58% ** ";   
+            $("#right_top_container").css("background-color", "yellow");            
         }
         else if (foreignCountry == true)
         {
@@ -1018,13 +1024,6 @@ This just gets the yesterday close and last vix values, we don't need these yet,
         {
 //            alert(warningMessage);
         }
-
-        if (exchange == "PK")
-        {
-          $("#left_bottom_container").css("background-color", "#FFC0CB");  
-          $("#right_top_container").css("background-color", "#FFC0CB");            
-        }
-
 
         var myIframe = document.getElementById('streetInsiderIFrame');
         if (myIframe != null)
