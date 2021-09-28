@@ -630,7 +630,7 @@ if ($which_website == "marketwatch")
       $marketWatchNewsHTML = preg_replace('/ schedules/i', '<span style="font-size: 25px; background-color: black; color:white"><b>&nbsp; SCHEDULES - CHECK THE DATE </b></span>&nbsp;', $marketWatchNewsHTML);
       $marketWatchNewsHTML = preg_replace('/ sets date for the release of/i', '<span style="font-size: 25px; background-color: black; color:white"><b>&nbsp; SETS DATE FOR THE RELEASE OF - CHECK THE DATE </b></span>&nbsp;', $marketWatchNewsHTML);
       $marketWatchNewsHTML = preg_replace('/ collaboration/i', '<span style="font-size: 25px; background-color: red; color:white"><b>&nbsp; COLLABORATION - CAREFUL </b></span>&nbsp;', $marketWatchNewsHTML);
-      $marketWatchNewsHTML = preg_replace('/ china/i', '<span style="font-size: 35px; background-color: red; color:black"><b>&nbsp; CHINA </b></span>&nbsp;', $marketWatchNewsHTML);
+      $marketWatchNewsHTML = preg_replace('/ china/i', '<span style="font-size: 25px; background-color: red; color:black"><b>&nbsp; CHINA </b></span>&nbsp;', $marketWatchNewsHTML);
 
 
 
@@ -873,7 +873,7 @@ else if ($which_website == "yahoo")
 
       $stockSplitsTable = $splitsTable[4]; 
 
-      $googleNews = $stockSplitsTable . "<ul class='newsSide'>";
+      $googleNews = "<ul class='newsSide'>";
       $googleNews .= "<li style='font-size: 20px !important'>Google News</li>";
       $i = 0;
       foreach ($googleRSSArray as $feedItem) {
@@ -893,10 +893,79 @@ else if ($which_website == "yahoo")
 
       /*** Seeking Alpha RSS Parse ***/ 
 
+      $rssSeekingAlpha = simplexml_load_file("https://seekingalpha.com/api/sa/combined/" . $symbol . ".xml");
+
+      $seekingAlphaNews = "<ul class='newsSide'>";
+      $seekingAlphaNews .= "<li style='font-size: 20px !important'>Seeking Alpha News</li>";
+
+      $classActionAdded = false;
+      $j = 0;
+      foreach ($rssSeekingAlpha->channel->item as $feedItem) {
+        $j++;
+
+        // Convert time from GMT to  AM/PM New York
+        $publicationDateStrToTime = strtotime($feedItem->pubDate);
+
+        $convertedDate = new DateTime(); 
+        $convertedDate->setTimestamp($publicationDateStrToTime);
+
+        $publicationDate = $feedItem->pubDate;
+        $publicationDate = preg_replace("/[0-9][0-9]\:[0-9][0-9]\:[0-9][0-9] \-[0-9][0-9][0-9][0-9]/", "", $publicationDate); 
+        $publicationTime = $convertedDate->format("g:i A");
+
+        $newsTitle = $feedItem->title; 
+
+        if (preg_match('/class.action/i', $newsTitle))
+        {
+            if ($classActionAdded == true)
+            {
+              continue;              
+            }
+            else
+            {
+              $classActionAdded = true;
+            }
+        }
+
+        $seekingAlphaNews .= "<li "; 
+
+        // red/green highlighting for yesterday/today
+        for ($i = $yesterdayDays; $i >= 1; $i--)
+        {
+            if (preg_match('/(' .  get_yahoo_trade_date($i) . ')/', $publicationDate))
+            {
+                $publicationTime = preg_replace('/PM/', '<span style="background-color: red">PM</span>', $publicationTime); 
+                if ($i == $yesterdayDays) 
+                {
+                    $publicationTime = preg_replace('/AM/', '<span style="background-color: lightgreen">AM</span>', $publicationTime); 
+              
+                }
+                else
+                {
+                    $publicationTime = preg_replace('/AM/', '<span style="background-color: red">AM</span>', $publicationTime); 
+                }  
+            }
+        }
+
+        if ($j % 2 == 1)
+        {
+          $seekingAlphaNews .=  "style='background-color: #FFFFFF; '"; 
+        };
+        
+        // if the regular expression contains (.*) then we need to do it per title, to avoid greedy regular expressions
+
+        $newsTitle = preg_replace('/ withdrawal(.*?)application/i', '<span style="font-size: 12px; background-color:red; color:black"><b> withdrawal $1 application (55%) </b></span> ', $newsTitle);
+        $newsTitle = preg_replace('/nasdaq rejects(.*?)listing/i', '<span style="font-size: 12px; background-color:red; color:black"><b>Nasdaq rejects $1 listing</span> If delisting tomorrow 65%, if delisting days away then 50-55%</b>&nbsp;', $newsTitle);
+
+        $seekingAlphaNews .=  " ><a target='_blank' href='$feedItem->link'> " . $publicationDate . " " . $publicationTime . " - " . $newsTitle;
+      }
+
+      $seekingAlphaNews .=  "</ul>";
+
+    /*** End of Seeking Alpha RSS Parse ***/ 
 
 
 
-      /*** End of Seeking Alpha RSS Parse ***/ 
 
 
 
@@ -906,10 +975,7 @@ else if ($which_website == "yahoo")
 
 
 
-
-
-
-      $finalReturn = "<td valign='top' style='width: 50%' >" . str_replace('<a ', '<a target="_blank" onclick="return openPage(this.href)" ', $allNews) . '</td><td valign="top" style="width: 50%">' . str_replace('<a ', '<a target="_blank" onclick="return openPage(this.href)" ', $googleNews) . '</td>';
+      $finalReturn = "<td valign='top' style='width: 50%' >" . str_replace('<a ', '<a target="_blank" onclick="return openPage(this.href)" ', $allNews) . '</td><td valign="top" style="width: 50%">' . $stockSplitsTable . $seekingAlphaNews . str_replace('<a ', '<a target="_blank" onclick="return openPage(this.href)" ', $googleNews) . '</td>';
 
       $finalReturn = preg_replace($patterns = array("/<img[^>]+\>/i", "/<embed.+?<\/embed>/im", "/<iframe.+?<\/iframe>/im", "/<script.+?<\/script>/im"), $replace = array("", "", "", ""), $finalReturn);
 
@@ -1050,7 +1116,7 @@ else if ($which_website == "yahoo")
       $finalReturn = preg_replace('/ schedules/i', '<span style="font-size: 25px; background-color: black; color:white"><b>&nbsp; SCHEDULES - CHECK THE DATE </b></span>&nbsp;', $finalReturn);
       $finalReturn = preg_replace('/ sets date for the release of/i', '<span style="font-size: 25px; background-color: black; color:white"><b>&nbsp; SETS DATE FOR THE RELEASE OF - CHECK THE DATE </b></span>&nbsp;', $finalReturn);
       $finalReturn = preg_replace('/ collaboration/i', '<span style="font-size: 25px; background-color: red; color:black"><b>&nbsp; COLLABORATION - CAREFUL </b></span>&nbsp;', $finalReturn);
-      $finalReturn = preg_replace('/ china/i', '<span style="font-size: 35px; background-color: red; color:black"><b>&nbsp; CHINA </b></span>&nbsp;', $finalReturn);
+      $finalReturn = preg_replace('/ china/i', '<span style="font-size: 25px; background-color: red; color:black"><b>&nbsp; CHINA </b></span>&nbsp;', $finalReturn);
 
 
 
