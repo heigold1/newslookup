@@ -192,6 +192,21 @@ function grabHTML($function_host_name, $url)
 
 } // end of function grabHTML
 
+function produce_XML_object_tree($raw_XML) {
+    libxml_use_internal_errors(true);
+    try {
+        $xmlTree = new SimpleXMLElement($raw_XML);
+    } catch (Exception $e) {
+        // Something went wrong.
+        $error_message = 'SimpleXMLElement threw an exception.';
+        foreach(libxml_get_errors() as $error_line) {
+            $error_message .= "\t" . $error_line->message;
+        }
+        trigger_error($error_message);
+        return false;
+    }
+    return $xmlTree;
+}
 
 function getSectorIndustry()
 {
@@ -321,13 +336,14 @@ $noTimeFound = false;
       $recentNews = false;
       $secTableRowCount = 0; 
 
-          $xmlFinalString=simplexml_load_file($rssFullLink);
+          $xmlFinalString=grabHTML('www.sec.gov', $rssFullLink);
+          $xmlFinalObject = produce_XML_object_tree($xmlFinalString); 
 
           $registrationOffering = "";
 
           for ($i = 0; $i < 5; $i++)
            { 
-              $entryRowObject = $xmlFinalString->entry[0];
+              $entryRowObject = $xmlFinalObject->entry[0];
               $filingType = "";
 
               if (!$entryRowObject)
@@ -335,10 +351,10 @@ $noTimeFound = false;
                   break;
               }
 
-              $entryContent = $xmlFinalString->entry[$i]->content; 
+              $entryContent = $xmlFinalObject->entry[$i]->content; 
 
               $title = ""; 
-              $datestamp = getDateFromUTC($xmlFinalString->entry[$i]->updated);
+              $datestamp = getDateFromUTC($xmlFinalObject->entry[$i]->updated);
               $itemDescription = ""; 
 
               foreach($entryContent as $k => $v){
@@ -360,9 +376,9 @@ $noTimeFound = false;
                   }
               }
 
-              $time = getAMPMTimeFromUTC($xmlFinalString->entry[$i]->updated);
+              $time = getAMPMTimeFromUTC($xmlFinalObject->entry[$i]->updated);
 
-              $firstLink  = $xmlFinalString->entry[$i]->link['href']; 
+              $firstLink  = $xmlFinalObject->entry[$i]->link['href']; 
               $firstLinkResults = grabHTML('www.sec.gov', $firstLink); 
 
 
@@ -375,7 +391,7 @@ $noTimeFound = false;
 
               $href2 = 'https://www.sec.gov' . $a2[0]->href;
 
-              $time = getAMPMTimeFromUTC($xmlFinalString->entry[$i]->updated);
+              $time = getAMPMTimeFromUTC($xmlFinalObject->entry[$i]->updated);
               for ($j = $yesterdayDays; $j >= 1; $j--)
               {
                   $datestamp = preg_replace('/(' .  get_trade_date($j) . ')/', '<span style="font-size: 16px; background-color:#000080; color:white">$1</span>', $datestamp);
@@ -384,7 +400,7 @@ $noTimeFound = false;
 
                       if ($j == $yesterdayDays)
                       {
-                          if (!timestampIsSafe($xmlFinalString->entry[$i]->updated))
+                          if (!timestampIsSafe($xmlFinalObject->entry[$i]->updated))
                           {
                               $recentNews = true;
                           }
