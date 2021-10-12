@@ -856,7 +856,7 @@ This just gets the yesterday close and last vix values, we don't need these yet,
             (function(){
 
 /*               var eTradeIFrame = '<br><iframe id="etrade_iframe" src="https://www.etrade.wallst.com/v1/stocks/news/search_results.asp?symbol=' + symbol + '&rsO=new#lastTradeTime" width="675px" height="500px"></iframe>';  */
-               var streetInsiderIFrame = '<br><iframe src="https://www.streetinsider.com/stock_lookup.php?LookUp=Get+Quote&q=' + symbol + '#stock_pod_nav" width="675px" height="500px"></iframe>'; 
+               var streetInsiderIFrame = '<br><iframe src="https://www.streetinsider.com/stock_lookup.php?LookUp=Get+Quote&q=' + symbol + '#stock_pod_nav" width="675px" height="300px"></iframe>'; 
 
 
               $("div#left_bottom_container").css("background-color", "#BBDDFF");
@@ -905,7 +905,7 @@ This just gets the yesterday close and last vix values, we don't need these yet,
                         playDelist();
                       }
 
-                      $("div#left_bottom_container").html( data +  streetInsiderIFrame ); 
+                      $("div#left_bottom_container").html( streetInsiderIFrame + data); 
                   }
                 });  // end of AJAX call to marketwatch    
 
