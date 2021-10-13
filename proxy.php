@@ -631,6 +631,9 @@ if ($which_website == "marketwatch")
       $marketWatchNewsHTML = preg_replace('/ sets date for the release of/i', '<span style="font-size: 25px; background-color: black; color:white"><b>&nbsp; SETS DATE FOR THE RELEASE OF - CHECK THE DATE </b></span>&nbsp;', $marketWatchNewsHTML);
       $marketWatchNewsHTML = preg_replace('/ collaboration/i', '<span style="font-size: 25px; background-color: red; color:white"><b>&nbsp; COLLABORATION - CAREFUL </b></span>&nbsp;', $marketWatchNewsHTML);
       $marketWatchNewsHTML = preg_replace('/ china/i', '<span style="font-size: 25px; background-color: red; color:black"><b>&nbsp; CHINA </b></span>&nbsp;', $marketWatchNewsHTML);
+      $marketWatchNewsHTML = preg_replace('/ taiwan/i', '<span style="font-size: 25px; background-color: red; color:black"><b>&nbsp; TAIWAN </b></span>&nbsp;', $marketWatchNewsHTML);
+      $marketWatchNewsHTML = preg_replace('/ hong kong/i', '<span style="font-size: 25px; background-color: red; color:black"><b>&nbsp; HONG KONG </b></span>&nbsp;', $marketWatchNewsHTML);
+      $marketWatchNewsHTML = preg_replace('/ kerrisdale/i', '<span style="font-size: 25px; background-color: red; color:black"><b>&nbsp; Kerrisdale - 65% </b></span>&nbsp;', $marketWatchNewsHTML);
 
 
 
@@ -1117,6 +1120,9 @@ else if ($which_website == "yahoo")
       $finalReturn = preg_replace('/ sets date for the release of/i', '<span style="font-size: 25px; background-color: black; color:white"><b>&nbsp; SETS DATE FOR THE RELEASE OF - CHECK THE DATE </b></span>&nbsp;', $finalReturn);
       $finalReturn = preg_replace('/ collaboration/i', '<span style="font-size: 25px; background-color: red; color:black"><b>&nbsp; COLLABORATION - CAREFUL </b></span>&nbsp;', $finalReturn);
       $finalReturn = preg_replace('/ china/i', '<span style="font-size: 25px; background-color: red; color:black"><b>&nbsp; CHINA </b></span>&nbsp;', $finalReturn);
+      $finalReturn = preg_replace('/ taiwan/i', '<span style="font-size: 25px; background-color: red; color:black"><b>&nbsp; TAIWAN </b></span>&nbsp;', $finalReturn);
+      $finalReturn = preg_replace('/ hong kong/i', '<span style="font-size: 25px; background-color: red; color:black"><b>&nbsp; HONG KONG </b></span>&nbsp;', $finalReturn);
+      $finalReturn = preg_replace('/ kerrisdale/i', '<span style="font-size: 25px; background-color: red; color:black"><b>&nbsp; Kerrisdale - 65% </b></span>&nbsp;', $finalReturn);
 
 
 

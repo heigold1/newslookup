@@ -470,7 +470,7 @@ $noTimeFound = false;
       $returnHtml .= $tableRows;
       $returnHtml .=  "</table>";
 
-      $returnHtml .=  '<a style="font-size: 35px" target="_blank" href="http://ec2-54-210-42-143.compute-1.amazonaws.com/newslookup/scrape-street-insider.php?symbol=' . $symbol . '">Street Insider Scrape</a><br> 
+      $returnLinks .=  '<a style="font-size: 35px" target="_blank" href="http://ec2-54-210-42-143.compute-1.amazonaws.com/newslookup/scrape-street-insider.php?symbol=' . $symbol . '">Street Insider Scrape</a><br> 
         <a style="font-size: 35px" target="_blank" href="https://www.streetinsider.com/stock_lookup.php?LookUp=Get+Quote&q=' . $symbol . '">Street Insider Actual Page</a><br>
         <a style="font-size: 35px" target="_blank" href="https://www.nasdaq.com/symbol/' . $symbol . '/sec-filings">Nasdaq</a><br>
         <a style="font-size: 35px" target="_blank" href="https://seekingalpha.com/symbol/' . $symbol . '?s=' . $symbol . '">Seeking Alpha</a><br>
@@ -480,12 +480,16 @@ $noTimeFound = false;
 
         '; 
 
-      $returnHtml .= getSectorIndustry(); 
+      $returnSectorIndustry .= getSectorIndustry(); 
 
       $returnHtml .=  "</body>";
       $returnHtml .=  "</html>";
 
-      echo $returnHtml; 
+      $returnArray['html'] = $returnHtml; 
+      $returnArray['links'] = $returnLinks;
+      $returnArray['sector_industry'] = $returnSectorIndustry; 
+
+      echo json_encode($returnArray); 
 
 ?>
 
