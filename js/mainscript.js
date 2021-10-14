@@ -905,9 +905,19 @@ This just gets the yesterday close and last vix values, we don't need these yet,
                         playDelist();
                       }
 
+                      console.log("Data is:"); 
+                      console.log(data); 
+
+
+/*
                       var html = JSON.parse(data); 
 
-                      $("div#left_bottom_container").html(html.html + streetInsiderIFrame + html.sector_industry + html.links); 
+console.log("html is:"); 
+console.log(html); 
+*/
+
+                      $("div#left_bottom_container").html(streetInsiderIFrame + data); 
+
                   }
                 });  // end of AJAX call to marketwatch    
 

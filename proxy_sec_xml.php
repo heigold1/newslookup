@@ -1,7 +1,7 @@
 <?php 
 
 require_once("simple_html_dom.php"); 
-error_reporting(1);
+error_reporting(E_ALL);
 
 $symbol=$_GET['symbol'];
 $secCompanyName = $_GET['secCompanyName'];
@@ -179,7 +179,7 @@ function grabHTML($function_host_name, $url)
     curl_setopt($ch,CURLOPT_HTTPHEADER,$header);
 
     curl_setopt($ch, CURLOPT_VERBOSE, true);
-    curl_setopt($ch, CURLOPT_STDERR,$f = fopen(__DIR__ . "/error.log", "w+"));
+//     curl_setopt($ch, CURLOPT_STDERR,$f = fopen(__DIR__ . "/error.log", "w+"));
 
     $returnHTML = curl_exec($ch); 
 
@@ -470,7 +470,7 @@ $noTimeFound = false;
       $returnHtml .= $tableRows;
       $returnHtml .=  "</table>";
 
-      $returnLinks .=  '<a style="font-size: 35px" target="_blank" href="http://ec2-54-210-42-143.compute-1.amazonaws.com/newslookup/scrape-street-insider.php?symbol=' . $symbol . '">Street Insider Scrape</a><br> 
+      $returnHtml .=  '<a style="font-size: 35px" target="_blank" href="http://ec2-54-210-42-143.compute-1.amazonaws.com/newslookup/scrape-street-insider.php?symbol=' . $symbol . '">Street Insider Scrape</a><br> 
         <a style="font-size: 35px" target="_blank" href="https://www.streetinsider.com/stock_lookup.php?LookUp=Get+Quote&q=' . $symbol . '">Street Insider Actual Page</a><br>
         <a style="font-size: 35px" target="_blank" href="https://www.nasdaq.com/symbol/' . $symbol . '/sec-filings">Nasdaq</a><br>
         <a style="font-size: 35px" target="_blank" href="https://seekingalpha.com/symbol/' . $symbol . '?s=' . $symbol . '">Seeking Alpha</a><br>
@@ -480,16 +480,23 @@ $noTimeFound = false;
 
         '; 
 
-      $returnSectorIndustry .= getSectorIndustry(); 
+      $returnHtml .= getSectorIndustry(); 
 
       $returnHtml .=  "</body>";
       $returnHtml .=  "</html>";
 
+/*
       $returnArray['html'] = $returnHtml; 
       $returnArray['links'] = $returnLinks;
       $returnArray['sector_industry'] = $returnSectorIndustry; 
 
-      echo json_encode($returnArray); 
+      $returnFinalArray = json_encode($returnArray); 
+
+      file_put_contents("returnFinalArray.txt", $returnFinalArray); 
+
+      echo json_encode($returnFinalArray); 
+*/
+      echo $returnHtml;       
 
 ?>
 
