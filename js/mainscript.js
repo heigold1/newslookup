@@ -1061,6 +1061,22 @@ console.log(html);
       CopyToClipboard();  
     }); // End of click function 
 
+   $("#pink_sheet_0002").click(function(){
+
+      $("#amountSpending").val("100");
+      $("#entryPrice").val("0.0002"); 
+      calcAll();
+      CopyToClipboard();  
+    }); // End of click function 
+
+   $("#pink_sheet_0006").click(function(){
+
+      $("#amountSpending").val("300");
+      $("#entryPrice").val("0.0006"); 
+      calcAll();
+      CopyToClipboard();  
+    }); // End of click function 
+
 
    $("#earnings_button").click(function(){
 

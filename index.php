@@ -37,6 +37,12 @@
 								<span>
 									<input type="checkbox" id="redo_localhost_checkbox" value="0">Redo local
 								</span> 
+								<span>
+									<input id="pink_sheet_0002" type="submit" value="$0.0002">
+								</span>
+								<span>
+									<input id="pink_sheet_0006" type="submit" value="$0.0006">
+								</span>
 							</td>
 						</tr>
 					</table> 
