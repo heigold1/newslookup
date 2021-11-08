@@ -388,11 +388,15 @@ function getStreetInsider($symbol, $yesterdayDays)
 
         $classActionAdded = false;
         $j = 0;
+
+        $previousNewsTitle = "";
+        $currentNewsTitle = ""; 
+
         foreach ($xmlFinalObject->channel->item as $feedItem) {
             $j++;
 
             // Convert time from GMT to  AM/PM New York
-            $publicationDateStrToTime = strtotime($feedItem->pubDate);
+            $publicationDateStrToTime = strtotime($feedItem->pubDate) - 14400;
 
             $convertedDate = new DateTime(); 
             $convertedDate->setTimestamp($publicationDateStrToTime);
@@ -402,11 +406,18 @@ function getStreetInsider($symbol, $yesterdayDays)
             $publicationTime = $convertedDate->format("g:i A");
 
             $newsTitle = $feedItem->title; 
+            $currentNewsTitle = $newsTitle; 
+            if (strcmp($previousNewsTitle, $currentNewsTitle) == 0)
+            {
+                $j--; 
+                continue; 
+            }
 
             if (preg_match('/class.action/i', $newsTitle))
             {
                 if ($classActionAdded == true)
                 {
+                  $j--;
                   continue;              
                 }
                 else
@@ -446,14 +457,16 @@ function getStreetInsider($symbol, $yesterdayDays)
             $newsTitle = preg_replace('/nasdaq rejects(.*?)listing/i', '<span style="font-size: 12px; background-color:red; color:black"><b>Nasdaq rejects $1 listing</span> If delisting tomorrow 65%, if delisting days away then 50-55%</b>&nbsp;', $newsTitle);
 
             $streetInsiderNews .=  " ><a target='_blank' href='$feedItem->link'> " . $publicationDate . " " . $publicationTime . " - " . $newsTitle . "</a>";
-        }
+
+            $previousNewsTitle = $currentNewsTitle; 
+        } // looping through each news channel item 
 
         $streetInsiderNews .=  "</ul>";
 
         $streetInsiderNews = preg_replace('/(' .  get_yahoo_yesterday_trade_date() . ')/', '<span style="font-size: 12px; background-color:   #000080; color:white"> $1</span> ', $streetInsiderNews);
         $streetInsiderNews = preg_replace('/(' .  get_yahoo_todays_trade_date() . ')/', '<span style="font-size: 12px; background-color:  black; color:white"> $1</span> ', $streetInsiderNews);
 
-        $streetInsiderNews .=  $yesterdayDays . "<br>"; 
+        $streetInsiderNews .=  "<br>"; 
 
         // yellow highlighting for before yesterday
         for ($daysBack = 14; $daysBack > $yesterdayDays; $daysBack--)
@@ -485,7 +498,7 @@ function getStreetInsider($symbol, $yesterdayDays)
         } 
     }  // if either we didn't find it in the database, or it hasn't been half an hour since we last scraped it. 
 
-    return "<div style='height: 275px; width: 100%; overflow-y:auto'>" . $streetInsiderNews . "</div>"; 
+    return "<div style='height: 250px; width: 100%; overflow-y:auto; border-style: double !important; border-color: black !important; color: black;'>" . $streetInsiderNews . "</div>"; 
 
 } // end of getStreetInsider 
 
