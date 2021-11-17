@@ -4,7 +4,7 @@ include './Samples/config.php';
 
 require_once("simple_html_dom.php"); 
 
-$yesterdayDays = 3;
+$yesterdayDays = 1;
 
 error_reporting(1);
 //ini_set('display_errors', 1);
@@ -1112,6 +1112,10 @@ else if ($which_website == "yahoo")
       $finalReturn = preg_replace('/ taiwan/i', '<span style="font-size: 25px; background-color: red; color:black"><b>&nbsp; TAIWAN </b></span>&nbsp;', $finalReturn);
       $finalReturn = preg_replace('/ hong kong/i', '<span style="font-size: 25px; background-color: red; color:black"><b>&nbsp; HONG KONG </b></span>&nbsp;', $finalReturn);
       $finalReturn = preg_replace('/ kerrisdale/i', '<span style="font-size: 25px; background-color: red; color:black"><b>&nbsp; Kerrisdale - 65% </b></span>&nbsp;', $finalReturn);
+      $finalReturn = preg_replace('/ q1 results/i', '<span style="font-size: 25px; background-color: red; color:black"><b>&nbsp; Q1 RESULTS </b></span>&nbsp;', $finalReturn);
+      $finalReturn = preg_replace('/ q2 results/i', '<span style="font-size: 25px; background-color: red; color:black"><b>&nbsp; Q2 RESULTS </b></span>&nbsp;', $finalReturn);
+      $finalReturn = preg_replace('/ q3 results/i', '<span style="font-size: 25px; background-color: red; color:black"><b>&nbsp; Q3 RESULTS </b></span>&nbsp;', $finalReturn);
+      $finalReturn = preg_replace('/ q4 results/i', '<span style="font-size: 25px; background-color: red; color:black"><b>&nbsp; Q4 RESULTS </b></span>&nbsp;', $finalReturn);
 
 
 
