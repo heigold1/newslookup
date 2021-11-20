@@ -185,7 +185,6 @@ console.log("inside calcAll");
 
 function calcBigChartsPercentage()
 {
-/*
     var myBigchartsPercentage = $("#bigcharts_percent_change").html(); 
     var myCalculatedPercentage = $("#calculatedPercentage").html(); 
 
@@ -194,12 +193,16 @@ function calcBigChartsPercentage()
 
 
     var bigChartsDifference = myCalculatedPercentage - myBigchartsPercentage; 
-    alert ("bigChartsDifference is " + myCalculatedPercentage + '-' + myBigchartsPercentage + '=' + bigChartsDifference); 
+//    alert ("bigChartsDifference is " + myCalculatedPercentage + '-' + myBigchartsPercentage + '=' + bigChartsDifference); 
     if (bigChartsDifference > 10)
     {
-      alert('good to go'); 
+        $("#td_bigcharts_change").css("background-color", "#00ff00");  
     }
-*/
+    else 
+    {
+        $("#td_bigcharts_change").css("background-color", "transparent");  
+    }
+
 }
 
 // if the user manually types in a new number of shares, recalculate only the order stub 
@@ -1149,6 +1152,7 @@ console.log(html);
             return; 
           }
 
+/*
           var volumeChecked = $("#volumeChecked").html();
           if (volumeChecked == "0")
           {
@@ -1161,11 +1165,11 @@ console.log(html);
 
             $("#volumeChecked").html("1");
           }
+*/
  
           if(e.keyCode==13)
           {
             calcAll(); 
-            calcBigChartsPercentage(); 
             $('#copy_price_to_percentage').click();
             CopyToClipboard();  
             $("#entryPrice").focus();   
@@ -1209,14 +1213,11 @@ console.log(html);
     //      $('#submit_button').click();
     });  // end of entryPercentage change function
 
-
-
-
-
     $(document.body).on('keyup', "#entryPrice", function(){
           calcAll(); 
           CopyToClipboard();
           $("#entryPrice").focus();
+          calcBigChartsPercentage(); 
     });  // end of entryPrice change function
 
     $('#yestCloseText').keypress(function(e){
