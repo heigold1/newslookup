@@ -1141,49 +1141,22 @@ else if ($which_website == "yahoo")
 } // if ($which_website == "yahoo")
 else if ($which_website == "bigcharts")
 {
-      $url = "http://$host_name/quickchart/quickchart.asp?symb=$symbol&insttype=&freq=1&show=&time=8";
-      $result = grabHTML($host_name, $url);
-      $html = str_get_html($result);  
-
-
-      $bigChartsYestClose = $html->find('table#quote tbody tr td div'); 
-      $bigChartsYestClose[4] = preg_replace('/<div>/', '<div><b>PRE MKT prev close (last)</b> - $', $bigChartsYestClose[4]); 
-
-      $bigChartsHighLow = $html->find('td.maincontent table#quote tbody tr td div'); 
-
-      $bigChartsReturn = $bigChartsYestClose[4]; 
-
-      $bigChartsHigh = $bigChartsHighLow[7];
-      $bigChartsLow = $bigChartsHighLow[8];      
-      $bigChartsHigh = preg_replace('/<div>/', '', $bigChartsHigh); 
-      $bigChartsHigh = preg_replace('/<\/div>/', '', $bigCharsHigh);       
-      $bigChartsHigh = (float)$bigChartsHigh; 
-      $bigChartsLow = preg_replace('/<div>/', '', $bigChartsLow);       
-      $bigChartsLow = preg_replace('/<\/div>/', '', $bigChartsLow); 
-      $bigChartsLow = (float)$bigChartsLow;
-
-      $percentageChange = number_format((100*(($bigChartsHigh - $bigChartsLow)/$bigChartsLow)), 4); 
-
-      $bigChartsHigh = number_format($bigChartsHigh, 4); 
-      $bigChartsLow = number_format($bigChartsLow, 4);
-
-      $percentageChangeText = '<br><b>&nbsp; % Change</b> - \$' . $bigChartsHigh .'/\$' . $bigChartsLow . ' = ' . $percentageChange; 
-
-      // grab the last vix value 
-      $url = "http://bigcharts.marketwatch.com/quickchart/quickchart.asp?symb=vix&insttype=&freq=9&show=&time=1"; 
+      // grab the last value from bigcharts
+      $url = "https://bigcharts.marketwatch.com/quickchart/quickchart.asp?symb=" . $symbol . "&insttype=&freq=9&show=&time=1&rand=" . rand(); 
  
       $result = grabHTML("bigcharts.marketwatch.com", $url);
       $html = str_get_html($result);  
 
-      $vixTDArray = $html->find('table#quote tbody tr td div'); 
+      $tdArray = $html->find('td.change div'); 
 
-      $vixTDArray[4] = preg_replace('/<div\>/', '', $vixTDArray[4]); 
-      $vixTDArray[4] = preg_replace('/<\/div>/', '', $vixTDArray[4]); 
-      $vixTDReturn = "<br>Last VIX Value: <span id='vix-value'>" . $vixTDArray[4] . "</span>";
+      $bigChartsReturn = $tdArray[1]; 
 
-      $bigChartsReturn = preg_replace('/<\/div>/', $vixTDReturn . '</div>', $bigChartsReturn); 
+      $bigChartsReturn = preg_replace('/<div.*?\>/', '', $bigChartsReturn); 
+      $bigChartsReturn = preg_replace('/<\/div>/', '', $bigChartsReturn); 
+      $bigChartsReturn = preg_replace('/\%/', '', $bigChartsReturn); 
+      $bigChartsReturn = preg_replace('/\-/', '', $bigChartsReturn); 
 
-      echo $bigChartsReturn; 
+      echo   $bigChartsReturn;         // json_encode($bigChartsReturn); 
 
 } // if ($which_website == "bigcharts")
 else if ($which_website == "streetinsider")

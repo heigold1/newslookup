@@ -173,14 +173,34 @@ console.log("inside calcAll");
   
     var orderType = "";
 
-    if (parseInt($("#day1").html()) > 15.00)
+    if (parseInt($("#day1").html()) > 20.00)
     {
       orderType += " HR_" + parseInt($("#day1").html());
     }
 
     $("#orderStub").val(original_symbol + " BUY " + finalSharesRoundedWithCommas + " $" + finalPriceDisplay + " (" + newCalculatedPercentage.toFixed(2) + "%) -- $" + totalValueString + orderType); 
 
+
 } // end of calcAll() function 
+
+function calcBigChartsPercentage()
+{
+/*
+    var myBigchartsPercentage = $("#bigcharts_percent_change").html(); 
+    var myCalculatedPercentage = $("#calculatedPercentage").html(); 
+
+    myBigchartsPercentage = parseFloat(myBigchartsPercentage).toFixed(2); 
+    myCalculatedPercentage = parseFloat(myCalculatedPercentage).toFixed(2); 
+
+
+    var bigChartsDifference = myCalculatedPercentage - myBigchartsPercentage; 
+    alert ("bigChartsDifference is " + myCalculatedPercentage + '-' + myBigchartsPercentage + '=' + bigChartsDifference); 
+    if (bigChartsDifference > 10)
+    {
+      alert('good to go'); 
+    }
+*/
+}
 
 // if the user manually types in a new number of shares, recalculate only the order stub 
 function reCalcOrderStub()
@@ -723,9 +743,9 @@ $(function() {
 
             $("#entryPercentage").focus();     
 
-/*
-This just gets the yesterday close and last vix values, we don't need these yet, can always bring them back
-            $("div#bigcharts_chart_container").css("background-color", "#BBDDFF");
+
+            // This just gets the yesterday close and last vix values, we don't need these yet, can always bring them back
+//             $("div#bigcharts_chart_container").css("background-color", "#BBDDFF");
             $("div#right_bottom_container").css("background-color", "#BBDDFF");                   
             $.ajax({
                 url: "proxy.php",
@@ -738,12 +758,13 @@ This just gets the yesterday close and last vix values, we don't need these yet,
                 success:  function (data) {
                   console.log(data);
                   // the daily VIX, so you can see how the volatility goes throughout the day
-                 $("div#bigcharts_yest_close").html(data + "<img style='max-width:100%; max-height:100%;' src='http://bigcharts.marketwatch.com/kaavio.Webhost/charts/big.chart?nosettings=1&symb=VIX&uf=0&type=2&size=2&sid=1704273&style=320&freq=9&entitlementtoken=0c33378313484ba9b46b8e24ded87dd6&time=1&rand=" + Math.random() + "&compidx=&ma=0&maval=9&lf=1&lf2=0&lf3=0&height=335&width=579&mocktick=1'>");
+                 $("#bigcharts_percent_change").text(data); 
                 }
             });  // end of AJAX call to bigcharts   
-            $("div#bigcharts_chart_container").css("background-color", "#F3F3FF");                         
+
+//             $("div#bigcharts_chart_container").css("background-color", "#F3F3FF");                         
             $("div#right_bottom_container").css("background-color", "#F3F3FF");                   
-*/
+
 
             // AJAX call to yahoo finance 
 
@@ -1058,6 +1079,7 @@ console.log(html);
 
       $("#amountSpending").val("350");
       calcAll();
+      calcBigChartsPercentage(); 
       CopyToClipboard();  
     }); // End of click function 
 
@@ -1143,6 +1165,7 @@ console.log(html);
           if(e.keyCode==13)
           {
             calcAll(); 
+            calcBigChartsPercentage(); 
             $('#copy_price_to_percentage').click();
             CopyToClipboard();  
             $("#entryPrice").focus();   

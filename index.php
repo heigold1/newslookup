@@ -93,7 +93,7 @@
 								<label class="historical_data_label">&nbsp;&nbsp;&nbsp;</label><span id="day1" class="historical_data_days">&nbsp;&nbsp;&nbsp;</span>		
 								<span id="yahoo_historical_data_link">&nbsp;&nbsp;&nbsp;</span>						
 							</td> 						
-							<td></td>
+							<td id=td_bigcharts_change>Bigcharts: &nbsp;<span id=bigcharts_percent_change></span></td>
 						</tr>
 						<tr style="height:15px">
 							<td style="width:140px"></td>
