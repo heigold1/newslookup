@@ -762,12 +762,21 @@ $(function() {
                   console.log(data);
                   // the daily VIX, so you can see how the volatility goes throughout the day
                  $("#bigcharts_percent_change").text(data); 
+
+                  if (parseFloat(data).toFixed(2) < 6.00)
+                  {
+                    $("#td_bigcharts_change").css("background-color", "#00ff00");  
+                  }
+                  else 
+                  {
+                    $("#td_bigcharts_change").css("background-color", "transparent");  
+                  }
+
                 }
             });  // end of AJAX call to bigcharts   
 
 //             $("div#bigcharts_chart_container").css("background-color", "#F3F3FF");                         
             $("div#right_bottom_container").css("background-color", "#F3F3FF");                   
-
 
             // AJAX call to yahoo finance 
 
@@ -1082,7 +1091,6 @@ console.log(html);
 
       $("#amountSpending").val("350");
       calcAll();
-      calcBigChartsPercentage(); 
       CopyToClipboard();  
     }); // End of click function 
 
