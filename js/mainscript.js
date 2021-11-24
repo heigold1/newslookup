@@ -761,9 +761,17 @@ $(function() {
                 success:  function (data) {
                   console.log(data);
                   // the daily VIX, so you can see how the volatility goes throughout the day
-                 $("#bigcharts_percent_change").text(data); 
 
-                  if (parseFloat(data).toFixed(2) < 6.00)
+                 var textArray = data.split("|"); 
+
+                 var lastPercentage = textArray[0]; 
+                 var lastValue = textArray[1]; 
+
+                 $("#bigcharts_percent_change").text(lastPercentage); 
+
+                  $("#bigcharts_last").text(lastValue); 
+
+                  if (parseFloat(lastPercentage).toFixed(2) < 6.00)
                   {
                     $("#td_bigcharts_change").css("background-color", "#00ff00");  
                   }

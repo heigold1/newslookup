@@ -4,7 +4,7 @@ include './Samples/config.php';
 
 require_once("simple_html_dom.php"); 
 
-$yesterdayDays = 3;
+$yesterdayDays = 1;
 
 error_reporting(1);
 //ini_set('display_errors', 1);
@@ -1157,7 +1157,12 @@ else if ($which_website == "bigcharts")
       $bigChartsReturn = preg_replace('/\-/', '', $bigChartsReturn); 
       $bigChartsReturn = preg_replace('/\+/', '', $bigChartsReturn); 
 
-      echo   $bigChartsReturn;         // json_encode($bigChartsReturn); 
+      $lastArray = $html->find('td.last div'); 
+      $lastValue = $lastArray[0]; 
+      $lastValue = preg_replace('/<div.*?\>/', '', $lastValue); 
+      $lastValue = preg_replace('/<\/div>/', '', $lastValue); 
+
+      echo   $bigChartsReturn . "|" . $lastValue;         // json_encode($bigChartsReturn); 
 
 } // if ($which_website == "bigcharts")
 else if ($which_website == "streetinsider")
