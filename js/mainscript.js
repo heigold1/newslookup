@@ -763,9 +763,10 @@ $(function() {
                   // the daily VIX, so you can see how the volatility goes throughout the day
 
                  var textArray = data.split("|"); 
-
+                 
                  var lastPercentage = textArray[0]; 
                  var lastValue = textArray[1]; 
+                 var time = textArray[2]; 
 
                  $("#bigcharts_percent_change").text(lastPercentage); 
 
@@ -779,6 +780,8 @@ $(function() {
                   {
                     $("#td_bigcharts_change").css("background-color", "transparent");  
                   }
+
+                  $("#bigcharts_time").text(time); 
 
                 }
             });  // end of AJAX call to bigcharts   

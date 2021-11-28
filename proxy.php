@@ -1162,7 +1162,15 @@ else if ($which_website == "bigcharts")
       $lastValue = preg_replace('/<div.*?\>/', '', $lastValue); 
       $lastValue = preg_replace('/<\/div>/', '', $lastValue); 
 
-      echo   $bigChartsReturn . "|" . $lastValue;         // json_encode($bigChartsReturn); 
+      $timeArray = $html->find('tr.header td.time'); 
+      $timeValue = $timeArray[0]; 
+      $timeValue = preg_replace('/<td.*?\>/', '', $timeValue); 
+      $timeValue = preg_replace('/<\/td>/', '', $timeValue); 
+      $timeValue = preg_replace('/\/\d{4}/', '', $timeValue); 
+
+
+
+      echo   $bigChartsReturn . "|" . $lastValue . "|" . $timeValue;         // json_encode($bigChartsReturn); 
 
 } // if ($which_website == "bigcharts")
 else if ($which_website == "streetinsider")

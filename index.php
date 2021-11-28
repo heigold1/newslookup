@@ -107,7 +107,7 @@
 								<label class="historical_data_label">&nbsp;&nbsp;&nbsp;</label><span id="day1_low" class="historical_data_days">&nbsp;&nbsp;&nbsp;</span>		
 								<span id="yahoo_historical_data_link">&nbsp;&nbsp;&nbsp;</span>						
 							</td> 						
-							<td></td>
+							<td><span id=bigcharts_time></span><span id=bigcharts_minutes_ago></span></td>
 						</tr>
 					</table> <!-- Order entry information (yest. close, etc...) --> 
 
