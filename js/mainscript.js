@@ -406,34 +406,6 @@ $(function() {
       $("#windowNumber").html("1"); 
     }
 
-    function determineTimeOfDayPercentage(){
-        var now = moment();
-        if (now.isSameOrAfter(moment('11:00','HH:mm')))
-        {
-           return "30%";
-        }
-        else if (now.isSameOrAfter(moment('10:00','HH:mm')))
-        {
-          return "25%";
-        }
-        else if (now.isSameOrAfter(moment('09:00','HH:mm')))
-        {
-          return "23%";
-        }
-        else if (now.isSameOrAfter(moment('08:00','HH:mm')))
-        {
-          return "20%";
-        }
-        else if (now.isSameOrAfter(moment('04:00','HH:mm')))
-        {
-          return "17%";
-        }
-        else 
-        {
-          return "N/A";
-        }
-    }
-
     function createSECCompanyName(companyName)
     {
         var companyName = companyName.toString();
@@ -570,8 +542,6 @@ $(function() {
               $("input[name=roundShares][value=50]").prop('checked', true);
 
               $("#yestCloseText").focus();
-
-              $("#time_of_day_percentage").html(determineTimeOfDayPercentage());
 
                 // E*TRADE API data
               $("div#left_top_container").css("background-color", "#BBDDFF");
