@@ -634,6 +634,7 @@ if ($which_website == "marketwatch")
       $marketWatchNewsHTML = preg_replace('/ taiwan/i', '<span style="font-size: 25px; background-color: red; color:black"><b>&nbsp; TAIWAN </b></span>&nbsp;', $marketWatchNewsHTML);
       $marketWatchNewsHTML = preg_replace('/ hong kong/i', '<span style="font-size: 25px; background-color: red; color:black"><b>&nbsp; HONG KONG </b></span>&nbsp;', $marketWatchNewsHTML);
       $marketWatchNewsHTML = preg_replace('/ kerrisdale/i', '<span style="font-size: 25px; background-color: red; color:black"><b>&nbsp; Kerrisdale - 65% </b></span>&nbsp;', $marketWatchNewsHTML);
+      $marketWatchNewsHTML = preg_replace('/ to showcase/i', '<span style="font-size: 25px; background-color: red; color:black"><b>&nbsp; TO SHOWCASE - CHECK THE DATE </b></span>&nbsp;', $marketWatchNewsHTML);
 
 
 
@@ -650,7 +651,7 @@ else if ($which_website == "yahoo")
 
     $rss = simplexml_load_file("http://feeds.finance.yahoo.com/rss/2.0/headline?s=$symbol&region=US&lang=en-US");
     $allNews = "<ul class='newsSide'>";
-    $allNews .= "<li style='font-size: 20px !important'>Yahoo Finance News</li>";
+    $allNews .= "<li style='font-size: 20px !important; background-color: #00ff00;'>Yahoo Finance News</li>";
 
     $classActionAdded = false;
     $j = 0;
@@ -876,6 +877,13 @@ else if ($which_website == "yahoo")
 
       $stockSplitsTable = $splitsTable[4]; 
 
+      if (preg_match('/latest/i', $stockSplitsTable))
+      {
+          $stockSplitsTable = "<table><tbody><tr><td><span style='font-style:arial; font-size: 25px;'>SPLIT NOT WORKING</span></td></tr></tbody></table>"; 
+      }
+
+//       $stockSplitsTable = preg_replace("/\<table border.*\/table\>?/", "", $stockSplitsTable); 
+
       $googleNews = "<ul class='newsSide'>";
       $googleNews .= "<li style='font-size: 20px !important'>Google News</li>";
       $i = 0;
@@ -888,8 +896,8 @@ else if ($which_website == "yahoo")
           {
             $googleNews .=  "style='background-color: #FFFFFF; '"; 
           };
-          
-          $googleNews .=  " ><a href='" . $feedItem['link'] . "'>" . $feedItem['pub-date'] . " - " . $feedItem['title'] . "</a></li>";
+          $googleNews .=  " ><a hr   
+       ef='" . $feedItem['link'] . "'>" . $feedItem['pub-date'] . " - " . $feedItem['title'] . "</a></li>";
       }
       $googleNews .=  "</ul>";
 
@@ -899,7 +907,7 @@ else if ($which_website == "yahoo")
       $rssSeekingAlpha = simplexml_load_file("https://seekingalpha.com/api/sa/combined/" . $symbol . ".xml");
 
       $seekingAlphaNews = "<ul class='newsSide'>";
-      $seekingAlphaNews .= "<li style='font-size: 20px !important'>Seeking Alpha News</li>";
+      $seekingAlphaNews .= "<li style='font-size: 20px !important; background-color: #00ff00;'>Seeking Alpha News</li>";
 
       $classActionAdded = false;
       $j = 0;
@@ -1116,7 +1124,9 @@ else if ($which_website == "yahoo")
       $finalReturn = preg_replace('/ q2 results/i', '<span style="font-size: 25px; background-color: red; color:black"><b>&nbsp; Q2 RESULTS </b></span>&nbsp;', $finalReturn);
       $finalReturn = preg_replace('/ q3 results/i', '<span style="font-size: 25px; background-color: red; color:black"><b>&nbsp; Q3 RESULTS </b></span>&nbsp;', $finalReturn);
       $finalReturn = preg_replace('/ q4 results/i', '<span style="font-size: 25px; background-color: red; color:black"><b>&nbsp; Q4 RESULTS </b></span>&nbsp;', $finalReturn);
-
+      $finalReturn = preg_replace('/ clinical/i', '<span style="font-size: 25px; background-color: red; color:black"><b>&nbsp; CLINICAL - DRUG NEWS </b></span>&nbsp;', $finalReturn);
+      $finalReturn = preg_replace('/ preclinical/i', '<span style="font-size: 25px; background-color: red; color:black"><b>&nbsp; PRECLINICAL - DRUG NEWS </b></span>&nbsp;', $finalReturn);
+      $finalReturn = preg_replace('/ to showcase/i', '<span style="font-size: 25px; background-color: red; color:black"><b>&nbsp; TO SHOWCASE - CHECK THE DATE </b></span>&nbsp;', $finalReturn);
 
 
       $message_board = '</font><a target="_blank" onclick="return openPage(this.href)" href="http://finance.yahoo.com/quote/' . $symbol . '/community?ltr=1"> Yahoo Message Boards</a>&nbsp;&nbsp;&nbsp;&nbsp;'; 

@@ -14,6 +14,7 @@ fopen("cookies.txt", "w");
 function buildNewsNotes()
 {
     $newsNotes = '<ul style="font-family: arial;">
+                      <li style="background-color: #00ff00;">SEC</li>
                       <li>Entry into a Material Definitive Agreement - STAY AWAY, SHARE PRICE COMING OUT</li>
                       </ul>
                       '; 
@@ -384,7 +385,7 @@ function getStreetInsider($symbol, $yesterdayDays)
 
 
         $streetInsiderNews = "<ul class='newsSide'>";
-        $streetInsiderNews .= "<li style='font-size: 20px !important'>StreetInsider News</li>";
+        $streetInsiderNews .= "<li style='font-size: 20px !important; background-color: #00ff00;'>StreetInsider News</li>";
 
         $classActionAdded = false;
         $j = 0;
@@ -606,8 +607,9 @@ function getStreetInsider($symbol, $yesterdayDays)
           $streetInsiderNews = preg_replace('/ taiwan/i', '<span style="font-size: 25px; background-color: red; color:black"><b>&nbsp; TAIWAN </b></span>&nbsp;', $streetInsiderNews);
           $streetInsiderNews = preg_replace('/ hong kong/i', '<span style="font-size: 25px; background-color: red; color:black"><b>&nbsp; HONG KONG </b></span>&nbsp;', $streetInsiderNews);
           $streetInsiderNews = preg_replace('/ kerrisdale/i', '<span style="font-size: 25px; background-color: red; color:black"><b>&nbsp; Kerrisdale - 65% </b></span>&nbsp;', $streetInsiderNews);
-
-
+          $streetInsiderNews = preg_replace('/ clinical/i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp; CLINICAL - DRUG NEWS </b></span>&nbsp;', $streetInsiderNews);
+          $streetInsiderNews = preg_replace('/ preclinical/i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp; PRECLINICAL - DRUG NEWS </b></span>&nbsp;', $streetInsiderNews);
+          $streetInsiderNews = preg_replace('/ to showcase/i', '<span style="font-size: 25px; background-color: red; color:black"><b>&nbsp; TO SHOWCASE - CHECK THE DATE </b></span>&nbsp;', $streetInsiderNews);
 
 
         try 
