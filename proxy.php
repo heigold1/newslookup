@@ -885,7 +885,7 @@ else if ($which_website == "yahoo")
 //       $stockSplitsTable = preg_replace("/\<table border.*\/table\>?/", "", $stockSplitsTable); 
 
       $googleNews = "<ul class='newsSide'>";
-      $googleNews .= "<li style='font-size: 20px !important'>Google News</li>";
+      $googleNews .= "<li style='font-size: 20px !important; background-color: lightgreen; '>Google News</li>";
       $i = 0;
       foreach ($googleRSSArray as $feedItem) {
 
