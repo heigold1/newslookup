@@ -449,7 +449,7 @@ function getStreetInsider($symbol, $yesterdayDays)
 
             if ($j % 2 == 1)
             {
-              $streetInsiderNews .=  "style='background-color: #FFFFFF; '"; 
+              $streetInsiderNews .=  "style='background-color: #ebd8bd; '"; 
             };
             
             // if the regular expression contains (.*) then we need to do it per title, to avoid greedy regular expressions
@@ -479,6 +479,8 @@ function getStreetInsider($symbol, $yesterdayDays)
         {
             $streetInsiderNews = preg_replace('/(' .  get_yahoo_trade_date($daysBack) . ')/', '<span style="font-size: 10px; background-color:#000080 ; color:white">$1</span>', $streetInsiderNews);
         }
+
+        $streetInsiderNews .= "yesterdayDays is " . $yesterdayDays . "<br>"; 
 
 
           $streetInsiderNews = preg_replace('/(' .  get_yahoo_yesterday_trade_date() . ')/', '<span style="font-size: 12px; background-color:   #000080; color:white"> $1</span> ', $streetInsiderNews);
@@ -610,6 +612,9 @@ function getStreetInsider($symbol, $yesterdayDays)
           $streetInsiderNews = preg_replace('/ clinical/i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp; CLINICAL - DRUG NEWS </b></span>&nbsp;', $streetInsiderNews);
           $streetInsiderNews = preg_replace('/ preclinical/i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp; PRECLINICAL - DRUG NEWS </b></span>&nbsp;', $streetInsiderNews);
           $streetInsiderNews = preg_replace('/ to showcase/i', '<span style="font-size: 25px; background-color: red; color:black"><b>&nbsp; TO SHOWCASE - CHECK THE DATE </b></span>&nbsp;', $streetInsiderNews);
+          $streetInsiderNews = preg_replace('/ rescue financing/i', '<span style="font-size: 25px; background-color: red; color:black"><b>&nbsp; 
+              RESCUE FINANCING - BE CAREFUL</b></span>&nbsp;', $streetInsiderNews);
+          $streetInsiderNews = preg_replace('/ begins trading/i', '<span style="font-size: 25px; background-color: red; color:black"><b>&nbsp; BEGINS TRADING - 29%</b></span>&nbsp;', $streetInsiderNews);
 
 
         try 

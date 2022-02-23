@@ -635,6 +635,8 @@ if ($which_website == "marketwatch")
       $marketWatchNewsHTML = preg_replace('/ hong kong/i', '<span style="font-size: 25px; background-color: red; color:black"><b>&nbsp; HONG KONG </b></span>&nbsp;', $marketWatchNewsHTML);
       $marketWatchNewsHTML = preg_replace('/ kerrisdale/i', '<span style="font-size: 25px; background-color: red; color:black"><b>&nbsp; Kerrisdale - 65% </b></span>&nbsp;', $marketWatchNewsHTML);
       $marketWatchNewsHTML = preg_replace('/ to showcase/i', '<span style="font-size: 25px; background-color: red; color:black"><b>&nbsp; TO SHOWCASE - CHECK THE DATE </b></span>&nbsp;', $marketWatchNewsHTML);
+      $marketWatchNewsHTML = preg_replace('/ rescue financing/i', '<span style="font-size: 25px; background-color: red; color:black"><b>&nbsp; 
+        RESCUE FINANCING - BE CAREFUL</b></span>&nbsp;', $marketWatchNewsHTML);
 
 
 
@@ -703,7 +705,7 @@ else if ($which_website == "yahoo")
 
         if ($j % 2 == 1)
         {
-          $allNews .=  "style='background-color: #FFFFFF; '"; 
+          $allNews .=  "style='background-color: #ebd8bd; '"; 
         };
         
         // if the regular expression contains (.*) then we need to do it per title, to avoid greedy regular expressions
@@ -885,7 +887,7 @@ else if ($which_website == "yahoo")
 //       $stockSplitsTable = preg_replace("/\<table border.*\/table\>?/", "", $stockSplitsTable); 
 
       $googleNews = "<ul class='newsSide'>";
-      $googleNews .= "<li style='font-size: 20px !important; background-color: lightgreen; '>Google News</li>";
+      $googleNews .= "<li style='font-size: 20px !important; background-color: lightblue; '>Google News</li>";
       $i = 0;
       foreach ($googleRSSArray as $feedItem) {
 
@@ -894,7 +896,7 @@ else if ($which_website == "yahoo")
 
           if ($i % 2 == 1)
           {
-            $googleNews .=  "style='background-color: #FFFFFF; '"; 
+            $googleNews .=  "style='background-color: #ebd8bd; '"; 
           };
           $googleNews .=  " ><a hr   
        ef='" . $feedItem['link'] . "'>" . $feedItem['pub-date'] . " - " . $feedItem['title'] . "</a></li>";
@@ -960,7 +962,7 @@ else if ($which_website == "yahoo")
 
         if ($j % 2 == 1)
         {
-          $seekingAlphaNews .=  "style='background-color: #FFFFFF; '"; 
+          $seekingAlphaNews .=  "style='background-color: #ebd8bd; '"; 
         };
         
         // if the regular expression contains (.*) then we need to do it per title, to avoid greedy regular expressions
@@ -972,6 +974,8 @@ else if ($which_website == "yahoo")
       }
 
       $seekingAlphaNews .=  "</ul>";
+
+      $seekingAlphaNews .= "yesterdayDays = " . $yesterdayDays . "<br>"; 
 
     /*** End of Seeking Alpha RSS Parse ***/ 
 
@@ -1127,6 +1131,10 @@ else if ($which_website == "yahoo")
       $finalReturn = preg_replace('/ clinical/i', '<span style="font-size: 25px; background-color: red; color:black"><b>&nbsp; CLINICAL - DRUG NEWS </b></span>&nbsp;', $finalReturn);
       $finalReturn = preg_replace('/ preclinical/i', '<span style="font-size: 25px; background-color: red; color:black"><b>&nbsp; PRECLINICAL - DRUG NEWS </b></span>&nbsp;', $finalReturn);
       $finalReturn = preg_replace('/ to showcase/i', '<span style="font-size: 25px; background-color: red; color:black"><b>&nbsp; TO SHOWCASE - CHECK THE DATE </b></span>&nbsp;', $finalReturn);
+      $finalReturn = preg_replace('/ rescue financing/i', '<span style="font-size: 25px; background-color: red; color:black"><b>&nbsp; RESCUE FINANCING - BE CAREFUL</b></span>&nbsp;', $finalReturn);
+      $finalReturn = preg_replace('/ begins trading/i', '<span style="font-size: 25px; background-color: red; color:black"><b>&nbsp; BEGINS TRADING - 29%</b></span>&nbsp;', $finalReturn);
+
+
 
 
       $message_board = '</font><a target="_blank" onclick="return openPage(this.href)" href="http://finance.yahoo.com/quote/' . $symbol . '/community?ltr=1"> Yahoo Message Boards</a>&nbsp;&nbsp;&nbsp;&nbsp;'; 
