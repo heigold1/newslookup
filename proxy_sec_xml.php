@@ -464,8 +464,8 @@ function getStreetInsider($symbol, $yesterdayDays)
 
         $streetInsiderNews .=  "</ul>";
 
-        $streetInsiderNews = preg_replace('/(' .  get_yahoo_yesterday_trade_date() . ')/', '<span style="font-size: 12px; background-color:   #000080; color:white"> $1</span> ', $streetInsiderNews);
-        $streetInsiderNews = preg_replace('/(' .  get_yahoo_todays_trade_date() . ')/', '<span style="font-size: 12px; background-color:  black; color:white"> $1</span> ', $streetInsiderNews);
+        $streetInsiderNews = preg_replace('/(' .  get_yahoo_yesterday_trade_date() . ')/', '<span style="font-size: 12px; background-color:   #000080; color:white; border: 1px solid red; "> $1</span> ', $streetInsiderNews);
+        $streetInsiderNews = preg_replace('/(' .  get_yahoo_todays_trade_date() . ')/', '<span style="font-size: 12px; background-color:  black; color:white; border: 1px solid red; "> $1</span> ', $streetInsiderNews);
 
         $streetInsiderNews .=  "<br>"; 
 
@@ -615,6 +615,7 @@ function getStreetInsider($symbol, $yesterdayDays)
           $streetInsiderNews = preg_replace('/ rescue financing/i', '<span style="font-size: 25px; background-color: red; color:black"><b>&nbsp; 
               RESCUE FINANCING - BE CAREFUL</b></span>&nbsp;', $streetInsiderNews);
           $streetInsiderNews = preg_replace('/ begins trading/i', '<span style="font-size: 25px; background-color: red; color:black"><b>&nbsp; BEGINS TRADING - 29%</b></span>&nbsp;', $streetInsiderNews);
+          $streetInsiderNews = preg_replace('/ consider shorting/i', '<span style="font-size: 25px; background-color: red; color:black"><b>&nbsp; CONSIDER SHORTING - 35%</b></span>&nbsp;', $streetInsiderNews);
 
 
         try 
