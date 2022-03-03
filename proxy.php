@@ -618,7 +618,7 @@ if ($which_website == "marketwatch")
       $marketWatchNewsHTML = preg_replace('/ phase 1/i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp; PHASE 1!!!!</b></span>&nbsp;', $marketWatchNewsHTML);
       $marketWatchNewsHTML = preg_replace('/ phase 2/i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp; PHASE 2!!!!</b></span>&nbsp;', $marketWatchNewsHTML);
       $marketWatchNewsHTML = preg_replace('/ phase 3/i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp; PHASE 3!!!!</b></span>&nbsp;', $marketWatchNewsHTML);
-      $marketWatchNewsHTML = preg_replace('/ to present/i', '<span style="font-size: 25px; background-color:black; color:white"><b>&nbsp; TO PRESENT - CHECK DATE - IF EARNINGS THEN OK TO CHASE AROUND 21-23%</b></span>&nbsp;', $marketWatchNewsHTML);
+      $marketWatchNewsHTML = preg_replace('/ to present/i', '<span style="font-size: 25px; background-color:#202020; color:white"><b>&nbsp; TO PRESENT - CHECK DATE - IF EARNINGS THEN OK TO CHASE AROUND 21-23%</b></span>&nbsp;', $marketWatchNewsHTML);
       $marketWatchNewsHTML = preg_replace('/ shareholder investigation/i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp; SHAREHOLDER INVESTIGATION - 19.5%</b></span>&nbsp;', $marketWatchNewsHTML);
       $marketWatchNewsHTML = preg_replace('/ announces an investigation/i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp; ANNOUNCES AN INVESTIGATION - 19.5%</b></span>&nbsp;', $marketWatchNewsHTML);
       $marketWatchNewsHTML = preg_replace('/ convertible bonds/i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp; convertible bonds (back off until you see a price)</b></span>&nbsp;', $marketWatchNewsHTML);
@@ -1002,8 +1002,14 @@ else if ($which_website == "yahoo")
           $finalReturn = preg_replace('/(' .  get_yahoo_trade_date($daysBack) . ')/', '<span style="font-size: 10px; background-color:#000080 ; color:white">$1</span>', $finalReturn);
       }
 
-      $finalReturn = preg_replace('/(' .  get_yahoo_yesterday_trade_date() . ')/', '<span style="font-size: 12px; background-color:   #000080; color:white; border: 1px solid red;"> $1</span> ', $finalReturn);
+      $finalReturn = preg_replace('/(' .  get_yahoo_yesterday_trade_date() . ')/', '<span style="font-size: 12px; background-color:   #0747a1; color:white; border: 1px solid red;"> $1</span> ', $finalReturn);
       $finalReturn = preg_replace('/(' .  get_yahoo_todays_trade_date() . ')/', '<span style="font-size: 12px; background-color:  black; color:white; border: 1px solid red;"> $1</span> ', $finalReturn);
+
+
+
+
+
+
 
       $finalReturn = preg_replace('/ delist/i', '<span style="font-size: 25px; background-color:red; color:black"><b> delist If delisting tomorrow 65%, if days away then 50-55%</b></span>', $finalReturn);
       $finalReturn = preg_replace('/Delist/', '<span style="font-size: 25px; background-color:red; color:black"><b> delist If delisting tomorrow 65%, if days away then 50-55%</b></span>', $finalReturn);
@@ -1033,7 +1039,7 @@ else if ($which_website == "yahoo")
       $finalReturn = preg_replace('/ regulatory update/i', '<span style="font-size: 12px; background-color:red; color:black"><b>&nbsp;regulatory update (35% even if regulation is good)</span></b>&nbsp;', $finalReturn);
       $finalReturn = preg_replace('/ suspended/i', '<span style="font-size: 12px; background-color:red; color:black"><b>&nbsp;suspended</span> (65-70%)</b>&nbsp;', $finalReturn);
       $finalReturn = preg_replace('/ fraud/i', '<span style="font-size: 12px; background-color:red; color:black"><b>&nbsp;fraud</span></b>&nbsp;', $finalReturn);      
-      $finalReturn = preg_replace('/ dividend/i', '<span style="font-size: 25px; background-color:black; color:white"><b>&nbsp;dividend (if cut, 35% ALSO CHECK THE ISSUEING DATE)</span></b>&nbsp;', $finalReturn);            
+      $finalReturn = preg_replace('/ dividend/i', '<span style="font-size: 25px; background-color:#202020; color:white"><b>&nbsp;dividend (if cut, 35% ALSO CHECK THE ISSUEING DATE)</span></b>&nbsp;', $finalReturn);            
       $finalReturn = preg_replace('/ strategic alternatives/i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp;strategic alternatives</span></b>&nbsp;', $finalReturn);
       $finalReturn = preg_replace('/ unpatentable/i', '<span style="font-size: 12px; background-color:red; color:black"><b>&nbsp;unpatentable</span> (60%)</b>&nbsp;', $finalReturn);
       $finalReturn = preg_replace('/ accelerate or increase/i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp;accelerate or increase</span> (Possible Chapter 11, stay away)</b>&nbsp;', $finalReturn);
@@ -1108,17 +1114,17 @@ else if ($which_website == "yahoo")
       $finalReturn = preg_replace('/ phase 1/i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp; PHASE 1!!!!</b></span>&nbsp;', $finalReturn);
       $finalReturn = preg_replace('/ phase 2/i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp; PHASE 2!!!!</b></span>&nbsp;', $finalReturn); 
       $finalReturn = preg_replace('/ phase 3/i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp; PHASE 3!!!!</b></span>&nbsp;', $finalReturn); 
-      $finalReturn = preg_replace('/ to present/i', '<span style="font-size: 25px; background-color:black; color:white"><b>&nbsp; TO PRESENT - CHECK DATE - IF EARNINGS THEN OK TO CHASE AROUND 21-23%</b></span>&nbsp;', $finalReturn);
+      $finalReturn = preg_replace('/ to present/i', '<span style="font-size: 25px; background-color:#202020; color:white"><b>&nbsp; TO PRESENT - CHECK DATE - IF EARNINGS THEN OK TO CHASE AROUND 21-23%</b></span>&nbsp;', $finalReturn);
       $finalReturn = preg_replace('/ shareholder investigation/i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp; SHAREHOLDER INVESTIGATION - 19.5%</b></span>&nbsp;', $finalReturn);
       $finalReturn = preg_replace('/ announces an investigation/i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp; ANNOUNCES AN INVESTIGATION - 19.5%</b></span>&nbsp;', $finalReturn);
       $finalReturn = preg_replace('/ convertible bonds/i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp; convertible bonds (back off until you see a price)</b></span>&nbsp;', $finalReturn);
       $finalReturn = preg_replace('/ equity grants/i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp; EQUITY GRANTS - (20-23% early on)</b></span>&nbsp;', $finalReturn);
-      $finalReturn = preg_replace('/ to announce/i', '<span style="font-size: 25px; background-color: black; color:white"><b>&nbsp; TO ANNOUNCE - CHECK THE DATE </b></span>&nbsp;', $finalReturn);
-      $finalReturn = preg_replace('/ to report/i', '<span style="font-size: 25px; background-color: black; color:white"><b>&nbsp; TO REPORT - CHECK THE DATE - DO NOT CHASE EARLY </b></span>&nbsp;', $finalReturn);
-      $finalReturn = preg_replace('/ to host/i', '<span style="font-size: 25px; background-color: black; color:white"><b>&nbsp; TO HOST - CHECK THE DATE </b></span>&nbsp;', $finalReturn);
-      $finalReturn = preg_replace('/ to release/i', '<span style="font-size: 25px; background-color: black; color:white"><b>&nbsp; TO RELEASE - CHECK THE DATE </b></span>&nbsp;', $finalReturn);
-      $finalReturn = preg_replace('/ schedules/i', '<span style="font-size: 25px; background-color: black; color:white"><b>&nbsp; SCHEDULES - CHECK THE DATE </b></span>&nbsp;', $finalReturn);
-      $finalReturn = preg_replace('/ sets date for the release of/i', '<span style="font-size: 25px; background-color: black; color:white"><b>&nbsp; SETS DATE FOR THE RELEASE OF - CHECK THE DATE </b></span>&nbsp;', $finalReturn);
+      $finalReturn = preg_replace('/ to announce/i', '<span style="font-size: 25px; background-color: #202020; color:white"><b>&nbsp; TO ANNOUNCE - CHECK THE DATE </b></span>&nbsp;', $finalReturn);
+      $finalReturn = preg_replace('/ to report/i', '<span style="font-size: 25px; background-color: #202020; color:white"><b>&nbsp; TO REPORT - CHECK THE DATE - DO NOT CHASE EARLY </b></span>&nbsp;', $finalReturn);
+      $finalReturn = preg_replace('/ to host/i', '<span style="font-size: 25px; background-color: #202020; color:white"><b>&nbsp; TO HOST - CHECK THE DATE </b></span>&nbsp;', $finalReturn);
+      $finalReturn = preg_replace('/ to release/i', '<span style="font-size: 25px; background-color: #202020; color:white"><b>&nbsp; TO RELEASE - CHECK THE DATE </b></span>&nbsp;', $finalReturn);
+      $finalReturn = preg_replace('/ schedules/i', '<span style="font-size: 25px; background-color: #202020; color:white"><b>&nbsp; SCHEDULES - CHECK THE DATE </b></span>&nbsp;', $finalReturn);
+      $finalReturn = preg_replace('/ sets date for the release of/i', '<span style="font-size: 25px; background-color: #202020; color:white"><b>&nbsp; SETS DATE FOR THE RELEASE OF - CHECK THE DATE </b></span>&nbsp;', $finalReturn);
       $finalReturn = preg_replace('/ collaboration/i', '<span style="font-size: 25px; background-color: red; color:black"><b>&nbsp; COLLABORATION - CAREFUL </b></span>&nbsp;', $finalReturn);
       $finalReturn = preg_replace('/ china/i', '<span style="font-size: 25px; background-color: red; color:black"><b>&nbsp; CHINA </b></span>&nbsp;', $finalReturn);
       $finalReturn = preg_replace('/ taiwan/i', '<span style="font-size: 25px; background-color: red; color:black"><b>&nbsp; TAIWAN </b></span>&nbsp;', $finalReturn);
@@ -1134,6 +1140,18 @@ else if ($which_website == "yahoo")
       $finalReturn = preg_replace('/ rescue financing/i', '<span style="font-size: 25px; background-color: red; color:black"><b>&nbsp; RESCUE FINANCING - BE CAREFUL</b></span>&nbsp;', $finalReturn);
       $finalReturn = preg_replace('/ begins trading/i', '<span style="font-size: 25px; background-color: red; color:black"><b>&nbsp; BEGINS TRADING - 29%</b></span>&nbsp;', $finalReturn);
       $finalReturn = preg_replace('/ consider shorting/i', '<span style="font-size: 25px; background-color: red; color:black"><b>&nbsp; CONSIDER SHORTING - 35%</b></span>&nbsp;', $finalReturn);
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
