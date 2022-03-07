@@ -153,6 +153,11 @@ console.log("inside calcAll");
       finalNumSharesRounded -= roundSharesOptionValue; 
     }
 
+    if (finalNumSharesRounded == 0)
+    {
+        alert("Number of shares is zero"); 
+    }
+
     var finalEntryPrice = Number($("#entryPrice").val());
     var totalValue = finalEntryPrice*finalNumSharesRounded; 
     var totalValueString = totalValue.toString(); 
@@ -525,7 +530,7 @@ $(function() {
               $("#day1").html("");
               $("#entryPrice").val(""); 
               $("#entryPercentage").val("");  
-              $("#amountSpending").val("1200");
+              $("#amountSpending").val("500");
               $("#eTradeLowPercentage").html("");
               $("#orderStub").val("-----------------------"); 
               $("#foreign_country").html("");

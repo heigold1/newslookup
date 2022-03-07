@@ -4,7 +4,7 @@ include './Samples/config.php';
 
 require_once("simple_html_dom.php"); 
 
-$yesterdayDays = 1;
+$yesterdayDays = 3;
 
 error_reporting(1);
 //ini_set('display_errors', 1);
@@ -508,7 +508,7 @@ if ($which_website == "marketwatch")
       // blue highlighting for yesterday
       for ($daysBack = $yesterdayDays; $daysBack >= 1; $daysBack--)
       {
-          $marketWatchNewsHTML = preg_replace('/(' .  get_marketwatch_trade_date($daysBack) . ')/', '<span style="font-size: 10px; background-color:#000080 ; color:white">$1</span>', $marketWatchNewsHTML);
+          $marketWatchNewsHTML = preg_replace('/(' .  get_marketwatch_trade_date($daysBack) . ')/', '<span style="font-size: 12px; background-color:#0747a1 ; color:white">$1</span>', $marketWatchNewsHTML);
       }
 
       $marketWatchNewsHTML = preg_replace('/(' .  get_marketwatch_today_trade_date() . ')/', '<span style="font-size: 10px; background-color:black; color:white">$1</span>', $marketWatchNewsHTML);           
@@ -637,6 +637,7 @@ if ($which_website == "marketwatch")
       $marketWatchNewsHTML = preg_replace('/ to showcase/i', '<span style="font-size: 25px; background-color: red; color:black"><b>&nbsp; TO SHOWCASE - CHECK THE DATE </b></span>&nbsp;', $marketWatchNewsHTML);
       $marketWatchNewsHTML = preg_replace('/ rescue financing/i', '<span style="font-size: 25px; background-color: red; color:black"><b>&nbsp; 
         RESCUE FINANCING - BE CAREFUL</b></span>&nbsp;', $marketWatchNewsHTML);
+      $marketWatchNewsHTML = preg_replace('/ liquidity/i', '<span style="font-size: 25px; background-color: red; color:black"><b>&nbsp; LIQUIDITY - BACK OFF</b></span>&nbsp;', $marketWatchNewsHTML);
 
 
 
@@ -713,7 +714,7 @@ else if ($which_website == "yahoo")
         $newsTitle = preg_replace('/ withdrawal(.*?)application/i', '<span style="font-size: 12px; background-color:red; color:black"><b> withdrawal $1 application (55%) </b></span> ', $newsTitle);
         $newsTitle = preg_replace('/nasdaq rejects(.*?)listing/i', '<span style="font-size: 12px; background-color:red; color:black"><b>Nasdaq rejects $1 listing</span> If delisting tomorrow 65%, if delisting days away then 50-55%</b>&nbsp;', $newsTitle);
 
-        $allNews .=  " ><a href='$feedItem->link'> " . $publicationDate . " " . $publicationTime . " - " . $newsTitle;
+        $allNews .=  " ><a href='$feedItem->link'> " . $publicationDate . " " . $publicationTime . " - <br>" . $newsTitle;
     }
 
       $allNews .=  "</ul>";
@@ -899,7 +900,7 @@ else if ($which_website == "yahoo")
             $googleNews .=  "style='background-color: #ebd8bd; '"; 
           };
           $googleNews .=  " ><a hr   
-       ef='" . $feedItem['link'] . "'>" . $feedItem['pub-date'] . " - " . $feedItem['title'] . "</a></li>";
+       ef='" . $feedItem['link'] . "'>" . $feedItem['pub-date'] . " - <br>" . $feedItem['title'] . "</a></li>";
       }
       $googleNews .=  "</ul>";
 
@@ -970,7 +971,7 @@ else if ($which_website == "yahoo")
         $newsTitle = preg_replace('/ withdrawal(.*?)application/i', '<span style="font-size: 12px; background-color:red; color:black"><b> withdrawal $1 application (55%) </b></span> ', $newsTitle);
         $newsTitle = preg_replace('/nasdaq rejects(.*?)listing/i', '<span style="font-size: 12px; background-color:red; color:black"><b>Nasdaq rejects $1 listing</span> If delisting tomorrow 65%, if delisting days away then 50-55%</b>&nbsp;', $newsTitle);
 
-        $seekingAlphaNews .=  " ><a target='_blank' href='$feedItem->link'> " . $publicationDate . " " . $publicationTime . " - " . $newsTitle . "</a>";
+        $seekingAlphaNews .=  " ><a target='_blank' href='$feedItem->link'> " . $publicationDate . " " . $publicationTime . " - <br>" . $newsTitle . "</a>";
       }
 
       $seekingAlphaNews .=  "</ul>";
@@ -994,12 +995,12 @@ else if ($which_website == "yahoo")
       // yellow highlighting for before yesterday
       for ($daysBack = 14; $daysBack > $yesterdayDays; $daysBack--)
       {
-          $finalReturn = preg_replace('/(' .  get_yahoo_trade_date($daysBack) . ')/', '<span style="font-size: 10px; background-color:yellow ; color:black">$1</span>', $finalReturn);      
+          $finalReturn = preg_replace('/(' .  get_yahoo_trade_date($daysBack) . ')/', '<span style="font-size: 12px; background-color:yellow ; color:black">$1</span>', $finalReturn);      
       }
       // blue highlighting for yesterday
       for ($daysBack = $yesterdayDays; $daysBack >= 1; $daysBack--)
       {
-          $finalReturn = preg_replace('/(' .  get_yahoo_trade_date($daysBack) . ')/', '<span style="font-size: 10px; background-color:#000080 ; color:white">$1</span>', $finalReturn);
+          $finalReturn = preg_replace('/(' .  get_yahoo_trade_date($daysBack) . ')/', '<span style="font-size: 12px; background-color:#0747a1 ; color:white">$1</span>', $finalReturn);
       }
 
       $finalReturn = preg_replace('/(' .  get_yahoo_yesterday_trade_date() . ')/', '<span style="font-size: 12px; background-color:   #0747a1; color:white; border: 1px solid red;"> $1</span> ', $finalReturn);
@@ -1140,6 +1141,7 @@ else if ($which_website == "yahoo")
       $finalReturn = preg_replace('/ rescue financing/i', '<span style="font-size: 25px; background-color: red; color:black"><b>&nbsp; RESCUE FINANCING - BE CAREFUL</b></span>&nbsp;', $finalReturn);
       $finalReturn = preg_replace('/ begins trading/i', '<span style="font-size: 25px; background-color: red; color:black"><b>&nbsp; BEGINS TRADING - 29%</b></span>&nbsp;', $finalReturn);
       $finalReturn = preg_replace('/ consider shorting/i', '<span style="font-size: 25px; background-color: red; color:black"><b>&nbsp; CONSIDER SHORTING - 35%</b></span>&nbsp;', $finalReturn);
+      $finalReturn = preg_replace('/ liquidity/i', '<span style="font-size: 25px; background-color: red; color:black"><b>&nbsp; LIQUIDITY - BACK OFF</b></span>&nbsp;', $finalReturn);
 
 
 
