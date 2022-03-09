@@ -153,11 +153,6 @@ console.log("inside calcAll");
       finalNumSharesRounded -= roundSharesOptionValue; 
     }
 
-    if (finalNumSharesRounded == 0)
-    {
-        alert("Number of shares is zero"); 
-    }
-
     var finalEntryPrice = Number($("#entryPrice").val());
     var totalValue = finalEntryPrice*finalNumSharesRounded; 
     var totalValueString = totalValue.toString(); 
@@ -251,6 +246,24 @@ function reCalcOrderStub()
 
 
 } // end of reCalcOrderStub 
+
+
+// Get the number of shares from the order stub.
+function getNumberOfShares()
+{
+    var finalNumShares = $("#amountSpending").val()/$("#entryPrice").val(); 
+
+    var roundSharesOptionValue =  $("input[name=roundShares]:checked").val(); 
+
+    var finalNumSharesRounded = (Math.round(finalNumShares/roundSharesOptionValue)*roundSharesOptionValue); 
+    if (finalNumSharesRounded > finalNumShares)
+    {
+      finalNumSharesRounded -= roundSharesOptionValue; 
+    }
+
+    return finalNumSharesRounded; 
+
+} // end of getNumberOfShares 
 
 /*
 var blink = function(){
@@ -1182,6 +1195,13 @@ console.log(html);
             else
             {
               $("#orderStub").css("background-color", "#FFFFFF");  
+            }
+
+            var numShares = getNumberOfShares(); 
+
+            if (numShares == 0)
+            {
+                alert("The number of shares is zero"); 
             }
 
     /*
