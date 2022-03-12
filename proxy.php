@@ -755,7 +755,16 @@ else if ($which_website == "yahoo")
 
       $country = trim($countryPipeArray[$countryPipeArrayLength - 1]); 
 
-      $sectorCountry = '<span>SECTOR - ' . $yahooFinanceObject->sector . '</span>&nbsp;&nbsp;<span id="industry">INDUSTRY - ' . $yahooFinanceObject->industry . '</span><br><br><div id="country">' . $country . '</div>'; 
+      $yahooFinanceSector = $yahooFinanceObject->sector; 
+      $yahooFinanceIndustry = $yahooFinanceObject->industry; 
+
+      /* Highlight certain sector words that should put us on guard */ 
+
+      $yahooFinanceSector = preg_replace('/energy/i', '<span style="font-size: 20px; background-color: red; color:black"><b>&nbsp; ENERGY</b></span>&nbsp;', $yahooFinanceSector); 
+
+      $yahooFinanceIndustry = preg_replace('/oil \& gas/i', '<span style="font-size: 20px; background-color: red; color:black"><b>&nbsp; OIL & GAS</b></span>&nbsp;', $yahooFinanceIndustry); 
+
+      $sectorCountry = '<span>SECTOR - ' . $yahooFinanceSector . '</span>&nbsp;&nbsp;<span id="industry">INDUSTRY - ' . $yahooFinanceIndustry . '</span><br><br><div id="country">' . $country . '</div>'; 
 
 
 
