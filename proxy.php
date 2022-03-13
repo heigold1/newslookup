@@ -747,7 +747,7 @@ else if ($which_website == "yahoo")
 
       $yahooFinanceObject = json_decode($yahooFinanceJson);
 
-      $companyWebsite = '<a target="_blank" onclick="return openPage(this.href)" href="' . $yahooFinanceObject->website . '" class="tab-link"><b>Website</b></a>&nbsp;&nbsp;';
+      $companyWebsite = '<a target="_blank" style="font-size: 15px;" onclick="return openPage(this.href)" href="' . $yahooFinanceObject->website . '" class="tab-link"><b>Website</b></a>&nbsp;&nbsp;';
 
       $countryPipeString = $yahooFinanceObject->address; 
       $countryPipeArray = explode('|', $countryPipeString);
@@ -764,7 +764,7 @@ else if ($which_website == "yahoo")
 
       $yahooFinanceIndustry = preg_replace('/oil \& gas/i', '<span style="font-size: 20px; background-color: red; color:black"><b>&nbsp; OIL & GAS</b></span>&nbsp;', $yahooFinanceIndustry); 
 
-      $sectorCountry = '<span>SECTOR - ' . $yahooFinanceSector . '</span>&nbsp;&nbsp;<span id="industry">INDUSTRY - ' . $yahooFinanceIndustry . '</span><br><br><div id="country">' . $country . '</div>'; 
+      $sectorCountry = '<span style="font-size: 15px;">SECTOR - ' . $yahooFinanceSector . '</span>&nbsp;&nbsp;<span id="industry" style="font-size: 15px;">INDUSTRY - ' . $yahooFinanceIndustry . '</span><br><br><div id="country" style="font-size: 15px;">' . $country . '</div>'; 
 
 
 
