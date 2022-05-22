@@ -603,7 +603,7 @@ function getStreetInsider($symbol, $yesterdayDays)
           $streetInsiderNews = preg_replace('/ announces an investigation/i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp; ANNOUNCES AN INVESTIGATION - 19.5%</b></span>&nbsp;', $streetInsiderNews);
           $streetInsiderNews = preg_replace('/ convertible bonds/i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp; convertible bonds (back off until you see a price)</b></span>&nbsp;', $streetInsiderNews);
           $streetInsiderNews = preg_replace('/ equity grants/i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp; EQUITY GRANTS - (20-23% early on)</b></span>&nbsp;', $streetInsiderNews);
-          $streetInsiderNews = preg_replace('/ to announce/i', '<span style="font-size: 25px; background-color:#202020; color:white"><b>&nbsp; TO ANNOUNCE - CHECK THE DATE </b></span>&nbsp;', $streetInsiderNews);
+          $streetInsiderNews = preg_replace('/ to announce/i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp; TO ANNOUNCE - CHECK THE DATE </b></span>&nbsp;', $streetInsiderNews);
           $streetInsiderNews = preg_replace('/ to report/i', '<span style="font-size: 25px; background-color:#202020; color:white"><b>&nbsp; TO REPORT - CHECK THE DATE - DO NOT CHASE EARLY </b></span>&nbsp;', $streetInsiderNews);
           $streetInsiderNews = preg_replace('/ to host/i', '<span style="font-size: 25px; background-color:#202020; color:white"><b>&nbsp; TO HOST - CHECK THE DATE </b></span>&nbsp;', $streetInsiderNews);
           $streetInsiderNews = preg_replace('/ to release/i', '<span style="font-size: 25px; background-color:#202020; color:white"><b>&nbsp; TO RELEASE - CHECK THE DATE </b></span>&nbsp;', $streetInsiderNews);
@@ -796,6 +796,12 @@ $noTimeFound = false;
               $title = preg_replace('/statement of changes in beneficial ownership of securities/i', '<span style="font-size: 16px; background-color:#00ff00; color:black"><b>&nbsp;Statement of changes in beneficial ownership of securities - 18% early</span></b>&nbsp;', $title);
               $title = preg_replace('/inability to timely file form/i', '<span style="font-size: 16px; background-color:red; color:black"><b>&nbsp;inability to timely file form - 84%</span></b>&nbsp;', $title);
               $title = preg_replace('/exempt offering of securities/i', '<span style="font-size: 16px; background-color:red; color:black"><b>&nbsp;Exempt Offering of Securities - 20% and must be a fast drop</span></b>&nbsp;', $title);
+              $title = preg_replace('/1\.01/i', '<span style="font-size: 16px; background-color:red; color:black"><b>&nbsp;1.01 - Entry into a Material Definitive Agreement - OFFERING COMING! BACK OFF!</span></b>&nbsp;', $title);
+              $title = preg_replace('/Current report/i', '<span style="font-size: 16px; background-color:red; color:black"><b>&nbsp;Current report</span></b>&nbsp;', $title);
+              $title = preg_replace('/7\.01/i', '<span style="font-size: 16px; background-color:lightblue; color:black"><b>&nbsp;Regulation FD Disclosure</span></b>&nbsp;<br>', $title);
+              $title = preg_replace('/8\.01/i', '<span style="font-size: 16px; background-color:lightblue; color:black"><b>&nbsp;Other Events</span></b>&nbsp;<br>', $title);
+              $title = preg_replace('/9\.01/i', '<span style="font-size: 16px; background-color:lightblue; color:black"><b>&nbsp;Financial Statemtnes and Exhibits</span></b>&nbsp;<br>', $title);
+
 
               if (preg_match('/registration/i', $title) || preg_match('/offering/i', $title))
               {

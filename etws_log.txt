@@ -254,3 +254,44 @@
 [20200219 05:57:12][108.210.66.3] <Error>
   <message>oauth_problem=token_expired</message>
 </Error>
+[20200407 08:53:53][] <html><head><title> - Error report</title><style><!--H1 {font-family:Tahoma,Arial,sans-serif;color:white;background-color:#525D76;font-size:22px;} H2 {font-family:Tahoma,Arial,sans-serif;color:white;background-color:#525D76;font-size:16px;} H3 {font-family:Tahoma,Arial,sans-serif;color:white;background-color:#525D76;font-size:14px;} BODY {font-family:Tahoma,Arial,sans-serif;color:black;background-color:white;} B {font-family:Tahoma,Arial,sans-serif;color:white;background-color:#525D76;} P {font-family:Tahoma,Arial,sans-serif;background:white;color:black;font-size:12px;}A {color : black;}A.name {color : black;}HR {color : #525D76;}--></style> </head><body><h1>HTTP Status 401 - Token 53yDlKR7Fh7e55JezaszseCQlPX4iwkMQbbYGsD130A= is invalid, or has expired</h1><HR size="1" noshade="noshade"><p><b>type</b> Status report</p><p><b>message</b> <u>Token 53yDlKR7Fh7e55JezaszseCQlPX4iwkMQbbYGsD130A= is invalid, or has expired</u></p><p><b>description</b> <u>This request requires HTTP authentication (Token 53yDlKR7Fh7e55JezaszseCQlPX4iwkMQbbYGsD130A= is invalid, or has expired).</u></p><HR size="1" noshade="noshade"><h3></h3></body></html>
+[20200619 08:52:10][] <html><head><title> - Error report</title><style><!--H1 {font-family:Tahoma,Arial,sans-serif;color:white;background-color:#525D76;font-size:22px;} H2 {font-family:Tahoma,Arial,sans-serif;color:white;background-color:#525D76;font-size:16px;} H3 {font-family:Tahoma,Arial,sans-serif;color:white;background-color:#525D76;font-size:14px;} BODY {font-family:Tahoma,Arial,sans-serif;color:black;background-color:white;} B {font-family:Tahoma,Arial,sans-serif;color:white;background-color:#525D76;} P {font-family:Tahoma,Arial,sans-serif;background:white;color:black;font-size:12px;}A {color : black;}A.name {color : black;}HR {color : #525D76;}--></style> </head><body><h1>HTTP Status 401 - Token GD2fyncuDHpz1GWzfznBs1/BOCSRPUL5aXP9o0emjJI= is invalid, or has expired</h1><HR size="1" noshade="noshade"><p><b>type</b> Status report</p><p><b>message</b> <u>Token GD2fyncuDHpz1GWzfznBs1/BOCSRPUL5aXP9o0emjJI= is invalid, or has expired</u></p><p><b>description</b> <u>This request requires HTTP authentication (Token GD2fyncuDHpz1GWzfznBs1/BOCSRPUL5aXP9o0emjJI= is invalid, or has expired).</u></p><HR size="1" noshade="noshade"><h3></h3></body></html>
+[20200814 09:00:25][] <html><head><title> - Error report</title><style><!--H1 {font-family:Tahoma,Arial,sans-serif;color:white;background-color:#525D76;font-size:22px;} H2 {font-family:Tahoma,Arial,sans-serif;color:white;background-color:#525D76;font-size:16px;} H3 {font-family:Tahoma,Arial,sans-serif;color:white;background-color:#525D76;font-size:14px;} BODY {font-family:Tahoma,Arial,sans-serif;color:black;background-color:white;} B {font-family:Tahoma,Arial,sans-serif;color:white;background-color:#525D76;} P {font-family:Tahoma,Arial,sans-serif;background:white;color:black;font-size:12px;}A {color : black;}A.name {color : black;}HR {color : #525D76;}--></style> </head><body><h1>HTTP Status 401 - Token rk8xcn9lzfByzPB9LCTpPXQIDPycw/pIdiwvrL73DDU= is invalid, or has expired</h1><HR size="1" noshade="noshade"><p><b>type</b> Status report</p><p><b>message</b> <u>Token rk8xcn9lzfByzPB9LCTpPXQIDPycw/pIdiwvrL73DDU= is invalid, or has expired</u></p><p><b>description</b> <u>This request requires HTTP authentication (Token rk8xcn9lzfByzPB9LCTpPXQIDPycw/pIdiwvrL73DDU= is invalid, or has expired).</u></p><HR size="1" noshade="noshade"><h3></h3></body></html>
+[20210310 08:51:10][] <html><head><title> - Error report</title><style><!--H1 {font-family:Tahoma,Arial,sans-serif;color:white;background-color:#525D76;font-size:22px;} H2 {font-family:Tahoma,Arial,sans-serif;color:white;background-color:#525D76;font-size:16px;} H3 {font-family:Tahoma,Arial,sans-serif;color:white;background-color:#525D76;font-size:14px;} BODY {font-family:Tahoma,Arial,sans-serif;color:black;background-color:white;} B {font-family:Tahoma,Arial,sans-serif;color:white;background-color:#525D76;} P {font-family:Tahoma,Arial,sans-serif;background:white;color:black;font-size:12px;}A {color : black;}A.name {color : black;}HR {color : #525D76;}--></style> </head><body><h1>HTTP Status 401 - oauth_problem=token_rejected</h1><HR size="1" noshade="noshade"><p><b>type</b> Status report</p><p><b>message</b> <u>oauth_problem=token_rejected</u></p><p><b>description</b> <u>This request requires HTTP authentication (oauth_problem=token_rejected).</u></p><HR size="1" noshade="noshade"><h3></h3></body></html>
+[20210507 08:59:47][] <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 2.0//EN">
+<html><head>
+<title>302 Found</title>
+</head><body>
+<h1>Found</h1>
+<p>The document has moved <a href="https://us.etrade.com/pagenotfound.html">here</a>.</p>
+</body></html>
+
+[20210507 08:59:53][] <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 2.0//EN">
+<html><head>
+<title>302 Found</title>
+</head><body>
+<h1>Found</h1>
+<p>The document has moved <a href="https://us.etrade.com/pagenotfound.html">here</a>.</p>
+</body></html>
+
+[20210507 09:00:37][] <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 2.0//EN">
+<html><head>
+<title>302 Found</title>
+</head><body>
+<h1>Found</h1>
+<p>The document has moved <a href="https://us.etrade.com/pagenotfound.html">here</a>.</p>
+</body></html>
+
+[20210507 09:11:15][] <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 2.0//EN">
+<html><head>
+<title>302 Found</title>
+</head><body>
+<h1>Found</h1>
+<p>The document has moved <a href="https://us.etrade.com/pagenotfound.html">here</a>.</p>
+</body></html>
+
+[20220314 09:08:04][] 
+[20220314 09:08:10][] 
+[20220314 09:09:07][] 
+[20220314 09:09:42][] 
+[20220314 09:15:49][] 

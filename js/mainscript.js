@@ -153,6 +153,20 @@ console.log("inside calcAll");
       finalNumSharesRounded -= roundSharesOptionValue; 
     }
 
+    // if the final number of shares is less than 50 (i.e. 0), then we're going to just start over again and 
+    //  round it to the nearest 10 
+
+    if (finalNumSharesRounded < 50)
+    {
+        finalNumShares = $("#amountSpending").val()/$("#entryPrice").val(); 
+        finalNumSharesRounded = (Math.round(finalNumShares/10)*10); 
+        if (finalNumSharesRounded > finalNumShares)
+        {
+          finalNumSharesRounded -= 10; 
+        }
+    }
+
+
     var finalEntryPrice = Number($("#entryPrice").val());
     var totalValue = finalEntryPrice*finalNumSharesRounded; 
     var totalValueString = totalValue.toString(); 
@@ -178,7 +192,7 @@ console.log("inside calcAll");
       orderType += " HR_" + parseInt($("#day1").html());
     }
 
-    $("#orderStub").val(original_symbol + " BUY " + finalSharesRoundedWithCommas + " $" + finalPriceDisplay + " (" + newCalculatedPercentage.toFixed(2) + "%) -- $" + totalValueString + orderType); 
+    $("#orderStub").val(original_symbol + " BUY " + finalSharesRoundedWithCommas + " $" + finalPriceDisplay + " (" + newCalculatedPercentage.toFixed(2) + "%) -- $" + $("#yestCloseText").val() + orderType); 
 
 
 } // end of calcAll() function 
@@ -543,7 +557,7 @@ $(function() {
               $("#day1").html("");
               $("#entryPrice").val(""); 
               $("#entryPercentage").val("");  
-              $("#amountSpending").val("500");
+              $("#amountSpending").val("1500");
               $("#eTradeLowPercentage").html("");
               $("#orderStub").val("-----------------------"); 
               $("#foreign_country").html("");
@@ -1093,6 +1107,15 @@ console.log(html);
       CopyToClipboard();  
     }); // End of click function 
 
+    // once the submit button is clicked
+   $("#halfAmountSpending").click(function(){
+      var amount = parseInt($("#amountSpending").val()); 
+      amount = amount/2; 
+      $("#amountSpending").val(amount);
+      calcAll();
+      CopyToClipboard();  
+    }); // End of click function 
+
    $("#pink_sheet_0002").click(function(){
 
       $("#amountSpending").val("100");
@@ -1197,12 +1220,15 @@ console.log(html);
               $("#orderStub").css("background-color", "#FFFFFF");  
             }
 
+/*
             var numShares = getNumberOfShares(); 
 
             if (numShares == 0)
             {
                 alert("The number of shares is zero"); 
             }
+*/ 
+
 
     /*
             var warningMessage = "Check to see if the VIX is picking up.  Check the volumes."; 

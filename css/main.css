@@ -144,6 +144,15 @@ span#time_of_day_percentage{
 	border-style: solid; 
 	border-width: 1px; 	
 	margin-bottom: 2px;
+	background-color: pink;
+}
+
+#halfAmountSpending{
+	width: 18px;
+	height: 18px;
+	border-style: solid; 
+	border-width: 1px; 	
+	margin-bottom: 2px;
 }
 
 #entryPercentage{
