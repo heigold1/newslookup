@@ -156,13 +156,13 @@ console.log("inside calcAll");
     // if the final number of shares is less than 50 (i.e. 0), then we're going to just start over again and 
     //  round it to the nearest 10 
 
-    if (finalNumSharesRounded < 50)
+    if (finalNumSharesRounded < 100)
     {
         finalNumShares = $("#amountSpending").val()/$("#entryPrice").val(); 
-        finalNumSharesRounded = (Math.round(finalNumShares/10)*10); 
-        if (finalNumSharesRounded > finalNumShares)
+        finalNumSharesRounded = (Math.floor(finalNumShares/10)*10); 
+        if (finalNumSharesRounded < 10)
         {
-          finalNumSharesRounded -= 10; 
+          finalNumSharesRounded = 10; 
         }
     }
 
@@ -557,7 +557,7 @@ $(function() {
               $("#day1").html("");
               $("#entryPrice").val(""); 
               $("#entryPercentage").val("");  
-              $("#amountSpending").val("1500");
+              $("#amountSpending").val("3000");
               $("#eTradeLowPercentage").html("");
               $("#orderStub").val("-----------------------"); 
               $("#foreign_country").html("");
@@ -904,14 +904,13 @@ $(function() {
 /*               var eTradeIFrame = '<br><iframe id="etrade_iframe" src="https://www.etrade.wallst.com/v1/stocks/news/search_results.asp?symbol=' + symbol + '&rsO=new#lastTradeTime" width="675px" height="500px"></iframe>';  */
 /*               var streetInsiderIFrame = '<br><iframe src="https://www.streetinsider.com/stock_lookup.php?LookUp=Get+Quote&q=' + symbol + '#stock_pod_nav" width="675px" height="300px"></iframe>';   */
 
-
               $("div#left_bottom_container").css("background-color", "#BBDDFF");
                 $.ajax({
                     url: "proxy_sec_xml.php",
                     data: {symbol: symbol,
                            secCompanyName : yahooCompanyName},
-
-/*
+    
+/*    
                     url: "proxy.php",
                     data: {symbol: symbol,
                          stockOrFund: stockOrFund, 
@@ -1110,7 +1109,7 @@ console.log(html);
     // once the submit button is clicked
    $("#halfAmountSpending").click(function(){
       var amount = parseInt($("#amountSpending").val()); 
-      amount = amount/2; 
+      amount = amount/3; 
       $("#amountSpending").val(amount);
       calcAll();
       CopyToClipboard();  
@@ -1272,9 +1271,9 @@ console.log(html);
 
           // in case I accidentally type in more than I should be trading with
           var thisValue = parseInt($(this).val()); 
-          if (thisValue >  2000)
+          if (thisValue >  3000)
           {
-            thisValue = 2000;
+            thisValue = 3000;
             $(this).val(thisValue);
           }
 
