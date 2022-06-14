@@ -6,7 +6,7 @@
 	<meta content="utf-8" http-equiv="encoding">	
 	<script src="js/jquery-1.11.1.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.15.1/moment.min.js"></script>
-	<script src="js/mainscript.js"></script>   
+	<script src="js/mainscript.js?n=1"></script>   
 	<link type="text/css" href="./css/main.css" rel="stylesheet"/>
 	<link type="text/css" href="./css/combined-min-1.0.5754.css" rel="stylesheet" />
 	<link type="text/css" href="./css/quote-layout.css" rel="stylesheet"/>

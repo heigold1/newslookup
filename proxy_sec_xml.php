@@ -6,6 +6,7 @@ error_reporting(E_ALL);
 $symbol=$_GET['symbol'];
 $secCompanyName = $_GET['secCompanyName'];
 $secCompanyName = preg_replace('/ /', '+', $secCompanyName);
+$secCompanyName = preg_replace("/<.*?>/", "", $secCompanyName);
 
 $yesterdayDays = 1;
 
@@ -191,20 +192,37 @@ function timestampIsSafeDateColumn($dateValue){
     }
 }
 
-function grabHTML($function_host_name, $url)
+function curl_get_contents($url)
 {
+    $ch = curl_init();
+
+    curl_setopt($ch, CURLOPT_HEADER, 0);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+    curl_setopt($ch, CURLOPT_URL, $url);
+
+    $data = curl_exec($ch);
+    curl_close($ch);
+
+    return $data;
+}
+
+function grabHTML($function_host_name, $url)
+{ 
 
     $ch = curl_init();
     $header=array('GET /1575051 HTTP/1.1',
     "Host: $function_host_name",
     'Accept:text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
     'Accept-Language:en-US,en;q=0.8',
-    'Cache-Control:max-age=0',
-    'Connection:keep-alive',
+    'Cache-Control: no-store, no-cache, must-revalidate, max-age=0',
+    'Cache-Control: post-check=0, pre-check=0', 
+    'Pragma: no-cache', 
+//     'Connection:keep-alive',
     'User-Agent:brent@heigoldinvestments.com',
     );
 
     curl_setopt($ch,CURLOPT_URL,$url);
+
     curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
     curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
     curl_setopt($ch,CURLOPT_RETURNTRANSFER,true);
@@ -213,9 +231,10 @@ function grabHTML($function_host_name, $url)
 
     curl_setopt($ch, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
 
-    curl_setopt($ch,CURLOPT_COOKIEFILE,'cookies.txt');
-    curl_setopt($ch,CURLOPT_COOKIEJAR,'cookies.txt');
+/*    curl_setopt($ch,CURLOPT_COOKIEFILE,'cookies.txt');
+    curl_setopt($ch,CURLOPT_COOKIEJAR,'cookies.txt');  */ 
     curl_setopt($ch,CURLOPT_HTTPHEADER,$header);
+    curl_setopt($ch, CURLOPT_FRESH_CONNECT, TRUE);
 
     curl_setopt($ch, CURLOPT_VERBOSE, true);
 //     curl_setopt($ch, CURLOPT_STDERR,$f = fopen(__DIR__ . "/error.log", "w+"));
@@ -654,7 +673,7 @@ $noTimeFound = false;
 
       // try https://www.nasdaq.com/symbol/staf/sec-filings
 
-      $url = "https://www.sec.gov/cgi-bin/browse-edgar?CIK=" . $symbol . "&owner=include&action=getcompany"; 
+      $url = "https://www.sec.gov/cgi-bin/browse-edgar?CIK=" . $symbol . "&owner=include&action=getcompany&rand=" . rand(); 
       $result = grabHTML('www.sec.gov', $url); 
 
       if (preg_match('/This page is temporarily unavailable/', $result))
@@ -669,7 +688,7 @@ $noTimeFound = false;
 
       if (preg_match('/No matching Ticker Symbol/', $result))
       {
-          $url = "https://www.sec.gov/cgi-bin/browse-edgar?company=" . $secCompanyName . "&owner=include&action=getcompany"; 
+          $url = "https://www.sec.gov/cgi-bin/browse-edgar?company=" . $secCompanyName . "&owner=include&action=getcompany&rand=" . rand();  
           $result = grabHTML('www.sec.gov', $url); 
 
           if (preg_match('/No matching companies/', $result))
@@ -683,8 +702,6 @@ $noTimeFound = false;
               return; 
           }
 
-
-
           if (preg_match('/Companies with names matching/', $result))
           {
               echo '<!DOCTYPE html><html><title>Filing - ' . $symbol . ' (AMBIGUOUS)</title><body>
@@ -696,17 +713,29 @@ $noTimeFound = false;
           }
       }
       $html = str_get_html($result);
+
       $rssTableRow = $html->find(' div table tbody tr'); 
       $rssLink = $rssTableRow[3]->find('a');
       $rssFullLink = "https://www.sec.gov" . $rssLink[0]->href; 
+      $rssFullLink = strval($rssFullLink); 
+
+      preg_match('/CIK\=(.*?)\&/', $rssLink[0]->href, $group); 
+
+      $cik = $group[1]; 
 
       $returnHtml = "";
       $tableRows = "";
       $recentNews = false;
       $secTableRowCount = 0; 
 
-          $xmlFinalString=grabHTML('www.sec.gov', $rssFullLink);
-          $xmlFinalObject = produce_XML_object_tree($xmlFinalString); 
+      $command = escapeshellcmd('python3 ../pythonscrape/scrape-sec-gov.py ' . $cik);
+      $secXMLString = shell_exec($command);
+
+//       $xmlFinalString=grabHTML('www.sec.gov', "https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=0001430306&type=&dateb=&owner=include&start=0&count=40&output=atom");
+
+//k       $xmlFinalString=grabHTML('www.sec.gov', $secXMLString);
+
+      $xmlFinalObject = produce_XML_object_tree($secXMLString); 
 
           $registrationOffering = "";
 
@@ -847,11 +876,12 @@ $noTimeFound = false;
       $returnHtml .= $tableRows;
       $returnHtml .=  "</table>";
 
-      $returnHtml .=  '<a style="font-size: 35px" target="_blank" href="http://ec2-54-210-42-143.compute-1.amazonaws.com/newslookup/scrape-street-insider.php?symbol=' . $symbol . '">Street Insider Scrape</a><br> 
-        <a style="font-size: 35px" target="_blank" href="https://www.streetinsider.com/stock_lookup.php?LookUp=Get+Quote&q=' . $symbol . '">Street Insider Actual Page</a><br>
-        <a style="font-size: 35px" target="_blank" href="https://www.nasdaq.com/symbol/' . $symbol . '/sec-filings">Nasdaq</a><br>
-        <a style="font-size: 35px" target="_blank" href="https://seekingalpha.com/symbol/' . $symbol . '?s=' . $symbol . '">Seeking Alpha</a><br>
-        <a style="font-size: 35px" target="_blank" href=https://www.etrade.wallst.com/v1/stocks/snapshot/snapshot.asp?ChallengeUrl=https://idp.etrade.com/idp/SSO.saml2&reinitiate-handshake=0&prospectnavyear=2011&AuthnContext=prospect&env=PRD&symbol=' . $symbol . '&rsO=new&country=US>E*TRADE</a>
+      $returnHtml .=  '<a style="font-size: 25px" target="_blank" href="http://ec2-54-210-42-143.compute-1.amazonaws.com/newslookup/scrape-street-insider.php?symbol=' . $symbol . '">Street Insider Scrape</a><br> 
+        <a style="font-size: 25px" target="_blank" href="https://www.streetinsider.com/stock_lookup.php?LookUp=Get+Quote&q=' . $symbol . '">Street Insider Actual Page</a><br>
+        <a style="font-size: 25px" target="_blank" href="https://www.nasdaq.com/symbol/' . $symbol . '/sec-filings">Nasdaq</a><br>
+        <a style="font-size: 25px" target="_blank" href="https://www.sec.gov/cgi-bin/browse-edgar?CIK=' . $symbol . '&owner=include&action=getcompany">SEC Symbol</a><br>
+        <a style="font-size: 25px" target="_blank" href="https://www.sec.gov/cgi-bin/browse-edgar?company=' . $secCompanyName . '&owner=include&action=getcompany">SEC Company Name</a><br>
+        <a style="font-size: 25px" target="_blank" href=https://www.etrade.wallst.com/v1/stocks/snapshot/snapshot.asp?ChallengeUrl=https://idp.etrade.com/idp/SSO.saml2&reinitiate-handshake=0&prospectnavyear=2011&AuthnContext=prospect&env=PRD&symbol=' . $symbol . '&rsO=new&country=US>E*TRADE</a>
         <br>
 
 
