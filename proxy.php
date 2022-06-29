@@ -639,6 +639,7 @@ if ($which_website == "marketwatch")
         RESCUE FINANCING - BE CAREFUL</b></span>&nbsp;', $marketWatchNewsHTML);
       $marketWatchNewsHTML = preg_replace('/ liquidity/i', '<span style="font-size: 25px; background-color: red; color:black"><b>&nbsp; LIQUIDITY - BACK OFF</b></span>&nbsp;', $marketWatchNewsHTML);
       $marketWatchNewsHTML = preg_replace('/annual report/i', '<span style="font-size: 25px; background-color: red; color:black"><b>&nbsp; ANNUAL REPORT</b></span>&nbsp;', $marketWatchNewsHTML);
+      $marketWatchNewsHTML = preg_replace('/IPO/', '<span style="font-size: 45px; background-color: red; color:black"><b>&nbsp; IPO - CHECK THE DATE</b></span>&nbsp;', $marketWatchNewsHTML);
 
 
 
@@ -1153,19 +1154,9 @@ else if ($which_website == "yahoo")
       $finalReturn = preg_replace('/ consider shorting/i', '<span style="font-size: 25px; background-color: red; color:black"><b>&nbsp; CONSIDER SHORTING - 35%</b></span>&nbsp;', $finalReturn);
       $finalReturn = preg_replace('/ liquidity/i', '<span style="font-size: 25px; background-color: red; color:black"><b>&nbsp; LIQUIDITY - BACK OFF</b></span>&nbsp;', $finalReturn);
       $finalReturn = preg_replace('/annual report/i', '<span style="font-size: 25px; background-color: red; color:black"><b>&nbsp; ANNUAL REPORT</b></span>&nbsp;', $finalReturn);
-
-
-
-
-
-
-
-
-
-
-
-
-
+      $finalReturn = preg_replace('/IPO/', '<span style="font-size: 55px; background-color: red; color:black"><b>&nbsp; IPO</b></span>&nbsp;', $finalReturn);
+      $finalReturn = preg_replace('/ call put ratio/i', '<span style="font-size: 25px; background-color: red; color:black"><b>&nbsp; CALL PUT RATIO - OK AT 20%</b></span>&nbsp;', $finalReturn);
+      $finalReturn = preg_replace('/ s-1/i', '<span style="font-size: 25px; background-color: red; color:black"><b>&nbsp; s-1 - BACK OFF!!</b></span>&nbsp;', $finalReturn);
 
 
       $message_board = '</font><a target="_blank" onclick="return openPage(this.href)" href="http://finance.yahoo.com/quote/' . $symbol . '/community?ltr=1"> Yahoo Message Boards</a>&nbsp;&nbsp;&nbsp;&nbsp;'; 
