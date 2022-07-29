@@ -557,7 +557,7 @@ $(function() {
               $("#day1").html("");
               $("#entryPrice").val(""); 
               $("#entryPercentage").val("");  
-              $("#amountSpending").val("3000");
+              $("#amountSpending").val("1500");
               $("#eTradeLowPercentage").html("");
               $("#orderStub").val("-----------------------"); 
               $("#foreign_country").html("");
@@ -1271,9 +1271,9 @@ console.log(html);
 
           // in case I accidentally type in more than I should be trading with
           var thisValue = parseInt($(this).val()); 
-          if (thisValue >  3000)
+          if (thisValue >  1500)
           {
-            thisValue = 3000;
+            thisValue = 1500;
             $(this).val(thisValue);
           }
 

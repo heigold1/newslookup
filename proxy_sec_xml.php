@@ -534,7 +534,7 @@ function getStreetInsider($symbol, $yesterdayDays)
 
           $streetInsiderNews = preg_replace('/ drug/i', '<span style="font-size: 12px; background-color:red; color:black"><b>&nbsp;drug </span></b> ', $streetInsiderNews);
 
-          $streetInsiderNews = preg_replace('/ guidance/i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp;GUIDANCE - BACK OFF </span></b>&nbsp;', $streetInsiderNews);
+          $streetInsiderNews = preg_replace('/ guidance/i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp;GUIDANCE - ADD 8-10% </span></b>&nbsp;', $streetInsiderNews);
           $streetInsiderNews = preg_replace('/ regulatory update/i', '<span style="font-size: 12px; background-color:red; color:black"><b>&nbsp;regulatory update (35% even if regulation is good)</span></b>&nbsp;', $streetInsiderNews);
           $streetInsiderNews = preg_replace('/ suspended/i', '<span style="font-size: 12px; background-color:red; color:black"><b>&nbsp;suspended</span> (65-70%)</b>&nbsp;', $streetInsiderNews);
           $streetInsiderNews = preg_replace('/ fraud/i', '<span style="font-size: 12px; background-color:red; color:black"><b>&nbsp;fraud</span></b>&nbsp;', $streetInsiderNews);      
@@ -646,9 +646,9 @@ function getStreetInsider($symbol, $yesterdayDays)
           $streetInsiderNews = preg_replace('/ call put ratio/i', '<span style="font-size: 25px; background-color: red; color:black"><b>&nbsp; CALL PUT RATIO - OK AT 20%</b></span>&nbsp;', $streetInsiderNews);
           $streetInsiderNews = preg_replace('/ s-1/i', '<span style="font-size: 25px; background-color: red; color:black"><b>&nbsp; s-1 - BACK OFF!!</b></span>&nbsp;', $streetInsiderNews);
           $streetInsiderNews = preg_replace('/(Files \$.*M)/i', '<span style="font-size: 25px; background-color: red; color:black"><b>&nbsp; $1 - OFFERING!!!</b></span>&nbsp;', $streetInsiderNews);
-
-
-
+          $streetInsiderNews = preg_replace('/ (cuts.*?guidance)/i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp;$1 - ADD 8-10% </span></b>&nbsp;', $streetInsiderNews); 
+          $streetInsiderNews = preg_replace('/ chapter 22/i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp;CHAPTER 22</span></b>&nbsp;', $streetInsiderNews);
+          $streetInsiderNews = preg_replace('/ (disappointing.*?results)/i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp;$1</span></b>&nbsp;', $streetInsiderNews);
 
         try 
         {
@@ -833,8 +833,6 @@ $noTimeFound = false;
               $title = preg_replace('/8\.01/i', '<span style="font-size: 16px; background-color:lightblue; color:black"><b>&nbsp;Other Events</span></b>&nbsp;<br>', $title);
               $title = preg_replace('/9\.01/i', '<span style="font-size: 16px; background-color:lightblue; color:black"><b>&nbsp;Financial Statemtnes and Exhibits</span></b>&nbsp;<br>', $title);
               $title = preg_replace('/general form for registration of securities/i', '<span style="font-size: 35px; background-color:red; color:black"><b>&nbsp;General form for registration of securities</span></b>&nbsp;', $title);
-              $title = preg_replace('/ (Files \$.*M)/i', '<span style="font-size: 35px; background-color:red; color:black"><b>&nbsp;$1 - OFFERING!!!!</span></b>&nbsp;', $title);
-
 
               if (preg_match('/registration/i', $title) || preg_match('/offering/i', $title))
               {
