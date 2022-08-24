@@ -1219,12 +1219,6 @@ console.log(html);
               $("#orderStub").css("background-color", "#FFFFFF");  
             }
 
-            if (( $("#entryPrice").val() < 1.00 ) && ( $("#entryPercentage").val() > 34 ) && ( $("#yestCloseText").val() > 1.00 ))
-            {
-              alert("Your entry is below $1.00.  Add 8%"); 
-            }
-
-
 /*
             var numShares = getNumberOfShares(); 
 
