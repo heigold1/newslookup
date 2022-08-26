@@ -733,6 +733,13 @@ $(function() {
                   $("#day4_low").html(returnedObject.day_4_low);
                   $("#day3_low").html(returnedObject.day_3_low);
                   $("#day5_low").html(returnedObject.day_5_low);
+
+                  $("#day1_volume").html(returnedObject.day_1_volume);
+                  $("#day2_volume").html(returnedObject.day_2_volume);
+                  $("#day4_volume").html(returnedObject.day_4_volume);
+                  $("#day3_volume").html(returnedObject.day_3_volume);
+                  $("#day5_volume").html(returnedObject.day_5_volume);
+
                 },
                 error: function (xhr, ajaxOptions, thrownError) {
                   console.log("there was an error in calling alphavantage_api_historical_data.php");
@@ -985,33 +992,40 @@ console.log(html);
         {
             highRiskFlag = 1; 
             warningMessage += " ** HIGH RISK STOCK!!! ** ";
-            $("#day1").css({'background-color' : 'red', 'font-size' : '19px'});
+            $("#day1").css({'background-color' : 'red', 'font-size' : '17px'});
         }
         else if (day1 < -15)
         {
-            $("#day1").css({'background-color' : 'yellow', 'font-size' : '19px'});
+            $("#day1").css({'background-color' : 'yellow', 'font-size' : '17px'});
         }
 
         if (day2 > 15)
         {
             highRiskFlag = 1; 
             warningMessage += " ** HIGH RISK STOCK!!! ** ";
-            $("#day2").css({'background-color' : 'red', 'font-size' : '19px'});
+            $("#day2").css({'background-color' : 'red', 'font-size' : '17px'});
         }
         else if (day2 < -15)
         {
-            $("#day2").css({'background-color' : 'yellow', 'font-size' : '19px'});
+            $("#day2").css({'background-color' : 'yellow', 'font-size' : '17px'});
         }
 
         if (day3 > 15)
         {
             highRiskFlag = 1; 
             warningMessage += " ** HIGH RISK STOCK!!! ** ";
-            $("#day3").css({'background-color' : 'red', 'font-size' : '19px'});
+            $("#day3").css({'background-color' : 'red', 'font-size' : '17px'});
         }
         else if (day3 < -15)
         {
-            $("#day3").css({'background-color' : 'yellow', 'font-size' : '19px'});
+            $("#day3").css({'background-color' : 'yellow', 'font-size' : '17px'});
+        }
+
+        var day1_volume = parseFloat($("#day1_volume").html());
+
+        if (day1_volume > 0.1)
+        {
+            $("#day1_volume").css({'background-color' : 'red', 'font-size' : '17px'});
         }
 
         if (highRiskFlag == 1)

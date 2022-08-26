@@ -129,6 +129,20 @@
 							</td> 						
 							<td><span id=bigcharts_time></span><span id=bigcharts_minutes_ago></span></td>
 						</tr>
+						<tr style="height:15px">
+							<td style="width:140px"></td>
+							<td style="width:460px" colspan="2">
+								 Volume:<span id="eTradeHigh">&nbsp;&nbsp;&nbsp;</span>
+
+								<label class="historical_data_label">&nbsp;&nbsp;&nbsp;</label><span id="day5_volume" class="historical_data_days">&nbsp;&nbsp;&nbsp;</span>
+								<label class="historical_data_label">&nbsp;&nbsp;&nbsp;</label><span id="day4_volume" class="historical_data_days">&nbsp;&nbsp;&nbsp;</span>
+								<label class="historical_data_label">&nbsp;&nbsp;&nbsp;</label><span id="day3_volume" class="historical_data_days">&nbsp;&nbsp;&nbsp;</span>
+								<label class="historical_data_label">&nbsp;&nbsp;&nbsp;</label><span id="day2_volume" class="historical_data_days">&nbsp;&nbsp;&nbsp;</span>
+								<label class="historical_data_label">&nbsp;&nbsp;&nbsp;</label><span id="day1_volume" class="historical_data_days">&nbsp;&nbsp;&nbsp;</span>		
+								<span id="yahoo_historical_data_link">&nbsp;&nbsp;&nbsp;</span>						
+							</td> 						
+							<td><span id=bigcharts_time></span><span id=bigcharts_minutes_ago></span></td>
+						</tr>
 					</table> <!-- Order entry information (yest. close, etc...) --> 
 
 			</div> <!-- Enter Quote Div -->
