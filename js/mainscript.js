@@ -1023,7 +1023,7 @@ console.log(html);
 
         var day1_volume = parseFloat($("#day1_volume").html());
 
-        if (day1_volume > 4.5)
+        if (day1_volume > 4.7)
         {
             highRiskFlag = 1; 
             warningMessage += " ** HIGH RISK STOCK!!! ** ";
