@@ -1001,8 +1001,6 @@ console.log(html);
 
         if (day2 > 15)
         {
-            highRiskFlag = 1; 
-            warningMessage += " ** HIGH RISK STOCK!!! ** ";
             $("#day2").css({'background-color' : 'red', 'font-size' : '17px'});
         }
         else if (day2 < -15)
@@ -1012,8 +1010,6 @@ console.log(html);
 
         if (day3 > 15)
         {
-            highRiskFlag = 1; 
-            warningMessage += " ** HIGH RISK STOCK!!! ** ";
             $("#day3").css({'background-color' : 'red', 'font-size' : '17px'});
         }
         else if (day3 < -15)
