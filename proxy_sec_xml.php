@@ -8,7 +8,7 @@ $secCompanyName = $_GET['secCompanyName'];
 $secCompanyName = preg_replace('/ /', '+', $secCompanyName);
 $secCompanyName = preg_replace("/<.*?>/", "", $secCompanyName);
 
-$yesterdayDays = 3;
+$yesterdayDays = 1;
 
 fopen("cookies.txt", "w");
 
@@ -381,7 +381,7 @@ function getStreetInsider($symbol, $yesterdayDays)
             $timeDiff = ($currentTimeInt - $lastUpdatedInt)/60; 
             // If it's newer than half-an-hour (i.e. 30.00 minutes) then just use what's stored in the database, because
             // the StreetInsider bot hasn't expired. 
-            if ($timeDiff < 11.00)
+            if ($timeDiff < 25.00)
             {
                 $streetInsiderNews = $myRow['htmltext']; 
             }
@@ -649,6 +649,7 @@ function getStreetInsider($symbol, $yesterdayDays)
           $streetInsiderNews = preg_replace('/ (cuts.*?guidance)/i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp;$1 </span></b>&nbsp;', $streetInsiderNews); 
           $streetInsiderNews = preg_replace('/ chapter 22/i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp;CHAPTER 22</span></b>&nbsp;', $streetInsiderNews);
           $streetInsiderNews = preg_replace('/ (disappointing.*?results)/i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp;$1</span></b>&nbsp;', $streetInsiderNews);
+          $streetInsiderNews = preg_replace('/ (reports.*?results)/i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp;$1</span></b>&nbsp;', $streetInsiderNews);
 
         try 
         {
