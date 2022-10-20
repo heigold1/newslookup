@@ -2,7 +2,7 @@
 <html lang="en-US">
 
 <head>
-    <title>High Risk Penny Drop Rates</title>   
+    <title>Low-volume Drop Rates</title>   
 	<script src="https://code.highcharts.com/highcharts.js"></script>
 	<script src="https://code.highcharts.com/highcharts-3d.js"></script>
 	<script src="https://code.highcharts.com/modules/exporting.js"></script>
@@ -17,7 +17,7 @@
 <figure class="highcharts-figure">
     <div id="container"></div>
     <p class="highcharts-description">
-        This chart demonstrates how far high-risk penny stocks will fall before their first significant recovery, based on how far they spiked up the previous day, and what the previous day's closing price was.
+        Low-volume drop rates
     </p>
 </figure>
 
@@ -64,10 +64,10 @@ var chart = new Highcharts.Chart({
         }
     },
     title: {
-        text: 'High-risk Penny Stock Drop Rates'
+        text: 'Low-volume drop rates'
     },
     subtitle: {
-        text: 'How far high-risk penny stocks will fall before their first significant (i.e. 5% and above) recovery'
+        text: 'Low-volume drop rates'
     },
     plotOptions: {
         scatter: {
@@ -78,11 +78,11 @@ var chart = new Highcharts.Chart({
     },
     xAxis: {
         min: 0,
-        max: 200,
+        max: 20000,
         gridLineWidth: 1,
         title: {
             enabled: true,
-            text: "Amount spiked previous day"
+            text: "Volume"
         }
     },
     yAxis: {
@@ -95,7 +95,7 @@ var chart = new Highcharts.Chart({
     },
     zAxis: {
         min: 0,
-        max: 1,
+        max: 3,
         showFirstLabel: false,
         title: {
             enabled: true,
@@ -112,7 +112,7 @@ var chart = new Highcharts.Chart({
             exposeAsGroupOnly: true
         },
         data: [
-            [107.65, 34.52, 0.33]]
+            [8000, 32.95, 1.73]]
     }]
 });
 
