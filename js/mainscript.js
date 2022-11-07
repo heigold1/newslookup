@@ -557,7 +557,7 @@ $(function() {
               $("#day1").html("");
               $("#entryPrice").val(""); 
               $("#entryPercentage").val("");  
-              $("#amountSpending").val("750");
+              $("#amountSpending").val("500");
               $("#eTradeLowPercentage").html("");
               $("#orderStub").val("-----------------------"); 
               $("#foreign_country").html("");
@@ -712,7 +712,7 @@ $(function() {
             }
 
             $.ajax({
-                url: "alphavantage_api_historical_data.php",
+                url: "marketstack-api-historical-data.php",
                 data: {symbol: original_symbol},
                 async: false, 
                 dataType: 'html',
@@ -742,7 +742,7 @@ $(function() {
 
                 },
                 error: function (xhr, ajaxOptions, thrownError) {
-                  console.log("there was an error in calling alphavantage_api_historical_data.php");
+                  console.log("there was an error in calling marketstack-api-historical-data.php");
                 }
 
             });

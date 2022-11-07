@@ -39,7 +39,11 @@ Highcharts.setOptions({
                 [1, Highcharts.color(color).brighten(-0.2).get('rgb')]
             ]
         };
-    })
+    }),
+    lang: {
+        thousandsSep: ','
+    }
+
 });
 
 // Set up the chart
@@ -78,11 +82,11 @@ var chart = new Highcharts.Chart({
     },
     xAxis: {
         min: 0,
-        max: 20000,
+        max: 100000,
         gridLineWidth: 1,
         title: {
             enabled: true,
-            text: "Volume"
+            text: "Previous day's volume"
         }
     },
     yAxis: {
@@ -95,7 +99,7 @@ var chart = new Highcharts.Chart({
     },
     zAxis: {
         min: 0,
-        max: 3,
+        max: 15,
         showFirstLabel: false,
         title: {
             enabled: true,
@@ -112,7 +116,10 @@ var chart = new Highcharts.Chart({
             exposeAsGroupOnly: true
         },
         data: [
-            [8000, 32.95, 1.73]]
+            [7800, 32.95, 1.73],
+            [16176, 22.76, 13.75],
+            [78390, 22.18, 10.37],
+            ]
     }]
 });
 

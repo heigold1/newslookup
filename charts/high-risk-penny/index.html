@@ -39,7 +39,10 @@ Highcharts.setOptions({
                 [1, Highcharts.color(color).brighten(-0.2).get('rgb')]
             ]
         };
-    })
+    }),
+    lang: {
+        thousandsSep: ','
+    }
 });
 
 // Set up the chart
@@ -112,7 +115,9 @@ var chart = new Highcharts.Chart({
             exposeAsGroupOnly: true
         },
         data: [
-            [107.65, 34.52, 0.33]]
+            [107.65, 34.52, 0.33],
+            [64.6, 24.57, 0.411]
+            ]
     }]
 });
 
