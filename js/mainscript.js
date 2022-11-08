@@ -712,7 +712,7 @@ $(function() {
             }
 
             $.ajax({
-                url: "marketstack-api-historical-data.php",
+                url: "alphavantage_api_historical_data.php",
                 data: {symbol: original_symbol},
                 async: false, 
                 dataType: 'html',
@@ -742,7 +742,7 @@ $(function() {
 
                 },
                 error: function (xhr, ajaxOptions, thrownError) {
-                  console.log("there was an error in calling marketstack-api-historical-data.php");
+                  console.log("there was an error in calling alphavantage_api_historical_data.php");
                 }
 
             });

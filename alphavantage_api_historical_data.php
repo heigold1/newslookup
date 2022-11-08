@@ -57,7 +57,9 @@ $header=array('GET /1575051 HTTP/1.1',
 
 
 
-$url = "https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=" . $symbol . "&apikey=RH5DAZF0ZQX2LSE6"; 
+$url = "https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=" . $symbol . "&apikey=RH5DAZF0ZQX2LSE6"; 
+
+
 
 //$results = curl_get_contents($url); 
 $results = grabHTML("www.alphavantage.co", $url);
@@ -102,7 +104,7 @@ foreach($object as $k => $v){
           {
             $dailyObject->close = $value; 
           }
-          elseif ($key =='5. volume')
+          elseif ($key =='6. volume')
           {
             $dailyObject->volume = $value; 
           }
