@@ -764,7 +764,9 @@ else if ($which_website == "yahoo")
 
       $yahooFinanceSector = preg_replace('/energy/i', '<span style="font-size: 20px; background-color: red; color:black"><b>&nbsp; ENERGY</b></span>&nbsp;', $yahooFinanceSector); 
 
-      $yahooFinanceIndustry = preg_replace('/oil \& gas/i', '<span style="font-size: 20px; background-color: red; color:black"><b>&nbsp; OIL & GAS</b></span>&nbsp;', $yahooFinanceIndustry); 
+      $yahooFinanceIndustry = preg_replace('/oil \& gas/i', '<span style="font-size: 35px; background-color: red; color:black"><b>&nbsp; OIL & GAS</b></span>&nbsp;', $yahooFinanceIndustry); 
+
+      $yahooFinanceIndustry = preg_replace('/shell companies/i', '<span style="font-size: 35px; background-color: red; color:black"><b>&nbsp; Shell Companies</b></span>&nbsp;', $yahooFinanceIndustry); 
 
       $sectorCountry = '<span style="font-size: 15px;">SECTOR - ' . $yahooFinanceSector . '</span>&nbsp;&nbsp;<span id="industry" style="font-size: 15px;">INDUSTRY - ' . $yahooFinanceIndustry . '</span><br><br><div id="country" style="font-size: 15px;">' . $country . '</div>'; 
 
