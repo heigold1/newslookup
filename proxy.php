@@ -4,7 +4,7 @@ include './Samples/config.php';
 
 require_once("simple_html_dom.php"); 
 
-$yesterdayDays = 3;
+$yesterdayDays = 1;
 
 error_reporting(1);
 //ini_set('display_errors', 1);
@@ -1165,6 +1165,7 @@ else if ($which_website == "yahoo")
       $finalReturn = preg_replace('/ (disappointing.*?results)/i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp;$1</span></b>&nbsp;', $finalReturn);
       $finalReturn = preg_replace('/ (reports.*?results)/i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp;$1</span></b>&nbsp;', $finalReturn);
       $finalReturn = preg_replace('/ EPS/i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp;EPS - CHECK FOR A LOSS</span></b>&nbsp;', $finalReturn);
+      $finalReturn = preg_replace('/ special committee investigation/i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp;SPECIAL COMMITTE INVESTIGATION - 50%</span></b>&nbsp;', $finalReturn);
 
 
 

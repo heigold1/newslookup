@@ -1119,13 +1119,22 @@ console.log(html);
     }); // End of click function 
 
     // once the submit button is clicked
-   $("#halfAmountSpending").click(function(){
+   $("#thirdAmountSpending").click(function(){
       var amount = parseInt($("#amountSpending").val()); 
       amount = amount/3; 
       $("#amountSpending").val(amount);
       calcAll();
       CopyToClipboard();  
     }); // End of click function 
+
+   $("#halfAmountSpending").click(function(){
+      var amount = parseInt($("#amountSpending").val()); 
+      amount = amount/2; 
+      $("#amountSpending").val(amount);
+      calcAll();
+      CopyToClipboard();  
+    }); // End of click function 
+
 
    $("#pink_sheet_0002").click(function(){
 

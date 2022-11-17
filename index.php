@@ -84,6 +84,11 @@
 												<button id="halfAmountSpending" type="button">...</button>
 											</td>
 										</tr>
+										<tr>
+											<td>
+												<button id="thirdAmountSpending" type="button">...</button>
+											</td>
+										</tr>
 									</tbody>
 								</table>
 							</td>
