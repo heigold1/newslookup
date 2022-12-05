@@ -8,7 +8,7 @@ $secCompanyName = $_GET['secCompanyName'];
 $secCompanyName = preg_replace('/ /', '+', $secCompanyName);
 $secCompanyName = preg_replace("/<.*?>/", "", $secCompanyName);
 
-$yesterdayDays = 1;
+$yesterdayDays = 3;
 
 fopen("cookies.txt", "w");
 
@@ -651,7 +651,10 @@ function getStreetInsider($symbol, $yesterdayDays)
           $streetInsiderNews = preg_replace('/ (disappointing.*?results)/i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp;$1</span></b>&nbsp;', $streetInsiderNews);
           $streetInsiderNews = preg_replace('/ (reports.*?results)/i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp;$1</span></b>&nbsp;', $streetInsiderNews);
           $streetInsiderNews = preg_replace('/ EPS/i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp; EPS - CHECK FOR A LOSS</span></b>&nbsp;', $streetInsiderNews);
-          $streetInsiderNews = preg_replace('/ special committee investigation/i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp;SPECIAL COMMITTE INVESTIGATION - 50%</span></b>&nbsp;', $streetInsiderNews);
+          $streetInsiderNews = preg_replace('/ committee investigation/i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp; COMMITTEE INVESTIGATION - STAY AWAY</span></b>&nbsp;', $streetInsiderNews);
+          $streetInsiderNews = preg_replace('/ (posts.*?data)/i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp;$1</span></b>&nbsp;', $streetInsiderNews);
+          $streetInsiderNews = preg_replace('/ (illegally.*\")/i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp;$1 - STAY AWAY"</span></b>&nbsp;', $streetInsiderNews);
+          $streetInsiderNews = preg_replace('/ at+the+market/i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp;AT THE MARKET - ADJUSTMENT COULD HAPPEN</span></b>&nbsp;', $streetInsiderNews);      
 
 
         try 
@@ -837,6 +840,7 @@ $noTimeFound = false;
               $title = preg_replace('/8\.01/i', '<span style="font-size: 16px; background-color:lightblue; color:black"><b>&nbsp;Other Events</span></b>&nbsp;<br>', $title);
               $title = preg_replace('/9\.01/i', '<span style="font-size: 16px; background-color:lightblue; color:black"><b>&nbsp;Financial Statemtnes and Exhibits</span></b>&nbsp;<br>', $title);
               $title = preg_replace('/general form for registration of securities/i', '<span style="font-size: 35px; background-color:red; color:black"><b>&nbsp;General form for registration of securities</span></b>&nbsp;', $title);
+              $title = preg_replace('/ business combination/i', '<span style="font-size: 55px; background-color:red; color:black"><b>&nbsp; BUSINESS<br><br> COMBINATION<br><br> - STAY<br><br>AWAY<br><br> </b></span> &nbsp;', $title);
 
               if (preg_match('/registration/i', $title) || preg_match('/offering/i', $title))
               {

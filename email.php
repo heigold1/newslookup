@@ -12,7 +12,7 @@ if (isset($_GET['trade']))
 	$order_to_send = substr($full_order, 0, $location_of_dashes);
 
 	$from = '<brentheigold@gmail.com>';
-        $to = 'jayratliffdtf@gmail.com';
+        $to =  'brent@heigoldinvestments.com';   // 'jayratliffdtf@gmail.com';
 
 	$subject = $order_to_send;
 	$body = "";
@@ -24,8 +24,8 @@ if (isset($_GET['trade']))
 	);
 
 	$smtp = Mail::factory('smtp', array(
-	        'host' => 'smtp.gmail.com',
-	        'port' => '587',   // 465 or 587 
+	        'host' => 'ssl://smtp.gmail.com', // 'smtp.gmail.com',
+	        'port' => '465',   // 465 or 587 
 	        'auth' => true,
 	        'username' => 'brentheigold@gmail.com',
 	        'password' => 'Heimer27*'
