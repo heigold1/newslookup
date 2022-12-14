@@ -1019,14 +1019,10 @@ else if ($which_website == "yahoo")
       $finalReturn = preg_replace('/(' .  get_yahoo_yesterday_trade_date() . ')/', '<span style="font-size: 12px; background-color:   #0747a1; color:white; border: 1px solid red;"> $1</span> ', $finalReturn);
       $finalReturn = preg_replace('/(' .  get_yahoo_todays_trade_date() . ')/', '<span style="font-size: 12px; background-color:  black; color:white; border: 1px solid red;"> $1</span> ', $finalReturn);
 
-
-
-
-
-
-
-      $finalReturn = preg_replace('/ delist/i', '<span style="font-size: 25px; background-color:red; color:black"><b> delist If delisting tomorrow 65%, if days away then 50-55%</b></span>', $finalReturn);
-      $finalReturn = preg_replace('/Delist/', '<span style="font-size: 25px; background-color:red; color:black"><b> delist If delisting tomorrow 65%, if days away then 50-55%</b></span>', $finalReturn);
+      $finalReturn = preg_replace('/ voluntarily delist/i', '<span style="font-size: 25px; background-color:red; color:black"><b> voluntarily delist - 65%</b></span>', $finalReturn);
+      $finalReturn = preg_replace('/ voluntary delist/i', '<span style="font-size: 25px; background-color:red; color:black"><b> voluntary delist - 65%</b></span>', $finalReturn);
+      $finalReturn = preg_replace('/ delist/i', '<span style="font-size: 25px; background-color:red; color:black"><b> delist </b></span>', $finalReturn);
+      $finalReturn = preg_replace('/Delist/', '<span style="font-size: 25px; background-color:red; color:black"><b> delist </b></span>', $finalReturn);
       $finalReturn = preg_replace('/ chapter 11|chapter 11 /i', '<span style="font-size: 25px; background-color:red; color:black"><b> &nbsp;CHAPTER 11</b></span>', $finalReturn);
       $finalReturn = preg_replace('/ reverse split|reverse split /i', '<span style="font-size: 25px; background-color:red; color:black"><b> &nbsp;REVERSE SPLIT</b></span>', $finalReturn);
       $finalReturn = preg_replace('/ reverse.stock split|reverse stock split /i', '<div style="font-size: 25px; background-color:red; display: inline-block;">REVERSE STOCK SPLIT</div>', $finalReturn);
@@ -1076,7 +1072,8 @@ else if ($which_website == "yahoo")
       $finalReturn = preg_replace('/ redemption of public shares/i', '<span style="font-size: 12px; background-color:red; color:black"><b>&nbsp; Redemption of Public Shares - 92%</b></span>&nbsp;', $finalReturn);
       $finalReturn = preg_replace('/ phase 2/i', '<span style="font-size: 12px; background-color:red; color:black"><b>&nbsp; Phase 2 - 82% and set a stop loss of around 12%</b></span>&nbsp;', $finalReturn);
       $finalReturn = preg_replace('/ investor call/i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp; INVESTOR CALL - CHECK THE DATE &nbsp;</b></span>&nbsp;', $finalReturn);
-      $finalReturn = preg_replace('/ strategic update/i', '<span style="font-size: 12px; background-color:red; color:black"><b>&nbsp; STRATEGIC UPDATE - BE CAREFUL &nbsp;</b></span>&nbsp;', $finalReturn);
+      $finalReturn = preg_replace('/ strategic update/i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp; STRATEGIC UPDATE - BE CAREFUL &nbsp;</b></span>&nbsp;', $finalReturn);
+      $finalReturn = preg_replace('/ strategic shift/i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp; STRATEGIC SHIFT - BE CAREFUL &nbsp;</b></span>&nbsp;', $finalReturn);
       $finalReturn = preg_replace('/ attorney general/i', '<span style="font-size: 12px; background-color:red; color:black"><b>&nbsp; attorney general (if there is an attorney general probe then 45-50%) &nbsp;</b></span>&nbsp;', $finalReturn);
       $finalReturn = preg_replace('/ merger/i', '<span style="font-size: 55px; background-color:red; color:black"><b>&nbsp; MERGER<br><br> - STAY AWAY</b></span>&nbsp;', $finalReturn);
       $finalReturn = preg_replace('/ preliminary(.*?)outlook/i', '<span style="font-size: 12px; background-color:red; color:black"><b>&nbsp; Preliminary$1Outlook -</span> <span style="font-size: 12px; background-color:lightgreen; color:black">41% right off the bat, then 48% literally 3 minutes later.  TAKE NO MORE THAN 5% AND BAIL &nbsp;</b></span>&nbsp;', $finalReturn);
