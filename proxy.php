@@ -4,7 +4,7 @@ include './Samples/config.php';
 
 require_once("simple_html_dom.php"); 
 
-$yesterdayDays = 1;
+$yesterdayDays = 4;
 
 error_reporting(1);
 //ini_set('display_errors', 1);
@@ -829,6 +829,8 @@ else if ($which_website == "yahoo")
       $google_keyword_string = preg_replace('/ltd\./i', "+", $google_keyword_string);
 
       // URL of Google News RSS feed
+
+/*
       $googleNewsRSSFeed = simplexml_load_file('https://news.google.com/news/feeds?hl=en&gl=ca&q='.$google_keyword_string.'&um=1&ie=UTF-8&output=rss'); 
 
       $googleRSSArray = array();
@@ -917,6 +919,7 @@ else if ($which_website == "yahoo")
       }
       $googleNews .=  "</ul>";
 
+*/
 
       /*** Seeking Alpha RSS Parse ***/ 
 
@@ -993,7 +996,7 @@ else if ($which_website == "yahoo")
 
     /*** End of Seeking Alpha RSS Parse ***/ 
 
-      $finalReturn = "<td valign='top' style='width: 50%' >" . str_replace('<a ', '<a target="_blank" onclick="return openPage(this.href)" ', $allNews) . '</td><td valign="top" style="width: 50%">' . $stockSplitsTable . $seekingAlphaNews . str_replace('<a ', '<a target="_blank" onclick="return openPage(this.href)" ', $googleNews) . '</td>';
+      $finalReturn = "<td valign='top' style='width: 50%' >" . str_replace('<a ', '<a target="_blank" onclick="return openPage(this.href)" ', $allNews) . '</td><td valign="top" style="width: 50%">' . $stockSplitsTable . $seekingAlphaNews . /* str_replace('<a ', '<a target="_blank" onclick="return openPage(this.href)" ', $googleNews) .  */  '</td>';
 
       $finalReturn = preg_replace($patterns = array("/<img[^>]+\>/i", "/<embed.+?<\/embed>/im", "/<iframe.+?<\/iframe>/im", "/<script.+?<\/script>/im"), $replace = array("", "", "", ""), $finalReturn);
 
@@ -1168,7 +1171,7 @@ else if ($which_website == "yahoo")
       $finalReturn = preg_replace('/ (posts.*?data)/i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp;$1</span></b>&nbsp;', $finalReturn);
       $finalReturn = preg_replace('/ (illegally.*\")/i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp;$1 - STAY AWAY</span></b>&nbsp;', $finalReturn);
       $finalReturn = preg_replace('/ at+the+market/i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp;AT THE MARKET - ADJUSTMENT COULD HAPPEN</span></b>&nbsp;', $finalReturn);      
-
+      $finalReturn = preg_replace('/ debt financing/i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp;DEBT FINANCING - STAY AWAY - FOR DAYS</span></b>&nbsp;', $finalReturn);   
 
 
 
