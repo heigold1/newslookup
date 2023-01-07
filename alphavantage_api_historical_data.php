@@ -135,6 +135,8 @@ if (isset($historicalDataArray[1]->close))
       $returnArray['day_1'] = number_format((float)$day_1_percentage, 2, '.', '');
       $returnArray['day_1_low'] = number_format((float)$day_1_percentage_low, 2, '.', '');
       $returnArray['day_1_volume'] = number_format($historicalDataArray[0]->volume/$historicalDataArray[1]->volume, 2); 
+      $returnArray['day_1_total_volume'] = number_format($historicalDataArray[0]->volume); 
+      
 }
 else
 {
@@ -148,6 +150,7 @@ if (isset($historicalDataArray[2]->close))
     $returnArray['day_2'] = number_format((float)$day_2_percentage, 2, '.', '');
     $returnArray['day_2_low'] = number_format((float)$day_2_percentage_low, 2, '.', '');
     $returnArray['day_2_volume'] = number_format($historicalDataArray[1]->volume/$historicalDataArray[2]->volume, 2); 
+    $returnArray['day_2_total_volume'] = number_format($historicalDataArray[1]->volume); 
 }
 else
 {
@@ -161,6 +164,7 @@ if (isset($historicalDataArray[3]->close))
     $returnArray['day_3'] = number_format((float)$day_3_percentage, 2, '.', '');
     $returnArray['day_3_low'] = number_format((float)$day_3_percentage_low, 2, '.', '');
     $returnArray['day_3_volume'] = number_format($historicalDataArray[2]->volume/$historicalDataArray[3]->volume, 2); 
+    $returnArray['day_3_total_volume'] = number_format($historicalDataArray[2]->volume); 
 }
 else
 {
@@ -174,6 +178,7 @@ if (isset($historicalDataArray[4]->close))
     $returnArray['day_4'] = number_format((float)$day_4_percentage, 2, '.', '');
     $returnArray['day_4_low'] = number_format((float)$day_4_percentage_low, 2, '.', '');
     $returnArray['day_4_volume'] = number_format($historicalDataArray[3]->volume/$historicalDataArray[4]->volume, 2); 
+    $returnArray['day_4_total_volume'] = number_format($historicalDataArray[3]->volume); 
 }
 else
 {
@@ -187,6 +192,7 @@ if (isset($historicalDataArray[5]->close))
      $returnArray['day_5'] = number_format((float)$day_5_percentage, 2, '.', '');
      $returnArray['day_5_low'] = number_format((float)$day_5_percentage_low, 2, '.', '');
      $returnArray['day_5_volume'] = number_format($historicalDataArray[4]->volume/$historicalDataArray[4]->volume, 2); 
+     $returnArray['day_5_total_volume'] = number_format($historicalDataArray[4]->volume); 
 }
 else
 {

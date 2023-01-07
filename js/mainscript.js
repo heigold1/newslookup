@@ -720,6 +720,9 @@ $(function() {
 
                   var returnedObject = JSON.parse(data);
 
+console.log("returnedObject is");
+console.log(returnedObject); 
+
                   yesterdayVolume = returnedObject.yest_volume; 
 
                   $("#day1").html(returnedObject.day_1);
@@ -739,6 +742,12 @@ $(function() {
                   $("#day4_volume").html(returnedObject.day_4_volume);
                   $("#day3_volume").html(returnedObject.day_3_volume);
                   $("#day5_volume").html(returnedObject.day_5_volume);
+
+                  $("#day1_total_volume").html(returnedObject.day_1_total_volume);
+                  $("#day2_total_volume").html(returnedObject.day_2_total_volume);
+                  $("#day3_total_volume").html(returnedObject.day_3_total_volume);
+                  $("#day4_total_volume").html(returnedObject.day_4_total_volume);
+                  $("#day5_total_volume").html(returnedObject.day_5_total_volume);
 
                 },
                 error: function (xhr, ajaxOptions, thrownError) {
