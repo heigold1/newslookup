@@ -136,6 +136,7 @@ if (isset($historicalDataArray[1]->close))
       $returnArray['day_1_low'] = number_format((float)$day_1_percentage_low, 2, '.', '');
       $returnArray['day_1_volume'] = number_format($historicalDataArray[0]->volume/$historicalDataArray[1]->volume, 2); 
       $returnArray['day_1_total_volume'] = number_format($historicalDataArray[0]->volume); 
+$returnArray['day_1_recovery'] = number_format((($historicalDataArray[0]->close - $historicalDataArray[0]->low)/$historicalDataArray[0]->low)*100, 2); 
       
 }
 else

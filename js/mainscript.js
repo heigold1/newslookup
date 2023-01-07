@@ -736,6 +736,7 @@ console.log(returnedObject);
                   $("#day4_low").html(returnedObject.day_4_low);
                   $("#day3_low").html(returnedObject.day_3_low);
                   $("#day5_low").html(returnedObject.day_5_low);
+                  $("#day_1_recovery").html("(" + returnedObject.day_1_recovery + ")"); 
 
                   $("#day1_volume").html(returnedObject.day_1_volume);
                   $("#day2_volume").html(returnedObject.day_2_volume);
@@ -747,7 +748,7 @@ console.log(returnedObject);
                   $("#day2_total_volume").html(returnedObject.day_2_total_volume);
                   $("#day3_total_volume").html(returnedObject.day_3_total_volume);
                   $("#day4_total_volume").html(returnedObject.day_4_total_volume);
-                  $("#day5_total_volume").html(returnedObject.day_5_total_volume);
+                  $("#day5_total_volume").html(returnedObject.day_5_total_volume); 
 
                 },
                 error: function (xhr, ajaxOptions, thrownError) {
