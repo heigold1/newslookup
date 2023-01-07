@@ -224,7 +224,6 @@ span#time_of_day_percentage{
 	width: 10px;
 }
 
-
 #orderStub{
 	width: 315px;
 }
@@ -293,4 +292,18 @@ li.indent{
 #earnings_button{
 	display: inline-block;
 	width: 30px;
+}
+
+#day_1_recovery{
+	font-size: 12px; 
+}
+
+.volume_label{
+	width: 50px;
+	font-size: 12px;
+}
+
+.volume_spacer{
+	background-color: #bbbbbb; 
+	width: 10px;
 }
