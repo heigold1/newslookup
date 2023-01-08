@@ -107,7 +107,7 @@
 							<td style="width:130px"><input type="radio" name="roundShares" id="roundShares" value="1000">Round 1,000</td> 						
 						</tr>
 						<tr style="height:15px">
-							<td style="width:140px">$<span id="eTradeLow">&nbsp;&nbsp;&nbsp;</span>&nbsp;(<span id="eTradeLowPercentage">&nbsp;</span>)%</td>
+							<td style="width:140px">$<span id="eTradeLow">&nbsp;&nbsp;&nbsp;</span>&nbsp;(<span id="eTradeLowPercentage">&nbsp;</span>%)</td>
 							<td style="width:460px" colspan="2">
 								E*T High $<span id="eTradeHigh">&nbsp;&nbsp;&nbsp;</span>
 
@@ -151,7 +151,7 @@
 						<tr style="height:15px">
 							<td style="width:140px"></td>
 							<td style="width:460px" colspan="2">
-								 Volume:<span id="eTradeHigh">&nbsp;&nbsp;</span>
+								 Vol:<span id="eTradeHigh">&nbsp;&nbsp;</span>
 
 								<label class="volume_spacer">&nbsp;&nbsp;&nbsp;</label>&nbsp;<span id="day5_total_volume" class="volume_label">&nbsp;&nbsp;&nbsp;</span>
 								<label class="volume_spacer">&nbsp;&nbsp;&nbsp;</label>&nbsp;<span id="day4_total_volume" class="volume_label">&nbsp;&nbsp;&nbsp;</span>
