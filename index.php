@@ -109,8 +109,8 @@
 						<tr style="height:15px">
 							<td style="width:140px">$<span id="eTradeLow">&nbsp;&nbsp;&nbsp;</span>&nbsp;(<span id="eTradeLowPercentage">&nbsp;</span>%)</td>
 							<td style="width:460px" colspan="2">
-								E*T High $<span id="eTradeHigh">&nbsp;&nbsp;&nbsp;</span>
-
+								<!-- E*T High $<span id="eTradeHigh">&nbsp;&nbsp;&nbsp;</span> --> 
+								Spikes: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
 								<label class="historical_data_label">&nbsp;&nbsp;&nbsp;</label><span id="day5" class="historical_data_days">&nbsp;&nbsp;&nbsp;</span>
 								<label class="historical_data_label">&nbsp;&nbsp;&nbsp;</label><span id="day4" class="historical_data_days">&nbsp;&nbsp;&nbsp;</span>
 								<label class="historical_data_label">&nbsp;&nbsp;&nbsp;</label><span id="day3" class="historical_data_days">&nbsp;&nbsp;&nbsp;</span>
@@ -123,13 +123,13 @@
 						<tr style="height:15px">
 							<td style="width:140px"></td>
 							<td style="width:460px" colspan="2">
-								 Low drops:<span id="eTradeHigh">&nbsp;&nbsp;&nbsp;</span>
+								 Lows:
 
 								<label class="historical_data_label">&nbsp;&nbsp;&nbsp;</label><span id="day5_low" class="historical_data_days">&nbsp;&nbsp;&nbsp;</span>
 								<label class="historical_data_label">&nbsp;&nbsp;&nbsp;</label><span id="day4_low" class="historical_data_days">&nbsp;&nbsp;&nbsp;</span>
 								<label class="historical_data_label">&nbsp;&nbsp;&nbsp;</label><span id="day3_low" class="historical_data_days">&nbsp;&nbsp;&nbsp;</span>
 								<label class="historical_data_label">&nbsp;&nbsp;&nbsp;</label><span id="day2_low" class="historical_data_days">&nbsp;&nbsp;&nbsp;</span>
-								<label class="historical_data_label">&nbsp;&nbsp;&nbsp;</label><span id="day1_low" class="historical_data_days">&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;<span id="day_1_recovery"></span>
+								<label class="historical_data_label">&nbsp;&nbsp;&nbsp;</label><span id="day1_low" class="historical_data_days">&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;<span id="day_1_recovery"></span>
 								<span id="yahoo_historical_data_link">&nbsp;&nbsp;&nbsp;</span>						
 							</td> 						
 							<td><span id=bigcharts_time></span><span id=bigcharts_minutes_ago></span></td>
@@ -137,8 +137,7 @@
 						<tr style="height:15px">
 							<td style="width:140px"></td>
 							<td style="width:460px" colspan="2">
-								 Volume Ratio:<span id="eTradeHigh">&nbsp;&nbsp;&nbsp;</span>
-
+								 Volume Ratio:
 								<label class="historical_data_label">&nbsp;&nbsp;&nbsp;</label><span id="day5_volume" class="historical_data_days">&nbsp;&nbsp;&nbsp;</span>
 								<label class="historical_data_label">&nbsp;&nbsp;&nbsp;</label><span id="day4_volume" class="historical_data_days">&nbsp;&nbsp;&nbsp;</span>
 								<label class="historical_data_label">&nbsp;&nbsp;&nbsp;</label><span id="day3_volume" class="historical_data_days">&nbsp;&nbsp;&nbsp;</span>
@@ -151,8 +150,7 @@
 						<tr style="height:15px">
 							<td style="width:140px"></td>
 							<td style="width:460px" colspan="2">
-								 Vol:<span id="eTradeHigh">&nbsp;&nbsp;</span>
-
+								 Vol:
 								<label class="volume_spacer">&nbsp;&nbsp;&nbsp;</label>&nbsp;<span id="day5_total_volume" class="volume_label">&nbsp;&nbsp;&nbsp;</span>
 								<label class="volume_spacer">&nbsp;&nbsp;&nbsp;</label>&nbsp;<span id="day4_total_volume" class="volume_label">&nbsp;&nbsp;&nbsp;</span>
 								<label class="volume_spacer">&nbsp;&nbsp;&nbsp;</label>&nbsp;<span id="day3_total_volume" class="volume_label">&nbsp;&nbsp;&nbsp;</span>

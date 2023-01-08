@@ -612,7 +612,7 @@ $(function() {
                           {
                               $("#eTradeLow").html(low.toFixed(4));
                           }
-                          $("#eTradeHigh").html(jsonObject.high);
+                          /* $("#eTradeHigh").html(jsonObject.high); */ 
 
                           yahooCompanyName = jsonObject.company_name;
 
