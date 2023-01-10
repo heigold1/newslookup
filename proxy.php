@@ -4,7 +4,7 @@ include './Samples/config.php';
 
 require_once("simple_html_dom.php"); 
 
-$yesterdayDays = 3;
+$yesterdayDays = 1;
 
 error_reporting(1);
 //ini_set('display_errors', 1);
@@ -1030,6 +1030,7 @@ else if ($which_website == "yahoo")
       $finalReturn = preg_replace('/ reverse split|reverse split /i', '<span style="font-size: 25px; background-color:red; color:black"><b> &nbsp;REVERSE SPLIT</b></span>', $finalReturn);
       $finalReturn = preg_replace('/ reverse.stock split|reverse stock split /i', '<div style="font-size: 25px; background-color:red; display: inline-block;">REVERSE STOCK SPLIT</div>', $finalReturn);
       $finalReturn = preg_replace('/ reverse.share split|reverse stock split /i', '<div style="font-size: 25px; background-color:red; display: inline-block;">REVERSE SHARE SPLIT</div>', $finalReturn);
+      $finalReturn = preg_replace('/rbc capital downgrade/i', '<span style="font-size: 25px; background-color:red; color:black"><b> &nbsp;RBC CAPITAL DOWNGRADE - STAY AWAY</b></span>', $finalReturn);      
       $finalReturn = preg_replace('/ downgrade|downgrade /i', '<span style="font-size: 15px; background-color:red; color:black"><b> &nbsp;DOWNGRADE</b></span>', $finalReturn); 
       $finalReturn = preg_replace('/ lowered to/i', '<span style="font-size: 15px; background-color:red; color:black"><b> &nbsp;LOWERED TO</b></span>', $finalReturn);      
       $finalReturn = preg_replace('/ ex-dividend|ex-dividend /i', '<div style="font-size: 12px; background-color:red; display: inline-block;">EX-DIVIDEND (chase at 25%)</div>', $finalReturn);
@@ -1172,10 +1173,7 @@ else if ($which_website == "yahoo")
       $finalReturn = preg_replace('/ (illegally.*\")/i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp;$1 - STAY AWAY</span></b>&nbsp;', $finalReturn);
       $finalReturn = preg_replace('/ at+the+market/i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp;AT THE MARKET - ADJUSTMENT COULD HAPPEN</span></b>&nbsp;', $finalReturn);      
       $finalReturn = preg_replace('/ debt financing/i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp;DEBT FINANCING - STAY AWAY - FOR DAYS</span></b>&nbsp;', $finalReturn);   
-
-
-
-
+      $finalReturn = preg_replace('/ liquidation/i', '<span style="font-size: 35px; background-color:red; color:black"><b>&nbsp;LIQUIDATION - STAY AWAY</span></b>&nbsp;', $finalReturn);   
 
       $message_board = '</font><a target="_blank" onclick="return openPage(this.href)" href="http://finance.yahoo.com/quote/' . $symbol . '/community?ltr=1"> Yahoo Message Boards</a>&nbsp;&nbsp;&nbsp;&nbsp;'; 
       $company_profile = '<a target="_blank" onclick="return openPage(this.href)" href="http://finance.yahoo.com/quote/' . $symbol . '/profile">Yahoo Company Profile for ' . $symbol . '</a><br>'; 
