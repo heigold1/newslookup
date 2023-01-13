@@ -557,7 +557,7 @@ $(function() {
               $("#day1").html("");
               $("#entryPrice").val(""); 
               $("#entryPercentage").val("");  
-              $("#amountSpending").val("750");
+              $("#amountSpending").val("300");
               $("#eTradeLowPercentage").html("");
               $("#orderStub").val("-----------------------"); 
               $("#foreign_country").html("");
@@ -1132,7 +1132,7 @@ console.log(html);
     // once the submit button is clicked
    $("#thirdAmountSpending").click(function(){
       var amount = parseInt($("#amountSpending").val()); 
-      amount = amount/3; 
+      amount = amount*3; 
       $("#amountSpending").val(amount);
       calcAll();
       CopyToClipboard();  
@@ -1140,7 +1140,7 @@ console.log(html);
 
    $("#halfAmountSpending").click(function(){
       var amount = parseInt($("#amountSpending").val()); 
-      amount = amount/2; 
+      amount = amount*2; 
       $("#amountSpending").val(amount);
       calcAll();
       CopyToClipboard();  

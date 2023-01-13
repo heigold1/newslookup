@@ -1,0 +1,84 @@
+<head> 
+  <title>3-point Stastistics</title>   
+  <script src="https://code.highcharts.com/highcharts.js"></script>
+  <script src="https://code.highcharts.com/modules/exporting.js"></script>
+  <script src="https://code.highcharts.com/modules/export-data.js"></script>
+  <script src="https://code.highcharts.com/modules/accessibility.js"></script>
+</head>
+
+<body>
+
+  <figure class="highcharts-figure">
+    <div id="container"></div>
+    <p class="highcharts-description">
+      A basic column chart recording the number of times each batch of an averaging-down order fills. 
+    </p>
+  </figure>
+</body>
+
+<script>
+
+Highcharts.chart('container', {
+  chart: {
+    type: 'column'
+  },
+  title: {
+    text: '3-point Average Order Statistics'
+  },
+  subtitle: {
+    text: ''
+  },
+  xAxis: {
+    categories: [
+      'January',
+      'Febuary',
+      'March',
+      'April',
+      'May',
+      'June',
+      'July',
+      'August',
+      'September',
+      'October',
+      'November',
+      'December'
+    ],
+    crosshair: true
+  },
+  yAxis: {
+    min: 0,
+    title: {
+      text: 'Number of times each order/batch hit'
+    }
+  },
+  tooltip: {
+    headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+    pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+      '<td style="padding:0"><b>{point.y:.0f} times</b></td></tr>',
+    footerFormat: '</table>',
+    shared: true,
+    useHTML: true
+  },
+  plotOptions: {
+    column: {
+      pointPadding: 0.2,
+      borderWidth: 0
+    }
+  },
+  series: [{
+    name: '1st Order',
+    data: [5]
+
+  }, {
+    name: '2nd Order',
+    data: [1]
+
+  }, {
+    name: '3rd Order',
+    data: [2]
+
+  } ]
+});
+
+
+</script>
