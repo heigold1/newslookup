@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+	<!-- Load plotly.js into the DOM -->
+    <title>Dollar Drop Rates</title>   
+	<script src='https://cdn.plot.ly/plotly-2.17.1.min.js'></script>
+</head>
+
+<body>
+	<div id='myDiv'><!-- Plotly chart will be drawn inside this DIV --></div>
+</body>
+
+
+<script>
+
+var data = [
+  {
+    x: ['17+%', '18+%', '19+%', '20+%', '21+%', '22+%', '23+%', '24+%', '25+%', '26+%', '27+%', '28+%'],
+    y: [1, 0, 0, 2, 0, 1, 0, 0, 0, 0, 0, 0],
+    type: 'bar'
+  }
+];
+
+var layout = {
+  title: {
+    text:'Dollar Stock Drops',
+    font: {
+      family: 'Arial, monospace',
+      size: 32
+    },
+    xref: 'paper',
+    x: 0.05,
+  },
+  xaxis: {
+    title: {
+      text: 'Percentage Points',
+      font: {
+        family: 'Arial, monospace',
+        size: 24,
+        color: '#7f7f7f'
+      }
+    },
+  },
+  yaxis: {
+    title: {
+      text: 'Number of times hit',
+      font: {
+        family: 'Arial, monospace',
+        size: 24,
+        color: '#7f7f7f'
+      }
+    }
+  }
+};
+
+Plotly.newPlot('myDiv', data, layout);
+
+
+</script>
+
+</html>
