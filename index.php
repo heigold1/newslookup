@@ -113,8 +113,8 @@
 						<td colspan="2">
 
 							<table>
-								<tr style="height: 22px">
-										<td>
+								<tr style="height: 21px">
+										<td style="width: 75px">
 												Spikes: 
 										</td>
 										<td>
@@ -156,7 +156,7 @@
 
 								<tr style="height: 22px">
 										<td>
-												Vol Rat:
+												Vol Ratio:
 										</td>
 										<td>
 												<label class="historical_data_label">&nbsp;&nbsp;&nbsp;</label><span id="day5_volume" class="historical_data_days">&nbsp;&nbsp;&nbsp;</span>
