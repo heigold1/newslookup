@@ -720,9 +720,6 @@ $(function() {
 
                   var returnedObject = JSON.parse(data);
 
-console.log("returnedObject is");
-console.log(returnedObject); 
-
                   yesterdayVolume = returnedObject.yest_volume; 
 
                   $("#day1").html(returnedObject.day_1);
@@ -749,6 +746,38 @@ console.log(returnedObject);
                   $("#day3_total_volume").html(returnedObject.day_3_total_volume);
                   $("#day4_total_volume").html(returnedObject.day_4_total_volume);
                   $("#day5_total_volume").html(returnedObject.day_5_total_volume); 
+
+                  var day_one_volume = parseInt(returnedObject.day_1_total_volume.replace(/,/g, '')); 
+                  var day_two_volume = parseInt(returnedObject.day_2_total_volume.replace(/,/g, '')); 
+                  var day_three_volume = parseInt(returnedObject.day_3_total_volume.replace(/,/g, '')); 
+                  var day_four_volume = parseInt(returnedObject.day_4_total_volume.replace(/,/g, '')); 
+                  var day_five_volume = parseInt(returnedObject.day_5_total_volume.replace(/,/g, '')); 
+
+                  if (day_one_volume < 50000)
+                  {
+                      $("#day1_total_volume").css({'background-color' : 'red', 'font-size' : '17px'});
+                  }
+
+                  if (day_two_volume < 50000)
+                  {
+                      $("#day2_total_volume").css({'background-color' : 'red', 'font-size' : '17px'});
+                  }
+
+                  if (day_three_volume < 50000)
+                  {
+                      $("#day3_total_volume").css({'background-color' : 'red', 'font-size' : '17px'});
+                  }
+
+                  if (day_four_volume < 50000)
+                  {
+                      $("#day4_total_volume").css({'background-color' : 'red', 'font-size' : '17px'});
+                  }
+
+                  if (day_five_volume < 50000)
+                  {
+                      $("#day5_total_volume").css({'background-color' : 'red', 'font-size' : '17px'});
+                  }
+
 
                 },
                 error: function (xhr, ajaxOptions, thrownError) {
