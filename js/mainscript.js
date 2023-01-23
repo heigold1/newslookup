@@ -557,7 +557,7 @@ $(function() {
               $("#day1").html("");
               $("#entryPrice").val(""); 
               $("#entryPercentage").val("");  
-              $("#amountSpending").val("300");
+              $("#amountSpending").val("500");
               $("#eTradeLowPercentage").html("");
               $("#orderStub").val("-----------------------"); 
               $("#foreign_country").html("");
@@ -753,27 +753,27 @@ $(function() {
                   var day_four_volume = parseInt(returnedObject.day_4_total_volume.replace(/,/g, '')); 
                   var day_five_volume = parseInt(returnedObject.day_5_total_volume.replace(/,/g, '')); 
 
-                  if (day_one_volume < 50000)
+                  if (day_one_volume < parseInt("100000"))
                   {
                       $("#day1_total_volume").css({'background-color' : 'red', 'font-size' : '17px'});
                   }
 
-                  if (day_two_volume < 50000)
+                  if (day_two_volume < parseInt("100000"))
                   {
                       $("#day2_total_volume").css({'background-color' : 'red', 'font-size' : '17px'});
                   }
 
-                  if (day_three_volume < 50000)
+                  if (day_three_volume < parseInt("100000"))
                   {
                       $("#day3_total_volume").css({'background-color' : 'red', 'font-size' : '17px'});
                   }
 
-                  if (day_four_volume < 50000)
+                  if (day_four_volume < parseInt("100000"))
                   {
                       $("#day4_total_volume").css({'background-color' : 'red', 'font-size' : '17px'});
                   }
 
-                  if (day_five_volume < 50000)
+                  if (day_five_volume < parseInt("100000"))
                   {
                       $("#day5_total_volume").css({'background-color' : 'red', 'font-size' : '17px'});
                   }
