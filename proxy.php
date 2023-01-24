@@ -763,6 +763,7 @@ else if ($which_website == "yahoo")
       /* Highlight certain sector words that should put us on guard */ 
 
       $yahooFinanceSector = preg_replace('/energy/i', '<span style="font-size: 20px; background-color: red; color:black"><b>&nbsp; ENERGY</b></span>&nbsp;', $yahooFinanceSector); 
+      $yahooFinanceSector = preg_replace('/shell companies/i', '<span style="font-size: 20px; background-color: red; color:black"><b>&nbsp; SHELL COMPANIES - STAY AWAY</b></span>&nbsp;', $yahooFinanceSector); 
 
       $yahooFinanceIndustry = preg_replace('/oil \& gas/i', '<span style="font-size: 35px; background-color: red; color:black"><b>&nbsp; OIL & GAS</b></span>&nbsp;', $yahooFinanceIndustry); 
 
@@ -775,6 +776,8 @@ else if ($which_website == "yahoo")
       addYahooSectorIndustry($symbol, $yahooFinanceObject->sector, $yahooFinanceObject->industry, $country, $companyName);
 
       $returnCompanyName = '<h1>' . $companyName . '</h1>';
+
+      $returnCompanyName = preg_replace('/ holding/i', '<span style="font-size: 45px; background-color:red; color:black"><b>&nbsp;HOLDING - STAY AWAY</span></b>&nbsp;', $returnCompanyName);  
 
       $yesterdayVolume = (int) $_GET['yesterday_volume'];
       $currentVolume = (int) $_GET['total_volume'];
@@ -1174,6 +1177,7 @@ else if ($which_website == "yahoo")
       $finalReturn = preg_replace('/ at+the+market/i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp;AT THE MARKET - ADJUSTMENT COULD HAPPEN</span></b>&nbsp;', $finalReturn);      
       $finalReturn = preg_replace('/ debt financing/i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp;DEBT FINANCING - STAY AWAY - FOR DAYS</span></b>&nbsp;', $finalReturn);   
       $finalReturn = preg_replace('/ liquidation/i', '<span style="font-size: 35px; background-color:red; color:black"><b>&nbsp;LIQUIDATION - STAY AWAY</span></b>&nbsp;', $finalReturn);   
+      $finalReturn = preg_replace('/ SPAC/i', '<span style="font-size: 35px; background-color:red; color:black"><b>&nbsp;SPAC - STAY AWAY</span></b>&nbsp;', $finalReturn);   
 
       $message_board = '</font><a target="_blank" onclick="return openPage(this.href)" href="http://finance.yahoo.com/quote/' . $symbol . '/community?ltr=1"> Yahoo Message Boards</a>&nbsp;&nbsp;&nbsp;&nbsp;'; 
       $company_profile = '<a target="_blank" onclick="return openPage(this.href)" href="http://finance.yahoo.com/quote/' . $symbol . '/profile">Yahoo Company Profile for ' . $symbol . '</a><br>'; 
