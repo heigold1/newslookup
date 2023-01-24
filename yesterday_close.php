@@ -82,6 +82,7 @@ $mkt_response_obj = simplexml_load_string($out);
       if (isset($mkt_response_obj->QuoteData->All->lastTrade))
       {
         $company_name = (string) $mkt_response_obj->QuoteData->All->companyName;
+        $prev_close = (string) $mkt_response_obj->QuoteData->All->previousClose;
         $ten_day_volume = (string) $mkt_response_obj->QuoteData->All->averageVolume; 
         $total_volume = (string) $mkt_response_obj->QuoteData->All->totalVolume;
         $last_trade = (string) $mkt_response_obj->QuoteData->All->lastTrade;
@@ -107,7 +108,7 @@ $mkt_response_obj = simplexml_load_string($out);
           $bid = floatval(preg_replace('/E-4/', '', $bid))/10000;
         }
 
-        $dataArray['prev_close'] = $last_trade; 
+        $dataArray['prev_close'] = $prev_close; 
         $dataArray['low'] = $low; 
         $dataArray['high'] = $high; 
         $dataArray['bid'] = $bid; 
