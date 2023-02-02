@@ -454,15 +454,15 @@ function getStreetInsider($symbol, $yesterdayDays)
             {
                 if (preg_match('/(' .  get_yahoo_trade_date($i) . ')/', $publicationDate))
                 {
-                    $publicationTime = preg_replace('/PM/', '<span style="background-color: red; font-size: 14px; ">PM</span>', $publicationTime); 
+                    $publicationTime = preg_replace('/PM/', '<span style="background-color: red; font-size: 18px; ">PM</span>', $publicationTime); 
                     if ($i == $yesterdayDays) 
                     {
-                        $publicationTime = preg_replace('/AM/', '<span style="background-color: #00ff00; font-size: 14px; ">AM</span>', $publicationTime); 
+                        $publicationTime = preg_replace('/AM/', '<span style="background-color: #00ff00; font-size: 18px; ">AM</span>', $publicationTime); 
                   
                     }
                     else
                     {
-                        $publicationTime = preg_replace('/AM/', '<span style="background-color: red; font-size: 14px; ">AM</span>', $publicationTime); 
+                        $publicationTime = preg_replace('/AM/', '<span style="background-color: red; font-size: 18px; ">AM</span>', $publicationTime); 
                     }  
                 }
             }
