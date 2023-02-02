@@ -416,7 +416,8 @@ function getStreetInsider($symbol, $yesterdayDays)
             $j++;
 
             // Convert time from GMT to  AM/PM New York
-            $publicationDateStrToTime = strtotime($feedItem->pubDate) - 14400;
+            // 18000 is 5 hours X 60 seconds/minute X 6 minutes/hour
+            $publicationDateStrToTime = strtotime($feedItem->pubDate) - 18000;
 
             $convertedDate = new DateTime(); 
             $convertedDate->setTimestamp($publicationDateStrToTime);
@@ -453,15 +454,15 @@ function getStreetInsider($symbol, $yesterdayDays)
             {
                 if (preg_match('/(' .  get_yahoo_trade_date($i) . ')/', $publicationDate))
                 {
-                    $publicationTime = preg_replace('/PM/', '<span style="background-color: red">PM</span>', $publicationTime); 
+                    $publicationTime = preg_replace('/PM/', '<span style="background-color: red; font-size: 14px; ">PM</span>', $publicationTime); 
                     if ($i == $yesterdayDays) 
                     {
-                        $publicationTime = preg_replace('/AM/', '<span style="background-color: #00ff00">AM</span>', $publicationTime); 
+                        $publicationTime = preg_replace('/AM/', '<span style="background-color: #00ff00; font-size: 14px; ">AM</span>', $publicationTime); 
                   
                     }
                     else
                     {
-                        $publicationTime = preg_replace('/AM/', '<span style="background-color: red">AM</span>', $publicationTime); 
+                        $publicationTime = preg_replace('/AM/', '<span style="background-color: red; font-size: 14px; ">AM</span>', $publicationTime); 
                     }  
                 }
             }
