@@ -664,7 +664,7 @@ else if ($which_website == "yahoo")
         $j++;
 
         // Convert time from GMT to  AM/PM New York
-        $publicationDateStrToTime = strtotime($feedItem->pubDate);
+        $publicationDateStrToTime = strtotime($feedItem->pubDate) - 18000;
         $convertedDate = new DateTime(); 
         $convertedDate->setTimestamp($publicationDateStrToTime);
 
@@ -937,7 +937,7 @@ else if ($which_website == "yahoo")
         $j++;
 
         // Convert time from GMT to  AM/PM New York
-        $publicationDateStrToTime = strtotime($feedItem->pubDate);
+        $publicationDateStrToTime = strtotime($feedItem->pubDate) - 18000;
 
         $convertedDate = new DateTime(); 
         $convertedDate->setTimestamp($publicationDateStrToTime);
