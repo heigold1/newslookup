@@ -1076,19 +1076,19 @@ console.log(html);
         var day2_low = parseFloat($("#day2_low").html());
         var day3_low = parseFloat($("#day3_low").html());
 
-        if (day1_low < -20)
+        if (day1_low < -15)
         {
             warningMessage += " ** LOW DROP STOCK!!! ** ";
             $("#day1_low").css({'background-color' : 'red', 'font-size' : '19px'});
         }
 
-        if (day2_low < -20)
+        if (day2_low < -15)
         {
             warningMessage += " ** LOW DROP STOCK!!! ** ";
             $("#day2_low").css({'background-color' : 'red', 'font-size' : '19px'});
         }
 
-        if (day3_low < -20)
+        if (day3_low < -15)
         {
             warningMessage += " ** LOW DROP STOCK!!! ** ";
             $("#day3_low").css({'background-color' : 'red', 'font-size' : '19px'});
