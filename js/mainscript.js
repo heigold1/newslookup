@@ -734,6 +734,12 @@ $(function() {
                   $("#day3_low").html(returnedObject.day_3_low);
                   $("#day5_low").html(returnedObject.day_5_low);
                   $("#day_1_recovery").html("(" + returnedObject.day_1_recovery + "%)"); 
+                  var day_1_recovery = parseFloat(returnedObject.day_1_recovery);
+                  if (day_1_recovery < 5.00)
+                  {
+                      $("#day_1_recovery").css({'background-color' : 'red', 'font-size' : '19px'});
+                  }
+
 
                   $("#day1_volume").html(returnedObject.day_1_volume);
                   $("#day2_volume").html(returnedObject.day_2_volume);
