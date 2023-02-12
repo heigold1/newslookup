@@ -1097,12 +1097,20 @@ console.log(html);
             warningMessage += " ** LOW DROP STOCK!!! ** ";
             $("#day2_low").css({'background-color' : 'red', 'font-size' : '19px'});
         }
+        else if (day2_low > 0)
+        {
+            $("#day2_low").css({'background-color' : '#00ff00', 'font-size' : '19px'});
+        }  
 
         if (day3_low < -15)
         {
             warningMessage += " ** LOW DROP STOCK!!! ** ";
             $("#day3_low").css({'background-color' : 'red', 'font-size' : '19px'});
         }
+        else if (day3_low > 0)
+        {
+            $("#day3_low").css({'background-color' : '#00ff00', 'font-size' : '19px'});
+        }  
 
         if (exchange == "PK")
         {
