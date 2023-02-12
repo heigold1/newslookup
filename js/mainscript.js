@@ -1087,6 +1087,10 @@ console.log(html);
             warningMessage += " ** LOW DROP STOCK!!! ** ";
             $("#day1_low").css({'background-color' : 'red', 'font-size' : '19px'});
         }
+        else if (day1_low > 0)
+        {
+            $("#day1_low").css({'background-color' : '#00ff00', 'font-size' : '19px'});
+        }  
 
         if (day2_low < -15)
         {
@@ -1167,7 +1171,7 @@ console.log(html);
     // once the submit button is clicked
    $("#thirdAmountSpending").click(function(){
       var amount = parseInt($("#amountSpending").val()); 
-      amount = amount*3; 
+      amount = amount/3; 
       $("#amountSpending").val(amount);
       calcAll();
       CopyToClipboard();  
@@ -1175,7 +1179,7 @@ console.log(html);
 
    $("#halfAmountSpending").click(function(){
       var amount = parseInt($("#amountSpending").val()); 
-      amount = amount*2; 
+      amount = amount/2; 
       $("#amountSpending").val(amount);
       calcAll();
       CopyToClipboard();  
