@@ -761,27 +761,27 @@ $(function() {
 
                   if (day_one_volume < parseInt("100000"))
                   {
-                      $("#day1_total_volume").css({'background-color' : 'red', 'font-size' : '17px'});
+                      $("#day1_total_volume").css({'background-color' : '#ff8a8a', 'font-size' : '17px'});
                   }
 
                   if (day_two_volume < parseInt("100000"))
                   {
-                      $("#day2_total_volume").css({'background-color' : 'red', 'font-size' : '17px'});
+                      $("#day2_total_volume").css({'background-color' : '#ff8a8a', 'font-size' : '17px'});
                   }
 
                   if (day_three_volume < parseInt("100000"))
                   {
-                      $("#day3_total_volume").css({'background-color' : 'red', 'font-size' : '17px'});
+                      $("#day3_total_volume").css({'background-color' : '#ff8a8a', 'font-size' : '17px'});
                   }
 
                   if (day_four_volume < parseInt("100000"))
                   {
-                      $("#day4_total_volume").css({'background-color' : 'red', 'font-size' : '17px'});
+                      $("#day4_total_volume").css({'background-color' : '#ff8a8a', 'font-size' : '17px'});
                   }
 
                   if (day_five_volume < parseInt("100000"))
                   {
-                      $("#day5_total_volume").css({'background-color' : 'red', 'font-size' : '17px'});
+                      $("#day5_total_volume").css({'background-color' : '#ff8a8a', 'font-size' : '17px'});
                   }
 
 
@@ -1069,6 +1069,7 @@ console.log(html);
         {
             highRiskFlag = 1; 
             warningMessage += " ** HIGH RISK STOCK!!! ** ";
+            $("#day1_volume").html($("#day1_volume").html() + "  VOL!!");
             $("#day1_volume").css({'background-color' : 'red', 'font-size' : '17px'});
         }
 

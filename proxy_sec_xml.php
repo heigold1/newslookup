@@ -8,7 +8,7 @@ $secCompanyName = $_GET['secCompanyName'];
 $secCompanyName = preg_replace('/ /', '+', $secCompanyName);
 $secCompanyName = preg_replace("/<.*?>/", "", $secCompanyName);
 
-$yesterdayDays = 3;
+$yesterdayDays = 1;
 
 fopen("cookies.txt", "w");
 
@@ -894,6 +894,7 @@ $noTimeFound = false;
       $returnHtml .=  '<a style="font-size: 25px" target="_blank" href="http://ec2-54-210-42-143.compute-1.amazonaws.com/newslookup/scrape-street-insider.php?symbol=' . $symbol . '">Street Insider Scrape</a><br> 
         <a style="font-size: 25px" target="_blank" href="https://www.streetinsider.com/stock_lookup.php?LookUp=Get+Quote&q=' . $symbol . '">Street Insider Actual Page</a><br>
         <a style="font-size: 25px" target="_blank" href="https://www.nasdaq.com/symbol/' . $symbol . '/sec-filings">Nasdaq</a><br>
+        <a style="font-size: 25px" target="_blank" href="https://www.nasdaq.com/symbol/' . $symbol . '/">Nasdaq Company</a><br>
         <a style="font-size: 25px" target="_blank" href="https://www.sec.gov/cgi-bin/browse-edgar?CIK=' . $symbol . '&owner=include&action=getcompany">SEC Symbol</a><br>
         <a style="font-size: 25px" target="_blank" href="https://www.sec.gov/cgi-bin/browse-edgar?company=' . $secCompanyName . '&owner=include&action=getcompany">SEC Company Name</a><br>
         <a style="font-size: 25px" target="_blank" href=https://www.etrade.wallst.com/v1/stocks/snapshot/snapshot.asp?ChallengeUrl=https://idp.etrade.com/idp/SSO.saml2&reinitiate-handshake=0&prospectnavyear=2011&AuthnContext=prospect&env=PRD&symbol=' . $symbol . '&rsO=new&country=US>E*TRADE</a>

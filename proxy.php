@@ -4,7 +4,7 @@ include './Samples/config.php';
 
 require_once("simple_html_dom.php"); 
 
-$yesterdayDays = 3;
+$yesterdayDays = 1;
 
 error_reporting(1);
 //ini_set('display_errors', 1);
@@ -777,7 +777,7 @@ else if ($which_website == "yahoo")
 
       $returnCompanyName = '<h1>' . $companyName . '</h1>';
 
-      $returnCompanyName = preg_replace('/ holding/i', '<span style="font-size: 45px; background-color:red; color:black"><b>&nbsp;HOLDING - STAY AWAY</span></b>&nbsp;', $returnCompanyName);  
+      $returnCompanyName = preg_replace('/ holding/i', '<span style="font-size: 45px; background-color:red; color:black"><b>&nbsp;HOLDING</span></b>&nbsp;', $returnCompanyName);  
 
       $yesterdayVolume = (int) $_GET['yesterday_volume'];
       $currentVolume = (int) $_GET['total_volume'];
