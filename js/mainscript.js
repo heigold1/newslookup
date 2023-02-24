@@ -187,7 +187,7 @@ console.log("inside calcAll");
   
     var orderType = "";
 
-    if (parseInt($("#day1").html()) > 20.00)
+    if (parseInt($("#day1").html()) > 24.00)
     {
       orderType += " HR_" + parseInt($("#day1").html());
     }

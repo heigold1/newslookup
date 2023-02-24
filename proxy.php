@@ -778,6 +778,7 @@ else if ($which_website == "yahoo")
       $returnCompanyName = '<h1>' . $companyName . '</h1>';
 
       $returnCompanyName = preg_replace('/ holding/i', '<span style="font-size: 45px; background-color:red; color:black"><b>&nbsp;HOLDING</span></b>&nbsp;', $returnCompanyName);  
+      $returnCompanyName = preg_replace('/ class a/i', '<span style="font-size: 45px; background-color:red; color:black"><b>&nbsp;CLASS A</span></b>&nbsp;', $returnCompanyName);  
 
       $yesterdayVolume = (int) $_GET['yesterday_volume'];
       $currentVolume = (int) $_GET['total_volume'];
