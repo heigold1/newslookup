@@ -1178,7 +1178,8 @@ else if ($which_website == "yahoo")
       $finalReturn = preg_replace('/ at+the+market/i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp;AT THE MARKET - ADJUSTMENT COULD HAPPEN</span></b>&nbsp;', $finalReturn);      
       $finalReturn = preg_replace('/ debt financing/i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp;DEBT FINANCING - STAY AWAY - FOR DAYS</span></b>&nbsp;', $finalReturn);   
       $finalReturn = preg_replace('/ liquidation/i', '<span style="font-size: 35px; background-color:red; color:black"><b>&nbsp;LIQUIDATION - STAY AWAY</span></b>&nbsp;', $finalReturn);   
-      $finalReturn = preg_replace('/ SPAC/i', '<span style="font-size: 35px; background-color:red; color:black"><b>&nbsp;SPAC - STAY AWAY</span></b>&nbsp;', $finalReturn);   
+      $finalReturn = preg_replace('/ SPAC /i', '<span style="font-size: 35px; background-color:red; color:black"><b>&nbsp;SPAC - STAY AWAY</span></b>&nbsp;', $finalReturn);   
+      $finalReturn = preg_replace('/ to begin trading/i', '<span style="font-size: 35px; background-color:red; color:black"><b>&nbsp;TO BEGIN TRADING - CHECK THE DATE</span></b>&nbsp;', $finalReturn);   
 
       $message_board = '</font><a target="_blank" onclick="return openPage(this.href)" href="http://finance.yahoo.com/quote/' . $symbol . '/community?ltr=1"> Yahoo Message Boards</a>&nbsp;&nbsp;&nbsp;&nbsp;'; 
       $company_profile = '<a target="_blank" onclick="return openPage(this.href)" href="http://finance.yahoo.com/quote/' . $symbol . '/profile">Yahoo Company Profile for ' . $symbol . '</a><br>'; 
