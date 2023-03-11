@@ -207,7 +207,7 @@ function calcBigChartsPercentage()
 
 
     var bigChartsDifference = myCalculatedPercentage - myBigchartsPercentage; 
-//    alert ("bigChartsDifference is " + myCalculatedPercentage + '-' + myBigchartsPercentage + '=' + bigChartsDifference); 
+
     if (bigChartsDifference > 10)
     {
         $("#td_bigcharts_change").css("background-color", "#00ff00");  

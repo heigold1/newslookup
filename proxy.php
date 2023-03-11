@@ -807,12 +807,12 @@ else if ($which_website == "yahoo")
 
       $yahooFinanceObject = json_decode($yahooFinanceJson);
 
-      $avgVolYahoo =  '<span id="vol_yahoo" style="background-color: orange; font-size: 12px;"><b>YahooAVG - ' . $yahooFinanceObject->avgvol . '</b></span>'; 
+      $avgVolYahoo =  '<span id="vol_yahoo" style="background-color: orange; font-size: 20px;"><b>YahooAVG - ' . $yahooFinanceObject->avgvol . '</b></span>'; 
 
 
 
 
-      $avgVol10days = '<span id="vol_10_day" style="font-size: 12px; background-color:#CCFF99; color: black; display: inline-block;"><b>eTradeAVG - ' . number_format((int) $_GET['ten_day_volume']) . '</b></span>'; 
+      $avgVol10days = '<span id="vol_10_day" style="font-size: 20px; background-color:#CCFF99; color: black; display: inline-block;"><b>eTradeAVG - ' . number_format((int) $_GET['ten_day_volume']) . '</b></span>'; 
 
       // todo - put in the avgVol3Months from finviz.com
       // $avgVol3Months = 
