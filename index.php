@@ -185,9 +185,15 @@
 
 						</td>
 
-						<td id=td_bigcharts_change>Bigcharts: &nbsp;$<span id=bigcharts_last></span>&nbsp; (<span id=bigcharts_percent_change></span>%)
+						<td>
+							<div id="td_bigcharts_change">  Bigcharts: &nbsp;$<span id=bigcharts_last></span>&nbsp; (<span id=bigcharts_percent_change></span>%)
 								<br>
-							<span id=bigcharts_time></span><span id=bigcharts_minutes_ago></span>
+							<span id="bigcharts_time"></span><span id="bigcharts_minutes_ago"></span>
+							<br><br>
+						</div>
+
+								E: <span style="font-size: 12px" id="etradeAverageVolume"></span>&nbsp; Y: <span style="font-size: 12px" id="yahooAverageVolume"></span> 
+
 						</td>
 
 

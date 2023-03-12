@@ -888,6 +888,7 @@ $(function() {
               google_keyword_string = google_keyword_string.replace(/ltd\./ig, "");
 
               $("div#right_top_container").html(data);
+
               $("#entryPercentage").focus();   
 
 
@@ -1137,11 +1138,26 @@ console.log(html);
         var eTradeAvgVolume = parseInt(document.getElementById("vol_10_day").innerHTML.replace(/\D/g,''));
         var volumeRatio = parseFloat(document.getElementById("vol_ratio").innerHTML.replace(/\D/g,''))/100;
 
-        if ((yahooAvgVolume < 250000) || (eTradeAvgVolume < 250000))
+        if ((yahooAvgVolume < 100000) || (eTradeAvgVolume < 100000))
         {
           playLowVolumeStock();
           warningMessage += " ** LOW AVERAGE VOLUME ** ";
+
+          if (yahooAvgVolume < 100000)
+          {
+              $("#yahooAverageVolume").css("background-color", "red"); 
+              $("#yahooAverageVolume").css("font-size", "25px"); 
+          }
+          if (eTradeAvgVolume < 100000)
+          {
+              $("#etradeAverageVolume").css("background-color", "red"); 
+              $("#etradeAverageVolume").css("font-size", "25px"); 
+          }
+
         }
+
+        $("#etradeAverageVolume").html(eTradeAvgVolume.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")); 
+        $("#yahooAverageVolume").html(yahooAvgVolume.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")); 
 
         if (volumeRatio > 0.175)
         {
