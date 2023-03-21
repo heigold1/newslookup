@@ -4,7 +4,7 @@ include './Samples/config.php';
 
 require_once("simple_html_dom.php"); 
 
-$yesterdayDays = 3;
+$yesterdayDays = 1;
 
 error_reporting(1);
 //ini_set('display_errors', 1);
@@ -769,6 +769,8 @@ else if ($which_website == "yahoo")
 
       $yahooFinanceIndustry = preg_replace('/shell companies/i', '<span style="font-size: 35px; background-color: red; color:black"><b>&nbsp; Shell Companies</b></span>&nbsp;', $yahooFinanceIndustry); 
 
+      $yahooFinanceIndustry = preg_replace('/banks/i', '<span style="font-size: 35px; background-color: red; color:black"><b>&nbsp; BANKS</b></span>&nbsp;', $yahooFinanceIndustry); 
+
       $sectorCountry = '<span style="font-size: 15px;">SECTOR - ' . $yahooFinanceSector . '</span>&nbsp;&nbsp;<span id="industry" style="font-size: 15px;">INDUSTRY - ' . $yahooFinanceIndustry . '</span><br><br><div id="country" style="font-size: 15px;">' . $country . '</div>'; 
 
 
@@ -778,6 +780,7 @@ else if ($which_website == "yahoo")
       $returnCompanyName = '<h1>' . $companyName . '</h1>';
 
       $returnCompanyName = preg_replace('/ holding/i', '<span style="font-size: 45px; background-color:red; color:black"><b>&nbsp;HOLDING</span></b>&nbsp;', $returnCompanyName);  
+      $returnCompanyName = preg_replace('/ hldgs/i', '<span style="font-size: 45px; background-color:red; color:black"><b>&nbsp;HLDGS</span></b>&nbsp;', $returnCompanyName);  
       $returnCompanyName = preg_replace('/ class a/i', '<span style="font-size: 45px; background-color:red; color:black"><b>&nbsp;CLASS A</span></b>&nbsp;', $returnCompanyName);  
 
       $yesterdayVolume = (int) $_GET['yesterday_volume'];

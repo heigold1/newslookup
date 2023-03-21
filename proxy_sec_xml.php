@@ -8,7 +8,7 @@ $secCompanyName = $_GET['secCompanyName'];
 $secCompanyName = preg_replace('/ /', '+', $secCompanyName);
 $secCompanyName = preg_replace("/<.*?>/", "", $secCompanyName);
 
-$yesterdayDays = 3;
+$yesterdayDays = 1;
 
 fopen("cookies.txt", "w");
 
@@ -657,12 +657,11 @@ function getStreetInsider($symbol, $yesterdayDays)
           $streetInsiderNews = preg_replace('/ (posts.*?data)/i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp;$1</span></b>&nbsp;', $streetInsiderNews);
           $streetInsiderNews = preg_replace('/ (illegally.*\")/i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp;$1 - STAY AWAY"</span></b>&nbsp;', $streetInsiderNews);
           $streetInsiderNews = preg_replace('/ at+the+market/i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp;AT THE MARKET - ADJUSTMENT COULD HAPPEN</span></b>&nbsp;', $streetInsiderNews);      
-          $streetInsiderNews = preg_replace('/Form\s+4/i', '<span style="font-size: 20px; background-color:#00ff00; color:black"><b>&nbsp;FORM 4</span></b>&nbsp;', $streetInsiderNews);    
-          $streetInsiderNews = preg_replace('/Form\s+3/i', '<span style="font-size: 20px; background-color:#00ff00; color:black"><b>&nbsp;FORM 4</span></b>&nbsp;', $streetInsiderNews);      
+          $streetInsiderNews = preg_replace('/Form/i', '<span style="font-size: 20px; background-color:#049dff; color:black"><b>&nbsp;FORM </span></b>&nbsp;', $streetInsiderNews);    
           $streetInsiderNews = preg_replace('/ liquidation/i', '<span style="font-size: 35px; background-color:red; color:black"><b>&nbsp;LIQUIDATION - STAY AWAY</span></b>&nbsp;', $streetInsiderNews);   
           $streetInsiderNews = preg_replace('/ SPAC /i', '<span style="font-size: 35px; background-color:red; color:black"><b>&nbsp;SPAC - STAY AWAY</span></b>&nbsp;', $streetInsiderNews);   
           $streetInsiderNews = preg_replace('/ to begin trading/i', '<span style="font-size: 35px; background-color:red; color:black"><b>&nbsp;TO BEGIN TRADING - CHECK THE DATE</span></b>&nbsp;', $streetInsiderNews);  
-
+          $streetInsiderNews = preg_replace('/form\s+nt\s10\-k/i', '<span style="font-size: 35px; background-color:red; color:black"><b>&nbsp; FORM NT 10K - INABILITY TO FILE FORM</span></b>&nbsp;', $streetInsiderNews);  
 
         try 
         {
