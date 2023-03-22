@@ -447,6 +447,8 @@ $(function() {
         companyName = companyName.replace(/ COM.*/, '');
         companyName = companyName.replace(/ LTD.*/, '');
         companyName = companyName.replace(/ NEW.*/, '');
+        companyName = companyName.replace(/ SHS.*/, '');
+        companyName = companyName.replace(/ CO.*/, ''); 
 
         companyNameArray = companyName.split(" ");
         var arrayLength = companyNameArray.length;
@@ -962,7 +964,7 @@ $(function() {
                 $.ajax({
                     url: "proxy_sec_xml.php",
                     data: {symbol: symbol,
-                           secCompanyName : yahooCompanyName},
+                           secCompanyName : secCompanyName},
     
 /*    
                     url: "proxy.php",

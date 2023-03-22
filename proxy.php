@@ -941,7 +941,8 @@ else if ($which_website == "yahoo")
         $j++;
 
         // Convert time from GMT to  AM/PM New York
-        $publicationDateStrToTime = strtotime($feedItem->pubDate) - 18000;
+        // 14400 is 4 hours X 60 seconds/minute X 60 minutes/hour
+        $publicationDateStrToTime = strtotime($feedItem->pubDate) - 14400;
 
         $convertedDate = new DateTime(); 
         $convertedDate->setTimestamp($publicationDateStrToTime);
@@ -1093,7 +1094,7 @@ else if ($which_website == "yahoo")
       $finalReturn = preg_replace('/ conference call to provide update/i', '<span style="font-size: 12px; background-color:red; color:black"><b>&nbsp; Conference Call to Provide Update -</span> <span style="font-size: 12px; background-color:lightgreen; color:black">CHECK THE DATE/TIME OF THE CALL &nbsp;</b></span>&nbsp;', $finalReturn);
       $finalReturn = preg_replace('/ seeking alpha/i', '<span style="font-size: 25px; background-color:red; color:black">SEEKING ALPHA &nbsp;</b></span>&nbsp;', $finalReturn);
       $finalReturn = preg_replace('/ fictitious sales/i', '<span style="font-size: 12px; background-color:red; color:black"><b>&nbsp; fictitious sales - STAY AWAY </b></span> &nbsp;', $finalReturn);     
-      $finalReturn = preg_replace('/ board of directors/i', '<span style="font-size: 12px; background-color:red; color:black"><b>&nbsp; board of directors - if change to board of directors - 20% </b></span> &nbsp;', $finalReturn);
+      $finalReturn = preg_replace('/ board of directors/i', '<span style="font-size: 15px; background-color:red; color:black"><b>&nbsp; board of directors - if no big deal then 20% </b></span> &nbsp;', $finalReturn);
       $finalReturn = preg_replace('/ class action/i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp; class action</b></span> &nbsp;', $finalReturn);
       $finalReturn = preg_replace('/ business combination/i', '<span style="font-size: 55px; background-color:red; color:black"><b>&nbsp; BUSINESS<br><br> COMBINATION<br><br> - STAY<br><br>AWAY<br><br> </b></span> &nbsp;', $finalReturn);
       $finalReturn = preg_replace('/ annual meeting of shareholders/i', '<span style="font-size: 15px; background-color:red; color:black"><b>&nbsp; annual meeting of shareholders - 40% early</b></span> &nbsp;', $finalReturn);

@@ -416,8 +416,8 @@ function getStreetInsider($symbol, $yesterdayDays)
             $j++;
 
             // Convert time from GMT to  AM/PM New York
-            // 18000 is 5 hours X 60 seconds/minute X 6 minutes/hour
-            $publicationDateStrToTime = strtotime($feedItem->pubDate) - 18000;
+            // 14400 is 4 hours X 60 seconds/minute X 60 minutes/hour
+            $publicationDateStrToTime = strtotime($feedItem->pubDate) - 14400;
 
             $convertedDate = new DateTime(); 
             $convertedDate->setTimestamp($publicationDateStrToTime);
@@ -522,7 +522,6 @@ function getStreetInsider($symbol, $yesterdayDays)
           $streetInsiderNews = preg_replace('/ miss sales|miss sales /i', '<span style="font-size: 12px; background-color:red; color:black"><b> &nbsp;MISS SALES (Chase at 65-70%)</b>&nbsp;</span>', $streetInsiderNews);
           $streetInsiderNews = preg_replace('/ disappointing sales|disappointing sales /i', '<span style="font-size: 12px; background-color:red; color:black"><b> &nbsp;DISAPPOINTINT SALES (Chase at 65-70%)</b>&nbsp;</span>', $streetInsiderNews);      
           $streetInsiderNews = preg_replace('/ sales results|sales results /i', '<span style="font-size: 15px; background-color:red; color:black"><b> &nbsp;SALES RESULTS (If bad, chase at 65-70%)</b>&nbsp;</span>', $streetInsiderNews);      
-          $streetInsiderNews = preg_replace('/ 8-k/i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp;8-K</span> (if it involves litigation, then back off)</b>&nbsp;', $streetInsiderNews);
           $streetInsiderNews = preg_replace('/ accountant/i', '<span style="font-size: 25px; background-color:red; color:black"><b> &nbsp;accountant (if hiring new accountant, 35-40%)</b>&nbsp;</span>', $streetInsiderNews);            
           $streetInsiderNews = preg_replace('/ clinical trial/i', '<span style="font-size: 15px; background-color:red; color:black"><b> &nbsp;clinical trial</b>&nbsp;</span>', $streetInsiderNews);            
           $streetInsiderNews = preg_replace('/ recall/i', '<span style="font-size: 25px; background-color:red; color:black"><b> &nbsp;recall (bad, back off)</b>&nbsp;</span>', $streetInsiderNews);                  
@@ -532,9 +531,7 @@ function getStreetInsider($symbol, $yesterdayDays)
           $streetInsiderNews = preg_replace('/ abandon/i', '<span style="font-size: 15px; background-color:red; color:black"><b>&nbsp;abandon&nbsp;</span> (65-70%)</b>', $streetInsiderNews);
           $streetInsiderNews = preg_replace('/ bankrupt/i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp;bankrupt</span> </b>', $streetInsiderNews);      
           $streetInsiderNews = preg_replace('/ terminate| terminates| terminated| termination/i', '<span style="font-size: 15px; background-color:red; color:black"><b>&nbsp;terminate&nbsp;</span> (65%) </b>', $streetInsiderNews);            
-
           $streetInsiderNews = preg_replace('/ drug/i', '<span style="font-size: 15px; background-color:red; color:black"><b>&nbsp;drug </span></b> ', $streetInsiderNews);
-
           $streetInsiderNews = preg_replace('/ guidance/i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp;GUIDANCE</span></b>&nbsp;', $streetInsiderNews);
           $streetInsiderNews = preg_replace('/ regulatory update/i', '<span style="font-size: 15px; background-color:red; color:black"><b>&nbsp;regulatory update (35% even if regulation is good)</span></b>&nbsp;', $streetInsiderNews);
           $streetInsiderNews = preg_replace('/ suspended/i', '<span style="font-size: 15px; background-color:red; color:black"><b>&nbsp;suspended</span> (65-70%)</b>&nbsp;', $streetInsiderNews);
@@ -570,7 +567,7 @@ function getStreetInsider($symbol, $yesterdayDays)
           $streetInsiderNews = preg_replace('/ conference call to provide update/i', '<span style="font-size: 12px; background-color:red; color:black"><b>&nbsp; Conference Call to Provide Update -</span> <span style="font-size: 12px; background-color:lightgreen; color:black">CHECK THE DATE/TIME OF THE CALL &nbsp;</b></span>&nbsp;', $streetInsiderNews);
           $streetInsiderNews = preg_replace('/ seeking alpha/i', '<span style="font-size: 25px; background-color:red; color:black">SEEKING ALPHA &nbsp;</b></span>&nbsp;', $streetInsiderNews);
           $streetInsiderNews = preg_replace('/ fictitious sales/i', '<span style="font-size: 15px; background-color:red; color:black"><b>&nbsp; fictitious sales - STAY AWAY </b></span> &nbsp;', $streetInsiderNews);     
-          $streetInsiderNews = preg_replace('/ board of directors/i', '<span style="font-size: 12px; background-color:red; color:black"><b>&nbsp; board of directors - if change to board of directors - 20% </b></span> &nbsp;', $streetInsiderNews);
+          $streetInsiderNews = preg_replace('/ board of directors/i', '<span style="font-size: 15px; background-color:red; color:black"><b>&nbsp; board of directors - if no big deal then 20% </b></span> &nbsp;', $streetInsiderNews);
           $streetInsiderNews = preg_replace('/ class action/i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp; class action</b></span> &nbsp;', $streetInsiderNews);
           $streetInsiderNews = preg_replace('/ business combination/i', '<span style="font-size: 55px; background-color:red; color:black"><b>&nbsp; BUSINESS<br><br> COMBINATION<br><br> - STAY<br><br>AWAY<br><br> </b></span> &nbsp;', $streetInsiderNews);
           $streetInsiderNews = preg_replace('/ annual meeting of shareholders/i', '<span style="font-size: 15px; background-color:red; color:black"><b>&nbsp; annual meeting of shareholders - 40% early</b></span> &nbsp;', $streetInsiderNews);
@@ -610,7 +607,6 @@ function getStreetInsider($symbol, $yesterdayDays)
           $streetInsiderNews = preg_replace('/ turnaround/i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp; TURNAROUND - BACK OFF </b></span>&nbsp;', $streetInsiderNews);
           $streetInsiderNews = preg_replace('/ clinical.stage/i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp; CLINICAL STAGE - BACK OFF </b></span>&nbsp;', $streetInsiderNews);      
           $streetInsiderNews = preg_replace('/ ratio change/i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp; RATIO CHANGE - REVERSE SPLIT </b></span>&nbsp;', $streetInsiderNews);
-          $streetInsiderNews = preg_replace('/ 10\-q/i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp; 10-Q </b></span>&nbsp;', $streetInsiderNews);
           $streetInsiderNews = preg_replace('/ registered direct offering/i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp; REGISTERED DIRECT OFFERING </b></span>&nbsp;', $streetInsiderNews);
           $streetInsiderNews = preg_replace('/ fda clearance/i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp; FDA Clearance - back off </b></span>&nbsp;', $streetInsiderNews);
           $streetInsiderNews = preg_replace('/ deficiency in compliance/i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp; Deficiency in Compliance - CHECK FOR DELISTING</b></span>&nbsp;', $streetInsiderNews);
@@ -657,11 +653,16 @@ function getStreetInsider($symbol, $yesterdayDays)
           $streetInsiderNews = preg_replace('/ (posts.*?data)/i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp;$1</span></b>&nbsp;', $streetInsiderNews);
           $streetInsiderNews = preg_replace('/ (illegally.*\")/i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp;$1 - STAY AWAY"</span></b>&nbsp;', $streetInsiderNews);
           $streetInsiderNews = preg_replace('/ at+the+market/i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp;AT THE MARKET - ADJUSTMENT COULD HAPPEN</span></b>&nbsp;', $streetInsiderNews);      
-          $streetInsiderNews = preg_replace('/Form/i', '<span style="font-size: 20px; background-color:#049dff; color:black"><b>&nbsp;FORM </span></b>&nbsp;', $streetInsiderNews);    
+          $streetInsiderNews = preg_replace('/\>Form/i', '><span style="font-size: 15px; background-color:lightblue; color:black"><b>&nbsp;FORM </span></b>&nbsp;', $streetInsiderNews);    
+          $streetInsiderNews = preg_replace('/ 424/i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp;424</span></b>&nbsp;', $streetInsiderNews);   
           $streetInsiderNews = preg_replace('/ liquidation/i', '<span style="font-size: 35px; background-color:red; color:black"><b>&nbsp;LIQUIDATION - STAY AWAY</span></b>&nbsp;', $streetInsiderNews);   
           $streetInsiderNews = preg_replace('/ SPAC /i', '<span style="font-size: 35px; background-color:red; color:black"><b>&nbsp;SPAC - STAY AWAY</span></b>&nbsp;', $streetInsiderNews);   
           $streetInsiderNews = preg_replace('/ to begin trading/i', '<span style="font-size: 35px; background-color:red; color:black"><b>&nbsp;TO BEGIN TRADING - CHECK THE DATE</span></b>&nbsp;', $streetInsiderNews);  
-          $streetInsiderNews = preg_replace('/form\s+nt\s10\-k/i', '<span style="font-size: 35px; background-color:red; color:black"><b>&nbsp; FORM NT 10K - INABILITY TO FILE FORM</span></b>&nbsp;', $streetInsiderNews);  
+          $streetInsiderNews = preg_replace('/(nt\s+[0-9]+\-.)/i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp; $1 - INABILITY TO FILE FORM</span></b>&nbsp;', $streetInsiderNews);  
+          $streetInsiderNews = preg_replace('/ (..\-q)/i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp; $1 </b></span>&nbsp;', $streetInsiderNews);
+          $streetInsiderNews = preg_replace('/ (..-k)/i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp;$1</span> (if it involves litigation, then back off)</b>&nbsp;', $streetInsiderNews);
+          $streetInsiderNews = preg_replace('/sc\s+13g/i', '<span style="font-size: 25px; background-color:#00ff00; color:black"><b>&nbsp;SC 13G</span></b>&nbsp;', $streetInsiderNews);   
+          $streetInsiderNews = preg_replace('/ (s-[0-9])/i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp;$1</span></b>&nbsp;', $streetInsiderNews);   
 
         try 
         {
@@ -793,8 +794,6 @@ $noTimeFound = false;
 
               $firstLink  = $xmlFinalObject->entry[$i]->link['href']; 
               $firstLinkResults = grabHTML('www.sec.gov', $firstLink); 
-
-
 
               $html2 = str_get_html($firstLinkResults);
 
