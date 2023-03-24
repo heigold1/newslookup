@@ -133,7 +133,7 @@
 												<label class="historical_data_label">&nbsp;&nbsp;&nbsp;</label><span id="day1" class="historical_data_days">&nbsp;&nbsp;&nbsp;</span>		
 										</td>
 								</tr>
-								<tr style="height: 22px">
+								<tr id="lows" style="height: 22px">
 										<td>
 											Lows:
 										</td>

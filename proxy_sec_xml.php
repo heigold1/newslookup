@@ -12,10 +12,10 @@ $yesterdayDays = 1;
 
 fopen("cookies.txt", "w");
 
-function buildNewsNotes()
+function buildNewsNotes($companyName)
 {
     $newsNotes = '<ul style="font-family: arial;">
-                      <li style="background-color: #00ff00;">SEC</li>
+                      <li style="background-color: #00ff00;">SEC - Company name is ' . $companyName . '</li>
                       <li>Entry into a Material Definitive Agreement - STAY AWAY, SHARE PRICE COMING OUT</li>
                       </ul>
                       '; 
@@ -541,14 +541,14 @@ function getStreetInsider($symbol, $yesterdayDays)
           $streetInsiderNews = preg_replace('/ unpatentable/i', '<span style="font-size: 12px; background-color:red; color:black"><b>&nbsp;unpatentable</span> (60%)</b>&nbsp;', $streetInsiderNews);
           $streetInsiderNews = preg_replace('/ accelerate or increase/i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp;accelerate or increase</span> (Possible Chapter 11, stay away)</b>&nbsp;', $streetInsiderNews);
           $streetInsiderNews = preg_replace('/ denial of application/i', '<span style="font-size: 15px; background-color:red; color:black"><b>&nbsp;denial of application</span> (65%)</b>&nbsp;', $streetInsiderNews);
-          $streetInsiderNews = preg_replace('/ restructuring support agreement/i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp;Restructuring Support Agreement</span> (53%)</b>&nbsp;', $streetInsiderNews);
+          $streetInsiderNews = preg_replace('/ restructuring support agreement/i', '<span style="font-size: 35px; background-color:red; color:black"><b>&nbsp;Restructuring Support Agreement</span> (53%)</b>&nbsp;', $streetInsiderNews);
           $streetInsiderNews = preg_replace('/ breach of contract/i', '<span style="font-size: 15px; background-color:red; color:black"><b>&nbsp;breach of contract</span> (If lost lawsuit, then 75%, if won then 35% premarket/first round)</b>&nbsp;', $streetInsiderNews);      
           $streetInsiderNews = preg_replace('/ jury verdict/i', '<span style="font-size: 15px; background-color:red; color:black"><b>&nbsp;jury verdict</span> BE CAREFUL (If lost major lawsuit, then 70-75%)</b>&nbsp;', $streetInsiderNews);      
           $streetInsiderNews = preg_replace('/ fcc/i', '<span style="font-size: 15px; background-color:red; color:black"><b>&nbsp;FCC</span> if regulation had long-term ratifications, then 65-70%</b>&nbsp;', $streetInsiderNews);      
           $streetInsiderNews = preg_replace('/ layoffs/i', '<span style="font-size: 12px; background-color:red; color:black"><b>&nbsp;layoffs</span> (check Jay\'s percentages)</b>&nbsp;', $streetInsiderNews);      
           $streetInsiderNews = preg_replace('/ layoff/i', '<span style="font-size: 12px; background-color:red; color:black"><b>&nbsp;layoff</span> (check Jay\'s percentages)</b>&nbsp;', $streetInsiderNews);      
           $streetInsiderNews = preg_replace('/ lays off/i', '<span style="font-size: 12px; background-color:red; color:black"><b>&nbsp;lays off</span> (check Jay\'s percentages)</b>&nbsp;', $streetInsiderNews);      
-          $streetInsiderNews = preg_replace('/ restructuring/i', '<span style="font-size: 15px; background-color:red; color:black"><b>&nbsp;restructuring</span></b>&nbsp;', $streetInsiderNews);      
+          $streetInsiderNews = preg_replace('/ restructuring/i', '<span style="font-size: 35px; background-color:red; color:black"><b>&nbsp;restructuring</span></b>&nbsp;', $streetInsiderNews);      
           $streetInsiderNews = preg_replace('/ restructure/i', '<span style="font-size: 15px; background-color:red; color:black"><b>&nbsp;restructure</span></b>&nbsp;', $streetInsiderNews);      
           $streetInsiderNews = preg_replace('/ clinical hold/i', '<span style="font-size: 15px; background-color:red; color:black"><b>&nbsp;clinical hold</span> (65 - 70%)</b>&nbsp;', $streetInsiderNews);
           $streetInsiderNews = preg_replace('/ convertible senior notes/i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp; convertible senior notes (back off until you see a price)</b></span>&nbsp;', $streetInsiderNews);
@@ -878,7 +878,7 @@ $noTimeFound = false;
 
       $returnHtml .= getStreetInsider($symbol, $yesterdayDays); 
 
-      $returnHtml .= buildNewsNotes(); 
+      $returnHtml .= buildNewsNotes($secCompanyName); 
 
       $returnHtml .= "<table style='border: 1px solid black !important'>"; 
 
