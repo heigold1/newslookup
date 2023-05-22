@@ -8,7 +8,7 @@ $secCompanyName = $_GET['secCompanyName'];
 $secCompanyName = preg_replace('/ /', '+', $secCompanyName);
 $secCompanyName = preg_replace("/<.*?>/", "", $secCompanyName);
 
-$yesterdayDays = 1;
+$yesterdayDays = 3;
 
 fopen("cookies.txt", "w");
 
@@ -507,8 +507,8 @@ function getStreetInsider($symbol, $yesterdayDays)
           $streetInsiderNews = preg_replace('/(' .  get_yahoo_todays_trade_date() . ')/', '<span style="font-size: 12px; background-color:  black; color:white"> $1</span> ', $streetInsiderNews);
           $streetInsiderNews = preg_replace('/ voluntarily delist/i', '<span style="font-size: 25px; background-color:red; color:black"><b> voluntarily delist - 65%</b></span>', $streetInsiderNews);
           $streetInsiderNews = preg_replace('/ voluntary delist/i', '<span style="font-size: 25px; background-color:red; color:black"><b> voluntary delist - 65%</b></span>', $streetInsiderNews);
-          $streetInsiderNews = preg_replace('/ delist/i', '<span style="font-size: 25px; background-color:red; color:black"><b> delist </b></span>', $streetInsiderNews);
-          $streetInsiderNews = preg_replace('/Delist/', '<span style="font-size: 25px; background-color:red; color:black"><b> delist </b></span>', $streetInsiderNews);
+          $streetInsiderNews = preg_replace('/ delist/i', '<span style="font-size: 55px; background-color:red; color:black"><b> delist - check the date</b></span>', $streetInsiderNews);
+          $streetInsiderNews = preg_replace('/Delist/', '<span style="font-size: 55px; background-color:red; color:black"><b> delist - check the date</b></span>', $streetInsiderNews);
           $streetInsiderNews = preg_replace('/ chapter 11|chapter 11 /i', '<span style="font-size: 55px; background-color:red; color:black"><b> &nbsp;CHAPTER 11</b></span>', $streetInsiderNews);
           $streetInsiderNews = preg_replace('/ bankrupt/i', '<span style="font-size: 55px; background-color:red; color:black"><b>&nbsp;bankrupt</span></b>', $streetInsiderNews);      
           $streetInsiderNews = preg_replace('/ reverse split|reverse split /i', '<span style="font-size: 25px; background-color:red; color:black"><b> &nbsp;REVERSE SPLIT</b></span>', $streetInsiderNews);
@@ -563,6 +563,7 @@ function getStreetInsider($symbol, $yesterdayDays)
           $streetInsiderNews = preg_replace('/ strategic shift/i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp; STRATEGIC SHIFT - BE CAREFUL &nbsp;</b></span>&nbsp;', $streetInsiderNews);
           $streetInsiderNews = preg_replace('/ attorney general/i', '<span style="font-size: 12px; background-color:red; color:black"><b>&nbsp; attorney general (if there is an attorney general probe then 45-50%) &nbsp;</b></span>&nbsp;', $streetInsiderNews);
           $streetInsiderNews = preg_replace('/ merger/i', '<span style="font-size: 55px; background-color:red; color:black"><b>&nbsp; MERGER<br><br> - STAY AWAY</b></span>&nbsp;', $streetInsiderNews);
+          $streetInsiderNews = preg_replace('/ take private/i', '<span style="font-size: 55px; background-color:red; color:black"><b>&nbsp; TAKE PRIVATE<br><br> - STAY AWAY</b></span>&nbsp;', $streetInsiderNews);
           $streetInsiderNews = preg_replace('/ preliminary(.*?)outlook/i', '<span style="font-size: 12px; background-color:red; color:black"><b>&nbsp; Preliminary$1Outlook -</span> <span style="font-size: 12px; background-color:lightgreen; color:black">41% right off the bat, then 48% literally 3 minutes later.  TAKE NO MORE THAN 5% AND BAIL &nbsp;</b></span>&nbsp;', $streetInsiderNews);
           $streetInsiderNews = preg_replace('/ conference call to provide update/i', '<span style="font-size: 12px; background-color:red; color:black"><b>&nbsp; Conference Call to Provide Update -</span> <span style="font-size: 12px; background-color:lightgreen; color:black">CHECK THE DATE/TIME OF THE CALL &nbsp;</b></span>&nbsp;', $streetInsiderNews);
           $streetInsiderNews = preg_replace('/ seeking alpha/i', '<span style="font-size: 25px; background-color:red; color:black">SEEKING ALPHA &nbsp;</b></span>&nbsp;', $streetInsiderNews);

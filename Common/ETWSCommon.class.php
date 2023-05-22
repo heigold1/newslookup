@@ -11,6 +11,11 @@
 class ETWSCommon {
 
 	/**
+	 * __construct
+	 */
+	function __construct(){}
+
+	/**
 	 * Convert html br tags to new line
 	 *
 	 * @param string @str

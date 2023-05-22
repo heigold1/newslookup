@@ -164,7 +164,8 @@ class etHttpUtils
 		}elseif($this->http_code < 200 or $this->http_code > 299 ){
 			$msg_str  = 	$this->response_header ;
 			if(DEBUG_MODE){
-				ETWSCommon::write_log($this->response_body);
+				$etwsCommon = new ETWSCommon(); 
+				$etwsCommon->write_log($this->response_body); 
 			}
 
 			throw new ETWSException($msg_str,$this->http_code);
