@@ -4,7 +4,7 @@ include './Samples/config.php';
 
 require_once("simple_html_dom.php"); 
 
-$yesterdayDays = 3;
+$yesterdayDays = 1;
 
 error_reporting(1);
 //ini_set('display_errors', 1);
@@ -835,6 +835,23 @@ else if ($which_website == "yahoo")
       $google_keyword_string = preg_replace('/inc\./i', "+", $google_keyword_string);
       $google_keyword_string = preg_replace('/ltd\./i', "+", $google_keyword_string);
 
+
+      // Not RSS feed but just a google scrape with keywords
+
+      $googleNewsFlag = "there is no google news"; 
+      $googleNewsURL = "https://www.google.com/search?q=stock+" . $symbol . "&tbm=nws"; 
+
+      $googleNewsResults = grabHTML("www.google.com", $googleNewsURL);
+
+//      $googleNewsHtml = str_get_html($googleNewsResults);  
+
+      if (
+        preg_match('/minutes? ago/', $googleNewsResults)  
+      )
+      {
+          $googleNewsFlag = "there is google news"; 
+      }
+
       // URL of Google News RSS feed
 
 /*
@@ -1185,6 +1202,8 @@ else if ($which_website == "yahoo")
       $finalReturn = preg_replace('/ liquidation/i', '<span style="font-size: 35px; background-color:red; color:black"><b>&nbsp;LIQUIDATION - STAY AWAY</span></b>&nbsp;', $finalReturn);   
       $finalReturn = preg_replace('/ SPAC /i', '<span style="font-size: 35px; background-color:red; color:black"><b>&nbsp;SPAC - STAY AWAY</span></b>&nbsp;', $finalReturn);   
       $finalReturn = preg_replace('/ to begin trading/i', '<span style="font-size: 35px; background-color:red; color:black"><b>&nbsp;TO BEGIN TRADING - CHECK THE DATE</span></b>&nbsp;', $finalReturn);   
+      $finalReturn = preg_replace('/ distribution ratios/i', '<span style="font-size: 55px; background-color:red; color:black"><b>&nbsp;DISTRIBUTION<br><br> RATIOS<br><br> - CHECK DATE</span></b>&nbsp;', $finalReturn);   
+      $finalReturn = preg_replace('/ distribution date/i', '<span style="font-size: 55px; background-color:red; color:black"><b>&nbsp;DISTRIBUTION<br><br> DATE<br><br> - CHECK DATE</span></b>&nbsp;', $finalReturn);   
 
       $message_board = '</font><a target="_blank" onclick="return openPage(this.href)" href="http://finance.yahoo.com/quote/' . $symbol . '/community?ltr=1"> Yahoo Message Boards</a>&nbsp;&nbsp;&nbsp;&nbsp;'; 
       $company_profile = '<a target="_blank" onclick="return openPage(this.href)" href="http://finance.yahoo.com/quote/' . $symbol . '/profile">Yahoo Company Profile for ' . $symbol . '</a><br>'; 
@@ -1201,7 +1220,7 @@ else if ($which_website == "yahoo")
 
       $splits = '&nbsp;&nbsp;<a target="_blank" onclick="return openPage(this.href)" href="https://www.stocksplithistory.com/?symbol=' . $symbol . '"> Splits</a>&nbsp;&nbsp;&nbsp;&nbsp;'; 
 
-      $finalReturn = $yahooDates . $returnCompanyName . $companyWebsite . $sectorCountry . $returnYesterdaysClose . $preMarketYesterdaysClose[0] . "<br>" . "<div style='display: inline-block;'>" . $yesterdayVolumeHTML . $currentVolumeHTML . $volumeRatioHTML . $avgVol10days . $avgVolYahoo .  $company_profile . $yahoo_main_page . $message_board . $google . $nasdaqInfo . $streetInsider . $streetInsiderScrape . $splits . '<table width="700px"><tr width="575px">' . $finalReturn . '</tr></table>'; 
+      $finalReturn = $yahooDates . $returnCompanyName . $companyWebsite . $sectorCountry . $returnYesterdaysClose . $preMarketYesterdaysClose[0] . "<br>" . "<div style='display: inline-block;'>" . $yesterdayVolumeHTML . $currentVolumeHTML . $volumeRatioHTML . $avgVol10days . $avgVolYahoo .  $company_profile . $yahoo_main_page . $message_board . $google . $nasdaqInfo . $streetInsider . $streetInsiderScrape . $splits . '<table width="700px"><tr width="575px">' . $finalReturn . '</tr></table>' . $googleNewsFlag . $googleNewsHtmlDOM[0];  
 
       echo $finalReturn; 
 

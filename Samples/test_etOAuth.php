@@ -45,7 +45,7 @@ function show_menu()
 	$choice = trim(fgets(STDIN));
 	return $choice;
 }
-
+ 
 
 $consumer 	= new etOAuthConsumer($key,$secret);
 $request 	= new etOAuth($consumer);
@@ -57,6 +57,7 @@ $choice = show_menu();
 				//Create a fresh request.
 				$request 	= new etOAuth($consumer);
 				$req_token = $request->GetRequestToken();
+
 
 				if(isset($req_token['oauth_token']) and isset($req_token['oauth_token_secret']))
 				{

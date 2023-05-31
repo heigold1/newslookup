@@ -50,13 +50,21 @@ class etOAuth
 	{
 		$required_params['Consumer Key'] = $this->key;
 		$required_params['Consumer Secret'] = $this->secret;
+
+echo "in etOauth.class.php, line 54\n";    
 		
 		$this->ValidateRequiredParams($required_params);
-			
+
+echo "in etOauth.class.php, line 58\n"; 
+
 		$etHttpObj = new etHttpUtils($this,$request_token_url,true);
 		$etHttpObj->params = array('oauth_callback' => $this->callback_url);
+echo "in etOauth.class.php, line 62\n"; 
 		$etHttpObj->GetResponse();
+echo "in etOauth.class.php, line 64\n"; 
 		$req_token_str = $etHttpObj->response_body;
+
+echo "in etOauth.class.php, line 67\n"; 
 
 		parse_str ($req_token_str,$req_token);
 		if( !isset($req_token['oauth_token']) or empty($req_token['oauth_token']) or

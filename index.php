@@ -31,9 +31,6 @@
 								<input id="earnings_button" type="submit" value="E">
 							</td>
 							<td style="width:450px"> 
-								<span id="prepare_order_only">
-									<input type="checkbox" id="prepare_order_only_checkbox" value="0">Only prep order
-								</span> 
 								<span>
 									<input type="checkbox" id="redo_localhost_checkbox" value="0">Redo local
 								</span> 
@@ -42,6 +39,12 @@
 								</span>
 								<span>
 									<input id="pink_sheet_0006" type="submit" value="$0.0006">
+								</span>
+								<span>
+									<input id="dollar_17_5" type="submit" value="17.5%">
+								</span>
+								<span>
+									<input id="penny_22_5" type="submit" value="22.5%">
 								</span>
 							</td>
 						</tr>

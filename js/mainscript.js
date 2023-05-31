@@ -706,13 +706,6 @@ $(function() {
 
             CopyToClipboard();
 
-            // if we are doing just a quick order prep then don't continue with the news 
-            if ($("#prepare_order_only_checkbox").prop('checked'))
-            {
-                $("#prepare_order_only_checkbox").prop('checked', false);
-                return; 
-            }
-
             $.ajax({
                 url: "alphavantage_api_historical_data.php",
                 data: {symbol: original_symbol},
@@ -889,6 +882,20 @@ $(function() {
               google_keyword_string = google_keyword_string.replace(/inc\./ig, "");
               google_keyword_string = google_keyword_string.replace(/ltd\./ig, "");
 
+              if (
+                (data.search(/there is google news/gi) > 0)
+                )
+              {
+                 $("div#bigcharts_yest_close").css("background-color", "red");
+                 $("div#bigcharts_yest_close").html("<a href='https://www.google.com/search?q=stock+" + symbol + "&tbm=nws' target='blank'>THERE IS GOOGLE NEWS</a>");  
+              }
+              else 
+              {
+                 $("div#bigcharts_yest_close").css("background-color", "#f3f3ff");
+              }
+
+
+
               $("div#right_top_container").html(data);
 
               $("#entryPercentage").focus();   
@@ -926,7 +933,7 @@ $(function() {
                   document.getElementById('country').style.fontSize = "75px"; 
                   document.getElementById('country').style.backgroundColor = "red";
                   document.getElementById('country').style.height = "35px"; 
-              }    
+              }
 
               yesterdaysClose = " " + data.match(/<h4(.*?)h4>/g) + " "; 
               yesterdaysClose = yesterdaysClose.replace(/ <h4>/ig, "");
@@ -1229,6 +1236,37 @@ console.log(html);
       CopyToClipboard();  
     }); // End of click function 
 
+    $("#dollar_17_5").click(function(){
+      $("#entryPercentage").val("17.5"); 
+
+      var yesterdaysClose = $('#yestCloseText').val(); 
+      var newPrice = yesterdaysClose - (yesterdaysClose*17.5/100); 
+      newPrice = newPrice.toFixed(2); 
+      $('#entryPrice').val(newPrice); 
+      calcAll();
+      CopyToClipboard();  
+
+    }); // End of click function 
+
+    $("#penny_22_5").click(function(){
+
+      $("#entryPercentage").val("22.5"); 
+
+      var yesterdaysClose = $('#yestCloseText').val(); 
+      var newPrice = yesterdaysClose - (yesterdaysClose*22.5/100); 
+      if (yesterdaysClose > 1.00){
+        newPrice = newPrice.toFixed(2);         
+      }
+      else
+      {
+        newPrice = newPrice.toFixed(4); 
+      }
+
+      $('#entryPrice').val(newPrice); 
+      calcAll();
+      CopyToClipboard();  
+
+    }); // End of click function 
 
    $("#earnings_button").click(function(){
 
