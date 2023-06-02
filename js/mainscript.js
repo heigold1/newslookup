@@ -882,12 +882,13 @@ $(function() {
               google_keyword_string = google_keyword_string.replace(/inc\./ig, "");
               google_keyword_string = google_keyword_string.replace(/ltd\./ig, "");
 
+              $("div#bigcharts_yest_close").html("<a href='https://www.google.com/search?q=stock+" + symbol + "&tbm=nws' target='blank'>GOOGLE NEWS</a>");  
+
               if (
                 (data.search(/there is google news/gi) > 0)
                 )
               {
                  $("div#bigcharts_yest_close").css("background-color", "red");
-                 $("div#bigcharts_yest_close").html("<a href='https://www.google.com/search?q=stock+" + symbol + "&tbm=nws' target='blank'>THERE IS GOOGLE NEWS</a>");  
               }
               else 
               {
