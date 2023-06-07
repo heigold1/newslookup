@@ -8,7 +8,7 @@ $secCompanyName = $_GET['secCompanyName'];
 $secCompanyName = preg_replace('/ /', '+', $secCompanyName);
 $secCompanyName = preg_replace("/<.*?>/", "", $secCompanyName);
 
-$yesterdayDays = 3;
+$yesterdayDays = 1;
 
 fopen("cookies.txt", "w");
 
@@ -666,6 +666,7 @@ function getStreetInsider($symbol, $yesterdayDays)
           $streetInsiderNews = preg_replace('/ (s-[0-9])/i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp;$1</span></b>&nbsp;', $streetInsiderNews);   
           $streetInsiderNews = preg_replace('/ distribution ratios/i', '<span style="font-size: 55px; background-color:red; color:black"><b>&nbsp;DISTRIBUTION<br><br> RATIOS<br><br> - CHECK DATE</span></b>&nbsp;', $streetInsiderNews);   
           $streetInsiderNews = preg_replace('/ distribution date/i', '<span style="font-size: 55px; background-color:red; color:black"><b>&nbsp;DISTRIBUTION<br><br> DATE<br><br> - CHECK DATE</span></b>&nbsp;', $streetInsiderNews);   
+          $streetInsiderNews = preg_replace('/ Hindenburg/i', '<span style="font-size: 55px; background-color:red; color:black"><b>&nbsp;HINDENBERG<br><br> RESEARCH<br><br> - STAY AWAY</span></b>&nbsp;', $streetInsiderNews); 
 
         try 
         {
@@ -734,7 +735,12 @@ $noTimeFound = false;
       $html = str_get_html($result);
 
       $rssTableRow = $html->find(' div table tbody tr'); 
-      $rssLink = $rssTableRow[3]->find('a');
+
+      if ($rssTableRow[3])
+      {
+          $rssLink = $rssTableRow[3]->find('a');
+      }
+
       $rssFullLink = "https://www.sec.gov" . $rssLink[0]->href; 
       $rssFullLink = strval($rssFullLink); 
 

@@ -4,7 +4,7 @@ include './Samples/config.php';
 
 require_once("simple_html_dom.php"); 
 
-$yesterdayDays = 3;
+$yesterdayDays = 1;
 
 error_reporting(1);
 //ini_set('display_errors', 1);
@@ -846,7 +846,8 @@ else if ($which_website == "yahoo")
 //      $googleNewsHtml = str_get_html($googleNewsResults);  
 
       if (
-        preg_match('/minutes? ago/', $googleNewsResults)  
+        preg_match('/minutes? ago/', $googleNewsResults) || 
+        preg_match('/mins ago/', $googleNewsResults)  
       )
       {
           $googleNewsFlag = "there is google news"; 
@@ -1204,6 +1205,7 @@ else if ($which_website == "yahoo")
       $finalReturn = preg_replace('/ to begin trading/i', '<span style="font-size: 35px; background-color:red; color:black"><b>&nbsp;TO BEGIN TRADING - CHECK THE DATE</span></b>&nbsp;', $finalReturn);   
       $finalReturn = preg_replace('/ distribution ratios/i', '<span style="font-size: 55px; background-color:red; color:black"><b>&nbsp;DISTRIBUTION<br><br> RATIOS<br><br> - CHECK DATE</span></b>&nbsp;', $finalReturn);   
       $finalReturn = preg_replace('/ distribution date/i', '<span style="font-size: 55px; background-color:red; color:black"><b>&nbsp;DISTRIBUTION<br><br> DATE<br><br> - CHECK DATE</span></b>&nbsp;', $finalReturn);   
+      $finalReturn = preg_replace('/ Hindenburg/i', '<span style="font-size: 55px; background-color:red; color:black"><b>&nbsp;HINDENBERG<br><br> RESEARCH<br><br> - STAY AWAY</span></b>&nbsp;', $finalReturn);   
 
       $message_board = '</font><a target="_blank" onclick="return openPage(this.href)" href="http://finance.yahoo.com/quote/' . $symbol . '/community?ltr=1"> Yahoo Message Boards</a>&nbsp;&nbsp;&nbsp;&nbsp;'; 
       $company_profile = '<a target="_blank" onclick="return openPage(this.href)" href="http://finance.yahoo.com/quote/' . $symbol . '/profile">Yahoo Company Profile for ' . $symbol . '</a><br>'; 
