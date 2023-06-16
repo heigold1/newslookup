@@ -559,7 +559,7 @@ $(function() {
               $("#day1").html("");
               $("#entryPrice").val(""); 
               $("#entryPercentage").val("");  
-              $("#amountSpending").val("500");
+              $("#amountSpending").val("700");
               $("#eTradeLowPercentage").html("");
               $("#orderStub").val("-----------------------"); 
               $("#foreign_country").html("");
@@ -757,26 +757,31 @@ $(function() {
                   if (day_one_volume < parseInt("100000"))
                   {
                       $("#day1_total_volume").css({'background-color' : '#ff8a8a', 'font-size' : '17px'});
+                      $("#day1_total_volume").fadeOut(300).fadeIn(300).fadeOut(300).fadeIn(300).fadeOut(300).fadeIn(300).fadeOut(300).fadeIn(300).fadeOut(300).fadeIn(300).fadeOut(300).fadeIn(300).fadeOut(300).fadeIn(300).fadeOut(300).fadeIn(300);
                   }
 
                   if (day_two_volume < parseInt("100000"))
                   {
                       $("#day2_total_volume").css({'background-color' : '#ff8a8a', 'font-size' : '17px'});
+                      $("#day2_total_volume").fadeOut(300).fadeIn(300).fadeOut(300).fadeIn(300).fadeOut(300).fadeIn(300).fadeOut(300).fadeIn(300).fadeOut(300).fadeIn(300).fadeOut(300).fadeIn(300).fadeOut(300).fadeIn(300).fadeOut(300).fadeIn(300);
                   }
 
                   if (day_three_volume < parseInt("100000"))
                   {
                       $("#day3_total_volume").css({'background-color' : '#ff8a8a', 'font-size' : '17px'});
+                      $("#day3_total_volume").fadeOut(300).fadeIn(300).fadeOut(300).fadeIn(300).fadeOut(300).fadeIn(300).fadeOut(300).fadeIn(300).fadeOut(300).fadeIn(300).fadeOut(300).fadeIn(300).fadeOut(300).fadeIn(300).fadeOut(300).fadeIn(300);
                   }
 
                   if (day_four_volume < parseInt("100000"))
                   {
                       $("#day4_total_volume").css({'background-color' : '#ff8a8a', 'font-size' : '17px'});
+                      $("#day4_total_volume").fadeOut(300).fadeIn(300).fadeOut(300).fadeIn(300).fadeOut(300).fadeIn(300).fadeOut(300).fadeIn(300).fadeOut(300).fadeIn(300).fadeOut(300).fadeIn(300).fadeOut(300).fadeIn(300).fadeOut(300).fadeIn(300);
                   }
 
                   if (day_five_volume < parseInt("100000"))
                   {
                       $("#day5_total_volume").css({'background-color' : '#ff8a8a', 'font-size' : '17px'});
+                      $("#day5_total_volume").fadeOut(300).fadeIn(300).fadeOut(300).fadeIn(300).fadeOut(300).fadeIn(300).fadeOut(300).fadeIn(300).fadeOut(300).fadeIn(300).fadeOut(300).fadeIn(300).fadeOut(300).fadeIn(300).fadeOut(300).fadeIn(300);
                   }
 
 
@@ -1050,10 +1055,12 @@ console.log(html);
             highRiskFlag = 1; 
             warningMessage += " ** HIGH RISK STOCK!!! ** ";
             $("#day1").css({'background-color' : 'red', 'font-size' : '17px'});
+            $("#day1").fadeOut(300).fadeIn(300).fadeOut(300).fadeIn(300).fadeOut(300).fadeIn(300).fadeOut(300).fadeIn(300).fadeOut(300).fadeIn(300).fadeOut(300).fadeIn(300).fadeOut(300).fadeIn(300).fadeOut(300).fadeIn(300);
         }
         else if (day1 < -15)
         {
             $("#day1").css({'background-color' : 'yellow', 'font-size' : '17px'});
+            $("#day1").fadeOut(300).fadeIn(300).fadeOut(300).fadeIn(300).fadeOut(300).fadeIn(300).fadeOut(300).fadeIn(300).fadeOut(300).fadeIn(300).fadeOut(300).fadeIn(300).fadeOut(300).fadeIn(300).fadeOut(300).fadeIn(300);
         }
 
         if (day2 > 15)
@@ -1082,6 +1089,7 @@ console.log(html);
             warningMessage += " ** HIGH RISK STOCK!!! ** ";
             $("#day1_volume").html($("#day1_volume").html() + "  VOL!!");
             $("#day1_volume").css({'background-color' : 'red', 'font-size' : '17px'});
+            $("#day1_volume").fadeOut(300).fadeIn(300).fadeOut(300).fadeIn(300).fadeOut(300).fadeIn(300).fadeOut(300).fadeIn(300).fadeOut(300).fadeIn(300).fadeOut(300).fadeIn(300).fadeOut(300).fadeIn(300).fadeOut(300).fadeIn(300);
         }
 
         if (highRiskFlag == 1)
@@ -1098,6 +1106,7 @@ console.log(html);
         {
             warningMessage += " ** LOW DROP STOCK!!! ** ";
             $("#day1_low").css({'background-color' : 'red', 'font-size' : '19px'});
+            $("#day1_low").fadeOut(300).fadeIn(300).fadeOut(300).fadeIn(300).fadeOut(300).fadeIn(300).fadeOut(300).fadeIn(300).fadeOut(300).fadeIn(300).fadeOut(300).fadeIn(300).fadeOut(300).fadeIn(300).fadeOut(300).fadeIn(300);
         }
         else if (day1_low > 0)
         {
