@@ -734,6 +734,7 @@ $(function() {
                   {
                       $("#day_1_recovery").css({'background-color' : 'red', 'font-size' : '40px'});
                       $("#lows").css({'background-color' : 'red'});
+                      $("#day_1_recovery").fadeOut(300).fadeIn(300).fadeOut(300).fadeIn(300).fadeOut(300).fadeIn(300).fadeOut(300).fadeIn(300).fadeOut(300).fadeIn(300).fadeOut(300).fadeIn(300).fadeOut(300).fadeIn(300).fadeOut(300).fadeIn(300);
                   }
 
                   $("#day1_volume").html(returnedObject.day_1_volume);
@@ -1050,7 +1051,7 @@ console.log(html);
 
         var highRiskFlag = 0; 
 
-        if (day1 > 15)
+        if (day1 > 21)
         {
             highRiskFlag = 1; 
             warningMessage += " ** HIGH RISK STOCK!!! ** ";
