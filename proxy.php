@@ -805,7 +805,7 @@ else if ($which_website == "yahoo")
 */
 
       // get Yahoo Finance average volume number
-      $command = escapeshellcmd('python3 ../pythonscrape/scrape-yahoo-finance-summary.py ' . $symbol);
+      $command = escapeshellcmd('python3 ./pythonscrape/scrape-yahoo-finance-summary.py ' . $symbol);
       $yahooFinanceJson = shell_exec($command);
 
       $yahooFinanceObject = json_decode($yahooFinanceJson);
@@ -1218,7 +1218,7 @@ else if ($which_website == "yahoo")
       $nasdaqInfo = '&nbsp;&nbsp;<a target="_blank" onclick="return openPage(this.href)" href="https://www.nasdaq.com/symbol/' . $symbol . '/sec-filings"> Nasdaq Info</a>&nbsp;&nbsp;&nbsp;&nbsp;'; 
       $streetInsider = '&nbsp;&nbsp;<a target="_blank" onclick="return openPage(this.href)" href="https://www.streetinsider.com/stock_lookup.php?LookUp=Get+Quote&q=' . $symbol . '"> SI</a>&nbsp;&nbsp;&nbsp;&nbsp;'; 
 
-      $streetInsiderScrape = '&nbsp;&nbsp;<a target="_blank" onclick="return openPage(this.href)" href="http://ec2-54-210-42-143.compute-1.amazonaws.com/newslookup/scrape-street-insider.php?symbol=' . $symbol . '"> SI Scrape</a>&nbsp;&nbsp;&nbsp;&nbsp;';  
+      $streetInsiderScrape = '&nbsp;&nbsp;<a target="_blank" onclick="return openPage(this.href)" href="./scrape-street-insider.php?symbol=' . $symbol . '"> SI Scrape</a>&nbsp;&nbsp;&nbsp;&nbsp;';  
 
       $splits = '&nbsp;&nbsp;<a target="_blank" onclick="return openPage(this.href)" href="https://www.stocksplithistory.com/?symbol=' . $symbol . '"> Splits</a>&nbsp;&nbsp;&nbsp;&nbsp;'; 
 
