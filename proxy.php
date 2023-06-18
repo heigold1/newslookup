@@ -4,7 +4,7 @@ include './Samples/config.php';
 
 require_once("simple_html_dom.php"); 
 
-$yesterdayDays = 1;
+$yesterdayDays = 4;
 
 error_reporting(1);
 //ini_set('display_errors', 1);
@@ -744,7 +744,7 @@ else if ($which_website == "yahoo")
 
 
 
-      $command = escapeshellcmd('python3 ../pythonscrape/scrape-yahoo-finance-company-profile.py ' . $symbol);
+      $command = escapeshellcmd('python3 ./pythonscrape/scrape-yahoo-finance-company-profile.py ' . $symbol);
       $yahooFinanceJson = shell_exec($command);
 
       $yahooFinanceObject = json_decode($yahooFinanceJson);

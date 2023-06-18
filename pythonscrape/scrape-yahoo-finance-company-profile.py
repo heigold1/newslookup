@@ -23,7 +23,6 @@ def parse_finance_page(symbol):
           "Accept-Language":"en-GB,en;q=0.9,en-US;q=0.8,ml;q=0.7",
           "Connection":"keep-alive",
           "Host":"finance.yahoo.com",
-          "Referer":"https://finance.yahoo.com",
           "Upgrade-Insecure-Requests":"1",
           "User-Agent":"Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.119 Safari/537.36"
     } 

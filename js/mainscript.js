@@ -606,6 +606,7 @@ $(function() {
                             $("#left_bottom_container").show();
                           }
                           $("#yestCloseText").val(jsonObject.prev_close);
+
                           if (low > 1.00)
                           {  
                               $("#eTradeLow").html(low.toFixed(2));
