@@ -5,7 +5,7 @@ error_reporting(0);
 // header('Content-type: text/html');
 $symbol=$_GET['symbol'];
 
-$command = escapeshellcmd('python3 ../pythonscrape/scrape-street-insider.py ' . $symbol);
+$command = escapeshellcmd('python3 ./pythonscrape/scrape-street-insider.py ' . $symbol);
 
 echo "before running the shell command<br><br>"; 
 
