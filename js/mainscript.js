@@ -889,7 +889,7 @@ $(function() {
               google_keyword_string = google_keyword_string.replace(/inc\./ig, "");
               google_keyword_string = google_keyword_string.replace(/ltd\./ig, "");
 
-              $("div#bigcharts_yest_close").html("<a href='https://www.google.com/search?q=stock+" + symbol + "&tbm=nws' target='blank'>GOOGLE NEWS</a><br><br><span style='font-size: 40px;'>CHECK THE BIG CHARTS DELAYED PRICE</span>");  
+              $("div#bigcharts_yest_close").html("<a href='https://www.google.com/search?q=stock+" + symbol + "&tbm=nws' target='blank'>GOOGLE NEWS</a>");  
 
               if (
                 (data.search(/there is google news/gi) > 0)
@@ -1044,6 +1044,8 @@ console.log(html);
         $("#entryPercentage").focus();
 
         var warningMessage = ""; 
+
+        $("#td_bigcharts_change").fadeOut(300).fadeIn(300).fadeOut(300).fadeIn(300).fadeOut(300).fadeIn(300).fadeOut(300).fadeIn(300).fadeOut(300).fadeIn(300).fadeOut(300).fadeIn(300).fadeOut(300).fadeIn(300).fadeOut(300).fadeIn(300);
 
         // any previous-day spike greater than 15% will be considered high-risk 
         var day1 = parseFloat($("#day1").html());
