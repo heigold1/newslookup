@@ -1045,8 +1045,6 @@ console.log(html);
 
         var warningMessage = ""; 
 
-        $("#td_bigcharts_change").fadeOut(300).fadeIn(300).fadeOut(300).fadeIn(300).fadeOut(300).fadeIn(300).fadeOut(300).fadeIn(300).fadeOut(300).fadeIn(300).fadeOut(300).fadeIn(300).fadeOut(300).fadeIn(300).fadeOut(300).fadeIn(300);
-
         // any previous-day spike greater than 15% will be considered high-risk 
         var day1 = parseFloat($("#day1").html());
         var day2 = parseFloat($("#day2").html());
@@ -1369,34 +1367,7 @@ console.log(html);
               $("#orderStub").css("background-color", "#FFFFFF");  
             }
 
-/*
-            var numShares = getNumberOfShares(); 
-
-            if (numShares == 0)
-            {
-                alert("The number of shares is zero"); 
-            }
-*/ 
-
-
-    /*
-            var warningMessage = "Check to see if the VIX is picking up.  Check the volumes."; 
-
-            var vixValue = parseFloat(document.getElementById("vix-value").innerHTML); 
-
-            if ($("#foreign_country").html() == "1")
-            {
-                warningMessage += "-- This is a foreign company"; 
-            }
-
-            if (warningMessage != "")
-            {
-                alert(warningMessage);
-                calcAll(); 
-                $('#copy_price_to_percentage').click();
-                CopyToClipboard();  
-            }
-    */ 
+            $("#td_bigcharts_change").fadeOut(300).fadeIn(300).fadeOut(300).fadeIn(300).fadeOut(300).fadeIn(300).fadeOut(300).fadeIn(300).fadeOut(300).fadeIn(300).fadeOut(300).fadeIn(300).fadeOut(300).fadeIn(300).fadeOut(300).fadeIn(300);
           } 
 
     //      $('#submit_button').click();
