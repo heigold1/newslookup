@@ -4,7 +4,7 @@ include './Samples/config.php';
 
 require_once("simple_html_dom.php"); 
 
-$yesterdayDays = 4;
+$yesterdayDays = 5;
 
 error_reporting(1);
 //ini_set('display_errors', 1);
@@ -630,7 +630,7 @@ if ($which_website == "marketwatch")
       $marketWatchNewsHTML = preg_replace('/ schedules/i', '<span style="font-size: 25px; background-color: black; color:white"><b>&nbsp; SCHEDULES - CHECK THE DATE </b></span>&nbsp;', $marketWatchNewsHTML);
       $marketWatchNewsHTML = preg_replace('/ sets date for the release of/i', '<span style="font-size: 25px; background-color: black; color:white"><b>&nbsp; SETS DATE FOR THE RELEASE OF - CHECK THE DATE </b></span>&nbsp;', $marketWatchNewsHTML);
       $marketWatchNewsHTML = preg_replace('/ collaboration/i', '<span style="font-size: 25px; background-color: red; color:white"><b>&nbsp; COLLABORATION - CAREFUL </b></span>&nbsp;', $marketWatchNewsHTML);
-      $marketWatchNewsHTML = preg_replace('/ china/i', '<span style="font-size: 65px; background-color: red; color:black"><b>&nbsp; CHINA </b></span>&nbsp;', $marketWatchNewsHTML);
+      $marketWatchNewsHTML = preg_replace('/ china/i', '<span style="font-size: 65px; background-color: red; color:black"><br><br><b>&nbsp; CHINA </b></span>&nbsp;', $marketWatchNewsHTML);
       $marketWatchNewsHTML = preg_replace('/ taiwan/i', '<span style="font-size: 65px; background-color: red; color:black"><b>&nbsp; TAIWAN </b></span>&nbsp;', $marketWatchNewsHTML);
       $marketWatchNewsHTML = preg_replace('/ hong kong/i', '<span style="font-size: 65px; background-color: red; color:black"><b>&nbsp; HONG KONG </b></span>&nbsp;', $marketWatchNewsHTML);
       $marketWatchNewsHTML = preg_replace('/ kerrisdale/i', '<span style="font-size: 25px; background-color: red; color:black"><b>&nbsp; Kerrisdale - 65% </b></span>&nbsp;', $marketWatchNewsHTML);
@@ -1170,7 +1170,7 @@ else if ($which_website == "yahoo")
       $finalReturn = preg_replace('/ schedules/i', '<span style="font-size: 25px; background-color: #202020; color:white"><b>&nbsp; SCHEDULES - CHECK THE DATE </b></span>&nbsp;', $finalReturn);
       $finalReturn = preg_replace('/ sets date for the release of/i', '<span style="font-size: 25px; background-color: #202020; color:white"><b>&nbsp; SETS DATE FOR THE RELEASE OF - CHECK THE DATE </b></span>&nbsp;', $finalReturn);
       $finalReturn = preg_replace('/ collaboration/i', '<span style="font-size: 25px; background-color: red; color:black"><b>&nbsp; COLLABORATION - CAREFUL </b></span>&nbsp;', $finalReturn);
-      $finalReturn = preg_replace('/ china/i', '<span style="font-size: 65px; background-color: red; color:black"><b>&nbsp; CHINA </b></span>&nbsp;', $finalReturn);
+      $finalReturn = preg_replace('/ china/i', '<span style="font-size: 65px; background-color: red; color:black"><br><br><b>&nbsp; CHINA </b></span>&nbsp;', $finalReturn);
       $finalReturn = preg_replace('/ taiwan/i', '<span style="font-size: 65px; background-color: red; color:black"><b>&nbsp; TAIWAN </b></span>&nbsp;', $finalReturn);
       $finalReturn = preg_replace('/ hong kong/i', '<span style="font-size: 65px; background-color: red; color:black"><b>&nbsp; HONG KONG </b></span>&nbsp;', $finalReturn);
       $finalReturn = preg_replace('/ kerrisdale/i', '<span style="font-size: 25px; background-color: red; color:black"><b>&nbsp; Kerrisdale - 65% </b></span>&nbsp;', $finalReturn);
@@ -1206,8 +1206,10 @@ else if ($which_website == "yahoo")
       $finalReturn = preg_replace('/ distribution ratios/i', '<span style="font-size: 55px; background-color:red; color:black"><b>&nbsp;DISTRIBUTION<br><br> RATIOS<br><br> - CHECK DATE</span></b>&nbsp;', $finalReturn);   
       $finalReturn = preg_replace('/ distribution date/i', '<span style="font-size: 55px; background-color:red; color:black"><b>&nbsp;DISTRIBUTION<br><br> DATE<br><br> - CHECK DATE</span></b>&nbsp;', $finalReturn);   
       $finalReturn = preg_replace('/ Hindenburg/i', '<span style="font-size: 55px; background-color:red; color:black"><b>&nbsp;HINDENBERG<br><br> RESEARCH<br><br> - STAY AWAY</span></b>&nbsp;', $finalReturn);   
+      $finalReturn = preg_replace('/ mentioned cautiously/i', '<span style="font-size: 35px; background-color:red; color:black"><b>&nbsp;MENTIONED CAUTIOUSLY - MINIMUM 35%</span></b>&nbsp;', $finalReturn);   
 
-      $message_board = '</font><a target="_blank" onclick="return openPage(this.href)" href="http://finance.yahoo.com/quote/' . $symbol . '/community?ltr=1"> Yahoo Message Boards</a>&nbsp;&nbsp;&nbsp;&nbsp;'; 
+
+       $message_board = '</font><a target="_blank" onclick="return openPage(this.href)" href="http://finance.yahoo.com/quote/' . $symbol . '/community?ltr=1"> Yahoo Message Boards</a>&nbsp;&nbsp;&nbsp;&nbsp;'; 
       $company_profile = '<a target="_blank" onclick="return openPage(this.href)" href="http://finance.yahoo.com/quote/' . $symbol . '/profile">Yahoo Company Profile for ' . $symbol . '</a><br>'; 
       $yahoo_main_page = '<a target="_blank" href="http://finance.yahoo.com/q?s=' . $symbol . '&ql=1">Yahoo Main Page for ' . $symbol . '</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
       $yahoo_5_day_chart = '<a target="_blank" href="http://finance.yahoo.com/echarts?s=' . $symbol . '+Interactive#symbol=' . $symbol . ';range=5d">5-day Chart for ' . $symbol . '</a><br><br>';

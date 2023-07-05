@@ -8,7 +8,7 @@ $secCompanyName = $_GET['secCompanyName'];
 $secCompanyName = preg_replace('/ /', '+', $secCompanyName);
 $secCompanyName = preg_replace("/<.*?>/", "", $secCompanyName);
 
-$yesterdayDays = 4;
+$yesterdayDays = 5;
 
 fopen("cookies.txt", "w");
 
@@ -628,7 +628,7 @@ function getStreetInsider($symbol, $yesterdayDays)
           $streetInsiderNews = preg_replace('/ schedules/i', '<span style="font-size: 25px; background-color:#202020; color:white"><b>&nbsp; SCHEDULES - CHECK THE DATE </b></span>&nbsp;', $streetInsiderNews);
           $streetInsiderNews = preg_replace('/ sets date for the release of/i', '<span style="font-size: 25px; background-color:#202020; color:white"><b>&nbsp; SETS DATE FOR THE RELEASE OF - CHECK THE DATE </b></span>&nbsp;', $streetInsiderNews);
           $streetInsiderNews = preg_replace('/ collaboration/i', '<span style="font-size: 25px; background-color: red; color:black"><b>&nbsp; COLLABORATION - CAREFUL </b></span>&nbsp;', $streetInsiderNews);
-          $streetInsiderNews = preg_replace('/ china/i', '<span style="font-size: 65px; background-color: red; color:black"><b>&nbsp; CHINA </b></span>&nbsp;', $streetInsiderNews);
+          $streetInsiderNews = preg_replace('/ china/i', '<span style="font-size: 65px; background-color: red; color:black"><br><br><b>&nbsp; CHINA </b></span>&nbsp;', $streetInsiderNews);
           $streetInsiderNews = preg_replace('/ taiwan/i', '<span style="font-size: 65px; background-color: red; color:black"><b>&nbsp; TAIWAN </b></span>&nbsp;', $streetInsiderNews);
           $streetInsiderNews = preg_replace('/ hong kong/i', '<span style="font-size: 65px; background-color: red; color:black"><b>&nbsp; HONG KONG </b></span>&nbsp;', $streetInsiderNews);
           $streetInsiderNews = preg_replace('/ kerrisdale/i', '<span style="font-size: 25px; background-color: red; color:black"><b>&nbsp; Kerrisdale - 65% </b></span>&nbsp;', $streetInsiderNews);
@@ -667,6 +667,7 @@ function getStreetInsider($symbol, $yesterdayDays)
           $streetInsiderNews = preg_replace('/ distribution ratios/i', '<span style="font-size: 55px; background-color:red; color:black"><b>&nbsp;DISTRIBUTION<br><br> RATIOS<br><br> - CHECK DATE</span></b>&nbsp;', $streetInsiderNews);   
           $streetInsiderNews = preg_replace('/ distribution date/i', '<span style="font-size: 55px; background-color:red; color:black"><b>&nbsp;DISTRIBUTION<br><br> DATE<br><br> - CHECK DATE</span></b>&nbsp;', $streetInsiderNews);   
           $streetInsiderNews = preg_replace('/ Hindenburg/i', '<span style="font-size: 55px; background-color:red; color:black"><b>&nbsp;HINDENBERG<br><br> RESEARCH<br><br> - STAY AWAY</span></b>&nbsp;', $streetInsiderNews); 
+          $streetInsiderNews = preg_replace('/ mentioned cautiously/i', '<span style="font-size: 35px; background-color:red; color:black"><b>&nbsp;MENTIONED CAUTIOUSLY - MINIMUM 35%</span></b>&nbsp;', $streetInsiderNews);   
 
         try 
         {
