@@ -89,6 +89,8 @@ if (isset($fullJSON->data[1]->close))
       $returnArray['day_1'] = number_format((float)$day_1_percentage, 2, '.', '');
       $returnArray['day_1_low'] = number_format((float)$day_1_percentage_low, 2, '.', '');
       $returnArray['day_1_volume'] = number_format($fullJSON->data[0]->volume/$fullJSON->data[1]->volume, 2); 
+      $returnArray['day_1_total_volume'] = number_format($fullJSON->data[0]->volume); 
+$returnArray['day_1_recovery'] = number_format((($fullJSON->data[0]->close - $fullJSON->data[0]->low)/$fullJSON->data[0]->low)*100, 2); 
 }
 else
 {
@@ -102,6 +104,7 @@ if (isset($fullJSON->data[2]->close))
       $returnArray['day_2'] = number_format((float)$day_1_percentage, 2, '.', '');
       $returnArray['day_2_low'] = number_format((float)$day_1_percentage_low, 2, '.', '');
       $returnArray['day_2_volume'] = number_format($fullJSON->data[1]->volume/$fullJSON->data[2]->volume, 2); 
+      $returnArray['day_2_total_volume'] = number_format($fullJSON->data[1]->volume); 
 }
 else
 {
@@ -115,6 +118,7 @@ if (isset($fullJSON->data[3]->close))
       $returnArray['day_3'] = number_format((float)$day_1_percentage, 2, '.', '');
       $returnArray['day_3_low'] = number_format((float)$day_1_percentage_low, 2, '.', '');
       $returnArray['day_3_volume'] = number_format($fullJSON->data[2]->volume/$fullJSON->data[3]->volume, 2); 
+      $returnArray['day_3_total_volume'] = number_format($fullJSON->data[2]->volume); 
 }
 else
 {
@@ -128,6 +132,7 @@ if (isset($fullJSON->data[4]->close))
       $returnArray['day_4'] = number_format((float)$day_1_percentage, 2, '.', '');
       $returnArray['day_4_low'] = number_format((float)$day_1_percentage_low, 2, '.', '');
       $returnArray['day_4_volume'] = number_format($fullJSON->data[3]->volume/$fullJSON->data[4]->volume, 2); 
+      $returnArray['day_4_total_volume'] = number_format($fullJSON->data[3]->volume); 
 }
 else
 {
@@ -141,6 +146,7 @@ if (isset($fullJSON->data[5]->close))
       $returnArray['day_5'] = number_format((float)$day_1_percentage, 2, '.', '');
       $returnArray['day_5_low'] = number_format((float)$day_1_percentage_low, 2, '.', '');
       $returnArray['day_5_volume'] = number_format($fullJSON->data[4]->volume/$fullJSON->data[5]->volume, 2); 
+      $returnArray['day_5_total_volume'] = number_format($fullJSON->data[4]->volume); 
 }
 else
 {

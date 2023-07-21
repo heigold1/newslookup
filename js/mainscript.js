@@ -708,7 +708,7 @@ $(function() {
             CopyToClipboard();
 
             $.ajax({
-                url: "alphavantage_api_historical_data.php",
+                url: "marketstack-api-historical-data.php",
                 data: {symbol: original_symbol},
                 async: false, 
                 dataType: 'html',
@@ -750,11 +750,27 @@ $(function() {
                   $("#day4_total_volume").html(returnedObject.day_4_total_volume);
                   $("#day5_total_volume").html(returnedObject.day_5_total_volume); 
 
-                  var day_one_volume = parseInt(returnedObject.day_1_total_volume.replace(/,/g, '')); 
-                  var day_two_volume = parseInt(returnedObject.day_2_total_volume.replace(/,/g, '')); 
-                  var day_three_volume = parseInt(returnedObject.day_3_total_volume.replace(/,/g, '')); 
-                  var day_four_volume = parseInt(returnedObject.day_4_total_volume.replace(/,/g, '')); 
-                  var day_five_volume = parseInt(returnedObject.day_5_total_volume.replace(/,/g, '')); 
+
+                  if (returnedObject.day_1_total_volume)
+                  {
+                      var day_one_volume = parseInt(returnedObject.day_1_total_volume.replace(/,/g, '')); 
+                  }
+                  if (returnedObject.day_2_total_volume)
+                  {
+                      var day_two_volume = parseInt(returnedObject.day_2_total_volume.replace(/,/g, '')); 
+                  }
+                  if (returnedObject.day_3_total_volume)
+                  {
+                      var day_three_volume = parseInt(returnedObject.day_3_total_volume.replace(/,/g, '')); 
+                  }
+                  if (returnedObject.day_4_total_volume)
+                  {
+                      var day_four_volume = parseInt(returnedObject.day_4_total_volume.replace(/,/g, '')); 
+                  }
+                  if (returnedObject.day_5_total_volume)
+                  {
+                      var day_five_volume = parseInt(returnedObject.day_5_total_volume.replace(/,/g, '')); 
+                  }
 
                   if (day_one_volume < parseInt("100000"))
                   {
@@ -789,7 +805,7 @@ $(function() {
 
                 },
                 error: function (xhr, ajaxOptions, thrownError) {
-                  console.log("there was an error in calling alphavantage_api_historical_data.php");
+                  console.log("there was an error in calling marketstack-api-historical-data.php");
                 }
 
             });
