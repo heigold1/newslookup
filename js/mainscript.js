@@ -496,6 +496,8 @@ $(function() {
           var yahooHtmlResults = "";
           var date = new Date(); 
           var currentMinutes = parseInt(date.getMinutes()); 
+          var dayOneLow; 
+          var dayOneRecovery; 
 
           closeAllWindows();
 
@@ -508,8 +510,6 @@ $(function() {
           $("#bigcharts_chart_container").html("");
           $("#bigcharts_yest_close").html("");
           $("#right_top_container").html("");
-          $("#right_top_container").hide();
-          $("#left_bottom_container").hide();
 
           $("#left_bottom_container").css("background-color", "#F3F3FF");  
           $("#right_top_container").css("background-color", "#F3F3FF");            
@@ -559,11 +559,12 @@ $(function() {
               $("#day1").html("");
               $("#entryPrice").val(""); 
               $("#entryPercentage").val("");  
-              $("#amountSpending").val("700");
+              $("#amountSpending").val("750");
               $("#eTradeLowPercentage").html("");
               $("#orderStub").val("-----------------------"); 
               $("#foreign_country").html("");
               $("#chinese_stock").html("");
+              $("#unlockNews").html("0"); 
 
               $("#day1").css("background-color", "#ffffff");
 
@@ -729,9 +730,10 @@ $(function() {
                   $("#day4_low").html(returnedObject.day_4_low);
                   $("#day3_low").html(returnedObject.day_3_low);
                   $("#day5_low").html(returnedObject.day_5_low);
+                  dayOneLow = parseFloat(returnedObject.day_1_low); 
                   $("#day_1_recovery").html("(" + returnedObject.day_1_recovery + "%)"); 
-                  var day_1_recovery = parseFloat(returnedObject.day_1_recovery);
-                  if (day_1_recovery < 5.00)
+                  dayOneRecovery = parseFloat(returnedObject.day_1_recovery);
+                  if (dayOneRecovery < 5.00)
                   {
                       $("#day_1_recovery").css({'background-color' : 'red', 'font-size' : '40px'});
                       $("#lows").css({'background-color' : 'red'});
@@ -1040,14 +1042,6 @@ $(function() {
                       console.log("Data is:"); 
                       console.log(data); 
 
-
-/*
-                      var html = JSON.parse(data); 
-
-console.log("html is:"); 
-console.log(html); 
-*/
-
                       $("div#left_bottom_container").html(/*streetInsiderIFrame + */ data); 
 
                   }
@@ -1213,7 +1207,12 @@ console.log(html);
         }
         $("#entryPercentage").focus();   
 
-    } // function startProcess()
+        if ((dayOneRecovery < 10) && (dayOneLow < -10))
+        {
+            alert("Check for the 'L' bar"); 
+        }
+
+    } // end of function startProcess()
 
     // once the submit button is clicked
    $("#submit_button").click(function(){
@@ -1338,7 +1337,9 @@ console.log(html);
 
     $('#entryPercentage').keypress(function(e){
 
-          if ($("#right_top_container").is(":hidden") && ($("#left_bottom_container").is(":hidden")))
+//          if ($("#right_top_container").is(":hidden") && ($("#left_bottom_container").is(":hidden")))
+
+          if ($('#unlockNews').html() == "0") 
           {
             $("#entryPercentage").val(""); 
              alert("unlock the news"); 
@@ -1443,8 +1444,7 @@ console.log(html);
     });
 
     $("#bigcharts_chart_container").click(function(){
-        $("#right_top_container").show();
-        $("#left_bottom_container").show();
+        $('#unlockNews').html("1"); 
         $("#entryPercentage").val(""); 
     });
 
