@@ -498,6 +498,7 @@ $(function() {
           var currentMinutes = parseInt(date.getMinutes()); 
           var dayOneLow; 
           var dayOneRecovery; 
+          var newStock = false; 
 
           closeAllWindows();
 
@@ -718,6 +719,11 @@ $(function() {
                   var returnedObject = JSON.parse(data);
 
                   yesterdayVolume = returnedObject.yest_volume; 
+
+                  if (returnedObject.new_stock == true) 
+                  {
+                      newStock = true;
+                  }
 
                   $("#day1").html(returnedObject.day_1);
                   $("#day2").html(returnedObject.day_2);
@@ -1210,6 +1216,11 @@ $(function() {
         if ((dayOneRecovery < 10) && (dayOneLow < -10))
         {
             alert("Check for the 'L' bar"); 
+        }
+
+        if (newStock == true)
+        {
+            alert("Check to see if it's a new stock"); 
         }
 
     } // end of function startProcess()

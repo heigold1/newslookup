@@ -2,7 +2,7 @@
 
 error_reporting(0);
 
-$fromDaysBack = 11;
+$fromDaysBack = 90;
 $toDaysBack = 1; 
 $symbol=$_GET['symbol'];
 
@@ -152,6 +152,18 @@ else
 {
   $returnArray['day_1'] = "N/A";
 }
+
+// we're going back 60 days (i.e. 0-59) to check and see when the stock began tading. 
+if (isset($fullJSON->data[59]->close) && ($fullJSON->pagination->count != 0) )
+{
+  $returnArray['new_stock'] = false; 
+}
+else 
+{
+  $returnArray['new_stock'] = true; 
+}
+
+$returnArray['earliest_day'] = $fullJSON->data[59]->close; 
 
 echo json_encode($returnArray);
 
