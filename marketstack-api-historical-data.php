@@ -2,7 +2,7 @@
 
 error_reporting(0);
 
-$fromDaysBack = 90;
+$fromDaysBack = 100;
 $toDaysBack = 1; 
 $symbol=$_GET['symbol'];
 
