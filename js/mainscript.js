@@ -746,6 +746,17 @@ $(function() {
                       $("#day_1_recovery").fadeOut(300).fadeIn(300).fadeOut(300).fadeIn(300).fadeOut(300).fadeIn(300).fadeOut(300).fadeIn(300).fadeOut(300).fadeIn(300).fadeOut(300).fadeIn(300).fadeOut(300).fadeIn(300).fadeOut(300).fadeIn(300);
                   }
 
+                  if ((dayOneRecovery < 10) && (dayOneLow < -10))
+                  {
+                      alert("Check for the 'L' bar"); 
+                  }
+
+                  if (newStock == true)
+                  {
+                      alert("Check to see if it's a new stock"); 
+                  }
+
+
                   $("#day1_volume").html(returnedObject.day_1_volume);
                   $("#day2_volume").html(returnedObject.day_2_volume);
                   $("#day4_volume").html(returnedObject.day_4_volume);
@@ -1212,16 +1223,6 @@ $(function() {
             myIframe.contentWindow.scrollTo(75, 100); 
         }
         $("#entryPercentage").focus();   
-
-        if ((dayOneRecovery < 10) && (dayOneLow < -10))
-        {
-            alert("Check for the 'L' bar"); 
-        }
-
-        if (newStock == true)
-        {
-            alert("Check to see if it's a new stock"); 
-        }
 
     } // end of function startProcess()
 
