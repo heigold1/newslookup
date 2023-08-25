@@ -1047,7 +1047,7 @@ $(function() {
                       console.log("Data is:"); 
                       console.log(data); 
 
-                      if ((dayOneRecovery < 10) && (dayOneLow < -10))
+                      if ((dayOneLow < -10) && (dayOneRecovery < 25))
                       {
                           alert("Check for the 'L' bar"); 
                           $('#unlockNews').html('1'); 
