@@ -746,17 +746,6 @@ $(function() {
                       $("#day_1_recovery").fadeOut(300).fadeIn(300).fadeOut(300).fadeIn(300).fadeOut(300).fadeIn(300).fadeOut(300).fadeIn(300).fadeOut(300).fadeIn(300).fadeOut(300).fadeIn(300).fadeOut(300).fadeIn(300).fadeOut(300).fadeIn(300);
                   }
 
-                  if ((dayOneRecovery < 10) && (dayOneLow < -10))
-                  {
-                      alert("Check for the 'L' bar"); 
-                  }
-
-                  if (newStock == true)
-                  {
-                      alert("Check to see if it's a new stock"); 
-                  }
-
-
                   $("#day1_volume").html(returnedObject.day_1_volume);
                   $("#day2_volume").html(returnedObject.day_2_volume);
                   $("#day4_volume").html(returnedObject.day_4_volume);
@@ -837,7 +826,6 @@ $(function() {
 //             $("div#bigcharts_yest_close").html("<img style='max-width:100%; max-height:100%;' src='https://api.wsj.net/api/kaavio/charts/big.chart?nosettings=1&symb=" + original_symbol + "&uf=0&type=2&size=2&style=320&freq=9&entitlementtoken=0c33378313484ba9b46b8e24ded87dd6&time=1&rand=" + Math.random() + "&compidx=&ma=0&maval=9&lf=1&lf2=0&lf3=0&height=335&width=579&mocktick=1'>");
 
             $("#entryPercentage").focus();     
-
 
             // This just gets the yesterday close and last vix values, we don't need these yet, can always bring them back
 //             $("div#bigcharts_chart_container").css("background-color", "#BBDDFF");
@@ -1059,13 +1047,29 @@ $(function() {
                       console.log("Data is:"); 
                       console.log(data); 
 
-                      $("div#left_bottom_container").html(/*streetInsiderIFrame + */ data); 
+                      if ((dayOneRecovery < 10) && (dayOneLow < -10))
+                      {
+                          alert("Check for the 'L' bar"); 
+                          $('#unlockNews').html('1'); 
+                      }
+
+                      if (newStock == true)
+                      {
+                          alert("Check to see if it's a new stock"); 
+                      }
+
+                      $("div#left_bottom_container").html(data);   /*streetInsiderIFrame + */
 
                   }
+
                 });  // end of AJAX call to marketwatch    
 
               $("div#left_bottom_container").css("background-color", "#F3F3FF");   
+
             })(1);
+
+
+
 
         $("h1").css({"padding-top" : "0px", "margin-top" : "0px", "padding-bottom" : "0px", "margin-bottom" : "0px"}); 
         $("#entryPercentage").focus();
