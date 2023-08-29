@@ -19,6 +19,15 @@ $google_keyword_string = $_GET['google_keyword_string'];
 fopen("cookies.txt", "w");
 
 
+function getYMDTradeDate($daysBack)
+{
+    $trade_date = "";
+
+    $trade_date = date('Y-m-d', strtotime("-" . $daysBack . " days"));
+
+    return $trade_date;
+}
+
 function get_yahoo_trade_date($daysBack)
 {
     $trade_date = "";
@@ -1224,7 +1233,14 @@ else if ($which_website == "yahoo")
 
       $splits = '&nbsp;&nbsp;<a target="_blank" onclick="return openPage(this.href)" href="https://www.stocksplithistory.com/?symbol=' . $symbol . '"> Splits</a>&nbsp;&nbsp;&nbsp;&nbsp;'; 
 
-      $finalReturn = $yahooDates . $returnCompanyName . $companyWebsite . $sectorCountry . $returnYesterdaysClose . $preMarketYesterdaysClose[0] . "<br>" . "<div style='display: inline-block;'>" . $yesterdayVolumeHTML . $currentVolumeHTML . $volumeRatioHTML . $avgVol10days . $avgVolYahoo .  $company_profile . $yahoo_main_page . $message_board . $google . $nasdaqInfo . $streetInsider . $streetInsiderScrape . $splits . '<table width="700px"><tr width="575px">' . $finalReturn . '</tr></table>' . $googleNewsFlag . $googleNewsHtmlDOM[0];  
+      $marketStackFromDate = getYMDTradeDate(100); 
+      $marketStackToDate = getYMDTradeDate(1); 
+      $marketStackURL = "https://api.marketstack.com/v1/eod?access_key=d36ab142bed5a1430fcde797063f6b9a&symbols=" . $symbol . "&date_from=" . $marketStackFromDate . "&date_to=" . $marketStackToDate;         
+      $marketStackOHLC = '&nbsp;&nbsp;<a target="_blank" onclick="return openPage(this.href)" href= ' . $marketStackURL . '"> OHLC</a>&nbsp;&nbsp;&nbsp;&nbsp;'; 
+
+
+
+      $finalReturn = $yahooDates . $returnCompanyName . $companyWebsite . $sectorCountry . $returnYesterdaysClose . $preMarketYesterdaysClose[0] . "<br>" . "<div style='display: inline-block;'>" . $yesterdayVolumeHTML . $currentVolumeHTML . $volumeRatioHTML . $avgVol10days . $avgVolYahoo .  $company_profile . $yahoo_main_page . $message_board . $google . $nasdaqInfo . $streetInsider . $streetInsiderScrape . $splits . $marketStackOHLC . '<table width="700px"><tr width="575px">' . $finalReturn . '</tr></table>' . $googleNewsFlag . $googleNewsHtmlDOM[0];  
 
       echo $finalReturn; 
 
