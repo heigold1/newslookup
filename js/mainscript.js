@@ -1358,7 +1358,7 @@ $(function() {
           if ($('#unlockNews').html() == "0") 
           {
             $("#entryPercentage").val(""); 
-             alert("unlock the news"); 
+             alert("Unlock the news and check for upward trajectories"); 
             return; 
           }
 
