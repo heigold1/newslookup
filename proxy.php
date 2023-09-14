@@ -4,7 +4,7 @@ include './Samples/config.php';
 
 require_once("simple_html_dom.php"); 
 
-$yesterdayDays = 4;
+$yesterdayDays = 1;
 
 error_reporting(1);
 //ini_set('display_errors', 1);
@@ -563,8 +563,8 @@ if ($which_website == "marketwatch")
       $marketWatchNewsHTML = preg_replace('/ layoffs/i', '<span style="font-size: 12px; background-color:red; color:black"><b>&nbsp;layoffs</span> (check Jay\'s percentages)</b>&nbsp;', $marketWatchNewsHTML);      
       $marketWatchNewsHTML = preg_replace('/ layoff/i', '<span style="font-size: 12px; background-color:red; color:black"><b>&nbsp;layoff</span> (check Jay\'s percentages)</b>&nbsp;', $marketWatchNewsHTML);      
       $marketWatchNewsHTML = preg_replace('/ lays off/i', '<span style="font-size: 12px; background-color:red; color:black"><b>&nbsp;lays off</span> (check Jay\'s percentages)</b>&nbsp;', $marketWatchNewsHTML);      
-      $marketWatchNewsHTML = preg_replace('/ restructuring/i', '<span style="font-size: 35px; background-color:red; color:black"><b>&nbsp;restructuring</span></b>&nbsp;', $marketWatchNewsHTML);      
-      $marketWatchNewsHTML = preg_replace('/ restructure/i', '<span style="font-size: 12px; background-color:red; color:black"><b>&nbsp;restructure</span></b>&nbsp;', $marketWatchNewsHTML);      
+      $marketWatchNewsHTML = preg_replace('/ restructuring/i', '<span style="font-size: 45px; background-color:red; color:black"><b>&nbsp;restructuring</span></b>&nbsp;', $marketWatchNewsHTML);      
+      $marketWatchNewsHTML = preg_replace('/ restructure/i', '<span style="font-size: 45px; background-color:red; color:black"><b>&nbsp;restructure</span></b>&nbsp;', $marketWatchNewsHTML);      
       $marketWatchNewsHTML = preg_replace('/nasdaq rejects(.*)listing/i', '<span style="font-size: 12px; background-color:red; color:black"><b>Nasdaq rejects $1 listing</span> If delisting tomorrow 65%, if delisting days away then 50-55%</b>&nbsp;', $marketWatchNewsHTML);
       $marketWatchNewsHTML = preg_replace('/ clinical hold/i', '<span style="font-size: 12px; background-color:red; color:black"><b>&nbsp;clinical hold</span> (65 - 70%)</b>&nbsp;', $marketWatchNewsHTML);
       $marketWatchNewsHTML = preg_replace('/ withdrawal(.*)application/i', '<span style="font-size: 12px; background-color:red; color:black"><b>&nbsp; withdrawal $1 application (55%)</b></span>&nbsp;', $marketWatchNewsHTML);
@@ -1102,8 +1102,8 @@ else if ($which_website == "yahoo")
       $finalReturn = preg_replace('/ layoffs/i', '<span style="font-size: 15px; background-color:red; color:black"><b>&nbsp;layoffs</span> (check Jay\'s percentages)</b>&nbsp;', $finalReturn);      
       $finalReturn = preg_replace('/ layoff/i', '<span style="font-size: 15px; background-color:red; color:black"><b>&nbsp;layoff</span> (check Jay\'s percentages)</b>&nbsp;', $finalReturn);      
       $finalReturn = preg_replace('/ lays off/i', '<span style="font-size: 15px; background-color:red; color:black"><b>&nbsp;lays off</span> (check Jay\'s percentages)</b>&nbsp;', $finalReturn);      
-      $finalReturn = preg_replace('/ restructuring/i', '<span style="font-size: 15px; background-color:red; color:black"><b>&nbsp;restructuring</span></b>&nbsp;', $finalReturn);      
-      $finalReturn = preg_replace('/ restructure/i', '<span style="font-size: 12px; background-color:red; color:black"><b>&nbsp;restructure</span></b>&nbsp;', $finalReturn);      
+      $finalReturn = preg_replace('/ restructuring/i', '<br><br><span style="font-size: 45px; background-color:red; color:black"><b>&nbsp;restructuring</span><br></b>&nbsp;', $finalReturn);      
+      $finalReturn = preg_replace('/ restructure/i', '<br><br><span style="font-size: 45px; background-color:red; color:black"><b>&nbsp;restructure</span><br></b>&nbsp;', $finalReturn);      
       $finalReturn = preg_replace('/ clinical hold/i', '<span style="font-size: 12px; background-color:red; color:black"><b>&nbsp;clinical hold</span> (65 - 70%)</b>&nbsp;', $finalReturn);
       $finalReturn = preg_replace('/ convertible senior notes/i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp; convertible senior notes (back off until you see a price)</b></span>&nbsp;', $finalReturn);
       $finalReturn = preg_replace('/ amendment(.*) to secured credit facilities/i', '<span style="font-size: 12px; background-color:red; color:black"><b>&nbsp; amendments to secured credit facilities (65%)</b></span>&nbsp;', $finalReturn);
@@ -1216,6 +1216,7 @@ else if ($which_website == "yahoo")
       $finalReturn = preg_replace('/ distribution date/i', '<span style="font-size: 55px; background-color:red; color:black"><b>&nbsp;DISTRIBUTION<br><br> DATE<br><br> - CHECK DATE</span></b>&nbsp;', $finalReturn);   
       $finalReturn = preg_replace('/ Hindenburg/i', '<span style="font-size: 55px; background-color:red; color:black"><b>&nbsp;HINDENBERG<br><br> RESEARCH<br><br> - STAY AWAY</span></b>&nbsp;', $finalReturn);   
       $finalReturn = preg_replace('/ mentioned cautiously/i', '<span style="font-size: 35px; background-color:red; color:black"><b>&nbsp;MENTIONED CAUTIOUSLY - MINIMUM 35%</span></b>&nbsp;', $finalReturn);   
+      $finalReturn = preg_replace('/ to join /i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp;TO JOIN - TREAT AS HIGH RISK, 21-23%</span></b>&nbsp;', $finalReturn);   
 
 
        $message_board = '</font><a target="_blank" onclick="return openPage(this.href)" href="http://finance.yahoo.com/quote/' . $symbol . '/community?ltr=1"> Yahoo Message Boards</a>&nbsp;&nbsp;&nbsp;&nbsp;'; 
