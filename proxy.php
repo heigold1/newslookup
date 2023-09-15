@@ -1217,6 +1217,7 @@ else if ($which_website == "yahoo")
       $finalReturn = preg_replace('/ Hindenburg/i', '<span style="font-size: 55px; background-color:red; color:black"><b>&nbsp;HINDENBERG<br><br> RESEARCH<br><br> - STAY AWAY</span></b>&nbsp;', $finalReturn);   
       $finalReturn = preg_replace('/ mentioned cautiously/i', '<span style="font-size: 35px; background-color:red; color:black"><b>&nbsp;MENTIONED CAUTIOUSLY - MINIMUM 35%</span></b>&nbsp;', $finalReturn);   
       $finalReturn = preg_replace('/ to join /i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp;TO JOIN - TREAT AS HIGH RISK, 21-23%</span></b>&nbsp;', $finalReturn);   
+      $finalReturn = preg_replace('/ upcoming /i', '<span style="font-size: 55px; background-color:red; color:black"><b>&nbsp;UPCOMING<br><br> - CHECK<br><br> DATE</span></b>&nbsp;', $finalReturn);   
 
 
        $message_board = '</font><a target="_blank" onclick="return openPage(this.href)" href="http://finance.yahoo.com/quote/' . $symbol . '/community?ltr=1"> Yahoo Message Boards</a>&nbsp;&nbsp;&nbsp;&nbsp;'; 
