@@ -8,7 +8,7 @@ $secCompanyName = $_GET['secCompanyName'];
 $secCompanyName = preg_replace('/ /', '+', $secCompanyName);
 $secCompanyName = preg_replace("/<.*?>/", "", $secCompanyName);
 
-$yesterdayDays = 1;
+$yesterdayDays = 3;
 
 fopen("cookies.txt", "w");
 
@@ -661,7 +661,7 @@ function getStreetInsider($symbol, $yesterdayDays)
           $streetInsiderNews = preg_replace('/ to begin trading/i', '<span style="font-size: 35px; background-color:red; color:black"><b>&nbsp;TO BEGIN TRADING - CHECK THE DATE</span></b>&nbsp;', $streetInsiderNews);  
           $streetInsiderNews = preg_replace('/(nt\s+[0-9]+\-.)/i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp; $1 - INABILITY TO FILE FORM</span></b>&nbsp;', $streetInsiderNews);  
           $streetInsiderNews = preg_replace('/ (..\-q)/i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp; $1 </b></span>&nbsp;', $streetInsiderNews);
-          $streetInsiderNews = preg_replace('/ (..-k)/i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp;$1</span> (if it involves litigation, then back off)</b>&nbsp;', $streetInsiderNews);
+          $streetInsiderNews = preg_replace('/ (..-k)/i', '<span style="font-size: 55px; background-color:red; color:black"><b>&nbsp;$1</span> (if it involves litigation, then back off)</b>&nbsp;', $streetInsiderNews);
           $streetInsiderNews = preg_replace('/sc\s+13g/i', '<span style="font-size: 25px; background-color:#00ff00; color:black"><b>&nbsp;SC 13G</span></b>&nbsp;', $streetInsiderNews);   
           $streetInsiderNews = preg_replace('/ (s-[0-9])/i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp;$1</span></b>&nbsp;', $streetInsiderNews);   
           $streetInsiderNews = preg_replace('/ distribution ratios/i', '<span style="font-size: 55px; background-color:red; color:black"><b>&nbsp;DISTRIBUTION<br><br> RATIOS<br><br> - CHECK DATE</span></b>&nbsp;', $streetInsiderNews);   

@@ -4,7 +4,7 @@ include './Samples/config.php';
 
 require_once("simple_html_dom.php"); 
 
-$yesterdayDays = 1;
+$yesterdayDays = 3;
 
 error_reporting(1);
 //ini_set('display_errors', 1);
@@ -536,7 +536,7 @@ if ($which_website == "marketwatch")
       $marketWatchNewsHTML = preg_replace('/ miss sales|miss sales /i', '<span style="font-size: 12px; background-color:red; color:black"><b> &nbsp;MISS SALES (Chase at 65-70%)</b>&nbsp;</span>', $marketWatchNewsHTML);
       $marketWatchNewsHTML = preg_replace('/ disappointing sales|disappointing sales /i', '<span style="font-size: 12px; background-color:red; color:black"><b> &nbsp;DISAPPOINTINT SALES (Chase at 65-70%)</b>&nbsp;</span>', $marketWatchNewsHTML);      
       $marketWatchNewsHTML = preg_replace('/ sales results|sales results /i', '<span style="font-size: 12px; background-color:red; color:black"><b> &nbsp;SALES RESULTS (If bad, chase at 65-70%)</b>&nbsp;</span>', $marketWatchNewsHTML);
-      $marketWatchNewsHTML = preg_replace('/ 8-k/i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp;8-K</span> (if it involves litigation, then back off)</b>&nbsp;', $marketWatchNewsHTML);
+      $marketWatchNewsHTML = preg_replace('/ 8-k/i', '<span style="font-size: 55px; background-color:red; color:black"><b>&nbsp;8-K</span> (if it involves litigation, then back off)</b>&nbsp;', $marketWatchNewsHTML);
       $marketWatchNewsHTML = preg_replace('/ accountant/i', '<span style="font-size: 25px; background-color:red; color:black"><b> &nbsp;accountant (if hiring new accountant, 35-40%)</b>&nbsp;</span>', $marketWatchNewsHTML);      
       $marketWatchNewsHTML = preg_replace('/ clinical trial/i', '<span style="font-size: 12px; background-color:red; color:black"><b> &nbsp;clinical trial</b>&nbsp;</span>', $marketWatchNewsHTML);            
       $marketWatchNewsHTML = preg_replace('/ recall/i', '<span style="font-size: 25px; background-color:red; color:black"><b> &nbsp;recall (bad, back ff)</b>&nbsp;</span>', $marketWatchNewsHTML);                  
@@ -1073,7 +1073,7 @@ else if ($which_website == "yahoo")
       $finalReturn = preg_replace('/ miss sales|miss sales /i', '<span style="font-size: 12px; background-color:red; color:black"><b> &nbsp;MISS SALES (Chase at 65-70%)</b>&nbsp;</span>', $finalReturn);
       $finalReturn = preg_replace('/ disappointing sales|disappointing sales /i', '<span style="font-size: 12px; background-color:red; color:black"><b> &nbsp;DISAPPOINTINT SALES (Chase at 65-70%)</b>&nbsp;</span>', $finalReturn);      
       $finalReturn = preg_replace('/ sales results|sales results /i', '<span style="font-size: 12px; background-color:red; color:black"><b> &nbsp;SALES RESULTS (If bad, chase at 65-70%)</b>&nbsp;</span>', $finalReturn);      
-      $finalReturn = preg_replace('/ 8-k/i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp;8-K</span> (if it involves litigation, then back off)</b>&nbsp;', $finalReturn);
+      $finalReturn = preg_replace('/ 8-k/i', '<span style="font-size: 55px; background-color:red; color:black"><b>&nbsp;8-K</span> (if it involves litigation, then back off)</b>&nbsp;', $finalReturn);
       $finalReturn = preg_replace('/ accountant/i', '<span style="font-size: 25px; background-color:red; color:black"><b> &nbsp;accountant (if hiring new accountant, 35-40%)</b>&nbsp;</span>', $finalReturn);            
       $finalReturn = preg_replace('/ clinical trial/i', '<span style="font-size: 12px; background-color:red; color:black"><b> &nbsp;clinical trial</b>&nbsp;</span>', $finalReturn);            
       $finalReturn = preg_replace('/ recall/i', '<span style="font-size: 25px; background-color:red; color:black"><b> &nbsp;recall (bad, back off)</b>&nbsp;</span>', $finalReturn);                  
