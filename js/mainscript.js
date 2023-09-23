@@ -1050,7 +1050,6 @@ $(function() {
                       if (dayOneLow < -10)
                       {
                           alert("Check for the 'L' bar"); 
-                          $('#unlockNews').html('1'); 
                       }
 
                       if (newStock == true)
@@ -1358,7 +1357,7 @@ $(function() {
           if ($('#unlockNews').html() == "0") 
           {
             $("#entryPercentage").val(""); 
-             alert("Unlock the news and check for upward trajectories"); 
+             alert("- Unlock the news\n\n - Check for upward trajectories \n\n - Check for potential Level II risks like giant market order sells"); 
             return; 
           }
 
