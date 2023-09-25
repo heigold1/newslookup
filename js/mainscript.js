@@ -1357,7 +1357,7 @@ $(function() {
           if ($('#unlockNews').html() == "0") 
           {
             $("#entryPercentage").val(""); 
-             alert("- Unlock the news\n\n - Check for upward trajectories \n\n - Check for potential Level II risks like giant market order sells"); 
+             alert("- Unlock the news\n\n - Check for upward trajectories \n\n - Check for potential Level II risks like giant market order sells \n\n - Check for any volume issues"); 
             return; 
           }
 

@@ -853,7 +853,7 @@ $noTimeFound = false;
               $title = preg_replace('/inability to timely file form/i', '<span style="font-size: 16px; background-color:red; color:black"><b>&nbsp;inability to timely file form - 84%</span></b>&nbsp;', $title);
               $title = preg_replace('/exempt offering of securities/i', '<span style="font-size: 16px; background-color:red; color:black"><b>&nbsp;Exempt Offering of Securities - 20% and must be a fast drop</span></b>&nbsp;', $title);
               $title = preg_replace('/1\.01/i', '<span style="font-size: 16px; background-color:red; color:black"><b>&nbsp;1.01 - Entry into a Material Definitive Agreement - OFFERING COMING! BACK OFF!</span></b>&nbsp;', $title);
-              $title = preg_replace('/Current report/i', '<span style="font-size: 16px; background-color:red; color:black"><b>&nbsp;Current report</span></b>&nbsp;', $title);
+              $title = preg_replace('/Current report/i', '<span style="font-size: 45px; background-color:red; color:black"><b>&nbsp;Current report</span></b>&nbsp;', $title);
               $title = preg_replace('/7\.01/i', '<span style="font-size: 16px; background-color:lightblue; color:black"><b>&nbsp;Regulation FD Disclosure</span></b>&nbsp;<br>', $title);
               $title = preg_replace('/8\.01/i', '<span style="font-size: 16px; background-color:lightblue; color:black"><b>&nbsp;Other Events</span></b>&nbsp;<br>', $title);
               $title = preg_replace('/9\.01/i', '<span style="font-size: 16px; background-color:lightblue; color:black"><b>&nbsp;Financial Statemtnes and Exhibits</span></b>&nbsp;<br>', $title);
