@@ -4,7 +4,7 @@ include './Samples/config.php';
 
 require_once("simple_html_dom.php"); 
 
-$yesterdayDays = 3;
+$yesterdayDays = 1;
 
 error_reporting(1);
 //ini_set('display_errors', 1);
@@ -673,7 +673,8 @@ else if ($which_website == "yahoo")
         $j++;
 
         // Convert time from GMT to  AM/PM New York
-        $publicationDateStrToTime = strtotime($feedItem->pubDate) - 18000;
+        // just add or subtract 3600 (seconds) to add or subtract one hour 
+        $publicationDateStrToTime = strtotime($feedItem->pubDate) - 14400; 
         $convertedDate = new DateTime(); 
         $convertedDate->setTimestamp($publicationDateStrToTime);
 
@@ -1218,6 +1219,9 @@ else if ($which_website == "yahoo")
       $finalReturn = preg_replace('/ mentioned cautiously/i', '<span style="font-size: 35px; background-color:red; color:black"><b>&nbsp;MENTIONED CAUTIOUSLY - MINIMUM 35%</span></b>&nbsp;', $finalReturn);   
       $finalReturn = preg_replace('/ to join /i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp;TO JOIN - TREAT AS HIGH RISK, 21-23%</span></b>&nbsp;', $finalReturn);   
       $finalReturn = preg_replace('/ upcoming /i', '<span style="font-size: 55px; background-color:red; color:black"><b>&nbsp;UPCOMING<br><br> - CHECK<br><br> DATE</span></b>&nbsp;', $finalReturn);   
+      $finalReturn = preg_replace('/ listing deficiency /i', '<span style="font-size: 55px; background-color:red; color:black"><b>&nbsp;LISTING DEFICIENCY<br><br> - CHECK<br><br> DATE</span></b>&nbsp;', $finalReturn);   
+      $finalReturn = preg_replace('/ mentioned as short/i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp;MENTIONED AS SHORT - BACK OFF</span></b>&nbsp;', $finalReturn);
+      $finalReturn = preg_replace('/ transaction support agreement/i', '<span style="font-size: 55px; background-color:red; color:black"><br><br><b>&nbsp;TRANSACTION SUPPORT AGREEMENT - BANKRUPTCY</span><br><br></b>&nbsp;', $finalReturn);
 
 
        $message_board = '</font><a target="_blank" onclick="return openPage(this.href)" href="http://finance.yahoo.com/quote/' . $symbol . '/community?ltr=1"> Yahoo Message Boards</a>&nbsp;&nbsp;&nbsp;&nbsp;'; 

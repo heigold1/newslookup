@@ -8,7 +8,7 @@ $secCompanyName = $_GET['secCompanyName'];
 $secCompanyName = preg_replace('/ /', '+', $secCompanyName);
 $secCompanyName = preg_replace("/<.*?>/", "", $secCompanyName);
 
-$yesterdayDays = 3;
+$yesterdayDays = 1;
 
 fopen("cookies.txt", "w");
 
@@ -670,6 +670,9 @@ function getStreetInsider($symbol, $yesterdayDays)
           $streetInsiderNews = preg_replace('/ mentioned cautiously/i', '<span style="font-size: 35px; background-color:red; color:black"><b>&nbsp;MENTIONED CAUTIOUSLY - MINIMUM 35%</span></b>&nbsp;', $streetInsiderNews);   
           $streetInsiderNews = preg_replace('/ to join /i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp;TO JOIN - TREAT AS HIGH RISK, 21-23%</span></b>&nbsp;', $streetInsiderNews);   
           $streetInsiderNews = preg_replace('/ upcoming /i', '<span style="font-size: 55px; background-color:red; color:black"><b>&nbsp;UPCOMING<br><br> - CHECK<br><br> DATE</span></b>&nbsp;', $streetInsiderNews);   
+          $streetInsiderNews = preg_replace('/ listing deficiency /i', '<span style="font-size: 55px; background-color:red; color:black"><b>&nbsp;LISTING DEFICIENCY<br><br> - CHECK<br><br> DATE</span></b>&nbsp;', $streetInsiderNews);
+          $streetInsiderNews = preg_replace('/ mentioned as short/i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp;MENTIONED AS SHORT - BACK OFF</span></b>&nbsp;', $streetInsiderNews);
+          $streetInsiderNews = preg_replace('/ transaction support agreement/i', '<span style="font-size: 55px; background-color:red; color:black"><br><br><b>&nbsp;TRANSACTION SUPPORT AGREEMENT - BANKRUPTCY</span><br><br></b>&nbsp;', $streetInsiderNews);
 
 
         try 
@@ -728,10 +731,12 @@ $noTimeFound = false;
 
           if (preg_match('/Companies with names matching/', $result))
           {
-              echo '<!DOCTYPE html><html><title>Filing - ' . $symbol . ' (AMBIGUOUS)</title><body>
-                  <a style="font-size: 35px" target="_blank" href="https://www.nasdaq.com/symbol/' . $symbol . '/sec-filings">Nasdaq</a><br>
-                  <a style="font-size: 35px" target="_blank" href=https://www.etrade.wallst.com/v1/stocks/snapshot/snapshot.asp?ChallengeUrl=https://idp.etrade.com/idp/SSO.saml2&reinitiate-handshake=0&prospectnavyear=2011&AuthnContext=prospect&env=PRD&symbol=' . $symbol . '&rsO=new&country=US>E*TRADE</a>
-                <br><div style="background-color: red"><span style="font-size: 55px">AMBIGUOUS</span></div>' . $result . getStreetInsider($symbol, $yesterdayDays) . getSectorIndustry() . 
+              echo '<!DOCTYPE html><html><title>Filing - ' . $symbol . ' (AMBIGUOUS)</title><body>'
+               .  getStreetInsider($symbol, $yesterdayDays) . '<br><br><table style="border: 1px solid black"><tr><td><div style="background-color: red"><span style="font-size: 25px">AMBIGUOUS SEC COMPANY NAMES</span></div></td></tr><tr><td>
+
+<a style="font-size: 35px" target="_blank" href="https://www.nasdaq.com/symbol/' . $symbol . '/sec-filings">Nasdaq</a><br>
+                  <a style="font-size: 35px" target="_blank" href=https://www.etrade.wallst.com/v1/stocks/snapshot/snapshot.asp?ChallengeUrl=https://idp.etrade.com/idp/SSO.saml2&reinitiate-handshake=0&prospectnavyear=2011&AuthnContext=prospect&env=PRD&symbol=' . $symbol . '&rsO=new&country=US>E*TRADE</a></td>
+                </table>' . getSectorIndustry() . 
                 '</body></html>';  
               return; 
           }
