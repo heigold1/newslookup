@@ -511,9 +511,9 @@ function getStreetInsider($symbol, $yesterdayDays)
           $streetInsiderNews = preg_replace('/Delist/', '<span style="font-size: 55px; background-color:red; color:black"><b> delist - check the date</b></span>', $streetInsiderNews);
           $streetInsiderNews = preg_replace('/ chapter 11|chapter 11 /i', '<span style="font-size: 55px; background-color:red; color:black"><br><br><b> &nbsp;CHAPTER 11</b></span>', $streetInsiderNews);
           $streetInsiderNews = preg_replace('/ bankrupt/i', '<span style="font-size: 55px; background-color:red; color:black"><b>&nbsp;bankrupt</span></b>', $streetInsiderNews);      
-          $streetInsiderNews = preg_replace('/ reverse split|reverse split /i', '<span style="font-size: 25px; background-color:red; color:black"><b> &nbsp;REVERSE SPLIT</b></span>', $streetInsiderNews);
-          $streetInsiderNews = preg_replace('/ reverse.stock split|reverse stock split /i', '<div style="font-size: 25px; background-color:red; display: inline-block;">REVERSE STOCK SPLIT</div>', $streetInsiderNews);
-          $streetInsiderNews = preg_replace('/ reverse.share split|reverse stock split /i', '<div style="font-size: 25px; background-color:red; display: inline-block;">REVERSE SHARE SPLIT</div>', $streetInsiderNews);
+          $streetInsiderNews = preg_replace('/ reverse split|reverse split /i', '<span style="font-size: 55px; background-color:red; color:black"><b> &nbsp;REVERSE SPLIT - CHECK DATE</b></span>', $streetInsiderNews);
+          $streetInsiderNews = preg_replace('/ reverse.stock split|reverse stock split /i', '<div style="font-size: 55px; background-color:red; display: inline-block;">REVERSE SPLIT - CHECK DATE</div>', $streetInsiderNews);
+          $streetInsiderNews = preg_replace('/ reverse.share split|reverse stock split /i', '<div style="font-size: 55px; background-color:red; display: inline-block;">REVERSE SPLIT - CHECK DATE</div>', $streetInsiderNews);
           $streetInsiderNews = preg_replace('/rbc capital downgrade/i', '<span style="font-size: 25px; background-color:red; color:black"><b> &nbsp;RBC CAPITAL DOWNGRADE - STAY AWAY</b></span>', $streetInsiderNews);      
           $streetInsiderNews = preg_replace('/ downgrade|downgrade /i', '<span style="font-size: 15px; background-color:red; color:black"><b> &nbsp;DOWNGRADE</b></span>', $streetInsiderNews);      
           $streetInsiderNews = preg_replace('/ lowered to/i', '<span style="font-size: 15px; background-color:red; color:black"><b> &nbsp;LOWERED TO</b></span>', $streetInsiderNews);      
@@ -573,7 +573,7 @@ function getStreetInsider($symbol, $yesterdayDays)
           $streetInsiderNews = preg_replace('/ business combination/i', '<span style="font-size: 55px; background-color:red; color:black"><br><br><b>&nbsp; BUSINESS<br><br> COMBINATION<br><br> - STAY<br><br>AWAY<br><br> </b></span> &nbsp;', $streetInsiderNews);
           $streetInsiderNews = preg_replace('/ annual meeting of shareholders/i', '<span style="font-size: 15px; background-color:red; color:black"><b>&nbsp; annual meeting of shareholders - 40% early</b></span> &nbsp;', $streetInsiderNews);
           $streetInsiderNews = preg_replace('/ transcript/i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp; transcript </b></span> &nbsp;', $streetInsiderNews);
-          $streetInsiderNews = preg_replace('/ share consolidation/i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp; share consolidation - REVERSE STOCK SPLIT </b></span> &nbsp;', $streetInsiderNews);
+          $streetInsiderNews = preg_replace('/ share consolidation/i', '<span style="font-size: 55px; background-color:red; color:black"><b>&nbsp; REVERSE SPLIT - CHECK DATE</b></span> &nbsp;', $streetInsiderNews);
           $streetInsiderNews = preg_replace('/ share exchange transaction/i', '<span style="font-size: 20px; background-color:red; color:black"><b>&nbsp; share exchange transaction - 47% </b></span> &nbsp;', $streetInsiderNews);
           $streetInsiderNews = preg_replace('/ closes(.*)offering/i', '<span style="font-size: 22px; background-color:red; color:black"><b>&nbsp; closes offering - be careful, 24%</b></span>&nbsp;', $streetInsiderNews);
           $streetInsiderNews = preg_replace('/ announces pricing/i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp; Announces Pricing </b></span>&nbsp;', $streetInsiderNews);
@@ -607,7 +607,7 @@ function getStreetInsider($symbol, $yesterdayDays)
           $streetInsiderNews = preg_replace('/ external advisor| external adviser/i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp; EXTERNAL ADVISOR - BACK OFF </b></span>&nbsp;', $streetInsiderNews);
           $streetInsiderNews = preg_replace('/ turnaround/i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp; TURNAROUND - BACK OFF </b></span>&nbsp;', $streetInsiderNews);
           $streetInsiderNews = preg_replace('/ clinical.stage/i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp; CLINICAL STAGE - BACK OFF </b></span>&nbsp;', $streetInsiderNews);      
-          $streetInsiderNews = preg_replace('/ ratio change/i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp; RATIO CHANGE - REVERSE SPLIT </b></span>&nbsp;', $streetInsiderNews);
+          $streetInsiderNews = preg_replace('/ ratio change/i', '<span style="font-size: 55px; background-color:red; color:black"><b>&nbsp; REVERSE SPLIT - CHECK DATE</b></span>&nbsp;', $streetInsiderNews);
           $streetInsiderNews = preg_replace('/ registered direct offering/i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp; REGISTERED DIRECT OFFERING </b></span>&nbsp;', $streetInsiderNews);
           $streetInsiderNews = preg_replace('/ fda clearance/i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp; FDA Clearance - back off </b></span>&nbsp;', $streetInsiderNews);
           $streetInsiderNews = preg_replace('/ deficiency in compliance/i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp; Deficiency in Compliance - CHECK FOR DELISTING</b></span>&nbsp;', $streetInsiderNews);
@@ -673,6 +673,7 @@ function getStreetInsider($symbol, $yesterdayDays)
           $streetInsiderNews = preg_replace('/ listing deficiency /i', '<span style="font-size: 55px; background-color:red; color:black"><b>&nbsp;LISTING DEFICIENCY<br><br> - CHECK<br><br> DATE</span></b>&nbsp;', $streetInsiderNews);
           $streetInsiderNews = preg_replace('/ mentioned as short/i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp;MENTIONED AS SHORT - BACK OFF</span></b>&nbsp;', $streetInsiderNews);
           $streetInsiderNews = preg_replace('/ transaction support agreement/i', '<span style="font-size: 55px; background-color:red; color:black"><br><br><b>&nbsp;TRANSACTION SUPPORT AGREEMENT - BANKRUPTCY</span><br><br></b>&nbsp;', $streetInsiderNews);
+          $streetInsiderNews = preg_replace('/ to highlight/i', '<span style="font-size: 60px; background-color:red; color:black"><br><br><b>&nbsp;TO HIGHLIGHT<br><br>CHECK DATE</span><br><br></b>&nbsp;', $streetInsiderNews);
 
 
         try 
