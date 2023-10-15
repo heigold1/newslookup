@@ -1168,7 +1168,7 @@ else if ($which_website == "yahoo")
       $finalReturn = preg_replace('/ phase 1/i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp; PHASE 1!!!!</b></span>&nbsp;', $finalReturn);
       $finalReturn = preg_replace('/ phase 2/i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp; PHASE 2!!!!</b></span>&nbsp;', $finalReturn); 
       $finalReturn = preg_replace('/ phase 3/i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp; PHASE 3!!!!</b></span>&nbsp;', $finalReturn); 
-      $finalReturn = preg_replace('/ to present/i', '<span style="font-size: 50px; background-color: red; color:black"><br><br><b>TO PRESENT - CHECK DATE</b></span>&nbsp;', $finalReturn);
+      $finalReturn = preg_replace('/ to present/i', '<span style="font-size: 65px; background-color: red; color:black"><b><br>TO<br><br>PRESENT<br><br>CHECK<br><br>DATE</b><br></span>&nbsp;', $finalReturn);
       $finalReturn = preg_replace('/ shareholder investigation/i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp; SHAREHOLDER INVESTIGATION - 19.5%</b></span>&nbsp;', $finalReturn);
       $finalReturn = preg_replace('/ announces an investigation/i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp; ANNOUNCES AN INVESTIGATION - 19.5%</b></span>&nbsp;', $finalReturn);
       $finalReturn = preg_replace('/ convertible bonds/i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp; convertible bonds (back off until you see a price)</b></span>&nbsp;', $finalReturn);
@@ -1222,23 +1222,23 @@ else if ($which_website == "yahoo")
       $finalReturn = preg_replace('/ listing deficiency /i', '<span style="font-size: 55px; background-color:red; color:black"><b>&nbsp;LISTING DEFICIENCY<br><br> - CHECK<br><br> DATE</span></b>&nbsp;', $finalReturn);   
       $finalReturn = preg_replace('/ mentioned as short/i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp;MENTIONED AS SHORT - BACK OFF</span></b>&nbsp;', $finalReturn);
       $finalReturn = preg_replace('/ transaction support agreement/i', '<span style="font-size: 55px; background-color:red; color:black"><br><br><b>&nbsp;TRANSACTION SUPPORT AGREEMENT - BANKRUPTCY</span><br><br></b>&nbsp;', $finalReturn);
-      $finalReturn = preg_replace('/ to highlight/i', '<span style="font-size: 65px; background-color:red; color:black"><br><br><b>&nbsp;TO<br><br>HIGHLIGHT<br><br>CHECK<br><br>DATE<br><br></span><br><br></b>&nbsp;', $finalReturn);
+      $finalReturn = preg_replace('/ to highlight/i', '<span style="font-size: 65px; background-color:red; color:black"><br><br><b>&nbsp;TO<br><br>HIGHLIGHT<br><br>CHECK<br><br>DATE<br><br></span></b>&nbsp;', $finalReturn);
 
 
        $message_board = '</font><a target="_blank" onclick="return openPage(this.href)" href="http://finance.yahoo.com/quote/' . $symbol . '/community?ltr=1"> Yahoo Message Boards</a>&nbsp;&nbsp;&nbsp;&nbsp;'; 
-      $company_profile = '<a target="_blank" onclick="return openPage(this.href)" href="http://finance.yahoo.com/quote/' . $symbol . '/profile">Yahoo Company Profile for ' . $symbol . '</a><br>'; 
-      $yahoo_main_page = '<a target="_blank" href="http://finance.yahoo.com/q?s=' . $symbol . '&ql=1">Yahoo Main Page for ' . $symbol . '</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
+      $company_profile = '<a target="_blank" onclick="return openPage(this.href)" href="http://finance.yahoo.com/quote/' . $symbol . '/profile">Yahoo Company Profile</a> &nbsp;'; 
+      $yahoo_main_page = '<a target="_blank" href="http://finance.yahoo.com/q?s=' . $symbol . '&ql=1">Yahoo Main Page</a>&nbsp;&nbsp';
       $yahoo_5_day_chart = '<a target="_blank" href="http://finance.yahoo.com/echarts?s=' . $symbol . '+Interactive#symbol=' . $symbol . ';range=5d">5-day Chart for ' . $symbol . '</a><br><br>';
       $eTrade = '<a target="_blank" href="https://www.etrade.wallst.com/v1/stocks/news/search_results.asp?symbol=' . $symbol . '">E*TRADE news for ' . $symbol . '</a>';
-      $google = '<a target="_blank" onclick="return openPage(this.href)" href="https://www.google.com/search?hl=en&gl=us&tbm=nws&authuser=1&q=' . $google_keyword_string . '">Google news for ' . $symbol . '</a>';
+      $google = '<a target="_blank" onclick="return openPage(this.href)" href="https://www.google.com/search?hl=en&gl=us&tbm=nws&authuser=1&q=' . $google_keyword_string . '">Google news</a>';
         $google = preg_replace('/<h1>/', '', $google);
         $google = preg_replace('/<\/h1>/', '', $google);
-      $nasdaqInfo = '&nbsp;&nbsp;<a target="_blank" onclick="return openPage(this.href)" href="https://www.nasdaq.com/symbol/' . $symbol . '/sec-filings"> Nasdaq Info</a>&nbsp;&nbsp;&nbsp;&nbsp;'; 
-      $streetInsider = '&nbsp;&nbsp;<a target="_blank" onclick="return openPage(this.href)" href="https://www.streetinsider.com/stock_lookup.php?LookUp=Get+Quote&q=' . $symbol . '"> SI</a>&nbsp;&nbsp;&nbsp;&nbsp;'; 
+      $nasdaqInfo = '&nbsp;&nbsp;<a target="_blank" onclick="return openPage(this.href)" href="https://www.nasdaq.com/symbol/' . $symbol . '/sec-filings"> Nasdaq Info</a>&nbsp;&nbsp;'; 
+      $streetInsider = '&nbsp;&nbsp;<a target="_blank" onclick="return openPage(this.href)" href="https://www.streetinsider.com/stock_lookup.php?LookUp=Get+Quote&q=' . $symbol . '"> SI</a>&nbsp;&nbsp;'; 
 
-      $streetInsiderScrape = '&nbsp;&nbsp;<a target="_blank" onclick="return openPage(this.href)" href="./scrape-street-insider.php?symbol=' . $symbol . '"> SI Scrape</a>&nbsp;&nbsp;&nbsp;&nbsp;';  
+      $streetInsiderScrape = '&nbsp;&nbsp;<a target="_blank" onclick="return openPage(this.href)" href="./scrape-street-insider.php?symbol=' . $symbol . '"> SI Scrape</a>&nbsp;&nbsp;';  
 
-      $splits = '&nbsp;&nbsp;<a target="_blank" onclick="return openPage(this.href)" href="https://www.stocksplithistory.com/?symbol=' . $symbol . '"> Splits</a>&nbsp;&nbsp;&nbsp;&nbsp;'; 
+      $splits = '&nbsp;&nbsp;<a target="_blank" onclick="return openPage(this.href)" href="https://www.stocksplithistory.com/?symbol=' . $symbol . '"> Splits</a>&nbsp;&nbsp;'; 
 
       $marketStackFromDate = getYMDTradeDate(100); 
       $marketStackToDate = getYMDTradeDate(1); 
@@ -1247,7 +1247,7 @@ else if ($which_website == "yahoo")
 
 
 
-      $finalReturn = $yahooDates . $returnCompanyName . $companyWebsite . $sectorCountry . $returnYesterdaysClose . $preMarketYesterdaysClose[0] . "<br>" . "<div style='display: inline-block;'>" . $yesterdayVolumeHTML . $currentVolumeHTML . $volumeRatioHTML . $avgVol10days . $avgVolYahoo .  $company_profile . $yahoo_main_page . $message_board . $google . $nasdaqInfo . $streetInsider . $streetInsiderScrape . $splits . $marketStackOHLC . '<table width="700px"><tr width="575px">' . $finalReturn . '</tr></table>' . $googleNewsFlag . $googleNewsHtmlDOM[0];  
+      $finalReturn = $yahooDates . $returnCompanyName . $companyWebsite . $sectorCountry . $returnYesterdaysClose . $preMarketYesterdaysClose[0] . "<br>" . "<div style='display: inline-block;'>" . /* $yesterdayVolumeHTML . $currentVolumeHTML . $volumeRatioHTML . $avgVol10days . $avgVolYahoo . */ $company_profile . $yahoo_main_page . $message_board . $google . $nasdaqInfo . $streetInsider . $streetInsiderScrape . $splits . $marketStackOHLC . '<table width="700px"><tr width="575px">' . $finalReturn . '</tr></table>' . $googleNewsFlag . $googleNewsHtmlDOM[0];  
 
       echo $finalReturn; 
 
