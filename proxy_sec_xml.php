@@ -851,6 +851,11 @@ $noTimeFound = false;
                   $recentNews = true; 
               }
 
+              if (preg_match('/beneficial ownership/i', $title))
+              {
+                continue; 
+              }
+
               $datestamp = preg_replace('/(' .  get_today_trade_date() . ')/', '<span style="font-size: 16px; background-color:black;  border: 1px solid red; color:white">$1</span>', $datestamp);
 
               $title = preg_replace('/registration statement/i', '<span style="font-size: 16px; background-color:red; color:black"><b>&nbsp;Registration statement - OFFERING COMING OUT, HOLD OFF</span></b>&nbsp;', $title);      
