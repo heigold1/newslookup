@@ -8,7 +8,7 @@ $secCompanyName = $_GET['secCompanyName'];
 $secCompanyName = preg_replace('/ /', '+', $secCompanyName);
 $secCompanyName = preg_replace("/<.*?>/", "", $secCompanyName);
 
-$yesterdayDays = 1;
+$yesterdayDays = 3;
 
 fopen("cookies.txt", "w");
 
@@ -774,7 +774,7 @@ $noTimeFound = false;
 
           $registrationOffering = "";
 
-          for ($i = 0; $i < 5; $i++)
+          for ($i = 0; $i < 8; $i++)
            { 
               $entryRowObject = $xmlFinalObject->entry[0];
               $filingType = "";
@@ -842,7 +842,7 @@ $noTimeFound = false;
                           $recentNews = true;
                           $time = preg_replace('/AM/', '<span style="background-color: red">AM</span>', $time); 
                       }
-                      $time = preg_replace('/PM/', '<table><tr><td><span style="background-color: red; font-size: 25px;">PM CHECK NEWS</span></td></tr></table>', $time); 
+                      $time = preg_replace('/PM/', '<table><tr><td><span style="background-color: red; font-size: 25px;">PM CHECK</span></td></tr></table>', $time); 
                   }
               } // for ($j = $yesterdayDays; $j >= 1; $j--)
 

@@ -4,7 +4,7 @@ include './Samples/config.php';
 
 require_once("simple_html_dom.php"); 
 
-$yesterdayDays = 1;
+$yesterdayDays = 3;
 
 error_reporting(1);
 //ini_set('display_errors', 1);
@@ -1247,7 +1247,7 @@ else if ($which_website == "yahoo")
 
 
 
-      $finalReturn = $yahooDates . $returnCompanyName . $companyWebsite . $sectorCountry . $returnYesterdaysClose . $preMarketYesterdaysClose[0] . "<br>" . "<div style='display: inline-block;'>" . /* $yesterdayVolumeHTML . $currentVolumeHTML . $volumeRatioHTML . $avgVol10days . $avgVolYahoo . */ $company_profile . $yahoo_main_page . $message_board . $google . $nasdaqInfo . $streetInsider . $streetInsiderScrape . $splits . $marketStackOHLC . '<table width="700px"><tr width="575px">' . $finalReturn . '</tr></table>' . $googleNewsFlag . $googleNewsHtmlDOM[0];  
+      $finalReturn = $yahooDates . $returnCompanyName . $companyWebsite . $sectorCountry . $returnYesterdaysClose . $preMarketYesterdaysClose[0] . "<br>" . "<div style='display: inline-block;'>" . /* $yesterdayVolumeHTML . $currentVolumeHTML . $volumeRatioHTML . */ $avgVol10days . $avgVolYahoo . $company_profile . $yahoo_main_page . $message_board . $google . $nasdaqInfo . $streetInsider . $streetInsiderScrape . $splits . $marketStackOHLC . '<table width="700px"><tr width="575px">' . $finalReturn . '</tr></table>' . $googleNewsFlag . $googleNewsHtmlDOM[0];  
 
       echo $finalReturn; 
 
