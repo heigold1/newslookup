@@ -447,6 +447,11 @@ function getStreetInsider($symbol, $yesterdayDays)
                 }
             }
 
+            if (preg_match('/form\s+4/i', $newsTitle))
+            {
+                continue; 
+            }
+
             $streetInsiderNews .= "<li "; 
 
             // red/green highlighting for yesterday/today
