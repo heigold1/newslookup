@@ -8,7 +8,7 @@ $secCompanyName = $_GET['secCompanyName'];
 $secCompanyName = preg_replace('/ /', '+', $secCompanyName);
 $secCompanyName = preg_replace("/<.*?>/", "", $secCompanyName);
 
-$yesterdayDays = 3;
+$yesterdayDays = 1;
 
 fopen("cookies.txt", "w");
 
@@ -447,7 +447,7 @@ function getStreetInsider($symbol, $yesterdayDays)
                 }
             }
 
-            if (preg_match('/form\s+4/i', $newsTitle))
+            if (preg_match('/\>Form\s+4/i', $newsTitle))
             {
                 continue; 
             }
