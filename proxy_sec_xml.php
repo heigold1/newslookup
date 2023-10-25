@@ -447,7 +447,9 @@ function getStreetInsider($symbol, $yesterdayDays)
                 }
             }
 
-            if (preg_match('/^form.*?4/i', $newsTitle))
+            if (preg_match('/^form.*?4/i', $newsTitle) ||
+               preg_match('/^form.*?sc.*?13/i', $newsTitle)
+                )
             {
                 continue; 
             }
