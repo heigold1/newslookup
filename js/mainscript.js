@@ -912,7 +912,7 @@ $(function() {
               google_keyword_string = google_keyword_string.replace(/inc\./ig, "");
               google_keyword_string = google_keyword_string.replace(/ltd\./ig, "");
 
-              $("div#bigcharts_yest_close").html("<a href='https://www.google.com/search?q=stock+" + symbol + "&tbm=nws' target='blank'>GOOGLE NEWS</a><br>- You can go in at pre-market low levels, just use the three-tier approach<br>You can go for stocks with SEC filings where it mentions that the news came out at an earlier date.  You can treat them as non-news<br>- You can go for lower-volume stocks at the 18-19% level, AS LONG AS the price is high (i.e. $10 a share)<br>- If a stock is high-risk because of 5X volume, set it at 22% (i.e. not 23%)<br>");  
+              $("div#bigcharts_yest_close").html("<a href='https://www.google.com/search?q=stock+" + symbol + "&tbm=nws' target='blank'>GOOGLE NEWS</a><br>- You can go in at pre-market low levels (DOLLAR STOCKS), just use the three-tier approach<br>You can go for stocks with SEC filings where it mentions that the news came out at an earlier date.  You can treat them as non-news<br>- You can go for lower-volume stocks at the 18-19% level, AS LONG AS the price is high (i.e. $10 a share)<br>- If a stock is high-risk because of 5X volume, set it at 22% (i.e. not 23%)<br>");  
 
               if (
                 (data.search(/there is google news/gi) > 0)
