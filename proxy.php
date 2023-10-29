@@ -4,7 +4,7 @@ include './Samples/config.php';
 
 require_once("simple_html_dom.php"); 
 
-$yesterdayDays = 1;
+$yesterdayDays = 3;
 
 error_reporting(1);
 //ini_set('display_errors', 1);
@@ -633,8 +633,8 @@ if ($which_website == "marketwatch")
       $marketWatchNewsHTML = preg_replace('/ convertible bonds/i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp; convertible bonds (back off until you see a price)</b></span>&nbsp;', $marketWatchNewsHTML);
       $marketWatchNewsHTML = preg_replace('/ equity grants/i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp; EQUITY GRANTS - (20-23% early on)</b></span>&nbsp;', $marketWatchNewsHTML);
       $marketWatchNewsHTML = preg_replace('/ to announce/i', '<span style="font-size: 25px; background-color: red; color:black"><b>&nbsp; TO ANNOUNCE - CHECK THE DATE </b></span>&nbsp;', $marketWatchNewsHTML);
-      $marketWatchNewsHTML = preg_replace('/ to report/i', '<span style="font-size: 25px; background-color: black; color:white"><b>&nbsp; TO REPORT - CHECK THE DATE - DO NOT CHASE EARLY </b></span>&nbsp;', $marketWatchNewsHTML);
-      $marketWatchNewsHTML = preg_replace('/ to host/i', '<span style="font-size: 25px; background-color: black; color:white"><b>&nbsp; TO HOST - CHECK THE DATE </b></span>&nbsp;', $marketWatchNewsHTML);
+      $marketWatchNewsHTML = preg_replace('/ to report/i', '<span style="font-size: 25px; background-color: red; color:white"><b>&nbsp; TO REPORT - CHECK THE DATE - DO NOT CHASE EARLY </b></span>&nbsp;', $marketWatchNewsHTML);
+      $marketWatchNewsHTML = preg_replace('/ to host/i', '<span style="font-size: 25px; background-color: red; color:white"><b>&nbsp; TO HOST - CHECK THE DATE </b></span>&nbsp;', $marketWatchNewsHTML);
       $marketWatchNewsHTML = preg_replace('/ to release/i', '<span style="font-size: 25px; background-color: black; color:white"><b>&nbsp; TO RELEASE - CHECK THE DATE </b></span>&nbsp;', $marketWatchNewsHTML);
       $marketWatchNewsHTML = preg_replace('/ schedules/i', '<span style="font-size: 25px; background-color: black; color:white"><b>&nbsp; SCHEDULES - CHECK THE DATE </b></span>&nbsp;', $marketWatchNewsHTML);
       $marketWatchNewsHTML = preg_replace('/ sets date for the release of/i', '<span style="font-size: 25px; background-color: black; color:white"><b>&nbsp; SETS DATE FOR THE RELEASE OF - CHECK THE DATE </b></span>&nbsp;', $marketWatchNewsHTML);
@@ -776,6 +776,8 @@ else if ($which_website == "yahoo")
       $yahooFinanceSector = preg_replace('/shell companies/i', '<span style="font-size: 20px; background-color: red; color:black"><b>&nbsp; SHELL COMPANIES - STAY AWAY</b></span>&nbsp;', $yahooFinanceSector); 
 
       $yahooFinanceIndustry = preg_replace('/oil \& gas/i', '<span style="font-size: 75px; background-color: red; color:black"><b>&nbsp; OIL & GAS</b></span>&nbsp;', $yahooFinanceIndustry); 
+
+      $yahooFinanceIndustry = preg_replace('/medical devices/i', '<span style="font-size: 75px; background-color: red; color:black"><b>&nbsp; MEDICAL DEVICES</b></span>&nbsp;', $yahooFinanceIndustry); 
 
       $yahooFinanceIndustry = preg_replace('/shell companies/i', '<span style="font-size: 35px; background-color: red; color:black"><b>&nbsp; Shell Companies</b></span>&nbsp;', $yahooFinanceIndustry); 
 
@@ -1174,8 +1176,8 @@ else if ($which_website == "yahoo")
       $finalReturn = preg_replace('/ convertible bonds/i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp; convertible bonds (back off until you see a price)</b></span>&nbsp;', $finalReturn);
       $finalReturn = preg_replace('/ equity grants/i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp; EQUITY GRANTS - (20-23% early on)</b></span>&nbsp;', $finalReturn);
       $finalReturn = preg_replace('/ to announce/i', '<span style="font-size: 25px; background-color: red; color:black"><b>&nbsp; TO ANNOUNCE - CHECK THE DATE </b></span>&nbsp;', $finalReturn);
-      $finalReturn = preg_replace('/ to report/i', '<span style="font-size: 25px; background-color: #202020; color:white"><b>&nbsp; TO REPORT - CHECK THE DATE - DO NOT CHASE EARLY </b></span>&nbsp;', $finalReturn);
-      $finalReturn = preg_replace('/ to host/i', '<span style="font-size: 25px; background-color: #202020; color:white"><b>&nbsp; TO HOST - CHECK THE DATE </b></span>&nbsp;', $finalReturn);
+      $finalReturn = preg_replace('/ to report/i', '<span style="font-size: 25px; background-color: red; color:black"><b>&nbsp; TO REPORT - CHECK THE DATE - DO NOT CHASE EARLY </b></span>&nbsp;', $finalReturn);
+      $finalReturn = preg_replace('/ to host/i', '<span style="font-size: 25px; background-color: red; color:black"><b>&nbsp; TO HOST - CHECK THE DATE </b></span>&nbsp;', $finalReturn);
       $finalReturn = preg_replace('/ to release/i', '<span style="font-size: 25px; background-color: #202020; color:white"><b>&nbsp; TO RELEASE - CHECK THE DATE </b></span>&nbsp;', $finalReturn);
       $finalReturn = preg_replace('/ schedules/i', '<span style="font-size: 25px; background-color: #202020; color:white"><b>&nbsp; SCHEDULES - CHECK THE DATE </b></span>&nbsp;', $finalReturn);
       $finalReturn = preg_replace('/ sets date for the release of/i', '<span style="font-size: 25px; background-color: #202020; color:white"><b>&nbsp; SETS DATE FOR THE RELEASE OF - CHECK THE DATE </b></span>&nbsp;', $finalReturn);

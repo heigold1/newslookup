@@ -8,7 +8,7 @@ $secCompanyName = $_GET['secCompanyName'];
 $secCompanyName = preg_replace('/ /', '+', $secCompanyName);
 $secCompanyName = preg_replace("/<.*?>/", "", $secCompanyName);
 
-$yesterdayDays = 1;
+$yesterdayDays = 3;
 
 fopen("cookies.txt", "w");
 
@@ -629,8 +629,8 @@ function getStreetInsider($symbol, $yesterdayDays)
           $streetInsiderNews = preg_replace('/ convertible bonds/i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp; convertible bonds (back off until you see a price)</b></span>&nbsp;', $streetInsiderNews);
           $streetInsiderNews = preg_replace('/ equity grants/i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp; EQUITY GRANTS - (20-23% early on)</b></span>&nbsp;', $streetInsiderNews);
           $streetInsiderNews = preg_replace('/ to announce/i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp; TO ANNOUNCE - CHECK THE DATE </b></span>&nbsp;', $streetInsiderNews);
-          $streetInsiderNews = preg_replace('/ to report/i', '<span style="font-size: 25px; background-color:#202020; color:white"><b>&nbsp; TO REPORT - CHECK THE DATE - DO NOT CHASE EARLY </b></span>&nbsp;', $streetInsiderNews);
-          $streetInsiderNews = preg_replace('/ to host/i', '<span style="font-size: 25px; background-color:#202020; color:white"><b>&nbsp; TO HOST - CHECK THE DATE </b></span>&nbsp;', $streetInsiderNews);
+          $streetInsiderNews = preg_replace('/ to report/i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp; TO REPORT - CHECK THE DATE - DO NOT CHASE EARLY </b></span>&nbsp;', $streetInsiderNews);
+          $streetInsiderNews = preg_replace('/ to host/i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp; TO HOST - CHECK THE DATE </b></span>&nbsp;', $streetInsiderNews);
           $streetInsiderNews = preg_replace('/ to release/i', '<span style="font-size: 25px; background-color:#202020; color:white"><b>&nbsp; TO RELEASE - CHECK THE DATE </b></span>&nbsp;', $streetInsiderNews);
           $streetInsiderNews = preg_replace('/ schedules/i', '<span style="font-size: 25px; background-color:#202020; color:white"><b>&nbsp; SCHEDULES - CHECK THE DATE </b></span>&nbsp;', $streetInsiderNews);
           $streetInsiderNews = preg_replace('/ sets date for the release of/i', '<span style="font-size: 25px; background-color:#202020; color:white"><b>&nbsp; SETS DATE FOR THE RELEASE OF - CHECK THE DATE </b></span>&nbsp;', $streetInsiderNews);
