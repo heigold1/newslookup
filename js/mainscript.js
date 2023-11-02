@@ -499,6 +499,7 @@ $(function() {
           var dayOneLow; 
           var dayOneRecovery; 
           var newStock = false; 
+          var numDaysTraded = 0; 
 
           closeAllWindows();
 
@@ -717,6 +718,7 @@ $(function() {
                 success:  function (data) {
 
                   var returnedObject = JSON.parse(data);
+                  numDaysTraded = returnedObject.count; 
 
                   yesterdayVolume = returnedObject.yest_volume; 
 
@@ -1050,12 +1052,12 @@ $(function() {
 
                       if (dayOneLow < -10)
                       {
-                          alert("Check for the 'L' bar"); 
+                          alert("Dropped " + dayOneLow + " yesterday.  Check for the 'L' bar"); 
                       }
 
                       if (newStock == true)
                       {
-                          alert("Check to see if it's a new stock"); 
+                          alert(numDaysTraded + " days traded. Check to see if it's a new stock"); 
                       }
 
                       $("div#left_bottom_container").html(data);   /*streetInsiderIFrame + */

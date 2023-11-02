@@ -163,6 +163,8 @@ else
   $returnArray['new_stock'] = true; 
 }
 
+$returnArray['count'] = $fullJSON->pagination->count; 
+
 $returnArray['earliest_day'] = $fullJSON->data[59]->close; 
 
 echo json_encode($returnArray);
