@@ -154,16 +154,26 @@ else
 }
 
 // we're going back 60 days (i.e. 0-59) to check and see when the stock began tading. 
-if (isset($fullJSON->data[59]->close) && ($fullJSON->pagination->count != 0) )
+if (isset($fullJSON->pagination->count) && ($fullJSON->pagination->count > 65) )
 {
   $returnArray['new_stock'] = false; 
+  $returnArray['count'] = $fullJSON->pagination->count; 
 }
 else 
 {
-  $returnArray['new_stock'] = true; 
+  if (isset($fullJSON->pagination->count) && ($fullJSON->pagination->count < 65))
+  {
+    $returnArray['new_stock'] = true; 
+    $returnArray['count'] = $fullJSON->pagination->count; 
+  }
+  else if (!isset($fullJSON->pagination->count))
+  {
+    $returnArray['count'] = 0;  
+    $returnArray['new_stock'] = true; 
+  }
 }
 
-$returnArray['count'] = $fullJSON->pagination->count; 
+// $returnArray['count'] = $fullJSON->pagination->count; 
 
 $returnArray['earliest_day'] = $fullJSON->data[59]->close; 
 
