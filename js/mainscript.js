@@ -919,7 +919,7 @@ $(function() {
                 "- You can go for stocks with SEC filings where it mentions that the news came out at an earlier date." + 
                 "- You can treat them as non-news<br>- You can go for lower-volume stocks at the 18-19% level, AS LONG AS the price is high (i.e. $10 a share)<br>" +
                 "- If a stock is high-risk because of 5X volume, set it at 22% (i.e. not 23%)<br>- Go 15% down from pre-market low for high-risk penny stocks<br>" + 
-                "- STALLS - dollar stocks with non-news - you can be patient, penny stocks with non-news and it stalls - just cut your losses and get out" +  
+                "- STALLS - dollar stocks with non-news - you can be patient, penny stocks with non-news and it stalls - just cut your losses and get out<br>" +  
                 "- Minimum entry for penny stocks - 23%");  
 
               if (
