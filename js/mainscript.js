@@ -874,11 +874,6 @@ $(function() {
 
             // AJAX call to yahoo finance 
 
-            if ($('input#redo_localhost_checkbox').is(':checked')) 
-            {
-                openPage("http://localhost/newslookup/proxy.php?symbol=" + symbol + "&which_website=yahoo&host_name=finance.yahoo.com&company_name=" + yahooCompanyName + "&ten_day_volume=" + yahoo10DayVolume + "&total_volume=" + totalVolume + "&yesterday_volume=" + yesterdayVolume);
-            }
-
             $("div#right_top_container").css("background-color", "#BBDDFF");                
             $.ajax({
             url: "proxy.php",
@@ -1005,12 +1000,14 @@ $(function() {
 
 /*               var eTradeIFrame = '<br><iframe id="etrade_iframe" src="https://www.etrade.wallst.com/v1/stocks/news/search_results.asp?symbol=' + symbol + '&rsO=new#lastTradeTime" width="675px" height="500px"></iframe>';  */
 /*               var streetInsiderIFrame = '<br><iframe src="https://www.streetinsider.com/stock_lookup.php?LookUp=Get+Quote&q=' + symbol + '#stock_pod_nav" width="675px" height="300px"></iframe>';   */
+              var checkSec = $("#check-sec").is(":checked")?"1":"0";
 
               $("div#left_bottom_container").css("background-color", "#BBDDFF");
                 $.ajax({
                     url: "proxy_sec_xml.php",
                     data: {symbol: symbol,
-                           secCompanyName : secCompanyName},
+                           secCompanyName : secCompanyName,
+                           checkSec: checkSec },
     
 /*    
                     url: "proxy.php",

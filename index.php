@@ -34,9 +34,6 @@
 							</td>
 							<td style="width:450px"> 
 								<span>
-									<input type="checkbox" id="redo_localhost_checkbox" value="0">Redo local
-								</span> 
-								<span>
 									<input id="pink_sheet_0002" type="submit" value="$0.0002">
 								</span>
 								<span>
@@ -47,6 +44,10 @@
 								</span>
 								<span>
 									<input id="penny_22_5" type="submit" value="22.5%">
+								</span>
+								<span>
+									<input id="check-sec" type="checkbox" <?php if ($_GET['check-sec'] == 1){echo "checked";} ?>>
+									<label for="check-sec">SEC</label>
 								</span>
 							</td>
 						</tr>
@@ -227,7 +228,7 @@
 			<div id="bigcharts_chart_container" style="	position: relative;	width: 53%; height: 100%; display: inline-block; border-style: solid; border-width: 3px; 	border-color: red;">
 			</div> <!-- Right Bottom Container Div -->
 
-			<div id="bigcharts_yest_close" style="	display: inline-block; width: 44%; height: 100%; vertical-align: top; border-style: solid;">
+			<div id="bigcharts_yest_close" style="	display: inline-block; width: 44%; height: 100%; vertical-align: top; border-style: solid;  overflow: scroll; ">
 			</div> <!-- yesterday's close, also the "last" value of previous market close --> 
 		</div> <!-- right bottom container --> 
 

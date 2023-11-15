@@ -7,8 +7,9 @@ $symbol=$_GET['symbol'];
 $secCompanyName = $_GET['secCompanyName'];
 $secCompanyName = preg_replace('/ /', '+', $secCompanyName);
 $secCompanyName = preg_replace("/<.*?>/", "", $secCompanyName);
+$checkSec = $_GET['checkSec']; 
 
-$yesterdayDays = 3;
+$yesterdayDays = 1;
 
 fopen("cookies.txt", "w");
 
@@ -702,11 +703,10 @@ function getStreetInsider($symbol, $yesterdayDays)
 
 } // end of getStreetInsider 
 
-$ret = "";
-$finalReturn = "";
-$noTimeFound = false;
 
-      // try https://www.nasdaq.com/symbol/staf/sec-filings
+
+
+
 
       $url = "https://www.sec.gov/cgi-bin/browse-edgar?CIK=" . $symbol . "&owner=include&action=getcompany&rand=" . rand(); 
       $result = grabHTML('www.sec.gov', $url); 
@@ -718,7 +718,7 @@ $noTimeFound = false;
                   <a style="font-size: 35px" target="_blank" href=https://www.etrade.wallst.com/v1/stocks/snapshot/snapshot.asp?ChallengeUrl=https://idp.etrade.com/idp/SSO.saml2&reinitiate-handshake=0&prospectnavyear=2011&AuthnContext=prospect&env=PRD&symbol=' . $symbol . '&rsO=new&country=US>E*TRADE</a>
                 <br><div style="background-color: red"><span style="font-size: 55px">SEC WEBSITE IS DOWN</span></div>' . getStreetInsider($symbol, $yesterdayDays) . getSectorIndustry() . 
                 '</body></html>';  
-          return; 
+//           return; 
       }
 
       if (preg_match('/No matching Ticker Symbol/', $result))
@@ -734,7 +734,7 @@ $noTimeFound = false;
                 <br>
                 <br><div style="background-color: red"><span style="font-size: 55px">NO MATCHING COMPANIES</span></div>' . getStreetInsider($symbol, $yesterdayDays) . getSectorIndustry() . 
                 '</body></html>';  
-              return; 
+//               return; 
           }
 
           if (preg_match('/Companies with names matching/', $result))
@@ -746,7 +746,7 @@ $noTimeFound = false;
                   <a style="font-size: 35px" target="_blank" href=https://www.etrade.wallst.com/v1/stocks/snapshot/snapshot.asp?ChallengeUrl=https://idp.etrade.com/idp/SSO.saml2&reinitiate-handshake=0&prospectnavyear=2011&AuthnContext=prospect&env=PRD&symbol=' . $symbol . '&rsO=new&country=US>E*TRADE</a></td>
                 </table>' . getSectorIndustry() . 
                 '</body></html>';  
-              return; 
+//               return; 
           }
       }
       $html = str_get_html($result);
@@ -764,19 +764,13 @@ $noTimeFound = false;
       preg_match('/CIK\=(.*?)\&/', $rssLink[0]->href, $group); 
 
       $cik = $group[1]; 
-
       $returnHtml = "";
-      $tableRows = "";
+      $secTableRows = "";
       $recentNews = false;
       $secTableRowCount = 0; 
 
       $command = escapeshellcmd('python3 ../pythonscrape/scrape-sec-gov.py ' . $cik);
       $secXMLString = shell_exec($command);
-
-//       $xmlFinalString=grabHTML('www.sec.gov', "https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=0001430306&type=&dateb=&owner=include&start=0&count=40&output=atom");
-
-//k       $xmlFinalString=grabHTML('www.sec.gov', $secXMLString);
-
       $xmlFinalObject = produce_XML_object_tree($secXMLString); 
 
           $registrationOffering = "";
@@ -884,9 +878,27 @@ $noTimeFound = false;
                   $registrationOffering = " - REGISTRATION";
               }
 
-              $tableRows .=  "<tr style='border: 1px solid black !important; height: 20px;'><td style='border: 1px solid black !important'>" . $filingType . '</td><td style="border: 1px solid black !important"><a target="_blank" href ="' . $href2 . '">' . $title . ', '. $itemDescription .  '</a></td><td style="border: 1px solid black !important">' . $datestamp . "</td><td style='border: 1px solid black !important; font-size: 18px;'>" . $time . "</td></tr>"; 
+              $secTableRows .=  "<tr style='border: 1px solid black !important; height: 20px;'><td style='border: 1px solid black !important'>" . $filingType . '</td><td style="border: 1px solid black !important"><a target="_blank" href ="' . $href2 . '">' . $title . ', '. $itemDescription .  '</a></td><td style="border: 1px solid black !important">' . $datestamp . "</td><td style='border: 1px solid black !important; font-size: 18px;'>" . $time . "</td></tr>"; 
               $secTableRowCount++; 
             }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
       $returnHtml .= "<!DOCTYPE html>"; 
       $returnHtml .= "<html>";
@@ -894,22 +906,17 @@ $noTimeFound = false;
         <link type="text/css" href="./css/main.css" rel="stylesheet"/>
       </head>';
 
-      if ($noTimeFound == true)
-      {
-          $returnHtml .= "<title>Filing - " . $symbol . "(CHECK TIME)" . $registrationOffering . "</title>";  
-      }
-      elseif ($recentNews){
-          $returnHtml .= "<title>Filing - " . $symbol . "</title>";  
-      }
-      else{
-          $returnHtml .= "<title>Filing - " . $symbol . " (NONE)" . $registrationOffering . "</title>";   
-      }
+      $returnHtml .= "<title>Filing - " . $symbol . "</title>";  
       
       $returnHtml .= "<body>"; 
 
       $returnHtml .= getStreetInsider($symbol, $yesterdayDays); 
 
       $returnHtml .= buildNewsNotes($secCompanyName); 
+
+
+
+
 
       $returnHtml .= "<table style='border: 1px solid black !important'>"; 
 
@@ -920,8 +927,12 @@ $noTimeFound = false;
       }
 
       $returnHtml .= "<tr><td>Type</td><td>Title" . $secMessage . "</td><td>Date</td><td>Time</td></tr>"; 
-      $returnHtml .= $tableRows;
+      $returnHtml .= $secTableRows;
       $returnHtml .=  "</table>";
+
+
+
+
 
       $returnHtml .=  '<a style="font-size: 25px" target="_blank" href="http://ec2-54-210-42-143.compute-1.amazonaws.com/newslookup/scrape-street-insider.php?symbol=' . $symbol . '">Street Insider Scrape</a><br> 
         <a style="font-size: 25px" target="_blank" href="https://www.streetinsider.com/stock_lookup.php?LookUp=Get+Quote&q=' . $symbol . '">Street Insider Actual Page</a><br>
