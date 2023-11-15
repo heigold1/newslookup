@@ -704,21 +704,18 @@ function getStreetInsider($symbol, $yesterdayDays)
 } // end of getStreetInsider 
 
 
-
-
-
+function getSecFilings($symbol, $yesterdayDays, $secCompanyName)
+{
 
       $url = "https://www.sec.gov/cgi-bin/browse-edgar?CIK=" . $symbol . "&owner=include&action=getcompany&rand=" . rand(); 
       $result = grabHTML('www.sec.gov', $url); 
 
       if (preg_match('/This page is temporarily unavailable/', $result))
       {
-          echo '<!DOCTYPE html><html><title>Filing - ' . $symbol . ' (NOT FOUND)</title><body>
-              <a style="font-size: 35px" target="_blank" href="https://www.nasdaq.com/symbol/' . $symbol . '/sec-filings">Nasdaq</a><br>
+          $returnSecHtml = '<a style="font-size: 35px" target="_blank" href="https://www.nasdaq.com/symbol/' . $symbol . '/sec-filings">Nasdaq</a><br>
                   <a style="font-size: 35px" target="_blank" href=https://www.etrade.wallst.com/v1/stocks/snapshot/snapshot.asp?ChallengeUrl=https://idp.etrade.com/idp/SSO.saml2&reinitiate-handshake=0&prospectnavyear=2011&AuthnContext=prospect&env=PRD&symbol=' . $symbol . '&rsO=new&country=US>E*TRADE</a>
-                <br><div style="background-color: red"><span style="font-size: 55px">SEC WEBSITE IS DOWN</span></div>' . getStreetInsider($symbol, $yesterdayDays) . getSectorIndustry() . 
-                '</body></html>';  
-//           return; 
+                <br><div style="background-color: red"><span style="font-size: 55px">SEC WEBSITE IS DOWN</span></div></body></html>';  
+           return $returnSecHtml; 
       }
 
       if (preg_match('/No matching Ticker Symbol/', $result))
@@ -728,25 +725,19 @@ function getStreetInsider($symbol, $yesterdayDays)
 
           if (preg_match('/No matching companies/', $result))
           {
-              echo '<!DOCTYPE html><html><title>Filing - ' . $symbol . ' (NOT FOUND)</title><body>
-                  <a style="font-size: 35px" target="_blank" href="https://www.nasdaq.com/symbol/' . $symbol . '/sec-filings">Nasdaq</a><br>
+              $returnSecHtml = '<a style="font-size: 35px" target="_blank" href="https://www.nasdaq.com/symbol/' . $symbol . '/sec-filings">Nasdaq</a><br>
                   <a style="font-size: 35px" target="_blank" href=https://www.etrade.wallst.com/v1/stocks/snapshot/snapshot.asp?ChallengeUrl=https://idp.etrade.com/idp/SSO.saml2&reinitiate-handshake=0&prospectnavyear=2011&AuthnContext=prospect&env=PRD&symbol=' . $symbol . '&rsO=new&country=US>E*TRADE</a>
                 <br>
-                <br><div style="background-color: red"><span style="font-size: 55px">NO MATCHING COMPANIES</span></div>' . getStreetInsider($symbol, $yesterdayDays) . getSectorIndustry() . 
-                '</body></html>';  
-//               return; 
+                <br><div style="background-color: red"><span style="font-size: 55px">NO MATCHING COMPANIES</span></div>';  
+               return $returnSecHtml; 
           }
 
           if (preg_match('/Companies with names matching/', $result))
           {
-              echo '<!DOCTYPE html><html><title>Filing - ' . $symbol . ' (AMBIGUOUS)</title><body>'
-               .  getStreetInsider($symbol, $yesterdayDays) . '<br><br><table style="border: 1px solid black"><tr><td><div style="background-color: red"><span style="font-size: 25px">AMBIGUOUS SEC COMPANY NAMES</span></div></td></tr><tr><td>
-
-<a style="font-size: 35px" target="_blank" href="https://www.nasdaq.com/symbol/' . $symbol . '/sec-filings">Nasdaq</a><br>
+              $returnSecHtml = '<table style="border: 1px solid black"><tr><td><div style="background-color: red"><span style="font-size: 25px">AMBIGUOUS SEC COMPANY NAMES</span></div></td></tr><tr><td><a style="font-size: 35px" target="_blank" href="https://www.nasdaq.com/symbol/' . $symbol . '/sec-filings">Nasdaq</a><br>
                   <a style="font-size: 35px" target="_blank" href=https://www.etrade.wallst.com/v1/stocks/snapshot/snapshot.asp?ChallengeUrl=https://idp.etrade.com/idp/SSO.saml2&reinitiate-handshake=0&prospectnavyear=2011&AuthnContext=prospect&env=PRD&symbol=' . $symbol . '&rsO=new&country=US>E*TRADE</a></td>
-                </table>' . getSectorIndustry() . 
-                '</body></html>';  
-//               return; 
+                </table>';  
+               return $returnSecHtml; 
           }
       }
       $html = str_get_html($result);
@@ -764,7 +755,6 @@ function getStreetInsider($symbol, $yesterdayDays)
       preg_match('/CIK\=(.*?)\&/', $rssLink[0]->href, $group); 
 
       $cik = $group[1]; 
-      $returnHtml = "";
       $secTableRows = "";
       $recentNews = false;
       $secTableRowCount = 0; 
@@ -865,7 +855,7 @@ function getStreetInsider($symbol, $yesterdayDays)
               $title = preg_replace('/inability to timely file form/i', '<span style="font-size: 16px; background-color:red; color:black"><b>&nbsp;inability to timely file form - 84%</span></b>&nbsp;', $title);
               $title = preg_replace('/exempt offering of securities/i', '<span style="font-size: 16px; background-color:red; color:black"><b>&nbsp;Exempt Offering of Securities - 20% and must be a fast drop</span></b>&nbsp;', $title);
               $title = preg_replace('/1\.01/i', '<span style="font-size: 16px; background-color:red; color:black"><b>&nbsp;1.01 - Entry into a Material Definitive Agreement - OFFERING COMING! BACK OFF!</span></b>&nbsp;', $title);
-              $title = preg_replace('/Current report/i', '<span style="font-size: 45px; background-color:red; color:black"><b>&nbsp;Current report</span></b>&nbsp;', $title);
+              $title = preg_replace('/Current report/i', '<span style="font-size: 45px; background-color:red; color:black"><b><br>&nbsp;Current report</span></b>&nbsp;', $title);
               $title = preg_replace('/7\.01/i', '<span style="font-size: 16px; background-color:lightblue; color:black"><b>&nbsp;Regulation FD Disclosure</span></b>&nbsp;<br>', $title);
               $title = preg_replace('/8\.01/i', '<span style="font-size: 16px; background-color:lightblue; color:black"><b>&nbsp;Other Events</span></b>&nbsp;<br>', $title);
               $title = preg_replace('/9\.01/i', '<span style="font-size: 16px; background-color:lightblue; color:black"><b>&nbsp;Financial Statemtnes and Exhibits</span></b>&nbsp;<br>', $title);
@@ -882,25 +872,23 @@ function getStreetInsider($symbol, $yesterdayDays)
               $secTableRowCount++; 
             }
 
+      $returnSecHtml = "<table style='border: 1px solid black !important'>"; 
 
+      $secMessage = " rowcount is " . $secTableRowCount . " "; 
+      if ($secTableRowCount == 0)
+      {
+        $secMessage = "<span style='font-size: 50px; background-color: red'> - CHECK STREET INSIDER</span>"; 
+      }
 
+      $returnSecHtml .= "<tr><td>Type</td><td>Title" . $secMessage . "</td><td>Date</td><td>Time</td></tr>"; 
+      $returnSecHtml .= $secTableRows;
+      $returnSecHtml .=  "</table>";
 
+      return $returnSecHtml; 
 
+} // end of getSecFilings
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-      $returnHtml .= "<!DOCTYPE html>"; 
+      $returnHtml = "<!DOCTYPE html>"; 
       $returnHtml .= "<html>";
       $returnHtml .= '<head>
         <link type="text/css" href="./css/main.css" rel="stylesheet"/>
@@ -915,20 +903,14 @@ function getStreetInsider($symbol, $yesterdayDays)
       $returnHtml .= buildNewsNotes($secCompanyName); 
 
 
-
-
-
-      $returnHtml .= "<table style='border: 1px solid black !important'>"; 
-
-      $secMessage = " rowcount is " . $secTableRowCount . " "; 
-      if ($secTableRowCount == 0)
+      if (intval($checkSec) == 1) 
       {
-        $secMessage = "<span style='font-size: 50px; background-color: red'> - CHECK STREET INSIDER</span>"; 
+        $returnHtml .= getSecFilings($symbol, $yesterdayDays, $secCompanyName); 
       }
-
-      $returnHtml .= "<tr><td>Type</td><td>Title" . $secMessage . "</td><td>Date</td><td>Time</td></tr>"; 
-      $returnHtml .= $secTableRows;
-      $returnHtml .=  "</table>";
+      else
+      {
+        $returnHtml .= "<table border='1' style='font-size: 35px; border: 1px solid black !important; height: 40px;'><tr><td >Type</td><td>NOT CHECKING SEC</td><td>Date</td><td>Time</td></tr></table><br>"; 
+      }
 
 
 
