@@ -789,6 +789,7 @@ $(function() {
                       $("#day1_total_volume").fadeOut(300).fadeIn(300).fadeOut(300).fadeIn(300).fadeOut(300).fadeIn(300).fadeOut(300).fadeIn(300).fadeOut(300).fadeIn(300).fadeOut(300).fadeIn(300).fadeOut(300).fadeIn(300).fadeOut(300).fadeIn(300);
                       if (day_one_volume == parseInt("0")){
                         $("#day1_total_volume").html("0 (HALTED)"); 
+                        alert("Stock was halted yesterday, stay away"); 
                       }
                   }
 
