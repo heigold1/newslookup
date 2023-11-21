@@ -787,7 +787,11 @@ $(function() {
                   {
                       $("#day1_total_volume").css({'background-color' : '#ff8a8a', 'font-size' : '17px'});
                       $("#day1_total_volume").fadeOut(300).fadeIn(300).fadeOut(300).fadeIn(300).fadeOut(300).fadeIn(300).fadeOut(300).fadeIn(300).fadeOut(300).fadeIn(300).fadeOut(300).fadeIn(300).fadeOut(300).fadeIn(300).fadeOut(300).fadeIn(300);
+                      if (day_one_volume == parseInt("0")){
+                        $("#day1_total_volume").html("0 (HALTED)"); 
+                      }
                   }
+
 
                   if (day_two_volume < parseInt("100000"))
                   {

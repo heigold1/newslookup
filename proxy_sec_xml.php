@@ -909,7 +909,7 @@ function getSecFilings($symbol, $yesterdayDays, $secCompanyName)
       }
       else
       {
-        $returnHtml .= "<table border='1' style='font-size: 35px; border: 1px solid black !important; height: 40px;'><tr><td >Type</td><td>NOT CHECKING SEC</td><td>Date</td><td>Time</td></tr></table><br>"; 
+        $returnHtml .= "<table border='1' style='font-size: 35px; border: 1px solid black !important; height: 40px;'><tr><td ></td><td>NOT CHECKING SEC</td><td></td><td></td></tr></table><br>"; 
       }
 
 
