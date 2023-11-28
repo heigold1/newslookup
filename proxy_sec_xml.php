@@ -267,6 +267,35 @@ function produce_XML_object_tree($raw_XML) {
     return $xmlTree;
 }
 
+
+function getIndustryCount($symbol)
+{
+    $servername = "localhost";
+    $username = "superuser";
+    $password = "heimer27";
+    $db = "daytrade"; 
+    $mysqli = null;
+    $date = date("Y-m-d"); 
+
+    // Check connection
+    try {
+        $mysqli = new mysqli($servername, $username, $password, $db);
+    } catch (mysqli_sql_exception $e) {
+
+    } 
+
+    $result = $mysqli->query("SELECT count(industry) as count FROM sector WHERE industry = (
+        SELECT industry FROM sector WHERE symbol = '" . $symbol . "')");
+
+    $returnValue = $result->fetch_assoc(); 
+
+    return $returnValue["count"]; 
+
+}  // end of getIndustryCount 
+
+
+
+
 function getSectorIndustry()
 {
 
@@ -933,18 +962,22 @@ function getSecFilings($symbol, $yesterdayDays, $secCompanyName)
       $returnHtml .=  "</body>";
       $returnHtml .=  "</html>";
 
-/*
-      $returnArray['html'] = $returnHtml; 
-      $returnArray['links'] = $returnLinks;
-      $returnArray['sector_industry'] = $returnSectorIndustry; 
 
+      $returnArray['html'] = $returnHtml;
+      $returnArray['industryCount'] = getIndustryCount($symbol); 
+
+/*
+      $returnArray['sector_industry'] = $returnSectorIndustry; 
       $returnFinalArray = json_encode($returnArray); 
 
       file_put_contents("returnFinalArray.txt", $returnFinalArray); 
 
       echo json_encode($returnFinalArray); 
 */
-      echo $returnHtml;       
+
+
+
+        echo json_encode($returnArray);       
 
 ?>
 

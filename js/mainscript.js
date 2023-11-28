@@ -1014,24 +1014,20 @@ $(function() {
                     data: {symbol: symbol,
                            secCompanyName : secCompanyName,
                            checkSec: checkSec },
-    
-/*    
-                    url: "proxy.php",
-                    data: {symbol: symbol,
-                         stockOrFund: stockOrFund, 
-                         which_website: "marketwatch", 
-                         host_name: "www.marketwatch.com"},
-*/ 
 
                      async: false, 
                     dataType: 'html',
                     success:  function (data) {
                       $("#entryPercentage").focus();   
-                      console.log(data);
+
+                      finalObject = JSON.parse(data); 
+
+                      console.log("INDUSTRY COUNT IS:"); 
+                      console.log(finalObject.industryCount);
 
                       if (
                         (yahooHtmlResults.search(/reverse split|reverse stock split/gi) > 0) ||
-                        (data.search(/reverse split|reverse stock split/gi) > 0)
+                        (finalObject.html.search(/reverse split|reverse stock split/gi) > 0)
                         )
                       {
                           reverseStockSplit = true; 
@@ -1039,7 +1035,7 @@ $(function() {
 
                       if (
                         (yahooHtmlResults.search(/delist|de-list/gi) > 0) || 
-                        (data.search(/delist|de-list/gi) > 0)
+                        (finalObject.html.search(/delist|de-list/gi) > 0)
                         )
                       {
                           varDelist = true;
@@ -1055,9 +1051,6 @@ $(function() {
                         playDelist();
                       }
 
-                      console.log("Data is:"); 
-                      console.log(data); 
-
                       if (dayOneLow < -10)
                       {
                           alert("Dropped " + dayOneLow + " yesterday.  Check for the 'L' bar"); 
@@ -1068,7 +1061,7 @@ $(function() {
                           alert(numDaysTraded + " days traded. Check to see if it's a new stock"); 
                       }
 
-                      $("div#left_bottom_container").html(data);   /*streetInsiderIFrame + */
+                      $("div#left_bottom_container").html(finalObject.html);   /*streetInsiderIFrame + */
 
                   }
 
