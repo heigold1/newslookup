@@ -775,11 +775,11 @@ else if ($which_website == "yahoo")
       $yahooFinanceSector = preg_replace('/energy/i', '<span style="font-size: 20px; background-color: red; color:black"><b>&nbsp; ENERGY</b></span>&nbsp;', $yahooFinanceSector); 
       $yahooFinanceSector = preg_replace('/shell companies/i', '<span style="font-size: 20px; background-color: red; color:black"><b>&nbsp; SHELL COMPANIES - STAY AWAY</b></span>&nbsp;', $yahooFinanceSector); 
 
-      $yahooFinanceIndustry = preg_replace('/oil \& gas/i', '<span style="font-size: 75px; background-color: red; color:black"><b>&nbsp; OIL & GAS</b></span>&nbsp;', $yahooFinanceIndustry); 
+      $yahooFinanceIndustry = preg_replace('/oil \& gas/i', '<span style="font-size: 60px; background-color: red; color:black"><b>&nbsp; OIL & GAS</b></span>&nbsp;', $yahooFinanceIndustry); 
 
-      $yahooFinanceIndustry = preg_replace('/medical devices/i', '<span style="font-size: 75px; background-color: red; color:black"><b>&nbsp; MEDICAL<br><br> DEVICES</b></span>&nbsp;', $yahooFinanceIndustry); 
+      $yahooFinanceIndustry = preg_replace('/medical devices/i', '<span style="font-size: 60px; background-color: red; color:black"><b>&nbsp; MEDICAL<br><br> DEVICES</b></span>&nbsp;', $yahooFinanceIndustry); 
 
-      $yahooFinanceIndustry = preg_replace('/biotechnology/i', '<span style="font-size: 75px; background-color: red; color:black"><b>&nbsp; BIOTECHNOLOGY</b></span>&nbsp;', $yahooFinanceIndustry); 
+      $yahooFinanceIndustry = preg_replace('/biotechnology/i', '<span style="font-size: 60px; background-color: red; color:black"><b>&nbsp; BIOTECHNOLOGY</b></span>&nbsp;', $yahooFinanceIndustry); 
 
       $yahooFinanceIndustry = preg_replace('/shell companies/i', '<span style="font-size: 35px; background-color: red; color:black"><b>&nbsp; Shell Companies</b></span>&nbsp;', $yahooFinanceIndustry); 
 
@@ -1062,10 +1062,10 @@ else if ($which_website == "yahoo")
       $finalReturn = preg_replace('/(' .  get_yahoo_yesterday_trade_date() . ')/', '<span style="font-size: 12px; background-color:   #0747a1; color:white; border: 1px solid red;"> $1</span> ', $finalReturn);
       $finalReturn = preg_replace('/(' .  get_yahoo_todays_trade_date() . ')/', '<span style="font-size: 12px; background-color:  black; color:white; border: 1px solid red;"> $1</span> ', $finalReturn);
 
-      $finalReturn = preg_replace('/ voluntarily delist/i', '<span style="font-size: 25px; background-color:red; color:black"><b> voluntarily delist - 65%</b></span>', $finalReturn);
-      $finalReturn = preg_replace('/ voluntary delist/i', '<span style="font-size: 25px; background-color:red; color:black"><b> voluntary delist - 65%</b></span>', $finalReturn);
-      $finalReturn = preg_replace('/ delist/i', '<span style="font-size: 25px; background-color:red; color:black"><b> delist </b></span>', $finalReturn);
-      $finalReturn = preg_replace('/Delist/', '<span style="font-size: 25px; background-color:red; color:black"><b> delist </b></span>', $finalReturn);
+      $finalReturn = preg_replace('/ voluntarily delist/i', '<span style="font-size: 65px; background-color:red; color:black"><b> voluntarily delist - 65%</b></span>', $finalReturn);
+      $finalReturn = preg_replace('/ voluntary delist/i', '<span style="font-size: 65px; background-color:red; color:black"><b> voluntary delist - 65%</b></span>', $finalReturn);
+      $finalReturn = preg_replace('/ delist/i', '<span style="font-size: 65px; background-color:red; color:black"><b> delist </b></span>', $finalReturn);
+      $finalReturn = preg_replace('/Delist/', '<span style="font-size: 65px; background-color:red; color:black"><b> delist </b></span>', $finalReturn);
       $finalReturn = preg_replace('/ chapter 11|chapter 11 /i', '<span style="font-size: 55px; background-color:red; color:black"><br><br><b> &nbsp;CHAPTER 11</b></span>', $finalReturn);
       $finalReturn = preg_replace('/ reverse split|reverse split /i', '<span style="font-size: 65px; background-color:red; color:black"><b> &nbsp;<br>REVERSE<br><br><br> SPLIT<br><br> - CHECK<br><br><br> DATE</b></span>', $finalReturn);
       $finalReturn = preg_replace('/ reverse.stock split|reverse stock split /i', '<div style="font-size: 65px; background-color:red; color:black; display: inline-block;"><b><br>REVERSE<br><br><br> SPLIT<br><br> - CHECK<br><br><br> DATE</b></div>', $finalReturn);

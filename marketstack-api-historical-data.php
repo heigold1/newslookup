@@ -18,6 +18,21 @@ function getTradeDate($daysBack)
     return $trade_date;
 }
 
+function secondsToTime($seconds) {
+    $dtF = new \DateTime('@0');
+    $dtT = new \DateTime("@$seconds");
+    return $dtF->diff($dtT)->format('%a');
+}
+
+function dateDifference($date)
+{
+    $currentDate = new DateTime(); 
+    $currentDateTimeStamp = $currentDate->format('U'); 
+
+    return secondsToTime($currentDateTimeStamp - $date); 
+
+}
+
 function grabHTML($function_host_name, $url)
 {
 
@@ -153,29 +168,32 @@ else
   $returnArray['day_1'] = "N/A";
 }
 
-// we're going back 60 days (i.e. 0-59) to check and see when the stock began tading. 
-if (isset($fullJSON->pagination->count) && ($fullJSON->pagination->count > 65) )
+
+
+
+
+$latestDay = intval($fullJSON->pagination->count) - 1; 
+
+if (isset($fullJSON->pagination->count))
 {
-  $returnArray['new_stock'] = false; 
-  $returnArray['count'] = $fullJSON->pagination->count; 
-}
-else 
-{
-  if (isset($fullJSON->pagination->count) && ($fullJSON->pagination->count < 65))
-  {
-    $returnArray['new_stock'] = true; 
+    $latestDay = strtotime($fullJSON->data[$latestDay]->date); 
+    $daysOld = dateDifference($latestDay); 
+
+    if ($daysOld < 30)
+    {
+        $returnArray['new_stock'] = true; 
+    }
+    else
+    {
+        $returnArray['new_stock'] = false;
+    }
     $returnArray['count'] = $fullJSON->pagination->count; 
-  }
-  else if (!isset($fullJSON->pagination->count))
-  {
+}
+else
+{
     $returnArray['count'] = 0;  
     $returnArray['new_stock'] = true; 
-  }
 }
-
-// $returnArray['count'] = $fullJSON->pagination->count; 
-
-$returnArray['earliest_day'] = $fullJSON->data[59]->close; 
 
 echo json_encode($returnArray);
 

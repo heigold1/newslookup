@@ -1025,6 +1025,11 @@ $(function() {
                       console.log("INDUSTRY COUNT IS:"); 
                       console.log(finalObject.industryCount);
 
+                      if (parseInt(finalObject.industryCount) > 7)
+                      {
+                        alert("Sector count is over 6, back off"); 
+                      }
+
                       if (
                         (yahooHtmlResults.search(/reverse split|reverse stock split/gi) > 0) ||
                         (finalObject.html.search(/reverse split|reverse stock split/gi) > 0)
@@ -1058,7 +1063,7 @@ $(function() {
 
                       if (newStock == true)
                       {
-                          alert(numDaysTraded + " days traded. Check to see if it's a new stock"); 
+                          alert("Stock has not traded a full month.  Check the number of days traded."); 
                       }
 
                       $("div#left_bottom_container").html(finalObject.html);   /*streetInsiderIFrame + */
