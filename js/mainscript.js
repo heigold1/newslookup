@@ -120,7 +120,6 @@ function closePage(){
 }
 
 function calcAll(){
-console.log("inside calcAll");
     var original_symbol = $.trim($("#quote_input").val()); 
     original_symbol = original_symbol.replace(/\.p\./gi, ".P"); 
     original_symbol = original_symbol.toUpperCase(); 
@@ -1397,7 +1396,6 @@ $(function() {
 
             var eTradeLowPercentage = parseFloat($("#eTradeLowPercentage").html());
             var currentPercent = parseFloat($(this).val()); 
-            console.log("eTradeLowPercentage is " + eTradeLowPercentage + " and currentPercent is " + currentPercent);
 
             if (currentPercent < eTradeLowPercentage)
             {
@@ -1409,9 +1407,26 @@ $(function() {
             }
 
             $("#td_bigcharts_change").fadeOut(300).fadeIn(300).fadeOut(300).fadeIn(300).fadeOut(300).fadeIn(300).fadeOut(300).fadeIn(300).fadeOut(300).fadeIn(300).fadeOut(300).fadeIn(300).fadeOut(300).fadeIn(300).fadeOut(300).fadeIn(300);
+
+            if(
+             ( 
+              ( parseInt($("#day1_total_volume").html().replace(/,/g, '')) < parseInt("50000")) || 
+              ( parseInt($("#day2_total_volume").html().replace(/,/g, '')) < parseInt("50000")) || 
+              ( parseInt($("#day3_total_volume").html().replace(/,/g, '')) < parseInt("50000")) || 
+              ( parseInt($("#day4_total_volume").html().replace(/,/g, '')) < parseInt("50000")) || 
+              ( parseInt($("#day5_total_volume").html().replace(/,/g, '')) < parseInt("50000"))
+                )
+              && 
+              ( parseFloat($(this).val()) < parseFloat("25.00"))
+              )
+
+              {
+                  setTimeout(function(){
+                      alert("Low-volume alert.  Check volume"); 
+                  }, 200);
+              }
           } 
 
-    //      $('#submit_button').click();
     });  // end of entryPercentage keypress function
 
     $(document.body).on('keyup', "#entryPercentage", function(){
