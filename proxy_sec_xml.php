@@ -966,17 +966,6 @@ function getSecFilings($symbol, $yesterdayDays, $secCompanyName)
       $returnArray['html'] = $returnHtml;
       $returnArray['industryCount'] = getIndustryCount($symbol); 
 
-/*
-      $returnArray['sector_industry'] = $returnSectorIndustry; 
-      $returnFinalArray = json_encode($returnArray); 
-
-      file_put_contents("returnFinalArray.txt", $returnFinalArray); 
-
-      echo json_encode($returnFinalArray); 
-*/
-
-
-
         echo json_encode($returnArray);       
 
 ?>

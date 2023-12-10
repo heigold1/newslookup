@@ -38,10 +38,10 @@ def parse_finance_page(symbol):
       response = requests.get(url, headers = headers, verify=False)
 
       if response.status_code!=200:
-        returnJsonData['address'] = 'COMPANY NOT FOUND'
-        returnJsonData['website'] = 'COMPANY NOT FOUND'
-        returnJsonData['sector'] = 'COMPANY NOT FOUND'
-        returnJsonData['industry'] = 'COMPANY NOT FOUND'
+        returnJsonData['address'] = 'WEBSITE NOT FOUND'
+        returnJsonData['website'] = 'WEBSITE NOT FOUND'
+        returnJsonData['sector'] = 'WEBSITE NOT FOUND'
+        returnJsonData['industry'] = 'WEBSITE NOT FOUND'
 
         jsonData = json.dumps(returnJsonData)
         print(jsonData)
@@ -77,31 +77,31 @@ def parse_finance_page(symbol):
               addressPipeString += "|"  
           returnJsonData['address'] = addressPipeString
         else: 
-          returnJsonData['address'] = 'NO ADDRESS' 
+          returnJsonData['address'] = 'NO ADDRESS LISTED' 
 
         if len(companyWebsite) > 0:
           returnJsonData['website'] = companyWebsite[0] 
         else: 
-          returnJsonData['website'] = 'NO WEBSITE' 
+          returnJsonData['website'] = 'NO WEBSITE LISTED' 
 
         if len(companySector) > 0: 
           returnJsonData['sector'] = companySector[0] 
         else: 
-          returnJsonData['sector'] = 'NO SECTOR' 
+          returnJsonData['sector'] = 'NO SECTOR LISTED' 
 
         if len(companyIndustry) > 0:  
           returnJsonData['industry'] = companyIndustry[0] 
         else: 
-          returnJsonData['industry'] = 'NO INDUSTRY' 
+          returnJsonData['industry'] = 'NO INDUSTRY LISTED' 
 
         jsonData = json.dumps(returnJsonData) 
         print(jsonData)
 
     except Exception as e:
-      returnJsonData['address'] = 'COMPANY NOT FOUND'
-      returnJsonData['website'] = 'COMPANY NOT FOUND *' + str(e) + '*' 
-      returnJsonData['sector'] = 'COMPANY NOT FOUND  *' + str(e) + '*' 
-      returnJsonData['industry'] = 'COMPANY NOT FOUND' 
+      returnJsonData['address'] = 'ADDRESS - SCRIPT ERROR *' + str(e) + '*'
+      returnJsonData['website'] = 'WEBSITE - SCRIPT ERROR *' + str(e) + '*' 
+      returnJsonData['sector'] = 'SECTOR - SCRIPT ERROR *' + str(e) + '*' 
+      returnJsonData['industry'] = 'INDUSTRY - SCRIPT ERROR' + str(e) + '*' 
 
       jsonData = json.dumps(returnJsonData)
       print(jsonData)

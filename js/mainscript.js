@@ -330,6 +330,9 @@ $(function() {
     var modal = document.getElementById('myModal');
     modal.style.display = "none";
 
+    var notesModal = document.getElementById('notes-modal');
+    notesModal.style.display = "none";
+
     // set the focus to the symbol input field
     $("#quote_input").focus();
 
@@ -896,6 +899,8 @@ $(function() {
               $("#entryPercentage").focus();   
               yahooHtmlResults = data; 
 
+// finalObject = JSON.parse(data); 
+
               console.log(data);
 
               yahooCompanyName = " " + data.match(/<h1(.*?)h1>/g) + " "; 
@@ -914,13 +919,7 @@ $(function() {
               google_keyword_string = google_keyword_string.replace(/inc\./ig, "");
               google_keyword_string = google_keyword_string.replace(/ltd\./ig, "");
 
-              $("div#bigcharts_yest_close").html("<a href='https://www.google.com/search?q=stock+" + symbol + "&tbm=nws' target='blank'>GOOGLE NEWS</a><br>- You can go in at pre-market low levels (DOLLAR STOCKS), just use the three-tier approach<br>" + 
-                "- You can go for stocks with SEC filings where it mentions that the news came out at an earlier date." + 
-                "- You can treat them as non-news<br>- You can go for lower-volume stocks at the 18-19% level, AS LONG AS the price is high (i.e. $10 a share)<br>" +
-                "- If a stock is high-risk because of 5X volume, set it at 22% (i.e. not 23%)<br>- Go 15% down from pre-market low for high-risk penny stocks<br>" + 
-                "- STALLS - dollar stocks with non-news - you can be patient, penny stocks with non-news and it stalls - just cut your losses and get out<br>" +  
-                "- Minimum entry for penny stocks - 23%<br>" + 
-                "- Pink Sheet dollar stocks - if the 50% down price is still over $1.00 a share, you can jump in at 50%");  
+              $("div#bigcharts_yest_close").html("<a href='https://www.google.com/search?q=stock+" + symbol + "&tbm=nws' target='blank'>GOOGLE NEWS</a>");  
 
               if (
                 (data.search(/there is google news/gi) > 0)
@@ -1423,11 +1422,23 @@ $(function() {
               {
                   setTimeout(function(){
                       alert("Low-volume alert.  Check volume"); 
-                  }, 200);
+                  }, 300);
               }
           } 
 
     });  // end of entryPercentage keypress function
+
+
+    $("#notes").hover(function () {
+        var notesModal = document.getElementById('notes-modal');
+            notesModal.style.display = "block"; 
+      }); 
+
+    $("#notes-modal").click(function(){
+        var notesModal = document.getElementById('notes-modal');
+            notesModal.style.display = "none"; 
+    }); 
+
 
     $(document.body).on('keyup', "#entryPercentage", function(){
 

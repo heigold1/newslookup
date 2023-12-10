@@ -231,6 +231,29 @@ function get_marketwatch_today_trade_date()
     return $today_marketwatch_trade_date;
 }
 
+function mapCountryCodes($code)
+{
+
+  $map = array(
+    'US' => 'USA',
+
+
+
+
+
+
+); 
+
+  $country = $map[$code]; 
+
+
+
+
+
+
+}
+
+
 function calcFinVizAvgVolume($string)
 {
     $string = preg_replace('/.*Avg Volume/', '', $string);
@@ -753,6 +776,7 @@ else if ($which_website == "yahoo")
 */
 
 
+/* Scrape Yahoo Finance */
 
       $command = escapeshellcmd('python3 ./pythonscrape/scrape-yahoo-finance-company-profile.py ' . $symbol);
       $yahooFinanceJson = shell_exec($command);
@@ -769,6 +793,53 @@ else if ($which_website == "yahoo")
 
       $yahooFinanceSector = $yahooFinanceObject->sector; 
       $yahooFinanceIndustry = $yahooFinanceObject->industry; 
+
+
+
+
+/* Scrape the stockanalysis.com website for country, sector, and industry information */ 
+/*
+      $command = escapeshellcmd('python3 ./pythonscrape/scrape-stock-analysis.py ' . $symbol);
+      $stockAnalysisJson = shell_exec($command);
+      $yahooFinanceObject = json_decode($stockAnalysisJson); 
+
+      $companyWebsite = '<a target="_blank" style="font-size: 15px;" onclick="return openPage(this.href)" href="" class="tab-link"><b>No website</b></a>&nbsp;&nbsp;';
+
+      $country = $yahooFinanceObject->country; 
+      $yahooFinanceSector = $yahooFinanceObject->sector; 
+      $yahooFinanceIndustry = $yahooFinanceObject->industry; 
+
+*/
+
+/* end of scraping stockanalysis.com website */ 
+
+
+/* Alphavantage alpha vantage API for company overview (sector, industry, country) 
+      
+      
+
+    $alphaVantageAPI = "https://www.alphavantage.co/query?function=OVERVIEW&symbol=" . $symbol . "&apikey=d36ab142bed5a1430fcde797063f6b9a"; 
+    $alphaVantageResults = grabHTML("www.alphavantage.co", $alphaVantageAPI);
+    $alphaVantageJSON = json_decode($alphaVantageResults);
+
+    $alphaVantageSector = $alphaVantageJSON->Sector; 
+    $alphaVantageIndustry = $alphaVantageJSON->Industry; 
+    $alphaVantageAddress = $alphaVantageJSON->Address; 
+
+    $commaLocation = intval(strrpos($alphaVantageAddress, ',')); 
+    $alphaVantageCountryCode = trim(substr($alphaVantageAddress, $commaLocation + 1)); 
+
+
+
+//     $alphaVantagCountry = mapCountryCodes($alphaVantageCountryCode); 
+
+
+
+  end of Alphavantage alpha vantage API for company overview */  
+
+
+
+
 
       /* Highlight certain sector words that should put us on guard */ 
 
@@ -787,9 +858,11 @@ else if ($which_website == "yahoo")
 
       $sectorCountry = '<span style="font-size: 15px;">SECTOR - ' . $yahooFinanceSector . '</span>&nbsp;&nbsp;<span id="industry" style="font-size: 15px;">INDUSTRY - ' . $yahooFinanceIndustry . '</span><br><br><div id="country" style="font-size: 15px;">' . $country . '</div>'; 
 
+      addYahooSectorIndustry($symbol, $yahooFinanceSector, $yahooFinanceIndusty, $country, $companyName);
 
 
-      addYahooSectorIndustry($symbol, $yahooFinanceObject->sector, $yahooFinanceObject->industry, $country, $companyName);
+
+
 
       $returnCompanyName = '<h1>' . $companyName . '</h1>';
 
@@ -1036,6 +1109,24 @@ else if ($which_website == "yahoo")
 
     /*** End of Seeking Alpha RSS Parse ***/ 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
       $finalReturn = "<td valign='top' style='width: 50%' >" . str_replace('<a ', '<a target="_blank" onclick="return openPage(this.href)" ', $allNews) . '</td><td valign="top" style="width: 50%">' . $stockSplitsTable . $seekingAlphaNews . /* str_replace('<a ', '<a target="_blank" onclick="return openPage(this.href)" ', $googleNews) .  */  '</td>';
 
       $finalReturn = preg_replace($patterns = array("/<img[^>]+\>/i", "/<embed.+?<\/embed>/im", "/<iframe.+?<\/iframe>/im", "/<script.+?<\/script>/im"), $replace = array("", "", "", ""), $finalReturn);
@@ -1249,11 +1340,16 @@ else if ($which_website == "yahoo")
       $marketStackURL = "https://api.marketstack.com/v1/eod?access_key=d36ab142bed5a1430fcde797063f6b9a&symbols=" . $symbol . "&date_from=" . $marketStackFromDate . "&date_to=" . $marketStackToDate;         
       $marketStackOHLC = '&nbsp;&nbsp;<a target="_blank" onclick="return openPage(this.href)" href= ' . $marketStackURL . '> OHLC</a>&nbsp;&nbsp;&nbsp;&nbsp;'; 
 
+      $alphaVantageURL = "https://www.alphavantage.co/query?function=OVERVIEW&symbol=" . $symbol . "&apikey=RH5DAZF0ZQX2LSE6"; 
+      $alphaVantage = '&nbsp;&nbsp;<a target="_blank" onclick="return openPage(this.href)" href= ' . $alphaVantageURL . '> Alpha Vantage API - country code is ' . $alphaVantageCountryCode . '</a>&nbsp;&nbsp;&nbsp;&nbsp;'; 
 
 
-      $finalReturn = $yahooDates . $returnCompanyName . $companyWebsite . $sectorCountry . $returnYesterdaysClose . $preMarketYesterdaysClose[0] . "<br>" . "<div style='display: inline-block;'>" . /* $yesterdayVolumeHTML . */ $currentVolumeHTML .  /* $volumeRatioHTML . */ $avgVol10days . $avgVolYahoo . $company_profile . $yahoo_main_page . $message_board . $google . $nasdaqInfo . $streetInsider . $streetInsiderScrape . $splits . $marketStackOHLC . '<table width="700px"><tr width="575px">' . $finalReturn . '</tr></table>' . $googleNewsFlag . $googleNewsHtmlDOM[0];  
+
+      $finalReturn = $yahooDates . $returnCompanyName . $companyWebsite . $sectorCountry . $returnYesterdaysClose . $preMarketYesterdaysClose[0] . "<br>" . "<div style='display: inline-block;'>" . /* $yesterdayVolumeHTML . */ $currentVolumeHTML .  /* $volumeRatioHTML . */ $avgVol10days . $avgVolYahoo . $company_profile . $yahoo_main_page . $message_board . $google . $nasdaqInfo . $streetInsider . $streetInsiderScrape . $splits . $marketStackOHLC . $alphaVantage . '<table width="700px"><tr width="575px">' . $finalReturn . '</tr></table>' . $googleNewsFlag . $googleNewsHtmlDOM[0];  
 
       echo $finalReturn; 
+
+
 
 } // if ($which_website == "yahoo")
 else if ($which_website == "bigcharts")
