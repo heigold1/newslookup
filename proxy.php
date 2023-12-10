@@ -891,13 +891,17 @@ else if ($which_website == "yahoo")
                 $avgVolFinViz = "<span id='vol_fin_viz' style='background-color: orange'><b>FinVizAVG - " . calcFinVizAvgVolume($finVizTDArray[10]) . "</b></span>";
 */
 
-      // get Yahoo Finance average volume number
+
+/*
+      // get Yahoo Finance average volume number.  We're going to skip yahoo finance avg vol for now, it's not that important 
+
       $command = escapeshellcmd('python3 ./pythonscrape/scrape-yahoo-finance-summary.py ' . $symbol);
       $yahooFinanceJson = shell_exec($command);
 
       $yahooFinanceObject = json_decode($yahooFinanceJson);
 
       $avgVolYahoo =  '<span id="vol_yahoo" style="background-color: orange; font-size: 20px;"><b>YahooAVG - ' . $yahooFinanceObject->avgvol . '</b></span>'; 
+*/
 
 
 
@@ -1108,23 +1112,6 @@ else if ($which_website == "yahoo")
       $seekingAlphaNews .= "yesterdayDays = " . $yesterdayDays . "<br>"; 
 
     /*** End of Seeking Alpha RSS Parse ***/ 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
       $finalReturn = "<td valign='top' style='width: 50%' >" . str_replace('<a ', '<a target="_blank" onclick="return openPage(this.href)" ', $allNews) . '</td><td valign="top" style="width: 50%">' . $stockSplitsTable . $seekingAlphaNews . /* str_replace('<a ', '<a target="_blank" onclick="return openPage(this.href)" ', $googleNews) .  */  '</td>';
@@ -1340,12 +1327,10 @@ else if ($which_website == "yahoo")
       $marketStackURL = "https://api.marketstack.com/v1/eod?access_key=d36ab142bed5a1430fcde797063f6b9a&symbols=" . $symbol . "&date_from=" . $marketStackFromDate . "&date_to=" . $marketStackToDate;         
       $marketStackOHLC = '&nbsp;&nbsp;<a target="_blank" onclick="return openPage(this.href)" href= ' . $marketStackURL . '> OHLC</a>&nbsp;&nbsp;&nbsp;&nbsp;'; 
 
-      $alphaVantageURL = "https://www.alphavantage.co/query?function=OVERVIEW&symbol=" . $symbol . "&apikey=RH5DAZF0ZQX2LSE6"; 
-      $alphaVantage = '&nbsp;&nbsp;<a target="_blank" onclick="return openPage(this.href)" href= ' . $alphaVantageURL . '> Alpha Vantage API - country code is ' . $alphaVantageCountryCode . '</a>&nbsp;&nbsp;&nbsp;&nbsp;'; 
+      $seekingAlphaURL = "https://seekingalpha.com/symbol/" . $symbol; 
+      $seekingAlpha = '&nbsp;&nbsp;<a target="_blank" onclick="return openPage(this.href)" href= ' . $seekingAlphaURL . '> Seeking Alpha' . '</a>&nbsp;&nbsp;&nbsp;&nbsp;'; 
 
-
-
-      $finalReturn = $yahooDates . $returnCompanyName . $companyWebsite . $sectorCountry . $returnYesterdaysClose . $preMarketYesterdaysClose[0] . "<br>" . "<div style='display: inline-block;'>" . /* $yesterdayVolumeHTML . */ $currentVolumeHTML .  /* $volumeRatioHTML . */ $avgVol10days . $avgVolYahoo . $company_profile . $yahoo_main_page . $message_board . $google . $nasdaqInfo . $streetInsider . $streetInsiderScrape . $splits . $marketStackOHLC . $alphaVantage . '<table width="700px"><tr width="575px">' . $finalReturn . '</tr></table>' . $googleNewsFlag . $googleNewsHtmlDOM[0];  
+      $finalReturn = $yahooDates . $returnCompanyName . $companyWebsite . $sectorCountry . $returnYesterdaysClose . $preMarketYesterdaysClose[0] . "<br>" . "<div style='display: inline-block;'>" . /* $yesterdayVolumeHTML . */ $currentVolumeHTML .  /* $volumeRatioHTML . */ $avgVol10days . /* $avgVolYahoo . */ $company_profile . $yahoo_main_page . $message_board . $google . $nasdaqInfo . $streetInsider . $streetInsiderScrape . $splits . $marketStackOHLC . $seekingAlpha . '<table width="700px"><tr width="575px">' . $finalReturn . '</tr></table>' . $googleNewsFlag . $googleNewsHtmlDOM[0];  
 
       echo $finalReturn; 
 

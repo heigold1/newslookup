@@ -33,7 +33,8 @@ def parse_finance_page(symbol):
   for retries in range(1):
     try:    
 
-      url = "https://finance.yahoo.com/quote/" + symbol + "/profile?p=" + symbol + '&.tsrc=fin-srch' 
+#      url = "https://finance.yahoo.com/quote/" + symbol + "/profile?p=" + symbol + '&.tsrc=fin-srch'
+      url = "https://finance.yahoo.com/quote/" + symbol + "/profile" 
 
       response = requests.get(url, headers = headers, verify=False)
 
@@ -98,10 +99,10 @@ def parse_finance_page(symbol):
         print(jsonData)
 
     except Exception as e:
-      returnJsonData['address'] = 'ADDRESS - SCRIPT ERROR *' + str(e) + '*'
-      returnJsonData['website'] = 'WEBSITE - SCRIPT ERROR *' + str(e) + '*' 
-      returnJsonData['sector'] = 'SECTOR - SCRIPT ERROR *' + str(e) + '*' 
-      returnJsonData['industry'] = 'INDUSTRY - SCRIPT ERROR' + str(e) + '*' 
+      returnJsonData['address'] = 'ADDRESS - ' + str(e) 
+      returnJsonData['website'] = 'WEBSITE - ' + str(e)
+      returnJsonData['sector'] = 'SECTOR - ' + str(e)
+      returnJsonData['industry'] = 'INDUSTRY - ' + str(e)
 
       jsonData = json.dumps(returnJsonData)
       print(jsonData)
