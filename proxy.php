@@ -850,7 +850,7 @@ else if ($which_website == "yahoo")
 
       $yahooFinanceIndustry = preg_replace('/medical devices/i', '<span style="font-size: 60px; background-color: red; color:black"><b>&nbsp; MEDICAL<br><br> DEVICES</b></span>&nbsp;', $yahooFinanceIndustry); 
 
-      $yahooFinanceIndustry = preg_replace('/biotechnology/i', '<span style="font-size: 60px; background-color: red; color:black"><b>&nbsp; BIOTECHNOLOGY</b></span>&nbsp;', $yahooFinanceIndustry); 
+      $yahooFinanceIndustry = preg_replace('/biotechnology/i', '<br><span style="font-size: 60px; background-color: red; color:black"><b>&nbsp; BIOTECHNOLOGY</b></span>&nbsp;', $yahooFinanceIndustry); 
 
       $yahooFinanceIndustry = preg_replace('/shell companies/i', '<span style="font-size: 35px; background-color: red; color:black"><b>&nbsp; Shell Companies</b></span>&nbsp;', $yahooFinanceIndustry); 
 
@@ -858,11 +858,7 @@ else if ($which_website == "yahoo")
 
       $sectorCountry = '<span style="font-size: 15px;">SECTOR - ' . $yahooFinanceSector . '</span>&nbsp;&nbsp;<span id="industry" style="font-size: 15px;">INDUSTRY - ' . $yahooFinanceIndustry . '</span><br><br><div id="country" style="font-size: 15px;">' . $country . '</div>'; 
 
-      addYahooSectorIndustry($symbol, $yahooFinanceSector, $yahooFinanceIndusty, $country, $companyName);
-
-
-
-
+      addYahooSectorIndustry($symbol, $yahooFinanceObject->sector, $yahooFinanceObject->industry, $country, $companyName);
 
       $returnCompanyName = '<h1>' . $companyName . '</h1>';
 
