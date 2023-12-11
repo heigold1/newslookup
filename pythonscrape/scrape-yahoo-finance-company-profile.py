@@ -17,6 +17,8 @@ urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 def parse_finance_page(symbol):
 
+  returnJsonData = [] 
+
   headers = {
           "Accept":"text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8",
           "Accept-Encoding":"gzip, deflate",
@@ -28,12 +30,11 @@ def parse_finance_page(symbol):
     } 
 
 
-#  print("Content-type: text/html\n\n")
+  responseCode = 0 
 
-  for retries in range(1):
+  for retries in range(4):
     try:    
 
-#      url = "https://finance.yahoo.com/quote/" + symbol + "/profile?p=" + symbol + '&.tsrc=fin-srch'
       url = "https://finance.yahoo.com/quote/" + symbol + "/profile" 
 
       response = requests.get(url, headers = headers, verify=False)
@@ -44,8 +45,7 @@ def parse_finance_page(symbol):
         returnJsonData['sector'] = 'WEBSITE NOT FOUND'
         returnJsonData['industry'] = 'WEBSITE NOT FOUND'
 
-        jsonData = json.dumps(returnJsonData)
-        print(jsonData)
+        continue 
 
       parser = html.fromstring(response.content)
       companyNameArray = parser.xpath('/html/body/div[1]/div/div/div[1]/div/div[3]/div[1]/div/div[1]/div/div/section/div[1]/div/h3/text()')
@@ -57,9 +57,8 @@ def parse_finance_page(symbol):
         returnJsonData['sector'] = 'ETF/ETN'  
         returnJsonData['industry'] = 'ETF/ETN'  
         returnJsonData['url'] = url 
-
-        jsonData = json.dumps(returnJsonData) 
-        print(jsonData) 
+        
+        break 
 
       else:
         companyAddress =  parser.xpath('/html/body/div[1]/div/div/div[1]/div/div[3]/div[1]/div/div[1]/div/div/section/div[1]/div/div/p[1]/text()')
@@ -69,7 +68,6 @@ def parse_finance_page(symbol):
         addressPipeString = ""
               
         companyAddressLength = len(companyAddress) 
-    
 
         if companyAddressLength > 0:
           for i in range(companyAddressLength):
@@ -95,8 +93,7 @@ def parse_finance_page(symbol):
         else: 
           returnJsonData['industry'] = 'NO INDUSTRY LISTED' 
 
-        jsonData = json.dumps(returnJsonData) 
-        print(jsonData)
+        break 
 
     except Exception as e:
       returnJsonData['address'] = 'ADDRESS - ' + str(e) 
@@ -104,8 +101,10 @@ def parse_finance_page(symbol):
       returnJsonData['sector'] = 'SECTOR - ' + str(e)
       returnJsonData['industry'] = 'INDUSTRY - ' + str(e)
 
-      jsonData = json.dumps(returnJsonData)
-      print(jsonData)
+      continue 
+
+  jsonData = json.dumps(returnJsonData)
+  print(jsonData)
 
 symbol = sys.argv[1] 
 
