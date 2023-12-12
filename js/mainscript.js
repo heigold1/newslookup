@@ -591,6 +591,15 @@ $(function() {
                   dataType: 'html',
                   success:  function (data) {
 
+
+                          var hasPeriod = original_symbol.indexOf('.'); 
+                          var length = original_symbol.length; 
+
+                          if ((length == 5) || (hasPeriod != -1))  
+                          {
+                            $("#amountSpending").val("350");
+                          }
+
                           returnData = data.match(/Caught exception/i); 
                           if (returnData || (data == '------') || (data == '------a') || (data == '------b'))
                           {
@@ -607,8 +616,6 @@ $(function() {
                           if (exchange == "PK")
                           {
                             $("#amountSpending").val("350");
-                            $("#right_top_container").show();
-                            $("#left_bottom_container").show();
                           }
                           $("#yestCloseText").val(jsonObject.prev_close);
 
@@ -639,8 +646,6 @@ $(function() {
 
                           var bidCalculatedPercentage=((prev_close-bid)/prev_close)*100; 
                           var lowCalculatedPercentage=((prev_close-low)/prev_close)*100; 
-
-                          console.log("exchnage is *" + exchange + "*");
 
                           if ((exchange == "u") && (lowCalculatedPercentage < 30.00)) 
                           {
@@ -1418,12 +1423,28 @@ $(function() {
               && 
               ( parseFloat($(this).val()) < parseFloat("25.00"))
               )
-
               {
                   setTimeout(function(){
                       alert("Low-volume alert.  Check volume"); 
                   }, 300);
               }
+
+              var original_symbol = $.trim($("#quote_input").val()); 
+              var hasPeriod = original_symbol.indexOf('.'); 
+              var length = original_symbol.length; 
+
+              if (
+                  (parseFloat($(this).val()) < parseFloat("60.00")) && 
+                  (
+                    (hasPeriod != -1) ||
+                    (length == 5)
+                  )
+                )
+                {
+                    setTimeout(function(){
+                        alert("You can't chase secondary securities before 60%.  Set it to at least 60%"); 
+                    }, 300);
+                }
           } 
 
     });  // end of entryPercentage keypress function
