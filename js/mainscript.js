@@ -1443,7 +1443,7 @@ $(function() {
                 {
                     setTimeout(function(){
                         alert("You can't chase secondary securities before 60%.  Set it to at least 60%"); 
-                    }, 300);
+                    }, 200);
                 }
           } 
 
