@@ -202,7 +202,7 @@
 							<br><br>
 						</div>
 
-								E: <span style="font-size: 12px" id="etradeAverageVolume"></span>&nbsp; Y: <span style="font-size: 12px" id="yahooAverageVolume"></span> 
+								5-day Avg Vol: <span style="font-size: 12px" id="five-day-average-volume"></span>
 
 						</td>
 

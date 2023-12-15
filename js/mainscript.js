@@ -502,6 +502,7 @@ $(function() {
           var dayOneRecovery; 
           var newStock = false; 
           var numDaysTraded = 0; 
+          var fiveDayAverageVolume; 
 
           closeAllWindows();
 
@@ -728,6 +729,7 @@ $(function() {
                   numDaysTraded = returnedObject.count; 
 
                   yesterdayVolume = returnedObject.yest_volume; 
+                  fiveDayAverageVolume = parseInt(returnedObject.five_day_average_volume); 
 
                   if (returnedObject.new_stock == true) 
                   {
@@ -1197,30 +1199,15 @@ $(function() {
 
         // check for any volume alerts
 
-        var yahooAvgVolume = parseInt(document.getElementById("vol_yahoo").innerHTML.replace(/\D/g,''));
-        var eTradeAvgVolume = parseInt(document.getElementById("vol_10_day").innerHTML.replace(/\D/g,''));
-        var volumeRatio = parseFloat(document.getElementById("vol_ratio").innerHTML.replace(/\D/g,''))/100;
+        $("#five-day-average-volume").html(fiveDayAverageVolume.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")); 
 
-        if ((yahooAvgVolume < 100000) || (eTradeAvgVolume < 100000))
+        if (fiveDayAverageVolume < 100000)
         {
           playLowVolumeStock();
           warningMessage += " ** LOW AVERAGE VOLUME ** ";
-
-          if (yahooAvgVolume < 100000)
-          {
-              $("#yahooAverageVolume").css("background-color", "red"); 
-              $("#yahooAverageVolume").css("font-size", "25px"); 
-          }
-          if (eTradeAvgVolume < 100000)
-          {
-              $("#etradeAverageVolume").css("background-color", "red"); 
-              $("#etradeAverageVolume").css("font-size", "25px"); 
-          }
-
+          $("#five-day-average-volume").css("background-color", "red"); 
+          $("#five-day-average-volume").css("font-size", "25px"); 
         }
-
-        $("#etradeAverageVolume").html(eTradeAvgVolume.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")); 
-        $("#yahooAverageVolume").html(yahooAvgVolume.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")); 
 
         if (volumeRatio > 0.175)
         {
