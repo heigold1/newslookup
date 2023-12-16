@@ -2,7 +2,7 @@
 <html lang="en-US">
 
 <head>
-    <title>Penny Stock Drop Rates</title>   
+    <title>Low-Volume Dollar Stock Drop Rates</title>   
     <script src="https://code.highcharts.com/highcharts.js"></script>
     <script src="https://code.highcharts.com/highcharts-3d.js"></script>
     <script src="https://code.highcharts.com/modules/exporting.js"></script>
@@ -15,7 +15,7 @@
 <body>
 
 <figure class="highcharts-figure">
-    <div id="container"></div>
+    <div id="low-volume-dollar-container"></div>
     <p class="highcharts-description">
         Low-volume drop rates for dollar stocks, based on the 5-day average volume.
     </p>
@@ -49,7 +49,7 @@ Highcharts.setOptions({
 // Set up the chart
 var chart = new Highcharts.Chart({
     chart: {
-        renderTo: 'container',
+        renderTo: 'low-volume-dollar-container',
         margin: 100,
         type: 'scatter',
         animation: false,

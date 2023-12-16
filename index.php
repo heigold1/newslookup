@@ -11,6 +11,14 @@
 	<link type="text/css" href="./css/combined-min-1.0.5754.css" rel="stylesheet" />
 	<link type="text/css" href="./css/quote-layout.css" rel="stylesheet"/>
 	<link type="text/css" href="./css/quote-typography.css" rel="stylesheet"/>
+
+
+  <script src="https://code.highcharts.com/highcharts.js"></script>
+  <script src="https://code.highcharts.com/highcharts-3d.js"></script>
+  <script src="https://code.highcharts.com/modules/exporting.js"></script>
+  <script src="https://code.highcharts.com/modules/export-data.js"></script>
+  <script src="https://code.highcharts.com/modules/accessibility.js"></script>
+	<link type="text/css" href="./highcharts-css/css.css" rel="stylesheet"/>
 </head>
 
 <div id="volumeChecked" style="display: none">0</div>
@@ -202,7 +210,8 @@
 							<br><br>
 						</div>
 
-								5-day Avg Vol: <span style="font-size: 12px" id="five-day-average-volume"></span>
+								5-day Avg Vol: <span style="font-size: 12px" id="five-day-average-volume"></span><br>
+								&nbsp; &nbsp; &nbsp; &nbsp; <span id="low-volume-dollar-chart" style="background-color: #00ff00;">Dollar</span>&nbsp;<span id="low-volume-penny-chart" style="background-color: #00ff00;">Penny</span>
 
 						</td>
 
@@ -272,5 +281,248 @@
 
 </div>
 
+<div id="low-volume-dollar-chart-modal" class="modal" style="display: none">
+
+  <!-- Modal content -->
+  <div class="modal-content">
+		<figure class="highcharts-figure">
+		    <div id="low-volume-dollar-container"></div>
+		    <p class="highcharts-description">
+        		Low-volume drop rates for dollar stocks, based on the 5-day average volume.
+    		</p>
+		</figure>
+  </div>
+
+</div>
+
+<div id="low-volume-penny-chart-modal" class="modal" style="display: none">
+
+  <!-- Modal content -->
+  <div class="modal-content">
+		<figure class="highcharts-figure">
+		    <div id="low-volume-penny-container"></div>
+		    <p class="highcharts-description">
+        		Low-volume drop rates for dollar stocks, based on the 5-day average volume.
+    		</p>
+		</figure>
+  </div>
+
+</div>
+
 </body>
+
+
+
+<script>
+
+// Give the points a 3D feel by adding a radial gradient
+Highcharts.setOptions({
+    colors: Highcharts.getOptions().colors.map(function (color) {
+        return {
+            radialGradient: {
+                cx: 0.4,
+                cy: 0.3,
+                r: 0.5
+            },
+            stops: [
+                [0, color],
+                [1, Highcharts.color(color).brighten(-0.2).get('rgb')]
+            ]
+        };
+    }),
+    lang: {
+        thousandsSep: ','
+    }
+
+});
+
+
+// Set up the chart for low-volume dollar stocks 
+var chart = new Highcharts.Chart({
+    chart: {
+        renderTo: 'low-volume-dollar-container',
+        margin: 100,
+        type: 'scatter',
+        animation: false,
+        options: {
+            enabled: true,
+            alpha: 10,
+            beta: 30,
+            depth: 250,
+            viewDistance: 5,
+            fitToPlot: false,
+            frame: {
+                bottom: { size: 1, color: 'rgba(0,0,0,0.02)' },
+                back: { size: 1, color: 'rgba(0,0,0,0.04)' },
+                side: { size: 1, color: 'rgba(0,0,0,0.06)' }
+            }
+        }
+    },
+    title: {
+        text: 'Dollar stock drop rates based on 5-day average volume'
+    },
+    subtitle: {
+        text: 'How far a dollar stock will drop before a significant recovery, based on 5-day average volume'
+    },
+    plotOptions: {
+        scatter: {
+            width: 20,
+            height: 20,
+            depth: 20
+        }
+    },
+    xAxis: {
+        min: 0,
+        max: 2000000,
+        gridLineWidth: 1,
+        title: {
+            enabled: true,
+            text: "5-day average volume"
+        }
+    },
+    yAxis: {
+        min: 0,
+        max: 60,
+        title: {
+            enabled: true,
+            text: "Percentage drop before recovery"
+        }
+    },
+    legend: {
+        enabled: false
+    },
+    series: [{
+        name: 'Data',
+        colorByPoint: true,
+        accessibility: {
+            exposeAsGroupOnly: true
+        },
+        data: [
+            [87776, 45.00],
+						[120000, 40.00]
+            ]
+    }]
+});   // for low-volume dollar stock chart 
+
+// Set up the chart for low-volume dollar stocks 
+var chart = new Highcharts.Chart({
+    chart: {
+        renderTo: 'low-volume-penny-container',
+        margin: 100,
+        type: 'scatter',
+        animation: false,
+        options: {
+            enabled: true,
+            alpha: 10,
+            beta: 30,
+            depth: 250,
+            viewDistance: 5,
+            fitToPlot: false,
+            frame: {
+                bottom: { size: 1, color: 'rgba(0,0,0,0.02)' },
+                back: { size: 1, color: 'rgba(0,0,0,0.04)' },
+                side: { size: 1, color: 'rgba(0,0,0,0.06)' }
+            }
+        }
+    },
+    title: {
+        text: 'Dollar stock drop rates based on 5-day average volume'
+    },
+    subtitle: {
+        text: 'How far a dollar stock will drop before a significant recovery, based on 5-day average volume'
+    },
+    plotOptions: {
+        scatter: {
+            width: 20,
+            height: 20,
+            depth: 20
+        }
+    },
+    xAxis: {
+        min: 0,
+        max: 2000000,
+        gridLineWidth: 1,
+        title: {
+            enabled: true,
+            text: "5-day average volume"
+        }
+    },
+    yAxis: {
+        min: 0,
+        max: 60,
+        title: {
+            enabled: true,
+            text: "Percentage drop before recovery"
+        }
+    },
+    legend: {
+        enabled: false
+    },
+    series: [{
+        name: 'Data',
+        colorByPoint: true,
+        accessibility: {
+            exposeAsGroupOnly: true
+        },
+        data: [
+            [0, 0.00]
+            ]
+    }]
+});   // for low-volume dollar stock chart 
+
+
+
+
+// Add mouse and touch events for rotation
+(function (H) {
+    function dragStart(eStart) {
+        eStart = chart.pointer.normalize(eStart);
+
+        var posX = eStart.chartX,
+            posY = eStart.chartY,
+            alpha = chart.options.chart.options3d.alpha,
+            beta = chart.options.chart.options3d.beta,
+            sensitivity = 5,  // lower is more sensitive
+            handlers = [];
+
+        function drag(e) {
+            // Get e.chartX and e.chartY
+            e = chart.pointer.normalize(e);
+
+            chart.update({
+                chart: {
+                    options3d: {
+                        alpha: alpha + (e.chartY - posY) / sensitivity,
+                        beta: beta + (posX - e.chartX) / sensitivity
+                    }
+                }
+            }, undefined, undefined, false);
+        }
+
+        function unbindAll() {
+            handlers.forEach(function (unbind) {
+                if (unbind) {
+                    unbind();
+                }
+            });
+            handlers.length = 0;
+        }
+
+        handlers.push(H.addEvent(document, 'mousemove', drag));
+        handlers.push(H.addEvent(document, 'touchmove', drag));
+
+
+        handlers.push(H.addEvent(document, 'mouseup', unbindAll));
+        handlers.push(H.addEvent(document, 'touchend', unbindAll));
+    }
+    H.addEvent(chart.container, 'mousedown', dragStart);
+    H.addEvent(chart.container, 'touchstart', dragStart);
+
+}(Highcharts));
+
+
+
+</script>
+
+
 </html>

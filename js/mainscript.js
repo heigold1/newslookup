@@ -1448,6 +1448,29 @@ $(function() {
     }); 
 
 
+    $("#low-volume-dollar-chart").hover(function () {
+        var chartModal = document.getElementById('low-volume-dollar-chart-modal');
+            chartModal.style.display = "block"; 
+      }); 
+
+    $("#low-volume-dollar-chart-modal").click(function(){
+        var notesModal = document.getElementById('low-volume-dollar-chart-modal');
+            notesModal.style.display = "none"; 
+    }); 
+
+    $("#low-volume-penny-chart").hover(function () {
+        var chartModal = document.getElementById('low-volume-penny-chart-modal');
+            chartModal.style.display = "block"; 
+      }); 
+
+    $("#low-volume-penny-chart-modal").click(function(){
+        var notesModal = document.getElementById('low-volume-penny-chart-modal');
+            notesModal.style.display = "none"; 
+    }); 
+
+
+
+
     $(document.body).on('keyup', "#entryPercentage", function(){
 
 
