@@ -289,6 +289,16 @@ li.indent{
     height: 30%;
 }
 
+/* Modal Content/Box */
+.modal-content-chart {
+    background-color: #fefefe;
+    margin: 5% auto; /* 15% from the top and centered */
+    padding: 10px;
+    border: 1px solid #888;
+    width: 60%; /* Could be more or less, depending on screen size */
+    height: 30%;
+}
+
 #earnings_button{
 	display: inline-block;
 	width: 30px;

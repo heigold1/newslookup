@@ -1209,11 +1209,6 @@ $(function() {
           $("#five-day-average-volume").css("font-size", "25px"); 
         }
 
-        if (volumeRatio > 0.175)
-        {
-          warningMessage += " ** VOLUME RATIO IS " + volumeRatio + " ** ";
-        }
-
         if (warningMessage != "")
         {
 //            alert(warningMessage);

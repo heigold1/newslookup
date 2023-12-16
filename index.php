@@ -16,7 +16,7 @@
   <script src="https://code.highcharts.com/highcharts.js"></script>
   <script src="https://code.highcharts.com/highcharts-3d.js"></script>
   <script src="https://code.highcharts.com/modules/exporting.js"></script>
-  <script src="https://code.highcharts.com/modules/export-data.js"></script>
+	<script src="https://code.highcharts.com/modules/export-data.js"></script>
   <script src="https://code.highcharts.com/modules/accessibility.js"></script>
 	<link type="text/css" href="./highcharts-css/css.css" rel="stylesheet"/>
 </head>
@@ -284,7 +284,7 @@
 <div id="low-volume-dollar-chart-modal" class="modal" style="display: none">
 
   <!-- Modal content -->
-  <div class="modal-content">
+  <div class="modal-content-chart">
 		<figure class="highcharts-figure">
 		    <div id="low-volume-dollar-container"></div>
 		    <p class="highcharts-description">
@@ -298,7 +298,7 @@
 <div id="low-volume-penny-chart-modal" class="modal" style="display: none">
 
   <!-- Modal content -->
-  <div class="modal-content">
+  <div class="modal-content-chart">
 		<figure class="highcharts-figure">
 		    <div id="low-volume-penny-container"></div>
 		    <p class="highcharts-description">
@@ -333,7 +333,6 @@ Highcharts.setOptions({
     lang: {
         thousandsSep: ','
     }
-
 });
 
 
@@ -373,16 +372,17 @@ var chart = new Highcharts.Chart({
     },
     xAxis: {
         min: 0,
-        max: 2000000,
+        max: 1000000,
         gridLineWidth: 1,
         title: {
             enabled: true,
             text: "5-day average volume"
         }
+
     },
     yAxis: {
         min: 0,
-        max: 60,
+        max: 50,
         title: {
             enabled: true,
             text: "Percentage drop before recovery"
@@ -391,6 +391,10 @@ var chart = new Highcharts.Chart({
     legend: {
         enabled: false
     },
+    tooltip: {
+        pointFormat: "x:{point.x:,.0f} <br> y:{point.y:,.0f}"
+    },
+
     series: [{
         name: 'Data',
         colorByPoint: true,
@@ -404,7 +408,7 @@ var chart = new Highcharts.Chart({
     }]
 });   // for low-volume dollar stock chart 
 
-// Set up the chart for low-volume dollar stocks 
+// Set up the chart for low-volume PENNY stocks 
 var chart = new Highcharts.Chart({
     chart: {
         renderTo: 'low-volume-penny-container',
@@ -458,6 +462,9 @@ var chart = new Highcharts.Chart({
     legend: {
         enabled: false
     },
+    tooltip: {
+        pointFormat: "x:{point.x:,.0f} <br> y:{point.y:,.0f}"
+    },
     series: [{
         name: 'Data',
         colorByPoint: true,
@@ -468,7 +475,7 @@ var chart = new Highcharts.Chart({
             [0, 0.00]
             ]
     }]
-});   // for low-volume dollar stock chart 
+});   // for low-volume PENNY stock chart 
 
 
 
