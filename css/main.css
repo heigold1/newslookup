@@ -285,8 +285,8 @@ li.indent{
     margin: 5% auto; /* 15% from the top and centered */
     padding: 10px;
     border: 1px solid #888;
-    width: 80%; /* Could be more or less, depending on screen size */
-    height: 30%;
+    width: 100%; /* Could be more or less, depending on screen size */
+    height: 100%;
 }
 
 /* Modal Content/Box */
@@ -295,8 +295,8 @@ li.indent{
     margin: 5% auto; /* 15% from the top and centered */
     padding: 10px;
     border: 1px solid #888;
-    width: 60%; /* Could be more or less, depending on screen size */
-    height: 30%;
+    width: 70%; /* Could be more or less, depending on screen size */
+    height: 60%;
 }
 
 #earnings_button{

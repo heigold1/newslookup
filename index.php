@@ -373,6 +373,7 @@ var chart = new Highcharts.Chart({
     xAxis: {
         min: 0,
         max: 1000000,
+        tickInterval: 10000, 
         gridLineWidth: 1,
         title: {
             enabled: true,
@@ -383,6 +384,7 @@ var chart = new Highcharts.Chart({
     yAxis: {
         min: 0,
         max: 50,
+        tickInterval: 5, 
         title: {
             enabled: true,
             text: "Percentage drop before recovery"
@@ -392,7 +394,7 @@ var chart = new Highcharts.Chart({
         enabled: false
     },
     tooltip: {
-        pointFormat: "Data:<br> x:{point.x:,.0f} <br> y:{point.y:,.0f}"
+        pointFormat: "Data:<br> x:{point.x:,.0f} <br> y:{point.y:,.0f}%"
     },
 
     series: [
@@ -406,7 +408,8 @@ var chart = new Highcharts.Chart({
         type: 'line', 
         color: 'red',
         data: [
-            [87776, 45.00]
+            [87776, 45.00],
+            [248833, 31.00]
             ]
     }]
 });   // for low-volume dollar stock chart 
@@ -449,6 +452,7 @@ var chart = new Highcharts.Chart({
         min: 0,
         max: 2000000,
         gridLineWidth: 1,
+        tickInterval: 10000, 
         title: {
             enabled: true,
             text: "5-day average volume"
@@ -457,6 +461,7 @@ var chart = new Highcharts.Chart({
     yAxis: {
         min: 0,
         max: 60,
+        tickInterval: 5, 
         title: {
             enabled: true,
             text: "Percentage drop before recovery"
@@ -466,7 +471,7 @@ var chart = new Highcharts.Chart({
         enabled: false
     },
     tooltip: {
-        pointFormat: "x:{point.x:,.0f} <br> y:{point.y:,.0f}"
+        pointFormat: "x:{point.x:,.0f} <br> y:{point.y:,.0f}%"
     },
     series: [{
         name: 'Data',
