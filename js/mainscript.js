@@ -1201,6 +1201,13 @@ $(function() {
 
         $("#five-day-average-volume").html(fiveDayAverageVolume.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")); 
 
+        $("#modal-symbol-dollar-drop").html(symbol);
+        $("#dollar-drop-average").html(fiveDayAverageVolume.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+
+        $("#modal-symbol-penny-drop").html(symbol);
+        $("#penny-drop-average").html(fiveDayAverageVolume.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+
+
         if (fiveDayAverageVolume < 100000)
         {
           playLowVolumeStock();

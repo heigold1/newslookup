@@ -284,11 +284,11 @@
 <div id="low-volume-dollar-chart-modal" class="modal" style="display: none">
 
   <!-- Modal content -->
-  <div class="modal-content-chart">
+  <div class="modal-content-chart" style="background-color: white; ">
 		<figure class="highcharts-figure">
 		    <div id="low-volume-dollar-container"></div>
-		    <p class="highcharts-description">
-        		Low-volume drop rates for dollar stocks, based on the 5-day average volume.
+		    <p class="highcharts-description" style="background-color: white; font-size: 15px;">
+        		&nbsp; &nbsp; For <span id="modal-symbol-dollar-drop"></span> - Vol <span id="dollar-drop-average"></span>
     		</p>
 		</figure>
   </div>
@@ -301,8 +301,8 @@
   <div class="modal-content-chart">
 		<figure class="highcharts-figure">
 		    <div id="low-volume-penny-container"></div>
-		    <p class="highcharts-description">
-        		Low-volume drop rates for dollar stocks, based on the 5-day average volume.
+		    <p class="highcharts-description" style="background-color: white; font-size: 15px;">
+        		&nbsp; &nbsp; For <span id="modal-symbol-penny-drop"></span> - Vol <span id="penny-drop-average"></span>
     		</p>
 		</figure>
   </div>
@@ -392,18 +392,21 @@ var chart = new Highcharts.Chart({
         enabled: false
     },
     tooltip: {
-        pointFormat: "x:{point.x:,.0f} <br> y:{point.y:,.0f}"
+        pointFormat: "Data:<br> x:{point.x:,.0f} <br> y:{point.y:,.0f}"
     },
 
-    series: [{
+    series: [
+
+    {
         name: 'Data',
         colorByPoint: true,
         accessibility: {
-            exposeAsGroupOnly: true
-        },
+            exposeAsGroupOnly: true  
+        }, 
+        type: 'line', 
+        color: 'red',
         data: [
-            [87776, 45.00],
-						[120000, 40.00]
+            [87776, 45.00]
             ]
     }]
 });   // for low-volume dollar stock chart 
@@ -471,6 +474,8 @@ var chart = new Highcharts.Chart({
         accessibility: {
             exposeAsGroupOnly: true
         },
+        type: 'line', 
+        color: 'red', 
         data: [
             [0, 0.00]
             ]
