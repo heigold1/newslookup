@@ -276,6 +276,10 @@
 			- STALLS - dollar stocks with non-news - you can be patient, penny stocks with non-news and it stalls - just cut your losses and get out<br><br>
 			- Minimum entry for penny stocks - 23%<br><br>
 			- Pink Sheet dollar stocks - if the 50% down price is still over $1.00 a share, you can jump in at 50%
+
+			DELISTINGS: 
+			- MCOM going to the Pink Sheets on December 20th 
+			- ETAO delisting on December 22nd 
     </p>
   </div>
 
@@ -383,7 +387,7 @@ var chart = new Highcharts.Chart({
     },
     yAxis: {
         min: 0,
-        max: 50,
+        max: 100,
         tickInterval: 5, 
         title: {
             enabled: true,
@@ -409,7 +413,8 @@ var chart = new Highcharts.Chart({
         color: 'red',
         data: [
             [87776, 45.00],
-            [248833, 31.00]
+            [248833, 31.00],
+            [287808, 85.30] 
             ]
     }]
 });   // for low-volume dollar stock chart 
@@ -460,7 +465,7 @@ var chart = new Highcharts.Chart({
     },
     yAxis: {
         min: 0,
-        max: 60,
+        max: 100,
         tickInterval: 5, 
         title: {
             enabled: true,
