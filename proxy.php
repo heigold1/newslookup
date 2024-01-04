@@ -1169,7 +1169,7 @@ else if ($which_website == "yahoo")
       $finalReturn = preg_replace('/ regulatory update/i', '<span style="font-size: 12px; background-color:red; color:black"><b>&nbsp;regulatory update (35% even if regulation is good)</span></b>&nbsp;', $finalReturn);
       $finalReturn = preg_replace('/ suspended/i', '<span style="font-size: 12px; background-color:red; color:black"><b>&nbsp;suspended</span> (65-70%)</b>&nbsp;', $finalReturn);
       $finalReturn = preg_replace('/ fraud/i', '<span style="font-size: 12px; background-color:red; color:black"><b>&nbsp;fraud</span></b>&nbsp;', $finalReturn);      
-      $finalReturn = preg_replace('/ dividend/i', '<span style="font-size: 55px; background-color:red; color:black"><br><br><b>&nbsp;DIVIDEND - CHECK THE ISSUING DATE)</span></b>&nbsp;', $finalReturn);             
+      $finalReturn = preg_replace('/ dividend/i', '<span style="font-size: 55px; background-color:red; color:black"><br><br><b>&nbsp;DIVIDEND<br><br> - CHECK<br><br> ISSUING<br><br> DATE)</span></b>&nbsp;', $finalReturn);             
       $finalReturn = preg_replace('/ strategic alternatives/i', '<span style="font-size: 55px; background-color:red; color:black"><b>&nbsp;strategic alternatives</span></b>&nbsp;', $finalReturn);
       $finalReturn = preg_replace('/ unpatentable/i', '<span style="font-size: 12px; background-color:red; color:black"><b>&nbsp;unpatentable</span> (60%)</b>&nbsp;', $finalReturn);
       $finalReturn = preg_replace('/ accelerate or increase/i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp;accelerate or increase</span> (Possible Chapter 11, stay away)</b>&nbsp;', $finalReturn);
