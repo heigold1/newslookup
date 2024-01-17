@@ -496,11 +496,13 @@ $(function() {
           var foreignCountry = true; 
           var chineseStock = false;
           var yahooHtmlResults = "";
+          var haltSymbolList; 
           var date = new Date(); 
           var currentMinutes = parseInt(date.getMinutes()); 
           var dayOneLow; 
           var dayOneRecovery; 
           var newStock = false; 
+          var hasBeenHalted = false; 
           var numDaysTraded = 0; 
           var fiveDayAverageVolume; 
 
@@ -564,7 +566,7 @@ $(function() {
               $("#day1").html("");
               $("#entryPrice").val(""); 
               $("#entryPercentage").val("");  
-              $("#amountSpending").val("1750");
+              $("#amountSpending").val("1000");
               $("#eTradeLowPercentage").html("");
               $("#orderStub").val("-----------------------"); 
               $("#foreign_country").html("");
@@ -904,13 +906,20 @@ $(function() {
             success:  function (data) {
 
               $("#entryPercentage").focus();   
-              yahooHtmlResults = data; 
 
-// finalObject = JSON.parse(data); 
+              finalObject = JSON.parse(data); 
+
+              yahooHtmlResults = finalObject.final_return; 
+              haltSymbolList = finalObject.halt_symbol_list; 
+
+              if (haltSymbolList.includes(original_symbol))
+              {
+                  hasBeenHalted = true; 
+              }
 
               console.log(data);
 
-              yahooCompanyName = " " + data.match(/<h1(.*?)h1>/g) + " "; 
+              yahooCompanyName = " " + finalObject.final_return.match(/<h1(.*?)h1>/g) + " "; 
 
               google_keyword_string = yahooCompanyName;
               google_keyword_string = $.trim(google_keyword_string); 
@@ -929,7 +938,7 @@ $(function() {
               $("div#bigcharts_yest_close").html("<a href='https://www.google.com/search?q=stock+" + symbol + "&tbm=nws' target='blank'>GOOGLE NEWS</a>");  
 
               if (
-                (data.search(/there is google news/gi) > 0)
+                (finalObject.final_return.search(/there is google news/gi) > 0)
                 )
               {
                  $("div#bigcharts_yest_close").css("background-color", "#FFA1A1");
@@ -941,7 +950,7 @@ $(function() {
 
 
 
-              $("div#right_top_container").html(data);
+              $("div#right_top_container").html(finalObject.final_return);
 
               $("#entryPercentage").focus();   
 
@@ -960,7 +969,7 @@ $(function() {
 
 //              data = data.replace('<span id="country">China', '<span id="country" style="font-size:300px; background-color:red"><br><br>China<br>');
 
-              if (data.toLowerCase().search("couldn't resolve host name") != -1)
+              if (finalObject.final_return.toLowerCase().search("couldn't resolve host name") != -1)
               {
                   openPage("http://ec2-54-210-42-143.compute-1.amazonaws.com/newslookup/proxy.php?symbol=" + symbol + "&which_website=yahoo&host_name=finance.yahoo.com&company_name=" + yahooCompanyName + "&ten_day_volume=" + yahoo10DayVolume + "&total_volume=" + totalVolume + "&yesterday_volume=" + yesterdayVolume);
               }
@@ -980,7 +989,7 @@ $(function() {
                   document.getElementById('country').style.height = "35px"; 
               }
 
-              yesterdaysClose = " " + data.match(/<h4(.*?)h4>/g) + " "; 
+              yesterdaysClose = " " + finalObject.final_return.match(/<h4(.*?)h4>/g) + " "; 
               yesterdaysClose = yesterdaysClose.replace(/ <h4>/ig, "");
               yesterdaysClose = yesterdaysClose.replace(/<\/h4> /ig, "");         
 
@@ -1069,6 +1078,11 @@ $(function() {
                       if (newStock == true)
                       {
                           alert("Stock has not traded a full month.  Check the number of days traded."); 
+                      }
+
+                      if (hasBeenHalted == true)
+                      {
+                          alert("STOCK HAS BEEN HALTED!!!!!!!!!!!!!!!!!")
                       }
 
                       $("div#left_bottom_container").html(finalObject.html);   /*streetInsiderIFrame + */
@@ -1439,7 +1453,7 @@ $(function() {
     });  // end of entryPercentage keypress function
 
 
-    $("#notes").hover(function () {
+    $("#notes").click(function () {
         var notesModal = document.getElementById('notes-modal');
             notesModal.style.display = "block"; 
       }); 
@@ -1450,7 +1464,7 @@ $(function() {
     }); 
 
 
-    $("#low-volume-dollar-chart").hover(function () {
+    $("#low-volume-dollar-chart").click(function () {
         var chartModal = document.getElementById('low-volume-dollar-chart-modal');
             chartModal.style.display = "block"; 
       }); 
@@ -1460,7 +1474,7 @@ $(function() {
             notesModal.style.display = "none"; 
     }); 
 
-    $("#low-volume-penny-chart").hover(function () {
+    $("#low-volume-penny-chart").click(function () {
         var chartModal = document.getElementById('low-volume-penny-chart-modal');
             chartModal.style.display = "block"; 
       }); 
@@ -1499,9 +1513,9 @@ $(function() {
 
           // in case I accidentally type in more than I should be trading with
           var thisValue = parseInt($(this).val()); 
-          if (thisValue >  1500)
+          if (thisValue >  1000)
           {
-            thisValue = 1500;
+            thisValue = 1000;
             $(this).val(thisValue);
           }
 

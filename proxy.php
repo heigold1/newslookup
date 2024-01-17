@@ -233,23 +233,11 @@ function get_marketwatch_today_trade_date()
 
 function mapCountryCodes($code)
 {
-
   $map = array(
     'US' => 'USA',
 
-
-
-
-
-
 ); 
-
   $country = $map[$code]; 
-
-
-
-
-
 
 }
 
@@ -316,8 +304,6 @@ function addYahooSectorIndustry($symbol, $sector, $industry, $country, $companyN
 }
 
 
-
-
 function curl_get_contents($url)
 {
     $ch = curl_init();
@@ -331,6 +317,55 @@ function curl_get_contents($url)
 
     return $data;
 }
+
+
+function getTradeHalts()
+{
+    $rss_feed = simplexml_load_file("https://www.nasdaqtrader.com/rss.aspx?feed=tradehalts");
+
+    $returnArray['haltstring'] = ""; 
+    $returnArray['haltalert'] = 0; 
+    $haltSymbolList = array(); 
+
+    $dateTime = new DateTime(); 
+    $dateTime->modify('-8 hours'); 
+    $currentDate = $dateTime->format("m/d/Y"); 
+
+    foreach ($rss_feed->channel->item as $feed_item) {
+
+      $ns = $feed_item->getNamespaces(true); 
+      $child = $feed_item->children($ns["ndaq"]);
+
+      $date = $child->HaltDate; 
+      $resumptionTime = $child->ResumptionTradeTime; 
+      $symbol = trim($feed_item->title); 
+      $reasonCode = trim($child->ReasonCode); 
+      $ignoreArray = array(''); 
+
+
+      $returnArray['haltstring'] .= "symbol is " . $symbol . ", date is " . $date . ", currentDate is " . $currentDate . ", child->ResumptionTradeTime is *" . $resumptionTime . "* and reasonCode is *" . $reasonCode . "* "; 
+
+      if ($date == $currentDate)
+      {
+        if (!in_array($symbol, $ignoreArray)) {
+            $returnArray['haltalert'] = 1; 
+            $returnArray['haltstring'] .= " *********************************** HALT ALERT\n"; 
+            array_push($haltSymbolList, $symbol); 
+        }
+
+      }
+      else 
+      {
+            $returnArray['haltstring'] .= " NO HALT ALERT\n"; 
+      }
+
+    }
+    $returnArray['halt_symbol_list'] = json_encode($haltSymbolList); 
+    return $returnArray; 
+}
+
+
+
 
 function grabEtradeHTML($etrade_host_name, $url)
 {
@@ -1328,9 +1363,14 @@ else if ($which_website == "yahoo")
 
       $finalReturn = $yahooDates . $returnCompanyName . $companyWebsite . $sectorCountry . $returnYesterdaysClose . $preMarketYesterdaysClose[0] . "<br>" . "<div style='display: inline-block;'>" . /* $yesterdayVolumeHTML . */ $currentVolumeHTML .  /* $volumeRatioHTML . */ $avgVol10days . /* $avgVolYahoo . */ $company_profile . $yahoo_main_page . $message_board . $google . $nasdaqInfo . $streetInsider . $streetInsiderScrape . $splits . $marketStackOHLC . $seekingAlpha . '<table width="700px"><tr width="575px">' . $finalReturn . '</tr></table>' . $googleNewsFlag . $googleNewsHtmlDOM[0];  
 
-      echo $finalReturn; 
+      $tradeHaltsArray = getTradeHalts(); 
 
+      $returnArray['haltstring'] = $tradeHaltsArray["haltstring"]; 
+      $returnArray['haltalert'] = $tradeHaltsArray["haltalert"]; 
+      $returnArray['halt_symbol_list'] = $tradeHaltsArray['halt_symbol_list']; 
+      $returnArray['final_return'] = $finalReturn;
 
+      echo json_encode($returnArray); 
 
 } // if ($which_website == "yahoo")
 else if ($which_website == "bigcharts")
