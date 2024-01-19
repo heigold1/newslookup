@@ -275,11 +275,9 @@
 			- Go 15% down from pre-market low for high-risk penny stocks<br><br>
 			- STALLS - dollar stocks with non-news - you can be patient, penny stocks with non-news and it stalls - just cut your losses and get out<br><br>
 			- Minimum entry for penny stocks - 23%<br><br>
-			- Pink Sheet dollar stocks - if the 50% down price is still over $1.00 a share, you can jump in at 50%
-
-			DELISTINGS: 
-			- MCOM going to the Pink Sheets on December 20th 
-			- ETAO delisting on December 22nd 
+			- Pink Sheet dollar stocks - if the 50% down price is still over $1.00 a share, you can jump in at 50%<br><br>
+			- Penny offerings - 45% down from offering price, if the price is super low then 50%<br><br>
+			- Super low volume stocks - you can go in at 24%, ONLY FOR DOLLAR STOCKS. 
     </p>
   </div>
 
