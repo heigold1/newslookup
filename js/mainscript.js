@@ -503,6 +503,7 @@ $(function() {
           var dayOneRecovery; 
           var newStock = false; 
           var hasBeenHalted = false; 
+          var hasBeenBlackListed = false; 
           var numDaysTraded = 0; 
           var fiveDayAverageVolume; 
 
@@ -912,6 +913,34 @@ $(function() {
               yahooHtmlResults = finalObject.final_return; 
               haltSymbolList = finalObject.halt_symbol_list; 
 
+              const blackList = [
+                {
+                  "stock": "RR", 
+                  "reason": "Waterfall halt on JANUARY 26TH 2024"
+                },
+                {
+                  "stock": "SAVE",
+                  "reason": "Teriminated merger on JANUARY 26TH 2024"
+                }
+                ]; 
+
+              var blacklistReason = ""; 
+
+              for (let i = 0; i < blackList.length; i++)
+              {
+                  let obj = blackList[i];
+                  if (obj.stock == original_symbol)
+                  {
+                      alert("STOCK HAS BEEN BLACKLISTED!!!!!!!!!!!!\n\n" + obj.reason); 
+                      blacklistReason = obj.reason; 
+                  }
+              }
+
+              if (blackList.includes(original_symbol))
+              {
+                  hasBeenBlackListed = true; 
+              }
+
               if (haltSymbolList.includes(original_symbol))
               {
                   hasBeenHalted = true; 
@@ -935,7 +964,7 @@ $(function() {
               google_keyword_string = google_keyword_string.replace(/inc\./ig, "");
               google_keyword_string = google_keyword_string.replace(/ltd\./ig, "");
 
-              $("div#bigcharts_yest_close").html("<a href='https://www.google.com/search?q=stock+" + symbol + "&tbm=nws' target='blank'>GOOGLE NEWS</a>");  
+              $("div#bigcharts_yest_close").html("<a href='https://www.google.com/search?q=stock+" + symbol + "&tbm=nws' target='blank'>GOOGLE NEWS</a><br><br><span style='font-size: 25px; background-color: red;'>" + blacklistReason + "</span>");  
 
               if (
                 (finalObject.final_return.search(/there is google news/gi) > 0)
@@ -1082,7 +1111,7 @@ $(function() {
 
                       if (hasBeenHalted == true)
                       {
-                          alert("STOCK HAS BEEN HALTED!!!!!!!!!!!!!!!!!")
+                          alert("STOCK HAS BEEN HALTED!!!!!!!!!!!!!!!!!"); 
                       }
 
                       $("div#left_bottom_container").html(finalObject.html);   /*streetInsiderIFrame + */
