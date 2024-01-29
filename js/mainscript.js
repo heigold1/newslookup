@@ -739,6 +739,11 @@ $(function() {
                       newStock = true;
                   }
 
+                  if (parseInt(returnedObject.day_1) > 24)
+                  {
+                      alert("HIGH RISK!!  Check to see if any news caused the spike yesterday\n (therefore it's not a news stock)");
+                  }
+
                   $("#day1").html(returnedObject.day_1);
                   $("#day2").html(returnedObject.day_2);
                   $("#day4").html(returnedObject.day_4);
@@ -917,6 +922,10 @@ $(function() {
                 {
                   "stock": "RR", 
                   "reason": "Waterfall halt on JANUARY 26TH 2024"
+                },
+                {
+                  "stock": "JL", 
+                  "reason": "Waterfall halt on JANUARY 29TH 2024"
                 },
                 {
                   "stock": "SAVE",
