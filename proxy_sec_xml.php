@@ -513,6 +513,7 @@ function getStreetInsider($symbol, $yesterdayDays)
 
             $newsTitle = preg_replace('/ withdrawal(.*?)application/i', '<span style="font-size: 12px; background-color:red; color:black"><b> withdrawal $1 application (55%) </b></span> ', $newsTitle);
             $newsTitle = preg_replace('/nasdaq rejects(.*?)listing/i', '<span style="font-size: 12px; background-color:red; color:black"><b>Nasdaq rejects $1 listing</span> </b>&nbsp;', $newsTitle);
+            $newsTitle = preg_replace('/ announces(.*?)offering/i', '<span style="font-size: 45px; background-color:red; color:black"><b> ANNOUNCES $1 OFFERING </b></span> ', $newsTitle);
 
             $streetInsiderNews .=  " ><a target='_blank' href='$feedItem->link'> " . $publicationDate . " " . $publicationTime . " - <br>" . $newsTitle . "</a>";
 
@@ -538,7 +539,6 @@ function getStreetInsider($symbol, $yesterdayDays)
         }
 
         $streetInsiderNews .= "yesterdayDays is " . $yesterdayDays . "<br>"; 
-
 
           $streetInsiderNews = preg_replace('/(' .  get_yahoo_yesterday_trade_date() . ')/', '<span style="font-size: 12px; background-color:   #0747a1; color:white"> $1</span> ', $streetInsiderNews);
           $streetInsiderNews = preg_replace('/(' .  get_yahoo_todays_trade_date() . ')/', '<span style="font-size: 12px; background-color:  black; color:white"> $1</span> ', $streetInsiderNews);
@@ -891,6 +891,7 @@ function getSecFilings($symbol, $yesterdayDays, $secCompanyName)
               $title = preg_replace('/general form for registration of securities/i', '<span style="font-size: 35px; background-color:red; color:black"><b>&nbsp;General form for registration of securities</span></b>&nbsp;', $title);
               $title = preg_replace('/ business combination/i', '<span style="font-size: 55px; background-color:red; color:black"><br><br><b>&nbsp; BUSINESS<br><br> COMBINATION<br><br> - STAY<br><br>AWAY<br><br> </b></span> &nbsp;', $title);
               $title = preg_replace('/annual report/i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp; ANNUAL REPORT</b></span> &nbsp;', $title);
+              $title = preg_replace('/424/i', '<span style="font-size: 45px; background-color:red; color:black"><b>&nbsp; 424 - OFFERING</b></span> &nbsp;', $title);
 
               if (preg_match('/registration/i', $title) || preg_match('/offering/i', $title))
               {

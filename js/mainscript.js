@@ -741,7 +741,7 @@ $(function() {
 
                   if (parseInt(returnedObject.day_1) > 24)
                   {
-                      alert("HIGH RISK!!  Check to see if any news caused the spike yesterday\n (therefore it's not a news stock)");
+                      alert("Is there any news that explains the high-risk spike?");
                   }
 
                   $("#day1").html(returnedObject.day_1);
@@ -930,6 +930,10 @@ $(function() {
                 {
                   "stock": "SAVE",
                   "reason": "Teriminated merger on JANUARY 26TH 2024"
+                },
+                {
+                  "stock": "AEY",
+                  "reason": "Halted on a bankruptcy"
                 }
                 ]; 
 
