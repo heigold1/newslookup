@@ -1,0 +1,122 @@
+Feb 2, 2024	HOLO	Stock Split	HOLO reverse stock split: 1 for 10
+Feb 2, 2024	GNPX	Stock Split	GNPX reverse stock split: 1 for 40
+Feb 2, 2024	CAMP	Stock Split	CAMP reverse stock split: 1 for 23
+Feb 2, 2024	BSGM	Stock Split	BSGM reverse stock split: 1 for 10
+Feb 1, 2024	TCRT	Stock Split	TCRT reverse stock split: 1 for 15
+Feb 1, 2024	NA	Stock Split	
+Feb 1, 2024	DAY	Symbol Change	CDAY ticker symbol changed to DAY
+Feb 1, 2024	CMAX	Stock Split	CMAX reverse stock split: 1 for 30
+Feb 1, 2024	AS	Listed	Amer Sports Inc was listed
+Feb 1, 2024	ARQ	Symbol Change	ADES ticker symbol changed to ARQ
+Jan 31, 2024	GOVX	Stock Split	GOVX reverse stock split: 1 for 15
+Jan 31, 2024	FBLG	Listed	Fibrobiologics Inc was listed
+Jan 30, 2024	XTKG	Symbol Change	PBTS ticker symbol changed to XTKG
+Jan 30, 2024	QGEN	Stock Split	QGEN reverse stock split: 1 for 1
+Jan 30, 2024	LFWD	Symbol Change	RWLK ticker symbol changed to LFWD
+Jan 30, 2024	GRI	Stock Split	GRI reverse stock split: 1 for 7
+Jan 30, 2024	COMS	Delisted	Comsovereign Holding Corp was delisted
+Jan 29, 2024	NEUE	Symbol Change	BHG ticker symbol changed to NEUE
+Jan 29, 2024	MMAT	Stock Split	MMAT reverse stock split: 1 for 100
+Jan 29, 2024	INBS	Stock Split	INBS reverse stock split: 1 for 12
+Jan 29, 2024	HUBG	Stock Split	HUBG stock split: 2 for 1
+Jan 29, 2024	FLUT	Listed	Flutter Entertainment PLC was listed
+Jan 29, 2024	ECCF	Listed	Eagle Point Credit Co Inc was listed
+Jan 29, 2024	AMIX	Listed	Autonomix Medical Inc was listed
+Jan 26, 2024	TC	Stock Split	TC reverse stock split: 1 for 15
+Jan 26, 2024	PBM	Symbol Change	NCAC ticker symbol changed to PBM
+Jan 26, 2024	NSTB	Delisted	Northern Star Investment Corp Ii was delisted
+Jan 26, 2024	NSTB	Bankruptcy	NSTB was liquidated due to bankruptcy.
+Jan 26, 2024	HAO	Listed	Haoxi Health Technology Ltd. was listed
+Jan 26, 2024	BTSG	Listed	Brightspring Health Services Inc was listed
+Jan 26, 2024	AVBP	Listed	Arrivent Biopharma Inc was listed
+Jan 26, 2024	ARAV	Delisted	Aravive Inc was delisted
+Jan 26, 2024	ARAV	Bankruptcy	ARAV was liquidated due to bankruptcy.
+Jan 26, 2024	AMJB	Listed	Jpmorgan Chase Financial Co LLC was listed
+Jan 25, 2024	YIBO	Listed	Planet Image International Ltd. was listed
+Jan 25, 2024	SOGP	Symbol Change	LIZI ticker symbol changed to SOGP
+Jan 25, 2024	REVB	Stock Split	REVB reverse stock split: 1 for 30
+Jan 25, 2024	RAIN	Delisted	Rain Oncology Inc was delisted
+Jan 25, 2024	OBDE	Listed	Blue Owl Capital Corp Iii was listed
+Jan 25, 2024	NCDL	Listed	Nuveen Churchill Direct Lending Corp was listed
+Jan 25, 2024	ESMT	Acquisition	ESMT was acquired by Vista Equity Partners
+Jan 25, 2024	RAIN	Acquisition	RAIN was acquired by Pathos Ai Inc
+Jan 25, 2024	KAVL	Stock Split	KAVL reverse stock split: 1 for 21
+Jan 25, 2024	INO	Stock Split	INO reverse stock split: 1 for 12
+Jan 25, 2024	GOLLQ	Symbol Change	GOL ticker symbol changed to GOLLQ
+Jan 25, 2024	GOLLQ	Delisted	Gol Intelligent Airlines Inc was delisted
+Jan 25, 2024	GOLLQ	Bankruptcy	GOLLQ was liquidated due to bankruptcy.
+Jan 25, 2024	ESMT	Delisted	Engagesmart Inc was delisted
+Jan 25, 2024	CGON	Listed	Cg Oncology Inc was listed
+Jan 25, 2024	BTSG	Stock Split	BTSG stock split: 15.7027 for 1
+Jan 24, 2024	SUGP	Listed	Su Group Holdings Ltd. was listed
+Jan 24, 2024	MFAN	Listed	Mfa Financial Inc was listed
+Jan 24, 2024	JL	Listed	J-long Group Ltd. was listed
+Jan 24, 2024	INSG	Stock Split	INSG reverse stock split: 1 for 10
+Jan 24, 2024	CORZ	Listed	Core Scientific Inc was listed
+Jan 23, 2024	ORTX	Delisted	Orchard Therapeutics PLC was delisted
+Jan 23, 2024	ORTX	Acquisition	ORTX was acquired by Kyowa Kirin Co. Ltd.
+Jan 23, 2024	GSDI	Symbol Change	GSD ticker symbol changed to GSDI
+Jan 23, 2024	GSDI	Delisted	Global System Dynamics Inc was delisted
+Jan 23, 2024	DTSS	Stock Split	DTSS reverse stock split: 1 for 15
+Jan 23, 2024	CORZ	Stock Split	CORZ reverse stock split: 1 for 10
+Jan 22, 2024	SRC	Delisted	Spirit Realty Capital Inc was delisted
+Jan 22, 2024	REBN	Stock Split	REBN reverse stock split: 1 for 8
+Jan 22, 2024	PCSA	Stock Split	PCSA reverse stock split: 1 for 20
+Jan 22, 2024	SRC	Acquisition	SRC was acquired by O
+Jan 22, 2024	NVVE	Stock Split	NVVE reverse stock split: 1 for 40
+Jan 22, 2024	MRTX	Delisted	Mirati Therapeutics Inc was delisted
+Jan 22, 2024	EVAX	Stock Split	EVAX reverse stock split: 1 for 10
+Jan 22, 2024	MRTX	Acquisition	MRTX was acquired by BMY
+Jan 22, 2024	AFJK	Symbol Change	AFJKU ticker symbol changed to AFJK
+Jan 19, 2024	KSPI	Listed	Joint Stock Co Kaspikz was listed
+Jan 19, 2024	GXAI	Symbol Change	NFTG ticker symbol changed to GXAI
+Jan 19, 2024	CNEY	Stock Split	CNEY reverse stock split: 1 for 30
+Jan 19, 2024	CLEU	Stock Split	CLEU reverse stock split: 1 for 15
+Jan 18, 2024	SALM	Delisted	Salem Media Group Inc was delisted
+Jan 18, 2024	PSBD	Listed	Palmer Square Capital Bdc Inc was listed
+Jan 18, 2024	PBLA	Stock Split	PBLA reverse stock split: 1 for 20
+Jan 18, 2024	CCTG	Listed	Ccsc Technology International Holdings Ltd. was listed
+Jan 17, 2024	GORV	Symbol Change	LAZY ticker symbol changed to GORV
+Jan 17, 2024	AULT	Stock Split	AULT reverse stock split: 1 for 25
+Jan 16, 2024	UXIN	Stock Split	UXIN reverse stock split: 1 for 10
+Jan 16, 2024	RNAZ	Stock Split	RNAZ reverse stock split: 1 for 40
+Jan 16, 2024	BVH	Acquisition	BVH was acquired by 0001674168
+Jan 16, 2024	HOVR	Symbol Change	PTHR ticker symbol changed to HOVR
+Jan 16, 2024	ELIQ	Delisted	Electriq Power Holdings Inc was delisted
+Jan 16, 2024	BVH	Delisted	Bluegreen Vacations Holding Corp was delisted
+Jan 12, 2024	SYNX	Listed	Silynxcom Ltd. was listed
+Jan 12, 2024	EFTR	Stock Split	EFTR reverse stock split: 1 for 25
+Jan 11, 2024	SDHC	Listed	Smith Douglas Homes Corp was listed
+Jan 10, 2024	TLPH	Symbol Change	ACRX ticker symbol changed to TLPH
+Jan 10, 2024	TCTM	Symbol Change	TEDU ticker symbol changed to TCTM
+Jan 10, 2024	NEXN	Symbol Change	TRMR ticker symbol changed to NEXN
+Jan 10, 2024	MESO	Stock Split	MESO reverse stock split: 1 for 2
+Jan 10, 2024	BETS	Stock Split	BETS reverse stock split: 1 for 1000
+Jan 9, 2024	TTNP	Stock Split	TTNP reverse stock split: 1 for 20
+Jan 9, 2024	ROMA	Listed	Roma Green Finance Ltd. was listed
+Jan 9, 2024	HWH	Symbol Change	HWH ticker symbol changed to HWH
+Jan 8, 2024	ONCT	Stock Split	ONCT reverse stock split: 1 for 20
+Jan 8, 2024	GRDI	Symbol Change	ADEX ticker symbol changed to GRDI
+Jan 8, 2024	GPP	Acquisition	GPP was acquired by GPRE
+Jan 8, 2024	GPP	Delisted	Green Plains Partners Lp was delisted
+Jan 8, 2024	EIGR	Stock Split	EIGR reverse stock split: 1 for 30
+Jan 5, 2024	SLGC	Delisted	Somalogic Inc was delisted
+Jan 5, 2024	SABS	Stock Split	SABS reverse stock split: 1 for 10
+Jan 5, 2024	SLGC	Acquisition	SLGC was acquired by LAB
+Jan 5, 2024	DSS	Stock Split	DSS reverse stock split: 1 for 20
+Jan 5, 2024	AIC	Delisted	Arlington Asset Investment Corp was delisted
+Jan 5, 2024	AAIN	Delisted	Arlington Asset Investment Corp was delisted
+Jan 4, 2024	SRT	Delisted	Startek Inc was delisted
+Jan 4, 2024	NMRD	Delisted	Nemaura Medical Inc was delisted
+Jan 4, 2024	CHS	Acquisition	CHS was acquired by Sycamore Partners Management Lp
+Jan 4, 2024	SRT	Acquisition	SRT was acquired by Capital Square Partners
+Jan 4, 2024	JSPR	Stock Split	JSPR reverse stock split: 1 for 10
+Jan 4, 2024	HALL	Delisted	Hallmark Financial Services Inc was delisted
+Jan 4, 2024	CHS	Delisted	Chico's Fas Inc was delisted
+Jan 4, 2024	ALTM	Listed	Arcadium Lithium PLC was listed
+Jan 4, 2024	ACON	Stock Split	ACON reverse stock split: 1 for 16
+Jan 3, 2024	TENX	Stock Split	TENX reverse stock split: 1 for 80
+Jan 3, 2024	PRSO	Stock Split	PRSO reverse stock split: 1 for 40
+Jan 3, 2024	LXEH	Stock Split	LXEH reverse stock split: 1 for 2
+Jan 3, 2024	LTHM	Delisted	Livent Corp was delisted
+Jan 3, 2024	FLEX	Spinoff	NXT spun off from FLEX
