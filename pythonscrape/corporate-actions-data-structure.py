@@ -20,7 +20,7 @@ def create_data_structure():
 
     f.close() 
 
-    print("]") 
+    print("\n") 
 
   except Exception as e:
     print("Exception") 
