@@ -16,14 +16,24 @@ def create_data_structure():
 
     for line in f:
       values = line.split("\t")
+#      print(values[1] + " is *" + values[2] + "*") 
       symbolList.append(values[1])  
 
-    f.close() 
-
+    f.seek(0) 
+   
     originalListCount = len(symbolList) 
     print("\nNumber of items before sorting is " + str(originalListCount)) 
 
     symbolList = list(OrderedDict.fromkeys(symbolList))
+
+    for line in f: 
+      values = line.split("\t") 
+      print(values[1] + " is *" + values[2] + "*")
+      if (values[2] == 'Delisted'): 
+        symbolList.remove(values[1])  
+        print("Removing " + values[1]) 
+
+    f.close() 
 
     afterSortListCount = len(symbolList) 
 

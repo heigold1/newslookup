@@ -743,6 +743,8 @@ $(function() {
                       alert("Is there any news that explains the high-risk spike?");
                   }
 
+
+
                   $("#day1").html(returnedObject.day_1);
                   $("#day2").html(returnedObject.day_2);
                   $("#day4").html(returnedObject.day_4);
@@ -1155,6 +1157,7 @@ $(function() {
             $("#day1_volume").html($("#day1_volume").html() + "  VOL!!");
             $("#day1_volume").css({'background-color' : 'red', 'font-size' : '17px'});
             $("#day1_volume").fadeOut(300).fadeIn(300).fadeOut(300).fadeIn(300).fadeOut(300).fadeIn(300).fadeOut(300).fadeIn(300).fadeOut(300).fadeIn(300).fadeOut(300).fadeIn(300).fadeOut(300).fadeIn(300).fadeOut(300).fadeIn(300);
+            alert("VOLUME SPIKE!  HIGH RISK!"); 
         }
 
         if (highRiskFlag == 1)
