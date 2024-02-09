@@ -277,8 +277,8 @@
 			- Minimum entry for penny stocks - 23%<br><br>
 			- Pink Sheet dollar stocks - if the 50% down price is still over $1.00 a share, you can jump in at 50%<br><br>
 			- Penny offerings - 45% down from offering price, if the price is super low then 50%<br><br>
-			- Super low volume stocks - you can go in at 24%, ONLY FOR DOLLAR STOCKS. 
-			- Recent bankruptcies - you can go into these at 40% penny, 35% dollar. 
+			- Super low volume stocks - you can go in at 24%, ONLY FOR DOLLAR STOCKS.<br><br>
+			- Recent bankruptcies - you can go into these at 40% penny the day after a bankruptcy, 35% dollar. 
     </p>
   </div>
 
