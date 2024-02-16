@@ -400,7 +400,7 @@ function getStreetInsider($symbol, $yesterdayDays)
     $currentTimeInt = strtotime('- 8 hours'); 
     $currentTime = date('Y-m-d H:i:s', $currentTimeInt); 
 
-    // If it's been over 30 minutes since we last scraped, or we haven't scraped it yet (i.e. no rows in the database) 
+    // If it's been over 25 minutes since we last scraped, or we haven't scraped it yet (i.e. no rows in the database) 
     // then we re-scrape (i.e. $reScrape = true) 
     if ($rowCount >= 1)
     {

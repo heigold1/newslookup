@@ -1,6 +1,8 @@
 #!/usr/bin/pythoption:'ascii' codec can't encode character '\xa9' in position 134670 lxml import html
 import urllib3
 from collections import OrderedDict
+import re 
+import json 
 
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
@@ -12,6 +14,7 @@ def create_data_structure():
 
     f = open("corporate-actions.txt", "r")
     symbolList = [] 
+    symbolListOther = {} 
 
 
     for line in f:
@@ -28,10 +31,15 @@ def create_data_structure():
 
     for line in f: 
       values = line.split("\t") 
-      print(values[1] + " is *" + values[2] + "*")
-      if (values[2] == 'Delisted'): 
+      print(values[1] + " is '" + values[2] + "', '" + values[3].rstrip('\n') + "'") 
+
+      pattern = re.compile(r'\breverse stock split\b', re.IGNORECASE) 
+
+      if ((values[2] == 'Delisted') or pattern.search(values[3])): 
         symbolList.remove(values[1])  
-        print("Removing " + values[1]) 
+        if pattern.search(values[3]): 
+          symbolListOther[values[1]] = "REVERSE SPLIT on " + values[0]  
+          print("Passed the regex test") 
 
     f.close() 
 
@@ -48,6 +56,10 @@ def create_data_structure():
       print('"' + symbol + '",', end=" ")
 
 
+    print("\n\nvar corporateActionsStocks= ") 
+
+    symbolListOtherJSON = json.dumps(symbolListOther, indent=2) 
+    print(symbolListOtherJSON + ";") 
 
     print("\n") 
 
