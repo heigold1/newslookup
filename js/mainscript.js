@@ -1102,11 +1102,6 @@ for (var corporateSymbol in corporateActionsStocks)
 }
 
 
-
-
-                      console.log("INDUSTRY COUNT IS:"); 
-                      console.log(finalObject.industryCount);
-
                       if (parseInt(finalObject.industryCount) > 7)
                       {
                         alert("Sector count is over 6, back off"); 

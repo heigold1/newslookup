@@ -1,0 +1,22 @@
+MariaDB [daytrade]> describe sector;
++----------+--------------+------+-----+---------+-------+
+| Field    | Type         | Null | Key | Default | Extra |
++----------+--------------+------+-----+---------+-------+
+| symbol   | varchar(10)  | NO   | PRI | NULL    |       |
+| sector   | varchar(50)  | YES  |     | NULL    |       |
+| industry | varchar(200) | YES  |     | NULL    |       |
+| country  | varchar(50)  | YES  |     | NULL    |       |
+| date     | date         | YES  |     | NULL    |       |
++----------+--------------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+
+MariaDB [daytrade]> describe streetinsider;
++-------------+--------------+------+-----+-------------------+-----------------------------+
+| Field       | Type         | Null | Key | Default           | Extra                       |
++-------------+--------------+------+-----+-------------------+-----------------------------+
+| symbol      | varchar(10)  | NO   | PRI | NULL              |                             |
+| htmltext    | blob         | YES  |     | NULL              |                             |
+| lastTitle   | varchar(300) | YES  |     | NULL              |                             |
+| lastLink    | varchar(300) | YES  |     | NULL              |                             |
+| lastUpdated | timestamp    | NO   |     | CURRENT_TIMESTAMP | on update CURRENT_TIMESTAMP |
++-------------+--------------+------+-----+-------------------+-----------------------------+
