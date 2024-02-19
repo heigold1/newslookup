@@ -719,7 +719,7 @@ function getStreetInsider($symbol, $yesterdayDays)
         {
             $link->set_charset("utf8");
 
-            $sqlStatement = "REPLACE INTO streetinsider (symbol, htmltext, lastTitle, lastLink) VALUES ('" . $symbol . "', '" . mysqli_real_escape_string($link, $streetInsiderNews) . "', '" . $streetInsiderLink . "', '" . $streetInsiderTitle . "')"; 
+            $sqlStatement = "REPLACE INTO streetinsider (symbol, htmltext, lastLink, lastTitle) VALUES ('" . $symbol . "', '" . mysqli_real_escape_string($link, $streetInsiderNews) . "', '" . $streetInsiderLink . "', '" . $streetInsiderTitle . "')"; 
 
             $query = mysqli_query($link, $sqlStatement);
             if(!$query)
