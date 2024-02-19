@@ -9,7 +9,7 @@ $secCompanyName = preg_replace('/ /', '+', $secCompanyName);
 $secCompanyName = preg_replace("/<.*?>/", "", $secCompanyName);
 $checkSec = $_GET['checkSec']; 
 
-$yesterdayDays = 1;
+$yesterdayDays = 4;
 
 fopen("cookies.txt", "w");
 
@@ -432,6 +432,8 @@ function getStreetInsider($symbol, $yesterdayDays)
         $xmlStreetInsider=grabHTML('www.streetinsider.com', $rssStreetInsider);
         $xmlFinalObject = produce_XML_object_tree($xmlStreetInsider); 
 
+        $streetInsiderLink = $xmlFinalObject->channel->item{0}->link;
+        $streetInsiderTitle = $xmlFinalObject->channel->item{0}->title;
 
         $streetInsiderNews = "<ul class='newsSide'>";
         $streetInsiderNews .= "<li style='font-size: 20px !important; background-color: #00ff00;'>StreetInsider News</li>";
@@ -713,11 +715,13 @@ function getStreetInsider($symbol, $yesterdayDays)
           $streetInsiderNews = preg_replace('/ transaction support agreement/i', '<span style="font-size: 55px; background-color:red; color:black"><br><br><b>&nbsp;TRANSACTION SUPPORT AGREEMENT - BANKRUPTCY</span><br><br></b>&nbsp;', $streetInsiderNews);
           $streetInsiderNews = preg_replace('/ to highlight/i', '<span style="font-size: 60px; background-color:red; color:black"><br><br><b>&nbsp;TO HIGHLIGHT<br><br>CHECK DATE</span><br><br></b>&nbsp;', $streetInsiderNews);
 
-
         try 
         {
             $link->set_charset("utf8");
-            $query = mysqli_query($link, "REPLACE INTO streetinsider (symbol, htmltext) VALUES ('" . $symbol . "', '" . mysqli_real_escape_string($link, $streetInsiderNews) . "')");
+
+            $sqlStatement = "REPLACE INTO streetinsider (symbol, htmltext, lastTitle, lastLink) VALUES ('" . $symbol . "', '" . mysqli_real_escape_string($link, $streetInsiderNews) . "', '" . $streetInsiderLink . "', '" . $streetInsiderTitle . "')"; 
+
+            $query = mysqli_query($link, $sqlStatement);
             if(!$query)
             {
                 echo "Error: " . mysqli_error($link);

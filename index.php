@@ -24,9 +24,8 @@
 <div id="volumeChecked" style="display: none">0</div>
 <div id="windowNumber" style="display: none">1</div>
 <span hidden id="unlockNews"></span> 
-
-
-<div id="main_container">
+ 
+ <div id="main_container">
 	<div id="left_container" style="position: relative; background-color: #F3F3FF; border-style: solid; border-width: 1px; float: left; width: 49%;	height: 100%;
 	display: block; clear: both; border-style: solid; border-width: 1px;">
 		<div id="left_top_container">

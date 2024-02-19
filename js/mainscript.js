@@ -191,7 +191,9 @@ function calcAll(){
       orderType += " HR_" + parseInt($("#day1").html());
     }
 
-    $("#orderStub").val(original_symbol + " BUY " + finalSharesRoundedWithCommas + " $" + finalPriceDisplay + " (" + newCalculatedPercentage.toFixed(2) + "%) -- $" + $("#yestCloseText").val() + orderType); 
+
+
+    $("#orderStub").val(original_symbol + " BUY " + finalSharesRoundedWithCommas + " $" + finalPriceDisplay + " (" + newCalculatedPercentage.toFixed(2) + "%) -- $" + $("#yestCloseText").val() + orderType + jsonValues); 
 
 
 } // end of calcAll() function 
