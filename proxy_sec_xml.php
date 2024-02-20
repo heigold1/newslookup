@@ -388,12 +388,12 @@ function getStreetInsider($symbol, $yesterdayDays)
         $query = mysqli_query($link, $SQL);
         if(!$query)
         {
-            echo "Error: " . mysqli_error($link);
+            error_log("Error: " . mysqli_error($link));
         }
     } 
     catch (mysqli_sql_exception $e) 
     {
-        echo "Error when selecting from database is " . $e->errorMessage() . "<br>"; 
+        error_log("Error when selecting from database is " . $e->errorMessage() . "<br>"); 
     } 
 
     $rowCount = mysqli_num_rows($query); 
@@ -409,9 +409,9 @@ function getStreetInsider($symbol, $yesterdayDays)
             $lastUpdatedInt = strtotime($myRow['lastUpdated'] . "- 8 hours");
             $lastUpdated = date('Y-m-d H:i:s', $lastUpdatedInt); 
             $timeDiff = ($currentTimeInt - $lastUpdatedInt)/60; 
-            // If it's newer than half-an-hour (i.e. 30.00 minutes) then just use what's stored in the database, because
+            // If it's newer than 10 minutes then just use what's stored in the database, because
             // the StreetInsider bot hasn't expired. 
-            if ($timeDiff < 25.00)
+            if ($timeDiff < 15.00)
             {
                 $streetInsiderNews = $myRow['htmltext']; 
             }
