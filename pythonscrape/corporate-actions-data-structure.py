@@ -2,7 +2,8 @@
 import urllib3
 from collections import OrderedDict
 import re 
-import json 
+import json
+from datetime import datetime  
 
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
@@ -19,7 +20,6 @@ def create_data_structure():
 
     for line in f:
       values = line.split("\t")
-#      print(values[1] + " is *" + values[2] + "*") 
       symbolList.append(values[1])  
 
     f.seek(0) 
@@ -27,19 +27,32 @@ def create_data_structure():
     originalListCount = len(symbolList) 
     print("\nNumber of items before sorting is " + str(originalListCount)) 
 
+    # Remove duplicates 
     symbolList = list(OrderedDict.fromkeys(symbolList))
 
+    # 2nd pass 
     for line in f: 
       values = line.split("\t") 
       print(values[1] + " is '" + values[2] + "', '" + values[3].rstrip('\n') + "'") 
 
       pattern = re.compile(r'\breverse stock split\b', re.IGNORECASE) 
 
-      if ((values[2] == 'Delisted') or pattern.search(values[3])): 
-        symbolList.remove(values[1])  
-        if pattern.search(values[3]): 
-          symbolListOther[values[1]] = "REVERSE SPLIT on " + values[0]  
-          print("Passed the regex test") 
+      today_date = datetime.now()
+
+      if ((values[2] == 'Delisted') or pattern.search(values[3])):
+        if values[2] == 'Delisted':  
+          symbolList.remove(values[1]) 
+        else: 
+          if pattern.search(values[3]): 
+            given_date_string = values[0] 
+            given_date = datetime.strptime(given_date_string, "%b %d, %Y") 
+            date_difference = today_date - given_date
+            days_difference = date_difference.days 
+
+            if days_difference > 4: 
+              symbolListOther[values[1]] = "REVERSE SPLIT on " + values[0]  
+              symbolList.remove(values[1]) 
+
 
     f.close() 
 
