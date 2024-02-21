@@ -722,7 +722,7 @@ $(function() {
 
             CopyToClipboard();
 
-            $.ajax({
+              $.ajax({
                 url: "marketstack-api-historical-data.php",
                 data: {symbol: original_symbol},
                 async: false, 
@@ -744,8 +744,6 @@ $(function() {
                   {
                       alert("Is there any news that explains the high-risk spike?");
                   }
-
-
 
                   $("#day1").html(returnedObject.day_1);
                   $("#day2").html(returnedObject.day_2);
@@ -1043,9 +1041,6 @@ $(function() {
                     success:  function (data) {
                       $("#entryPercentage").focus();   
 
-console.log("results of proxy_sec_xml.php is "); 
-console.log(data); 
-
                       finalObject = JSON.parse(data); 
 
 
@@ -1307,6 +1302,18 @@ for (var corporateSymbol in corporateActionsStocks)
         {
             myIframe.contentWindow.scrollTo(75, 100); 
         }
+
+
+        // At the very end we calculate the 17.5% entry and copy it to the clipboard. 
+        $("#entryPercentage").val("17.51"); 
+        $("#amountSpending").val("500"); 
+
+        var yesterdaysClose = $('#yestCloseText').val(); 
+        var newPrice = yesterdaysClose - (yesterdaysClose*17.5/100); 
+        newPrice = newPrice.toFixed(2); 
+        $('#entryPrice').val(newPrice); 
+        calcAll();
+
         $("#entryPercentage").focus();   
 
     } // end of function startProcess() end of startProcess 
