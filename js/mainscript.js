@@ -1046,46 +1046,43 @@ $(function() {
 
 var corporateActionsStocks=
 {
-  "GOVX": "REVERSE SPLIT on Jan 31, 2024",
-  "DTSS": "REVERSE SPLIT on Jan 23, 2024",
-  "INSG": "REVERSE SPLIT on Jan 24, 2024",
-  "CMAX": "REVERSE SPLIT on Feb 1, 2024",
-  "INBS": "REVERSE SPLIT on Jan 29, 2024",
-  "ACB": "REVERSE SPLIT on Feb 20, 2024",
-  "HOLO": "REVERSE SPLIT on Feb 2, 2024",
-  "FRGT": "REVERSE SPLIT on Feb 5, 2024",
-  "JZ": "REVERSE SPLIT on Feb 20, 2024",
-  "QGEN": "REVERSE SPLIT on Jan 30, 2024",
-  "NVVE": "REVERSE SPLIT on Jan 22, 2024",
   "GNPX": "REVERSE SPLIT on Feb 2, 2024",
-  "BSGM": "REVERSE SPLIT on Feb 2, 2024",
-  "EJH": "REVERSE SPLIT on Feb 14, 2024",
+  "VLCN": "REVERSE SPLIT on Feb 5, 2024",
   "MMAT": "REVERSE SPLIT on Jan 29, 2024",
+  "PCSA": "REVERSE SPLIT on Jan 22, 2024",
+  "CHRO": "REVERSE SPLIT on Feb 14, 2024",
+  "EJH": "REVERSE SPLIT on Feb 14, 2024",
+  "REBN": "REVERSE SPLIT on Jan 22, 2024",
+  "VRM": "REVERSE SPLIT on Feb 14, 2024",
+  "DTIL": "REVERSE SPLIT on Feb 14, 2024",
   "CORZ": "REVERSE SPLIT on Jan 23, 2024",
   "TC": "REVERSE SPLIT on Jan 26, 2024",
-  "VCNX": "REVERSE SPLIT on Feb 20, 2024",
-  "REBN": "REVERSE SPLIT on Jan 22, 2024",
-  "ASMB": "REVERSE SPLIT on Feb 12, 2024",
-  "CHRO": "REVERSE SPLIT on Feb 14, 2024",
-  "CAMP": "REVERSE SPLIT on Feb 2, 2024",
-  "PCSA": "REVERSE SPLIT on Jan 22, 2024",
-  "REVB": "REVERSE SPLIT on Jan 25, 2024",
-  "DTIL": "REVERSE SPLIT on Feb 14, 2024",
-  "GTBP": "REVERSE SPLIT on Feb 5, 2024",
   "GRI": "REVERSE SPLIT on Jan 30, 2024",
-  "UAVS": "REVERSE SPLIT on Feb 9, 2024",
-  "VRM": "REVERSE SPLIT on Feb 14, 2024",
-  "VLCN": "REVERSE SPLIT on Feb 5, 2024",
-  "KAVL": "REVERSE SPLIT on Jan 25, 2024",
+  "INSG": "REVERSE SPLIT on Jan 24, 2024",
+  "CAMP": "REVERSE SPLIT on Feb 2, 2024",
+  "INBS": "REVERSE SPLIT on Jan 29, 2024",
+  "GOVX": "REVERSE SPLIT on Jan 31, 2024",
+  "FRGT": "REVERSE SPLIT on Feb 5, 2024",
+  "GTBP": "REVERSE SPLIT on Feb 5, 2024",
   "EVAX": "REVERSE SPLIT on Jan 22, 2024",
-  "SGLY": "REVERSE SPLIT on Feb 12, 2024",
   "TCRT": "REVERSE SPLIT on Feb 1, 2024",
-  "SISI": "REVERSE SPLIT on Feb 16, 2024",
+  "BSGM": "REVERSE SPLIT on Feb 2, 2024",
+  "REVB": "REVERSE SPLIT on Jan 25, 2024",
+  "CMAX": "REVERSE SPLIT on Feb 1, 2024",
+  "SGLY": "REVERSE SPLIT on Feb 12, 2024",
+  "QGEN": "REVERSE SPLIT on Jan 30, 2024",
+  "UAVS": "REVERSE SPLIT on Feb 9, 2024",
+  "ASMB": "REVERSE SPLIT on Feb 12, 2024",
+  "KAVL": "REVERSE SPLIT on Jan 25, 2024",
   "INO": "REVERSE SPLIT on Jan 25, 2024",
+  "DTSS": "REVERSE SPLIT on Jan 23, 2024",
+  "SISI": "REVERSE SPLIT on Feb 16, 2024",
   "MYMD": "REVERSE SPLIT on Feb 15, 2024",
-  "AMBO": "REVERSE SPLIT on Feb 20, 2024",
-  "GRYP": "REVERSE SPLIT on Feb 9, 2024"
+  "HOLO": "REVERSE SPLIT on Feb 2, 2024",
+  "GRYP": "REVERSE SPLIT on Feb 9, 2024",
+  "NVVE": "REVERSE SPLIT on Jan 22, 2024"
 };
+
 
 
 
@@ -1302,17 +1299,6 @@ for (var corporateSymbol in corporateActionsStocks)
         {
             myIframe.contentWindow.scrollTo(75, 100); 
         }
-
-
-        // At the very end we calculate the 17.5% entry and copy it to the clipboard. 
-        $("#entryPercentage").val("17.51"); 
-        $("#amountSpending").val("500"); 
-
-        var yesterdaysClose = $('#yestCloseText').val(); 
-        var newPrice = yesterdaysClose - (yesterdaysClose*17.5/100); 
-        newPrice = newPrice.toFixed(2); 
-        $('#entryPrice').val(newPrice); 
-        calcAll();
 
         $("#entryPercentage").focus();   
 
