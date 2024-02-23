@@ -569,7 +569,7 @@ function getStreetInsider($symbol, $yesterdayDays)
           $streetInsiderNews = preg_replace('/[ \']disruption[ \']/i', '<span style="font-size: 12px; background-color:red; color:black"><b> &nbsp;disruption&nbsp;</span> (chase at 52%)</b>', $streetInsiderNews);
           $streetInsiderNews = preg_replace('/ abandon/i', '<span style="font-size: 15px; background-color:red; color:black"><b>&nbsp;abandon&nbsp;</span> (65-70%)</b>', $streetInsiderNews);
           $streetInsiderNews = preg_replace('/ bankrupt/i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp;bankrupt</span> </b>', $streetInsiderNews);      
-          $streetInsiderNews = preg_replace('/ terminate| terminates| terminated| termination/i', '<span style="font-size: 15px; background-color:red; color:black"><b>&nbsp;terminate&nbsp;</span> (65%) </b>', $streetInsiderNews);            
+          $streetInsiderNews = preg_replace('/ terminate| terminates| terminated| termination/i', '<span style="font-size: 15px; background-color:red; color:black"><b>&nbsp;terminate&nbsp;</span> (65% dollar, 75% penny) </b>', $streetInsiderNews);            
           $streetInsiderNews = preg_replace('/ drug/i', '<span style="font-size: 15px; background-color:red; color:black"><b>&nbsp;drug </span></b> ', $streetInsiderNews);
           $streetInsiderNews = preg_replace('/ guidance/i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp;GUIDANCE</span></b>&nbsp;', $streetInsiderNews);
           $streetInsiderNews = preg_replace('/ regulatory update/i', '<span style="font-size: 15px; background-color:red; color:black"><b>&nbsp;regulatory update (35% even if regulation is good)</span></b>&nbsp;', $streetInsiderNews);

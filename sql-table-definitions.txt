@@ -20,3 +20,30 @@ MariaDB [daytrade]> describe streetinsider;
 | lastLink    | varchar(300) | YES  |     | NULL              |                             |
 | lastUpdated | timestamp    | NO   |     | CURRENT_TIMESTAMP | on update CURRENT_TIMESTAMP |
 +-------------+--------------+------+-----+-------------------+-----------------------------+
+
+
+CREATE TABLE `sector` (
+  `symbol` varchar(10) NOT NULL,
+  `sector` varchar(50) DEFAULT NULL,
+  `industry` varchar(200) DEFAULT NULL,
+  `country` varchar(50) DEFAULT NULL,
+  `date` date DEFAULT NULL,
+  PRIMARY KEY (`symbol`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+
+
+
+CREATE TABLE `streetinsider` (
+  `symbol` varchar(10) NOT NULL,
+  `htmltext` blob,
+  `lastTitle` varchar(300) DEFAULT NULL,
+  `lastLink` varchar(300) DEFAULT NULL,
+  `lastUpdated` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`symbol`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+
+
+
+
