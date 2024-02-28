@@ -435,6 +435,9 @@ function getStreetInsider($symbol, $yesterdayDays)
         $streetInsiderLink = $xmlFinalObject->channel->item{0}->link;
         $streetInsiderTitle = $xmlFinalObject->channel->item{0}->title;
 
+        $streetInsiderLink = mysql_real_escape_string($streetInsiderLink);
+        $streetInsiderTitle = mysql_real_escape_string($streetInsiderTitle);
+
         $streetInsiderNews = "<ul class='newsSide'>";
         $streetInsiderNews .= "<li style='font-size: 20px !important; background-color: #00ff00;'>StreetInsider News</li>";
 

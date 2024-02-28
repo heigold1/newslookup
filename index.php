@@ -279,7 +279,9 @@
 			- Super low volume stocks - you can go in at 24%, ONLY FOR DOLLAR STOCKS.<br><br>
 			- Recent bankruptcies - you can go into these at 40% penny the day after a bankruptcy, 35% dollar. <br><br>
 			- Earnings loss - 57.5% for dollar stocks.<br><br> 
-			- High risk stocks that drop in the pre-market - if dollar, try 7.5 (i.e. not 10)% below the pre-market low. 
+			- High risk stocks that drop in the pre-market - if dollar, try 7.5 (i.e. not 10)% below the pre-market low.<br><br>
+			- You can treat stocks barely under $1.00 (i.e. like $0.9983) as dollar stocks and chase at 17.5%.  They have dropped to that price and recovered well.  Just make sure you only take 5%. 
+			- Earnings net income - 37%. 
     </p>
   </div>
 
