@@ -1046,38 +1046,38 @@ $(function() {
 
 var corporateActionsStocks=
 {
-  "SISI": "REVERSE SPLIT on Feb 16, 2024",
-  "FFIE": "REVERSE SPLIT on Mar 1, 2024",
-  "ATNF": "REVERSE SPLIT on Feb 28, 2024",
-  "CHRO": "REVERSE SPLIT on Feb 14, 2024",
-  "DTIL": "REVERSE SPLIT on Feb 14, 2024",
-  "LSDI": "REVERSE SPLIT on Feb 26, 2024",
-  "AMBO": "REVERSE SPLIT on Feb 20, 2024",
-  "JZ": "REVERSE SPLIT on Feb 20, 2024",
-  "BPTH": "REVERSE SPLIT on Feb 23, 2024",
-  "ASMB": "REVERSE SPLIT on Feb 12, 2024",
-  "CJJD": "REVERSE SPLIT on Mar 1, 2024",
-  "APVO": "REVERSE SPLIT on Mar 6, 2024",
-  "ZCMD": "REVERSE SPLIT on Feb 29, 2024",
-  "TGL": "REVERSE SPLIT on Feb 27, 2024",
-  "IFBD": "REVERSE SPLIT on Mar 4, 2024",
-  "CPHI": "REVERSE SPLIT on Mar 6, 2024",
-  "TRIB": "REVERSE SPLIT on Feb 23, 2024",
-  "MYMD": "REVERSE SPLIT on Feb 15, 2024",
-  "PHUN": "REVERSE SPLIT on Feb 27, 2024",
-  "SGLY": "REVERSE SPLIT on Feb 12, 2024",
   "VRPX": "REVERSE SPLIT on Mar 1, 2024",
-  "CELU": "REVERSE SPLIT on Feb 29, 2024",
-  "VRM": "REVERSE SPLIT on Feb 14, 2024",
-  "EGIO": "REVERSE SPLIT on Mar 1, 2024",
+  "FFIE": "REVERSE SPLIT on Mar 1, 2024",
+  "ZCMD": "REVERSE SPLIT on Feb 29, 2024",
+  "SGLY": "REVERSE SPLIT on Feb 12, 2024",
   "RETO": "REVERSE SPLIT on Mar 1, 2024",
   "ACB": "REVERSE SPLIT on Feb 20, 2024",
-  "LYT": "REVERSE SPLIT on Feb 23, 2024",
+  "MYMD": "REVERSE SPLIT on Feb 15, 2024",
+  "TRIB": "REVERSE SPLIT on Feb 23, 2024",
+  "TGL": "REVERSE SPLIT on Feb 27, 2024",
+  "PIK": "REVERSE SPLIT on Mar 7, 2024",
+  "AMBO": "REVERSE SPLIT on Feb 20, 2024",
+  "JZ": "REVERSE SPLIT on Feb 20, 2024",
+  "ATNF": "REVERSE SPLIT on Feb 28, 2024",
+  "EGIO": "REVERSE SPLIT on Mar 1, 2024",
+  "IFBD": "REVERSE SPLIT on Mar 4, 2024",
   "AUUD": "REVERSE SPLIT on Feb 27, 2024",
+  "LYT": "REVERSE SPLIT on Feb 23, 2024",
+  "CHRO": "REVERSE SPLIT on Feb 14, 2024",
+  "SISI": "REVERSE SPLIT on Feb 16, 2024",
+  "VRM": "REVERSE SPLIT on Feb 14, 2024",
+  "BPTH": "REVERSE SPLIT on Feb 23, 2024",
+  "DTIL": "REVERSE SPLIT on Feb 14, 2024",
+  "CPHI": "REVERSE SPLIT on Mar 6, 2024",
   "EJH": "REVERSE SPLIT on Feb 14, 2024",
-  "VCNX": "REVERSE SPLIT on Feb 20, 2024"
+  "APVO": "REVERSE SPLIT on Mar 6, 2024",
+  "PHUN": "REVERSE SPLIT on Feb 27, 2024",
+  "CELU": "REVERSE SPLIT on Feb 29, 2024",
+  "LSDI": "REVERSE SPLIT on Feb 26, 2024",
+  "VCNX": "REVERSE SPLIT on Feb 20, 2024",
+  "ASMB": "REVERSE SPLIT on Feb 12, 2024",
+  "CJJD": "REVERSE SPLIT on Mar 1, 2024"
 };
-
 
 
 
@@ -1115,7 +1115,7 @@ for (var corporateSymbol in corporateActionsStocks)
 
                       if (reverseStockSplit == true)
                       {
-                        playReverseStockSplit(); 
+//                         playReverseStockSplit(); 
                       }
 
                       if (varDelist == true)
@@ -1160,6 +1160,8 @@ for (var corporateSymbol in corporateActionsStocks)
         var day1 = parseFloat($("#day1").html());
         var day2 = parseFloat($("#day2").html());
         var day3 = parseFloat($("#day3").html());
+        var day4 = parseFloat($("#day4").html());
+        var day5 = parseFloat($("#day5").html());
 
         var highRiskFlag = 0; 
 
@@ -1209,6 +1211,11 @@ for (var corporateSymbol in corporateActionsStocks)
         if (highRiskFlag == 1)
         {
             playHighRiskStock(); 
+        }
+
+        if ((day1 > 1.00) && (day2 > 1.00) && (day3 > 1.00) && (day4 > 1.00) && (day5 > 1.00))
+        {
+          alert("UPWARD TRAJECTORY!!! 19%!!!!"); 
         }
 
 
@@ -1437,7 +1444,7 @@ for (var corporateSymbol in corporateActionsStocks)
           if ($('#unlockNews').html() == "0") 
           {
             $("#entryPercentage").val(""); 
-             alert("- Unlock the news\n\n - Check for upward trajectories \n\n - Check for potential Level II risks like giant market order sells \n\n - Check for any volume issues"); 
+             alert("- CHECK FOR L-BARS"); 
             return; 
           }
 
