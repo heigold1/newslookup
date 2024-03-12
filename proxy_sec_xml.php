@@ -718,6 +718,8 @@ function getStreetInsider($symbol, $yesterdayDays)
           $streetInsiderNews = preg_replace('/ transaction support agreement/i', '<span style="font-size: 55px; background-color:red; color:black"><br><br><b>&nbsp;TRANSACTION SUPPORT AGREEMENT - BANKRUPTCY</span><br><br></b>&nbsp;', $streetInsiderNews);
           $streetInsiderNews = preg_replace('/ to highlight/i', '<span style="font-size: 60px; background-color:red; color:black"><br><br><b>&nbsp;TO HIGHLIGHT<br><br>CHECK DATE</span><br><br></b>&nbsp;', $streetInsiderNews);
           $streetInsiderNews = preg_replace('/ short report/i', '<span style="font-size: 35px; background-color:red; color:black"><b>SHORT REPORT - STAY AWAY</span></b>&nbsp;', $streetInsiderNews);
+          $streetInsiderNews = preg_replace('/ mixed shelf/i', '<span style="font-size: 35px; background-color:red; color:black"><b>MIXED SHELF - OFFERING</span></b>&nbsp;', $streetInsiderNews);
+
 
         try 
         {
@@ -901,6 +903,7 @@ function getSecFilings($symbol, $yesterdayDays, $secCompanyName)
               $title = preg_replace('/ business combination/i', '<span style="font-size: 55px; background-color:red; color:black"><br><br><b>&nbsp; BUSINESS<br><br> COMBINATION<br><br> - STAY<br><br>AWAY<br><br> </b></span> &nbsp;', $title);
               $title = preg_replace('/annual report/i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp; ANNUAL REPORT</b></span> &nbsp;', $title);
               $title = preg_replace('/424/i', '<span style="font-size: 45px; background-color:red; color:black"><b>&nbsp; 424 - OFFERING</b></span> &nbsp;', $title);
+              $title = preg_replace('/notice of effectiveness/i', '<span style="font-size: 30px; background-color:red; color:black"><b>NOTICE OF EFFECTIVENESS</b></span> &nbsp;', $title);
 
               if (preg_match('/registration/i', $title) || preg_match('/offering/i', $title))
               {

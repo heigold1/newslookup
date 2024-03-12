@@ -1338,6 +1338,7 @@ else if ($which_website == "yahoo")
       $finalReturn = preg_replace('/ transaction support agreement/i', '<span style="font-size: 55px; background-color:red; color:black"><br><br><b>&nbsp;TRANSACTION SUPPORT AGREEMENT - BANKRUPTCY</span><br><br></b>&nbsp;', $finalReturn);
       $finalReturn = preg_replace('/ to highlight/i', '<span style="font-size: 65px; background-color:red; color:black"><br><br><b>&nbsp;TO<br><br>HIGHLIGHT<br><br>CHECK<br><br>DATE<br><br></span></b>&nbsp;', $finalReturn);
       $finalReturn = preg_replace('/ short report/i', '<span style="font-size: 35px; background-color:red; color:black"><b>SHORT REPORT - STAY AWAY</span></b>&nbsp;', $finalReturn);
+      $finalReturn = preg_replace('/ mixed shelf/i', '<span style="font-size: 35px; background-color:red; color:black"><b>MIXED SHELF - OFFERING</span></b>&nbsp;', $finalReturn);
 
 
        $message_board = '</font><a target="_blank" onclick="return openPage(this.href)" href="http://finance.yahoo.com/quote/' . $symbol . '/community?ltr=1"> Yahoo Message Boards</a>&nbsp;&nbsp;&nbsp;&nbsp;'; 
