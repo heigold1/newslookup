@@ -1441,12 +1441,15 @@ for (var corporateSymbol in corporateActionsStocks)
 
 //          if ($("#right_top_container").is(":hidden") && ($("#left_bottom_container").is(":hidden")))
 
+/*
           if ($('#unlockNews').html() == "0") 
           {
             $("#entryPercentage").val(""); 
              alert("- CHECK FOR L-BARS"); 
+            $('#unlockNews').html("1"); 
             return; 
           }
+*/ 
 
 /*
           var volumeChecked = $("#volumeChecked").html();
