@@ -774,7 +774,9 @@ function getSecFilings($symbol, $yesterdayDays, $secCompanyName)
 
           if (preg_match('/Companies with names matching/', $result))
           {
-              $returnSecHtml = '<table style="border: 1px solid black"><tr><td><div style="background-color: red"><span style="font-size: 25px">AMBIGUOUS SEC COMPANY NAMES</span></div></td></tr><tr><td><a style="font-size: 35px" target="_blank" href="https://www.nasdaq.com/symbol/' . $symbol . '/sec-filings">Nasdaq</a><br>
+              $returnSecHtml = '<table style="border: 1px solid black"><tr><td><div style="background-color: red"><span style="font-size: 25px">AMBIGUOUS SEC COMPANY NAMES</span></div></td></tr>
+              <tr><td><a style="font-size: 35px" target="_blank" href="https://seekingalpha.com/symbol/' . $symbol . '/sec-filings?filter=all">Seeking Alpha SEC</a><br>
+              <tr><td><a style="font-size: 35px" target="_blank" href="https://www.nasdaq.com/symbol/' . $symbol . '/sec-filings">Nasdaq</a><br>
                   <a style="font-size: 35px" target="_blank" href=https://www.etrade.wallst.com/v1/stocks/snapshot/snapshot.asp?ChallengeUrl=https://idp.etrade.com/idp/SSO.saml2&reinitiate-handshake=0&prospectnavyear=2011&AuthnContext=prospect&env=PRD&symbol=' . $symbol . '&rsO=new&country=US>E*TRADE</a></td>
                 </table>';  
                return $returnSecHtml; 

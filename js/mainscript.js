@@ -550,6 +550,8 @@ $(function() {
 
               original_symbol = original_symbol.replace(/\.p\./gi, ".P"); 
 
+              $("div#bigcharts_chart_container").html("<img style='max-width:100%; max-height:100%;' src='https://api.wsj.net/api/kaavio/charts/big.chart?nosettings=1&symb=US:" + original_symbol + "&uf=0&type=2&size=2&style=320&freq=1&entitlementtoken=0c33378313484ba9b46b8e24ded87dd6&time=4&rand=" + Math.random() + "&compidx=&ma=0&maval=9&lf=1&lf2=0&lf3=0&height=335&width=579&mocktick=1)'>");
+
               document.title = "Lookup - " + symbol; 
 //              openPage("https://www.nasdaq.com/symbol/" + symbol + "/sec-filings");
 
@@ -846,7 +848,7 @@ $(function() {
 
             $("div#left_top_container").css("background-color", "#F3F3FF");
 
-            $("div#bigcharts_chart_container").html("<img style='max-width:100%; max-height:100%;' src='https://api.wsj.net/api/kaavio/charts/big.chart?nosettings=1&symb=US:" + original_symbol + "&uf=0&type=2&size=2&style=320&freq=1&entitlementtoken=0c33378313484ba9b46b8e24ded87dd6&time=4&rand=" + Math.random() + "&compidx=&ma=0&maval=9&lf=1&lf2=0&lf3=0&height=335&width=579&mocktick=1)'>");
+
 
 // This is for the daily chart, I currently don't use it so it's taking up processing time.
 //             $("div#bigcharts_yest_close").html("<img style='max-width:100%; max-height:100%;' src='https://api.wsj.net/api/kaavio/charts/big.chart?nosettings=1&symb=" + original_symbol + "&uf=0&type=2&size=2&style=320&freq=9&entitlementtoken=0c33378313484ba9b46b8e24ded87dd6&time=1&rand=" + Math.random() + "&compidx=&ma=0&maval=9&lf=1&lf2=0&lf3=0&height=335&width=579&mocktick=1'>");
@@ -1046,37 +1048,39 @@ $(function() {
 
 var corporateActionsStocks=
 {
-  "VRPX": "REVERSE SPLIT on Mar 1, 2024",
-  "FFIE": "REVERSE SPLIT on Mar 1, 2024",
-  "ZCMD": "REVERSE SPLIT on Feb 29, 2024",
-  "SGLY": "REVERSE SPLIT on Feb 12, 2024",
-  "RETO": "REVERSE SPLIT on Mar 1, 2024",
-  "ACB": "REVERSE SPLIT on Feb 20, 2024",
-  "MYMD": "REVERSE SPLIT on Feb 15, 2024",
-  "TRIB": "REVERSE SPLIT on Feb 23, 2024",
-  "TGL": "REVERSE SPLIT on Feb 27, 2024",
-  "PIK": "REVERSE SPLIT on Mar 7, 2024",
-  "AMBO": "REVERSE SPLIT on Feb 20, 2024",
-  "JZ": "REVERSE SPLIT on Feb 20, 2024",
-  "ATNF": "REVERSE SPLIT on Feb 28, 2024",
-  "EGIO": "REVERSE SPLIT on Mar 1, 2024",
-  "IFBD": "REVERSE SPLIT on Mar 4, 2024",
   "AUUD": "REVERSE SPLIT on Feb 27, 2024",
-  "LYT": "REVERSE SPLIT on Feb 23, 2024",
-  "CHRO": "REVERSE SPLIT on Feb 14, 2024",
-  "SISI": "REVERSE SPLIT on Feb 16, 2024",
-  "VRM": "REVERSE SPLIT on Feb 14, 2024",
-  "BPTH": "REVERSE SPLIT on Feb 23, 2024",
-  "DTIL": "REVERSE SPLIT on Feb 14, 2024",
-  "CPHI": "REVERSE SPLIT on Mar 6, 2024",
-  "EJH": "REVERSE SPLIT on Feb 14, 2024",
   "APVO": "REVERSE SPLIT on Mar 6, 2024",
+  "CJJD": "REVERSE SPLIT on Mar 1, 2024",
+  "CHRO": "REVERSE SPLIT on Feb 14, 2024",
+  "TRIB": "REVERSE SPLIT on Feb 23, 2024",
+  "GXAI": "REVERSE SPLIT on Mar 8, 2024",
+  "CISO": "REVERSE SPLIT on Mar 8, 2024",
+  "IFBD": "REVERSE SPLIT on Mar 4, 2024",
+  "DTIL": "REVERSE SPLIT on Feb 14, 2024",
+  "PIK": "REVERSE SPLIT on Mar 7, 2024",
   "PHUN": "REVERSE SPLIT on Feb 27, 2024",
   "CELU": "REVERSE SPLIT on Feb 29, 2024",
-  "LSDI": "REVERSE SPLIT on Feb 26, 2024",
+  "ACB": "REVERSE SPLIT on Feb 20, 2024",
+  "RETO": "REVERSE SPLIT on Mar 1, 2024",
+  "ZCMD": "REVERSE SPLIT on Feb 29, 2024",
   "VCNX": "REVERSE SPLIT on Feb 20, 2024",
-  "ASMB": "REVERSE SPLIT on Feb 12, 2024",
-  "CJJD": "REVERSE SPLIT on Mar 1, 2024"
+  "LYT": "REVERSE SPLIT on Feb 23, 2024",
+  "BPTH": "REVERSE SPLIT on Feb 23, 2024",
+  "ATNF": "REVERSE SPLIT on Feb 28, 2024",
+  "SISI": "REVERSE SPLIT on Feb 16, 2024",
+  "AMBO": "REVERSE SPLIT on Feb 20, 2024",
+  "VRM": "REVERSE SPLIT on Feb 14, 2024",
+  "FFIE": "REVERSE SPLIT on Mar 1, 2024",
+  "EGIO": "REVERSE SPLIT on Mar 1, 2024",
+  "CPHI": "REVERSE SPLIT on Mar 6, 2024",
+  "GOEV": "REVERSE SPLIT on Mar 8, 2024",
+  "TGL": "REVERSE SPLIT on Feb 27, 2024",
+  "PGY": "REVERSE SPLIT on Mar 8, 2024",
+  "MYMD": "REVERSE SPLIT on Feb 15, 2024",
+  "LSDI": "REVERSE SPLIT on Feb 26, 2024",
+  "JZ": "REVERSE SPLIT on Feb 20, 2024",
+  "EJH": "REVERSE SPLIT on Feb 14, 2024",
+  "VRPX": "REVERSE SPLIT on Mar 1, 2024"
 };
 
 
