@@ -786,6 +786,9 @@ function getSecFilings($symbol, $yesterdayDays, $secCompanyName)
 
       $rssTableRow = $html->find(' div table tbody tr'); 
 
+      $secCompanyAddress = $html->find('div.mailer'); 
+
+
       if ($rssTableRow[3])
       {
           $rssLink = $rssTableRow[3]->find('a');
@@ -928,7 +931,7 @@ function getSecFilings($symbol, $yesterdayDays, $secCompanyName)
       $returnSecHtml .= $secTableRows;
       $returnSecHtml .=  "</table>";
 
-      return $returnSecHtml; 
+      return $returnSecHtml . "<b>" . $secCompanyAddress[1] . "</b>"; 
 
 } // end of getSecFilings
 
