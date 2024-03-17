@@ -921,7 +921,7 @@ function getSecFilings($symbol, $yesterdayDays, $secCompanyName)
       $secMessage = " rowcount is " . $secTableRowCount . " "; 
       if ($secTableRowCount == 0)
       {
-        $secMessage = "<a href='https://seekingalpha.com/symbol/" . $symbol . "/sec-filings'>
+        $secMessage = "<a target='_blank' href='https://seekingalpha.com/symbol/" . $symbol . "/sec-filings'>
         <span style='font-size: 50px; background-color: red'> - CHECK STREET INSIDER</span></a>"; 
       }
 
