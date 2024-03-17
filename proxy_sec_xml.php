@@ -806,7 +806,7 @@ function getSecFilings($symbol, $yesterdayDays, $secCompanyName)
       $recentNews = false;
       $secTableRowCount = 0; 
 
-      $command = escapeshellcmd('python3 ../pythonscrape/scrape-sec-gov.py ' . $cik);
+      $command = escapeshellcmd('python3 ./pythonscrape/scrape-sec-gov.py ' . $cik);
       $secXMLString = shell_exec($command);
       $xmlFinalObject = produce_XML_object_tree($secXMLString); 
 
