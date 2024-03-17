@@ -3,6 +3,7 @@
 include './Samples/config.php';
 
 require_once("simple_html_dom.php"); 
+require_once("country-codes.php");
 
 $yesterdayDays = 1;
 
@@ -812,7 +813,7 @@ else if ($which_website == "yahoo")
 
 
 /* Scrape Yahoo Finance */
-
+/*
       $command = escapeshellcmd('python3 ./pythonscrape/scrape-yahoo-finance-company-profile.py ' . $symbol);
       $yahooFinanceJson = shell_exec($command);
 
@@ -828,8 +829,49 @@ else if ($which_website == "yahoo")
 
       $yahooFinanceSector = $yahooFinanceObject->sector; 
       $yahooFinanceIndustry = $yahooFinanceObject->industry; 
+/* 
 
+/* We are currently grabbing sector, industry, and country from financialmodelingprep.com */
 
+      $country = "";
+      $yahooFinanceSector = ""; 
+      $yahooFinanceIndustry = ""; 
+      $website = ""; 
+
+      $apiUrl = 'https://financialmodelingprep.com/api/v3/profile/' . $symbol . '?apikey=EdahmOwRgQ6xcbs6j37SESSCrCIhcoa9';
+
+      $yahooFinanceJson = file_get_contents($apiUrl); 
+
+      // Make the HTTP GET request
+
+      if ($yahooFinanceJson === false) {
+        // Handle error, e.g., unable to connect to the API
+        $country = "NOT LISTED";
+        $yahooFinanceSector = "NOT LISTED"; 
+        $yahooFinanceIndustry = "NOT LISTED"; 
+        $website = "NOT LISTED"; 
+      }
+      else
+      {
+        $yahooFinanceObject = json_decode($yahooFinanceJson, true); 
+        if (empty($yahooFinanceObject))
+        {
+          $country = "NOT LISTED";
+          $yahooFinanceSector = "NOT LISTED"; 
+          $yahooFinanceIndustry = "NOT LISTED"; 
+          $website = "NOT LISTED"; 
+        }
+        else 
+        {
+          $country = $countryCodes[$yahooFinanceObject[0]['country']];
+          $yahooFinanceSector = $yahooFinanceObject[0]['sector']; 
+          $yahooFinanceIndustry = $yahooFinanceObject[0]['industry']; 
+          $website = $yahooFinanceObject[0]['website'];
+        }
+
+      }
+
+      $companyWebsite = '<a target="_blank" style="font-size: 15px;" onclick="return openPage(this.href)" href="' . $website . '" class="tab-link"><b>Website</b></a>&nbsp;&nbsp;';
 
 
 /* Scrape the stockanalysis.com website for country, sector, and industry information */ 
