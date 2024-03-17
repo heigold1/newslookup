@@ -84,6 +84,9 @@ $mkt_response_obj = simplexml_load_string($out);
 if (isset($mkt_response_obj->QuoteData->All->previousClose))
 {
 	$prevClose = floatval($mkt_response_obj->QuoteData->All->previousClose);
+  $lastTrade = floatval($mkt_response_obj->QuoteData->All->lastTrade);
+  $change = ($prevClose - $lastTrade)*100/$prevClose; 
+  $change = number_format($change, 2, '.', ''); 
 
 	$price = $prevClose - $prevClose*floatVal(floatval($percentage)/100); 
 
@@ -107,7 +110,16 @@ if (isset($mkt_response_obj->QuoteData->All->previousClose))
 	}
 
 	$orderStub = $symbol . " BUY " . $numShares . " $" . $price . " (" . $percentage . "%)"; 
-	echo $orderStub; 
+
+  $response = array(
+    'orderStub' => $orderStub, 
+    'change' => $change 
+  ); 
+
+  $jsonResponse = json_encode($response); 
+  header('Content-Type: application/json'); 
+  echo $jsonResponse; 
+
 }
 else
 {
