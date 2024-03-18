@@ -2,6 +2,7 @@
 
 header("Access-Control-Allow-Origin: *");
 
+
 /**
  * E*TRADE PHP SDK
  *
@@ -26,14 +27,11 @@ include './Common/Common.php';
 include './OAuth/etOAuth.class.php';
 include './Market/MarketClient.class.php';
 
-$symbol=$_GET['symbol'];
-$amount = $_GET['amount']; 
-$percentage = $_GET['percentage']; 
-
-
 /*
 $file_name = dirname(__FILE__);
 echo $file_name; die(); */
+
+$symbol=$_GET['symbol'];
 
 $dataArray = array();
 
@@ -82,36 +80,9 @@ $mkt_response_obj = simplexml_load_string($out);
 if (isset($mkt_response_obj->QuoteData->All->previousClose))
 {
 	$prevClose = floatval($mkt_response_obj->QuoteData->All->previousClose);
-  $lastTrade = floatval($mkt_response_obj->QuoteData->All->lastTrade);
-  $change = ($prevClose - $lastTrade)*100/$prevClose; 
-  $change = number_format($change, 2, '.', ''); 
-
-	$price = $prevClose - $prevClose*floatVal(floatval($percentage)/100); 
-
-	if ($price > 1.00)
-	{
-		$price = number_format($price, 2, '.', ''); 
-	}
-	else
-	{
-    $price = number_format($price, 4, '.', ''); 
-	}
-
-	$numShares = floatVal($amount)/$price; 
-	$numShares = floor($numShares/100)*100; 
-
-	// There is some kind of regulation that states that you can't place an order for more than 
-	// 118,500 shares. 
-	if ($numShares > 118500) 
-	{
-		$numShares = 118500; 
-	}
-
-	$orderStub = $symbol . " BUY " . $numShares . " $" . $price . " (" . $percentage . "%)"; 
 
   $response = array(
-    'orderStub' => $orderStub, 
-    'change' => $change 
+    'prevClose' => $prevClose
   ); 
 
   $jsonResponse = json_encode($response); 
