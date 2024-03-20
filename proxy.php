@@ -871,6 +871,11 @@ else if ($which_website == "yahoo")
 
       }
 
+      if ($country == null)
+      {
+        $country = "NOT LISTED, CHECK"; 
+      }
+
       $companyWebsite = '<a target="_blank" style="font-size: 15px;" onclick="return openPage(this.href)" href="' . $website . '" class="tab-link"><b>Website</b></a>&nbsp;&nbsp;';
 
       addYahooSectorIndustry($symbol, $yahooFinanceSector, $yahooFinanceIndustry, $country, $companyName);
