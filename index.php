@@ -281,8 +281,9 @@
 			- Earnings loss - 57.5% for dollar stocks.<br><br> 
 			- High risk stocks that drop in the pre-market - if dollar, try 7.5 (i.e. not 10)% below the pre-market low.<br><br>
 			- You can treat stocks barely under $1.00 (i.e. like $0.9983) as dollar stocks and chase at 17.5%.  They have dropped to that price and recovered well.  Just make sure you only take 5%.<br><br> 
-			- Earnings net income - 40% minimum.  No more jumping in before 40%, EVER.  You know this from experience (losses from jumping in before 40%). 
-			- If there is a major drop the previous day - 35-40% early the next day, and it must drop fast. 
+			- Earnings net income - 40% minimum.  No more jumping in before 40%, EVER.  You know this from experience (losses from jumping in before 40%). <br><br>
+			- If there is a major drop the previous day - 35-40% early the next day, and it must drop fast. <br><br>
+			- Check for words like "TO REPORT", "TO HIGHLIGHT", "DIVIDEND", and LOOK FOR DATES! 
     </p>
   </div>
 

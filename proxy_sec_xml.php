@@ -720,7 +720,6 @@ function getStreetInsider($symbol, $yesterdayDays)
           $streetInsiderNews = preg_replace('/ short report/i', '<span style="font-size: 35px; background-color:red; color:black"><b>SHORT REPORT - STAY AWAY</span></b>&nbsp;', $streetInsiderNews);
           $streetInsiderNews = preg_replace('/ mixed shelf/i', '<span style="font-size: 35px; background-color:red; color:black"><b>MIXED SHELF - OFFERING</span></b>&nbsp;', $streetInsiderNews);
 
-
         try 
         {
             $link->set_charset("utf8");
@@ -951,6 +950,19 @@ function getSecFilings($symbol, $yesterdayDays, $secCompanyName)
       $returnHtml .= getStreetInsider($symbol, $yesterdayDays); 
 
       $returnHtml .= buildNewsNotes($secCompanyName); 
+
+
+      $returnArray['dividendCheckDate'] = 0;
+      if (preg_match('/dividend/i', $returnHtml))
+      {
+        $returnArray['dividendCheckDate'] = 1;
+      }
+
+      $returnArray['checkReportDate'] = 0;
+      if (preg_match('/to report/i', $returnHtml))
+      {
+        $returnArray['checkReportDate'] = 1;
+      }
 
 
       if (intval($checkSec) == 1) 

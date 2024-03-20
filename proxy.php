@@ -873,6 +873,7 @@ else if ($which_website == "yahoo")
 
       $companyWebsite = '<a target="_blank" style="font-size: 15px;" onclick="return openPage(this.href)" href="' . $website . '" class="tab-link"><b>Website</b></a>&nbsp;&nbsp;';
 
+      addYahooSectorIndustry($symbol, $yahooFinanceSector, $yahooFinanceIndustry, $country, $companyName);
 
 /* Scrape the stockanalysis.com website for country, sector, and industry information */ 
 /*
@@ -935,7 +936,7 @@ else if ($which_website == "yahoo")
 
       $sectorCountry = '<span style="font-size: 15px;">SECTOR - ' . $yahooFinanceSector . '</span>&nbsp;&nbsp;<span id="industry" style="font-size: 15px;">INDUSTRY - ' . $yahooFinanceIndustry . '</span><br><br><div id="country" style="font-size: 15px;">' . $country . '</div>'; 
 
-      addYahooSectorIndustry($symbol, $yahooFinanceObject->sector, $yahooFinanceObject->industry, $country, $companyName);
+
 
       $returnCompanyName = '<h1>' . $companyName . '</h1>';
 
@@ -1381,6 +1382,18 @@ else if ($which_website == "yahoo")
       $finalReturn = preg_replace('/ to highlight/i', '<span style="font-size: 65px; background-color:red; color:black"><br><br><b>&nbsp;TO<br><br>HIGHLIGHT<br><br>CHECK<br><br>DATE<br><br></span></b>&nbsp;', $finalReturn);
       $finalReturn = preg_replace('/ short report/i', '<span style="font-size: 35px; background-color:red; color:black"><b>SHORT REPORT - STAY AWAY</span></b>&nbsp;', $finalReturn);
       $finalReturn = preg_replace('/ mixed shelf/i', '<span style="font-size: 35px; background-color:red; color:black"><b>MIXED SHELF - OFFERING</span></b>&nbsp;', $finalReturn);
+
+
+      $returnArray['dividendCheckDate'] = 0; 
+      if (preg_match('/dividend/i', $finalReturn))
+      {
+        $returnArray['dividendCheckDate'] = 1; 
+      }
+      $returnArray['checkReportDate'] = 0;
+      if (preg_match('/to report/i', $finalReturn))
+      {
+        $returnArray['checkReportDate'] = 1;
+      }
 
 
        $message_board = '</font><a target="_blank" onclick="return openPage(this.href)" href="http://finance.yahoo.com/quote/' . $symbol . '/community?ltr=1"> Yahoo Message Boards</a>&nbsp;&nbsp;&nbsp;&nbsp;'; 
