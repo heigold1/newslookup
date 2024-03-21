@@ -1399,6 +1399,16 @@ else if ($which_website == "yahoo")
       {
         $returnArray['checkReportDate'] = 1;
       }
+      $returnArray['checkAnnouncementDate'] = 0;
+      if (preg_match('/to announce/i', $finalReturn))
+      {
+        $returnArray['checkAnnouncementDate'] = 1;
+      }
+      $returnArray['checkPresentationDate'] = 0;
+      if (preg_match('/to present/i', $returnHtml))
+      {
+        $returnArray['checkPresentationDate'] = 1;
+      }
 
 
        $message_board = '</font><a target="_blank" onclick="return openPage(this.href)" href="http://finance.yahoo.com/quote/' . $symbol . '/community?ltr=1"> Yahoo Message Boards</a>&nbsp;&nbsp;&nbsp;&nbsp;'; 

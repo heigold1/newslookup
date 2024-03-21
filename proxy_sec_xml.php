@@ -964,6 +964,18 @@ function getSecFilings($symbol, $yesterdayDays, $secCompanyName)
         $returnArray['checkReportDate'] = 1;
       }
 
+      $returnArray['checkAnnouncementDate'] = 0;
+      if (preg_match('/to announce/i', $returnHtml))
+      {
+        $returnArray['checkAnnouncementtDate'] = 1;
+      }
+
+      $returnArray['checkPresentationDate'] = 0;
+      if (preg_match('/to present/i', $returnHtml))
+      {
+        $returnArray['checkPresentationDate'] = 1;
+      }
+
 
       if (intval($checkSec) == 1) 
       {
