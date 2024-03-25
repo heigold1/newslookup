@@ -4,6 +4,7 @@ from collections import OrderedDict
 import re 
 import json
 from datetime import datetime  
+import sys  
 
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
@@ -39,20 +40,26 @@ def create_data_structure():
 
       today_date = datetime.now()
 
-      if ((values[2] == 'Delisted') or pattern.search(values[3])):
-        if values[2] == 'Delisted':  
-          symbolList.remove(values[1]) 
+      if ((values[2] == 'Delisted') or pattern.search(values[3]) or (values[2] == 'Symbol Change')):
+        if (values[2] == 'Delisted'): 
+          if values[1] in symbolList:
+            symbolList.remove(values[1]) 
         else: 
+          given_date_string = values[0] 
+          given_date = datetime.strptime(given_date_string, "%b %d, %Y") 
           if pattern.search(values[3]): 
-            given_date_string = values[0] 
-            given_date = datetime.strptime(given_date_string, "%b %d, %Y") 
             date_difference = today_date - given_date
             days_difference = date_difference.days 
 
             if days_difference > 4: 
               symbolListOther[values[1]] = "REVERSE SPLIT on " + values[0]  
-              symbolList.remove(values[1]) 
+              if values[1] in symbolList:
+                symbolList.remove(values[1]) 
 
+          if values[2] == 'Symbol Change':
+              symbolListOther[values[1]] = "SYMBOL CHANGE on " + values[0] + "!!! 40 PERCENT!!!" 
+              if values[1] in symbolList: 
+                symbolList.remove(values[1])           
 
     f.close() 
 
@@ -78,7 +85,9 @@ def create_data_structure():
 
   except Exception as e:
     print("Exception") 
-    print(e) 
+    print(e)
+    exc_type, exc_obj, exc_tb = sys.exc_info()  
+    print("An exception occurred on line " + str(exc_tb.tb_lineno))
 
 mydata = create_data_structure()
 

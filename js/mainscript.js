@@ -511,6 +511,7 @@ $(function() {
           var checkReportDate = 0; 
           var checkAnnouncementDate = 0; 
           var checkPresentationDate = 0; 
+          var checkHighlightDate = 0; 
 
 
           closeAllWindows();
@@ -935,21 +936,23 @@ $(function() {
               {
                  dividendCheckDate = 1; 
               }
-
               if (finalObject.checkReportDate == 1)
               {
                 checkReportDate = 1; 
               }
-
               if (finalObject.checkAnnouncementDate == 1)
               {
                 checkAnnouncementDate = 1; 
               }
-
               if (finalObject.checkPresentationDate == 1)
               {
                 checkPresentationDate = 1; 
               }
+              if (finalObject.checkHighlightDate == 1)
+              {
+                checkHighlightDate = 1; 
+              }
+              
 
 
               yahooCompanyName = " " + finalObject.final_return.match(/<h1(.*?)h1>/g) + " "; 
@@ -1106,42 +1109,47 @@ $(function() {
                       {
                         alert("CHECK PRESENTATION DATE!!!!"); 
                       }
+                      if (checkHighlightDate == 1)
+                      {
+                        alert("CHECK HIGHLIGHT DATE!!!!"); 
+                      }
+
+
 
 
 
 var corporateActionsStocks=
 {
-  "PIK": "REVERSE SPLIT on Mar 7, 2024",
-  "BPTH": "REVERSE SPLIT on Feb 23, 2024",
-  "LSDI": "REVERSE SPLIT on Feb 26, 2024",
   "TGL": "REVERSE SPLIT on Feb 27, 2024",
-  "TRIB": "REVERSE SPLIT on Feb 23, 2024",
-  "EGIO": "REVERSE SPLIT on Mar 1, 2024",
-  "XTIA": "REVERSE SPLIT on Mar 13, 2024",
-  "PGY": "REVERSE SPLIT on Mar 8, 2024",
-  "ZCMD": "REVERSE SPLIT on Feb 29, 2024",
-  "OTLK": "REVERSE SPLIT on Mar 14, 2024",
-  "IFBD": "REVERSE SPLIT on Mar 4, 2024",
-  "RETO": "REVERSE SPLIT on Mar 1, 2024",
-  "CELU": "REVERSE SPLIT on Feb 29, 2024",
-  "FFIE": "REVERSE SPLIT on Mar 1, 2024",
-  "PHUN": "REVERSE SPLIT on Feb 27, 2024",
-  "HPCO": "REVERSE SPLIT on Mar 13, 2024",
-  "LYT": "REVERSE SPLIT on Feb 23, 2024",
-  "GXAI": "REVERSE SPLIT on Mar 8, 2024",
-  "AFMD": "REVERSE SPLIT on Mar 11, 2024",
+  "AUUD": "REVERSE SPLIT on Feb 27, 2024",
   "LFWD": "REVERSE SPLIT on Mar 15, 2024",
   "CJJD": "REVERSE SPLIT on Mar 1, 2024",
-  "GOEV": "REVERSE SPLIT on Mar 8, 2024",
-  "AGE": "REVERSE SPLIT on Mar 15, 2024",
-  "APVO": "REVERSE SPLIT on Mar 6, 2024",
-  "CPHI": "REVERSE SPLIT on Mar 6, 2024",
+  "VRPX": "REVERSE SPLIT on Mar 1, 2024",
   "ATNF": "REVERSE SPLIT on Feb 28, 2024",
-  "AUUD": "REVERSE SPLIT on Feb 27, 2024",
+  "YSG": "REVERSE SPLIT on Mar 18, 2024",
+  "PGY": "REVERSE SPLIT on Mar 8, 2024",
+  "IFBD": "REVERSE SPLIT on Mar 4, 2024",
   "CISO": "REVERSE SPLIT on Mar 8, 2024",
-  "VRPX": "REVERSE SPLIT on Mar 1, 2024"
+  "CPHI": "REVERSE SPLIT on Mar 6, 2024",
+  "FFIE": "REVERSE SPLIT on Mar 1, 2024",
+  "PHUN": "REVERSE SPLIT on Feb 27, 2024",
+  "APVO": "REVERSE SPLIT on Mar 6, 2024",
+  "HPCO": "REVERSE SPLIT on Mar 13, 2024",
+  "AGE": "REVERSE SPLIT on Mar 15, 2024",
+  "GOEV": "REVERSE SPLIT on Mar 8, 2024",
+  "GXAI": "REVERSE SPLIT on Mar 8, 2024",
+  "AFMD": "REVERSE SPLIT on Mar 11, 2024",
+  "AEVA": "REVERSE SPLIT on Mar 19, 2024",
+  "ZCMD": "REVERSE SPLIT on Feb 29, 2024",
+  "AUNA": "REVERSE SPLIT on Mar 4, 2024",
+  "PIK": "REVERSE SPLIT on Mar 7, 2024",
+  "EGIO": "REVERSE SPLIT on Mar 1, 2024",
+  "RETO": "REVERSE SPLIT on Mar 1, 2024",
+  "LSDI": "REVERSE SPLIT on Feb 26, 2024",
+  "XTIA": "REVERSE SPLIT on Mar 13, 2024",
+  "CELU": "REVERSE SPLIT on Feb 29, 2024",
+  "OTLK": "REVERSE SPLIT on Mar 14, 2024"
 };
-
 
 
 

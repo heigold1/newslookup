@@ -5,7 +5,7 @@ include './Samples/config.php';
 require_once("simple_html_dom.php"); 
 require_once("country-codes.php");
 
-$yesterdayDays = 1;
+$yesterdayDays = 3;
 
 error_reporting(1);
 //ini_set('display_errors', 1);
@@ -1408,6 +1408,10 @@ else if ($which_website == "yahoo")
       if (preg_match('/to present/i', $returnHtml))
       {
         $returnArray['checkPresentationDate'] = 1;
+      }
+      if (preg_match('/to highlight/i', $returnHtml))
+      {
+        $returnArray['checkHighlightDate'] = 1;
       }
 
 

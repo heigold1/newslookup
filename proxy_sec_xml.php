@@ -9,7 +9,7 @@ $secCompanyName = preg_replace('/ /', '+', $secCompanyName);
 $secCompanyName = preg_replace("/<.*?>/", "", $secCompanyName);
 $checkSec = $_GET['checkSec']; 
 
-$yesterdayDays = 1;
+$yesterdayDays = 3;
 
 fopen("cookies.txt", "w");
 
@@ -957,23 +957,24 @@ function getSecFilings($symbol, $yesterdayDays, $secCompanyName)
       {
         $returnArray['dividendCheckDate'] = 1;
       }
-
       $returnArray['checkReportDate'] = 0;
       if (preg_match('/to report/i', $returnHtml))
       {
         $returnArray['checkReportDate'] = 1;
       }
-
       $returnArray['checkAnnouncementDate'] = 0;
       if (preg_match('/to announce/i', $returnHtml))
       {
         $returnArray['checkAnnouncementtDate'] = 1;
       }
-
       $returnArray['checkPresentationDate'] = 0;
       if (preg_match('/to present/i', $returnHtml))
       {
         $returnArray['checkPresentationDate'] = 1;
+      }
+      if (preg_match('/to highlight/i', $returnHtml))
+      {
+        $returnArray['checkHighlightDate'] = 1;
       }
 
 
