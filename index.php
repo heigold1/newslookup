@@ -44,7 +44,7 @@
 									<input id="pink_sheet_0002" type="submit" value="$0.0002">
 								</span>
 								<span>
-									<input id="pink_sheet_0006" type="submit" value="$0.0006">
+									<input id="asian_stocks" type="submit" value="87.5%">
 								</span>
 								<span>
 									<input id="dollar_17_5" type="submit" value="17.5%">

@@ -1428,10 +1428,16 @@ for (var corporateSymbol in corporateActionsStocks)
       CopyToClipboard();  
     }); // End of click function 
 
-   $("#pink_sheet_0006").click(function(){
+   $("#asian_stocks").click(function(){
 
-      $("#amountSpending").val("300");
-      $("#entryPrice").val("0.0006"); 
+      $("#entryPercentage").val("87.5"); 
+      $("#amountSpending").val("350"); 
+
+      var yesterdaysClose = $('#yestCloseText').val(); 
+      var newPrice = yesterdaysClose - (yesterdaysClose*87.5/100); 
+      newPrice = newPrice.toFixed(2); 
+      $('#entryPrice').val(newPrice); 
+
       calcAll();
       CopyToClipboard();  
     }); // End of click function 
