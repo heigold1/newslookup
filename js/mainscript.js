@@ -1420,10 +1420,16 @@ for (var corporateSymbol in corporateActionsStocks)
     }); // End of click function 
 
 
-   $("#pink_sheet_0002").click(function(){
+   $("#symbol_change").click(function(){
 
-      $("#amountSpending").val("100");
-      $("#entryPrice").val("0.0002"); 
+      $("#entryPercentage").val("37.5"); 
+      $("#amountSpending").val("500"); 
+
+      var yesterdaysClose = $('#yestCloseText').val(); 
+      var newPrice = yesterdaysClose - (yesterdaysClose*37.5/100); 
+      newPrice = newPrice.toFixed(2); 
+      $('#entryPrice').val(newPrice);
+
       calcAll();
       CopyToClipboard();  
     }); // End of click function 
