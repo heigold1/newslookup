@@ -1117,38 +1117,71 @@ $(function() {
 
 
 
-
 var corporateActionsStocks=
 {
-  "TGL": "REVERSE SPLIT on Feb 27, 2024",
-  "AUUD": "REVERSE SPLIT on Feb 27, 2024",
-  "LFWD": "REVERSE SPLIT on Mar 15, 2024",
-  "CJJD": "REVERSE SPLIT on Mar 1, 2024",
-  "VRPX": "REVERSE SPLIT on Mar 1, 2024",
-  "ATNF": "REVERSE SPLIT on Feb 28, 2024",
-  "YSG": "REVERSE SPLIT on Mar 18, 2024",
-  "PGY": "REVERSE SPLIT on Mar 8, 2024",
-  "IFBD": "REVERSE SPLIT on Mar 4, 2024",
-  "CISO": "REVERSE SPLIT on Mar 8, 2024",
-  "CPHI": "REVERSE SPLIT on Mar 6, 2024",
-  "FFIE": "REVERSE SPLIT on Mar 1, 2024",
-  "PHUN": "REVERSE SPLIT on Feb 27, 2024",
-  "APVO": "REVERSE SPLIT on Mar 6, 2024",
-  "HPCO": "REVERSE SPLIT on Mar 13, 2024",
-  "AGE": "REVERSE SPLIT on Mar 15, 2024",
-  "GOEV": "REVERSE SPLIT on Mar 8, 2024",
-  "GXAI": "REVERSE SPLIT on Mar 8, 2024",
-  "AFMD": "REVERSE SPLIT on Mar 11, 2024",
-  "AEVA": "REVERSE SPLIT on Mar 19, 2024",
-  "ZCMD": "REVERSE SPLIT on Feb 29, 2024",
-  "AUNA": "REVERSE SPLIT on Mar 4, 2024",
-  "PIK": "REVERSE SPLIT on Mar 7, 2024",
-  "EGIO": "REVERSE SPLIT on Mar 1, 2024",
-  "RETO": "REVERSE SPLIT on Mar 1, 2024",
-  "LSDI": "REVERSE SPLIT on Feb 26, 2024",
-  "XTIA": "REVERSE SPLIT on Mar 13, 2024",
+  "NMHI": "SYMBOL CHANGE on Mar 12, 2024!!! 39 PERCENT!!!",
+  "LENZ": "REVERSE SPLIT on Mar 22, 2024",
+  "TBRG": "SYMBOL CHANGE on Mar 4, 2024!!! 39 PERCENT!!!",
+  "BCAN": "REVERSE SPLIT on Mar 22, 2024",
   "CELU": "REVERSE SPLIT on Feb 29, 2024",
-  "OTLK": "REVERSE SPLIT on Mar 14, 2024"
+  "POLCQ": "SYMBOL CHANGE on Feb 29, 2024!!! 39 PERCENT!!!",
+  "HPCO": "REVERSE SPLIT on Mar 13, 2024",
+  "LIANY": "SYMBOL CHANGE on Mar 18, 2024!!! 39 PERCENT!!!",
+  "FSRN": "SYMBOL CHANGE on Mar 25, 2024!!! 39 PERCENT!!!",
+  "MRNO": "SYMBOL CHANGE on Mar 21, 2024!!! 39 PERCENT!!!",
+  "GXAI": "REVERSE SPLIT on Mar 8, 2024",
+  "ATER": "REVERSE SPLIT on Mar 22, 2024",
+  "XTIA": "REVERSE SPLIT on Mar 13, 2024",
+  "CUROQ": "SYMBOL CHANGE on Mar 11, 2024!!! 39 PERCENT!!!",
+  "VRPX": "REVERSE SPLIT on Mar 1, 2024",
+  "MBRX": "REVERSE SPLIT on Mar 22, 2024",
+  "QTTB": "SYMBOL CHANGE on Mar 26, 2024!!! 39 PERCENT!!!",
+  "BTTR": "REVERSE SPLIT on Mar 21, 2024",
+  "RETO": "REVERSE SPLIT on Mar 1, 2024",
+  "HPH": "SYMBOL CHANGE on Mar 18, 2024!!! 39 PERCENT!!!",
+  "CJJD": "REVERSE SPLIT on Mar 1, 2024",
+  "AGE": "REVERSE SPLIT on Mar 15, 2024",
+  "CISO": "REVERSE SPLIT on Mar 8, 2024",
+  "LFWD": "REVERSE SPLIT on Mar 15, 2024",
+  "DJT": "SYMBOL CHANGE on Mar 26, 2024!!! 39 PERCENT!!!",
+  "PGY": "REVERSE SPLIT on Mar 8, 2024",
+  "ROII": "SYMBOL CHANGE on Feb 27, 2024!!! 39 PERCENT!!!",
+  "OTLK": "REVERSE SPLIT on Mar 14, 2024",
+  "NITO": "SYMBOL CHANGE on Mar 19, 2024!!! 39 PERCENT!!!",
+  "FFIE": "REVERSE SPLIT on Mar 1, 2024",
+  "MLGO": "REVERSE SPLIT on Mar 22, 2024",
+  "ZCMD": "REVERSE SPLIT on Feb 29, 2024",
+  "IFBD": "REVERSE SPLIT on Mar 4, 2024",
+  "AEVA": "REVERSE SPLIT on Mar 19, 2024",
+  "BFXXQ": "SYMBOL CHANGE on Mar 4, 2024!!! 39 PERCENT!!!",
+  "AFMD": "REVERSE SPLIT on Mar 11, 2024",
+  "BODI": "SYMBOL CHANGE on Mar 4, 2024!!! 39 PERCENT!!!",
+  "BNAI": "SYMBOL CHANGE on Mar 15, 2024!!! 39 PERCENT!!!",
+  "PHUN": "REVERSE SPLIT on Feb 27, 2024",
+  "CPHI": "REVERSE SPLIT on Mar 6, 2024",
+  "GOEV": "REVERSE SPLIT on Mar 8, 2024",
+  "CPAY": "SYMBOL CHANGE on Mar 25, 2024!!! 39 PERCENT!!!",
+  "ZEO": "SYMBOL CHANGE on Mar 14, 2024!!! 39 PERCENT!!!",
+  "NTRP": "SYMBOL CHANGE on Mar 13, 2024!!! 39 PERCENT!!!",
+  "CRML": "SYMBOL CHANGE on Feb 28, 2024!!! 39 PERCENT!!!",
+  "ATNF": "REVERSE SPLIT on Feb 28, 2024",
+  "QTI": "SYMBOL CHANGE on Mar 5, 2024!!! 39 PERCENT!!!",
+  "AUNA": "REVERSE SPLIT on Mar 4, 2024",
+  "CRGEQ": "SYMBOL CHANGE on Feb 28, 2024!!! 39 PERCENT!!!",
+  "APVO": "REVERSE SPLIT on Mar 6, 2024",
+  "FUFU": "SYMBOL CHANGE on Mar 1, 2024!!! 39 PERCENT!!!",
+  "TGL": "REVERSE SPLIT on Feb 27, 2024",
+  "COOT": "SYMBOL CHANGE on Mar 22, 2024!!! 39 PERCENT!!!",
+  "AIRJ": "SYMBOL CHANGE on Mar 15, 2024!!! 39 PERCENT!!!",
+  "CYTT": "SYMBOL CHANGE on Mar 15, 2024!!! 39 PERCENT!!!",
+  "EGIO": "REVERSE SPLIT on Mar 1, 2024",
+  "MTUS": "SYMBOL CHANGE on Feb 27, 2024!!! 39 PERCENT!!!",
+  "GTI": "SYMBOL CHANGE on Mar 15, 2024!!! 39 PERCENT!!!",
+  "ADVM": "REVERSE SPLIT on Mar 21, 2024",
+  "AUUD": "REVERSE SPLIT on Feb 27, 2024",
+  "YSG": "REVERSE SPLIT on Mar 18, 2024",
+  "PIK": "REVERSE SPLIT on Mar 7, 2024",
+  "DOC": "SYMBOL CHANGE on Mar 4, 2024!!! 39 PERCENT!!!"
 };
 
 
@@ -1289,6 +1322,11 @@ for (var corporateSymbol in corporateActionsStocks)
         if ((day1 > 1.00) && (day2 > 1.00) && (day3 > 1.00) && (day4 > 1.00) && (day5 > 1.00))
         {
           alert("UPWARD TRAJECTORY!!! 19%!!!!"); 
+        }
+
+        if ((day1 < 1.00) && (day2 < 1.00) && (day3 < 1.00))
+        {
+          alert("DOWNWARD TRAJECTORY!!!"); 
         }
 
 

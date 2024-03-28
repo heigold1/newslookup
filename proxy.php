@@ -5,7 +5,7 @@ include './Samples/config.php';
 require_once("simple_html_dom.php"); 
 require_once("country-codes.php");
 
-$yesterdayDays = 3;
+$yesterdayDays = 1;
 
 error_reporting(1);
 //ini_set('display_errors', 1);
