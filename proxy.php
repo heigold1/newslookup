@@ -1413,6 +1413,10 @@ else if ($which_website == "yahoo")
       {
         $returnArray['checkHighlightDate'] = 1;
       }
+      if (preg_match('/to participate/i', $returnHtml))
+      {
+        $returnArray['checkParticipationDate'] = 1;
+      }
 
 
        $message_board = '</font><a target="_blank" onclick="return openPage(this.href)" href="http://finance.yahoo.com/quote/' . $symbol . '/community?ltr=1"> Yahoo Message Boards</a>&nbsp;&nbsp;&nbsp;&nbsp;'; 

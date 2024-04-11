@@ -976,6 +976,10 @@ function getSecFilings($symbol, $yesterdayDays, $secCompanyName)
       {
         $returnArray['checkHighlightDate'] = 1;
       }
+      if (preg_match('/to participate/i', $returnHtml))
+      {
+        $returnArray['checkParticipationDate'] = 1;
+      }
 
 
       if (intval($checkSec) == 1) 

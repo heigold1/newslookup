@@ -512,6 +512,7 @@ $(function() {
           var checkAnnouncementDate = 0; 
           var checkPresentationDate = 0; 
           var checkHighlightDate = 0; 
+          var checkParticipationDate = 0; 
 
 
           closeAllWindows();
@@ -952,6 +953,10 @@ $(function() {
               {
                 checkHighlightDate = 1; 
               }
+              if (finalObject.checkParticipationDate == 1)
+              {
+                checkParticipationDate = 1; 
+              }
               
 
 
@@ -1091,6 +1096,12 @@ $(function() {
                       {
                         checkPresentationDate = 1; 
                       }
+                      if (finalObject.checkParticipationDate == 1)
+                      {
+                        checkParticipationDate = 1; 
+                      }
+
+
 
 
                       if (dividendCheckDate == 1)
@@ -1113,79 +1124,88 @@ $(function() {
                       {
                         alert("CHECK HIGHLIGHT DATE!!!!"); 
                       }
+                      if (checkParticipationDate == 1)
+                      {
+                        alert("CHECK PARTICIPATION DATE!!!"); 
+                      }
+
 
 
 
 
 var corporateActionsStocks=
 {
-  "NMHI": "SYMBOL CHANGE on Mar 12, 2024!!! 39 PERCENT!!!",
-  "LENZ": "REVERSE SPLIT on Mar 22, 2024",
-  "TBRG": "SYMBOL CHANGE on Mar 4, 2024!!! 39 PERCENT!!!",
+  "NMHI": "SYMBOL CHANGE on Mar 12, 2024!!! 38 PERCENT!!!",
+  "DJT": "SYMBOL CHANGE on Mar 26, 2024!!! 38 PERCENT!!!",
+  "VIEWQ": "SYMBOL CHANGE on Apr 4, 2024!!! 38 PERCENT!!!",
   "BCAN": "REVERSE SPLIT on Mar 22, 2024",
-  "CELU": "REVERSE SPLIT on Feb 29, 2024",
-  "POLCQ": "SYMBOL CHANGE on Feb 29, 2024!!! 39 PERCENT!!!",
-  "HPCO": "REVERSE SPLIT on Mar 13, 2024",
-  "LIANY": "SYMBOL CHANGE on Mar 18, 2024!!! 39 PERCENT!!!",
-  "FSRN": "SYMBOL CHANGE on Mar 25, 2024!!! 39 PERCENT!!!",
-  "MRNO": "SYMBOL CHANGE on Mar 21, 2024!!! 39 PERCENT!!!",
-  "GXAI": "REVERSE SPLIT on Mar 8, 2024",
-  "ATER": "REVERSE SPLIT on Mar 22, 2024",
-  "XTIA": "REVERSE SPLIT on Mar 13, 2024",
-  "CUROQ": "SYMBOL CHANGE on Mar 11, 2024!!! 39 PERCENT!!!",
-  "VRPX": "REVERSE SPLIT on Mar 1, 2024",
+  "DOYU": "REVERSE SPLIT on Mar 28, 2024",
+  "NXTT": "SYMBOL CHANGE on Apr 2, 2024!!! 38 PERCENT!!!",
   "MBRX": "REVERSE SPLIT on Mar 22, 2024",
-  "QTTB": "SYMBOL CHANGE on Mar 26, 2024!!! 39 PERCENT!!!",
+  "MTBLY": "SYMBOL CHANGE on Apr 3, 2024!!! 38 PERCENT!!!",
+  "GTI": "SYMBOL CHANGE on Mar 15, 2024!!! 38 PERCENT!!!",
   "BTTR": "REVERSE SPLIT on Mar 21, 2024",
-  "RETO": "REVERSE SPLIT on Mar 1, 2024",
-  "HPH": "SYMBOL CHANGE on Mar 18, 2024!!! 39 PERCENT!!!",
-  "CJJD": "REVERSE SPLIT on Mar 1, 2024",
-  "AGE": "REVERSE SPLIT on Mar 15, 2024",
-  "CISO": "REVERSE SPLIT on Mar 8, 2024",
-  "LFWD": "REVERSE SPLIT on Mar 15, 2024",
-  "DJT": "SYMBOL CHANGE on Mar 26, 2024!!! 39 PERCENT!!!",
-  "PGY": "REVERSE SPLIT on Mar 8, 2024",
-  "ROII": "SYMBOL CHANGE on Feb 27, 2024!!! 39 PERCENT!!!",
+  "TRAW": "SYMBOL CHANGE on Apr 3, 2024!!! 38 PERCENT!!!",
   "OTLK": "REVERSE SPLIT on Mar 14, 2024",
-  "NITO": "SYMBOL CHANGE on Mar 19, 2024!!! 39 PERCENT!!!",
-  "FFIE": "REVERSE SPLIT on Mar 1, 2024",
-  "MLGO": "REVERSE SPLIT on Mar 22, 2024",
-  "ZCMD": "REVERSE SPLIT on Feb 29, 2024",
-  "IFBD": "REVERSE SPLIT on Mar 4, 2024",
-  "AEVA": "REVERSE SPLIT on Mar 19, 2024",
-  "BFXXQ": "SYMBOL CHANGE on Mar 4, 2024!!! 39 PERCENT!!!",
-  "AFMD": "REVERSE SPLIT on Mar 11, 2024",
-  "BODI": "SYMBOL CHANGE on Mar 4, 2024!!! 39 PERCENT!!!",
-  "BNAI": "SYMBOL CHANGE on Mar 15, 2024!!! 39 PERCENT!!!",
-  "PHUN": "REVERSE SPLIT on Feb 27, 2024",
-  "CPHI": "REVERSE SPLIT on Mar 6, 2024",
-  "GOEV": "REVERSE SPLIT on Mar 8, 2024",
-  "CPAY": "SYMBOL CHANGE on Mar 25, 2024!!! 39 PERCENT!!!",
-  "ZEO": "SYMBOL CHANGE on Mar 14, 2024!!! 39 PERCENT!!!",
-  "NTRP": "SYMBOL CHANGE on Mar 13, 2024!!! 39 PERCENT!!!",
-  "CRML": "SYMBOL CHANGE on Feb 28, 2024!!! 39 PERCENT!!!",
-  "ATNF": "REVERSE SPLIT on Feb 28, 2024",
-  "QTI": "SYMBOL CHANGE on Mar 5, 2024!!! 39 PERCENT!!!",
-  "AUNA": "REVERSE SPLIT on Mar 4, 2024",
-  "CRGEQ": "SYMBOL CHANGE on Feb 28, 2024!!! 39 PERCENT!!!",
-  "APVO": "REVERSE SPLIT on Mar 6, 2024",
-  "FUFU": "SYMBOL CHANGE on Mar 1, 2024!!! 39 PERCENT!!!",
-  "TGL": "REVERSE SPLIT on Feb 27, 2024",
-  "COOT": "SYMBOL CHANGE on Mar 22, 2024!!! 39 PERCENT!!!",
-  "AIRJ": "SYMBOL CHANGE on Mar 15, 2024!!! 39 PERCENT!!!",
-  "CYTT": "SYMBOL CHANGE on Mar 15, 2024!!! 39 PERCENT!!!",
-  "EGIO": "REVERSE SPLIT on Mar 1, 2024",
-  "MTUS": "SYMBOL CHANGE on Feb 27, 2024!!! 39 PERCENT!!!",
-  "GTI": "SYMBOL CHANGE on Mar 15, 2024!!! 39 PERCENT!!!",
-  "ADVM": "REVERSE SPLIT on Mar 21, 2024",
-  "AUUD": "REVERSE SPLIT on Feb 27, 2024",
+  "INTZ": "REVERSE SPLIT on Mar 25, 2024",
+  "DCFC": "REVERSE SPLIT on Apr 2, 2024",
+  "QTTB": "REVERSE SPLIT on Mar 26, 2024",
   "YSG": "REVERSE SPLIT on Mar 18, 2024",
-  "PIK": "REVERSE SPLIT on Mar 7, 2024",
-  "DOC": "SYMBOL CHANGE on Mar 4, 2024!!! 39 PERCENT!!!"
+  "CYTT": "SYMBOL CHANGE on Mar 15, 2024!!! 38 PERCENT!!!",
+  "ADVM": "REVERSE SPLIT on Mar 21, 2024",
+  "BNAI": "SYMBOL CHANGE on Mar 15, 2024!!! 38 PERCENT!!!",
+  "UCAR": "REVERSE SPLIT on Apr 3, 2024",
+  "VJTTY": "SYMBOL CHANGE on Mar 22, 2024!!! 38 PERCENT!!!",
+  "NTRP": "SYMBOL CHANGE on Mar 13, 2024!!! 38 PERCENT!!!",
+  "HPH": "SYMBOL CHANGE on Mar 18, 2024!!! 38 PERCENT!!!",
+  "GLAD": "REVERSE SPLIT on Apr 5, 2024",
+  "MLGO": "REVERSE SPLIT on Mar 22, 2024",
+  "RENT": "REVERSE SPLIT on Apr 3, 2024",
+  "LENZ": "REVERSE SPLIT on Mar 22, 2024",
+  "LFWD": "REVERSE SPLIT on Mar 15, 2024",
+  "LIANY": "SYMBOL CHANGE on Mar 18, 2024!!! 38 PERCENT!!!",
+  "CTRM": "REVERSE SPLIT on Mar 27, 2024",
+  "NITO": "SYMBOL CHANGE on Mar 19, 2024!!! 38 PERCENT!!!",
+  "CPAY": "SYMBOL CHANGE on Mar 25, 2024!!! 38 PERCENT!!!",
+  "CASSQ": "SYMBOL CHANGE on Apr 4, 2024!!! 38 PERCENT!!!",
+  "RNAC": "REVERSE SPLIT on Apr 5, 2024",
+  "JOANQ": "SYMBOL CHANGE on Mar 27, 2024!!! 38 PERCENT!!!",
+  "VIWWQ": "SYMBOL CHANGE on Apr 4, 2024!!! 38 PERCENT!!!",
+  "AEVA": "REVERSE SPLIT on Mar 19, 2024",
+  "LPA": "SYMBOL CHANGE on Mar 28, 2024!!! 38 PERCENT!!!",
+  "AIRJ": "SYMBOL CHANGE on Mar 15, 2024!!! 38 PERCENT!!!",
+  "COOT": "SYMBOL CHANGE on Mar 22, 2024!!! 38 PERCENT!!!",
+  "EMKR": "REVERSE SPLIT on Apr 2, 2024",
+  "CUROQ": "SYMBOL CHANGE on Mar 11, 2024!!! 38 PERCENT!!!",
+  "NRXP": "REVERSE SPLIT on Apr 2, 2024",
+  "LGVN": "REVERSE SPLIT on Mar 27, 2024",
+  "GMDAQ": "SYMBOL CHANGE on Apr 5, 2024!!! 38 PERCENT!!!",
+  "SNPX": "REVERSE SPLIT on Apr 5, 2024",
+  "GCTS": "SYMBOL CHANGE on Mar 27, 2024!!! 38 PERCENT!!!",
+  "ETAO": "REVERSE SPLIT on Mar 26, 2024",
+  "SER": "REVERSE SPLIT on Mar 15, 2024",
+  "SOLV": "SYMBOL CHANGE on Apr 1, 2024!!! 38 PERCENT!!!",
+  "ATER": "REVERSE SPLIT on Mar 22, 2024",
+  "AFMD": "REVERSE SPLIT on Mar 11, 2024",
+  "STKH": "REVERSE SPLIT on Apr 4, 2024",
+  "GEV": "SYMBOL CHANGE on Apr 2, 2024!!! 38 PERCENT!!!",
+  "FAAS": "SYMBOL CHANGE on Apr 3, 2024!!! 38 PERCENT!!!",
+  "FSRN": "SYMBOL CHANGE on Mar 25, 2024!!! 38 PERCENT!!!",
+  "MRNO": "SYMBOL CHANGE on Mar 21, 2024!!! 38 PERCENT!!!",
+  "XTIA": "REVERSE SPLIT on Mar 13, 2024",
+  "BOLD": "REVERSE SPLIT on Mar 19, 2024",
+  "MIMOQ": "SYMBOL CHANGE on Apr 1, 2024!!! 38 PERCENT!!!",
+  "EDBL": "REVERSE SPLIT on Apr 5, 2024",
+  "AWIN": "REVERSE SPLIT on Apr 2, 2024",
+  "POLCQ": "SYMBOL CHANGE on Mar 11, 2024!!! 38 PERCENT!!!",
+  "CWBC": "SYMBOL CHANGE on Apr 1, 2024!!! 38 PERCENT!!!",
+  "ZEO": "SYMBOL CHANGE on Mar 14, 2024!!! 38 PERCENT!!!",
+  "XXII": "REVERSE SPLIT on Apr 2, 2024",
+  "PDYN": "SYMBOL CHANGE on Apr 8, 2024!!! 38 PERCENT!!!",
+  "PLUR": "REVERSE SPLIT on Apr 1, 2024",
+  "CTNM": "REVERSE SPLIT on Apr 1, 2024",
+  "HPCO": "REVERSE SPLIT on Mar 13, 2024"
 };
-
-
-
 
 
 
@@ -1319,7 +1339,7 @@ for (var corporateSymbol in corporateActionsStocks)
             playHighRiskStock(); 
         }
 
-        if ((day1 > 1.00) && (day2 > 1.00) && (day3 > 1.00) && (day4 > 1.00) && (day5 > 1.00))
+        if ((day3 > 1.00) && (day4 > 1.00) && (day5 > 1.00))
         {
           alert("UPWARD TRAJECTORY!!! 19%!!!!"); 
         }

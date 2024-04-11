@@ -272,7 +272,7 @@
 			- You can go for lower-volume stocks at the 18-19% level, AS LONG AS the price is high (i.e. $10 a share)<br><br>
 			- If a stock is high-risk because of 5X volume, set it at 22% (i.e. not 23%)<br><br>
 			- Go 15% down from pre-market low for high-risk penny stocks<br><br>
-			- STALLS - dollar stocks with non-news - you can be patient, penny stocks with non-news and it stalls - just cut your losses and get out<br><br>
+			- STALLS - If it isn't going anywhere, just get out after an hour.<br><br>
 			- Minimum entry for penny stocks - 23%<br><br>
 			- Pink Sheet dollar stocks - if the 50% down price is still over $1.00 a share, you can jump in at 50%.  If you catch a Pink Sheet dollar stock at 50% mark, only take 20-25% profit<br><br>
 			- Penny offerings - 45% down from offering price, if the price is super low then 50%<br><br>
@@ -284,6 +284,8 @@
 			- Earnings net income - 40% minimum.  No more jumping in before 40%, EVER.  You know this from experience (losses from jumping in before 40%). <br><br>
 			- If there is a major drop the previous day - 35-40% early the next day, and it must drop fast. <br><br>
 			- You can go in at 20% right up unil 8:00, provided the big charts difference is at least 10%<br><br>
+			- Drug news - 83%. 
+			
     </p>
   </div>
 

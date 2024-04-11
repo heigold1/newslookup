@@ -57,7 +57,7 @@ def create_data_structure():
                 symbolList.remove(values[1]) 
 
           if values[2] == 'Symbol Change':
-              symbolListOther[values[1]] = "SYMBOL CHANGE on " + values[0] + "!!! 39 PERCENT!!!" 
+              symbolListOther[values[1]] = "SYMBOL CHANGE on " + values[0] + "!!! 38 PERCENT!!!" 
               if values[1] in symbolList: 
                 symbolList.remove(values[1])           
 
