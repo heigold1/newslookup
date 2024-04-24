@@ -451,8 +451,8 @@ function getStreetInsider($symbol, $yesterdayDays)
             $j++;
 
             // Convert time from GMT to  AM/PM New York
-            // 18000 is 5 hours X 60 seconds/minute X 60 minutes/hour
-            $publicationDateStrToTime = strtotime($feedItem->pubDate) - 18000;
+            // 14400 is 4 hours X 60 seconds/minute X 60 minutes/hour
+            $publicationDateStrToTime = strtotime($feedItem->pubDate) - 14400;
 
             $convertedDate = new DateTime(); 
             $convertedDate->setTimestamp($publicationDateStrToTime);
@@ -719,6 +719,8 @@ function getStreetInsider($symbol, $yesterdayDays)
           $streetInsiderNews = preg_replace('/ to highlight/i', '<span style="font-size: 60px; background-color:red; color:black"><br><br><b>&nbsp;TO HIGHLIGHT<br><br>CHECK DATE</span><br><br></b>&nbsp;', $streetInsiderNews);
           $streetInsiderNews = preg_replace('/ short report/i', '<span style="font-size: 35px; background-color:red; color:black"><b>SHORT REPORT - STAY AWAY</span></b>&nbsp;', $streetInsiderNews);
           $streetInsiderNews = preg_replace('/ mixed shelf/i', '<span style="font-size: 35px; background-color:red; color:black"><b>MIXED SHELF - OFFERING</span></b>&nbsp;', $streetInsiderNews);
+          $streetInsiderNews = preg_replace('/ closing of private placement/i', '<span style="font-size: 35px; background-color:red; color:black"><b>CLOSING OF PRIVATE PLACEMENT</span></b>&nbsp;', $streetInsiderNews);
+
 
         try 
         {
