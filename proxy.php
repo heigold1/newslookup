@@ -867,6 +867,14 @@ else if ($which_website == "yahoo")
           $yahooFinanceSector = $yahooFinanceObject[0]['sector']; 
           $yahooFinanceIndustry = $yahooFinanceObject[0]['industry']; 
           $website = $yahooFinanceObject[0]['website'];
+          $city = $yahooFinanceObject[0]['city']; 
+          $state = $yahooFinanceObject[0]['state']; 
+
+          if ($country = "United States") 
+          {
+            $country .= " (" . $city . ", " . $state . ")"; 
+
+          }
         }
 
       }
