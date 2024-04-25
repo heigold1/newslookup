@@ -1025,7 +1025,8 @@ $(function() {
               }
               else 
               {
-                  document.getElementById('country').innerHTML = "<a target='_blank' href = https://finance.yahoo.com/quote/" + symbol + "/profile>" + document.getElementById('country').innerHTML + "</a>"
+                  document.getElementById('country').innerHTML = "<a target='_blank' href = 'https://www.etrade.wallst.com/v1/stocks/snapshot/snapshot.asp?symbol=" + symbol + "'>" + document.getElementById('country').innerHTML + "</a>"
+                  https://www.etrade.wallst.com/v1/stocks/snapshot/snapshot.asp?symbol=SBFM
                   document.getElementById('country').style.fontSize = "35px"; 
                   document.getElementById('country').style.backgroundColor = "rgb(255, 138, 138)";
                   document.getElementById('country').style.height = "35px"; 
