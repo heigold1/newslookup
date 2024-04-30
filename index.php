@@ -173,7 +173,7 @@
 
 								<tr style="height: 22px">
 										<td>
-												Vol Ratio:
+												Vol R:
 										</td>
 										<td>
 												<label class="historical_data_label">&nbsp;&nbsp;&nbsp;</label><span id="day5_volume" class="historical_data_days">&nbsp;&nbsp;&nbsp;</span>
