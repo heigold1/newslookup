@@ -1133,78 +1133,53 @@ $(function() {
 
 
 
-
-
 var corporateActionsStocks=
 {
-  "ZOOZ": "SYMBOL CHANGE on Apr 5, 2024!!! 38 PERCENT!!!",
-  "BENF": "REVERSE SPLIT on Apr 18, 2024",
-  "NCNA": "REVERSE SPLIT on Apr 16, 2024",
-  "PALI": "REVERSE SPLIT on Apr 8, 2024",
-  "SMSI": "REVERSE SPLIT on Apr 11, 2024",
-  "SNPX": "REVERSE SPLIT on Apr 5, 2024",
-  "RENT": "REVERSE SPLIT on Apr 3, 2024",
-  "SBFM": "REVERSE SPLIT on Apr 17, 2024",
-  "WINT": "REVERSE SPLIT on Apr 22, 2024",
-  "LEJUY": "SYMBOL CHANGE on Apr 11, 2024!!! 38 PERCENT!!!",
-  "DCFCQ": "REVERSE SPLIT on Apr 2, 2024",
-  "GSUN": "REVERSE SPLIT on Apr 19, 2024",
-  "NRXP": "REVERSE SPLIT on Apr 2, 2024",
-  "EZGO": "REVERSE SPLIT on Apr 12, 2024",
-  "CTNM": "REVERSE SPLIT on Apr 1, 2024",
   "ZAPP": "REVERSE SPLIT on Apr 23, 2024",
-  "DCFWQ": "SYMBOL CHANGE on Apr 19, 2024!!! 38 PERCENT!!!",
-  "PDYN": "SYMBOL CHANGE on Apr 8, 2024!!! 38 PERCENT!!!",
-  "MYSZ": "REVERSE SPLIT on Apr 23, 2024",
-  "STKH": "REVERSE SPLIT on Apr 4, 2024",
-  "CISS": "REVERSE SPLIT on Apr 12, 2024",
-  "XXII": "REVERSE SPLIT on Apr 2, 2024",
-  "CDTX": "REVERSE SPLIT on Apr 24, 2024",
-  "CBDBY": "SYMBOL CHANGE on Apr 18, 2024!!! 38 PERCENT!!!",
-  "SOLV": "SYMBOL CHANGE on Apr 1, 2024!!! 38 PERCENT!!!",
-  "GEV": "SYMBOL CHANGE on Apr 2, 2024!!! 38 PERCENT!!!",
-  "VIAOY": "SYMBOL CHANGE on Apr 24, 2024!!! 38 PERCENT!!!",
-  "ALLR": "REVERSE SPLIT on Apr 9, 2024",
-  "EDBL": "REVERSE SPLIT on Apr 5, 2024",
-  "TCON": "REVERSE SPLIT on Apr 10, 2024",
-  "AWIN": "REVERSE SPLIT on Apr 2, 2024",
-  "ZPTA": "SYMBOL CHANGE on Apr 1, 2024!!! 38 PERCENT!!!",
-  "AGEN": "REVERSE SPLIT on Apr 12, 2024",
-  "FAAS": "SYMBOL CHANGE on Apr 3, 2024!!! 38 PERCENT!!!",
-  "AILE": "SYMBOL CHANGE on Apr 17, 2024!!! 38 PERCENT!!!",
-  "FLNT": "REVERSE SPLIT on Apr 12, 2024",
-  "CASSQ": "SYMBOL CHANGE on Apr 4, 2024!!! 38 PERCENT!!!",
+  "AEZS": "REVERSE SPLIT on May 3, 2024",
+  "OKLO": "SYMBOL CHANGE on May 10, 2024!!! 38 PERCENT!!!",
+  "BKKT": "REVERSE SPLIT on Apr 29, 2024",
   "SECOY": "SYMBOL CHANGE on Apr 25, 2024!!! 38 PERCENT!!!",
-  "GMDAQ": "SYMBOL CHANGE on Apr 5, 2024!!! 38 PERCENT!!!",
+  "LOGC": "SYMBOL CHANGE on May 13, 2024!!! 38 PERCENT!!!",
+  "YTEN": "REVERSE SPLIT on May 3, 2024",
+  "BZFD": "REVERSE SPLIT on May 6, 2024",
+  "TBIO": "REVERSE SPLIT on May 9, 2024",
   "GGEI": "SYMBOL CHANGE on Apr 18, 2024!!! 38 PERCENT!!!",
-  "WISA": "REVERSE SPLIT on Apr 15, 2024",
-  "CWBC": "SYMBOL CHANGE on Apr 1, 2024!!! 38 PERCENT!!!",
-  "NUTX": "REVERSE SPLIT on Apr 10, 2024",
-  "GLAD": "REVERSE SPLIT on Apr 5, 2024",
-  "SMFL": "REVERSE SPLIT on Apr 22, 2024",
-  "GRRR": "REVERSE SPLIT on Apr 15, 2024",
-  "EMKR": "REVERSE SPLIT on Apr 2, 2024",
   "MRIN": "REVERSE SPLIT on Apr 15, 2024",
-  "VIWWQ": "SYMBOL CHANGE on Apr 4, 2024!!! 38 PERCENT!!!",
-  "RNAC": "REVERSE SPLIT on Apr 5, 2024",
-  "MIMOQ": "SYMBOL CHANGE on Apr 1, 2024!!! 38 PERCENT!!!",
-  "NIVF": "SYMBOL CHANGE on Apr 4, 2024!!! 38 PERCENT!!!",
+  "OLB": "REVERSE SPLIT on May 6, 2024",
+  "SGBX": "REVERSE SPLIT on May 2, 2024",
+  "RCON": "REVERSE SPLIT on May 1, 2024",
+  "WISA": "REVERSE SPLIT on Apr 15, 2024",
+  "CDTX": "REVERSE SPLIT on Apr 24, 2024",
+  "NUVO": "SYMBOL CHANGE on May 2, 2024!!! 38 PERCENT!!!",
+  "VIAOY": "SYMBOL CHANGE on Apr 24, 2024!!! 38 PERCENT!!!",
+  "NCNA": "REVERSE SPLIT on Apr 16, 2024",
+  "FER": "SYMBOL CHANGE on May 9, 2024!!! 38 PERCENT!!!",
+  "VINO": "REVERSE SPLIT on May 1, 2024",
+  "GRRR": "REVERSE SPLIT on Apr 15, 2024",
+  "ATXI": "REVERSE SPLIT on Apr 26, 2024",
+  "WINT": "REVERSE SPLIT on Apr 22, 2024",
   "BPTSY": "REVERSE SPLIT on Apr 23, 2024",
-  "XYLO": "SYMBOL CHANGE on Apr 18, 2024!!! 38 PERCENT!!!",
-  "APDN": "REVERSE SPLIT on Apr 25, 2024",
-  "BON": "REVERSE SPLIT on Apr 11, 2024",
-  "UCAR": "REVERSE SPLIT on Apr 3, 2024",
-  "NXTT": "SYMBOL CHANGE on Apr 2, 2024!!! 38 PERCENT!!!",
+  "SOPA": "REVERSE SPLIT on May 1, 2024",
   "PIRS": "REVERSE SPLIT on Apr 23, 2024",
-  "TRAW": "SYMBOL CHANGE on Apr 3, 2024!!! 38 PERCENT!!!",
-  "OSAP": "SYMBOL CHANGE on Apr 17, 2024!!! 38 PERCENT!!!",
-  "EIGRQ": "SYMBOL CHANGE on Apr 10, 2024!!! 38 PERCENT!!!",
-  "PLUR": "REVERSE SPLIT on Apr 1, 2024",
-  "ACORQ": "SYMBOL CHANGE on Apr 11, 2024!!! 38 PERCENT!!!",
-  "MTBLY": "SYMBOL CHANGE on Apr 3, 2024!!! 38 PERCENT!!!",
+  "IVP": "REVERSE SPLIT on May 8, 2024",
+  "APDN": "REVERSE SPLIT on Apr 25, 2024",
   "YYAI": "SYMBOL CHANGE on Apr 15, 2024!!! 38 PERCENT!!!",
-  "VIEWQ": "SYMBOL CHANGE on Apr 4, 2024!!! 38 PERCENT!!!",
-  "MI": "REVERSE SPLIT on Apr 12, 2024"
+  "ZVSA": "REVERSE SPLIT on Apr 26, 2024",
+  "CNXX": "SYMBOL CHANGE on May 3, 2024!!! 38 PERCENT!!!",
+  "OSAPQ": "SYMBOL CHANGE on Apr 17, 2024!!! 38 PERCENT!!!",
+  "BENF": "REVERSE SPLIT on Apr 18, 2024",
+  "FUVV": "SYMBOL CHANGE on Apr 30, 2024!!! 38 PERCENT!!!",
+  "SBFM": "REVERSE SPLIT on Apr 17, 2024",
+  "DCFWQ": "SYMBOL CHANGE on Apr 19, 2024!!! 38 PERCENT!!!",
+  "CBDBY": "SYMBOL CHANGE on Apr 18, 2024!!! 38 PERCENT!!!",
+  "XYLO": "SYMBOL CHANGE on Apr 18, 2024!!! 38 PERCENT!!!",
+  "DCFCQ": "SYMBOL CHANGE on Apr 19, 2024!!! 38 PERCENT!!!",
+  "SMFL": "REVERSE SPLIT on Apr 22, 2024",
+  "MYSZ": "REVERSE SPLIT on Apr 23, 2024",
+  "ZH": "REVERSE SPLIT on May 10, 2024",
+  "AILE": "SYMBOL CHANGE on Apr 17, 2024!!! 38 PERCENT!!!",
+  "GSUN": "REVERSE SPLIT on Apr 19, 2024"
 };
 
 
@@ -1458,7 +1433,7 @@ for (var corporateSymbol in corporateActionsStocks)
       amount = amount/3; 
       $("#amountSpending").val(amount);
 */
-      $("#amountSpending").val("333.33"); 
+      $("#amountSpending").val("250.00"); 
 
       calcAll();
       CopyToClipboard();  
@@ -1730,9 +1705,9 @@ for (var corporateSymbol in corporateActionsStocks)
 
           // in case I accidentally type in more than I should be trading with
           var thisValue = parseInt($(this).val()); 
-          if (thisValue >  500)
+          if (thisValue > 700)
           {
-            thisValue = 500;
+            thisValue = 700;
             $(this).val(thisValue);
           }
 

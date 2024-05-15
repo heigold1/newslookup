@@ -285,6 +285,7 @@
 			- If there is a major drop the previous day - 35-40% early the next day, and it must drop fast. <br><br>
 			- You can go in at 20% right up unil 8:00, provided the big charts difference is at least 10%<br><br>
 			- Drug news - 83%. 
+			- You can go for stocks whose earnings are about to come out after market close that day. 
 			
     </p>
   </div>
