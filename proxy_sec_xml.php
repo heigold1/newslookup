@@ -916,6 +916,7 @@ function getSecFilings($symbol, $yesterdayDays, $secCompanyName)
               $title = preg_replace('/annual report/i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp; ANNUAL REPORT - CHECK IF IT HAS EARNINGS, IF NOT THEN 40%</b></span> &nbsp;', $title);
               $title = preg_replace('/424/i', '<span style="font-size: 45px; background-color:red; color:black"><b>&nbsp; 424 - OFFERING</b></span> &nbsp;', $title);
               $title = preg_replace('/notice of effectiveness/i', '<span style="font-size: 30px; background-color:red; color:black"><b>NOTICE OF EFFECTIVENESS</b></span> &nbsp;', $title);
+              $title = preg_replace('/additional definitive proxy soliciting materials/i', '<span style="font-size: 20px; background-color:red; color:black"><b>ADDITIONAL DEFINITIVE PROXY SOLICITING MATERIALS - CHECK WITH JAY ON THE MEETING MINUTES</b></span> &nbsp;', $title);
 
               if (preg_match('/registration/i', $title) || preg_match('/offering/i', $title))
               {
