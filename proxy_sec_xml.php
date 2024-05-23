@@ -722,6 +722,8 @@ function getStreetInsider($symbol, $yesterdayDays)
           $streetInsiderNews = preg_replace('/ closing of private placement/i', '<span style="font-size: 35px; background-color:red; color:black"><b>CLOSING OF PRIVATE PLACEMENT</span></b>&nbsp;', $streetInsiderNews);
           $streetInsiderNews = preg_replace('/ files to sell/i', '<span style="font-size: 25px; background-color:red; color:black"><b>FILES TO SELL - OFFERING</span></b>&nbsp;', $streetInsiderNews);
           $streetInsiderNews = preg_replace('/ POS /', '<span style="font-size: 25px; background-color:red; color:black"><b>POS - POSSIBLE OFFERING</span></b>&nbsp;', $streetInsiderNews);
+          $streetInsiderNews = preg_replace('/ delays filing/i', '<span style="font-size: 35px; background-color:red; color:black"><b>DELAYS FILING - 40%</span></b>&nbsp;', $streetInsiderNews);
+          $streetInsiderNews = preg_replace('/ recapitalization/i', '<span style="font-size: 35px; background-color:red; color:black"><b>RECAPITALIZATION - BANKRUPTCY</span></b>&nbsp;', $streetInsiderNews);
 
 
         try 

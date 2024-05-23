@@ -1397,6 +1397,8 @@ else if ($which_website == "yahoo")
       $finalReturn = preg_replace('/ mixed shelf/i', '<span style="font-size: 35px; background-color:red; color:black"><b>MIXED SHELF - OFFERING</span></b>&nbsp;', $finalReturn);
       $finalReturn = preg_replace('/ closing of private placement/i', '<span style="font-size: 35px; background-color:red; color:black"><b>CLOSING OF PRIVATE PLACEMENT</span></b>&nbsp;', $finalReturn);
       $finalReturn = preg_replace('/ files to sell/i', '<span style="font-size: 25px; background-color:red; color:black"><b>FILES TO SELL - OFFERING</span></b>&nbsp;', $finalReturn);
+      $finalReturn = preg_replace('/ delays filing/i', '<span style="font-size: 35px; background-color:red; color:black"><b>DELAYS FILING - 40%</span></b>&nbsp;', $finalReturn);
+      $finalReturn = preg_replace('/ recapitalization/i', '<span style="font-size: 35px; background-color:red; color:black"><b>RECAPITALIZATION - BANKRUPTCY</span></b>&nbsp;', $finalReturn);
 
 
       $returnArray['dividendCheckDate'] = 0; 
