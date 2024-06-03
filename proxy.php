@@ -1293,7 +1293,7 @@ else if ($which_website == "yahoo")
       $finalReturn = preg_replace('/ seeking alpha/i', '<span style="font-size: 25px; background-color:red; color:black">SEEKING ALPHA &nbsp;</b></span>&nbsp;', $finalReturn);
       $finalReturn = preg_replace('/ fictitious sales/i', '<span style="font-size: 12px; background-color:red; color:black"><b>&nbsp; fictitious sales - STAY AWAY </b></span> &nbsp;', $finalReturn);     
       $finalReturn = preg_replace('/ board of directors/i', '<span style="font-size: 15px; background-color:red; color:black"><b>&nbsp; board of directors - if no big deal then 20% </b></span> &nbsp;', $finalReturn);
-      $finalReturn = preg_replace('/ class action/i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp; class action</b></span> &nbsp;', $finalReturn);
+      $finalReturn = preg_replace('/ class action/i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp; class action - 20-23%</b></span> &nbsp;', $finalReturn);
       $finalReturn = preg_replace('/ business combination/i', '<span style="font-size: 55px; background-color:red; color:black"><br><br><b>&nbsp; BUSINESS<br><br> COMBINATION<br><br> - STAY<br><br>AWAY<br><br> </b></span> &nbsp;', $finalReturn);
       $finalReturn = preg_replace('/ annual meeting of shareholders/i', '<span style="font-size: 15px; background-color:red; color:black"><b>&nbsp; annual meeting of shareholders - 40% early</b></span> &nbsp;', $finalReturn);
       $finalReturn = preg_replace('/ transcript/i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp; transcript </b></span> &nbsp;', $finalReturn);

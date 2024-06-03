@@ -1135,47 +1135,47 @@ $(function() {
 
 var corporateActionsStocks=
 {
-  "BWIN": "SYMBOL CHANGE on May 20, 2024!!! 38 PERCENT!!!",
-  "BNR": "REVERSE SPLIT on May 15, 2024",
+  "TBIO": "REVERSE SPLIT on May 9, 2024",
   "CLVV": "SYMBOL CHANGE on May 16, 2024!!! 38 PERCENT!!!",
-  "CTHR": "REVERSE SPLIT on May 17, 2024",
-  "SOPA": "REVERSE SPLIT on May 1, 2024",
-  "OKLO": "SYMBOL CHANGE on May 10, 2024!!! 38 PERCENT!!!",
-  "VINO": "REVERSE SPLIT on May 1, 2024",
-  "BKKT": "REVERSE SPLIT on Apr 29, 2024",
-  "PAIYY": "SYMBOL CHANGE on May 20, 2024!!! 38 PERCENT!!!",
-  "CNH": "SYMBOL CHANGE on May 20, 2024!!! 38 PERCENT!!!",
-  "ZVSA": "REVERSE SPLIT on Apr 26, 2024",
-  "DRMA": "REVERSE SPLIT on May 16, 2024",
-  "IVP": "REVERSE SPLIT on May 8, 2024",
-  "LOGC": "SYMBOL CHANGE on May 13, 2024!!! 38 PERCENT!!!",
-  "OLB": "REVERSE SPLIT on May 6, 2024",
-  "CDTX": "REVERSE SPLIT on Apr 24, 2024",
-  "SECOY": "SYMBOL CHANGE on Apr 25, 2024!!! 38 PERCENT!!!",
-  "APDN": "REVERSE SPLIT on Apr 25, 2024",
-  "ATXI": "REVERSE SPLIT on Apr 26, 2024",
-  "VIAOY": "SYMBOL CHANGE on Apr 24, 2024!!! 38 PERCENT!!!",
-  "RCON": "REVERSE SPLIT on May 1, 2024",
-  "CNXX": "SYMBOL CHANGE on May 3, 2024!!! 38 PERCENT!!!",
-  "VRN": "SYMBOL CHANGE on May 15, 2024!!! 38 PERCENT!!!",
-  "ZH": "REVERSE SPLIT on May 10, 2024",
-  "SHMD": "SYMBOL CHANGE on May 1, 2024!!! 38 PERCENT!!!",
-  "LION": "SYMBOL CHANGE on May 14, 2024!!! 38 PERCENT!!!",
-  "AEZS": "REVERSE SPLIT on May 3, 2024",
+  "BZFD": "REVERSE SPLIT on May 6, 2024",
+  "GV": "REVERSE SPLIT on May 29, 2024",
+  "INBX": "SYMBOL CHANGE on May 30, 2024!!! 38 PERCENT!!!",
+  "GCTK": "REVERSE SPLIT on May 20, 2024",
+  "SINT": "REVERSE SPLIT on May 28, 2024",
   "FER": "SYMBOL CHANGE on May 9, 2024!!! 38 PERCENT!!!",
+  "PAIYY": "SYMBOL CHANGE on May 20, 2024!!! 38 PERCENT!!!",
+  "XHG": "SYMBOL CHANGE on May 30, 2024!!! 38 PERCENT!!!",
+  "SCNI": "REVERSE SPLIT on May 21, 2024",
+  "BWIN": "SYMBOL CHANGE on May 20, 2024!!! 38 PERCENT!!!",
+  "OKLO": "SYMBOL CHANGE on May 10, 2024!!! 38 PERCENT!!!",
+  "AKAN": "REVERSE SPLIT on May 23, 2024",
+  "AUVIQ": "SYMBOL CHANGE on May 28, 2024!!! 38 PERCENT!!!",
+  "SEEL": "REVERSE SPLIT on May 16, 2024",
+  "BNR": "REVERSE SPLIT on May 15, 2024",
+  "CTHR": "REVERSE SPLIT on May 17, 2024",
+  "OLB": "REVERSE SPLIT on May 6, 2024",
+  "CNH": "SYMBOL CHANGE on May 20, 2024!!! 38 PERCENT!!!",
+  "IVP": "REVERSE SPLIT on May 8, 2024",
   "ADN": "REVERSE SPLIT on May 14, 2024",
   "HSCS": "REVERSE SPLIT on May 17, 2024",
-  "SEEL": "REVERSE SPLIT on May 16, 2024",
-  "BPTSY": "SYMBOL CHANGE on Apr 25, 2024!!! 38 PERCENT!!!",
-  "BZFD": "REVERSE SPLIT on May 6, 2024",
-  "TIRX": "REVERSE SPLIT on May 14, 2024",
-  "FUVV": "SYMBOL CHANGE on Apr 30, 2024!!! 38 PERCENT!!!",
-  "YTEN": "REVERSE SPLIT on May 3, 2024",
+  "AUVPQ": "SYMBOL CHANGE on May 28, 2024!!! 38 PERCENT!!!",
+  "AEZS": "REVERSE SPLIT on May 3, 2024",
   "ELWS": "REVERSE SPLIT on May 16, 2024",
-  "TBIO": "REVERSE SPLIT on May 9, 2024",
+  "LSB": "SYMBOL CHANGE on May 28, 2024!!! 38 PERCENT!!!",
+  "ZH": "REVERSE SPLIT on May 10, 2024",
+  "TIRX": "REVERSE SPLIT on May 14, 2024",
+  "YTEN": "REVERSE SPLIT on May 3, 2024",
+  "CIM": "REVERSE SPLIT on May 22, 2024",
   "ENTO": "SYMBOL CHANGE on May 17, 2024!!! 38 PERCENT!!!",
-  "SGBX": "REVERSE SPLIT on May 2, 2024",
-  "NUVO": "SYMBOL CHANGE on May 2, 2024!!! 38 PERCENT!!!"
+  "THAR": "REVERSE SPLIT on May 28, 2024",
+  "OPGN": "REVERSE SPLIT on May 20, 2024",
+  "CNXX": "SYMBOL CHANGE on May 3, 2024!!! 38 PERCENT!!!",
+  "BSFC": "REVERSE SPLIT on May 20, 2024",
+  "LION": "SYMBOL CHANGE on May 14, 2024!!! 38 PERCENT!!!",
+  "LOGC": "SYMBOL CHANGE on May 13, 2024!!! 38 PERCENT!!!",
+  "DRMA": "REVERSE SPLIT on May 16, 2024",
+  "JAGX": "REVERSE SPLIT on May 23, 2024",
+  "VRN": "SYMBOL CHANGE on May 15, 2024!!! 38 PERCENT!!!"
 };
 
 
@@ -1294,7 +1294,7 @@ for (var corporateSymbol in corporateActionsStocks)
 
         var day1_volume = parseFloat($("#day1_volume").html());
 
-        if (day1_volume > 4.7)
+        if (day1_volume > 4.0)
         {
             highRiskFlag = 1; 
             warningMessage += " ** HIGH RISK STOCK!!! ** ";

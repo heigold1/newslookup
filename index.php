@@ -267,15 +267,12 @@
   <!-- Modal content -->
   <div class="modal-content">
     <p style="font-size: 25px">
-			- You can go in at pre-market low levels (DOLLAR STOCKS), just use the three-tier approach<br><br>
-			- You can go for stocks with SEC filings where it mentions that the news came out at an earlier date.- You can treat them as non-news<br><br>
-			- You can go for lower-volume stocks at the 18-19% level, AS LONG AS the price is high (i.e. $10 a share)<br><br>
-			- If a stock is high-risk because of 5X volume, set it at 22% (i.e. not 23%)<br><br>
+			- If a stock is high-risk because of 5X volume, set it at 23%<br><br>
 			- Go 15% down from pre-market low for high-risk penny stocks<br><br>
 			- STALLS - If it isn't going anywhere, just get out after an hour.<br><br>
-			- Minimum entry for penny stocks - 23%<br><br>
+			- Minimum entry for penny stocks - 28%<br><br>
 			- Pink Sheet dollar stocks - if the 50% down price is still over $1.00 a share, you can jump in at 50%.  If you catch a Pink Sheet dollar stock at 50% mark, only take 20-25% profit<br><br>
-			- Penny offerings - 45% down from offering price, if the price is super low then 50%<br><br>
+			- Offerings - 37% down from offering price for dollar stocks, 50% for penny stocks.<br><br>
 			- Super low volume stocks - you can go in at 24%, ONLY FOR DOLLAR STOCKS.<br><br>
 			- Recent bankruptcies - you can go into these at 40% penny the day after a bankruptcy, 35% dollar. <br><br>
 			- Earnings loss - 57.5% for dollar stocks.<br><br> 
