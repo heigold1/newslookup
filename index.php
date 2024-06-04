@@ -281,8 +281,9 @@
 			- Earnings net income - 40% minimum.  No more jumping in before 40%, EVER.  You know this from experience (losses from jumping in before 40%). <br><br>
 			- If there is a major drop the previous day - 35-40% early the next day, and it must drop fast. <br><br>
 			- You can go in at 20% right up unil 8:00, provided the big charts difference is at least 10%<br><br>
-			- Drug news - 83%. 
-			- You can go for stocks whose earnings are about to come out after market close that day. 
+			- Drug news - 83%.<br><br>
+			- You can go for stocks whose earnings are about to come out after market close that day.<br><br>
+			- If an earnings is $0.00 - go in at 40%. 
 			
     </p>
   </div>
