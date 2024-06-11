@@ -998,12 +998,9 @@ function getSecFilings($symbol, $yesterdayDays, $secCompanyName)
         $returnHtml .= "<table border='1' style='font-size: 35px; border: 1px solid black !important; height: 40px;'><tr><td ></td><td>NOT CHECKING SEC</td><td></td><td></td></tr></table><br>"; 
       }
 
-
-
-
-
       $returnHtml .=  '<a style="font-size: 25px" target="_blank" href="http://ec2-54-210-42-143.compute-1.amazonaws.com/newslookup/scrape-street-insider.php?symbol=' . $symbol . '">Street Insider Scrape</a><br> 
         <a style="font-size: 25px" target="_blank" href="https://www.streetinsider.com/stock_lookup.php?LookUp=Get+Quote&q=' . $symbol . '">Street Insider Actual Page</a><br>
+        <a style="font-size: 25px" target="_blank" href="https://seekingalpha.com/symbol/' . $symbol . '/sec-filings">Seeking Alpha SEC</a><br>
         <a style="font-size: 25px" target="_blank" href="https://www.nasdaq.com/symbol/' . $symbol . '/sec-filings">Nasdaq</a><br>
         <a style="font-size: 25px" target="_blank" href="https://www.nasdaq.com/symbol/' . $symbol . '/">Nasdaq Company</a><br>
         <a style="font-size: 25px" target="_blank" href="https://www.sec.gov/cgi-bin/browse-edgar?CIK=' . $symbol . '&owner=include&action=getcompany">SEC Symbol</a><br>
