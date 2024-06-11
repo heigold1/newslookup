@@ -5,6 +5,8 @@ include './Samples/config.php';
 require_once("simple_html_dom.php"); 
 require_once("country-codes.php");
 
+libxml_use_internal_errors(true);
+
 $yesterdayDays = 1;
 
 error_reporting(1);
@@ -400,7 +402,6 @@ function grabEtradeHTML($etrade_host_name, $url)
 
     $returnHTML = curl_exec($ch);
 
-
     return $returnHTML;
 
 } // end of function grabEtradeHTML
@@ -426,6 +427,7 @@ function grabHTML($function_host_name, $url)
     curl_setopt($ch,CURLOPT_CONNECTTIMEOUT, 300);
     curl_setopt( $ch, CURLOPT_COOKIESESSION, true );
     curl_setopt($ch, CURLOPT_IPRESOLVE, CURL_IPRESOLVE_V4 );
+    curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
 
     curl_setopt($ch, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
 
@@ -436,6 +438,24 @@ function grabHTML($function_host_name, $url)
     curl_setopt($ch, CURLOPT_VERBOSE, true);
     curl_setopt($ch, CURLOPT_STDERR,$f = fopen(__DIR__ . "/error.log", "w+"));
 
+$response = curl_exec($ch);
+
+if (curl_errno($ch)) {
+    echo 'Curl error: ' . curl_error($ch);
+} else {
+    $finalUrl = curl_getinfo($ch, CURLINFO_EFFECTIVE_URL);
+    return htmlspecialchars($response);
+}
+
+
+
+
+
+
+
+
+/*
+
     $returnHTML = curl_exec($ch); 
 
     if($errno = curl_errno($ch)) {
@@ -444,6 +464,7 @@ function grabHTML($function_host_name, $url)
     }   
     curl_close($ch);
     return $returnHTML; 
+*/
 
 } // end of function grabHTML
 
@@ -722,13 +743,36 @@ else if ($which_website == "yahoo")
     $companyName = $_GET['company_name']; 
     $companyNameArray = explode(" ", $companyName);
 
-    $rss = simplexml_load_file("http://feeds.finance.yahoo.com/rss/2.0/headline?s=$symbol&region=US&lang=en-US");
+/*
+These methods don't work anymore, so we have to do a python scrape 
+   $rss = simplexml_load_file("https://feeds.finance.yahoo.com/rss/2.0/headline?s=$symbol&region=US&lang=en-US");
+   $rss = grabHTML('feeds.finance.yahoo.com', "https://feeds.finance.yahoo.com/rss/2.0/headline?s=$symbol&region=US&lang=en-US"); 
+*/
+
+
+
+      $command = escapeshellcmd('python3 ./pythonscrape/scrape-yahoo-finance-rss.py ' . $symbol . ' ' . $yesterdayDays);
+      $allNews = shell_exec($command);
+
+/*
+
+echo "About to echo the yahoo finance command<br>";
+
+echo "<pre>"; 
+var_dump($allNews); 
+echo "</pre>"; 
+die(); 
+*/
+
+
+/*
     $allNews = "<ul class='newsSide'>";
     $allNews .= "<li style='font-size: 20px !important; background-color: #00ff00;'>Yahoo Finance News</li>";
 
     $classActionAdded = false;
     $j = 0;
-    foreach ($rss->channel->item as $feedItem) {
+
+    foreach ($rssYahoo->channel->item as $feedItem) {
         $j++;
 
         // Convert time from GMT to  AM/PM New York
@@ -738,6 +782,7 @@ else if ($which_website == "yahoo")
         $convertedDate->setTimestamp($publicationDateStrToTime);
 
         $publicationDate = $feedItem->pubDate;
+
         $publicationDate = preg_replace("/[0-9][0-9]\:[0-9][0-9]\:[0-9][0-9] \+0000/", "", $publicationDate); 
         $publicationTime = $convertedDate->format("g:i A");
 
@@ -789,6 +834,12 @@ else if ($which_website == "yahoo")
     }
 
       $allNews .=  "</ul>";
+
+      */ 
+
+
+
+
 
       // grab the finanicals 
 

@@ -1135,43 +1135,50 @@ $(function() {
 
 var corporateActionsStocks=
 {
-  "BCDA": "REVERSE SPLIT on May 30, 2024",
-  "LOGC": "SYMBOL CHANGE on May 13, 2024!!! 38 PERCENT!!!",
-  "DRMA": "REVERSE SPLIT on May 16, 2024",
-  "INBX": "SYMBOL CHANGE on May 30, 2024!!! 38 PERCENT!!!",
-  "ENTO": "SYMBOL CHANGE on May 17, 2024!!! 38 PERCENT!!!",
-  "JAGX": "REVERSE SPLIT on May 23, 2024",
-  "AUVPQ": "SYMBOL CHANGE on May 28, 2024!!! 38 PERCENT!!!",
-  "CNH": "SYMBOL CHANGE on May 20, 2024!!! 38 PERCENT!!!",
-  "OKLO": "SYMBOL CHANGE on May 10, 2024!!! 38 PERCENT!!!",
-  "THAR": "REVERSE SPLIT on May 28, 2024",
-  "IVP": "REVERSE SPLIT on May 8, 2024",
-  "CIM": "REVERSE SPLIT on May 22, 2024",
-  "ZH": "REVERSE SPLIT on May 10, 2024",
-  "AUVIQ": "SYMBOL CHANGE on May 28, 2024!!! 38 PERCENT!!!",
-  "ELWS": "REVERSE SPLIT on May 16, 2024",
-  "CLVV": "SYMBOL CHANGE on May 16, 2024!!! 38 PERCENT!!!",
-  "LION": "SYMBOL CHANGE on May 14, 2024!!! 38 PERCENT!!!",
-  "ADN": "REVERSE SPLIT on May 14, 2024",
-  "FER": "SYMBOL CHANGE on May 9, 2024!!! 38 PERCENT!!!",
   "VRN": "SYMBOL CHANGE on May 15, 2024!!! 38 PERCENT!!!",
+  "BCDA": "REVERSE SPLIT on May 30, 2024",
+  "OKLO": "SYMBOL CHANGE on May 10, 2024!!! 38 PERCENT!!!",
   "SCNI": "REVERSE SPLIT on May 21, 2024",
-  "XHG": "SYMBOL CHANGE on May 30, 2024!!! 38 PERCENT!!!",
-  "GCTK": "REVERSE SPLIT on May 20, 2024",
+  "ADN": "REVERSE SPLIT on May 14, 2024",
+  "WAY": "REVERSE SPLIT on May 15, 2024",
   "SEEL": "REVERSE SPLIT on May 16, 2024",
-  "BNR": "REVERSE SPLIT on May 15, 2024",
-  "SINT": "REVERSE SPLIT on May 28, 2024",
-  "OPGN": "REVERSE SPLIT on May 20, 2024",
-  "TBIO": "REVERSE SPLIT on May 9, 2024",
-  "AKAN": "REVERSE SPLIT on May 23, 2024",
-  "BWIN": "SYMBOL CHANGE on May 20, 2024!!! 38 PERCENT!!!",
-  "HSCS": "REVERSE SPLIT on May 17, 2024",
-  "GV": "REVERSE SPLIT on May 29, 2024",
   "LSB": "SYMBOL CHANGE on May 28, 2024!!! 38 PERCENT!!!",
-  "CTHR": "REVERSE SPLIT on May 17, 2024",
+  "GCTK": "REVERSE SPLIT on May 20, 2024",
   "PAIYY": "SYMBOL CHANGE on May 20, 2024!!! 38 PERCENT!!!",
+  "ELWS": "REVERSE SPLIT on May 16, 2024",
+  "HSCS": "REVERSE SPLIT on May 17, 2024",
+  "CTHR": "REVERSE SPLIT on May 17, 2024",
+  "AUVIQ": "SYMBOL CHANGE on May 28, 2024!!! 38 PERCENT!!!",
+  "XHG": "SYMBOL CHANGE on May 30, 2024!!! 38 PERCENT!!!",
+  "TIRX": "REVERSE SPLIT on May 14, 2024",
+  "CNH": "SYMBOL CHANGE on May 20, 2024!!! 38 PERCENT!!!",
+  "AKAN": "REVERSE SPLIT on May 23, 2024",
+  "ATYR": "SYMBOL CHANGE on Jun 5, 2024!!! 38 PERCENT!!!",
+  "ZH": "REVERSE SPLIT on May 10, 2024",
+  "BWIN": "SYMBOL CHANGE on May 20, 2024!!! 38 PERCENT!!!",
+  "PLAG": "REVERSE SPLIT on Jun 3, 2024",
+  "SINT": "REVERSE SPLIT on May 28, 2024",
+  "LICY": "REVERSE SPLIT on Jun 4, 2024",
+  "JAGX": "REVERSE SPLIT on May 23, 2024",
+  "OPGN": "REVERSE SPLIT on May 20, 2024",
+  "CIM": "REVERSE SPLIT on May 22, 2024",
+  "NBY": "REVERSE SPLIT on May 31, 2024",
+  "HLTHQ": "SYMBOL CHANGE on Jun 5, 2024!!! 38 PERCENT!!!",
+  "GV": "REVERSE SPLIT on May 29, 2024",
+  "DRMA": "REVERSE SPLIT on May 16, 2024",
+  "QXO": "SYMBOL CHANGE on Jun 6, 2024!!! 38 PERCENT!!!",
+  "BNR": "REVERSE SPLIT on May 15, 2024",
   "BSFC": "REVERSE SPLIT on May 20, 2024",
-  "TIRX": "REVERSE SPLIT on May 14, 2024"
+  "THAR": "REVERSE SPLIT on May 28, 2024",
+  "LION": "SYMBOL CHANGE on May 14, 2024!!! 38 PERCENT!!!",
+  "CLVV": "SYMBOL CHANGE on May 16, 2024!!! 38 PERCENT!!!",
+  "ENTO": "SYMBOL CHANGE on May 17, 2024!!! 38 PERCENT!!!",
+  "LOGC": "SYMBOL CHANGE on May 13, 2024!!! 38 PERCENT!!!",
+  "GWAV": "REVERSE SPLIT on Jun 3, 2024",
+  "CNSP": "REVERSE SPLIT on Jun 5, 2024",
+  "ISUNQ": "SYMBOL CHANGE on May 22, 2024!!! 38 PERCENT!!!",
+  "AUVPQ": "SYMBOL CHANGE on May 28, 2024!!! 38 PERCENT!!!",
+  "INBX": "SYMBOL CHANGE on May 30, 2024!!! 38 PERCENT!!!"
 };
 
 
@@ -1425,7 +1432,7 @@ for (var corporateSymbol in corporateActionsStocks)
       amount = amount/3; 
       $("#amountSpending").val(amount);
 */
-      $("#amountSpending").val("250.00"); 
+      $("#amountSpending").val("170.00"); 
 
       calcAll();
       CopyToClipboard();  

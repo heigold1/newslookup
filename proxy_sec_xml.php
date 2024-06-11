@@ -773,7 +773,7 @@ function getSecFilings($symbol, $yesterdayDays, $secCompanyName)
               $returnSecHtml = '<a style="font-size: 35px" target="_blank" href="https://www.nasdaq.com/symbol/' . $symbol . '/sec-filings">Nasdaq</a><br>
                   <a style="font-size: 35px" target="_blank" href=https://www.etrade.wallst.com/v1/stocks/snapshot/snapshot.asp?ChallengeUrl=https://idp.etrade.com/idp/SSO.saml2&reinitiate-handshake=0&prospectnavyear=2011&AuthnContext=prospect&env=PRD&symbol=' . $symbol . '&rsO=new&country=US>E*TRADE</a>
                 <br>
-                <br><div style="background-color: red"><span style="font-size: 55px">NO MATCHING COMPANIES</span></div>';  
+                <br><a target="_blank" href="http://seekingalpha.com/symbol/' . $symbol . '/sec-filings"><div style="background-color: red"><span style="font-size: 45px">NO MATCHING COMPANIES - CHECK SEEKING ALPHA</span></div></a>';  
                return $returnSecHtml; 
           }
 
