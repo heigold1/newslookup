@@ -52,7 +52,7 @@ def create_data_structure():
             days_difference = date_difference.days 
 
             if days_difference > 4: 
-              symbolListOther[values[1]] = "REVERSE SPLIT on " + values[0]  
+              symbolListOther[values[1]] = "REVERSE SPLIT " + str(days_difference) + " DAYS AGO!!!!!!"   
               if values[1] in symbolList:
                 symbolList.remove(values[1]) 
 
