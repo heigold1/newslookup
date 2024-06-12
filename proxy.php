@@ -897,7 +897,7 @@ die();
 
       if ($yahooFinanceJson === false) {
         // Handle error, e.g., unable to connect to the API
-        $country = "NOT LISTED";
+        $country = "CHECK E*TRADE";
         $yahooFinanceSector = "NOT LISTED"; 
         $yahooFinanceIndustry = "NOT LISTED"; 
         $website = "NOT LISTED"; 
@@ -907,7 +907,7 @@ die();
         $yahooFinanceObject = json_decode($yahooFinanceJson, true); 
         if (empty($yahooFinanceObject))
         {
-          $country = "NOT LISTED";
+          $country = "CHECK E*TRADE";
           $yahooFinanceSector = "NOT LISTED"; 
           $yahooFinanceIndustry = "NOT LISTED"; 
           $website = "NOT LISTED"; 
@@ -1390,6 +1390,7 @@ die();
       $finalReturn = preg_replace('/ phase 3/i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp; PHASE 3!!!!</b></span>&nbsp;', $finalReturn); 
       $finalReturn = preg_replace('/ to present/i', '<span style="font-size: 65px; background-color: red; color:black"><b><br>TO<br><br>PRESENT<br><br>CHECK<br><br>DATE</b><br></span>&nbsp;', $finalReturn);
       $finalReturn = preg_replace('/ to participate/i', '<span style="font-size: 65px; background-color: red; color:black"><b><br>TO<br><br>PARTICIPATE<br><br>CHECK<br><br>DATE</b><br></span>&nbsp;', $finalReturn);
+      $finalReturn = preg_replace('/ to co.host/i', '<span style="font-size: 65px; background-color: red; color:black"><b><br>TO<br><br>CO-HOST<br><br>CHECK<br><br>DATE</b><br></span>&nbsp;', $finalReturn);
       $finalReturn = preg_replace('/ shareholder investigation/i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp; SHAREHOLDER INVESTIGATION - 19.5%</b></span>&nbsp;', $finalReturn);
       $finalReturn = preg_replace('/ announces an investigation/i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp; ANNOUNCES AN INVESTIGATION - 19.5%</b></span>&nbsp;', $finalReturn);
       $finalReturn = preg_replace('/ convertible bonds/i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp; convertible bonds (back off until you see a price)</b></span>&nbsp;', $finalReturn);
@@ -1526,12 +1527,10 @@ else if ($which_website == "bigcharts")
 {
       // grab the last value from bigcharts
       $url = "https://bigcharts.marketwatch.com/quickchart/quickchart.asp?symb=" . $symbol . "&insttype=&freq=9&show=&time=1&rand=" . rand(); 
- 
       $result = grabHTML("bigcharts.marketwatch.com", $url);
       $html = str_get_html($result);  
-
       $tdArray = $html->find('td.change div'); 
-
+ 
       $bigChartsReturn = $tdArray[1]; 
 
       $bigChartsReturn = preg_replace('/<div.*?\>/', '', $bigChartsReturn); 
@@ -1550,6 +1549,9 @@ else if ($which_website == "bigcharts")
       $timeValue = preg_replace('/<td.*?\>/', '', $timeValue); 
       $timeValue = preg_replace('/<\/td>/', '', $timeValue); 
       $timeValue = preg_replace('/\/\d{4}/', '', $timeValue); 
+
+
+
 
 
 

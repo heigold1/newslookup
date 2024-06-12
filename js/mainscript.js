@@ -864,6 +864,11 @@ $(function() {
 
             // This just gets the yesterday close and last vix values, we don't need these yet, can always bring them back
 //             $("div#bigcharts_chart_container").css("background-color", "#BBDDFF");
+
+
+/*
+I took this out on June 12th 2024 because it no longer worked.  Try it using Python
+
             $("div#right_bottom_container").css("background-color", "#BBDDFF");                   
             $.ajax({
                 url: "proxy.php",
@@ -900,6 +905,9 @@ $(function() {
 
                 }
             });  // end of AJAX call to bigcharts   
+*/
+
+
 
 //             $("div#bigcharts_chart_container").css("background-color", "#F3F3FF");                         
             $("div#right_bottom_container").css("background-color", "#F3F3FF");                   
@@ -1135,51 +1143,55 @@ $(function() {
 
 var corporateActionsStocks=
 {
-  "GV": "REVERSE SPLIT 13 DAYS AGO!!!!!!",
-  "BCDA": "REVERSE SPLIT 12 DAYS AGO!!!!!!",
-  "SINT": "REVERSE SPLIT 14 DAYS AGO!!!!!!",
-  "RBTC": "SYMBOL CHANGE on Jun 7, 2024!!! 38 PERCENT!!!",
-  "LICY": "REVERSE SPLIT 7 DAYS AGO!!!!!!",
-  "WAY": "REVERSE SPLIT 27 DAYS AGO!!!!!!",
-  "INBX": "SYMBOL CHANGE on May 30, 2024!!! 38 PERCENT!!!",
-  "ADN": "REVERSE SPLIT 28 DAYS AGO!!!!!!",
-  "OPGN": "REVERSE SPLIT 22 DAYS AGO!!!!!!",
-  "BNR": "REVERSE SPLIT 27 DAYS AGO!!!!!!",
-  "LION": "SYMBOL CHANGE on May 14, 2024!!! 38 PERCENT!!!",
-  "PLAG": "REVERSE SPLIT 8 DAYS AGO!!!!!!",
-  "SCNI": "REVERSE SPLIT 21 DAYS AGO!!!!!!",
-  "THAR": "REVERSE SPLIT 14 DAYS AGO!!!!!!",
-  "SEEL": "REVERSE SPLIT 26 DAYS AGO!!!!!!",
-  "CTHR": "REVERSE SPLIT 25 DAYS AGO!!!!!!",
-  "AUVIQ": "SYMBOL CHANGE on May 28, 2024!!! 38 PERCENT!!!",
-  "ISUNQ": "SYMBOL CHANGE on May 22, 2024!!! 38 PERCENT!!!",
-  "DRMA": "REVERSE SPLIT 26 DAYS AGO!!!!!!",
-  "CNH": "SYMBOL CHANGE on May 20, 2024!!! 38 PERCENT!!!",
-  "LOGC": "SYMBOL CHANGE on May 13, 2024!!! 38 PERCENT!!!",
-  "ELWS": "REVERSE SPLIT 26 DAYS AGO!!!!!!",
-  "HSCS": "REVERSE SPLIT 25 DAYS AGO!!!!!!",
-  "SNGX": "REVERSE SPLIT 5 DAYS AGO!!!!!!",
-  "BSFC": "REVERSE SPLIT 22 DAYS AGO!!!!!!",
+  "ATYR": "SYMBOL CHANGE on Jun 5, 2024!!! 38 PERCENT!!!",
   "AUVPQ": "SYMBOL CHANGE on May 28, 2024!!! 38 PERCENT!!!",
-  "VRN": "SYMBOL CHANGE on May 15, 2024!!! 38 PERCENT!!!",
+  "LOGC": "SYMBOL CHANGE on May 13, 2024!!! 38 PERCENT!!!",
+  "BNR": "REVERSE SPLIT 28 DAYS AGO!!!!!!",
+  "VLCN": "REVERSE SPLIT 5 DAYS AGO!!!!!!",
+  "SINT": "REVERSE SPLIT 15 DAYS AGO!!!!!!",
   "CLVV": "SYMBOL CHANGE on May 16, 2024!!! 38 PERCENT!!!",
-  "NBY": "REVERSE SPLIT 11 DAYS AGO!!!!!!",
-  "CIM": "REVERSE SPLIT 20 DAYS AGO!!!!!!",
-  "GWAV": "REVERSE SPLIT 8 DAYS AGO!!!!!!",
-  "ONIT": "SYMBOL CHANGE on Jun 10, 2024!!! 38 PERCENT!!!",
-  "AKAN": "REVERSE SPLIT 19 DAYS AGO!!!!!!",
-  "PAIYY": "SYMBOL CHANGE on May 20, 2024!!! 38 PERCENT!!!",
-  "CNSP": "REVERSE SPLIT 6 DAYS AGO!!!!!!",
-  "QXO": "REVERSE SPLIT 5 DAYS AGO!!!!!!",
-  "XHG": "SYMBOL CHANGE on May 30, 2024!!! 38 PERCENT!!!",
   "ENTO": "SYMBOL CHANGE on May 17, 2024!!! 38 PERCENT!!!",
+  "XHG": "SYMBOL CHANGE on May 30, 2024!!! 38 PERCENT!!!",
+  "LION": "SYMBOL CHANGE on May 14, 2024!!! 38 PERCENT!!!",
+  "ELWS": "REVERSE SPLIT 27 DAYS AGO!!!!!!",
+  "CNSP": "REVERSE SPLIT 7 DAYS AGO!!!!!!",
+  "QXO": "REVERSE SPLIT 6 DAYS AGO!!!!!!",
+  "AUVIQ": "SYMBOL CHANGE on May 28, 2024!!! 38 PERCENT!!!",
+  "GV": "REVERSE SPLIT 14 DAYS AGO!!!!!!",
+  "CTHR": "REVERSE SPLIT 26 DAYS AGO!!!!!!",
   "LSB": "SYMBOL CHANGE on May 28, 2024!!! 38 PERCENT!!!",
-  "GCTK": "REVERSE SPLIT 22 DAYS AGO!!!!!!",
-  "HLTHQ": "SYMBOL CHANGE on Jun 5, 2024!!! 38 PERCENT!!!",
-  "TIRX": "REVERSE SPLIT 28 DAYS AGO!!!!!!",
-  "JAGX": "REVERSE SPLIT 19 DAYS AGO!!!!!!",
+  "ONIT": "SYMBOL CHANGE on Jun 10, 2024!!! 38 PERCENT!!!",
+  "AKAN": "REVERSE SPLIT 20 DAYS AGO!!!!!!",
+  "DRMA": "REVERSE SPLIT 27 DAYS AGO!!!!!!",
+  "BCDA": "REVERSE SPLIT 13 DAYS AGO!!!!!!",
+  "BSFC": "REVERSE SPLIT 23 DAYS AGO!!!!!!",
   "BWIN": "SYMBOL CHANGE on May 20, 2024!!! 38 PERCENT!!!",
-  "ATYR": "SYMBOL CHANGE on Jun 5, 2024!!! 38 PERCENT!!!"
+  "SSKN": "REVERSE SPLIT 5 DAYS AGO!!!!!!",
+  "PAIYY": "SYMBOL CHANGE on May 20, 2024!!! 38 PERCENT!!!",
+  "SEEL": "REVERSE SPLIT 27 DAYS AGO!!!!!!",
+  "ADN": "REVERSE SPLIT 29 DAYS AGO!!!!!!",
+  "VRN": "SYMBOL CHANGE on May 15, 2024!!! 38 PERCENT!!!",
+  "DBVT": "REVERSE SPLIT 5 DAYS AGO!!!!!!",
+  "LICY": "REVERSE SPLIT 8 DAYS AGO!!!!!!",
+  "SNGX": "REVERSE SPLIT 6 DAYS AGO!!!!!!",
+  "HSCS": "REVERSE SPLIT 26 DAYS AGO!!!!!!",
+  "JAGX": "REVERSE SPLIT 20 DAYS AGO!!!!!!",
+  "CNH": "SYMBOL CHANGE on May 20, 2024!!! 38 PERCENT!!!",
+  "TIRX": "REVERSE SPLIT 29 DAYS AGO!!!!!!",
+  "GWAV": "REVERSE SPLIT 9 DAYS AGO!!!!!!",
+  "PLAG": "REVERSE SPLIT 9 DAYS AGO!!!!!!",
+  "HLTHQ": "SYMBOL CHANGE on Jun 5, 2024!!! 38 PERCENT!!!",
+  "NBY": "REVERSE SPLIT 12 DAYS AGO!!!!!!",
+  "CEAD": "REVERSE SPLIT 5 DAYS AGO!!!!!!",
+  "ISUNQ": "SYMBOL CHANGE on May 22, 2024!!! 38 PERCENT!!!",
+  "WAY": "REVERSE SPLIT 28 DAYS AGO!!!!!!",
+  "RBTC": "SYMBOL CHANGE on Jun 7, 2024!!! 38 PERCENT!!!",
+  "INBX": "SYMBOL CHANGE on May 30, 2024!!! 38 PERCENT!!!",
+  "SCNI": "REVERSE SPLIT 22 DAYS AGO!!!!!!",
+  "OPGN": "REVERSE SPLIT 23 DAYS AGO!!!!!!",
+  "GCTK": "REVERSE SPLIT 23 DAYS AGO!!!!!!",
+  "CIM": "REVERSE SPLIT 21 DAYS AGO!!!!!!",
+  "THAR": "REVERSE SPLIT 15 DAYS AGO!!!!!!"
 };
 
 
