@@ -9,7 +9,7 @@ $secCompanyName = preg_replace('/ /', '+', $secCompanyName);
 $secCompanyName = preg_replace("/<.*?>/", "", $secCompanyName);
 $checkSec = $_GET['checkSec']; 
 
-$yesterdayDays = 1;
+$yesterdayDays = 2;
 
 fopen("cookies.txt", "w");
 

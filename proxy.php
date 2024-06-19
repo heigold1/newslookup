@@ -7,7 +7,7 @@ require_once("country-codes.php");
 
 libxml_use_internal_errors(true);
 
-$yesterdayDays = 1;
+$yesterdayDays = 2;
 
 error_reporting(1);
 //ini_set('display_errors', 1);
@@ -1529,33 +1529,17 @@ else if ($which_website == "bigcharts")
       $url = "https://bigcharts.marketwatch.com/quickchart/quickchart.asp?symb=" . $symbol . "&insttype=&freq=9&show=&time=1&rand=" . rand(); 
       $result = grabHTML("bigcharts.marketwatch.com", $url);
       $html = str_get_html($result);  
-      $tdArray = $html->find('td.change div'); 
- 
-      $bigChartsReturn = $tdArray[1]; 
 
-      $bigChartsReturn = preg_replace('/<div.*?\>/', '', $bigChartsReturn); 
-      $bigChartsReturn = preg_replace('/<\/div>/', '', $bigChartsReturn); 
-      $bigChartsReturn = preg_replace('/\%/', '', $bigChartsReturn); 
-      $bigChartsReturn = preg_replace('/\-/', '', $bigChartsReturn); 
-      $bigChartsReturn = preg_replace('/\+/', '', $bigChartsReturn); 
+      $command = escapeshellcmd('python3 ./pythonscrape/scrape-bigcharts.py ' . $symbol);
+      $bigChartsValues = shell_exec($command);
 
-      $lastArray = $html->find('td.last div'); 
-      $lastValue = $lastArray[0]; 
-      $lastValue = preg_replace('/<div.*?\>/', '', $lastValue); 
-      $lastValue = preg_replace('/<\/div>/', '', $lastValue); 
+      $values = explode('|', $bigChartsValues); 
 
-      $timeArray = $html->find('tr.header td.time'); 
-      $timeValue = $timeArray[0]; 
-      $timeValue = preg_replace('/<td.*?\>/', '', $timeValue); 
-      $timeValue = preg_replace('/<\/td>/', '', $timeValue); 
-      $timeValue = preg_replace('/\/\d{4}/', '', $timeValue); 
+      $bigChartsPercentage = $values[0];
+      $bigChartsLast = $values[1]; 
+      $bigChartsTime = $values[2]; 
 
-
-
-
-
-
-      echo   $bigChartsReturn . "|" . $lastValue . "|" . $timeValue;         // json_encode($bigChartsReturn); 
+      echo   $bigChartsPercentage . "|" . $bigChartsLast . "|" . $bigChartsTime;   
 
 } // if ($which_website == "bigcharts")
 else if ($which_website == "streetinsider")
