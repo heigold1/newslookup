@@ -1504,12 +1504,12 @@ for (var corporateSymbol in corporateActionsStocks)
 
     }); // End of click function 
 
-    $("#penny_22_5").click(function(){
+    $("#penny_21").click(function(){
 
-      $("#entryPercentage").val("22.5"); 
+      $("#entryPercentage").val("21.00"); 
 
       var yesterdaysClose = $('#yestCloseText').val(); 
-      var newPrice = yesterdaysClose - (yesterdaysClose*22.5/100); 
+      var newPrice = yesterdaysClose - (yesterdaysClose*21.00/100); 
       if (yesterdaysClose > 1.00){
         newPrice = newPrice.toFixed(2);         
       }
