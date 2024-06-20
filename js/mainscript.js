@@ -611,7 +611,7 @@ $(function() {
 
                           if ((length == 5) || (hasPeriod != -1))  
                           {
-                            $("#amountSpending").val("350");
+                            $("#amountSpending").val("250");
                           }
 
                           returnData = data.match(/Caught exception/i); 
@@ -629,7 +629,7 @@ $(function() {
 
                           if (exchange == "PK")
                           {
-                            $("#amountSpending").val("350");
+                            $("#amountSpending").val("250");
                           }
                           $("#yestCloseText").val(jsonObject.prev_close);
 
@@ -1428,10 +1428,10 @@ for (var corporateSymbol in corporateActionsStocks)
 
     }); // End of click function 
 
-    // once the submit button is clicked
+    // Change the amount spending to the allotted Pink Sheet amount
    $("#changeAmountSpending").click(function(){
 
-      $("#amountSpending").val("350");
+      $("#amountSpending").val("250");
       calcAll();
       CopyToClipboard();  
     }); // End of click function 
@@ -1455,7 +1455,7 @@ for (var corporateSymbol in corporateActionsStocks)
       amount = amount/2; 
       $("#amountSpending").val(amount);
 */
-      $("#amountSpending").val("500"); 
+      $("#amountSpending").val("100"); 
 
       calcAll();
       CopyToClipboard();  
@@ -1464,11 +1464,11 @@ for (var corporateSymbol in corporateActionsStocks)
 
    $("#symbol_change").click(function(){
 
-      $("#entryPercentage").val("37.5"); 
+      $("#entryPercentage").val("25.00"); 
       $("#amountSpending").val("500"); 
 
       var yesterdaysClose = $('#yestCloseText').val(); 
-      var newPrice = yesterdaysClose - (yesterdaysClose*37.5/100); 
+      var newPrice = yesterdaysClose - (yesterdaysClose*25.00/100); 
       newPrice = newPrice.toFixed(2); 
       $('#entryPrice').val(newPrice);
 
@@ -1479,7 +1479,7 @@ for (var corporateSymbol in corporateActionsStocks)
    $("#asian_stocks").click(function(){
 
       $("#entryPercentage").val("87.5"); 
-      $("#amountSpending").val("350"); 
+      $("#amountSpending").val("250"); 
 
       var yesterdaysClose = $('#yestCloseText').val(); 
       var newPrice = yesterdaysClose - (yesterdaysClose*87.5/100); 

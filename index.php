@@ -44,7 +44,7 @@
 									<input id="asian_stocks" type="submit" value="87.5%">
 								</span>
 								<span>
-									<input id="symbol_change" type="submit" value="37.5%">
+									<input id="symbol_change" type="submit" value="25%">
 								</span>
 								<span>
 									<input id="dollar_17_5" type="submit" value="17.5%">
