@@ -7,7 +7,7 @@ require_once("country-codes.php");
 
 libxml_use_internal_errors(true);
 
-$yesterdayDays = 2;
+$yesterdayDays = 1;
 
 error_reporting(1);
 //ini_set('display_errors', 1);

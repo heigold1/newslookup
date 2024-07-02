@@ -577,7 +577,7 @@ $(function() {
               $("#day1").html("");
               $("#entryPrice").val(""); 
               $("#entryPercentage").val("");  
-              $("#amountSpending").val("500");
+              $("#amountSpending").val("600");
               $("#eTradeLowPercentage").html("");
               $("#orderStub").val("-----------------------"); 
               $("#foreign_country").html("");
@@ -1143,53 +1143,59 @@ $(function() {
 
 var corporateActionsStocks=
 {
-  "DBVT": "REVERSE SPLIT 11 DAYS AGO!!!!!!",
-  "PEGY": "REVERSE SPLIT 6 DAYS AGO!!!!!!",
-  "DM": "REVERSE SPLIT 7 DAYS AGO!!!!!!",
-  "LSB": "SYMBOL CHANGE on May 28, 2024!!! 38 PERCENT!!!",
-  "NAAS": "REVERSE SPLIT 5 DAYS AGO!!!!!!",
-  "BWIN": "SYMBOL CHANGE on May 20, 2024!!! 38 PERCENT!!!",
-  "ONIT": "SYMBOL CHANGE on Jun 10, 2024!!! 38 PERCENT!!!",
-  "BCDA": "REVERSE SPLIT 19 DAYS AGO!!!!!!",
-  "PLAG": "REVERSE SPLIT 15 DAYS AGO!!!!!!",
-  "ATYR": "SYMBOL CHANGE on Jun 5, 2024!!! 38 PERCENT!!!",
-  "RBOT": "REVERSE SPLIT 5 DAYS AGO!!!!!!",
-  "SNGX": "REVERSE SPLIT 12 DAYS AGO!!!!!!",
-  "QXO": "REVERSE SPLIT 12 DAYS AGO!!!!!!",
-  "LICY": "REVERSE SPLIT 14 DAYS AGO!!!!!!",
-  "HLTHQ": "SYMBOL CHANGE on Jun 5, 2024!!! 38 PERCENT!!!",
-  "AUVPQ": "SYMBOL CHANGE on May 28, 2024!!! 38 PERCENT!!!",
-  "NBY": "REVERSE SPLIT 18 DAYS AGO!!!!!!",
-  "CIM": "REVERSE SPLIT 27 DAYS AGO!!!!!!",
+  "SPCE": "REVERSE SPLIT 15 DAYS AGO!!!!!!",
   "DSY": "SYMBOL CHANGE on Jun 7, 2024!!! 38 PERCENT!!!",
-  "BNED": "REVERSE SPLIT 6 DAYS AGO!!!!!!",
-  "CNH": "SYMBOL CHANGE on May 20, 2024!!! 38 PERCENT!!!",
-  "AKAN": "REVERSE SPLIT 26 DAYS AGO!!!!!!",
-  "THAR": "REVERSE SPLIT 21 DAYS AGO!!!!!!",
-  "CAMPQ": "SYMBOL CHANGE on Jun 11, 2024!!! 38 PERCENT!!!",
-  "CNSP": "REVERSE SPLIT 13 DAYS AGO!!!!!!",
-  "INBX": "SYMBOL CHANGE on May 30, 2024!!! 38 PERCENT!!!",
-  "AUVIQ": "SYMBOL CHANGE on May 28, 2024!!! 38 PERCENT!!!",
-  "OPGN": "REVERSE SPLIT 29 DAYS AGO!!!!!!",
-  "RTC": "REVERSE SPLIT 8 DAYS AGO!!!!!!",
-  "SCNI": "REVERSE SPLIT 28 DAYS AGO!!!!!!",
-  "JAGX": "REVERSE SPLIT 26 DAYS AGO!!!!!!",
-  "SSKN": "REVERSE SPLIT 11 DAYS AGO!!!!!!",
-  "VLD": "REVERSE SPLIT 5 DAYS AGO!!!!!!",
-  "XHG": "SYMBOL CHANGE on May 30, 2024!!! 38 PERCENT!!!",
-  "GCTK": "REVERSE SPLIT 29 DAYS AGO!!!!!!",
-  "VLCN": "REVERSE SPLIT 11 DAYS AGO!!!!!!",
-  "GV": "REVERSE SPLIT 20 DAYS AGO!!!!!!",
-  "ISUNQ": "SYMBOL CHANGE on May 22, 2024!!! 38 PERCENT!!!",
-  "KPRX": "REVERSE SPLIT 7 DAYS AGO!!!!!!",
-  "BSFC": "REVERSE SPLIT 29 DAYS AGO!!!!!!",
-  "CEAD": "REVERSE SPLIT 11 DAYS AGO!!!!!!",
-  "GWAV": "REVERSE SPLIT 15 DAYS AGO!!!!!!",
+  "RIGL": "REVERSE SPLIT 5 DAYS AGO!!!!!!",
+  "TWOU": "REVERSE SPLIT 18 DAYS AGO!!!!!!",
+  "SNGX": "REVERSE SPLIT 26 DAYS AGO!!!!!!",
+  "TECX": "REVERSE SPLIT 11 DAYS AGO!!!!!!",
+  "TRNR": "REVERSE SPLIT 18 DAYS AGO!!!!!!",
+  "NKLA": "REVERSE SPLIT 7 DAYS AGO!!!!!!",
+  "VLCN": "REVERSE SPLIT 25 DAYS AGO!!!!!!",
+  "SLRX": "REVERSE SPLIT 15 DAYS AGO!!!!!!",
+  "DBVT": "REVERSE SPLIT 25 DAYS AGO!!!!!!",
+  "KPRX": "REVERSE SPLIT 21 DAYS AGO!!!!!!",
+  "RBOT": "REVERSE SPLIT 19 DAYS AGO!!!!!!",
+  "AIOT": "SYMBOL CHANGE on Jul 1, 2024!!! 38 PERCENT!!!",
+  "BNED": "REVERSE SPLIT 20 DAYS AGO!!!!!!",
+  "PEGY": "REVERSE SPLIT 20 DAYS AGO!!!!!!",
+  "CNSP": "REVERSE SPLIT 27 DAYS AGO!!!!!!",
+  "CATX": "REVERSE SPLIT 15 DAYS AGO!!!!!!",
+  "TNXP": "REVERSE SPLIT 22 DAYS AGO!!!!!!",
+  "VLD": "REVERSE SPLIT 19 DAYS AGO!!!!!!",
+  "CEAD": "REVERSE SPLIT 25 DAYS AGO!!!!!!",
+  "LICY": "REVERSE SPLIT 28 DAYS AGO!!!!!!",
+  "BJDX": "REVERSE SPLIT 12 DAYS AGO!!!!!!",
+  "HLTHQ": "SYMBOL CHANGE on Jun 5, 2024!!! 38 PERCENT!!!",
+  "STRR": "REVERSE SPLIT 15 DAYS AGO!!!!!!",
+  "ALMS": "REVERSE SPLIT 12 DAYS AGO!!!!!!",
+  "DM": "REVERSE SPLIT 21 DAYS AGO!!!!!!",
+  "TEN": "SYMBOL CHANGE on Jul 1, 2024!!! 38 PERCENT!!!",
+  "CRKN": "REVERSE SPLIT 7 DAYS AGO!!!!!!",
+  "ATRA": "REVERSE SPLIT 12 DAYS AGO!!!!!!",
+  "OMIC": "REVERSE SPLIT 6 DAYS AGO!!!!!!",
+  "YYAI": "REVERSE SPLIT 5 DAYS AGO!!!!!!",
+  "GRAL": "SYMBOL CHANGE on Jun 25, 2024!!! 38 PERCENT!!!",
+  "ICU": "REVERSE SPLIT 22 DAYS AGO!!!!!!",
+  "QXO": "REVERSE SPLIT 26 DAYS AGO!!!!!!",
+  "DMTKQ": "SYMBOL CHANGE on Jun 26, 2024!!! 38 PERCENT!!!",
+  "PLAG": "REVERSE SPLIT 29 DAYS AGO!!!!!!",
   "RBTC": "SYMBOL CHANGE on Jun 7, 2024!!! 38 PERCENT!!!",
-  "ICU": "REVERSE SPLIT 8 DAYS AGO!!!!!!",
-  "SINT": "REVERSE SPLIT 21 DAYS AGO!!!!!!",
-  "TNXP": "REVERSE SPLIT 8 DAYS AGO!!!!!!",
-  "PAIYY": "SYMBOL CHANGE on May 20, 2024!!! 38 PERCENT!!!"
+  "CCIX": "SYMBOL CHANGE on Jun 21, 2024!!! 38 PERCENT!!!",
+  "QLI": "REVERSE SPLIT 11 DAYS AGO!!!!!!",
+  "GWAV": "REVERSE SPLIT 29 DAYS AGO!!!!!!",
+  "VSME": "REVERSE SPLIT 14 DAYS AGO!!!!!!",
+  "CAMPQ": "SYMBOL CHANGE on Jun 11, 2024!!! 38 PERCENT!!!",
+  "NAAS": "REVERSE SPLIT 19 DAYS AGO!!!!!!",
+  "WKHS": "REVERSE SPLIT 15 DAYS AGO!!!!!!",
+  "GRI": "REVERSE SPLIT 14 DAYS AGO!!!!!!",
+  "RTC": "REVERSE SPLIT 22 DAYS AGO!!!!!!",
+  "STAF": "REVERSE SPLIT 6 DAYS AGO!!!!!!",
+  "ATYR": "SYMBOL CHANGE on Jun 5, 2024!!! 38 PERCENT!!!",
+  "FORD": "REVERSE SPLIT 14 DAYS AGO!!!!!!",
+  "FSRNQ": "SYMBOL CHANGE on Jun 20, 2024!!! 38 PERCENT!!!",
+  "ONIT": "SYMBOL CHANGE on Jun 10, 2024!!! 38 PERCENT!!!",
+  "SSKN": "REVERSE SPLIT 25 DAYS AGO!!!!!!"
 };
 
 
@@ -1443,7 +1449,7 @@ for (var corporateSymbol in corporateActionsStocks)
       amount = amount/3; 
       $("#amountSpending").val(amount);
 */
-      $("#amountSpending").val("170.00"); 
+      $("#amountSpending").val("200.00"); 
 
       calcAll();
       CopyToClipboard();  
@@ -1465,7 +1471,7 @@ for (var corporateSymbol in corporateActionsStocks)
    $("#symbol_change").click(function(){
 
       $("#entryPercentage").val("25.00"); 
-      $("#amountSpending").val("500"); 
+      $("#amountSpending").val("600"); 
 
       var yesterdaysClose = $('#yestCloseText').val(); 
       var newPrice = yesterdaysClose - (yesterdaysClose*25.00/100); 
@@ -1492,7 +1498,7 @@ for (var corporateSymbol in corporateActionsStocks)
 
     $("#dollar_17_5").click(function(){
       $("#entryPercentage").val("17.51"); 
-      $("#amountSpending").val("500"); 
+      $("#amountSpending").val("600"); 
 
 
       var yesterdaysClose = $('#yestCloseText').val(); 

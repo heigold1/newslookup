@@ -14,7 +14,6 @@ import xml.etree.ElementTree as ET
 from datetime import datetime, timedelta
 
 
-
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 def parse_bigcharts_page(symbol):
@@ -51,10 +50,11 @@ def parse_bigcharts_page(symbol):
 
     finalHTMLString = request.content.decode('utf-8')     
 
-#    print(finalXMLString) 
-
-#    print(finalHTMLString) 
-
+    pattern_not_found = "unable to find" 
+    match_not_found = re.search(pattern_not_found, finalHTMLString) 
+    if match_not_found:
+      print("NF|0.00|0.00") 
+      sys.exit() 
 
     pattern_last = r'<span class="label">Last:</span>\s*<div>(.*?)</div>'
     pattern_time = r'<td class="soft time">(.*?)</td>'
