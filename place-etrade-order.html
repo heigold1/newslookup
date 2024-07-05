@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Place E-Trade Order</title>
+    <script src="js/placeEtradeOrder.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.15.1/moment.min.js"></script>
+    <script src="js/jquery-1.11.1.min.js"></script>
+</head>
+<body>
+    <h1>Place E-Trade Order</h1>
+    <form id="orderForm">
+        <label for="orderString">Order String:</label><br>
+        <textarea id="orderString" name="orderString" rows="4" cols="75"></textarea><br><br>
+        <button type="button" onclick="placeOrder()">Place Order</button>
+    </form>
+    <div id="response"></div>
+</body>
+</html>

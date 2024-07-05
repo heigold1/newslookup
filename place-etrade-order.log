@@ -1,0 +1,16 @@
+[05-Jul-2024 02:13:03 Europe/Berlin] About to try
+[05-Jul-2024 02:13:03 Europe/Berlin] Just set the request_params
+[05-Jul-2024 02:13:03 Europe/Berlin] The resourceUrl is https://api.etrade.com/order/rest/placeequityorder
+[05-Jul-2024 02:15:07 Europe/Berlin] About to try
+[05-Jul-2024 02:15:07 Europe/Berlin] Just set the request_params
+[05-Jul-2024 02:15:07 Europe/Berlin] The resourceUrl is https://api.etrade.com/order/rest/placeequityorder
+[05-Jul-2024 02:16:31 Europe/Berlin] About to try
+[05-Jul-2024 02:16:31 Europe/Berlin] Just set the request_params
+[05-Jul-2024 02:16:31 Europe/Berlin] The resourceUrl is https://api.etrade.com/order/rest/placeequityorder
+[05-Jul-2024 02:22:10 Europe/Berlin] About to try
+[05-Jul-2024 02:22:10 Europe/Berlin] Just set the request_params
+[05-Jul-2024 02:22:10 Europe/Berlin] The resourceUrl is https://api.etrade.com/order/rest/placeequityorder
+[05-Jul-2024 02:29:38 Europe/Berlin] PHP Parse error:  syntax error, unexpected integer "706697", expecting ")" in C:\xampp\htdocs\newslookup\place-etrade-order.php on line 43
+[05-Jul-2024 02:29:58 Europe/Berlin] About to try
+[05-Jul-2024 02:29:58 Europe/Berlin] Just set the request_params
+[05-Jul-2024 02:29:58 Europe/Berlin] The resourceUrl is https://api.etrade.com/order/rest/placeequityorder

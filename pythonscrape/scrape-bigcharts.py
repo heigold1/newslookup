@@ -56,7 +56,7 @@ def parse_bigcharts_page(symbol):
       print("NF|0.00|0.00") 
       sys.exit() 
 
-    pattern_last = r'<span class="label">Last:</span>\s*<div>(.*?)</div>'
+    pattern_last = r'<span class="label">Low:</span>\s*<div>(.*?)</div>'
     pattern_time = r'<td class="soft time">(.*?)</td>'
     pattern_percent_change = r'<span class="label">Percent Change:</span>\s*<div class="important negative">(.*?)</div>'
 
