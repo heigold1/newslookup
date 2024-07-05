@@ -27,7 +27,7 @@ class ETWSCommon {
 	}
 
 	// Determine Start Time
-	public function get_time() {
+	public static function get_time() {
 		$mtime = microtime();
 		$mtime = explode(" ",$mtime);
 		$mtime = $mtime[1] + $mtime[0];
@@ -37,7 +37,7 @@ class ETWSCommon {
 	}
 
 	// Determine end time
-	public function get_time_diff($starttime,$endtime)
+	public static function get_time_diff($starttime,$endtime)
 	{
 		$totaltime = ($endtime - $starttime);
 		return round($totaltime,4);

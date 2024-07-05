@@ -77,7 +77,8 @@ setConst('RENEW_TOKEN_URL'	,	ETRADE_OAUTH_SERVER . '/oauth/renew_access_token');
 setConst('REVOKE_TOKEN_URL'	,	ETRADE_OAUTH_SERVER . '/oauth/revoke_access_token');
 
 
-setConst('URL_ACCOUNTLIST', 	ETRADE_SERVER . '/accounts/'.$url_str_part.'rest/accountlist');
+//setConst('URL_ACCOUNTLIST', 	ETRADE_SERVER . '/accounts/'.$url_str_part.'rest/accountlist');
+setConst('URL_ACCOUNTLIST', 	ETRADE_SERVER . '/v1/accounts/list'); 
 setConst('URL_ACCOUNTBALANCE',	ETRADE_SERVER . '/accounts/'.$url_str_part.'rest/accountbalance');
 setConst('URL_ACCOUNTPOSITIONS',ETRADE_SERVER . '/accounts/'.$url_str_part.'rest/accountpositions');
 setConst('URL_ACCOUNTALERTS',	ETRADE_SERVER . '/accounts/'.$url_str_part.'rest/alerts');

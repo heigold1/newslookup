@@ -109,60 +109,48 @@ class etHttpUtils
 	{
 		$ch = curl_init();
 		// set URL and other appropriate options
+
 		curl_setopt($ch, CURLOPT_URL, 			$this->request_url );
 		curl_setopt($ch, CURLOPT_VERBOSE, 		CURL_DEBUG_MODE);
 		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, $this->use_ssl);
-echo "in etHttpUtils.class.php, line 115\n"; 
 		if($this->postfields or $this->method == 'POST')
 		{
 			curl_setopt($ch, CURLOPT_POST, 		true);
 		}
-echo "in etHttpUtils.class.php, line 120\n"; 
 		if($this->postfields )
 		{
 			curl_setopt($ch, CURLOPT_POSTFIELDS, $this->postfields);
 		}
-echo "in etHttpUtils.class.php, line 125\n"; 
 		if($this->headers)
 		{
 			curl_setopt($ch, CURLOPT_HTTPHEADER, $this->headers);
 		}
-echo "in etHttpUtils.class.php, line 130\n"; 
 		if($this->method  and $this->method != 'GET' and $this->method != 'POST' )
 		{
 			curl_setopt($ch, CURLOPT_CUSTOMREQUEST,$this->method);
 		}
-echo "in etHttpUtils.class.php, line 135\n"; 
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 		curl_setopt($ch, CURLOPT_HEADER, true);
 		curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 60);
 		/*curl_setopt($ch, CURLOPT_SSLVERSION, 3);*/
 		curl_setopt($ch, CURLOPT_SSLVERSION, CURL_SSLVERSION_TLSv1_2);
-echo "in etHttpUtils.class.php, line 141\n"; 
 		//--------------------------------
 		$this->result = curl_exec($ch);
 		//--------------------------------
-echo "in etHttpUtils.class.php, line 145\n"; 
 		if(curl_errno($ch))
 		{
-echo "in etHttpUtils.class.php, line 148\n"; 
 			$errorCode = 1001;
-			$errorMessage = "Error no : " . curl_errno($ch) . "\nError : " . curl_error($ch);
+			$errorMessage = "Error no : " . curl_errno($ch) . "\nError : *" . curl_error($ch) . "*";
 
 			throw new OAuthException($errorMessage,$errorCode);
 		}
 		else
 		{
-echo "in etHttpUtils.class.php, line 156\n"; 
 			$curl_info 				= curl_getinfo($ch);  
 
 			$this->response_header	= substr($this->result, 0,$curl_info['header_size']);
 			$this->response_body	= substr($this->result, $curl_info['header_size']);
 			$this->http_code 		= $curl_info['http_code'];
-echo "in etHttpUtils.class.php, line 162\n"; 
-echo "this->response_header is " . $this->response_header . "\n"; 
-echo "this->response_body is " . $this->response_body . "\n"; 
-echo "this->http_code is " . $this->http_code . "\n"; 
 		}
 		// close cURL resource, and free up system resources
 		curl_close($ch);
@@ -187,11 +175,9 @@ echo "this->http_code is " . $this->http_code . "\n";
 	 */
 	public function GetResponse()
 	{
-echo "in etHttpUtils.class.php, line 180\n"; 
 		$this->getSignedURLandHeaders();
-echo "in etHttpUtils.class.php, line 182\n"; 
+echo "in etHttpUtils.class.php, GetResponse\n"; 
 		$this->DoHttpRequest();
-echo "in etHttpUtils.class.php, line 184\n"; 
 	}
 	
 	/**
@@ -199,7 +185,7 @@ echo "in etHttpUtils.class.php, line 184\n";
 	 * @method GetResponseObject
 	 * @param string $str
 	 */
-	public function GetResponseObject($str)
+	public static function GetResponseObject($str)
 	{
 		if( RESPONSE_FORMAT == 'json' )
 		{

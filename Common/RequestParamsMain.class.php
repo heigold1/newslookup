@@ -42,7 +42,7 @@ class RequestParamsMain
 		$url = rtrim($url,"&");
 		return $url;
 	}
-	public function buildFullURL($baseURL, $RESTParams = null, $queryParamsObj = null)
+	public static function buildFullURL($baseURL, $RESTParams = null, $queryParamsObj = null)
 	{
 		$url = rtrim($baseURL, '/');
 		

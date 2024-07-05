@@ -14,3 +14,36 @@
 [05-Jul-2024 02:29:58 Europe/Berlin] About to try
 [05-Jul-2024 02:29:58 Europe/Berlin] Just set the request_params
 [05-Jul-2024 02:29:58 Europe/Berlin] The resourceUrl is https://api.etrade.com/order/rest/placeequityorder
+[05-Jul-2024 02:44:18 Europe/Berlin] PHP Fatal error:  Uncaught Error: Non-static method ETWSCommon::get_time() cannot be called statically in C:\xampp\htdocs\newslookup\Samples\test_account.php:40
+Stack trace:
+#0 {main}
+  thrown in C:\xampp\htdocs\newslookup\Samples\test_account.php on line 40
+[05-Jul-2024 02:45:35 Europe/Berlin] PHP Fatal error:  Uncaught Error: Non-static method ETWSCommon::get_time() cannot be called statically in C:\xampp\htdocs\newslookup\Samples\test_account.php:42
+Stack trace:
+#0 {main}
+  thrown in C:\xampp\htdocs\newslookup\Samples\test_account.php on line 42
+[05-Jul-2024 02:45:53 Europe/Berlin] PHP Fatal error:  Uncaught Error: Non-static method RequestParamsMain::buildFullURL() cannot be called statically in C:\xampp\htdocs\newslookup\Accounts\etAccounts.class.php:37
+Stack trace:
+#0 C:\xampp\htdocs\newslookup\Samples\test_account.php(52): etAccounts->GetAccountList()
+#1 {main}
+  thrown in C:\xampp\htdocs\newslookup\Accounts\etAccounts.class.php on line 37
+[05-Jul-2024 03:45:29 Europe/Berlin] PHP Fatal error:  Uncaught Error: Undefined constant "count" in C:\xampp\htdocs\newslookup\Samples\test_account.php:77
+Stack trace:
+#0 {main}
+  thrown in C:\xampp\htdocs\newslookup\Samples\test_account.php on line 77
+[05-Jul-2024 04:15:51 Europe/Berlin] PHP Warning:  Undefined array key "Oauth" in C:\xampp\htdocs\newslookup\Samples\test_account.php on line 20
+[05-Jul-2024 04:15:51 Europe/Berlin] PHP Warning:  Trying to access array offset on value of type null in C:\xampp\htdocs\newslookup\Samples\test_account.php on line 20
+[05-Jul-2024 04:18:48 Europe/Berlin] PHP Warning:  Undefined array key "Oauth" in C:\xampp\htdocs\newslookup\Samples\test_account.php on line 20
+[05-Jul-2024 04:18:48 Europe/Berlin] PHP Warning:  Trying to access array offset on value of type null in C:\xampp\htdocs\newslookup\Samples\test_account.php on line 20
+[05-Jul-2024 04:22:18 Europe/Berlin] PHP Fatal error:  Uncaught Error: Non-static method ETWSCommon::get_time() cannot be called statically in C:\xampp\htdocs\newslookup\Samples\test_account.php:154
+Stack trace:
+#0 {main}
+  thrown in C:\xampp\htdocs\newslookup\Samples\test_account.php on line 154
+[05-Jul-2024 04:23:39 Europe/Berlin] PHP Fatal error:  Uncaught Error: Non-static method etHttpUtils::GetResponseObject() cannot be called statically in C:\xampp\htdocs\newslookup\Samples\test_account.php:156
+Stack trace:
+#0 {main}
+  thrown in C:\xampp\htdocs\newslookup\Samples\test_account.php on line 156
+[05-Jul-2024 04:24:20 Europe/Berlin] PHP Fatal error:  Uncaught Error: Non-static method ETWSCommon::get_time_diff() cannot be called statically in C:\xampp\htdocs\newslookup\Samples\test_account.php:159
+Stack trace:
+#0 {main}
+  thrown in C:\xampp\htdocs\newslookup\Samples\test_account.php on line 159

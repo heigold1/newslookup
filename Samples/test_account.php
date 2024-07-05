@@ -12,12 +12,22 @@ require_once("config.php");
 require_once(dirname(__FILE__) . '/../Common/Common.php');
 require_once(dirname(__FILE__) . '/../Accounts/etAccounts.class.php');
 
+$ini_array = parse_ini_file('../etrade.ini', true);
 
+$key 	= $ini_array['OAuth']['oauth_consumer_key'];
+$secret = $ini_array['OAuth']['consumer_secret'];
+$token = $ini_array['OAuth']['oauth_token']; 
+$token_secret = $ini_array['OAuth']['oauth_token_secret']; 
+
+/*
 $consumer 	= new etOAuthConsumer('874c996f1f6ecaa46c65abb115da9912','886529f1c9d06729e97b6f511a89b4df');
  
 $consumer->oauth_token 			= 'ALtd95JtNpqLZ4EjFrnNQZIo+IPdnrtoPhzMmC/ZX9Q=';
 $consumer->oauth_token_secret 	= 'qhy6RDGo5rj1oUAfu+VV9Kx65mCEqy+YrC6f8L0W4Gc=';
-
+*/
+$consumer 	= new etOAuthConsumer($key,$secret);
+$consumer->oauth_token 			= $token;
+$consumer->oauth_token_secret 	= $token_secret;
 
 $ac_obj = new etAccounts($consumer);
 
@@ -29,7 +39,9 @@ $choice = '1';
 while (in_array($choice,$valid_choice))
 {
 	$choice = show_menu();
-	$starttime = ETWSCommon::get_time();
+	$etwsCommon = new ETWSCommon(); 
+	
+	$starttime = $etwsCommon->get_time();
 	try {
 		switch($choice)
 		{
