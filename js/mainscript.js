@@ -59,6 +59,20 @@ function playDelist(){
   delist.play();
 }
 
+function generateHaltedStocksTable(stocks) {
+    let table = '<table style="border: 1px solid black; border-collapse: collapse; background-color: #00ff00; width: 100%; text-align: center;">';
+    table += '<thead><tr><th style="border: 1px solid black; padding: 10px;">Currently Halted Stocks</th></tr></thead>';
+    table += '<tbody>';
+
+    stocks.forEach(symbol => {
+        table += `<tr><td style="border: 1px solid black; padding: 10px;">${symbol}</td></tr>`;
+    });
+
+    table += '</tbody></table>';
+
+    return table;
+}
+
 // when someone clicks to open up a link for marketwatch or yahoo finance.
 function openPage(link){
   var latestWindowNumber = $("#windowNumber").html();
@@ -499,6 +513,7 @@ $(function() {
           var chineseStock = false;
           var yahooHtmlResults = "";
           var haltSymbolList; 
+          var currentlyHaltedList; 
           var date = new Date(); 
           var currentMinutes = parseInt(date.getMinutes()); 
           var dayOneLow; 
@@ -934,7 +949,8 @@ $(function() {
               finalObject = JSON.parse(data); 
 
               yahooHtmlResults = finalObject.final_return; 
-              haltSymbolList = finalObject.halt_symbol_list; 
+              haltSymbolList = JSON.parse(finalObject.halt_symbol_list); 
+              currentlyHaltedList = JSON.parse(finalObject.currently_halted);
 
               if (haltSymbolList.includes(original_symbol))
               {
@@ -985,6 +1001,11 @@ $(function() {
               google_keyword_string = google_keyword_string.replace(/ltd\./ig, "");
 
               $("div#bigcharts_yest_close").html("<a href='https://www.google.com/search?q=stock+" + symbol + "&tbm=nws' target='blank'>GOOGLE NEWS</a><br><br><span style='font-size: 25px; background-color: red;'></span>");  
+
+              if (currentlyHaltedList.length > 0)              
+              {
+                $("div#bigcharts_yest_close").append(generateHaltedStocksTable(currentlyHaltedList)); 
+              }
 
               if (
                 (finalObject.final_return.search(/there is google news/gi) > 0)
@@ -1143,59 +1164,59 @@ $(function() {
 
 var corporateActionsStocks=
 {
-  "SPCE": "REVERSE SPLIT 15 DAYS AGO!!!!!!",
-  "DSY": "SYMBOL CHANGE on Jun 7, 2024!!! 38 PERCENT!!!",
-  "RIGL": "REVERSE SPLIT 5 DAYS AGO!!!!!!",
-  "TWOU": "REVERSE SPLIT 18 DAYS AGO!!!!!!",
-  "SNGX": "REVERSE SPLIT 26 DAYS AGO!!!!!!",
-  "TECX": "REVERSE SPLIT 11 DAYS AGO!!!!!!",
-  "TRNR": "REVERSE SPLIT 18 DAYS AGO!!!!!!",
-  "NKLA": "REVERSE SPLIT 7 DAYS AGO!!!!!!",
-  "VLCN": "REVERSE SPLIT 25 DAYS AGO!!!!!!",
-  "SLRX": "REVERSE SPLIT 15 DAYS AGO!!!!!!",
-  "DBVT": "REVERSE SPLIT 25 DAYS AGO!!!!!!",
-  "KPRX": "REVERSE SPLIT 21 DAYS AGO!!!!!!",
-  "RBOT": "REVERSE SPLIT 19 DAYS AGO!!!!!!",
-  "AIOT": "SYMBOL CHANGE on Jul 1, 2024!!! 38 PERCENT!!!",
-  "BNED": "REVERSE SPLIT 20 DAYS AGO!!!!!!",
-  "PEGY": "REVERSE SPLIT 20 DAYS AGO!!!!!!",
-  "CNSP": "REVERSE SPLIT 27 DAYS AGO!!!!!!",
-  "CATX": "REVERSE SPLIT 15 DAYS AGO!!!!!!",
-  "TNXP": "REVERSE SPLIT 22 DAYS AGO!!!!!!",
-  "VLD": "REVERSE SPLIT 19 DAYS AGO!!!!!!",
-  "CEAD": "REVERSE SPLIT 25 DAYS AGO!!!!!!",
-  "LICY": "REVERSE SPLIT 28 DAYS AGO!!!!!!",
-  "BJDX": "REVERSE SPLIT 12 DAYS AGO!!!!!!",
-  "HLTHQ": "SYMBOL CHANGE on Jun 5, 2024!!! 38 PERCENT!!!",
-  "STRR": "REVERSE SPLIT 15 DAYS AGO!!!!!!",
-  "ALMS": "REVERSE SPLIT 12 DAYS AGO!!!!!!",
-  "DM": "REVERSE SPLIT 21 DAYS AGO!!!!!!",
-  "TEN": "SYMBOL CHANGE on Jul 1, 2024!!! 38 PERCENT!!!",
-  "CRKN": "REVERSE SPLIT 7 DAYS AGO!!!!!!",
-  "ATRA": "REVERSE SPLIT 12 DAYS AGO!!!!!!",
-  "OMIC": "REVERSE SPLIT 6 DAYS AGO!!!!!!",
-  "YYAI": "REVERSE SPLIT 5 DAYS AGO!!!!!!",
-  "GRAL": "SYMBOL CHANGE on Jun 25, 2024!!! 38 PERCENT!!!",
-  "ICU": "REVERSE SPLIT 22 DAYS AGO!!!!!!",
-  "QXO": "REVERSE SPLIT 26 DAYS AGO!!!!!!",
-  "DMTKQ": "SYMBOL CHANGE on Jun 26, 2024!!! 38 PERCENT!!!",
-  "PLAG": "REVERSE SPLIT 29 DAYS AGO!!!!!!",
-  "RBTC": "SYMBOL CHANGE on Jun 7, 2024!!! 38 PERCENT!!!",
-  "CCIX": "SYMBOL CHANGE on Jun 21, 2024!!! 38 PERCENT!!!",
-  "QLI": "REVERSE SPLIT 11 DAYS AGO!!!!!!",
-  "GWAV": "REVERSE SPLIT 29 DAYS AGO!!!!!!",
-  "VSME": "REVERSE SPLIT 14 DAYS AGO!!!!!!",
-  "CAMPQ": "SYMBOL CHANGE on Jun 11, 2024!!! 38 PERCENT!!!",
-  "NAAS": "REVERSE SPLIT 19 DAYS AGO!!!!!!",
-  "WKHS": "REVERSE SPLIT 15 DAYS AGO!!!!!!",
-  "GRI": "REVERSE SPLIT 14 DAYS AGO!!!!!!",
-  "RTC": "REVERSE SPLIT 22 DAYS AGO!!!!!!",
-  "STAF": "REVERSE SPLIT 6 DAYS AGO!!!!!!",
-  "ATYR": "SYMBOL CHANGE on Jun 5, 2024!!! 38 PERCENT!!!",
-  "FORD": "REVERSE SPLIT 14 DAYS AGO!!!!!!",
+  "STRR": "REVERSE SPLIT 22 DAYS AGO!!!!!!",
+  "BNED": "REVERSE SPLIT 27 DAYS AGO!!!!!!",
   "FSRNQ": "SYMBOL CHANGE on Jun 20, 2024!!! 38 PERCENT!!!",
+  "RBOT": "REVERSE SPLIT 26 DAYS AGO!!!!!!",
+  "ATRA": "REVERSE SPLIT 19 DAYS AGO!!!!!!",
+  "DMTKQ": "SYMBOL CHANGE on Jun 26, 2024!!! 38 PERCENT!!!",
+  "WKHS": "REVERSE SPLIT 22 DAYS AGO!!!!!!",
+  "KORE": "REVERSE SPLIT 8 DAYS AGO!!!!!!",
+  "PEGY": "REVERSE SPLIT 27 DAYS AGO!!!!!!",
+  "NUWE": "REVERSE SPLIT 11 DAYS AGO!!!!!!",
+  "TWOU": "REVERSE SPLIT 25 DAYS AGO!!!!!!",
+  "TNXP": "REVERSE SPLIT 29 DAYS AGO!!!!!!",
+  "AZTR": "REVERSE SPLIT 8 DAYS AGO!!!!!!",
+  "MDRR": "REVERSE SPLIT 6 DAYS AGO!!!!!!",
+  "CRKN": "REVERSE SPLIT 14 DAYS AGO!!!!!!",
+  "ASST": "REVERSE SPLIT 7 DAYS AGO!!!!!!",
+  "RTC": "REVERSE SPLIT 29 DAYS AGO!!!!!!",
+  "ALMS": "REVERSE SPLIT 19 DAYS AGO!!!!!!",
+  "YGMZ": "REVERSE SPLIT 8 DAYS AGO!!!!!!",
+  "OMIC": "REVERSE SPLIT 13 DAYS AGO!!!!!!",
+  "DM": "REVERSE SPLIT 28 DAYS AGO!!!!!!",
+  "QLI": "REVERSE SPLIT 18 DAYS AGO!!!!!!",
+  "CATX": "REVERSE SPLIT 22 DAYS AGO!!!!!!",
+  "SPCE": "REVERSE SPLIT 22 DAYS AGO!!!!!!",
+  "ASLN": "REVERSE SPLIT 6 DAYS AGO!!!!!!",
+  "SLRX": "REVERSE SPLIT 22 DAYS AGO!!!!!!",
+  "TECX": "REVERSE SPLIT 18 DAYS AGO!!!!!!",
+  "TEN": "SYMBOL CHANGE on Jul 1, 2024!!! 38 PERCENT!!!",
   "ONIT": "SYMBOL CHANGE on Jun 10, 2024!!! 38 PERCENT!!!",
-  "SSKN": "REVERSE SPLIT 25 DAYS AGO!!!!!!"
+  "NUTX": "REVERSE SPLIT 6 DAYS AGO!!!!!!",
+  "GRAL": "SYMBOL CHANGE on Jun 25, 2024!!! 38 PERCENT!!!",
+  "ABVE": "SYMBOL CHANGE on Jul 1, 2024!!! 38 PERCENT!!!",
+  "AIOT": "SYMBOL CHANGE on Jul 1, 2024!!! 38 PERCENT!!!",
+  "CCIX": "SYMBOL CHANGE on Jun 21, 2024!!! 38 PERCENT!!!",
+  "VSME": "REVERSE SPLIT 21 DAYS AGO!!!!!!",
+  "GRI": "REVERSE SPLIT 21 DAYS AGO!!!!!!",
+  "NAAS": "REVERSE SPLIT 26 DAYS AGO!!!!!!",
+  "BJDX": "REVERSE SPLIT 19 DAYS AGO!!!!!!",
+  "TRNR": "REVERSE SPLIT 25 DAYS AGO!!!!!!",
+  "FORD": "REVERSE SPLIT 21 DAYS AGO!!!!!!",
+  "AIEV": "SYMBOL CHANGE on Jun 24, 2024!!! 38 PERCENT!!!",
+  "RIGL": "REVERSE SPLIT 12 DAYS AGO!!!!!!",
+  "KPRX": "REVERSE SPLIT 28 DAYS AGO!!!!!!",
+  "CAMPQ": "SYMBOL CHANGE on Jun 11, 2024!!! 38 PERCENT!!!",
+  "NKLA": "REVERSE SPLIT 14 DAYS AGO!!!!!!",
+  "DARE": "REVERSE SPLIT 8 DAYS AGO!!!!!!",
+  "STAF": "REVERSE SPLIT 13 DAYS AGO!!!!!!",
+  "YYAI": "REVERSE SPLIT 12 DAYS AGO!!!!!!",
+  "RELI": "REVERSE SPLIT 8 DAYS AGO!!!!!!",
+  "DLAPQ": "SYMBOL CHANGE on Jul 1, 2024!!! 38 PERCENT!!!",
+  "JZXN": "REVERSE SPLIT 6 DAYS AGO!!!!!!",
+  "ICU": "REVERSE SPLIT 29 DAYS AGO!!!!!!",
+  "VLD": "REVERSE SPLIT 26 DAYS AGO!!!!!!"
 };
 
 

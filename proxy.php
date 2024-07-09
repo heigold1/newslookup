@@ -326,9 +326,9 @@ function getTradeHalts()
 {
     $rss_feed = simplexml_load_file("https://www.nasdaqtrader.com/rss.aspx?feed=tradehalts");
 
-    $returnArray['haltstring'] = ""; 
-    $returnArray['haltalert'] = 0; 
+    $returnArray['halt_table'] = "<table>"; 
     $haltSymbolList = array(); 
+    $currentlyHalted = array(); 
 
     $dateTime = new DateTime(); 
     $dateTime->modify('-8 hours'); 
@@ -343,27 +343,35 @@ function getTradeHalts()
       $resumptionTime = $child->ResumptionTradeTime; 
       $symbol = trim($feed_item->title); 
       $reasonCode = trim($child->ReasonCode); 
-      $ignoreArray = array(''); 
-
-
-      $returnArray['haltstring'] .= "symbol is " . $symbol . ", date is " . $date . ", currentDate is " . $currentDate . ", child->ResumptionTradeTime is *" . $resumptionTime . "* and reasonCode is *" . $reasonCode . "* "; 
 
       if ($date == $currentDate)
       {
-        if (!in_array($symbol, $ignoreArray)) {
-            $returnArray['haltalert'] = 1; 
-            $returnArray['haltstring'] .= " *********************************** HALT ALERT\n"; 
+        if (!in_array($symbol, $haltSymbolList)) {
             array_push($haltSymbolList, $symbol); 
         }
+
+        if ($resumptionTime == "")
+        {
+            if (!in_array($symbol, $currentlyHalted)) {
+                array_push($currentlyHalted, $symbol); 
+            }
+        }        
 
       }
       else 
       {
             $returnArray['haltstring'] .= " NO HALT ALERT\n"; 
       }
-
     }
+
+if (empty($currentlyHalted))
+{
+    error_log("The array is empty"); 
+}
+
     $returnArray['halt_symbol_list'] = json_encode($haltSymbolList); 
+    $returnArray['currently_halted'] = json_encode($currentlyHalted); 
+
     return $returnArray; 
 }
 
@@ -1515,9 +1523,8 @@ die();
 
       $tradeHaltsArray = getTradeHalts(); 
 
-      $returnArray['haltstring'] = $tradeHaltsArray["haltstring"]; 
-      $returnArray['haltalert'] = $tradeHaltsArray["haltalert"]; 
       $returnArray['halt_symbol_list'] = $tradeHaltsArray['halt_symbol_list']; 
+      $returnArray['currently_halted'] = $tradeHaltsArray['currently_halted']; 
       $returnArray['final_return'] = $finalReturn;
 
       echo json_encode($returnArray); 
