@@ -358,16 +358,7 @@ function getTradeHalts()
         }        
 
       }
-      else 
-      {
-            $returnArray['haltstring'] .= " NO HALT ALERT\n"; 
-      }
     }
-
-if (empty($currentlyHalted))
-{
-    error_log("The array is empty"); 
-}
 
     $returnArray['halt_symbol_list'] = json_encode($haltSymbolList); 
     $returnArray['currently_halted'] = json_encode($currentlyHalted); 
