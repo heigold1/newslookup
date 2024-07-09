@@ -31,6 +31,8 @@ class etHttpUtils
 	 */
 	function __construct(	$consumer,	$url, $headers = false,	$method = 'GET')
 	{
+
+echo "inside the construct for etHttpUtils.class.php\n"; 
 		$this->consumer 	= $consumer;
 		$this->request_url	= $url;
 		$this->headers 		= $headers;
@@ -76,6 +78,7 @@ class etHttpUtils
 	 */
 	private function getRequestObject()
 	{
+echo "inside getRequestObject\n"; 
 		if(isset($this->consumer->oauth_token) 			and	!empty($this->consumer->oauth_token)
 		and isset($this->consumer->oauth_token_secret) 	and !empty($this->consumer->oauth_token_secret)
 		)
@@ -86,6 +89,24 @@ class etHttpUtils
 			$token_obj 	= null;
 		}
 
+echo "the consumer is:\n";
+var_dump($this->consumer); 
+
+echo "the token_obj is:\n";
+var_dump($token_obj);
+
+echo "the method is:\n";
+var_dump($this->method);
+
+echo "the request_url is:\n";
+var_dump($this->request_url);
+
+echo "the params are:\n";
+var_dump($this->params); 
+
+
+
+
 
 
 		$request_obj = OAuthRequest::from_consumer_and_token($this->consumer,
@@ -95,7 +116,16 @@ class etHttpUtils
 															$this->params);
 	
 		$sig_method = new OAuthSignatureMethod_HMAC_SHA1();
+
+
+echo "request_obj before ->sign_request is\n";
+var_dump($request_obj); 
+
 		$request_obj->sign_request($sig_method, $this->consumer, $token_obj);
+
+
+echo "the final request_object is:\n";
+var_dump($request_obj); 
 
 		return $request_obj;
 	}
@@ -120,9 +150,15 @@ class etHttpUtils
 		if($this->postfields )
 		{
 			curl_setopt($ch, CURLOPT_POSTFIELDS, $this->postfields);
+echo "the cURL postFields are:\n"; 
+var_dump($this->postfields); 
 		}
 		if($this->headers)
 		{
+
+echo "the CURL http headers are:\n"; 
+var_dump($this->headers); 
+
 			curl_setopt($ch, CURLOPT_HTTPHEADER, $this->headers);
 		}
 		if($this->method  and $this->method != 'GET' and $this->method != 'POST' )
@@ -135,13 +171,16 @@ class etHttpUtils
 		/*curl_setopt($ch, CURLOPT_SSLVERSION, 3);*/
 		curl_setopt($ch, CURLOPT_SSLVERSION, CURL_SSLVERSION_TLSv1_2);
 		//--------------------------------
+
 		$this->result = curl_exec($ch);
+
+
+
 		//--------------------------------
 		if(curl_errno($ch))
 		{
 			$errorCode = 1001;
 			$errorMessage = "Error no : " . curl_errno($ch) . "\nError : *" . curl_error($ch) . "*";
-
 			throw new OAuthException($errorMessage,$errorCode);
 		}
 		else
@@ -151,6 +190,8 @@ class etHttpUtils
 			$this->response_header	= substr($this->result, 0,$curl_info['header_size']);
 			$this->response_body	= substr($this->result, $curl_info['header_size']);
 			$this->http_code 		= $curl_info['http_code'];
+
+
 		}
 		// close cURL resource, and free up system resources
 		curl_close($ch);

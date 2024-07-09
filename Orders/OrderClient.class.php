@@ -103,13 +103,19 @@ class OrderClient
 	{
 		$requestXml = ETWSObj2Request::buildRequestData($request_object,'PlaceEquityOrder');
 		$resourceUrl = RequestParamsMain::buildFullURL(URL_PL_EQ_ORDER);
+echo "resourceUrl is " . $resourceUrl . "\n"; 
 		return $this->getOrderResponse($resourceUrl,'POST',$requestXml);
 	}
 
 	public function previewEquityOrder($request_object)
 	{
 		$requestXml = ETWSObj2Request::buildRequestData($request_object,'PreviewEquityOrder');
+
+echo "request_object is:\n";
+var_dump($request_object); 
+
 		$resourceUrl = RequestParamsMain::buildFullURL(URL_PR_EQ_ORDER);
+echo "resourceUrl is " . $resourceUrl . "\n"; 
 		return $this->getOrderResponse($resourceUrl,'POST',$requestXml);
 	}
 

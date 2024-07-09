@@ -318,3 +318,76 @@
 [20240705 04:19:03][] <Error>
   <message>oauth_problem=parameter_absent,oauth_parameters_absent=oauth_token</message>
 </Error>
+[20240705 04:44:13][::1] <Error>
+  <code>9999</code>
+  <message>Please validate the input and try again</message>
+</Error>
+[20240705 04:48:22][::1] <Error>
+  <code>9999</code>
+  <message>Please validate the input and try again</message>
+</Error>
+[20240705 05:44:53][::1] <Error>
+  <code>9999</code>
+  <message>Please validate the input and try again</message>
+</Error>
+[20240705 05:46:11][::1] <Error>
+  <code>9999</code>
+  <message>Please validate the input and try again</message>
+</Error>
+[20240705 05:46:13][::1] <Error>
+  <code>9999</code>
+  <message>Please validate the input and try again</message>
+</Error>
+[20240705 05:46:40][::1] <Error>
+  <code>9999</code>
+  <message>Please validate the input and try again</message>
+</Error>
+[20240705 05:53:06][::1] <Error>
+  <code>9999</code>
+  <message>Please validate the input and try again</message>
+</Error>
+[20240705 06:43:05][::1] <Error>
+  <message>oauth_problem=token_expired</message>
+</Error>
+[20240705 06:46:42][::1] <Error>
+  <message>oauth_problem=token_expired</message>
+</Error>
+[20240705 06:50:24][::1] <Error>
+  <message>oauth_problem=token_expired</message>
+</Error>
+[20240705 06:59:45][::1] <Error>
+  <message>oauth_problem=token_expired</message>
+</Error>
+[20240705 06:59:47][::1] <Error>
+  <message>oauth_problem=token_expired</message>
+</Error>
+[20240705 07:01:14][::1] <Error>
+  <message>oauth_problem=token_expired</message>
+</Error>
+[20240705 07:13:30][::1] <Error>
+  <code>9999</code>
+  <message>Please validate the input and try again</message>
+</Error>
+[20240705 07:35:19][::1] <Error>
+  <code>9999</code>
+  <message>Please validate the input and try again</message>
+</Error>
+[20240705 07:54:37][::1] <Error>
+  <code>9999</code>
+  <message>Please validate the input and try again</message>
+</Error>
+[20240706 10:13:39][] <!DOCTYPE html><html><head><title> - Error report</title><style type="text/css">H1 {font-family:Tahoma,Arial,sans-serif;color:white;background-color:#525D76;font-size:22px;} H2 {font-family:Tahoma,Arial,sans-serif;color:white;background-color:#525D76;font-size:16px;} H3 {font-family:Tahoma,Arial,sans-serif;color:white;background-color:#525D76;font-size:14px;} BODY {font-family:Tahoma,Arial,sans-serif;color:black;background-color:white;} B {font-family:Tahoma,Arial,sans-serif;color:white;background-color:#525D76;} P {font-family:Tahoma,Arial,sans-serif;background:white;color:black;font-size:12px;}A {color : black;}A.name {color : black;}.line {height: 1px; background-color: #525D76; border: none;}</style> </head><body><h1>HTTP Status 500 - consumerKey is empty</h1><div class="line"></div><p><b>type</b> Exception report</p><p><b>message</b> <u>consumerKey is empty</u></p><p><b>description</b> <u>The server encountered an internal error that prevented it from fulfilling this request.</u></p><p><b>exception</b></p><pre>java.lang.IllegalArgumentException: consumerKey is empty
+	com.etrade.etws.oauth.manager.ConsumerManager.getConsumerKey(ConsumerManager.java:247)
+	com.etrade.etws.oauth.OAuthValidator.validateConsumer(OAuthValidator.java:490)
+	com.etrade.etws.oauth.common.OAuthCommons.validateConsumer(OAuthCommons.java:260)
+	com.etrade.etws.oauth.bean.OAuthAuditBean.validateAuditParameters(OAuthAuditBean.java:74)
+	com.etrade.etws.common.audit.AuditFilter.doFilter(AuditFilter.java:72)
+	com.etrade.api.filter.preflightfilter.PreflightFilter.doFilter(PreflightFilter.java:63)
+	org.eclipse.jetty.servlets.CrossOriginFilter.handle(CrossOriginFilter.java:319)
+	org.eclipse.jetty.servlets.CrossOriginFilter.doFilter(CrossOriginFilter.java:273)
+	com.etrade.api.filter.preflightfilter.CORSMobileOriginFilter.doFilter(CORSMobileOriginFilter.java:57)
+	org.apache.logging.log4j.web.Log4jServletFilter.doFilter(Log4jServletFilter.java:71)
+</pre><p><b>note</b> <u>The full stack trace of the root cause is available in the  logs.</u></p><hr class="line"><h3></h3></body></html>
+[20240706 10:49:30][] <Error>
+  <message>oauth_problem=parameter_absent,oauth_parameters_absent=oauth_token</message>
+</Error>

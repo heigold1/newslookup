@@ -26,5 +26,7 @@ class EquityOrderRequest extends basicOrderRequest
 	protected $orderTerm; 
 	/* enum - EquityOrderTerm 	GOOD_UNTIL_CANCEL,	GOOD_FOR_DAY,	IMMEDIATE_OR_CANCEL,	FILL_OR_KILL;	*/
 
+	protected $orderType; 
+
 }
 ?>

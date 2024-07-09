@@ -17,7 +17,7 @@ class ETWSObj2Request {
 	 *    @return string $xml
 	 */
 	
-	public function buildRequestData($obj, $root_node, $request_format = REQUEST_FORMAT) 
+	public static function buildRequestData($obj, $root_node, $request_format = REQUEST_FORMAT) 
 	{
 		
 		if(! $request_format || ($request_format != 'json' && $request_format != 'xml'))
@@ -34,7 +34,7 @@ class ETWSObj2Request {
 	 * @param string $root_node
 	 * @return string
 	 */
-	private function requestJson($obj,$root_node)
+	private static function requestJson($obj,$root_node)
 	{
 		$arr[$root_node] = self::object_to_array($obj);
 		$json = json_encode($arr);
@@ -92,7 +92,7 @@ class ETWSObj2Request {
 	 * @return array
 	 */
 
-	private function object_to_array($var)
+	private static function object_to_array($var)
 	{
 		
 		$result = array();

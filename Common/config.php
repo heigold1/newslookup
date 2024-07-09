@@ -61,9 +61,13 @@ setConst('URL_EXPIRYDATES',			ETRADE_SERVER . '/market/rest/optionexpiredate');
 
 setConst('URL_ORDERLIST',			ETRADE_SERVER . '/order/rest/orderlist');
 
-setConst('URL_PL_EQ_ORDER',			ETRADE_SERVER . '/order/rest/placeequityorder');
+//setConst('URL_PL_EQ_ORDER',			ETRADE_SERVER . '/order/rest/placeequityorder');
+setConst('URL_PL_EQ_ORDER',         ETRADE_SERVER . '/v1/accounts/S11DfWByF1AJIO-pGBEw-g/orders/place');
 setConst('URL_PL_OP_ORDER',			ETRADE_SERVER . '/order/rest/placeoptionorder');
-setConst('URL_PR_EQ_ORDER',			ETRADE_SERVER . '/order/rest/previewequityorder');
+
+// setConst('URL_PR_EQ_ORDER',			ETRADE_SERVER . '/order/rest/previewequityorder');
+setConst('URL_PR_EQ_ORDER',         ETRADE_SERVER . '/v1/accounts/S11DfWByF1AJIO-pGBEw-g/orders/preview');
+
 setConst('URL_PR_OP_ORDER',			ETRADE_SERVER . '/order/rest/previewoptionorder');
 setConst('URL_PR_CH_EQ_ORDER',		ETRADE_SERVER . '/order/rest/previewchangeequityorder');
 setConst('URL_PL_CH_EQ_ORDER',		ETRADE_SERVER . '/order/rest/placechangeequityorder');

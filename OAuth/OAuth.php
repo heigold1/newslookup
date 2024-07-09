@@ -45,6 +45,8 @@ class OAuthConsumer {
 		$this->secret = $secret;
 		$this->callback_url = $callback_url;
 
+echo "inside OAuth.php constructor\n"; 
+
 	}
 
 	function __toString() {
@@ -191,6 +193,10 @@ class OAuthSignatureMethod_PLAINTEXT extends OAuthSignatureMethod {
 	 * OAuthRequest handles this!
 	 */
 	public function build_signature($request, $consumer, $token) {
+
+echo "inside build_signature.  request is:\n";
+var_dump($request); 
+
 		$key_parts = array(
 		$consumer->secret,
 		($token) ? $token->secret : ""

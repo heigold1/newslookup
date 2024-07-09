@@ -47,3 +47,139 @@ Stack trace:
 Stack trace:
 #0 {main}
   thrown in C:\xampp\htdocs\newslookup\Samples\test_account.php on line 159
+[05-Jul-2024 04:33:33 Europe/Berlin] About to try
+[05-Jul-2024 04:33:33 Europe/Berlin] Just set the request_params
+[05-Jul-2024 04:33:33 Europe/Berlin] PHP Fatal error:  Uncaught Error: Non-static method ETWSObj2Request::buildRequestData() cannot be called statically in C:\xampp\htdocs\newslookup\Orders\OrderClient.class.php:104
+Stack trace:
+#0 C:\xampp\htdocs\newslookup\place-etrade-order.php(89): OrderClient->placeEquityOrder(Object(PlaceEquityOrder))
+#1 {main}
+  thrown in C:\xampp\htdocs\newslookup\Orders\OrderClient.class.php on line 104
+[05-Jul-2024 04:35:47 Europe/Berlin] About to try
+[05-Jul-2024 04:35:47 Europe/Berlin] Just set the request_params
+[05-Jul-2024 04:35:47 Europe/Berlin] PHP Fatal error:  Uncaught Error: Non-static method ETWSObj2Request::requestJson() cannot be called statically in C:\xampp\htdocs\newslookup\Common\ETWSObj2Request.class.php:27
+Stack trace:
+#0 C:\xampp\htdocs\newslookup\Orders\OrderClient.class.php(104): ETWSObj2Request::buildRequestData(Object(PlaceEquityOrder), 'PlaceEquityOrde...')
+#1 C:\xampp\htdocs\newslookup\place-etrade-order.php(89): OrderClient->placeEquityOrder(Object(PlaceEquityOrder))
+#2 {main}
+  thrown in C:\xampp\htdocs\newslookup\Common\ETWSObj2Request.class.php on line 27
+[05-Jul-2024 04:37:52 Europe/Berlin] About to try
+[05-Jul-2024 04:37:52 Europe/Berlin] Just set the request_params
+[05-Jul-2024 04:37:52 Europe/Berlin] PHP Fatal error:  Uncaught Error: Non-static method ETWSObj2Request::object_to_array() cannot be called statically in C:\xampp\htdocs\newslookup\Common\ETWSObj2Request.class.php:39
+Stack trace:
+#0 C:\xampp\htdocs\newslookup\Common\ETWSObj2Request.class.php(27): ETWSObj2Request::requestJson(Object(PlaceEquityOrder), 'PlaceEquityOrde...')
+#1 C:\xampp\htdocs\newslookup\Orders\OrderClient.class.php(104): ETWSObj2Request::buildRequestData(Object(PlaceEquityOrder), 'PlaceEquityOrde...')
+#2 C:\xampp\htdocs\newslookup\place-etrade-order.php(89): OrderClient->placeEquityOrder(Object(PlaceEquityOrder))
+#3 {main}
+  thrown in C:\xampp\htdocs\newslookup\Common\ETWSObj2Request.class.php on line 39
+[05-Jul-2024 04:38:17 Europe/Berlin] About to try
+[05-Jul-2024 04:38:17 Europe/Berlin] Just set the request_params
+[05-Jul-2024 04:40:58 Europe/Berlin] About to try
+[05-Jul-2024 04:40:58 Europe/Berlin] Just set the request_params
+[05-Jul-2024 04:41:13 Europe/Berlin] About to try
+[05-Jul-2024 04:41:13 Europe/Berlin] Just set the request_params
+[05-Jul-2024 04:42:35 Europe/Berlin] About to try
+[05-Jul-2024 04:42:35 Europe/Berlin] Just set the request_params
+[05-Jul-2024 04:44:13 Europe/Berlin] About to try
+[05-Jul-2024 04:44:13 Europe/Berlin] Just set the request_params
+[05-Jul-2024 04:48:21 Europe/Berlin] About to try
+[05-Jul-2024 04:48:21 Europe/Berlin] Just set the request_params
+[05-Jul-2024 05:44:52 Europe/Berlin] About to try
+[05-Jul-2024 05:46:10 Europe/Berlin] About to try
+[05-Jul-2024 05:46:12 Europe/Berlin] About to try
+[05-Jul-2024 05:46:39 Europe/Berlin] About to try
+[05-Jul-2024 05:53:06 Europe/Berlin] About to try
+[05-Jul-2024 06:05:27 Europe/Berlin] About to try
+[05-Jul-2024 06:05:27 Europe/Berlin] PHP Warning:  Undefined variable $out in C:\xampp\htdocs\newslookup\place-etrade-order.php on line 257
+[05-Jul-2024 06:05:27 Europe/Berlin] 
+[05-Jul-2024 06:42:57 Europe/Berlin] PHP Parse error:  syntax error, unexpected variable "$request_params" in C:\xampp\htdocs\newslookup\place-etrade-order.php on line 45
+[05-Jul-2024 06:43:05 Europe/Berlin] About to try
+[05-Jul-2024 06:46:41 Europe/Berlin] About to try
+[05-Jul-2024 06:50:24 Europe/Berlin] About to try
+[05-Jul-2024 06:59:44 Europe/Berlin] About to try
+[05-Jul-2024 06:59:47 Europe/Berlin] About to try
+[05-Jul-2024 07:01:13 Europe/Berlin] About to try
+[05-Jul-2024 07:13:29 Europe/Berlin] About to try
+[05-Jul-2024 07:35:07 Europe/Berlin] PHP Parse error:  syntax error, unexpected identifier "var_dump", expecting "," or ";" in C:\xampp\htdocs\newslookup\Common\etHttpUtils.class.php on line 124
+[05-Jul-2024 07:35:18 Europe/Berlin] About to try
+[05-Jul-2024 07:40:44 Europe/Berlin] PHP Warning:  Undefined variable $oauth_signature in C:\xampp\htdocs\newslookup\place-etrade-order.php on line 111
+[05-Jul-2024 07:40:44 Europe/Berlin] PHP Warning:  Undefined variable $additional_params in C:\xampp\htdocs\newslookup\place-etrade-order.php on line 113
+[05-Jul-2024 07:40:44 Europe/Berlin] PHP Fatal error:  Uncaught TypeError: array_merge(): Argument #2 must be of type array, null given in C:\xampp\htdocs\newslookup\place-etrade-order.php:75
+Stack trace:
+#0 C:\xampp\htdocs\newslookup\place-etrade-order.php(75): array_merge(Array, NULL)
+#1 C:\xampp\htdocs\newslookup\place-etrade-order.php(113): build_oauth_header('https://api.etr...', 'GET', '5d9924704d87090...', 'xyP0NRg2h3DruTi...', '789245a882c0212...', 'TW9rMx3RL9Qg2JA...', NULL)
+#2 {main}
+  thrown in C:\xampp\htdocs\newslookup\place-etrade-order.php on line 75
+[05-Jul-2024 07:44:17 Europe/Berlin] About to try
+[05-Jul-2024 07:44:18 Europe/Berlin] PHP Warning:  Undefined variable $out in C:\xampp\htdocs\newslookup\place-etrade-order.php on line 337
+[05-Jul-2024 07:44:18 Europe/Berlin] 
+[05-Jul-2024 07:54:36 Europe/Berlin] About to try
+[05-Jul-2024 07:55:21 Europe/Berlin] About to try
+[05-Jul-2024 08:31:57 Europe/Berlin] PHP Fatal error:  Uncaught ValueError: hash_hmac(): Argument #1 ($algo) must be a valid cryptographic hashing algorithm in C:\xampp\htdocs\newslookup\place-etrade-order.php:58
+Stack trace:
+#0 C:\xampp\htdocs\newslookup\place-etrade-order.php(58): hash_hmac('HMAC-SHA1', 'GET&https%3A%2F...', Object(SensitiveParameterValue), true)
+#1 C:\xampp\htdocs\newslookup\place-etrade-order.php(78): build_oauth_signature('https://api.etr...', 'GET', Array, '789245a882c0212...', 'eb6rGk9oXJyMEO4...')
+#2 C:\xampp\htdocs\newslookup\place-etrade-order.php(112): build_oauth_header('https://api.etr...', 'GET', '5d9924704d87090...', 'wkbdjb2uHff3skd...', '789245a882c0212...', 'eb6rGk9oXJyMEO4...')
+#3 {main}
+  thrown in C:\xampp\htdocs\newslookup\place-etrade-order.php on line 58
+[05-Jul-2024 08:38:41 Europe/Berlin] PHP Parse error:  Unmatched '}' in C:\xampp\htdocs\newslookup\place-etrade-order.php on line 326
+[05-Jul-2024 08:39:09 Europe/Berlin] About to try
+[05-Jul-2024 08:39:10 Europe/Berlin] PHP Warning:  Undefined variable $out in C:\xampp\htdocs\newslookup\place-etrade-order.php on line 344
+[05-Jul-2024 08:39:10 Europe/Berlin] 
+[05-Jul-2024 08:41:41 Europe/Berlin] About to try
+[05-Jul-2024 08:41:42 Europe/Berlin] PHP Warning:  Undefined variable $out in C:\xampp\htdocs\newslookup\place-etrade-order.php on line 344
+[05-Jul-2024 08:41:42 Europe/Berlin] 
+[05-Jul-2024 08:47:08 Europe/Berlin] About to try
+[05-Jul-2024 08:47:09 Europe/Berlin] PHP Warning:  Undefined variable $out in C:\xampp\htdocs\newslookup\place-etrade-order.php on line 350
+[05-Jul-2024 08:47:09 Europe/Berlin] 
+[05-Jul-2024 08:48:12 Europe/Berlin] About to try
+[05-Jul-2024 08:48:13 Europe/Berlin] PHP Warning:  Undefined variable $out in C:\xampp\htdocs\newslookup\place-etrade-order.php on line 346
+[05-Jul-2024 08:48:13 Europe/Berlin] 
+[05-Jul-2024 09:14:07 Europe/Berlin] About to try
+[05-Jul-2024 09:14:08 Europe/Berlin] PHP Warning:  Undefined variable $out in C:\xampp\htdocs\newslookup\place-etrade-order.php on line 346
+[05-Jul-2024 09:14:08 Europe/Berlin] 
+[05-Jul-2024 09:18:15 Europe/Berlin] About to try
+[05-Jul-2024 09:18:15 Europe/Berlin] PHP Warning:  Undefined variable $out in C:\xampp\htdocs\newslookup\place-etrade-order.php on line 349
+[05-Jul-2024 09:18:15 Europe/Berlin] 
+[05-Jul-2024 09:18:54 Europe/Berlin] About to try
+[05-Jul-2024 09:18:54 Europe/Berlin] PHP Warning:  Undefined variable $out in C:\xampp\htdocs\newslookup\place-etrade-order.php on line 349
+[05-Jul-2024 09:18:54 Europe/Berlin] 
+[05-Jul-2024 09:19:06 Europe/Berlin] About to try
+[05-Jul-2024 09:19:07 Europe/Berlin] PHP Warning:  Undefined variable $out in C:\xampp\htdocs\newslookup\place-etrade-order.php on line 349
+[05-Jul-2024 09:19:07 Europe/Berlin] 
+[05-Jul-2024 09:22:26 Europe/Berlin] About to try
+[05-Jul-2024 09:22:27 Europe/Berlin] PHP Warning:  Undefined variable $out in C:\xampp\htdocs\newslookup\place-etrade-order.php on line 349
+[05-Jul-2024 09:22:27 Europe/Berlin] 
+[05-Jul-2024 09:47:36 Europe/Berlin] PHP Parse error:  syntax error, unexpected token ":" in C:\xampp\htdocs\newslookup\Common\etHttpUtils.class.php on line 105
+[05-Jul-2024 10:04:46 Europe/Berlin] PHP Parse error:  syntax error, unexpected double-quoted string "the request_url is:\n" in C:\xampp\htdocs\newslookup\Common\etHttpUtils.class.php on line 101
+[05-Jul-2024 10:50:03 Europe/Berlin] PHP Fatal error:  Uncaught Error: Call to undefined function GetURL() in C:\xampp\htdocs\newslookup\Samples\test_push.php:26
+Stack trace:
+#0 {main}
+  thrown in C:\xampp\htdocs\newslookup\Samples\test_push.php on line 26
+[05-Jul-2024 10:50:50 Europe/Berlin] PHP Fatal error:  Uncaught Error: Call to undefined function GetURL() in C:\xampp\htdocs\newslookup\Samples\test_handshake.php:36
+Stack trace:
+#0 {main}
+  thrown in C:\xampp\htdocs\newslookup\Samples\test_handshake.php on line 36
+[05-Jul-2024 22:23:22 Europe/Berlin] About to try
+[05-Jul-2024 22:23:22 Europe/Berlin] PHP Warning:  Undefined variable $header in C:\xampp\htdocs\newslookup\place-etrade-order.php on line 166
+[05-Jul-2024 22:23:22 Europe/Berlin] PHP Fatal error:  Uncaught TypeError: curl_setopt(): The CURLOPT_HTTPHEADER option must have an array value in C:\xampp\htdocs\newslookup\place-etrade-order.php:166
+Stack trace:
+#0 C:\xampp\htdocs\newslookup\place-etrade-order.php(166): curl_setopt(Object(CurlHandle), 10023, NULL)
+#1 {main}
+  thrown in C:\xampp\htdocs\newslookup\place-etrade-order.php on line 166
+[06-Jul-2024 09:07:32 Europe/Berlin] About to try
+[06-Jul-2024 09:07:32 Europe/Berlin] PHP Warning:  Array to string conversion in C:\xampp\htdocs\newslookup\place-etrade-order.php on line 216
+[06-Jul-2024 09:08:44 Europe/Berlin] About to try
+[06-Jul-2024 09:12:44 Europe/Berlin] About to try
+[06-Jul-2024 09:14:02 Europe/Berlin] About to try
+[06-Jul-2024 09:14:43 Europe/Berlin] About to try
+[06-Jul-2024 09:16:45 Europe/Berlin] About to try
+[06-Jul-2024 09:19:58 Europe/Berlin] About to try
+[06-Jul-2024 09:20:21 Europe/Berlin] About to try
+[06-Jul-2024 09:20:30 Europe/Berlin] About to try
+[06-Jul-2024 09:22:21 Europe/Berlin] About to try
+[06-Jul-2024 09:25:09 Europe/Berlin] About to try
+[06-Jul-2024 09:26:43 Europe/Berlin] About to try
+[06-Jul-2024 09:29:46 Europe/Berlin] About to try
+[06-Jul-2024 09:46:50 Europe/Berlin] PHP Parse error:  Unmatched '}' in C:\xampp\htdocs\newslookup\place-etrade-order.php on line 469
+[06-Jul-2024 10:49:27 Europe/Berlin] PHP Warning:  Undefined array key "orderString" in C:\xampp\htdocs\newslookup\Samples\test_Orders.php on line 17
+[06-Jul-2024 10:49:27 Europe/Berlin] PHP Warning:  Undefined array key "oauth_token_secret" in C:\xampp\htdocs\newslookup\Samples\test_Orders.php on line 32

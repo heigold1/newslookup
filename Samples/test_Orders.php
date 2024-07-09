@@ -12,10 +12,34 @@ require_once("config.php");
 require_once(dirname(__FILE__) . '/../Common/Common.php');
 require_once(dirname(__FILE__) . '/../Orders/OrderClient.class.php');
 
-$consumer 	= new etOAuthConsumer(ETWS_APP_KEY,ETWS_APP_SECRET);
+
+
+$orderString=$_GET['orderString'];
+
+// $dataArray = array();
+
+$ini_array = parse_ini_file('etrade.ini', true);
+
+//$consumer   = new etOAuthConsumer(ETWS_APP_KEY,ETWS_APP_SECRET);
+// $consumer = new etOAuthConsumer($ini_array['OAuth']['oauth_consumer_key'],$ini_array['OAuth']['consumer_secret']);
+//$consumer->oauth_token      = $ini_array['OAuth']['oauth_token'];
+//$consumer->oauth_token_secret   = $ini_array['OAuth']['oauth_token_secret'];
+//$ac_obj = new OrderClient($consumer);
+
+$key 	= $ini_array['OAuth']['oauth_consumer_key'];
+$secret = $ini_array['OAuth']['consumer_secret'];
+$oauth_token = $ini_array['OAuth']['oauth_token'];
+$oauth_token_secret = $ini_array['oauth_token_secret']; 
+
+
+$consumer 	= new etOAuthConsumer($key,$secret); // new etOAuthConsumer(ETWS_APP_KEY,ETWS_APP_SECRET);
  
-$consumer->oauth_token 			= OAUTH_ACCESS_TOKEN;
-$consumer->oauth_token_secret 	= OAUTH_ACCESS_TOKEN_SECRET;
+$consumer->oauth_token 			= $oauth_token; // OAUTH_ACCESS_TOKEN;
+$consumer->oauth_token_secret 	= $oauth_token_secret; // OAUTH_ACCESS_TOKEN_SECRET;
+
+
+
+
 
 $ac_obj	= new OrderClient($consumer);
 
@@ -40,25 +64,25 @@ while (in_array($choice,$valid_choice))
 				$request_params = new EquityOrderRequest();
 				
 				/* From orderRequestMain. */
-				$request_params->__set('accountId',83310032);
-				$request_params->__set('clientOrderId','123123');
-				$request_params->__set('limitPrice',300);
-				$request_params->__set('previewId','');
-				$request_params->__set('stopPrice',300);
+				$request_params->__set('accountId','151706697');
+				$request_params->__set('clientOrderId','1');
+				$request_params->__set('limitPrice',0.01);
+//				$request_params->__set('previewId','');
+//				$request_params->__set('stopPrice',300);
 			
 				/* From basicOrderRequest. */
-				$request_params->__set('allOrNone','');
-				$request_params->__set('quantity',4);
-				$request_params->__set('reserveOrder','');
-				$request_params->__set('reserveQuantity',0);
+//				$request_params->__set('allOrNone','');
+				$request_params->__set('quantity',100);
+//				$request_params->__set('reserveOrder','');
+//				$request_params->__set('reserveQuantity',0);
 			
 				/* From EquityOrderRequest */
-				$request_params->__set('stopLimitPrice','');
-				$request_params->__set('symbol','AAPL');
+//				$request_params->__set('stopLimitPrice','');
+				$request_params->__set('symbol','IONM');
 				$request_params->__set('orderAction','BUY'); //{BUY,   SELL,    BUY_TO_COVER,    SELL_SHORT'}
 				$request_params->__set('priceType','LIMIT');// { MARKET,	LIMIT,	STOP,	STOP_LIMIT,	MARKET_ON_CLOSE'}
-				$request_params->__set('routingDestination','');
-				$request_params->__set('marketSession','REGULAR');// { REGULAR, EXTENDED }
+//				$request_params->__set('routingDestination','');
+//				$request_params->__set('marketSession','REGULAR');// { REGULAR, EXTENDED }
 				$request_params->__set('orderTerm','GOOD_FOR_DAY'); //{ GOOD_UNTIL_CANCEL,GOOD_FOR_DAY,IMMEDIATE_OR_CANCEL,FILL_OR_KILL}
 				
 				$request_xml_object = new PreviewEquityOrder($request_params);

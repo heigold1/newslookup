@@ -94,9 +94,14 @@ setConst('URL_EXPIRYDATES',		ETRADE_SERVER . '/market/'.$url_str_part.'rest/opti
 
 
 setConst('URL_ORDERLIST',		ETRADE_SERVER . '/order/'.$url_str_part.'rest/orderlist');
-setConst('URL_PL_EQ_ORDER',		ETRADE_SERVER . '/order/'.$url_str_part.'rest/placeequityorder');
+// setConst('URL_PL_EQ_ORDER',		ETRADE_SERVER . '/order/'.$url_str_part.'rest/placeequityorder');
+setConst('URL_PL_EQ_ORDER',         ETRADE_SERVER . '/v1/accounts/S11DfWByF1AJIO-pGBEw-g/orders/place');
 setConst('URL_PL_OP_ORDER',		ETRADE_SERVER . '/order/'.$url_str_part.'rest/placeoptionorder');
-setConst('URL_PR_EQ_ORDER',		ETRADE_SERVER . '/order/'.$url_str_part.'rest/previewequityorder');
+
+//setConst('URL_PR_EQ_ORDER',		ETRADE_SERVER . '/order/'.$url_str_part.'rest/previewequityorder');
+setConst('URL_PR_EQ_ORDER',         ETRADE_SERVER . '/v1/accounts/S11DfWByF1AJIO-pGBEw-g/orders/preview');
+
+
 setConst('URL_PR_OP_ORDER',		ETRADE_SERVER . '/order/'.$url_str_part.'rest/previewoptionorder');
 setConst('URL_PR_CH_EQ_ORDER',	ETRADE_SERVER . '/order/'.$url_str_part.'rest/previewchangeequityorder');
 setConst('URL_PL_CH_EQ_ORDER',	ETRADE_SERVER . '/order/'.$url_str_part.'rest/placechangeequityorder');

@@ -15,6 +15,7 @@ class orderRequestMain extends RequestParamsMain{
 	protected $limitPrice;
 	protected $previewId;
 	protected $stopPrice;
+    protected $orderType; 
 }
 
 
