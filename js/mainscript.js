@@ -60,13 +60,23 @@ function playDelist(){
 }
 
 function generateHaltedStocksTable(stocks) {
-    let table = '<table style="border: 1px solid black; border-collapse: collapse; background-color: #00ff00; width: 100%; text-align: center;">';
-    table += '<thead><tr><th style="border: 1px solid black; padding: 10px;">Currently Halted Stocks</th></tr></thead>';
-    table += '<tbody>';
+    let table = '<a target="_blank" href="https://www.nasdaqtrader.com/trader.aspx?id=tradehalts"><table style="border: 1px solid black; border-collapse: collapse; background-color: #00ff00; width: 100%; text-align: center;">';
+    table += '<thead><tr style="height: 15px !important;"><th style="border: 1px solid black; ">Symbol</th><th style="border: 1px solid black; ">Reason</th></tr></thead>';
+    table += '<tbody></a>';
 
+    for (const[symbol, reasonCode] of Object.entries(stocks))
+    {
+        table+= `<tr style="height: 15px !important;"><td style="border: 1px solid black; ">${symbol}</td><td style="border: 1px solid black; ">${reasonCode}</td></tr>`; 
+    }
+
+
+/*
     stocks.forEach(symbol => {
         table += `<tr><td style="border: 1px solid black; padding: 10px;">${symbol}</td></tr>`;
     });
+
+*/
+
 
     table += '</tbody></table>';
 
@@ -1002,7 +1012,9 @@ $(function() {
 
               $("div#bigcharts_yest_close").html("<a href='https://www.google.com/search?q=stock+" + symbol + "&tbm=nws' target='blank'>GOOGLE NEWS</a><br><br><span style='font-size: 25px; background-color: red;'></span>");  
 
-              if (currentlyHaltedList.length > 0)              
+              var currentlyHaltedKeys = Object.keys(currentlyHaltedList); 
+
+              if (currentlyHaltedKeys.length > 0)              
               {
                 $("div#bigcharts_yest_close").append(generateHaltedStocksTable(currentlyHaltedList)); 
               }

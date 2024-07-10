@@ -353,7 +353,7 @@ function getTradeHalts()
         if ($resumptionTime == "")
         {
             if (!in_array($symbol, $currentlyHalted)) {
-                array_push($currentlyHalted, $symbol); 
+                $currentlyHalted[$symbol] = $reasonCode; 
             }
         }        
 
