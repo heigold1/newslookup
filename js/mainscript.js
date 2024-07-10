@@ -908,9 +908,21 @@ $(function() {
                   // the daily VIX, so you can see how the volatility goes throughout the day
 
                  var textArray = data.split("|"); 
+
+                 yesterdaysClose = parseFloat($('#yestCloseText').val()); 
                  
                  var lastPercentage = textArray[0]; 
                  var lastValue = textArray[1]; 
+                 var diffPrice = parseFloat(parseFloat(lastValue) - parseFloat(lastValue)*0.10); 
+                 if (yesterdaysClose > 1.00)
+                 {
+                    diffPrice = diffPrice.toFixed(2); 
+                 }
+                 else
+                 {
+                    diffPrice = diffPrice.toFixed(4); 
+                 } 
+
                  var time = textArray[2]; 
 
                  $("#bigcharts_percent_change").text(lastPercentage); 
@@ -926,7 +938,7 @@ $(function() {
                     $("#td_bigcharts_change").css("background-color", "transparent");  
                   }
 
-                  $("#bigcharts_time").text(time); 
+                  $("#bigcharts_diff").text("10% Diff: $" + diffPrice); 
 
                 }
             });  // end of AJAX call to bigcharts   

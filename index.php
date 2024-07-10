@@ -205,7 +205,7 @@
 						<td>
 							<div id="td_bigcharts_change">  <a target="_blank" href="https://bigcharts.marketwatch.com/quickchart/quickchart.asp?symb=<?php echo $_GET['symbol'] ?>&insttype=&freq=1&show=&time=8">Bigcharts:</a> &nbsp;$<span id=bigcharts_last></span>&nbsp; <br>(<span id=bigcharts_percent_change></span>%)
 								<br>
-							<span id="bigcharts_time"></span><br><span id="bigcharts_minutes_ago"></span>
+							<span id="bigcharts_diff"></span><br>
 						</div>
 
 								5-day Avg Vol: <span style="font-size: 12px" id="five-day-average-volume"></span><br>
