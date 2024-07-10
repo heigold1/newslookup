@@ -920,6 +920,16 @@ die();
           $city = $yahooFinanceObject[0]['city']; 
           $state = $yahooFinanceObject[0]['state']; 
 
+          if (trim($city) == "")
+          {
+              $city = "SEEK ALPHA";
+          }
+          if (trim($state) == "")
+          {
+              $state = "SEEK ALPHA";
+          }
+
+
           if ($country = "United States") 
           {
             $country .= " (" . $city . ", " . $state . ")"; 
