@@ -47,17 +47,17 @@ def create_data_structure():
         else: 
           given_date_string = values[0] 
           given_date = datetime.strptime(given_date_string, "%b %d, %Y") 
-          if pattern.search(values[3]): 
-            date_difference = today_date - given_date
-            days_difference = date_difference.days 
+          date_difference = today_date - given_date
+          days_difference = date_difference.days
 
+          if pattern.search(values[3]): 
             if days_difference > 4: 
               symbolListOther[values[1]] = "REVERSE SPLIT " + str(days_difference) + " DAYS AGO!!!!!!"   
               if values[1] in symbolList:
                 symbolList.remove(values[1]) 
 
           if values[2] == 'Symbol Change':
-              symbolListOther[values[1]] = "SYMBOL CHANGE on " + values[0] + "!!! 38 PERCENT!!!" 
+              symbolListOther[values[1]] = "SYMBOL CHANGE " + str(days_difference) + " DAYS AGO!!! 38 PERCENT!!!" 
               if values[1] in symbolList: 
                 symbolList.remove(values[1])           
 
