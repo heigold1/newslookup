@@ -1359,8 +1359,7 @@ for (var corporateSymbol in corporateActionsStocks)
         {
             $("#day3").css({'background-color' : 'yellow', 'font-size' : '17px'});
         }
-
-        var day1_volume = parseFloat($("#day1_volume").html());
+        var day1_volume = parseFloat($("#day1_volume").html().replace(/,/g, ""));
 
         if (day1_volume > 4.0)
         {
