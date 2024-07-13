@@ -9,7 +9,7 @@ $secCompanyName = preg_replace('/ /', '+', $secCompanyName);
 $secCompanyName = preg_replace("/<.*?>/", "", $secCompanyName);
 $checkSec = $_GET['checkSec']; 
 
-$yesterdayDays = 1;
+$yesterdayDays = 3;
 
 fopen("cookies.txt", "w");
 
@@ -920,7 +920,7 @@ function getSecFilings($symbol, $yesterdayDays, $secCompanyName)
               $title = preg_replace('/424/i', '<span style="font-size: 45px; background-color:red; color:black"><b>&nbsp; 424 - OFFERING</b></span> &nbsp;', $title);
               $title = preg_replace('/notice of effectiveness/i', '<span style="font-size: 30px; background-color:red; color:black"><b>NOTICE OF EFFECTIVENESS</b></span> &nbsp;', $title);
               $title = preg_replace('/additional definitive proxy soliciting materials/i', '<span style="font-size: 20px; background-color:red; color:black"><b>ADDITIONAL DEFINITIVE PROXY SOLICITING MATERIALS - CHECK WITH JAY ON THE MEETING MINUTES</b></span> &nbsp;', $title);
-              $title = preg_replace('/offered to employees/i', '<span style="font-size: 20px; background-color:#00FF00; color:black"><b>OFFERED TO EMPLOYEES - THIS IS OK</b></span> &nbsp;', $title);
+              $title = preg_replace('/offered to employees/i', '<span style="font-size: 20px; background-color:#00FF00; color:black"><b>OFFERED TO EMPLOYEES - THIS IS OK BUT CHECK FOR MORE IN THE ARTICLE</b></span> &nbsp;', $title);
 
               if (preg_match('/registration/i', $title) || preg_match('/offering/i', $title))
               {

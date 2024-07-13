@@ -59,7 +59,8 @@ def parse_finance_page(symbol):
       title = first_item.find('title').text
       link = first_item.find('link').text 
       print('{"yahooInfo":{"urlTitle":"' + title + '","url":"' + link + '"}}')
-      
+    else: 
+      print('{"yahooInfo":{"urlTitle":"","url":""}}')      
 
   except Exception as e:
     print('{"yahooInfo":{"urlTitle":"","url":""}}') 
