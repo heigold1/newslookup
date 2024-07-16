@@ -1188,56 +1188,54 @@ $(function() {
 
 var corporateActionsStocks=
 {
-  "VSME": "REVERSE SPLIT 24 DAYS AGO!!!!!!",
-  "NAAS": "REVERSE SPLIT 29 DAYS AGO!!!!!!",
-  "NKLA": "REVERSE SPLIT 17 DAYS AGO!!!!!!",
-  "RBOT": "REVERSE SPLIT 29 DAYS AGO!!!!!!",
-  "NUWE": "REVERSE SPLIT 14 DAYS AGO!!!!!!",
-  "RIGL": "REVERSE SPLIT 15 DAYS AGO!!!!!!",
-  "STAF": "REVERSE SPLIT 16 DAYS AGO!!!!!!",
-  "BJDX": "REVERSE SPLIT 22 DAYS AGO!!!!!!",
-  "YGMZ": "REVERSE SPLIT 11 DAYS AGO!!!!!!",
-  "YYAI": "REVERSE SPLIT 15 DAYS AGO!!!!!!",
-  "CATX": "REVERSE SPLIT 25 DAYS AGO!!!!!!",
-  "AZTR": "REVERSE SPLIT 11 DAYS AGO!!!!!!",
-  "FORD": "REVERSE SPLIT 24 DAYS AGO!!!!!!",
-  "NUTX": "REVERSE SPLIT 9 DAYS AGO!!!!!!",
-  "TWOU": "REVERSE SPLIT 28 DAYS AGO!!!!!!",
-  "ASLN": "REVERSE SPLIT 9 DAYS AGO!!!!!!",
-  "BNED": "REVERSE SPLIT 30 DAYS AGO!!!!!!",
-  "FSRNQ": "SYMBOL CHANGE 22 DAYS AGO!!! 38 PERCENT!!!",
-  "CCIX": "SYMBOL CHANGE 21 DAYS AGO!!! 38 PERCENT!!!",
-  "ATRA": "REVERSE SPLIT 22 DAYS AGO!!!!!!",
-  "WENA": "SYMBOL CHANGE 18 DAYS AGO!!! 38 PERCENT!!!",
-  "WKHS": "REVERSE SPLIT 25 DAYS AGO!!!!!!",
-  "GRAL": "SYMBOL CHANGE 17 DAYS AGO!!! 38 PERCENT!!!",
-  "TECX": "REVERSE SPLIT 21 DAYS AGO!!!!!!",
-  "JZXN": "REVERSE SPLIT 9 DAYS AGO!!!!!!",
-  "TRNR": "REVERSE SPLIT 28 DAYS AGO!!!!!!",
-  "AIOT": "SYMBOL CHANGE 11 DAYS AGO!!! 38 PERCENT!!!",
-  "AIEV": "SYMBOL CHANGE 18 DAYS AGO!!! 38 PERCENT!!!",
-  "PHIO": "REVERSE SPLIT 7 DAYS AGO!!!!!!",
-  "DLAPQ": "SYMBOL CHANGE 11 DAYS AGO!!! 38 PERCENT!!!",
-  "GRI": "REVERSE SPLIT 24 DAYS AGO!!!!!!",
-  "STRR": "REVERSE SPLIT 25 DAYS AGO!!!!!!",
-  "TEN": "SYMBOL CHANGE 11 DAYS AGO!!! 38 PERCENT!!!",
-  "RELI": "REVERSE SPLIT 11 DAYS AGO!!!!!!",
-  "SLRX": "REVERSE SPLIT 25 DAYS AGO!!!!!!",
-  "PEGY": "REVERSE SPLIT 30 DAYS AGO!!!!!!",
-  "TOYO": "SYMBOL CHANGE 11 DAYS AGO!!! 38 PERCENT!!!",
-  "OMIC": "REVERSE SPLIT 16 DAYS AGO!!!!!!",
-  "QLI": "REVERSE SPLIT 21 DAYS AGO!!!!!!",
-  "CRKN": "REVERSE SPLIT 17 DAYS AGO!!!!!!",
-  "SPCE": "REVERSE SPLIT 25 DAYS AGO!!!!!!",
-  "CYN": "REVERSE SPLIT 7 DAYS AGO!!!!!!",
-  "VLD": "REVERSE SPLIT 29 DAYS AGO!!!!!!",
-  "ABVE": "SYMBOL CHANGE 11 DAYS AGO!!! 38 PERCENT!!!",
-  "MDRR": "REVERSE SPLIT 9 DAYS AGO!!!!!!",
-  "DMTKQ": "SYMBOL CHANGE 16 DAYS AGO!!! 38 PERCENT!!!",
-  "ALMS": "REVERSE SPLIT 22 DAYS AGO!!!!!!",
-  "KORE": "REVERSE SPLIT 11 DAYS AGO!!!!!!",
-  "ASST": "REVERSE SPLIT 10 DAYS AGO!!!!!!",
-  "DARE": "REVERSE SPLIT 11 DAYS AGO!!!!!!"
+  "RELI": "REVERSE SPLIT 14 DAYS AGO!!!!!!",
+  "GRI": "REVERSE SPLIT 27 DAYS AGO!!!!!!",
+  "ASST": "REVERSE SPLIT 13 DAYS AGO!!!!!!",
+  "NUTX": "REVERSE SPLIT 12 DAYS AGO!!!!!!",
+  "WKHS": "REVERSE SPLIT 28 DAYS AGO!!!!!!",
+  "VSME": "REVERSE SPLIT 27 DAYS AGO!!!!!!",
+  "KORE": "REVERSE SPLIT 14 DAYS AGO!!!!!!",
+  "STRR": "REVERSE SPLIT 28 DAYS AGO!!!!!!",
+  "STAF": "REVERSE SPLIT 19 DAYS AGO!!!!!!",
+  "ABVE": "SYMBOL CHANGE 14 DAYS AGO!!! 38 PERCENT!!!",
+  "YGMZ": "REVERSE SPLIT 14 DAYS AGO!!!!!!",
+  "CYN": "REVERSE SPLIT 10 DAYS AGO!!!!!!",
+  "HOOK": "REVERSE SPLIT 5 DAYS AGO!!!!!!",
+  "FSRNQ": "SYMBOL CHANGE 25 DAYS AGO!!! 38 PERCENT!!!",
+  "EFSH": "REVERSE SPLIT 7 DAYS AGO!!!!!!",
+  "YYAI": "REVERSE SPLIT 18 DAYS AGO!!!!!!",
+  "QLI": "REVERSE SPLIT 24 DAYS AGO!!!!!!",
+  "CJET": "REVERSE SPLIT 7 DAYS AGO!!!!!!",
+  "SLRX": "REVERSE SPLIT 28 DAYS AGO!!!!!!",
+  "NKLA": "REVERSE SPLIT 20 DAYS AGO!!!!!!",
+  "DMTKQ": "SYMBOL CHANGE 19 DAYS AGO!!! 38 PERCENT!!!",
+  "BJDX": "REVERSE SPLIT 25 DAYS AGO!!!!!!",
+  "TEN": "SYMBOL CHANGE 14 DAYS AGO!!! 38 PERCENT!!!",
+  "NUWE": "REVERSE SPLIT 17 DAYS AGO!!!!!!",
+  "IONM": "REVERSE SPLIT 6 DAYS AGO!!!!!!",
+  "AZTR": "REVERSE SPLIT 14 DAYS AGO!!!!!!",
+  "GRAL": "SYMBOL CHANGE 20 DAYS AGO!!! 38 PERCENT!!!",
+  "ASLN": "REVERSE SPLIT 12 DAYS AGO!!!!!!",
+  "TECX": "REVERSE SPLIT 24 DAYS AGO!!!!!!",
+  "FRES": "REVERSE SPLIT 5 DAYS AGO!!!!!!",
+  "CCIX": "SYMBOL CHANGE 24 DAYS AGO!!! 38 PERCENT!!!",
+  "PHIO": "REVERSE SPLIT 10 DAYS AGO!!!!!!",
+  "AIOT": "SYMBOL CHANGE 14 DAYS AGO!!! 38 PERCENT!!!",
+  "ATRA": "REVERSE SPLIT 25 DAYS AGO!!!!!!",
+  "DLAPQ": "SYMBOL CHANGE 14 DAYS AGO!!! 38 PERCENT!!!",
+  "CATX": "REVERSE SPLIT 28 DAYS AGO!!!!!!",
+  "TOYO": "SYMBOL CHANGE 14 DAYS AGO!!! 38 PERCENT!!!",
+  "CRKN": "REVERSE SPLIT 20 DAYS AGO!!!!!!",
+  "SPCE": "REVERSE SPLIT 28 DAYS AGO!!!!!!",
+  "WENA": "SYMBOL CHANGE 21 DAYS AGO!!! 38 PERCENT!!!",
+  "MDRR": "REVERSE SPLIT 12 DAYS AGO!!!!!!",
+  "JZXN": "REVERSE SPLIT 12 DAYS AGO!!!!!!",
+  "DARE": "REVERSE SPLIT 14 DAYS AGO!!!!!!",
+  "RIGL": "REVERSE SPLIT 18 DAYS AGO!!!!!!",
+  "OMIC": "REVERSE SPLIT 19 DAYS AGO!!!!!!",
+  "FORD": "REVERSE SPLIT 27 DAYS AGO!!!!!!",
+  "ALMS": "REVERSE SPLIT 25 DAYS AGO!!!!!!",
+  "AIEV": "SYMBOL CHANGE 21 DAYS AGO!!! 38 PERCENT!!!"
 };
 
 
@@ -1498,6 +1496,18 @@ for (var corporateSymbol in corporateActionsStocks)
     }); // End of click function 
 
    $("#halfAmountSpending").click(function(){
+/*
+      var amount = parseInt($("#amountSpending").val()); 
+      amount = amount/2; 
+      $("#amountSpending").val(amount);
+*/
+      $("#amountSpending").val("300"); 
+
+      calcAll();
+      CopyToClipboard();  
+    }); // End of click function 
+
+   $("#minimalAmountSpending").click(function(){
 /*
       var amount = parseInt($("#amountSpending").val()); 
       amount = amount/2; 

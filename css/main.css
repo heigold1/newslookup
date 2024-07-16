@@ -147,7 +147,7 @@ span#time_of_day_percentage{
 	background-color: pink;
 }
 
-#halfAmountSpending, #thirdAmountSpending{
+#halfAmountSpending, #thirdAmountSpending, #minimalAmountSpending{
 	width: 18px;
 	height: 18px;
 	border-style: solid; 

@@ -89,21 +89,24 @@
 										<tr>
 
 											<td rowspan="0"> 
-												Spend $<input tabindex = "5" id="amountSpending">
+												$<input tabindex = "5" id="amountSpending">
 											</td>
 											<td>
-												<button id="changeAmountSpending" type="button">...</button>
+												&nbsp; <button id="changeAmountSpending" type="button">...</button>
 											</td>
 										</tr>
 
 										<tr>
 											<td>
-												<button id="halfAmountSpending" type="button">...</button>
+												&nbsp; <button id="halfAmountSpending" type="button">...</button>
+											</td>
+											<td>
+												&nbsp; <button id="minimalAmountSpending" type="button">...</button>
 											</td>
 										</tr>
 										<tr>
 											<td>
-												<button id="thirdAmountSpending" type="button">...</button>
+												&nbsp; <button id="thirdAmountSpending" type="button">...</button>
 											</td>
 										</tr>
 									</tbody>
