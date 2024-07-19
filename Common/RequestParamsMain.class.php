@@ -28,7 +28,7 @@ class RequestParamsMain
 			return false;
 	}
 
-	public function buildQueryString($queryParamsObj)
+	public static function buildQueryString($queryParamsObj)
 	{
 		$url = '';
 		foreach($queryParamsObj as $k=>$v)
