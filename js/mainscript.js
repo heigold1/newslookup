@@ -476,10 +476,13 @@ $(function() {
         companyName = companyName.replace(/ LTD.*/, '');
         companyName = companyName.replace(/ NEW.*/, '');
         companyName = companyName.replace(/ SHS.*/, '');
-        companyName = companyName.replace(/ CO.*/, ''); 
+        companyName = companyName.replace(/ CORPORATION.*/, ' CORP'); 
 
         companyNameArray = companyName.split(" ");
         var arrayLength = companyNameArray.length;
+
+
+
 
         if (arrayLength == 1)
         {
@@ -496,6 +499,9 @@ $(function() {
                    returnCompanyName += "+";
                 }
             }
+
+
+
             return returnCompanyName; 
         }
     }
@@ -671,9 +677,11 @@ $(function() {
                           yahooCompanyName = jsonObject.company_name;
 
                           secCompanyName = jsonObject.company_name;
+
                           secCompanyName = createSECCompanyName(secCompanyName);
 
                           console.log("SEC company name is *" + secCompanyName + "*");
+
 
 /*                          openPage('./proxy_sec_xml.php?symbol=' + symbol + '&secCompanyName=' + secCompanyName);  */
 /*                          openPage('https://www.nasdaq.com/symbol/' + symbol + '/sec-filings');  */
@@ -1188,57 +1196,55 @@ $(function() {
 
 var corporateActionsStocks=
 {
-  "NYCB": "REVERSE SPLIT 6 DAYS AGO!!!!!!",
-  "NUTX": "REVERSE SPLIT 15 DAYS AGO!!!!!!",
-  "VSME": "REVERSE SPLIT 30 DAYS AGO!!!!!!",
-  "HOOK": "REVERSE SPLIT 8 DAYS AGO!!!!!!",
-  "IONM": "REVERSE SPLIT 9 DAYS AGO!!!!!!",
-  "TEN": "SYMBOL CHANGE 17 DAYS AGO!!! 38 PERCENT!!!",
-  "YYAI": "REVERSE SPLIT 21 DAYS AGO!!!!!!",
-  "NKLA": "REVERSE SPLIT 23 DAYS AGO!!!!!!",
-  "WENA": "SYMBOL CHANGE 24 DAYS AGO!!! 38 PERCENT!!!",
-  "TOYO": "SYMBOL CHANGE 17 DAYS AGO!!! 38 PERCENT!!!",
-  "JZXN": "REVERSE SPLIT 15 DAYS AGO!!!!!!",
-  "NUWE": "REVERSE SPLIT 20 DAYS AGO!!!!!!",
-  "CMBT": "SYMBOL CHANGE 3 DAYS AGO!!! 38 PERCENT!!!",
-  "CLNN": "REVERSE SPLIT 7 DAYS AGO!!!!!!",
-  "ALTS": "SYMBOL CHANGE 3 DAYS AGO!!! 38 PERCENT!!!",
-  "PHIO": "REVERSE SPLIT 13 DAYS AGO!!!!!!",
-  "CCIX": "SYMBOL CHANGE 27 DAYS AGO!!! 38 PERCENT!!!",
-  "DMTKQ": "SYMBOL CHANGE 22 DAYS AGO!!! 38 PERCENT!!!",
-  "TECX": "REVERSE SPLIT 27 DAYS AGO!!!!!!",
-  "YGMZ": "REVERSE SPLIT 17 DAYS AGO!!!!!!",
-  "EFSH": "REVERSE SPLIT 10 DAYS AGO!!!!!!",
-  "IMCC": "REVERSE SPLIT 6 DAYS AGO!!!!!!",
-  "CRKN": "REVERSE SPLIT 23 DAYS AGO!!!!!!",
-  "SHPSQ": "SYMBOL CHANGE 2 DAYS AGO!!! 38 PERCENT!!!",
-  "OMIC": "REVERSE SPLIT 22 DAYS AGO!!!!!!",
-  "SHPWQ": "SYMBOL CHANGE 2 DAYS AGO!!! 38 PERCENT!!!",
-  "DARE": "REVERSE SPLIT 17 DAYS AGO!!!!!!",
-  "KORE": "REVERSE SPLIT 17 DAYS AGO!!!!!!",
-  "CYN": "REVERSE SPLIT 13 DAYS AGO!!!!!!",
-  "GRAL": "SYMBOL CHANGE 23 DAYS AGO!!! 38 PERCENT!!!",
-  "DLAPQ": "SYMBOL CHANGE 17 DAYS AGO!!! 38 PERCENT!!!",
-  "CJET": "REVERSE SPLIT 10 DAYS AGO!!!!!!",
-  "BJDX": "REVERSE SPLIT 28 DAYS AGO!!!!!!",
-  "ASST": "REVERSE SPLIT 16 DAYS AGO!!!!!!",
-  "AMWL": "REVERSE SPLIT 7 DAYS AGO!!!!!!",
-  "AIEV": "SYMBOL CHANGE 24 DAYS AGO!!! 38 PERCENT!!!",
-  "ATRA": "REVERSE SPLIT 28 DAYS AGO!!!!!!",
-  "STAF": "REVERSE SPLIT 22 DAYS AGO!!!!!!",
-  "AZTR": "REVERSE SPLIT 17 DAYS AGO!!!!!!",
-  "ABVE": "SYMBOL CHANGE 17 DAYS AGO!!! 38 PERCENT!!!",
-  "QLI": "REVERSE SPLIT 27 DAYS AGO!!!!!!",
-  "MDRR": "REVERSE SPLIT 15 DAYS AGO!!!!!!",
-  "ALMS": "REVERSE SPLIT 28 DAYS AGO!!!!!!",
-  "ASLN": "REVERSE SPLIT 15 DAYS AGO!!!!!!",
-  "AIOT": "SYMBOL CHANGE 17 DAYS AGO!!! 38 PERCENT!!!",
-  "FSRNQ": "SYMBOL CHANGE 28 DAYS AGO!!! 38 PERCENT!!!",
-  "FRES": "REVERSE SPLIT 8 DAYS AGO!!!!!!",
-  "RELI": "REVERSE SPLIT 17 DAYS AGO!!!!!!",
-  "RIGL": "REVERSE SPLIT 21 DAYS AGO!!!!!!"
+  "SHPWQ": "SYMBOL CHANGE 3 DAYS AGO!!! 38 PERCENT!!!",
+  "SHPSQ": "SYMBOL CHANGE 3 DAYS AGO!!! 38 PERCENT!!!",
+  "CMBT": "SYMBOL CHANGE 4 DAYS AGO!!! 38 PERCENT!!!",
+  "ALTS": "SYMBOL CHANGE 4 DAYS AGO!!! 38 PERCENT!!!",
+  "NYCB": "REVERSE SPLIT 7 DAYS AGO!!!!!!",
+  "IMCC": "REVERSE SPLIT 7 DAYS AGO!!!!!!",
+  "CLNN": "REVERSE SPLIT 8 DAYS AGO!!!!!!",
+  "AMWL": "REVERSE SPLIT 8 DAYS AGO!!!!!!",
+  "HOOK": "REVERSE SPLIT 9 DAYS AGO!!!!!!",
+  "FRES": "REVERSE SPLIT 9 DAYS AGO!!!!!!",
+  "IONM": "REVERSE SPLIT 10 DAYS AGO!!!!!!",
+  "EFSH": "REVERSE SPLIT 11 DAYS AGO!!!!!!",
+  "CJET": "REVERSE SPLIT 11 DAYS AGO!!!!!!",
+  "PHIO": "REVERSE SPLIT 14 DAYS AGO!!!!!!",
+  "CYN": "REVERSE SPLIT 14 DAYS AGO!!!!!!",
+  "NUTX": "REVERSE SPLIT 16 DAYS AGO!!!!!!",
+  "MDRR": "REVERSE SPLIT 16 DAYS AGO!!!!!!",
+  "JZXN": "REVERSE SPLIT 16 DAYS AGO!!!!!!",
+  "ASLN": "REVERSE SPLIT 16 DAYS AGO!!!!!!",
+  "ASST": "REVERSE SPLIT 17 DAYS AGO!!!!!!",
+  "YGMZ": "REVERSE SPLIT 18 DAYS AGO!!!!!!",
+  "TOYO": "SYMBOL CHANGE 18 DAYS AGO!!! 38 PERCENT!!!",
+  "TEN": "SYMBOL CHANGE 18 DAYS AGO!!! 38 PERCENT!!!",
+  "RELI": "REVERSE SPLIT 18 DAYS AGO!!!!!!",
+  "KORE": "REVERSE SPLIT 18 DAYS AGO!!!!!!",
+  "DLAPQ": "SYMBOL CHANGE 18 DAYS AGO!!! 38 PERCENT!!!",
+  "DARE": "REVERSE SPLIT 18 DAYS AGO!!!!!!",
+  "AZTR": "REVERSE SPLIT 18 DAYS AGO!!!!!!",
+  "AIOT": "SYMBOL CHANGE 18 DAYS AGO!!! 38 PERCENT!!!",
+  "ABVE": "SYMBOL CHANGE 18 DAYS AGO!!! 38 PERCENT!!!",
+  "NUWE": "REVERSE SPLIT 21 DAYS AGO!!!!!!",
+  "YYAI": "REVERSE SPLIT 22 DAYS AGO!!!!!!",
+  "RIGL": "REVERSE SPLIT 22 DAYS AGO!!!!!!",
+  "STAF": "REVERSE SPLIT 23 DAYS AGO!!!!!!",
+  "OMIC": "REVERSE SPLIT 23 DAYS AGO!!!!!!",
+  "DMTKQ": "SYMBOL CHANGE 23 DAYS AGO!!! 38 PERCENT!!!",
+  "NKLA": "REVERSE SPLIT 24 DAYS AGO!!!!!!",
+  "GRAL": "SYMBOL CHANGE 24 DAYS AGO!!! 38 PERCENT!!!",
+  "CRKN": "REVERSE SPLIT 24 DAYS AGO!!!!!!",
+  "WENA": "SYMBOL CHANGE 25 DAYS AGO!!! 38 PERCENT!!!",
+  "AIEV": "SYMBOL CHANGE 25 DAYS AGO!!! 38 PERCENT!!!",
+  "TECX": "REVERSE SPLIT 28 DAYS AGO!!!!!!",
+  "QLI": "REVERSE SPLIT 28 DAYS AGO!!!!!!",
+  "CCIX": "SYMBOL CHANGE 28 DAYS AGO!!! 38 PERCENT!!!",
+  "FSRNQ": "SYMBOL CHANGE 29 DAYS AGO!!! 38 PERCENT!!!",
+  "BJDX": "REVERSE SPLIT 29 DAYS AGO!!!!!!",
+  "ATRA": "REVERSE SPLIT 29 DAYS AGO!!!!!!",
+  "ALMS": "REVERSE SPLIT 29 DAYS AGO!!!!!!"
 };
-
 
 
 for (var corporateSymbol in corporateActionsStocks)
