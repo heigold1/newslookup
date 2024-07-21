@@ -253,9 +253,11 @@ def get_cik_from_ticker(symbol):
     
     response = requests.get(url)
     data = response.json()
+
     
+
     if data and 'cik' in data[0]:
-        if data[0]['cik'] == "null":
+        if data[0]['cik'] is None:
             return "NOT FOUND" 
         else:
             return data[0]['cik']
@@ -294,7 +296,7 @@ def parse_finance_page(symbol, company_name, yesterday_days):
             
                 result = {
                     'found': False, 
-                    'message': '<a style="font-size: 35px" target="_blank" href="https://www.nasdaq.com/symbol/' + symbol + '/sec-filings">Nasdaq</a><br><a style="font-size: 35px" target="_blank" href=https://www.etrade.wallst.com/v1/stocks/snapshot/snapshot.asp?ChallengeUrl=https://idp.etrade.com/idp/SSO.saml2&reinitiate-handshake=0&prospectnavyear=2011&AuthnContext=prospect&env=PRD&symbol=' + symbol + '&rsO=new&country=US>E*TRADE</a><br><div style="background-color: red"><span style="font-size: 55px">SEC WEBSITE IS DOWN</span></div></body></html>'
+                    'message': '<a style="font-size: 35px" target="_blank" href="https://www.nasdaq.com/symbol/' + symbol + '/sec-filings">Nasdaq</a><br><a style="font-size: 35px" target="_blank" href="https://www.etrade.wallst.com/v1/stocks/snapshot/snapshot.asp?ChallengeUrl=https://idp.etrade.com/idp/SSO.saml2&reinitiate-handshake=0&prospectnavyear=2011&AuthnContext=prospect&env=PRD&symbol=' + symbol + '&rsO=new&country=US">E*TRADE</a><br><div style="background-color: red"><span style="font-size: 55px">SEC WEBSITE IS DOWN</span></div></body></html>'
                 }
                 print(json.dumps(result))
                 sys.exit() 
@@ -316,7 +318,7 @@ def parse_finance_page(symbol, company_name, yesterday_days):
 
                 result = {
                     'found': False, 
-                    'message': '<a style="font-size: 35px" target="_blank" href="https://www.nasdaq.com/symbol/' + symbol + '/sec-filings">Nasdaq</a><br><a style="font-size: 35px" target="_blank" href=https://www.etrade.wallst.com/v1/stocks/snapshot/snapshot.asp?ChallengeUrl=https://idp.etrade.com/idp/SSO.saml2&reinitiate-handshake=0&prospectnavyear=2011&AuthnContext=prospect&env=PRD&symbol=' + symbol + '&rsO=new&country=US>E*TRADE</a><br><div style="background-color: red"><span style="font-size: 55px">SEC WEBSITE IS DOWN</span></div></body></html>' 
+                    'message': '<a style="font-size: 35px" target="_blank" href="https://www.nasdaq.com/symbol/' + symbol + '/sec-filings">Nasdaq</a><br><a style="font-size: 35px" target="_blank" href="https://www.etrade.wallst.com/v1/stocks/snapshot/snapshot.asp?ChallengeUrl=https://idp.etrade.com/idp/SSO.saml2&reinitiate-handshake=0&prospectnavyear=2011&AuthnContext=prospect&env=PRD&symbol=' + symbol + '&rsO=new&country=US">E*TRADE</a><br><div style="background-color: red"><span style="font-size: 55px">SEC WEBSITE IS DOWN</span></div></body></html>' 
                     }
                 print(json.dumps(result))
                 sys.exit() 
@@ -342,7 +344,7 @@ def parse_finance_page(symbol, company_name, yesterday_days):
 
                     result = {
                         'found' : False, 
-                        'message' : '<a style="font-size: 35px" target="_blank" href="https://www.nasdaq.com/symbol/' + symbol + '/sec-filings">Nasdaq</a><br><a style="font-size: 35px" target="_blank" href=https://www.etrade.wallst.com/v1/stocks/snapshot/snapshot.asp?ChallengeUrl=https://idp.etrade.com/idp/SSO.saml2&reinitiate-handshake=0&prospectnavyear=2011&AuthnContext=prospect&env=PRD&symbol=' + symbol + '&rsO=new&country=US>E*TRADE</a><br><br><a target="_blank" href="http://seekingalpha.com/symbol/' + symbol + '/sec-filings"><div style="background-color: red"><span style="font-size: 45px">NO MATCHING COMPANIES - CHECK SEEKING ALPHA</span></div></a>'
+                        'message' : '<a target="_blank" href="http://seekingalpha.com/symbol/' + symbol + '/sec-filings"><div style="background-color: red"><span style="font-size: 45px">NO MATCHING COMPANIES - CHECK SEEKING ALPHA</span></div></a>'
                         }
                     print(json.dumps(result))
                     sys.exit() 
@@ -361,7 +363,7 @@ def parse_finance_page(symbol, company_name, yesterday_days):
 
                     result = {
                         'found' : False, 
-                        'message' : '<table style="border: 1px solid black"><tr><td><a target="_blank" href="http://seekingalpha.com/symbol/' + symbol + '/sec-filings"><div style="background-color: red"><span style="font-size: 40px">AMBIGUOUS SEC COMPANY NAMES - CHECK SEEKING ALPHA</span></div></a></td></tr><tr><td><a style="font-size: 35px" target="_blank" href="https://seekingalpha.com/symbol/' + symbol + '/sec-filings?filter=all">Seeking Alpha SEC</a><br><tr><td><a style="font-size: 35px" target="_blank" href="https://www.nasdaq.com/symbol/' + symbol + '/sec-filings">Nasdaq</a><br><a style="font-size: 35px" target="_blank" href=https://www.etrade.wallst.com/v1/stocks/snapshot/snapshot.asp?ChallengeUrl=https://idp.etrade.com/idp/SSO.saml2&reinitiate-handshake=0&prospectnavyear=2011&AuthnContext=prospect&env=PRD&symbol=' + symbol + '&rsO=new&country=US>E*TRADE</a></td></table>' 
+                        'message' : '<table style="border: 1px solid black"><tr><td><a target="_blank" href="http://seekingalpha.com/symbol/' + symbol + '/sec-filings"><div style="background-color: red"><span style="font-size: 40px">AMBIGUOUS SEC COMPANY NAMES - CHECK SEEKING ALPHA</span></div></a></td></tr><tr><td><a style="font-size: 35px" target="_blank" href="https://seekingalpha.com/symbol/' + symbol + '/sec-filings?filter=all">Seeking Alpha SEC</a><br><tr><td><a style="font-size: 35px" target="_blank" href="https://www.nasdaq.com/symbol/' + symbol + '/sec-filings">Nasdaq</a><br><a style="font-size: 35px" target="_blank" href="https://www.etrade.wallst.com/v1/stocks/snapshot/snapshot.asp?ChallengeUrl=https://idp.etrade.com/idp/SSO.saml2&reinitiate-handshake=0&prospectnavyear=2011&AuthnContext=prospect&env=PRD&symbol=' + symbol + '&rsO=new&country=US">E*TRADE</a></td></table>' 
                         }
                     print(json.dumps(result))
                     sys.exit() 

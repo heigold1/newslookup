@@ -182,7 +182,7 @@ def get_cik_from_ticker(symbol):
     data = response.json()
     
     if data and 'cik' in data[0]:
-        if data[0]['cik'] == "null":
+        if data[0]['cik'] is None:
             return "NOT FOUND" 
         else:
             return data[0]['cik']
