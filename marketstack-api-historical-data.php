@@ -147,7 +147,7 @@ if (isset($fullJSON->data[2]->close))
 }
 else
 {
-  $returnArray['day_1'] = "N/A";
+  $returnArray['day_2'] = "N/A";
 }
 
 if (isset($fullJSON->data[3]->close))
@@ -171,7 +171,7 @@ if (isset($fullJSON->data[3]->close))
 }
 else
 {
-  $returnArray['day_1'] = "N/A";
+  $returnArray['day_3'] = "N/A";
 }
 
 if (isset($fullJSON->data[4]->close))
@@ -195,7 +195,7 @@ if (isset($fullJSON->data[4]->close))
 }
 else
 {
-  $returnArray['day_1'] = "N/A";
+  $returnArray['day_4'] = "N/A";
 }
 
 if (isset($fullJSON->data[5]->close))
@@ -219,7 +219,7 @@ if (isset($fullJSON->data[5]->close))
 }
 else
 {
-  $returnArray['day_1'] = "N/A";
+  $returnArray['day_5'] = "N/A";
 }
 
 $returnArray['five_day_average_volume'] = $fiveDayVolume/5.0; 
