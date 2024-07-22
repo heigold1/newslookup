@@ -166,7 +166,7 @@ def parse_xml(xml_data, yesterday_days):
         sec_table_rows.append(f"<tr style='border: 1px solid black !important; height: 20px;'><td style='border: 1px solid black !important'>{filing_type}</td><td style='border: 1px solid black !important'><a target='_blank' href='{href}'>{title}, {item_description}</a></td><td style='border: 1px solid black !important'>{datestamp}</td><td style='border: 1px solid black !important; font-size: 18px;'>{time}</td></tr>")
         sec_table_row_count += 1
 
-    return_sec_html = "<table style='border: 1px solid black !important'>"
+    return_sec_html = "<table style='border: 1px solid black !important; background-color: #ADD8E6'>"
     sec_message = f" rowcount is {sec_table_row_count} "
     if sec_table_row_count == 0:
         sec_message = f"<a target='_blank' href='https://seekingalpha.com/symbol/{symbol}/sec-filings'><span style='font-size: 50px; background-color: red'> - SEC ROWCOUNT IS 0 - CHECK STREET INSIDER</span></a>"
@@ -180,19 +180,6 @@ def parse_xml(xml_data, yesterday_days):
         'message' : return_sec_html 
         }
     print(json.dumps(result)) 
-
-
-
-#    return return_sec_html
-
-
-
-
-
-
-
-
-
 
 
 def get_xml_page_from_rss_link(rss_link): 
@@ -216,15 +203,6 @@ def get_xml_page_from_rss_link(rss_link):
         response.raise_for_status()  # Raise an error for bad status codes
 
         return response.text 
-         
-
-#        finalXMLString = response.content.decode('utf-8')
-
-#        result = {
-#            'found' : True, 
-#            'message' : response.text 
-#                }
-#        print(json.dumps(result)) 
 
     except requests.exceptions.RequestException as e:
         result = {
@@ -293,11 +271,11 @@ def parse_finance_page(symbol, company_name, yesterday_days):
 
             target_cik = get_cik_from_ticker(symbol) 
             if target_cik == "NOT FOUND":
-            
+
                 result = {
-                    'found': False, 
-                    'message': '<a style="font-size: 35px" target="_blank" href="https://www.nasdaq.com/symbol/' + symbol + '/sec-filings">Nasdaq</a><br><a style="font-size: 35px" target="_blank" href="https://www.etrade.wallst.com/v1/stocks/snapshot/snapshot.asp?ChallengeUrl=https://idp.etrade.com/idp/SSO.saml2&reinitiate-handshake=0&prospectnavyear=2011&AuthnContext=prospect&env=PRD&symbol=' + symbol + '&rsO=new&country=US">E*TRADE</a><br><div style="background-color: red"><span style="font-size: 55px">SEC WEBSITE IS DOWN</span></div></body></html>'
-                }
+                    'found' : False, 
+                    'message' : '<a target="_blank" href="http://seekingalpha.com/symbol/' + symbol + '/sec-filings"><div style="background-color: red"><span style="font-size: 45px">SEC WEBSITE IS DOWN - CHECK SEEKING ALPHA</span></div></a>'
+                    }
                 print(json.dumps(result))
                 sys.exit() 
 
@@ -317,8 +295,8 @@ def parse_finance_page(symbol, company_name, yesterday_days):
             if target_cik == "NOT FOUND":
 
                 result = {
-                    'found': False, 
-                    'message': '<a style="font-size: 35px" target="_blank" href="https://www.nasdaq.com/symbol/' + symbol + '/sec-filings">Nasdaq</a><br><a style="font-size: 35px" target="_blank" href="https://www.etrade.wallst.com/v1/stocks/snapshot/snapshot.asp?ChallengeUrl=https://idp.etrade.com/idp/SSO.saml2&reinitiate-handshake=0&prospectnavyear=2011&AuthnContext=prospect&env=PRD&symbol=' + symbol + '&rsO=new&country=US">E*TRADE</a><br><div style="background-color: red"><span style="font-size: 55px">SEC WEBSITE IS DOWN</span></div></body></html>' 
+                    'found' : False, 
+                    'message' : '<a target="_blank" href="http://seekingalpha.com/symbol/' + symbol + '/sec-filings"><div style="background-color: red"><span style="font-size: 45px">PAGE UNAVAILABLE - CHECK SEEKING ALPHA</span></div></a>'
                     }
                 print(json.dumps(result))
                 sys.exit() 
@@ -363,8 +341,9 @@ def parse_finance_page(symbol, company_name, yesterday_days):
 
                     result = {
                         'found' : False, 
-                        'message' : '<table style="border: 1px solid black"><tr><td><a target="_blank" href="http://seekingalpha.com/symbol/' + symbol + '/sec-filings"><div style="background-color: red"><span style="font-size: 40px">AMBIGUOUS SEC COMPANY NAMES - CHECK SEEKING ALPHA</span></div></a></td></tr><tr><td><a style="font-size: 35px" target="_blank" href="https://seekingalpha.com/symbol/' + symbol + '/sec-filings?filter=all">Seeking Alpha SEC</a><br><tr><td><a style="font-size: 35px" target="_blank" href="https://www.nasdaq.com/symbol/' + symbol + '/sec-filings">Nasdaq</a><br><a style="font-size: 35px" target="_blank" href="https://www.etrade.wallst.com/v1/stocks/snapshot/snapshot.asp?ChallengeUrl=https://idp.etrade.com/idp/SSO.saml2&reinitiate-handshake=0&prospectnavyear=2011&AuthnContext=prospect&env=PRD&symbol=' + symbol + '&rsO=new&country=US">E*TRADE</a></td></table>' 
+                        'message' : '<a target="_blank" href="http://seekingalpha.com/symbol/' + symbol + '/sec-filings"><div style="background-color: red"><span style="font-size: 45px">AMBIGUOUS NAMES - CHECK SEEKING ALPHA</span></div></a>'
                         }
+
                     print(json.dumps(result))
                     sys.exit() 
 
