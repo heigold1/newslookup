@@ -302,6 +302,14 @@ function addYahooSectorIndustry($symbol, $sector, $industry, $country, $companyN
 
     } 
 
+    $symbol = $mysqli->real_escape_string($symbol);
+    $sector = $mysqli->real_escape_string($sector);
+    $industry = $mysqli->real_escape_string($industry);
+    $country = $mysqli->real_escape_string($country);
+    $date = $mysqli->real_escape_string($date);
+
+    $sqlStatement = "REPLACE INTO sector (symbol, sector, industry, country, date) VALUES ('" . $symbol . "', '" . $sector . "', '" . $industry . "', '" . $country . "','" . $date . "')"; 
+
     $mysqli->query("REPLACE INTO sector (symbol, sector, industry, country, date) VALUES ('" . $symbol . "', '" . $sector . "', '" . $industry . "', '" . $country . "','" . $date . "')");
 
 }
@@ -890,6 +898,7 @@ die();
       $yahooFinanceSector = ""; 
       $yahooFinanceIndustry = ""; 
       $website = ""; 
+      $cik = ""; 
 
       $apiUrl = 'https://financialmodelingprep.com/api/v3/profile/' . $symbol . '?apikey=EdahmOwRgQ6xcbs6j37SESSCrCIhcoa9';
 
@@ -903,6 +912,7 @@ die();
         $yahooFinanceSector = "NOT LISTED"; 
         $yahooFinanceIndustry = "NOT LISTED"; 
         $website = "NOT LISTED"; 
+        $cik = "NOT_FOUND"; 
       }
       else
       {
@@ -913,6 +923,8 @@ die();
           $yahooFinanceSector = "NOT LISTED"; 
           $yahooFinanceIndustry = "NOT LISTED"; 
           $website = "NOT LISTED"; 
+          $cik = "NOT_FOUND"; 
+
         }
         else 
         {
@@ -922,6 +934,7 @@ die();
           $website = $yahooFinanceObject[0]['website'];
           $city = $yahooFinanceObject[0]['city']; 
           $state = $yahooFinanceObject[0]['state']; 
+          $cik = $yahooFinanceObject[0]['cik']; 
 
           if (trim($city) == "")
           {
@@ -945,6 +958,11 @@ die();
       if ($country == null)
       {
         $country = "NOT LISTED, CHECK"; 
+      }
+
+      if ($cik == null)
+      {
+        $cik = "NOT_FOUND"; 
       }
 
       $companyWebsite = '<a target="_blank" style="font-size: 15px;" onclick="return openPage(this.href)" href="' . $website . '" class="tab-link"><b>Website</b></a>&nbsp;&nbsp;';
@@ -1530,6 +1548,7 @@ die();
       $returnArray['halt_symbol_list'] = $tradeHaltsArray['halt_symbol_list']; 
       $returnArray['currently_halted'] = $tradeHaltsArray['currently_halted']; 
       $returnArray['final_return'] = $finalReturn;
+      $returnArray['cik'] = $cik; 
 
       echo json_encode($returnArray); 
 

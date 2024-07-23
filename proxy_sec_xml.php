@@ -7,6 +7,7 @@ $symbol=$_GET['symbol'];
 $secCompanyName = $_GET['secCompanyName'];
 $secCompanyName = preg_replace('/ /', '+', $secCompanyName);
 $secCompanyName = preg_replace("/<.*?>/", "", $secCompanyName);
+$cikNumber = $_GET['cikNumber']; 
 $checkSec = $_GET['checkSec']; 
 
 $yesterdayDays = 3;
@@ -752,10 +753,10 @@ function getStreetInsider($symbol, $yesterdayDays)
 } // end of getStreetInsider 
 
 
-function getSecFilings($symbol, $yesterdayDays, $secCompanyName)
+function getSecFilings($symbol, $yesterdayDays, $cikNumber, $secCompanyName)
 {
 
-     $command = escapeshellcmd('python3 ./pythonscrape/scrape-sec-gov-full.py ' . $symbol . " " . $secCompanyName . " " . $yesterdayDays);
+     $command = escapeshellcmd('python3 ./pythonscrape/scrape-sec-gov-full.py ' . $symbol . " " . $yesterdayDays . " " . $cikNumber . " " . $secCompanyName);
 
 //      $command = escapeshellcmd('python3 ./pythonscrape/scrape-sec-gov.py ' . $cik);
 
@@ -813,7 +814,7 @@ function getSecFilings($symbol, $yesterdayDays, $secCompanyName)
 
       if (intval($checkSec) == 1) 
       {
-        $returnHtml .= getSecFilings($symbol, $yesterdayDays, $secCompanyName); 
+        $returnHtml .= getSecFilings($symbol, $yesterdayDays, $cikNumber, $secCompanyName); 
       }
       else
       {
