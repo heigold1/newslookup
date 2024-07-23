@@ -320,13 +320,13 @@ def parse_finance_page(symbol, original_symbol, yesterday_days, cik_number, comp
             parse_xml(xml_page, yesterday_days) 
             sys.exit() 
 
+
         tree = html.fromstring(html_page_first_try)
         rss_links = tree.xpath('//a[contains(text(), "RSS Feed")]/@href')
         rss_link = "https://www.sec.gov" + rss_links[0] 
         xml_page = get_xml_page_from_rss_link(rss_link) 
         parse_xml(xml_page, yesterday_days) 
         sys.exit() 
-
 
 
 

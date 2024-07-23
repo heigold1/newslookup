@@ -1291,7 +1291,7 @@ die();
         }
         else 
         {
-            $seekingAlphaNews .= "<span style='font-size: 45px;'>NO ITEMS FOUND</span>"; 
+            $seekingAlphaNews .= "<br><br><span style='font-size: 45px;'>NO ITEMS FOUND</span>"; 
         }
 
       $seekingAlphaNews .=  "</ul>";

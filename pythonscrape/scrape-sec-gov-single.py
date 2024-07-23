@@ -179,7 +179,7 @@ def parse_finance_page(symbol, cik_number, company_name):
                 print(json.dumps(result))
                 sys.exit() 
 
-            rss_link = "https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=" + target_cik + "&type=&dateb=&owner=include&start=0&count=40&output=atom"
+            rss_link = "https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=" + cik_number + "&type=&dateb=&owner=include&start=0&count=40&output=atom"
             print("Status code !=200, rss_link is " + rss_link) 
             xml_page = get_xml_page_from_rss_link(rss_link) 
             parse_xml(xml_page) 
@@ -198,7 +198,7 @@ def parse_finance_page(symbol, cik_number, company_name):
                 print(json.dumps(result))
                 sys.exit() 
            
-            rss_link = "https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=" + target_cik + "&type=&dateb=&owner=include&start=0&count=40&output=atom"
+            rss_link = "https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=" + cik_number + "&type=&dateb=&owner=include&start=0&count=40&output=atom"
             xml_page = get_xml_page_from_rss_link(rss_link) 
             parse_xml(xml_page)
             sys.exit() 
@@ -221,7 +221,7 @@ def parse_finance_page(symbol, cik_number, company_name):
                     print(json.dumps(result))
                     sys.exit() 
 
-                rss_link = "https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=" + target_cik + "&type=&dateb=&owner=include&start=0&count=40&output=atom"
+                rss_link = "https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=" + cik_number + "&type=&dateb=&owner=include&start=0&count=40&output=atom"
                 xml_page = get_xml_page_from_rss_link(rss_link) 
                 parse_xml(xml_page) 
                 sys.exit()
@@ -237,7 +237,7 @@ def parse_finance_page(symbol, cik_number, company_name):
                     print(json.dumps(result))
                     sys.exit() 
 
-                rss_link = "https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=" + target_cik + "&type=&dateb=&owner=include&start=0&count=40&output=atom"
+                rss_link = "https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=" + cik_number + "&type=&dateb=&owner=include&start=0&count=40&output=atom"
                 xml_page = get_xml_page_from_rss_link(rss_link) 
                 parse_xml(xml_page)
                 sys.exit()
