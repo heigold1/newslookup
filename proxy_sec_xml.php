@@ -757,9 +757,6 @@ function getStreetInsider($symbol, $yesterdayDays)
 function getSecFilings($symbol, $originalSymbol, $yesterdayDays, $cikNumber, $secCompanyName)
 {
 
-echo "python command is " . 'python3 ./pythonscrape/scrape-sec-gov-full.py ' . $symbol . " " . $originalSymbol . " " . $yesterdayDays . " " . $cikNumber . " " . $secCompanyName;
-die(); 
-
      $command = escapeshellcmd('python3 ./pythonscrape/scrape-sec-gov-full.py ' . $symbol . " " . $originalSymbol . " " . $yesterdayDays . " " . $cikNumber . " " . $secCompanyName);
 
 //      $command = escapeshellcmd('python3 ./pythonscrape/scrape-sec-gov.py ' . $cik);
