@@ -14,6 +14,7 @@ error_reporting(1);
 
 // header('Content-type: text/html');
 $symbol=$_GET['symbol'];
+$originalSymbol = $_GET['originalSymbol']; 
 $host_name=$_GET['host_name'];
 $which_website=$_GET['which_website'];
 $stockOrFund=$_GET['stockOrFund']; 
@@ -900,7 +901,7 @@ die();
       $website = ""; 
       $cik = ""; 
 
-      $apiUrl = 'https://financialmodelingprep.com/api/v3/profile/' . $symbol . '?apikey=EdahmOwRgQ6xcbs6j37SESSCrCIhcoa9';
+      $apiUrl = 'https://financialmodelingprep.com/api/v3/profile/' . $originalSymbol . '?apikey=EdahmOwRgQ6xcbs6j37SESSCrCIhcoa9';
 
       $yahooFinanceJson = file_get_contents($apiUrl); 
 
@@ -1042,7 +1043,15 @@ die();
       $currentVolume = (int) $_GET['total_volume'];
       $volumeRatio = 0; 
 
-      $volumeRatio = $currentVolume/$yesterdayVolume; 
+      if ($yesterdayVolume == 0)
+      {
+        $volumeRation = "DIV0";
+      }
+      else 
+      {
+        $volumeRatio = $currentVolume/$yesterdayVolume;         
+      }
+
       $volumeRatio = number_format((float)$volumeRatio, 2, '.', '');
       $yesterdayVolume = number_format($yesterdayVolume);
       $currentVolume = number_format($currentVolume);
@@ -1207,73 +1216,83 @@ die();
 
       /*** Seeking Alpha RSS Parse ***/ 
 
-      $rssSeekingAlpha = simplexml_load_file("https://seekingalpha.com/api/sa/combined/" . $symbol . ".xml");
+
+      $rssSeekingAlpha = simplexml_load_file("https://seekingalpha.com/api/sa/combined/" . $originalSymbol . ".xml");
 
       $seekingAlphaNews = "<ul class='newsSide'>";
       $seekingAlphaNews .= "<li style='font-size: 20px !important; background-color: #00ff00;'>Seeking Alpha News</li>";
 
       $classActionAdded = false;
       $j = 0;
-      foreach ($rssSeekingAlpha->channel->item as $feedItem) {
-        $j++;
 
-        // Convert time from GMT to  AM/PM New York
-        // 18000 is 5 hours X 60 seconds/minute X 60 minutes/hour
-        $publicationDateStrToTime = strtotime($feedItem->pubDate) - 18000;
 
-        $convertedDate = new DateTime(); 
-        $convertedDate->setTimestamp($publicationDateStrToTime);
+         if (isset($rssSeekingAlpha->channel->item) && count($rssSeekingAlpha->channel->item) > 0) {
 
-        $publicationDate = $feedItem->pubDate;
-        $publicationDate = preg_replace("/[0-9][0-9]\:[0-9][0-9]\:[0-9][0-9] \-[0-9][0-9][0-9][0-9]/", "", $publicationDate); 
-        $publicationTime = $convertedDate->format("g:i A");
+          foreach ($rssSeekingAlpha->channel->item as $feedItem) {
+            $j++;
 
-        $newsTitle = $feedItem->title; 
+            // Convert time from GMT to  AM/PM New York
+            // 18000 is 5 hours X 60 seconds/minute X 60 minutes/hour
+            $publicationDateStrToTime = strtotime($feedItem->pubDate) - 18000;
 
-        if (preg_match('/class.action/i', $newsTitle))
-        {
-            if ($classActionAdded == true)
+            $convertedDate = new DateTime(); 
+            $convertedDate->setTimestamp($publicationDateStrToTime);
+
+            $publicationDate = $feedItem->pubDate;
+            $publicationDate = preg_replace("/[0-9][0-9]\:[0-9][0-9]\:[0-9][0-9] \-[0-9][0-9][0-9][0-9]/", "", $publicationDate); 
+            $publicationTime = $convertedDate->format("g:i A");
+
+            $newsTitle = $feedItem->title; 
+
+            if (preg_match('/class.action/i', $newsTitle))
             {
-              continue;              
-            }
-            else
-            {
-              $classActionAdded = true;
-            }
-        }
-
-        $seekingAlphaNews .= "<li "; 
-
-        // red/green highlighting for yesterday/today
-        for ($i = $yesterdayDays; $i >= 1; $i--)
-        {
-            if (preg_match('/(' .  get_yahoo_trade_date($i) . ')/', $publicationDate))
-            {
-                $publicationTime = preg_replace('/PM/', '<span style="background-color: red; font-size: 18px;">PM</span>', $publicationTime); 
-                if ($i == $yesterdayDays) 
+                if ($classActionAdded == true)
                 {
-                    $publicationTime = preg_replace('/AM/', '<span style="background-color: #00ff00; ; font-size: 18px;">AM</span>', $publicationTime); 
-              
+                  continue;              
                 }
                 else
                 {
-                    $publicationTime = preg_replace('/AM/', '<span style="background-color: red; font-size: 18px;">AM</span>', $publicationTime); 
-                }  
+                  $classActionAdded = true;
+                }
             }
+
+            $seekingAlphaNews .= "<li "; 
+
+            // red/green highlighting for yesterday/today
+            for ($i = $yesterdayDays; $i >= 1; $i--)
+            {
+                if (preg_match('/(' .  get_yahoo_trade_date($i) . ')/', $publicationDate))
+                {
+                    $publicationTime = preg_replace('/PM/', '<span style="background-color: red; font-size: 18px;">PM</span>', $publicationTime); 
+                    if ($i == $yesterdayDays) 
+                    {
+                        $publicationTime = preg_replace('/AM/', '<span style="background-color: #00ff00; ; font-size: 18px;">AM</span>', $publicationTime); 
+                  
+                    }
+                    else
+                    {
+                        $publicationTime = preg_replace('/AM/', '<span style="background-color: red; font-size: 18px;">AM</span>', $publicationTime); 
+                    }  
+                }
+            }
+
+            if ($j % 2 == 1)
+            {
+              $seekingAlphaNews .=  "style='background-color: #ebd8bd; '"; 
+            };
+            
+            // if the regular expression contains (.*) then we need to do it per title, to avoid greedy regular expressions
+
+            $newsTitle = preg_replace('/ withdrawal(.*?)application/i', '<span style="font-size: 12px; background-color:red; color:black"><b> withdrawal $1 application (55%) </b></span> ', $newsTitle);
+            $newsTitle = preg_replace('/nasdaq rejects(.*?)listing/i', '<span style="font-size: 12px; background-color:red; color:black"><b>Nasdaq rejects $1 listing</span> If delisting tomorrow 65%, if delisting days away then 50-55%</b>&nbsp;', $newsTitle);
+
+            $seekingAlphaNews .=  " ><a target='_blank' href='$feedItem->link'> " . $publicationDate . " " . $publicationTime . " - <br>" . $newsTitle . "</a>";
+          }
         }
-
-        if ($j % 2 == 1)
+        else 
         {
-          $seekingAlphaNews .=  "style='background-color: #ebd8bd; '"; 
-        };
-        
-        // if the regular expression contains (.*) then we need to do it per title, to avoid greedy regular expressions
-
-        $newsTitle = preg_replace('/ withdrawal(.*?)application/i', '<span style="font-size: 12px; background-color:red; color:black"><b> withdrawal $1 application (55%) </b></span> ', $newsTitle);
-        $newsTitle = preg_replace('/nasdaq rejects(.*?)listing/i', '<span style="font-size: 12px; background-color:red; color:black"><b>Nasdaq rejects $1 listing</span> If delisting tomorrow 65%, if delisting days away then 50-55%</b>&nbsp;', $newsTitle);
-
-        $seekingAlphaNews .=  " ><a target='_blank' href='$feedItem->link'> " . $publicationDate . " " . $publicationTime . " - <br>" . $newsTitle . "</a>";
-      }
+            $seekingAlphaNews .= "<span style='font-size: 45px;'>NO ITEMS FOUND</span>"; 
+        }
 
       $seekingAlphaNews .=  "</ul>";
 
@@ -1533,7 +1552,7 @@ die();
       $marketStackURL = "https://api.marketstack.com/v1/eod?access_key=d36ab142bed5a1430fcde797063f6b9a&symbols=" . $symbol . "&date_from=" . $marketStackFromDate . "&date_to=" . $marketStackToDate;         
       $marketStackOHLC = '&nbsp;&nbsp;<a target="_blank" onclick="return openPage(this.href)" href= ' . $marketStackURL . '> OHLC</a>&nbsp;&nbsp;&nbsp;&nbsp;'; 
 
-      $seekingAlphaURL = "https://seekingalpha.com/symbol/" . $symbol; 
+      $seekingAlphaURL = "https://seekingalpha.com/symbol/" . $originalSymbol; 
       $seekingAlpha = '&nbsp;&nbsp;<a target="_blank" onclick="return openPage(this.href)" href= ' . $seekingAlphaURL . '> Seeking Alpha' . '</a>&nbsp;&nbsp;&nbsp;&nbsp;'; 
 
       $otcMarketsURL = "https://www.otcmarkets.com/stock/" . $symbol . "/profile";

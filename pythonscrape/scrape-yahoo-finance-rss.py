@@ -84,7 +84,14 @@ def parse_finance_page(symbol, yesterday_days):
     all_news = "<ul class='newsSide'>";
     all_news += "<li style='font-size: 20px !important; background-color: #00ff00;'>Yahoo Finance News</li>";
 
-    for item in root.findall(".//item"):
+
+    items = root.findall(".//item")
+    if not items:
+        print("<ul class='newsSide'><li style='font-size: 20px !important; background-color: #00ff00;'>Yahoo Finance News</li><br><br><span style='font-size:45px;'>NO ITEMS FOUND</span>");
+        sys.exit(); 
+
+
+    for item in items:
       j += 1  
       title = item.find("title").text
       pub_date_str = item.find("pubDate").text

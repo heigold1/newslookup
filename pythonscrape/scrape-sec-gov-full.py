@@ -69,8 +69,11 @@ def parse_xml(xml_data, yesterday_days):
     sec_table_rows = []
     sec_table_row_count = 0
     recent_news = False
+    num_entries = len(entries) 
 
-    for i in range(0, 9):
+
+
+    for i in range(0, min(9, num_entries)):
         entry = entries[i]
         updated = entry.find("{http://www.w3.org/2005/Atom}updated").text
         datestamp = get_date_from_utc(updated)
@@ -211,7 +214,7 @@ def get_xml_page_from_rss_link(rss_link):
                 }
         print(json.dumps(result))
 
-def parse_finance_page(symbol, yesterday_days, cik_number, company_name):
+def parse_finance_page(symbol, original_symbol, yesterday_days, cik_number, company_name):
 
     headers = {
           "Accept":"text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8",
@@ -239,13 +242,12 @@ def parse_finance_page(symbol, yesterday_days, cik_number, company_name):
 
                 result = {
                     'found' : False, 
-                    'message' : '<a target="_blank" href="http://seekingalpha.com/symbol/' + symbol + '/sec-filings"><div style="background-color: red"><span style="font-size: 45px">SEC WEBSITE IS DOWN - CHECK SEEKING ALPHA</span></div></a>'
+                    'message' : '<a target="_blank" href="http://seekingalpha.com/symbol/' + original_symbol + '/sec-filings"><div style="background-color: red"><span style="font-size: 45px">SEC WEBSITE IS DOWN - CHECK SEEKING ALPHA</span></div></a>'
                     }
                 print(json.dumps(result))
                 sys.exit() 
 
-            rss_link = "https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=" + target_cik + "&type=&dateb=&owner=include&start=0&count=40&output=atom"
-            print("Status code !=200, rss_link is " + rss_link) 
+            rss_link = "https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=" + cik_number + "&type=&dateb=&owner=include&start=0&count=40&output=atom"
             xml_page = get_xml_page_from_rss_link(rss_link) 
             parse_xml(xml_page, yesterday_days) 
             sys.exit()
@@ -259,12 +261,12 @@ def parse_finance_page(symbol, yesterday_days, cik_number, company_name):
 
                 result = {
                     'found' : False, 
-                    'message' : '<a target="_blank" href="http://seekingalpha.com/symbol/' + symbol + '/sec-filings"><div style="background-color: red"><span style="font-size: 45px">PAGE UNAVAILABLE - CHECK SEEKING ALPHA</span></div></a>'
+                    'message' : '<a target="_blank" href="http://seekingalpha.com/symbol/' + original_symbol + '/sec-filings"><div style="background-color: red"><span style="font-size: 45px">PAGE UNAVAILABLE - CHECK SEEKING ALPHA</span></div></a>'
                     }
                 print(json.dumps(result))
                 sys.exit() 
            
-            rss_link = "https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=" + target_cik + "&type=&dateb=&owner=include&start=0&count=40&output=atom"
+            rss_link = "https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=" + cik_number + "&type=&dateb=&owner=include&start=0&count=40&output=atom"
             xml_page = get_xml_page_from_rss_link(rss_link) 
             parse_xml(xml_page, yesterday_days)
             sys.exit() 
@@ -283,12 +285,12 @@ def parse_finance_page(symbol, yesterday_days, cik_number, company_name):
 
                     result = {
                         'found' : False, 
-                        'message' : '<a target="_blank" href="http://seekingalpha.com/symbol/' + symbol + '/sec-filings"><div style="background-color: red"><span style="font-size: 45px">NO MATCHING COMPANIES - CHECK SEEKING ALPHA</span></div></a>'
+                        'message' : '<a target="_blank" href="http://seekingalpha.com/symbol/' + original_symbol + '/sec-filings"><div style="background-color: red"><span style="font-size: 45px">NO MATCHING COMPANIES - CHECK SEEKING ALPHA</span></div></a>'
                         }
                     print(json.dumps(result))
                     sys.exit() 
 
-                rss_link = "https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=" + target_cik + "&type=&dateb=&owner=include&start=0&count=40&output=atom"
+                rss_link = "https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=" + cik_number + "&type=&dateb=&owner=include&start=0&count=40&output=atom"
                 xml_page = get_xml_page_from_rss_link(rss_link) 
                 parse_xml(xml_page, yesterday_days) 
                 sys.exit()
@@ -300,13 +302,13 @@ def parse_finance_page(symbol, yesterday_days, cik_number, company_name):
 
                     result = {
                         'found' : False, 
-                        'message' : '<a target="_blank" href="http://seekingalpha.com/symbol/' + symbol + '/sec-filings"><div style="background-color: red"><span style="font-size: 45px">AMBIGUOUS NAMES - CHECK SEEKING ALPHA</span></div></a>'
+                        'message' : '<a target="_blank" href="http://seekingalpha.com/symbol/' + original_symbol + '/sec-filings"><div style="background-color: red"><span style="font-size: 45px">AMBIGUOUS NAMES - CHECK SEEKING ALPHA</span></div></a>'
                         }
 
                     print(json.dumps(result))
                     sys.exit() 
 
-                rss_link = "https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=" + target_cik + "&type=&dateb=&owner=include&start=0&count=40&output=atom"
+                rss_link = "https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=" + cik_number + "&type=&dateb=&owner=include&start=0&count=40&output=atom"
                 xml_page = get_xml_page_from_rss_link(rss_link) 
                 parse_xml(xml_page, yesterday_days)
                 sys.exit()
@@ -332,11 +334,12 @@ def parse_finance_page(symbol, yesterday_days, cik_number, company_name):
         print("Failed to process the request, Exception:%s"%(e)) 
 
 symbol = sys.argv[1]
-yesterday_days = sys.argv[2] 
-cik_number = sys.argv[3]
-company_name = sys.argv[4]
+original_symbol = sys.argv[2]
+yesterday_days = sys.argv[3] 
+cik_number = sys.argv[4]
+company_name = sys.argv[5]
 
-scraped_data = parse_finance_page(symbol, yesterday_days, cik_number, company_name)
+scraped_data = parse_finance_page(symbol, original_symbol, yesterday_days, cik_number, company_name)
 
 
 

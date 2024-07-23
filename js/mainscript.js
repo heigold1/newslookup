@@ -636,6 +636,7 @@ $(function() {
 
                 // E*TRADE API data
               $("div#left_top_container").css("background-color", "#BBDDFF");
+
               $.ajax({
                   url: "yesterday_close.php",
                   data: {symbol: eTradeSymbol},
@@ -970,6 +971,7 @@ $(function() {
             $.ajax({
             url: "proxy.php",
             data: {symbol: symbol,
+                 originalSymbol: original_symbol, 
                  which_website: "yahoo", 
                  host_name: "finance.yahoo.com",
                  company_name: yahooCompanyName,
@@ -1141,6 +1143,7 @@ $(function() {
                 $.ajax({
                     url: "proxy_sec_xml.php",
                     data: {symbol: symbol,
+                           originalSymbol: original_symbol, 
                            secCompanyName : secCompanyName,
                            cikNumber: cikNumber, 
                            checkSec: checkSec},

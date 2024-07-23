@@ -116,20 +116,6 @@ def parse_xml(xml_data):
         }      
     print(json.dumps(result)) 
 
-
-
-#    return return_sec_html
-
-
-
-
-
-
-
-
-
-
-
 def get_xml_page_from_rss_link(rss_link): 
     headers = {
           "Accept":"text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8",
@@ -160,39 +146,7 @@ def get_xml_page_from_rss_link(rss_link):
 
         print(json.dumps(result))
 
-def get_cik_from_ticker(symbol):
-
-    headers = {
-          "Accept":"text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8",
-          "Accept-Encoding":"gzip, deflate",
-          "Accept-Language":"en-GB,en;q=0.9,en-US;q=0.8,ml;q=0.7",
-          "Connection":"keep-alive",
-          "Cache-Control":"no-store, no-cache, must-revalidate, max-age=0'",
-          "Cache-Control":"post-check=0, pre-check=0", 
-          "Pragma":"no-cache", 
-          "Host":"www.sec.gov",
-          "Referer":"https://www.sec.gov",
-          "Upgrade-Insecure-Requests":"1",
-          "User-Agent":"brent@heigoldinvestments.com"
-      } 
-
-    url = 'https://financialmodelingprep.com/api/v3/profile/' + symbol +  '?apikey=EdahmOwRgQ6xcbs6j37SESSCrCIhcoa9'
-    
-    response = requests.get(url)
-    data = response.json()
-    
-    if data and 'cik' in data[0]:
-        if data[0]['cik'] is None:
-            return "NOT FOUND" 
-        else:
-            return data[0]['cik']
-    else:
-        return "NOT FOUND" 
-
-
-
-
-def parse_finance_page(symbol, company_name):
+def parse_finance_page(symbol, cik_number, company_name):
 
     headers = {
           "Accept":"text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8",
@@ -216,8 +170,7 @@ def parse_finance_page(symbol, company_name):
 
         if request.status_code!=200:
 
-            target_cik = get_cik_from_ticker(symbol) 
-            if target_cik == "NOT FOUND":
+            if cik_number == "NOT_FOUND":
             
                 result = {
                     'url': '---', 
@@ -237,9 +190,7 @@ def parse_finance_page(symbol, company_name):
        
         if "TThis page is temporarily unavailable" in html_page_first_try:
             
-            target_cik = get_cik_from_ticker(symbol)
-
-            if target_cik == "NOT FOUND":
+            if cik_number == "NOT_FOUND":
                 result = {
                     'url': '---', 
                     'url_title': 'NO SEC' 
@@ -262,9 +213,7 @@ def parse_finance_page(symbol, company_name):
 
             if "No matching companies" in html_page_second_try: 
 
-                target_cik = get_cik_from_ticker(symbol)
-
-                if target_cik == "NOT FOUND": 
+                if cik_number == "NOT_FOUND": 
                     result = {
                         'url': '---', 
                         'url_title': 'NO SEC' 
@@ -280,9 +229,7 @@ def parse_finance_page(symbol, company_name):
 
             if "Companies with names matching" in html_page_second_try: 
 
-                target_cik = get_cik_from_ticker(symbol)     
-
-                if target_cik == "NOT FOUND":
+                if cik_number == "NOT_FOUND":
                     result = {
                         'url': '---', 
                         'url_title': 'NO SEC' 
@@ -316,9 +263,10 @@ def parse_finance_page(symbol, company_name):
         print("Failed to process the request, Exception:%s"%(e)) 
 
 symbol = sys.argv[1]
-company_name = sys.argv[2] 
+cik_number = sys.argv[2]
+company_name = sys.argv[3] 
 
-scraped_data = parse_finance_page(symbol, company_name)
+scraped_data = parse_finance_page(symbol, cik_number, company_name)
 
 
 
