@@ -1233,7 +1233,7 @@ die();
 
             // Convert time from GMT to  AM/PM New York
             // 18000 is 5 hours X 60 seconds/minute X 60 minutes/hour
-            $publicationDateStrToTime = strtotime($feedItem->pubDate) - 18000;
+            $publicationDateStrToTime = strtotime($feedItem->pubDate) - 14400;
 
             $convertedDate = new DateTime(); 
             $convertedDate->setTimestamp($publicationDateStrToTime);
