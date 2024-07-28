@@ -7,7 +7,7 @@ require_once("country-codes.php");
 
 libxml_use_internal_errors(true);
 
-$yesterdayDays = 1;
+$yesterdayDays = 3;
 
 error_reporting(1);
 //ini_set('display_errors', 1);
@@ -1500,6 +1500,9 @@ die();
       $finalReturn = preg_replace('/ files to sell/i', '<span style="font-size: 25px; background-color:red; color:black"><b>FILES TO SELL - OFFERING</span></b>&nbsp;', $finalReturn);
       $finalReturn = preg_replace('/ delays filing/i', '<span style="font-size: 35px; background-color:red; color:black"><b>DELAYS FILING - 40%</span></b>&nbsp;', $finalReturn);
       $finalReturn = preg_replace('/ recapitalization/i', '<span style="font-size: 35px; background-color:red; color:black"><b>RECAPITALIZATION - BANKRUPTCY</span></b>&nbsp;', $finalReturn);
+      $finalReturn = preg_replace('/ department of justice/i', '<span style="font-size: 25px; background-color:red; color:black"><b> DEPARTMENT OF JUSTICE - STAY AWAY</span></b>&nbsp;', $finalReturn);
+      $finalReturn = preg_replace('/ license agreements/i', '<span style="font-size: 25px; background-color:red; color:black"><b>LICENSE AGREEMENTS - 40% NEWS UPDATE</b></span>&nbsp;', $finalReturn);
+      $finalReturn = preg_replace('/ private placement/i', '<span style="font-size: 25px; background-color:red; color:black"><b>PRIVATE PLACEMENT - WAIT FOR PRICE</b></span>&nbsp;', $finalReturn);
 
 
       $returnArray['dividendCheckDate'] = 0; 
