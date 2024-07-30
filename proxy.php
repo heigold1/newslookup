@@ -1503,6 +1503,7 @@ die();
       $finalReturn = preg_replace('/ department of justice/i', '<span style="font-size: 25px; background-color:red; color:black"><b> DEPARTMENT OF JUSTICE - STAY AWAY</span></b>&nbsp;', $finalReturn);
       $finalReturn = preg_replace('/ license agreements/i', '<span style="font-size: 25px; background-color:red; color:black"><b>LICENSE AGREEMENTS - 40% NEWS UPDATE</b></span>&nbsp;', $finalReturn);
       $finalReturn = preg_replace('/ private placement/i', '<span style="font-size: 25px; background-color:red; color:black"><b>PRIVATE PLACEMENT - WAIT FOR PRICE</b></span>&nbsp;', $finalReturn);
+      $finalReturn = preg_replace('/ SEC investigation/i', '<span style="font-size: 25px; background-color:red; color:black"><b>SEC INVESTIGATION - STAY AWAY</b></span>&nbsp;', $finalReturn);
 
 
       $returnArray['dividendCheckDate'] = 0; 
