@@ -51,7 +51,7 @@
 									<input id="penny_21" type="submit" value="21%">
 								</span>
 								<span>
-									<input id="dollar_17_5" type="submit" value="17.5%">
+									<input id="dollar_19_5" type="submit" value="19.5%">
 								</span>
 								<span>
 									<input id="check-sec" type="checkbox" <?php if ($_GET['check-sec'] == 1){echo "checked";} ?>>
