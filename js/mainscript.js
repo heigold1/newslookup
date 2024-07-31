@@ -1578,13 +1578,13 @@ for (var corporateSymbol in corporateActionsStocks)
       CopyToClipboard();  
     }); // End of click function 
 
-    $("#dollar_19_5").click(function(){
-      $("#entryPercentage").val("19.51"); 
+    $("#dollar_19_6").click(function(){
+      $("#entryPercentage").val("19.61"); 
       $("#amountSpending").val("300"); 
 
 
       var yesterdaysClose = $('#yestCloseText').val(); 
-      var newPrice = yesterdaysClose - (yesterdaysClose*19.51/100); 
+      var newPrice = yesterdaysClose - (yesterdaysClose*19.61/100); 
       newPrice = newPrice.toFixed(2); 
       $('#entryPrice').val(newPrice); 
       calcAll();
