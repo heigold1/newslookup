@@ -1018,12 +1018,13 @@ die();
 
       $yahooFinanceSector = preg_replace('/energy/i', '<span style="font-size: 20px; background-color: red; color:black"><b>&nbsp; ENERGY</b></span>&nbsp;', $yahooFinanceSector); 
       $yahooFinanceSector = preg_replace('/shell companies/i', '<span style="font-size: 20px; background-color: red; color:black"><b>&nbsp; SHELL COMPANIES - STAY AWAY</b></span>&nbsp;', $yahooFinanceSector); 
+      $yahooFinanceSector = preg_replace('/healthcare/i', '<br><span style="font-size: 60px; background-color: red; color:black"><b>&nbsp; HEALTHCARE</b></span>&nbsp;', $yahooFinanceSector); 
 
       $yahooFinanceIndustry = preg_replace('/oil \& gas/i', '<span style="font-size: 60px; background-color: red; color:black"><b>&nbsp; OIL & GAS</b></span>&nbsp;', $yahooFinanceIndustry); 
 
       $yahooFinanceIndustry = preg_replace('/medical devices/i', '<span style="font-size: 60px; background-color: red; color:black"><b>&nbsp; MEDICAL<br><br> DEVICES</b></span>&nbsp;', $yahooFinanceIndustry); 
 
-      $yahooFinanceIndustry = preg_replace('/biotechnology/i', '<br><span style="font-size: 60px; background-color: red; color:black"><b>&nbsp; BIOTECHNOLOGY</b></span>&nbsp;', $yahooFinanceIndustry); 
+      $yahooFinanceIndustry = preg_replace('/biotechnology/i', '<br><span style="font-size: 30px; background-color: red; color:black"><b>&nbsp; BIOTECHNOLOGY</b></span>&nbsp;', $yahooFinanceIndustry); 
 
       $yahooFinanceIndustry = preg_replace('/shell companies/i', '<span style="font-size: 35px; background-color: red; color:black"><b>&nbsp; Shell Companies</b></span>&nbsp;', $yahooFinanceIndustry); 
 

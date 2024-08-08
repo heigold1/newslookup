@@ -37,12 +37,24 @@
 						<tr>
 							<td style="width:200px">
 <input tabindex ="1" style="text-align: left;" id="quote_input" class="textbox" type="text" size="10" value="<?php echo $_GET['symbol'] ?>">
-								<input id="submit_button" type="submit" value="Submit">
+								<input id="submit_button" type="submit" value="Sub">
 								<input id="earnings_button" type="submit" value="E">
 							</td>
-							<td style="width:450px"> 
+							<td style="width:650px"> 
 								<span>
 									<input id="asian_stocks" type="submit" value="87.5%">
+								</span>
+								<span>
+									<input id="net_loss_penny" type="submit" value="62.5%">
+								</span>
+								<span>
+									<input id="net_loss" type="submit" value="52.5%">
+								</span>
+								<span>
+									<input id="net_income_penny" type="submit" value="50%">
+								</span>
+								<span>
+									<input id="net_income" type="submit" value="40%">
 								</span>
 								<span>
 									<input id="symbol_change" type="submit" value="25%">
@@ -51,16 +63,13 @@
 									<input id="penny_21" type="submit" value="21%">
 								</span>
 								<span>
-									<input id="dollar_19_6" type="submit" value="19.6%">
+									<input id="dollar_17_5" type="submit" value="17.5%">
 								</span>
 								<span>
 									<input id="check-sec" type="checkbox" <?php if ($_GET['check-sec'] == 1){echo "checked";} ?>>
 									<label for="check-sec">SEC</label>
 								</span>
 								&nbsp; 
-								<span id="notes" style="background-color: #00ff00;">
-									NOTES
-								</span>	
 							</td>
 						</tr>
 					</table> 
@@ -213,7 +222,7 @@
 						</div>
 
 								5-day Avg Vol: <span style="font-size: 12px" id="five-day-average-volume"></span><br>
-								&nbsp; &nbsp; &nbsp; &nbsp; <span id="low-volume-dollar-chart" style="background-color: #00ff00;">Dollar</span>&nbsp;<span id="low-volume-penny-chart" style="background-color: #00ff00;">Penny</span>
+								&nbsp; &nbsp; &nbsp; &nbsp; <span id="low-volume-dollar-chart" style="background-color: #00ff00;">Dollar</span>&nbsp;<span id="low-volume-penny-chart" style="background-color: #00ff00;">Penny</span>&nbsp;<span id="notes" style="background-color: #00ff00;">NOTES</span>	
 
 						</td>
 

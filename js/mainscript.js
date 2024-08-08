@@ -615,7 +615,7 @@ $(function() {
               $("#day1").html("");
               $("#entryPrice").val(""); 
               $("#entryPercentage").val("");  
-              $("#amountSpending").val("300");
+              $("#amountSpending").val("600");
               $("#eTradeLowPercentage").html("");
               $("#orderStub").val("-----------------------"); 
               $("#foreign_country").html("");
@@ -1213,60 +1213,59 @@ $(function() {
 
 var corporateActionsStocks=
 {
-  "FOA": "REVERSE SPLIT 5 DAYS AGO!!!!!!",
-  "SNES": "REVERSE SPLIT 6 DAYS AGO!!!!!!",
-  "EZFL": "REVERSE SPLIT 6 DAYS AGO!!!!!!",
-  "EVGN": "REVERSE SPLIT 6 DAYS AGO!!!!!!",
-  "TNFA": "SYMBOL CHANGE 7 DAYS AGO!!! 38 PERCENT!!!",
-  "LTM": "REVERSE SPLIT 7 DAYS AGO!!!!!!",
-  "KITT": "REVERSE SPLIT 8 DAYS AGO!!!!!!",
-  "CNL": "SYMBOL CHANGE 9 DAYS AGO!!! 38 PERCENT!!!",
-  "PSIG": "SYMBOL CHANGE 12 DAYS AGO!!! 38 PERCENT!!!",
-  "BHIL": "REVERSE SPLIT 12 DAYS AGO!!!!!!",
-  "TCRT": "REVERSE SPLIT 13 DAYS AGO!!!!!!",
-  "STEC": "SYMBOL CHANGE 13 DAYS AGO!!! 38 PERCENT!!!",
-  "SONM": "REVERSE SPLIT 13 DAYS AGO!!!!!!",
-  "SNTI": "REVERSE SPLIT 13 DAYS AGO!!!!!!",
-  "MGOL": "REVERSE SPLIT 13 DAYS AGO!!!!!!",
-  "LUCY": "REVERSE SPLIT 13 DAYS AGO!!!!!!",
-  "SHPWQ": "SYMBOL CHANGE 15 DAYS AGO!!! 38 PERCENT!!!",
-  "SHPSQ": "SYMBOL CHANGE 15 DAYS AGO!!! 38 PERCENT!!!",
-  "ALZN": "REVERSE SPLIT 15 DAYS AGO!!!!!!",
-  "VTAK": "REVERSE SPLIT 16 DAYS AGO!!!!!!",
-  "SMX": "REVERSE SPLIT 16 DAYS AGO!!!!!!",
-  "CNTM": "SYMBOL CHANGE 16 DAYS AGO!!! 38 PERCENT!!!",
-  "CMBT": "SYMBOL CHANGE 16 DAYS AGO!!! 38 PERCENT!!!",
-  "CLDI": "REVERSE SPLIT 16 DAYS AGO!!!!!!",
-  "ALTS": "SYMBOL CHANGE 16 DAYS AGO!!! 38 PERCENT!!!",
-  "NYCB": "REVERSE SPLIT 19 DAYS AGO!!!!!!",
-  "IMCC": "REVERSE SPLIT 19 DAYS AGO!!!!!!",
-  "ARTV": "REVERSE SPLIT 19 DAYS AGO!!!!!!",
-  "CLNN": "REVERSE SPLIT 20 DAYS AGO!!!!!!",
-  "AMWL": "REVERSE SPLIT 20 DAYS AGO!!!!!!",
-  "HOOK": "REVERSE SPLIT 21 DAYS AGO!!!!!!",
-  "FRES": "REVERSE SPLIT 21 DAYS AGO!!!!!!",
-  "CGBS": "SYMBOL CHANGE 21 DAYS AGO!!! 38 PERCENT!!!",
-  "SDST": "SYMBOL CHANGE 22 DAYS AGO!!! 38 PERCENT!!!",
-  "IONM": "REVERSE SPLIT 22 DAYS AGO!!!!!!",
-  "EFSH": "REVERSE SPLIT 23 DAYS AGO!!!!!!",
-  "CJET": "REVERSE SPLIT 23 DAYS AGO!!!!!!",
-  "PHIO": "REVERSE SPLIT 26 DAYS AGO!!!!!!",
-  "CYN": "REVERSE SPLIT 26 DAYS AGO!!!!!!",
-  "NUTX": "REVERSE SPLIT 28 DAYS AGO!!!!!!",
-  "MDRR": "REVERSE SPLIT 28 DAYS AGO!!!!!!",
-  "JZXN": "REVERSE SPLIT 28 DAYS AGO!!!!!!",
-  "ASLN": "REVERSE SPLIT 28 DAYS AGO!!!!!!",
-  "ASST": "REVERSE SPLIT 29 DAYS AGO!!!!!!",
-  "YGMZ": "REVERSE SPLIT 30 DAYS AGO!!!!!!",
-  "TOYO": "SYMBOL CHANGE 30 DAYS AGO!!! 38 PERCENT!!!",
-  "TEN": "SYMBOL CHANGE 30 DAYS AGO!!! 38 PERCENT!!!",
-  "RELI": "REVERSE SPLIT 30 DAYS AGO!!!!!!",
-  "KORE": "REVERSE SPLIT 30 DAYS AGO!!!!!!",
-  "DLAPQ": "SYMBOL CHANGE 30 DAYS AGO!!! 38 PERCENT!!!",
-  "DARE": "REVERSE SPLIT 30 DAYS AGO!!!!!!",
-  "AZTR": "REVERSE SPLIT 30 DAYS AGO!!!!!!",
-  "AIOT": "SYMBOL CHANGE 30 DAYS AGO!!! 38 PERCENT!!!",
-  "ABVE": "SYMBOL CHANGE 30 DAYS AGO!!! 38 PERCENT!!!"
+  "TXNM": "SYMBOL CHANGE 2 DAYS AGO!!! 38 PERCENT!!!",
+  "SYTA": "REVERSE SPLIT 5 DAYS AGO!!!!!!",
+  "NCPL": "REVERSE SPLIT 5 DAYS AGO!!!!!!",
+  "VWEWQ": "SYMBOL CHANGE 6 DAYS AGO!!! 38 PERCENT!!!",
+  "VWESQ": "SYMBOL CHANGE 6 DAYS AGO!!! 38 PERCENT!!!",
+  "SMC": "SYMBOL CHANGE 6 DAYS AGO!!! 38 PERCENT!!!",
+  "SEG": "SYMBOL CHANGE 6 DAYS AGO!!! 38 PERCENT!!!",
+  "MKDW": "SYMBOL CHANGE 6 DAYS AGO!!! 38 PERCENT!!!",
+  "EVOK": "REVERSE SPLIT 6 DAYS AGO!!!!!!",
+  "ADGM": "SYMBOL CHANGE 6 DAYS AGO!!! 38 PERCENT!!!",
+  "SPGC": "REVERSE SPLIT 8 DAYS AGO!!!!!!",
+  "PITA": "SYMBOL CHANGE 8 DAYS AGO!!! 38 PERCENT!!!",
+  "CCM": "REVERSE SPLIT 8 DAYS AGO!!!!!!",
+  "AIU": "REVERSE SPLIT 9 DAYS AGO!!!!!!",
+  "FOA": "REVERSE SPLIT 12 DAYS AGO!!!!!!",
+  "SNES": "REVERSE SPLIT 13 DAYS AGO!!!!!!",
+  "EZFL": "REVERSE SPLIT 13 DAYS AGO!!!!!!",
+  "EVGN": "REVERSE SPLIT 13 DAYS AGO!!!!!!",
+  "TNFA": "SYMBOL CHANGE 14 DAYS AGO!!! 38 PERCENT!!!",
+  "LTM": "REVERSE SPLIT 14 DAYS AGO!!!!!!",
+  "BURU": "REVERSE SPLIT 14 DAYS AGO!!!!!!",
+  "KITT": "REVERSE SPLIT 15 DAYS AGO!!!!!!",
+  "CNL": "SYMBOL CHANGE 16 DAYS AGO!!! 38 PERCENT!!!",
+  "PSIG": "SYMBOL CHANGE 19 DAYS AGO!!! 38 PERCENT!!!",
+  "BHIL": "REVERSE SPLIT 19 DAYS AGO!!!!!!",
+  "TCRT": "REVERSE SPLIT 20 DAYS AGO!!!!!!",
+  "STEC": "SYMBOL CHANGE 20 DAYS AGO!!! 38 PERCENT!!!",
+  "SONM": "REVERSE SPLIT 20 DAYS AGO!!!!!!",
+  "SNTI": "REVERSE SPLIT 20 DAYS AGO!!!!!!",
+  "SCPX": "REVERSE SPLIT 20 DAYS AGO!!!!!!",
+  "MGOL": "REVERSE SPLIT 20 DAYS AGO!!!!!!",
+  "LUCY": "REVERSE SPLIT 20 DAYS AGO!!!!!!",
+  "SHPWQ": "SYMBOL CHANGE 22 DAYS AGO!!! 38 PERCENT!!!",
+  "SHPSQ": "SYMBOL CHANGE 22 DAYS AGO!!! 38 PERCENT!!!",
+  "ALZN": "REVERSE SPLIT 22 DAYS AGO!!!!!!",
+  "VTAK": "REVERSE SPLIT 23 DAYS AGO!!!!!!",
+  "SMX": "REVERSE SPLIT 23 DAYS AGO!!!!!!",
+  "CNTM": "SYMBOL CHANGE 23 DAYS AGO!!! 38 PERCENT!!!",
+  "CMBT": "SYMBOL CHANGE 23 DAYS AGO!!! 38 PERCENT!!!",
+  "CLDI": "REVERSE SPLIT 23 DAYS AGO!!!!!!",
+  "ALTS": "SYMBOL CHANGE 23 DAYS AGO!!! 38 PERCENT!!!",
+  "NYCB": "REVERSE SPLIT 26 DAYS AGO!!!!!!",
+  "IMCC": "REVERSE SPLIT 26 DAYS AGO!!!!!!",
+  "ARTV": "REVERSE SPLIT 26 DAYS AGO!!!!!!",
+  "CLNN": "REVERSE SPLIT 27 DAYS AGO!!!!!!",
+  "AMWL": "REVERSE SPLIT 27 DAYS AGO!!!!!!",
+  "HOOK": "REVERSE SPLIT 28 DAYS AGO!!!!!!",
+  "FRES": "REVERSE SPLIT 28 DAYS AGO!!!!!!",
+  "CGBS": "SYMBOL CHANGE 28 DAYS AGO!!! 38 PERCENT!!!",
+  "SDST": "SYMBOL CHANGE 29 DAYS AGO!!! 38 PERCENT!!!",
+  "IONM": "REVERSE SPLIT 29 DAYS AGO!!!!!!",
+  "EFSH": "REVERSE SPLIT 30 DAYS AGO!!!!!!",
+  "CJET": "REVERSE SPLIT 30 DAYS AGO!!!!!!"
 };
 
 
@@ -1553,11 +1552,17 @@ for (var corporateSymbol in corporateActionsStocks)
    $("#symbol_change").click(function(){
 
       $("#entryPercentage").val("25.00"); 
-      $("#amountSpending").val("300"); 
+      $("#amountSpending").val("600"); 
 
       var yesterdaysClose = $('#yestCloseText').val(); 
       var newPrice = yesterdaysClose - (yesterdaysClose*25.00/100); 
-      newPrice = newPrice.toFixed(2); 
+      if (yesterdaysClose > 1.00){
+        newPrice = newPrice.toFixed(2);         
+      }
+      else
+      {
+        newPrice = newPrice.toFixed(4); 
+      }
       $('#entryPrice').val(newPrice);
 
       calcAll();
@@ -1571,21 +1576,112 @@ for (var corporateSymbol in corporateActionsStocks)
 
       var yesterdaysClose = $('#yestCloseText').val(); 
       var newPrice = yesterdaysClose - (yesterdaysClose*87.5/100); 
-      newPrice = newPrice.toFixed(2); 
+      if (yesterdaysClose > 1.00){
+        newPrice = newPrice.toFixed(2);         
+      }
+      else
+      {
+        newPrice = newPrice.toFixed(4); 
+      }
       $('#entryPrice').val(newPrice); 
 
       calcAll();
       CopyToClipboard();  
     }); // End of click function 
 
-    $("#dollar_19_6").click(function(){
-      $("#entryPercentage").val("19.61"); 
-      $("#amountSpending").val("300"); 
+    $("#dollar_17_5").click(function(){
+      $("#entryPercentage").val("17.51"); 
+      $("#amountSpending").val("600"); 
 
 
       var yesterdaysClose = $('#yestCloseText').val(); 
-      var newPrice = yesterdaysClose - (yesterdaysClose*19.61/100); 
-      newPrice = newPrice.toFixed(2); 
+      var newPrice = yesterdaysClose - (yesterdaysClose*17.51/100); 
+      if (yesterdaysClose > 1.00){
+        newPrice = newPrice.toFixed(2);         
+      }
+      else
+      {
+        newPrice = newPrice.toFixed(4); 
+      }
+      $('#entryPrice').val(newPrice); 
+      calcAll();
+      CopyToClipboard();  
+
+    }); // End of click function 
+
+    $("#net_income").click(function(){
+      $("#entryPercentage").val("40.00"); 
+      $("#amountSpending").val("200"); 
+
+
+      var yesterdaysClose = $('#yestCloseText').val(); 
+      var newPrice = yesterdaysClose - (yesterdaysClose*40.00/100); 
+      if (yesterdaysClose > 1.00){
+        newPrice = newPrice.toFixed(2);         
+      }
+      else
+      {
+        newPrice = newPrice.toFixed(4); 
+      }
+      $('#entryPrice').val(newPrice); 
+      calcAll();
+      CopyToClipboard();  
+
+    }); // End of click function 
+
+    $("#net_income_penny").click(function(){
+      $("#entryPercentage").val("50.00"); 
+      $("#amountSpending").val("200"); 
+
+      var yesterdaysClose = $('#yestCloseText').val(); 
+      var newPrice = yesterdaysClose - (yesterdaysClose*50.00/100); 
+      if (yesterdaysClose > 1.00){
+        newPrice = newPrice.toFixed(2);         
+      }
+      else
+      {
+        newPrice = newPrice.toFixed(4); 
+      }
+      $('#entryPrice').val(newPrice); 
+      calcAll();
+      CopyToClipboard();  
+
+    }); // End of click function 
+
+
+    $("#net_loss").click(function(){
+      $("#entryPercentage").val("52.50"); 
+      $("#amountSpending").val("200"); 
+
+      var yesterdaysClose = $('#yestCloseText').val(); 
+      var newPrice = yesterdaysClose - (yesterdaysClose*52.50/100); 
+      if (yesterdaysClose > 1.00){
+        newPrice = newPrice.toFixed(2);         
+      }
+      else
+      {
+        newPrice = newPrice.toFixed(4); 
+      }
+
+      $('#entryPrice').val(newPrice); 
+      calcAll();
+      CopyToClipboard();  
+
+    }); // End of click function 
+
+    $("#net_loss_penny").click(function(){
+      $("#entryPercentage").val("62.50"); 
+      $("#amountSpending").val("200"); 
+
+      var yesterdaysClose = $('#yestCloseText').val(); 
+      var newPrice = yesterdaysClose - (yesterdaysClose*62.50/100); 
+      if (yesterdaysClose > 1.00){
+        newPrice = newPrice.toFixed(2);         
+      }
+      else
+      {
+        newPrice = newPrice.toFixed(4); 
+      }
       $('#entryPrice').val(newPrice); 
       calcAll();
       CopyToClipboard();  
@@ -1595,6 +1691,7 @@ for (var corporateSymbol in corporateActionsStocks)
     $("#penny_21").click(function(){
 
       $("#entryPercentage").val("21.00"); 
+      $("#amountSpending").val("300"); 
 
       var yesterdaysClose = $('#yestCloseText').val(); 
       var newPrice = yesterdaysClose - (yesterdaysClose*21.00/100); 
