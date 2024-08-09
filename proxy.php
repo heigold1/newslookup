@@ -939,19 +939,19 @@ die();
 
           if (trim($city) == "")
           {
-              $city = "SEEK ALPHA";
+              $city = "ALPHA";
           }
           if (trim($state) == "")
           {
-              $state = "SEEK ALPHA";
+              $state = "ALPHA";
           }
 
 
-          if ($country = "United States") 
-          {
+/*          if ($country == "United States") 
+          { */
             $country .= " (" . $city . ", " . $state . ")"; 
 
-          }
+//          }
         }
 
       }
@@ -1030,7 +1030,7 @@ die();
 
       $yahooFinanceIndustry = preg_replace('/banks/i', '<span style="font-size: 35px; background-color: red; color:black"><b>&nbsp; BANKS</b></span>&nbsp;', $yahooFinanceIndustry); 
 
-      $sectorCountry = '<span style="font-size: 15px;">SECTOR - ' . $yahooFinanceSector . '</span>&nbsp;&nbsp;<span id="industry" style="font-size: 15px;">INDUSTRY - ' . $yahooFinanceIndustry . '</span><br><br><div id="country" style="font-size: 15px;">' . $country . '</div>'; 
+      $sectorCountry = '<span style="font-size: 15px;">SECTOR - ' . $yahooFinanceSector . '</span>&nbsp;&nbsp;<span id="industry" style="font-size: 15px;">INDUSTRY - ' . $yahooFinanceIndustry . '</span><br><br><div id="country" style="font-size: 15px; height:75px; ">' . $country . '</div>'; 
 
 
 
