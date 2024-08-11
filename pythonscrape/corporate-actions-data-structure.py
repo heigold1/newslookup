@@ -34,7 +34,6 @@ def create_data_structure():
     # 2nd pass 
     for line in f: 
       values = line.split("\t") 
-      print(values[1] + " is '" + values[2] + "', '" + values[3].rstrip('\n') + "'") 
 
       pattern = re.compile(r'\breverse stock split\b', re.IGNORECASE) 
 
@@ -50,9 +49,13 @@ def create_data_structure():
           date_difference = today_date - given_date
           days_difference = date_difference.days
 
+          print("symbol is " + values[1] + ", today's date is " + str(today_date) + ", given date is " + str(given_date) + "  and days_difference is " + str(days_difference))
+
           if pattern.search(values[3]): 
             if days_difference > 4: 
               symbolListOther[values[1]] = "REVERSE SPLIT " + str(days_difference) + " DAYS AGO!!!!!!"   
+            elif days_difference == 0:  
+              symbolListOther[values[1]] = "REVERSE SPLIT TODAY.  40%" 
               if values[1] in symbolList:
                 symbolList.remove(values[1]) 
 
