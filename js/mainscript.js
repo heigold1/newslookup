@@ -1094,6 +1094,8 @@ $(function() {
 
               var country = document.getElementById('country').innerHTML; 
 
+              document.getElementById('country').innerHTML = "<a target='_blank' href = 'https://seekingalpha.com/symbol/" + symbol + "'>" + document.getElementById('country').innerHTML + "</a>"
+
               if ((country.search(/United States/i) < 0) || (country.search(/ALPHA/) > 0))
               {
                   document.getElementById('country').style.fontSize = "60px"; 
@@ -1102,7 +1104,6 @@ $(function() {
               }
               else 
               {
-                  document.getElementById('country').innerHTML = "<a target='_blank' href = 'https://seekingalpha.com/symbol/" + symbol + "'>" + document.getElementById('country').innerHTML + "</a>"
                   document.getElementById('country').style.fontSize = "20px"; 
                   document.getElementById('country').style.backgroundColor = "rgb(255, 138, 138)";
                   document.getElementById('country').style.height = "25px"; 
