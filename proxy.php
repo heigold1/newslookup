@@ -7,7 +7,7 @@ require_once("country-codes.php");
 
 libxml_use_internal_errors(true);
 
-$yesterdayDays = 3;
+$yesterdayDays = 1;
 
 error_reporting(1);
 //ini_set('display_errors', 1);
@@ -1505,6 +1505,7 @@ die();
       $finalReturn = preg_replace('/ license agreements/i', '<span style="font-size: 25px; background-color:red; color:black"><b>LICENSE AGREEMENTS - 40% NEWS UPDATE</b></span>&nbsp;', $finalReturn);
       $finalReturn = preg_replace('/ private placement/i', '<span style="font-size: 25px; background-color:red; color:black"><b>PRIVATE PLACEMENT - WAIT FOR PRICE</b></span>&nbsp;', $finalReturn);
       $finalReturn = preg_replace('/ SEC investigation/i', '<span style="font-size: 25px; background-color:red; color:black"><b>SEC INVESTIGATION - STAY AWAY</b></span>&nbsp;', $finalReturn);
+      $finalReturn = preg_replace('/ U\.S\. probe/i', '<span style="font-size: 25px; background-color:red; color:black"><b>U.S. PROBE - STAY AWAY</b></span>&nbsp;', $finalReturn);
 
 
       $returnArray['dividendCheckDate'] = 0; 
