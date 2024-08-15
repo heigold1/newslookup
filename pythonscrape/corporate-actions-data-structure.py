@@ -35,11 +35,14 @@ def create_data_structure():
     for line in f: 
       values = line.split("\t") 
 
-      pattern = re.compile(r'\breverse stock split\b', re.IGNORECASE) 
+      reverseSplitPattern = re.compile(r'\breverse stock split\b', re.IGNORECASE) 
+      stockSplitPattern = re.compile(rf'{re.escape(values[1])} stock split', re.IGNORECASE)
+      wasListedPattern = re.compile(r'\was listed\b', re.IGNORECASE)
+      spunOffPattern = re.compile(r'spun off', re.IGNORECASE) 
 
       today_date = datetime.now()
 
-      if ((values[2] == 'Delisted') or pattern.search(values[3]) or (values[2] == 'Symbol Change')):
+      if ((values[2] == 'Delisted') or reverseSplitPattern.search(values[3]) or (values[2] == 'Symbol Change')):
         if (values[2] == 'Delisted'): 
           if values[1] in symbolList:
             symbolList.remove(values[1]) 
@@ -49,20 +52,35 @@ def create_data_structure():
           date_difference = today_date - given_date
           days_difference = date_difference.days
 
-          print("symbol is " + values[1] + ", today's date is " + str(today_date) + ", given date is " + str(given_date) + "  and days_difference is " + str(days_difference))
+      if reverseSplitPattern.search(values[3]): 
+        if days_difference > 4: 
+          symbolListOther[values[1]] = "REVERSE SPLIT " + str(days_difference) + " DAYS AGO!!!!!!"   
+        elif days_difference == 0:  
+          symbolListOther[values[1]] = "REVERSE SPLIT TODAY.  40%" 
+        if values[1] in symbolList:
+          symbolList.remove(values[1]) 
 
-          if pattern.search(values[3]): 
-            if days_difference > 4: 
-              symbolListOther[values[1]] = "REVERSE SPLIT " + str(days_difference) + " DAYS AGO!!!!!!"   
-            elif days_difference == 0:  
-              symbolListOther[values[1]] = "REVERSE SPLIT TODAY.  40%" 
-              if values[1] in symbolList:
-                symbolList.remove(values[1]) 
+      print("Line is ** " + line) 
 
-          if values[2] == 'Symbol Change':
-              symbolListOther[values[1]] = "SYMBOL CHANGE " + str(days_difference) + " DAYS AGO!!! 38 PERCENT!!!" 
-              if values[1] in symbolList: 
-                symbolList.remove(values[1])           
+      if stockSplitPattern.search(values[3]):
+        symbolList.remove(values[1])
+        print("Found stock split pattern for " + values[1]) 
+
+      if values[2] == 'Symbol Change':
+        symbolListOther[values[1]] = "SYMBOL CHANGE " + str(days_difference) + " DAYS AGO!!! 38 PERCENT!!!" 
+        if values[1] in symbolList: 
+          symbolList.remove(values[1])           
+
+      if wasListedPattern.search(values[3]): 
+        symbolListOther[values[1]] = "WAS LISTED " + str(days_difference) + " DAYS AGO!!!  AT LEAST 38 PERCENT!!!" 
+        if values[1] in symbolList:
+          symbolList.remove(values[1]) 
+
+      if spunOffPattern.search(values[3]):
+        symbolListOther[values[1]] = "NEW SYMBOL AS OF " + str(days_difference) + " DAYS AGO!!!  AT LEAST 38 PERCENT!!!" 
+        if values[1] in symbolList:
+          symbolList.remove(values[1]) 
+
 
     f.close() 
 
