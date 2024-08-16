@@ -279,24 +279,13 @@
   <!-- Modal content -->
   <div class="modal-content">
     <p style="font-size: 25px">
-			- If a stock is high-risk because of 5X volume, set it at 23%<br><br>
-			- Go 15% down from pre-market low for high-risk penny stocks<br><br>
-			- STALLS - If it isn't going anywhere, just get out after an hour.<br><br>
-			- Minimum entry for penny stocks - 28%<br><br>
 			- Pink Sheet dollar stocks - if the 50% down price is still over $1.00 a share, you can jump in at 50%.  If you catch a Pink Sheet dollar stock at 50% mark, only take 20-25% profit<br><br>
-			- Offerings - 37% down from offering price for dollar stocks, 50% for penny stocks.<br><br>
 			- Super low volume stocks - you can go in at 24%, ONLY FOR DOLLAR STOCKS.<br><br>
 			- Recent bankruptcies - you can go into these at 40% penny the day after a bankruptcy, 35% dollar. <br><br>
-			- Earnings loss - 57.5% for dollar stocks.<br><br> 
-			- High risk stocks that drop in the pre-market - if dollar, try 7.5 (i.e. not 10)% below the pre-market low.<br><br>
-			- You can treat stocks barely under $1.00 (i.e. like $0.9983) as dollar stocks and chase at 17.5%.  They have dropped to that price and recovered well.  Just make sure you only take 5%.<br><br> 
-			- Earnings net income - 40% minimum.  No more jumping in before 40%, EVER.  You know this from experience (losses from jumping in before 40%). <br><br>
-			- If there is a major drop the previous day - 35-40% early the next day, and it must drop fast. <br><br>
-			- You can go in at 20% right up unil 8:00, provided the big charts difference is at least 10%<br><br>
-			- Drug news - 83%.<br><br>
 			- You can go for stocks whose earnings are about to come out after market close that day.<br><br>
 			- If an earnings is $0.00 - go in at 40%. 
-			
+			- Penny stocks with delisting news - you can go in these at 40%. 
+			- Inability to file - 38% dollar, 50% penny. 
     </p>
   </div>
 
