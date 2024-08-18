@@ -183,9 +183,9 @@ function calcAll(){
     {
         finalNumShares = $("#amountSpending").val()/$("#entryPrice").val(); 
         finalNumSharesRounded = (Math.floor(finalNumShares/10)*10); 
-        if (finalNumSharesRounded < 10)
+        if (finalNumSharesRounded < 5)
         {
-          finalNumSharesRounded = 10; 
+          finalNumSharesRounded = 5; 
         }
     }
 
