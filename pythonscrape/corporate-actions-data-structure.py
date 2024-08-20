@@ -56,7 +56,7 @@ def create_data_structure():
         if days_difference > 4: 
           symbolListOther[values[1]] = "REVERSE SPLIT " + str(days_difference) + " DAYS AGO!!!!!!"   
         elif days_difference == 0:  
-          symbolListOther[values[1]] = "REVERSE SPLIT TODAY.  40%" 
+          symbolListOther[values[1]] = "REVERSE SPLIT TODAY.  50%" 
         if values[1] in symbolList:
           symbolList.remove(values[1]) 
 
