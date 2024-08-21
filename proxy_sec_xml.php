@@ -734,6 +734,7 @@ function getStreetInsider($symbol, $yesterdayDays)
           $streetInsiderNews = preg_replace('/ private placement/i', '<span style="font-size: 25px; background-color:red; color:black"><b>PRIVATE PLACEMENT - WAIT FOR PRICE</b></span>&nbsp;', $streetInsiderNews);
           $streetInsiderNews = preg_replace('/ SEC investigation/i', '<span style="font-size: 25px; background-color:red; color:black"><b>SEC INVESTIGATION - STAY AWAY</b></span>&nbsp;', $streetInsiderNews);
           $streetInsiderNews = preg_replace('/ U\.S\. probe/i', '<span style="font-size: 25px; background-color:red; color:black"><b>U.S. PROBE - STAY AWAY</b></span>&nbsp;', $streetInsiderNews);
+          $streetInsiderNews = preg_replace('/ to submit/i', '<span style="font-size: 25px; background-color:red; color:black"><b>TO SUBMIT - CHECK DATE - IF IN THE FUTURE THEN ITS OK TO CHASE AT USUAL ENTRY</b></span>&nbsp;', $streetInsiderNews);
 
 
 
