@@ -286,6 +286,7 @@
 			- If an earnings is $0.00 - go in at 40%.<br><br> 
 			- Penny stocks with delisting news - you can go in these at 40%.<br><br>
 			- Inability to file - 38% dollar, 50% penny. <br><br>
+			- Same day reverse split - 40% dollar, 50% penny.  If they have already been dropping in pre-market, back way, way off.
     </p>
   </div>
 

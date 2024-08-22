@@ -31,9 +31,14 @@ def create_data_structure():
     # Remove duplicates 
     symbolList = list(OrderedDict.fromkeys(symbolList))
 
+    print("The original symbolList array is:") 
+    print(symbolList) 
+
     # 2nd pass 
     for line in f: 
       values = line.split("\t") 
+
+      print("Currently looking at stock " + values[1]) 
 
       reverseSplitPattern = re.compile(r'\breverse stock split\b', re.IGNORECASE) 
       stockSplitPattern = re.compile(rf'{re.escape(values[1])} stock split', re.IGNORECASE)
@@ -55,10 +60,8 @@ def create_data_structure():
       if reverseSplitPattern.search(values[3]): 
         if days_difference > 4: 
           symbolListOther[values[1]] = "REVERSE SPLIT " + str(days_difference) + " DAYS AGO!!!!!!"   
-        elif days_difference == 0:  
-          symbolListOther[values[1]] = "REVERSE SPLIT TODAY.  40% DOLLAR, 50% PENNY" 
-        if values[1] in symbolList:
-          symbolList.remove(values[1]) 
+          if values[1] in symbolList:
+            symbolList.remove(values[1]) 
 
       print("Line is ** " + line) 
 
