@@ -42,8 +42,9 @@
 							</td>
 							<td style="width:650px"> 
 								<span>
-									<input id="asian_stocks" type="submit" value="87.5%">
+									<input id="asian_stocks" type="submit" value="86%">
 								</span>
+								<label class="historical_data_label_thin">&nbsp;</label>
 								<span>
 									<input id="net_loss_penny" type="submit" value="62.5%">
 								</span>
@@ -56,11 +57,16 @@
 								<span>
 									<input id="net_income" type="submit" value="40%">
 								</span>
+								<label class="historical_data_label_thin">&nbsp;</label>
 								<span>
 									<input id="symbol_change" type="submit" value="25%">
 								</span>
 								<span>
 									<input id="penny_21" type="submit" value="21%">
+								</span>
+								<label class="historical_data_label_thin">&nbsp;</label>
+								<span>
+									<input id="dollar_17_5_half" type="submit" value="17.5%" style="background-color: pink; ">
 								</span>
 								<span>
 									<input id="dollar_17_5" type="submit" value="17.5%">

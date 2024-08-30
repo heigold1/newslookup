@@ -224,6 +224,12 @@ span#time_of_day_percentage{
 	width: 10px;
 }
 
+.historical_data_label_thin{
+	color: #000000; 
+	background-color: #000000; 
+	width: 3px;
+}
+
 #orderStub{
 	width: 315px;
 }
