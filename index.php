@@ -286,6 +286,7 @@
   <div class="modal-content">
     <p style="font-size: 25px">
 			- Pink Sheet dollar stocks - if the 50% down price is still over $1.00 a share, you can jump in at 50%.  If you catch a Pink Sheet dollar stock at 50% mark, only take 20-25% profit<br><br>
+			- PINK SHEET - If there is no level II data and your order is the only order showing, cancel your order.<br><br> 
 			- Super low volume stocks - you can go in at 24%, ONLY FOR DOLLAR STOCKS.<br><br>
 			- Recent bankruptcies - you can go into these at 40% penny the day after a bankruptcy, 35% dollar. <br><br>
 			- You can go for stocks whose earnings are about to come out after market close that day.<br><br>
