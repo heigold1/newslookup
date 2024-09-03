@@ -1733,7 +1733,7 @@ for (var corporateSymbol in corporateActionsStocks)
     $("#penny_21").click(function(){
 
       $("#entryPercentage").val("21.00"); 
-      $("#amountSpending").val("300"); 
+      $("#amountSpending").val("250"); 
 
       var yesterdaysClose = $('#yestCloseText').val(); 
       var newPrice = yesterdaysClose - (yesterdaysClose*21.00/100); 
@@ -1872,7 +1872,7 @@ for (var corporateSymbol in corporateActionsStocks)
              )
               {
                   setTimeout(function(){
-                      alert("It spiked over 100% the previous day, only take 4.2% profit"); 
+                      alert("It spiked over 100% the previous day, 1) Take 4.2% profit, 2) TWO-TIER, or 3) GO LOWER"); 
                   }, 300);
 
               }
@@ -1886,7 +1886,7 @@ for (var corporateSymbol in corporateActionsStocks)
              )
               {
                   setTimeout(function(){
-                      alert("It spiked over 100% the previous day, only take 5.5% profit"); 
+                      alert("It spiked over 100% the previous day, only take 5.5% profit, 2) TWO-TIER, or 3) GO LOWER"); 
                   }, 300);
 
               }

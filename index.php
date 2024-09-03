@@ -296,7 +296,7 @@
 			- Same day reverse split - 40% dollar, 50% penny.  If they have already been dropping in pre-market, back way, way off.<br><br><br>
 			DROPS <br><br>
 			*******<br><br>
-			- 40-45% drop previous day - 40% 
+			- 40-45% drop previous day - 40%<br><br>
 
     </p>
   </div>
