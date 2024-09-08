@@ -121,7 +121,7 @@ if (isset($fullJSON->data[1]->close))
 
       $returnArray['day_1_recovery'] = number_format((($fullJSON->data[0]->close - $fullJSON->data[0]->low)/$fullJSON->data[0]->low)*100, 2); 
       $fiveDayVolume += floatval($fullJSON->data[0]->volume); 
-      if (($fullJSON->data[1]->close > 1.00) && ($fullJSON->data[2]->close < 1.00))
+      if (($fullJSON->data[0]->close > 1.00) && ($fullJSON->data[1]->close < 1.00))
       {
           $returnArray['penny_to_dollar'] = true; 
       }

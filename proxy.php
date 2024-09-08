@@ -1551,6 +1551,9 @@ die();
 
       $streetInsiderScrape = '&nbsp;&nbsp;<a target="_blank" onclick="return openPage(this.href)" href="./scrape-street-insider.php?symbol=' . $symbol . '"> SI Scrape</a>&nbsp;&nbsp;';  
 
+
+
+
       $splits = '&nbsp;&nbsp;<a target="_blank" onclick="return openPage(this.href)" href="https://www.stocksplithistory.com/?symbol=' . $symbol . '"> Splits</a>&nbsp;&nbsp;'; 
 
       $marketStackFromDate = getYMDTradeDate(100); 
