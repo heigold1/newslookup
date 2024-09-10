@@ -7,7 +7,7 @@ require_once("country-codes.php");
 
 libxml_use_internal_errors(true);
 
-$yesterdayDays = 3;
+$yesterdayDays = 1;
 
 error_reporting(1);
 //ini_set('display_errors', 1);
@@ -1507,6 +1507,7 @@ die();
       $finalReturn = preg_replace('/ SEC investigation/i', '<span style="font-size: 25px; background-color:red; color:black"><b>SEC INVESTIGATION - STAY AWAY</b></span>&nbsp;', $finalReturn);
       $finalReturn = preg_replace('/ U\.S\. probe/i', '<span style="font-size: 25px; background-color:red; color:black"><b>U.S. PROBE - STAY AWAY</b></span>&nbsp;', $finalReturn);
       $finalReturn = preg_replace('/ to submit/i', '<span style="font-size: 25px; background-color:red; color:black"><b>TO SUBMIT - CHECK DATE - IF IN THE FUTURE THEN ITS OK TO CHASE AT USUAL ENTRY</b></span>&nbsp;', $finalReturn);
+      $finalReturn = preg_replace('/ to launch/i', '<span style="font-size: 25px; background-color:#00ff00; color:black; "><b>TO LAUNCH - THIS IS OK BUT DON\'T CHASE EARLY</b></span>&nbsp;', $finalReturn);
 
 
       $returnArray['dividendCheckDate'] = 0; 
