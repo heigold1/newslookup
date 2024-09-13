@@ -37,6 +37,7 @@ def create_data_structure():
     # 2nd pass 
     for line in f: 
       values = line.split("\t") 
+      days_difference = None 
 
       print("Currently looking at stock " + values[1]) 
 

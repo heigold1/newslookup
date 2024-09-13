@@ -735,7 +735,7 @@ function getStreetInsider($symbol, $yesterdayDays)
           $streetInsiderNews = preg_replace('/ SEC investigation/i', '<span style="font-size: 25px; background-color:red; color:black"><b>SEC INVESTIGATION - STAY AWAY</b></span>&nbsp;', $streetInsiderNews);
           $streetInsiderNews = preg_replace('/ U\.S\. probe/i', '<span style="font-size: 25px; background-color:red; color:black"><b>U.S. PROBE - STAY AWAY</b></span>&nbsp;', $streetInsiderNews);
           $streetInsiderNews = preg_replace('/ to submit/i', '<span style="font-size: 25px; background-color:red; color:black"><b>TO SUBMIT - CHECK DATE - IF IN THE FUTURE THEN ITS OK TO CHASE AT USUAL ENTRY</b></span>&nbsp;', $streetInsiderNews);
-          $streetInsiderNews = preg_replace('/ to launch/i', '<span style="font-size: 25px; background-color:#00ff00; color:black; "><b>TO LAUNCH - THIS IS OK BUT DON\'T CHASE EARLY</b></span>&nbsp;', $streetInsiderNews);
+          $streetInsiderNews = preg_replace('/ launch/i', '<span style="font-size: 20px; background-color:orange; color:black; "><b>LAUNCH - IF ABOUT TO LAUNCH OR LAUNCH IS SUCCESSFUL, 18-20%.  IF FAILED LAUNCH, 40%</b></span>&nbsp;', $streetInsiderNews);
 
 
 
