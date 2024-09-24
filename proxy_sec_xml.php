@@ -442,7 +442,7 @@ function getStreetInsider($symbol, $yesterdayDays)
 
         $streetInsiderNews = "<ul class='newsSide'>";
         $streetInsiderNews .= "<li style='font-size: 20px !important; background-color: #00ff00;'>
-<a style='font-size: 25px' target='_blank' href='https://www.streetinsider.com/stock_lookup.php?LookUp=Get+Quote&q=" . $symbol . "'>StreetInsider News</a></li>";
+<a style='font-size: 25px' target='_blank' href='https://www.streetinsider.com/stock_lookup.php?LookUp=Get+Quote&q=" . $symbol . "'>StreetInsider News</a> -- <a style='font-size: 25px' target='_blank' href='https://newsquantified.com/" . $symbol . "'>News Quantified</a></li>";
 
 
         $classActionAdded = false;
@@ -524,12 +524,74 @@ function getStreetInsider($symbol, $yesterdayDays)
             $newsTitle = preg_replace('/nasdaq rejects(.*?)listing/i', '<span style="font-size: 12px; background-color:red; color:black"><b>Nasdaq rejects $1 listing</span> </b>&nbsp;', $newsTitle);
             $newsTitle = preg_replace('/ announces(.*?)offering/i', '<span style="font-size: 35px; background-color:red; color:black"><b> ANNOUNCES $1 OFFERING </b></span> ', $newsTitle);
 
-            $streetInsiderNews .=  " ><a target='_blank' href='$feedItem->link'> " . $publicationDate . " " . $publicationTime . " - <br>" . $newsTitle . "</a>";
+            $streetInsiderNews .=  " ><a target='_blank' href='$feedItem->link'> " . $publicationDate . " " . $publicationTime . " - <br>" . $newsTitle . "</a></li>";
 
             $previousNewsTitle = $currentNewsTitle; 
         } // looping through each news channel item 
 
         $streetInsiderNews .=  "</ul>";
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        try 
+        {
+            $link->set_charset("utf8");
+
+            $sqlStatement = "REPLACE INTO streetinsider (symbol, htmltext, lastLink, lastTitle) VALUES ('" . $symbol . "', '" . mysqli_real_escape_string($link, $streetInsiderNews) . "', '" . $streetInsiderLink . "', '" . $streetInsiderTitle . "')"; 
+
+            $query = mysqli_query($link, $sqlStatement);
+            if(!$query)
+            {
+                echo "Error: " . mysqli_error($link);
+            }
+        } 
+        catch (mysqli_sql_exception $e) 
+        {
+            echo "Error when writing to database is " . $e->errorMessage() . "<br>"; 
+        } 
+    }  // if either we didn't find it in the database, or it hasn't been half an hour since we last scraped it. 
+
+    
+
+
+
+
+
+
+
+} // end of getStreetInsider 
+
+
+
+
+function getNewsQuantified($symbol, $yesterdayDays)
+{
+
+    $streetInsiderNews = "<ul class='newsSide'>";
+    $streetInsiderNews .= "<li style='font-size: 20px !important; background-color: #00ff00;'><a style='font-size: 25px' target='_blank' href='https://www.streetinsider.com/stock_lookup.php?LookUp=Get+Quote&q=" . $symbol . "'>StreetInsider News</a> -- <a style='font-size: 25px' target='_blank' href='https://newsquantified.com/" . $symbol . "'>News Quantified</a></li>";
+
+    $command = escapeshellcmd('python3 ./pythonscrape/scrape-news-quantified.py ' . $symbol . ' ' . $yesterdayDays);
+    $streetInsiderNews .= shell_exec($command);
+    $streetInsiderNews .=  "</ul>";
 
         $streetInsiderNews = preg_replace('/(' .  get_yahoo_yesterday_trade_date() . ')/', '<span style="font-size: 12px; background-color:   #0747a1; color:white; border: 1px solid red; "> $1</span> ', $streetInsiderNews);
         $streetInsiderNews = preg_replace('/(' .  get_yahoo_todays_trade_date() . ')/', '<span style="font-size: 12px; background-color:  black; color:white; border: 1px solid red; "> $1</span> ', $streetInsiderNews);
@@ -739,27 +801,20 @@ function getStreetInsider($symbol, $yesterdayDays)
 
 
 
-        try 
-        {
-            $link->set_charset("utf8");
 
-            $sqlStatement = "REPLACE INTO streetinsider (symbol, htmltext, lastLink, lastTitle) VALUES ('" . $symbol . "', '" . mysqli_real_escape_string($link, $streetInsiderNews) . "', '" . $streetInsiderLink . "', '" . $streetInsiderTitle . "')"; 
 
-            $query = mysqli_query($link, $sqlStatement);
-            if(!$query)
-            {
-                echo "Error: " . mysqli_error($link);
-            }
-        } 
-        catch (mysqli_sql_exception $e) 
-        {
-            echo "Error when writing to database is " . $e->errorMessage() . "<br>"; 
-        } 
-    }  // if either we didn't find it in the database, or it hasn't been half an hour since we last scraped it. 
 
-    return "<div style='height: 250px; width: 100%; overflow-y:auto; border-style: double !important; border-color: black !important; color: black;'>" . $streetInsiderNews . "</div>"; 
+        return "<div style='height: 250px; width: 100%; overflow-y:auto; border-style: double !important; border-color: black !important; color: black;'>" . $streetInsiderNews . "</div>"; 
 
-} // end of getStreetInsider 
+
+
+
+
+
+
+
+
+}
 
 
 function getSecFilings($symbol, $originalSymbol, $yesterdayDays, $cikNumber, $secCompanyName)
@@ -786,7 +841,13 @@ function getSecFilings($symbol, $originalSymbol, $yesterdayDays, $cikNumber, $se
       
       $returnHtml .= "<body>"; 
 
-      $returnHtml .= getStreetInsider($symbol, $yesterdayDays); 
+//       $returnHtml .= getStreetInsider($symbol, $yesterdayDays); 
+
+
+      $returnHtml .= getNewsQuantified($symbol, $yesterdayDays); 
+
+
+
 
       $returnHtml .= buildNewsNotes($secCompanyName); 
 
