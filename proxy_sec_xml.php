@@ -11,7 +11,7 @@ $secCompanyName = preg_replace("/<.*?>/", "", $secCompanyName);
 $cikNumber = $_GET['cikNumber']; 
 $checkSec = $_GET['checkSec']; 
 
-$yesterdayDays = 3;
+$yesterdayDays = 1;
 
 fopen("cookies.txt", "w");
 
@@ -799,20 +799,7 @@ function getNewsQuantified($symbol, $yesterdayDays)
           $streetInsiderNews = preg_replace('/ to submit/i', '<span style="font-size: 25px; background-color:red; color:black"><b>TO SUBMIT - CHECK DATE - IF IN THE FUTURE THEN ITS OK TO CHASE AT USUAL ENTRY</b></span>&nbsp;', $streetInsiderNews);
           $streetInsiderNews = preg_replace('/ launch/i', '<span style="font-size: 20px; background-color:orange; color:black; "><b>LAUNCH - IF ABOUT TO LAUNCH OR LAUNCH IS SUCCESSFUL, 18-20%.  IF FAILED LAUNCH, 40%</b></span>&nbsp;', $streetInsiderNews);
 
-
-
-
-
-
         return "<div style='height: 250px; width: 100%; overflow-y:auto; border-style: double !important; border-color: black !important; color: black;'>" . $streetInsiderNews . "</div>"; 
-
-
-
-
-
-
-
-
 
 }
 
