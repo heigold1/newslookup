@@ -10,7 +10,7 @@ import re
 
 def check_am_pm(yesterday_days, publication_date_time):
     # Loop through the range of days
-    for i in range(yesterday_days, 1, -1):
+    for i in range(yesterday_days, 0, -1):
         # Check if the publication_date matches the calculated trade date for day `i`
 
         if re.search(get_yahoo_trade_date(i), publication_date_time):  
@@ -104,7 +104,7 @@ def scrape_news(symbol, yesterday_days):
 
             display_date = check_am_pm(yesterday_days, display_date) 
 
-            linkData[count] = (date_time_str, f'<li><a href="{link}">{display_date} {action} from {from_action} by {firm}</a></li>')
+            linkData[count] = (date_time_str, f'<li><a target="blank" href="{link}">{display_date} {action} from {from_action} by {firm}</a></li>')
             count += 1
 
     # Scraping news
@@ -128,7 +128,7 @@ def scrape_news(symbol, yesterday_days):
         display_date = date_time_str 
         display_date = check_am_pm(yesterday_days, display_date)
 
-        linkData[count] = (date_time_str, f'<li><a href="{link}">{display_date} {headline}</a></li>')
+        linkData[count] = (date_time_str, f'<li><a target="blank" href="{link}">{display_date} {headline}</a></li>')
         count += 1
 
     # Scraping SEC filings
@@ -148,7 +148,7 @@ def scrape_news(symbol, yesterday_days):
         display_date = date_time_str 
         display_date = check_am_pm(yesterday_days, display_date)
 
-        linkData[count] = (date_time_str, f'<li><a href="{link}">{display_date} {headline}</a></li>')
+        linkData[count] = (date_time_str, f'<li><a target="blank" href="{link}">{display_date} {headline}</a></li>')
         count += 1
 
     # Sort linkData by date
@@ -166,6 +166,11 @@ if __name__ == "__main__":
     data = scrape_news(symbol, yesterday_days)
 
     # Output the results
+    j = 0 
     for key, value in data.items():
-        #print(f"{key}: {value}")
-        print(value[1]) 
+        j += 1 
+        #print(f"{key}: {value}")a
+        new_value = value[1] 
+        if j % 2 == 1: 
+            new_value = new_value.replace('<li>', '<li style="background-color: #ebd8bd;">') 
+        print(new_value) 
