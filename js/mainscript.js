@@ -1518,7 +1518,8 @@ for (var corporateSymbol in corporateActionsStocks)
         if ((day1 < 1.00) && (day2 < 1.00) && (day3 < 1.00))
         {
 //          alert("DOWNWARD TRAJECTORY!!!"); 
-// Since I put it in the pop-ups now, to check the TMX 3-month for L-bars, I'm going to temporarily take this out for now.
+// Since I put it in the pop-ups now, to check the TMX 3-month chart for L-bars, I'm going to temporarily take this out for now.
+// since checking the TMX 3-month for L-bars will tell me if there is a downward trajectory. 
 
         }
 
