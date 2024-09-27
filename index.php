@@ -341,7 +341,7 @@
   <!-- Modal content -->
   <div class="modal-content">
   	<br><br><br><br>
-    <p style="font-size: 160px">CHECK FOR L-BARS</p>
+    <p style="font-size: 160px">CHECK FOR L-BARS</p><br> 
   </div>
 
 </div>

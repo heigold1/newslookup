@@ -1606,14 +1606,8 @@ for (var corporateSymbol in corporateActionsStocks)
 
         $("#entryPercentage").focus();  
 
-        var modal = document.getElementById('check-for-l-bars');
-        modal.style.display = "block";
-        setTimeout(function(){ 
-          var modal = document.getElementById('check-for-l-bars');
-          modal.style.display = "none";
-        }, 1050);
-
-
+        var modalLBars = document.getElementById('check-for-l-bars');
+        modalLBars.style.display = "block";
 
     } // end of function startProcess() end of startProcess 
 
@@ -2044,6 +2038,10 @@ for (var corporateSymbol in corporateActionsStocks)
             notesModal.style.display = "none"; 
     }); 
 
+    $("#check-for-l-bars").click(function(){
+        var notesModal = document.getElementById('check-for-l-bars');
+            notesModal.style.display = "none"; 
+    }); 
 
 
 
