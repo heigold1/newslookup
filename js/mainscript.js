@@ -574,6 +574,7 @@ $(function() {
               alert("Check for extreme drops in the after-hours"); 
           }
 
+          alert("Check TMX 3-month chart for L-bars"); 
 
           $("#left_bottom_container").html("");
           $("#bigcharts_chart_container").html("");
@@ -1388,8 +1389,7 @@ for (var corporateSymbol in corporateActionsStocks)
   }
 }
 
-
-                      if (parseInt(finalObject.industryCount) > 7)
+                      if ((parseInt(finalObject.industryCount) > 7) && (finalObject.industry != "Biotechnology"))
                       {
                         alert("Sector count is over 6, back off"); 
                       }
@@ -1514,9 +1514,12 @@ for (var corporateSymbol in corporateActionsStocks)
           alert("UPWARD TRAJECTORY!!! 19%!!!!"); 
         }
 
+
         if ((day1 < 1.00) && (day2 < 1.00) && (day3 < 1.00))
         {
-          alert("DOWNWARD TRAJECTORY!!!"); 
+//          alert("DOWNWARD TRAJECTORY!!!"); 
+// Since I put it in the pop-ups now, to check the TMX 3-month for L-bars, I'm going to temporarily take this out for now.
+
         }
 
 
@@ -1605,9 +1608,6 @@ for (var corporateSymbol in corporateActionsStocks)
         }
 
         $("#entryPercentage").focus();  
-
-        var modalLBars = document.getElementById('check-for-l-bars');
-        modalLBars.style.display = "block";
 
     } // end of function startProcess() end of startProcess 
 

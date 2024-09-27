@@ -286,12 +286,15 @@ function getIndustryCount($symbol)
 
     } 
 
-    $result = $mysqli->query("SELECT count(industry) as count FROM sector WHERE industry = (
+    $result = $mysqli->query("SELECT industry, count(industry) as count FROM sector WHERE industry = (
         SELECT industry FROM sector WHERE symbol = '" . $symbol . "')");
 
     $returnValue = $result->fetch_assoc(); 
 
-    return $returnValue["count"]; 
+    $returnArray["count"] = $returnValue["count"];
+    $returnArray["industry"] = $returnValue["industry"]; 
+
+    return $returnArray; 
 
 }  // end of getIndustryCount 
 
@@ -898,7 +901,11 @@ function getSecFilings($symbol, $originalSymbol, $yesterdayDays, $cikNumber, $se
 
 
       $returnArray['html'] = $returnHtml;
-      $returnArray['industryCount'] = getIndustryCount($symbol); 
+
+      $industryCount = getIndustryCount($symbol); 
+
+      $returnArray['industryCount'] = $industryCount["count"]; 
+      $returnArray['industry'] = $industryCount["industry"]; 
 
         echo json_encode($returnArray);       
 
