@@ -20,6 +20,11 @@ import random
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 
+def days_back_date(days):
+    today = datetime.now()
+    past_date = today - timedelta(days=days)
+    return past_date.strftime('%Y-%m-%d') 
+
 def get_date_from_utc(utc_date):
     return parser.isoparse(utc_date).strftime("%Y-%m-%d")
 
@@ -158,9 +163,6 @@ def parse_xml(xml_data, yesterday_days):
 
 
 
-
-
-
         if re.search('registration', title, re.IGNORECASE) or re.search('offering', title, re.IGNORECASE):
             registration_offering = " - REGISTRATION"
         else:
@@ -177,6 +179,10 @@ def parse_xml(xml_data, yesterday_days):
     return_sec_html += f"<tr><td>Type</td><td>Title{sec_message}</td><td>Date</td><td>Time</td></tr>"
     return_sec_html += "".join(sec_table_rows)
     return_sec_html += "</table>"
+
+    for days_back_count in range(14, yesterday_days, -1):
+        date_string = days_back_date(days_back_count) 
+        return_sec_html = re.sub(r'(' + re.escape(date_string) + r')', r'<span style="font-size: 12px; background-color:yellow; color:black">\1</span>', return_sec_html)
 
     result = {
         'found' : True, 
