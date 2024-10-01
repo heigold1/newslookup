@@ -787,7 +787,7 @@ function getNewsQuantified($symbol, $yesterdayDays)
           $streetInsiderNews = preg_replace('/ mentioned as short/i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp;MENTIONED AS SHORT - BACK OFF</span></b>&nbsp;', $streetInsiderNews);
           $streetInsiderNews = preg_replace('/ transaction support agreement/i', '<span style="font-size: 55px; background-color:red; color:black"><br><br><b>&nbsp;TRANSACTION SUPPORT AGREEMENT - BANKRUPTCY</span><br><br></b>&nbsp;', $streetInsiderNews);
           $streetInsiderNews = preg_replace('/ to highlight/i', '<span style="font-size: 60px; background-color:red; color:black"><br><br><b>&nbsp;TO HIGHLIGHT<br><br>CHECK DATE</span><br><br></b>&nbsp;', $streetInsiderNews);
-          $streetInsiderNews = preg_replace('/ short report/i', '<span style="font-size: 35px; background-color:red; color:black"><b>SHORT REPORT - STAY AWAY</span></b>&nbsp;', $streetInsiderNews);
+          $streetInsiderNews = preg_replace('/ short report/i', '<br><br><span style="font-size: 35px; background-color:red; color:black"><b>SHORT REPORT - STAY AWAY</span></b>&nbsp;', $streetInsiderNews);
           $streetInsiderNews = preg_replace('/ mixed shelf/i', '<span style="font-size: 35px; background-color:red; color:black"><b>MIXED SHELF - OFFERING</span></b>&nbsp;', $streetInsiderNews);
           $streetInsiderNews = preg_replace('/ closing of private placement/i', '<span style="font-size: 35px; background-color:red; color:black"><b>CLOSING OF PRIVATE PLACEMENT</span></b>&nbsp;', $streetInsiderNews);
           $streetInsiderNews = preg_replace('/ files to sell/i', '<span style="font-size: 25px; background-color:red; color:black"><b>FILES TO SELL - OFFERING</span></b>&nbsp;', $streetInsiderNews);

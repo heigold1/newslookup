@@ -1494,7 +1494,7 @@ die();
       $finalReturn = preg_replace('/ mentioned as short/i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp;MENTIONED AS SHORT - BACK OFF</span></b>&nbsp;', $finalReturn);
       $finalReturn = preg_replace('/ transaction support agreement/i', '<span style="font-size: 55px; background-color:red; color:black"><br><br><b>&nbsp;TRANSACTION SUPPORT AGREEMENT - BANKRUPTCY</span><br><br></b>&nbsp;', $finalReturn);
       $finalReturn = preg_replace('/ to highlight/i', '<span style="font-size: 65px; background-color:red; color:black"><br><br><b>&nbsp;TO<br><br>HIGHLIGHT<br><br>CHECK<br><br>DATE<br><br></span></b>&nbsp;', $finalReturn);
-      $finalReturn = preg_replace('/ short report/i', '<span style="font-size: 35px; background-color:red; color:black"><b>SHORT REPORT - STAY AWAY</span></b>&nbsp;', $finalReturn);
+      $finalReturn = preg_replace('/ short report/i', '<br><br><span style="font-size: 35px; background-color:red; color:black"><b>SHORT REPORT - STAY AWAY</span></b>&nbsp;', $finalReturn);
       $finalReturn = preg_replace('/ mixed shelf/i', '<span style="font-size: 35px; background-color:red; color:black"><b>MIXED SHELF - OFFERING</span></b>&nbsp;', $finalReturn);
       $finalReturn = preg_replace('/ closing of private placement/i', '<span style="font-size: 35px; background-color:red; color:black"><b>CLOSING OF PRIVATE PLACEMENT</span></b>&nbsp;', $finalReturn);
       $finalReturn = preg_replace('/ files to sell/i', '<span style="font-size: 25px; background-color:red; color:black"><b>FILES TO SELL - OFFERING</span></b>&nbsp;', $finalReturn);
