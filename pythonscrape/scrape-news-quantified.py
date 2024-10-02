@@ -117,7 +117,7 @@ def scrape_news(symbol, yesterday_days):
         time = row.select_one('.date-cell.time-cell').text.strip()
         headline = row.select_one('.headline-cell.mobile-r').text.strip()
     
-        if re.search(r'class.action', headline, re.IGNORECASE) or re.search(r"ATTENTION .+? SHAREHOLDERS", headline) or re.search(r"ALERT:", headline) or re.search(r"investors who have lost money", headline, re.IGNORECASE) or re.search(r"shareholders who lost money", headline, re.IGNORECASE) or re.search(r"contact .+? regarding an ongoing investigation", headline, re.IGNORECASE) or re.search(r"investigated by the .+? law firm", headline, re.IGNORECASE) or re.search(r"INVESTIGATION:", headline)  :
+        if re.search(r'class.action', headline, re.IGNORECASE) or re.search(r"ATTENTION .+? SHAREHOLDERS", headline) or re.search(r"ALERT:", headline) or re.search(r"investors who have lost money", headline, re.IGNORECASE) or re.search(r"shareholders who lost money", headline, re.IGNORECASE) or re.search(r"contact .+? regarding an ongoing investigation", headline, re.IGNORECASE) or re.search(r"investigated by the .+? law firm", headline, re.IGNORECASE) or re.search(r"INVESTIGATION:", headline) or re.search(r"downgrade", headline, re.IGNORECASE)  :
             continue 
 
         link = row.select_one('.impact-cell.mobile-r a')['href']
