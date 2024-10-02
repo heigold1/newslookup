@@ -1352,7 +1352,7 @@ for (var corporateSymbol in corporateActionsStocks)
 
                       if (dayOneLow < -10)
                       {
-                          alert("Dropped " + dayOneLow + " yesterday.  Check for the 'L' bar"); 
+                          alert("DROPPED " + dayOneLow + "% YESTERDAY"); 
                       }
 
                       if (newStock == true)
