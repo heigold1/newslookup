@@ -672,7 +672,7 @@ function getNewsQuantified($symbol, $yesterdayDays)
           $streetInsiderNews = preg_replace('/ investor call/i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp; INVESTOR CALL - CHECK THE DATE &nbsp;</b></span>&nbsp;', $streetInsiderNews);
           $streetInsiderNews = preg_replace('/ strategic update/i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp; STRATEGIC UPDATE - BE CAREFUL &nbsp;</b></span>&nbsp;', $streetInsiderNews);
           $streetInsiderNews = preg_replace('/ strategic shift/i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp; STRATEGIC SHIFT - BE CAREFUL &nbsp;</b></span>&nbsp;', $streetInsiderNews);
-          $streetInsiderNews = preg_replace('/ attorney general/i', '<span style="font-size: 12px; background-color:red; color:black"><b>&nbsp; attorney general (if there is an attorney general probe then 45-50%) &nbsp;</b></span>&nbsp;', $streetInsiderNews);
+          $streetInsiderNews = preg_replace('/ attorney general/i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp; attorney general (if there is an attorney general probe then 45-50%) &nbsp;</b></span>&nbsp;', $streetInsiderNews);
           $streetInsiderNews = preg_replace('/ merger/i', '<span style="font-size: 55px; background-color:red; color:black"><br><br><b>&nbsp; MERGER<br><br> - STAY AWAY</b></span>&nbsp;', $streetInsiderNews);
           $streetInsiderNews = preg_replace('/ take private/i', '<span style="font-size: 55px; background-color:red; color:black"><b>&nbsp; TAKE PRIVATE<br><br> - STAY AWAY</b></span>&nbsp;', $streetInsiderNews);
           $streetInsiderNews = preg_replace('/ preliminary(.*?)outlook/i', '<span style="font-size: 12px; background-color:red; color:black"><b>&nbsp; Preliminary$1Outlook -</span> <span style="font-size: 12px; background-color:lightgreen; color:black">41% right off the bat, then 48% literally 3 minutes later.  TAKE NO MORE THAN 5% AND BAIL &nbsp;</b></span>&nbsp;', $streetInsiderNews);
@@ -802,6 +802,10 @@ function getNewsQuantified($symbol, $yesterdayDays)
           $streetInsiderNews = preg_replace('/ to submit/i', '<span style="font-size: 25px; background-color:red; color:black"><b>TO SUBMIT - CHECK DATE - IF IN THE FUTURE THEN ITS OK TO CHASE AT USUAL ENTRY</b></span>&nbsp;', $streetInsiderNews);
           $streetInsiderNews = preg_replace('/ launch/i', '<span style="font-size: 20px; background-color:orange; color:black; "><b>LAUNCH - IF ABOUT TO LAUNCH OR LAUNCH IS SUCCESSFUL, 18-20%.  IF FAILED LAUNCH, 40%</b></span>&nbsp;', $streetInsiderNews);
           $streetInsiderNews = preg_replace('/ to supply/i', '<span style="font-size: 20px; background-color:#00ff00; color:black; "><b>TO SUPPLY - THIS IS OK</b></span>&nbsp;', $streetInsiderNews);
+          $streetInsiderNews = preg_replace('/ enters partnership/i', '<span style="font-size: 20px; background-color:#00ff00; color:black; "><b>ENTERS PARTNERSHIP - THIS IS OK</b></span>&nbsp;', $streetInsiderNews);
+          $streetInsiderNews = preg_replace('/ announces partnership/i', '<span style="font-size: 20px; background-color:#00ff00; color:black; "><b>ANNOUNCES PARTNERSHIP - THIS IS OK</b></span>&nbsp;', $streetInsiderNews);
+          $streetInsiderNews = preg_replace('/ shareholder update/i', '<span style="font-size: 25px; background-color:red; color:black; "><b>SHAREHOLDER UPDATE - 40%</b></span>&nbsp;', $streetInsiderNews);
+
 
 
         return "<div style='height: 250px; width: 100%; overflow-y:auto; border-style: double !important; border-color: black !important; color: black;'>" . $streetInsiderNews . "</div>"; 

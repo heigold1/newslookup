@@ -59,10 +59,12 @@ def create_data_structure():
           days_difference = date_difference.days
 
       if reverseSplitPattern.search(values[3]): 
-        if days_difference > 4: 
+        if values[1] in symbolList: 
+          symbolList.remove(values[1]) 
+        if days_difference == 1:
+          symbolListOther[values[1]] = "REVERSE SPLIT YESTERDAY!!!! 25-30% EARLY!!!!!" 
+        elif days_difference > 1: 
           symbolListOther[values[1]] = "REVERSE SPLIT " + str(days_difference) + " DAYS AGO!!!!!!"   
-          if values[1] in symbolList:
-            symbolList.remove(values[1]) 
 
       print("Line is ** " + line) 
 
