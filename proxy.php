@@ -1511,6 +1511,7 @@ die();
       $finalReturn = preg_replace('/ enters partnership/i', '<span style="font-size: 20px; background-color:#00ff00; color:black; "><b>ENTERS PARTNERSHIP - THIS IS OK</b></span>&nbsp;', $finalReturn);
       $finalReturn = preg_replace('/ announces partnership/i', '<span style="font-size: 20px; background-color:#00ff00; color:black; "><b>ANNOUNCES PARTNERSHIP - THIS IS OK</b></span>&nbsp;', $finalReturn);
       $finalReturn = preg_replace('/ shareholder update/i', '<span style="font-size: 25px; background-color:red; color:black; "><b>SHAREHOLDER UPDATE - 40%</b></span>&nbsp;', $finalReturn);
+      $finalReturn = preg_replace('/ granted extension (.*?) listing/i', '<span style="font-size: 25px; background-color:red; color:black; "><b>GRANTED EXTENSION $1 LISTING - 40%</b></span>&nbsp;', $finalReturn);
 
 
       $returnArray['dividendCheckDate'] = 0; 
