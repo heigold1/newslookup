@@ -1,12 +1,38 @@
-#!/usr/bin/pythoption:'ascii' codec can't encode character '\xa9' in position 134670 lxml import html
+#!/usr/bin/python3
 import urllib3
 from collections import OrderedDict
 import re 
 import json
 from datetime import datetime  
 import sys  
+import pandas as pd
+import numpy as np 
+
+
 
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
+
+
+market_holidays = [
+  'Sep 2, 2024'
+        ]
+
+market_holidays = pd.to_datetime(market_holidays, format="%b %d, %Y") 
+
+def trading_days_ago(past_date_str, holidays):
+    # Convert past_date_str to a datetime object with the same format
+    past_date = pd.to_datetime(past_date_str, format="%b %d, %Y")
+
+    # Get the current date
+    current_date = pd.to_datetime(datetime.now().date())
+
+    # Create a range of business days between the past date and current date
+    business_days = pd.bdate_range(past_date, current_date, freq='C',  holidays=holidays)
+    
+    # Calculate the number of trading days ago (exclude weekends and holidays)
+    trading_days_ago = len(business_days) - 1  # Subtract 1 to exclude today
+    
+    return int(trading_days_ago)
 
 
 def create_data_structure():
@@ -54,9 +80,13 @@ def create_data_structure():
             symbolList.remove(values[1]) 
         else: 
           given_date_string = values[0] 
-          given_date = datetime.strptime(given_date_string, "%b %d, %Y") 
-          date_difference = today_date - given_date
-          days_difference = date_difference.days
+#          given_date = datetime.strptime(given_date_string, "%b %d, %Y") 
+#          date_difference = today_date - given_date
+#          days_difference = date_difference.days
+          days_difference = trading_days_ago(given_date_string, market_holidays) 
+          print(f"Days difference for {values[0]} is: {days_difference}") 
+
+
 
       if reverseSplitPattern.search(values[3]): 
         if days_difference == 1:
