@@ -11,7 +11,7 @@ $secCompanyName = preg_replace("/<.*?>/", "", $secCompanyName);
 $cikNumber = $_GET['cikNumber']; 
 $checkSec = $_GET['checkSec']; 
 
-$yesterdayDays = 3;
+$yesterdayDays = 1;
 
 fopen("cookies.txt", "w");
 
@@ -806,6 +806,7 @@ function getNewsQuantified($symbol, $yesterdayDays)
           $streetInsiderNews = preg_replace('/ announces partnership/i', '<span style="font-size: 20px; background-color:#00ff00; color:black; "><b>ANNOUNCES PARTNERSHIP - THIS IS OK</b></span>&nbsp;', $streetInsiderNews);
           $streetInsiderNews = preg_replace('/ shareholder update/i', '<span style="font-size: 25px; background-color:red; color:black; "><b>SHAREHOLDER UPDATE - 40%</b></span>&nbsp;', $streetInsiderNews);
           $streetInsiderNews = preg_replace('/ granted extension (.*?) listing/i', '<span style="font-size: 25px; background-color:red; color:black; "><b>GRANTED EXTENSION $1 LISTING - 40%</b></span>&nbsp;', $streetInsiderNews);
+          $streetInsiderNews = preg_replace('/ preliminary purchase/i', '<span style="font-size: 25px; background-color:red; color:black; "><b>PRELIMINARY PURCHASE - 40%</b></span>&nbsp;', $streetInsiderNews);
 
 
 
