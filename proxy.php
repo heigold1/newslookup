@@ -1513,6 +1513,7 @@ die();
       $finalReturn = preg_replace('/ shareholder update/i', '<span style="font-size: 25px; background-color:red; color:black; "><b>SHAREHOLDER UPDATE - 40%</b></span>&nbsp;', $finalReturn);
       $finalReturn = preg_replace('/ granted extension (.*?) listing/i', '<span style="font-size: 25px; background-color:red; color:black; "><b>GRANTED EXTENSION $1 LISTING - 40%</b></span>&nbsp;', $finalReturn);
       $finalReturn = preg_replace('/ preliminary purchase/i', '<span style="font-size: 25px; background-color:red; color:black; "><b>PRELIMINARY PURCHASE - 40%</b></span>&nbsp;', $finalReturn);
+      $finalReturn = preg_replace('/ patent filing/i', '<span style="font-size: 25px; background-color:red; color:black; "><b>patent filing - 40% news update</b></span>&nbsp;', $finalReturn);
 
 
       $returnArray['dividendCheckDate'] = 0; 

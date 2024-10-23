@@ -291,16 +291,19 @@
 			- Pink Sheet dollar stocks on news - you still have to chase these at 85%, even if they are dollar stocks<br><br>
 			- PINK SHEET - If there is no level II data and your order is the only order showing, cancel your order.<br><br><br>
 
-			- Super low volume stocks - you can go in at 24%, ONLY FOR DOLLAR STOCKS.<br><br>
+			NASDAQ/NYSE<br><br>
+			***********<br><br>
+			- Recent S1/S1/S3/etc... if the S1/S2/S3/424B3/notice of effectiveness is several days old, you can go in, penny or dollar.<br><br>
+			- Super low volume stocks - you can go in at 22%, ONLY FOR DOLLAR STOCKS.<br><br>
 			- Recent bankruptcies - you can go into these at 40% penny the day after a bankruptcy, 35% dollar. <br><br>
 			- You can go for stocks whose earnings are about to come out after market close that day.<br><br>
 			- If an earnings is $0.00 - go in at 40%.<br><br> 
-			- Penny stocks with delisting news - you can go in these at 40%.<br><br>
-			- Inability to file - 38% dollar, 50% penny. <br><br>
-			- Same day reverse split - 40% dollar, 50% penny.  If they have already been dropping in pre-market, back way, way off.<br><br><br>
+			- Penny stocks with delisting news - you can go in these at 40% provided the delisting date is a long shot away.<br><br>
+			- Inability to file - 38% dollar, 50% penny. <br><br><br>
+			
 			DROPS <br><br>
 			*******<br><br>
-			- 40-45% drop previous day - 40%<br><br>
+			- 40-45% drop previous day - 22%<br><br>
 
     </p>
   </div>
