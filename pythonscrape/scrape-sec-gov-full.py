@@ -159,7 +159,9 @@ def parse_xml(xml_data, yesterday_days):
         title = re.sub(r'424', '<span style="font-size: 45px; background-color:red; color:black"><b>&nbsp; 424 - OFFERING</b></span> &nbsp;', title)
         title = re.sub(r'notice of effectiveness', '<span style="font-size: 30px; background-color:red; color:black"><b>NOTICE OF EFFECTIVENESS</b></span> &nbsp;', title, flags=re.IGNORECASE)
         title = re.sub(r'additional definitive proxy soliciting materials', '<span style="font-size: 20px; background-color:red; color:black"><b>ADDITIONAL DEFINITIVE PROXY SOLICITING MATERIALS - CHECK WITH JAY ON THE MEETING MINUTES</b></span> &nbsp;', title, flags=re.IGNORECASE)
-        title = re.sub(r'offered to employees', '<span style="font-size: 20px; background-color:#00FF00; color:black"><b>OFFERED TO EMPLOYEES - THIS IS OK BUT CHECK FOR MORE IN THE ARTICLE</b></span> &nbsp;', title, flags=re.IGNORECASE)
+        title = re.sub(r'offered to employees', '<span style="font-size: 20px; background-color:red; color:black"><b>OFFERED TO EMPLOYEES</b></span> &nbsp;', title, flags=re.IGNORECASE)
+        title = re.sub(r'\[Rules (13a-16|15d-16).*?\]', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp; \\g<0> - CHECK FOR BANKRUPTCY, INSOLVENCY, OFFERING, RAISING EXTRA CASH, ETC...</b></span>', title, flags=re.IGNORECASE)
+
 
 
 
