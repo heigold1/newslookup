@@ -1680,13 +1680,13 @@ for (var corporateSymbol in corporateActionsStocks)
       CopyToClipboard();  
     }); // End of click function 
 
-    $("#dollar_17_5").click(function(){
-      $("#entryPercentage").val("17.51"); 
+    $("#dollar_19_5").click(function(){
+      $("#entryPercentage").val("19.30"); 
       $("#amountSpending").val("600"); 
 
 
       var yesterdaysClose = $('#yestCloseText').val(); 
-      var newPrice = yesterdaysClose - (yesterdaysClose*17.51/100); 
+      var newPrice = yesterdaysClose - (yesterdaysClose*19.35/100); 
       if (yesterdaysClose > 1.00){
         newPrice = newPrice.toFixed(2);         
       }
@@ -1700,13 +1700,13 @@ for (var corporateSymbol in corporateActionsStocks)
 
     }); // End of click function 
 
-    $("#dollar_17_5_half").click(function(){
-      $("#entryPercentage").val("17.51"); 
+    $("#dollar_19_5_half").click(function(){
+      $("#entryPercentage").val("19.30"); 
       $("#amountSpending").val("250"); 
 
 
       var yesterdaysClose = $('#yestCloseText').val(); 
-      var newPrice = yesterdaysClose - (yesterdaysClose*17.51/100); 
+      var newPrice = yesterdaysClose - (yesterdaysClose*19.35/100); 
       if (yesterdaysClose > 1.00){
         newPrice = newPrice.toFixed(2);         
       }

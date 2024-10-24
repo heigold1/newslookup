@@ -66,10 +66,10 @@
 								</span>
 								<label class="historical_data_label_thin">&nbsp;</label>
 								<span>
-									<input id="dollar_17_5_half" type="submit" value="17.5%" style="background-color: pink; ">
+									<input id="dollar_19_5_half" type="submit" value="19.3%" style="background-color: pink; ">
 								</span>
 								<span>
-									<input id="dollar_17_5" type="submit" value="17.5%">
+									<input id="dollar_19_5" type="submit" value="19.3%">
 								</span>
 								<span>
 									<input id="check-sec" type="checkbox" <?php if ($_GET['check-sec'] == 1){echo "checked";} ?>>
@@ -283,7 +283,7 @@
 <div id="notes-modal" class="modal" style="display: none">
 
   <!-- Modal content -->
-  <div class="modal-content">
+  <div class="modal-content" style="overflow: auto; ">
     <p style="font-size: 25px">
     		PINK SHEET<br><br>
     		**********<br><br>
@@ -303,7 +303,11 @@
 			
 			DROPS <br><br>
 			*******<br><br>
-			- 40-45% drop previous day - 22%<br><br>
+			- 40-45% drop previous day - 22%<br><br><br>
+
+			MAJOR NEWS <br><br>
+			*******<br><br>
+			- If a Phase 1/2 stock drops 64% in the after hours and recovers, you can go for it at 64% again in the pre-market.%<br><br>
 
     </p>
   </div>
