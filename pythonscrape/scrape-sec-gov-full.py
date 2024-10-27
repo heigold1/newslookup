@@ -161,6 +161,7 @@ def parse_xml(xml_data, yesterday_days):
         title = re.sub(r'additional definitive proxy soliciting materials', '<span style="font-size: 20px; background-color:red; color:black"><b>ADDITIONAL DEFINITIVE PROXY SOLICITING MATERIALS - CHECK WITH JAY ON THE MEETING MINUTES</b></span> &nbsp;', title, flags=re.IGNORECASE)
         title = re.sub(r'offered to employees', '<span style="font-size: 20px; background-color:red; color:black"><b>OFFERED TO EMPLOYEES</b></span> &nbsp;', title, flags=re.IGNORECASE)
         title = re.sub(r'\[Rules (13a-16|15d-16).*?\]', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp; \\g<0> - CHECK FOR BANKRUPTCY, INSOLVENCY, OFFERING, RAISING EXTRA CASH, ETC...</b></span>', title, flags=re.IGNORECASE)
+        title = re.sub(r'1\.01', r'<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp; 1.01 - CHECK FOR BANKRUPTCY, INSOLVENCY, OFFERING, RAISING EXTRA CASH, ETC...</b></span>', title)
 
 
 

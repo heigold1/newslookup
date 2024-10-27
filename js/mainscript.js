@@ -12,6 +12,41 @@ var windowName8;
 var windowName9; 
 var windowName10; 
 
+
+function prepareChatGPTQuestion(link)
+{
+    var message = "Can you go through the following SEC filing and tell me if there are any red flags, like any mention of bankruptcy, insolvency, dissolving of assets or subsidiaries, major layoffs, delisting in a couple weeks, shutting down operations, or an upcoming stock offering filed, pharmaceutical drug news (i.e. phase 1/2/3 results, of which even good results can still cause the stock to drop) or anything similar to that? If it's about something minor like a CEO retiring, a delisting notice where the delisting is months away, or an earnings net income where they simply didn't make as much as what was estimated, that's fine, that's not a big deal. Here is the filing link: " + link; 
+//     var message = "TEST";   
+
+    //`Can you read the following link and tell me if there are any red flags in this SEC filing? Here is the link: ${link}`;
+    
+    document.getElementById("prepareChatGPT").value = message;
+
+
+//    if (textBox) {
+//        textBox.value = message; // Set the message as the value
+        
+        var copyTextarea = $("#prepareChatGPT");
+        copyTextarea.select();
+
+        try {
+          var successful = document.execCommand('copy');
+          var msg = successful ? 'successful' : 'unsuccessful';
+          console.log('Copying text command was ' + msg);
+        } catch (err) {
+          console.log('Oops, unable to copy');
+        }
+/*
+    } 
+    else {
+        console.error("Hidden textbox not found in DOM.");
+    }
+*/
+}
+
+
+
+
 function CopyToClipboard() {
   var copyTextarea = $("#orderStub");
   copyTextarea.select();
@@ -1244,109 +1279,113 @@ $(function() {
 
 var corporateActionsStocks=
 {
-  "KWE": "REVERSE SPLIT YESTERDAY!!!! 25-30% EARLY!!!!!",
-  "AIFU": "SYMBOL CHANGE 1 DAYS AGO!!! 38 PERCENT!!!",
-  "ZCAR": "REVERSE SPLIT TWO DAYS AGO!!!!! 25-30% EARLY!!!!",
-  "NTBLQ": "SYMBOL CHANGE 2 DAYS AGO!!! 38 PERCENT!!!",
-  "WAI": "SYMBOL CHANGE 3 DAYS AGO!!! 38 PERCENT!!!",
-  "GRTSQ": "SYMBOL CHANGE 3 DAYS AGO!!! 38 PERCENT!!!",
-  "SDOT": "REVERSE SPLIT 4 DAYS AGO!!!!!!",
-  "SANW": "REVERSE SPLIT 4 DAYS AGO!!!!!!",
-  "HURA": "REVERSE SPLIT 5 DAYS AGO!!!!!!",
-  "BIOR": "REVERSE SPLIT 4 DAYS AGO!!!!!!",
-  "PEGY": "REVERSE SPLIT 5 DAYS AGO!!!!!!",
-  "ORANY": "SYMBOL CHANGE 5 DAYS AGO!!! 38 PERCENT!!!",
-  "STSS": "REVERSE SPLIT 6 DAYS AGO!!!!!!",
-  "MGRX": "REVERSE SPLIT 6 DAYS AGO!!!!!!",
-  "ME": "REVERSE SPLIT 6 DAYS AGO!!!!!!",
-  "DLPN": "REVERSE SPLIT 6 DAYS AGO!!!!!!",
-  "UAVS": "REVERSE SPLIT 7 DAYS AGO!!!!!!",
+  "NUKK": "REVERSE SPLIT YESTERDAY!!!! 25-30% EARLY!!!!!",
+  "CTNT": "REVERSE SPLIT YESTERDAY!!!! 25-30% EARLY!!!!!",
+  "ROLR": "WAS LISTED None DAYS AGO!!!  AT LEAST 38 PERCENT!!!",
+  "KWE": "REVERSE SPLIT TWO DAYS AGO!!!!! 25-30% EARLY!!!!",
+  "FBLA": "WAS LISTED None DAYS AGO!!!  AT LEAST 38 PERCENT!!!",
+  "AIFU": "SYMBOL CHANGE 2 DAYS AGO!!! 38 PERCENT!!!",
+  "ZCAR": "REVERSE SPLIT 3 DAYS AGO!!!!!!",
+  "NTBLQ": "SYMBOL CHANGE 3 DAYS AGO!!! 38 PERCENT!!!",
+  "NAYA": "SYMBOL CHANGE 3 DAYS AGO!!! 38 PERCENT!!!",
+  "HUHU": "WAS LISTED None DAYS AGO!!!  AT LEAST 38 PERCENT!!!",
+  "WAI": "SYMBOL CHANGE 4 DAYS AGO!!! 38 PERCENT!!!",
+  "GRTSQ": "SYMBOL CHANGE 4 DAYS AGO!!! 38 PERCENT!!!",
+  "SDOT": "REVERSE SPLIT 5 DAYS AGO!!!!!!",
+  "SANW": "REVERSE SPLIT 5 DAYS AGO!!!!!!",
+  "HURA": "REVERSE SPLIT 6 DAYS AGO!!!!!!",
+  "BIOR": "REVERSE SPLIT 5 DAYS AGO!!!!!!",
+  "PEGY": "REVERSE SPLIT 6 DAYS AGO!!!!!!",
+  "ORIS": "WAS LISTED None DAYS AGO!!!  AT LEAST 38 PERCENT!!!",
+  "ORANY": "SYMBOL CHANGE 6 DAYS AGO!!! 38 PERCENT!!!",
+  "STSS": "REVERSE SPLIT 7 DAYS AGO!!!!!!",
+  "MGRX": "REVERSE SPLIT 7 DAYS AGO!!!!!!",
+  "ME": "REVERSE SPLIT 7 DAYS AGO!!!!!!",
+  "DLPN": "REVERSE SPLIT 7 DAYS AGO!!!!!!",
+  "UAVS": "REVERSE SPLIT 8 DAYS AGO!!!!!!",
   "SFHG": "WAS LISTED None DAYS AGO!!!  AT LEAST 38 PERCENT!!!",
-  "PENG": "SYMBOL CHANGE 7 DAYS AGO!!! 38 PERCENT!!!",
-  "AGBA": "REVERSE SPLIT 7 DAYS AGO!!!!!!",
-  "PIXY": "REVERSE SPLIT 8 DAYS AGO!!!!!!",
-  "CANPY": "SYMBOL CHANGE 8 DAYS AGO!!! 38 PERCENT!!!",
+  "PENG": "SYMBOL CHANGE 8 DAYS AGO!!! 38 PERCENT!!!",
+  "AGBA": "REVERSE SPLIT 8 DAYS AGO!!!!!!",
+  "PIXY": "REVERSE SPLIT 9 DAYS AGO!!!!!!",
+  "CANPY": "SYMBOL CHANGE 9 DAYS AGO!!! 38 PERCENT!!!",
   "UPB": "WAS LISTED None DAYS AGO!!!  AT LEAST 38 PERCENT!!!",
   "STFS": "WAS LISTED None DAYS AGO!!!  AT LEAST 38 PERCENT!!!",
   "CBLL": "WAS LISTED None DAYS AGO!!!  AT LEAST 38 PERCENT!!!",
   "CAMP": "WAS LISTED None DAYS AGO!!!  AT LEAST 38 PERCENT!!!",
-  "ALCE": "REVERSE SPLIT 9 DAYS AGO!!!!!!",
-  "WLDS": "REVERSE SPLIT 10 DAYS AGO!!!!!!",
+  "ALCE": "REVERSE SPLIT 10 DAYS AGO!!!!!!",
+  "WLDS": "REVERSE SPLIT 11 DAYS AGO!!!!!!",
   "SOBO": "WAS LISTED None DAYS AGO!!!  AT LEAST 38 PERCENT!!!",
-  "INHD": "REVERSE SPLIT 10 DAYS AGO!!!!!!",
-  "XPON": "REVERSE SPLIT 11 DAYS AGO!!!!!!",
-  "VERB": "REVERSE SPLIT 11 DAYS AGO!!!!!!",
-  "SQNS": "REVERSE SPLIT 11 DAYS AGO!!!!!!",
-  "MAXN": "REVERSE SPLIT 11 DAYS AGO!!!!!!",
+  "INHD": "REVERSE SPLIT 11 DAYS AGO!!!!!!",
+  "XPON": "REVERSE SPLIT 12 DAYS AGO!!!!!!",
+  "VERB": "REVERSE SPLIT 12 DAYS AGO!!!!!!",
+  "SQNS": "REVERSE SPLIT 12 DAYS AGO!!!!!!",
+  "MAXN": "REVERSE SPLIT 12 DAYS AGO!!!!!!",
   "KLC": "WAS LISTED None DAYS AGO!!!  AT LEAST 38 PERCENT!!!",
-  "JCTC": "SYMBOL CHANGE 11 DAYS AGO!!! 38 PERCENT!!!",
-  "HOLO": "REVERSE SPLIT 11 DAYS AGO!!!!!!",
-  "DWTX": "REVERSE SPLIT 11 DAYS AGO!!!!!!",
+  "JCTC": "SYMBOL CHANGE 12 DAYS AGO!!! 38 PERCENT!!!",
+  "HOLO": "REVERSE SPLIT 12 DAYS AGO!!!!!!",
+  "DWTX": "REVERSE SPLIT 12 DAYS AGO!!!!!!",
   "CLIK": "WAS LISTED None DAYS AGO!!!  AT LEAST 38 PERCENT!!!",
   "CICB": "WAS LISTED None DAYS AGO!!!  AT LEAST 38 PERCENT!!!",
-  "VMAR": "REVERSE SPLIT 12 DAYS AGO!!!!!!",
+  "VMAR": "REVERSE SPLIT 13 DAYS AGO!!!!!!",
   "SKK": "WAS LISTED None DAYS AGO!!!  AT LEAST 38 PERCENT!!!",
-  "SGD": "REVERSE SPLIT 12 DAYS AGO!!!!!!",
-  "AZ": "REVERSE SPLIT 12 DAYS AGO!!!!!!",
-  "AGFY": "REVERSE SPLIT 12 DAYS AGO!!!!!!",
-  "VTNRQ": "SYMBOL CHANGE 13 DAYS AGO!!! 38 PERCENT!!!",
+  "SGD": "REVERSE SPLIT 13 DAYS AGO!!!!!!",
+  "AZ": "REVERSE SPLIT 13 DAYS AGO!!!!!!",
+  "AGFY": "REVERSE SPLIT 13 DAYS AGO!!!!!!",
+  "VTNRQ": "SYMBOL CHANGE 14 DAYS AGO!!! 38 PERCENT!!!",
   "SHEH": "WAS LISTED None DAYS AGO!!!  AT LEAST 38 PERCENT!!!",
-  "SBXD": "SYMBOL CHANGE 13 DAYS AGO!!! 38 PERCENT!!!",
-  "RNLXY": "SYMBOL CHANGE 13 DAYS AGO!!! 38 PERCENT!!!",
-  "OKUR": "REVERSE SPLIT 13 DAYS AGO!!!!!!",
+  "SBXD": "SYMBOL CHANGE 14 DAYS AGO!!! 38 PERCENT!!!",
+  "RNLXY": "SYMBOL CHANGE 14 DAYS AGO!!! 38 PERCENT!!!",
+  "OKUR": "REVERSE SPLIT 14 DAYS AGO!!!!!!",
   "HSBH": "WAS LISTED None DAYS AGO!!!  AT LEAST 38 PERCENT!!!",
   "AZNH": "WAS LISTED None DAYS AGO!!!  AT LEAST 38 PERCENT!!!",
-  "STRM": "REVERSE SPLIT 14 DAYS AGO!!!!!!",
-  "SIFY": "REVERSE SPLIT 14 DAYS AGO!!!!!!",
+  "STRM": "REVERSE SPLIT 15 DAYS AGO!!!!!!",
+  "SIFY": "REVERSE SPLIT 15 DAYS AGO!!!!!!",
   "FLX": "WAS LISTED None DAYS AGO!!!  AT LEAST 38 PERCENT!!!",
   "CBNA": "WAS LISTED None DAYS AGO!!!  AT LEAST 38 PERCENT!!!",
-  "BDRX": "REVERSE SPLIT 14 DAYS AGO!!!!!!",
-  "UPXI": "REVERSE SPLIT 15 DAYS AGO!!!!!!",
-  "KRKR": "REVERSE SPLIT 15 DAYS AGO!!!!!!",
-  "EVVAQ": "SYMBOL CHANGE 15 DAYS AGO!!! 38 PERCENT!!!",
-  "CLYM": "SYMBOL CHANGE 15 DAYS AGO!!! 38 PERCENT!!!",
-  "CETX": "REVERSE SPLIT 15 DAYS AGO!!!!!!",
+  "BDRX": "REVERSE SPLIT 15 DAYS AGO!!!!!!",
+  "UPXI": "REVERSE SPLIT 16 DAYS AGO!!!!!!",
+  "KRKR": "REVERSE SPLIT 16 DAYS AGO!!!!!!",
+  "EVVAQ": "SYMBOL CHANGE 16 DAYS AGO!!! 38 PERCENT!!!",
+  "CLYM": "SYMBOL CHANGE 16 DAYS AGO!!! 38 PERCENT!!!",
+  "CETX": "REVERSE SPLIT 16 DAYS AGO!!!!!!",
   "WCT": "WAS LISTED None DAYS AGO!!!  AT LEAST 38 PERCENT!!!",
   "TRP": "NEW SYMBOL AS OF None DAYS AGO!!!  AT LEAST 38 PERCENT!!!",
-  "SOBR": "REVERSE SPLIT 16 DAYS AGO!!!!!!",
+  "SOBR": "REVERSE SPLIT 17 DAYS AGO!!!!!!",
   "SARO": "WAS LISTED None DAYS AGO!!!  AT LEAST 38 PERCENT!!!",
-  "LIEN": "SYMBOL CHANGE 16 DAYS AGO!!! 38 PERCENT!!!",
-  "LGTY": "SYMBOL CHANGE 16 DAYS AGO!!! 38 PERCENT!!!",
+  "LIEN": "SYMBOL CHANGE 17 DAYS AGO!!! 38 PERCENT!!!",
+  "LGTY": "SYMBOL CHANGE 17 DAYS AGO!!! 38 PERCENT!!!",
   "FVR": "WAS LISTED None DAYS AGO!!!  AT LEAST 38 PERCENT!!!",
-  "EXE": "SYMBOL CHANGE 16 DAYS AGO!!! 38 PERCENT!!!",
-  "BDMD": "SYMBOL CHANGE 16 DAYS AGO!!! 38 PERCENT!!!",
-  "AREB": "REVERSE SPLIT 16 DAYS AGO!!!!!!",
-  "ADTX": "REVERSE SPLIT 16 DAYS AGO!!!!!!",
+  "EXE": "SYMBOL CHANGE 17 DAYS AGO!!! 38 PERCENT!!!",
+  "BDMD": "SYMBOL CHANGE 17 DAYS AGO!!! 38 PERCENT!!!",
+  "AREB": "REVERSE SPLIT 17 DAYS AGO!!!!!!",
+  "ADTX": "REVERSE SPLIT 17 DAYS AGO!!!!!!",
   "ZENA": "WAS LISTED None DAYS AGO!!!  AT LEAST 38 PERCENT!!!",
   "SITC": "NEW SYMBOL AS OF None DAYS AGO!!!  AT LEAST 38 PERCENT!!!",
-  "NIXX": "SYMBOL CHANGE 17 DAYS AGO!!! 38 PERCENT!!!",
-  "LSB": "REVERSE SPLIT 17 DAYS AGO!!!!!!",
+  "NIXX": "SYMBOL CHANGE 18 DAYS AGO!!! 38 PERCENT!!!",
+  "LSB": "REVERSE SPLIT 18 DAYS AGO!!!!!!",
   "HTLM": "WAS LISTED None DAYS AGO!!!  AT LEAST 38 PERCENT!!!",
   "CURB": "WAS LISTED None DAYS AGO!!!  AT LEAST 38 PERCENT!!!",
-  "BCLI": "REVERSE SPLIT 17 DAYS AGO!!!!!!",
+  "BCLI": "REVERSE SPLIT 18 DAYS AGO!!!!!!",
   "ZJK": "WAS LISTED None DAYS AGO!!!  AT LEAST 38 PERCENT!!!",
-  "SONN": "REVERSE SPLIT 18 DAYS AGO!!!!!!",
-  "OMCC": "SYMBOL CHANGE 18 DAYS AGO!!! 38 PERCENT!!!",
-  "LXEH": "REVERSE SPLIT 18 DAYS AGO!!!!!!",
+  "SONN": "REVERSE SPLIT 19 DAYS AGO!!!!!!",
+  "OMCC": "SYMBOL CHANGE 19 DAYS AGO!!! 38 PERCENT!!!",
+  "LXEH": "REVERSE SPLIT 19 DAYS AGO!!!!!!",
   "J": "NEW SYMBOL AS OF None DAYS AGO!!!  AT LEAST 38 PERCENT!!!",
-  "HTCO": "SYMBOL CHANGE 18 DAYS AGO!!! 38 PERCENT!!!",
-  "CNET": "REVERSE SPLIT 18 DAYS AGO!!!!!!",
+  "HTCO": "SYMBOL CHANGE 19 DAYS AGO!!! 38 PERCENT!!!",
+  "CNET": "REVERSE SPLIT 19 DAYS AGO!!!!!!",
   "AMTM": "WAS LISTED None DAYS AGO!!!  AT LEAST 38 PERCENT!!!",
-  "SEEL": "REVERSE SPLIT 19 DAYS AGO!!!!!!",
-  "NLSP": "REVERSE SPLIT 19 DAYS AGO!!!!!!",
+  "SEEL": "REVERSE SPLIT 20 DAYS AGO!!!!!!",
+  "NLSP": "REVERSE SPLIT 20 DAYS AGO!!!!!!",
+  "FOXX": "SYMBOL CHANGE 20 DAYS AGO!!! 38 PERCENT!!!",
   "LGCY": "WAS LISTED None DAYS AGO!!!  AT LEAST 38 PERCENT!!!",
   "IBG": "WAS LISTED None DAYS AGO!!!  AT LEAST 38 PERCENT!!!",
   "GRDN": "WAS LISTED None DAYS AGO!!!  AT LEAST 38 PERCENT!!!",
   "BKV": "WAS LISTED None DAYS AGO!!!  AT LEAST 38 PERCENT!!!",
   "BIOA": "WAS LISTED None DAYS AGO!!!  AT LEAST 38 PERCENT!!!",
   "PC": "WAS LISTED None DAYS AGO!!!  AT LEAST 38 PERCENT!!!",
-  "ORGS": "REVERSE SPLIT 21 DAYS AGO!!!!!!",
-  "FRGT": "REVERSE SPLIT 21 DAYS AGO!!!!!!",
-  "ARQQ": "REVERSE SPLIT 21 DAYS AGO!!!!!!",
-  "SCNX": "SYMBOL CHANGE 22 DAYS AGO!!! 38 PERCENT!!!",
-  "ONCO": "REVERSE SPLIT 22 DAYS AGO!!!!!!",
-  "EJH": "REVERSE SPLIT 22 DAYS AGO!!!!!!",
-  "BBGI": "REVERSE SPLIT 22 DAYS AGO!!!!!!"
+  "ORGS": "REVERSE SPLIT 22 DAYS AGO!!!!!!",
+  "FRGT": "REVERSE SPLIT 22 DAYS AGO!!!!!!",
+  "ARQQ": "REVERSE SPLIT 22 DAYS AGO!!!!!!"
 };
 
 
