@@ -142,7 +142,12 @@ def parse_xml(xml_data, yesterday_days):
             continue
 
         datestamp = re.sub(f'({get_today_trade_date()})', r'<span style="font-size: 16px; background-color:black;  border: 1px solid red; color:white">\1</span>', datestamp)
-        
+       
+
+        filing_type = re.sub(r'PRE 14A', '<span style="font-size: 15px; background-color:red; color:black">PRE 14A</span> &nbsp;', filing_type, flags=re.IGNORECASE)
+
+
+
         title = re.sub('registration statement', '<span style="font-size: 16px; background-color:red; color:black"><b>&nbsp;Registration statement - OFFERING COMING OUT, HOLD OFF</span></b>&nbsp;', title, flags=re.IGNORECASE)
         title = re.sub(r'beneficial ownership', '<span style="font-size: 16px; background-color:#00ff00; color:black"><b>&nbsp;beneficial ownership</span></b>&nbsp;', title, flags=re.IGNORECASE)
         title = re.sub(r'statement of changes in beneficial ownership of securities', '<span style="font-size: 16px; background-color:#00ff00; color:black"><b>&nbsp;Statement of changes in beneficial ownership of securities - 18% early</span></b>&nbsp;', title, flags=re.IGNORECASE)
@@ -171,11 +176,11 @@ def parse_xml(xml_data, yesterday_days):
         else:
             registration_offering = ""
 
-        sec_table_rows.append(f"<tr style='border: 1px solid black !important; height: 20px;'><td style='border: 1px solid black !important'>{filing_type}</td><td style='border: 1px solid black !important'><a target='_blank' href='{href}'>{title}, {item_description}</a></td><td style='border: 1px solid black !important'>{datestamp}</td><td style='border: 1px solid black !important; font-size: 18px;'>{time}</td></tr>")
+        sec_table_rows.append(f"<tr style='border: 1px solid black !important; height: 20px;'><td style='border: 1px solid black !important'>{filing_type}</td><td style='border: 1px solid black !important'><a target='_blank' href='{href}'>{title}, {item_description}</a><button onclick='prepareChatGPTQuestion(\"{href}\")' style='margin-left: 5px;'>ChatGPT</button></td><td style='border: 1px solid black !important'>{datestamp}</td><td style='border: 1px solid black !important; font-size: 18px;'>{time}</td></tr>")
         sec_table_row_count += 1
 
     return_sec_html = "<table style='border: 1px solid black !important; background-color: #B1D4E0'>"
-    sec_message = f" rowcount is {sec_table_row_count} "
+    sec_message = f" rowcount is {sec_table_row_count} <input type='textarea' id='prepareChatGPT' style='with: 5px !important' >"
     if sec_table_row_count == 0:
         sec_message = f"<a target='_blank' href='https://seekingalpha.com/symbol/{symbol}/sec-filings'><span style='font-size: 50px; background-color: red'> - SEC ROWCOUNT IS 0 - CHECK STREET INSIDER</span></a>"
 
