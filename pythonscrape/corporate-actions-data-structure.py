@@ -94,11 +94,11 @@ def create_data_structure():
           if values[1] in symbolList: 
             symbolList.remove(values[1]) 
         elif days_difference == 2: 
-          symbolListOther[values[1]] = "REVERSE SPLIT TWO DAYS AGO!!!!! 25-30% EARLY!!!!" 
+          symbolListOther[values[1]] = "REVERSE SPLIT TWO TRADING DAYS AGO!!!!! 25-30% EARLY!!!!" 
           if values[1] in symbolList:
             symbolList.remove(values[1]) 
         elif days_difference > 1: 
-          symbolListOther[values[1]] = "REVERSE SPLIT " + str(days_difference) + " DAYS AGO!!!!!!"   
+          symbolListOther[values[1]] = "REVERSE SPLIT " + str(days_difference) + " TRADING DAYS AGO!!!!!!"   
           if values[1] in symbolList:
             symbolList.remove(values[1]) 
 
@@ -106,21 +106,21 @@ def create_data_structure():
       print("Line is ** " + line) 
 
       if stockSplitPattern.search(values[3]):
-        symbolList.remove(values[1])
-        print("Found stock split pattern for " + values[1]) 
+        if values[1] in symbolList: 
+          symbolList.remove(values[1])
 
       if values[2] == 'Symbol Change':
-        symbolListOther[values[1]] = "SYMBOL CHANGE " + str(days_difference) + " DAYS AGO!!! 38 PERCENT!!!" 
+        symbolListOther[values[1]] = "SYMBOL CHANGE " + str(days_difference) + " TRADING DAYS AGO!!! 38 PERCENT!!!" 
         if values[1] in symbolList: 
           symbolList.remove(values[1])           
 
       if wasListedPattern.search(values[3]): 
-        symbolListOther[values[1]] = "WAS LISTED " + str(days_difference) + " DAYS AGO!!!  AT LEAST 38 PERCENT!!!" 
+        symbolListOther[values[1]] = "WAS LISTED " + str(days_difference) + " TRADING DAYS AGO!!!  AT LEAST 38 PERCENT!!!" 
         if values[1] in symbolList:
           symbolList.remove(values[1]) 
 
       if spunOffPattern.search(values[3]):
-        symbolListOther[values[1]] = "NEW SYMBOL AS OF " + str(days_difference) + " DAYS AGO!!!  AT LEAST 38 PERCENT!!!" 
+        symbolListOther[values[1]] = "NEW SYMBOL AS OF " + str(days_difference) + " TRADING DAYS AGO!!!  AT LEAST 38 PERCENT!!!" 
         if values[1] in symbolList:
           symbolList.remove(values[1]) 
 

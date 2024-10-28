@@ -15,7 +15,7 @@ var windowName10;
 
 function prepareChatGPTQuestion(link)
 {
-    var message = "Can you go through the following SEC filing and tell me if there are any red flags, like any mention of bankruptcy, insolvency, dissolving of assets or subsidiaries, major layoffs, delisting in a couple weeks, shutting down operations, or an upcoming stock offering filed, pharmaceutical drug news (i.e. phase 1/2/3 results, of which even good results can still cause the stock to drop) or anything similar to that? If it's about something minor like a CEO retiring, a delisting notice where the delisting is months away, or an earnings net income where they simply didn't make as much as what was estimated, that's fine, that's not a big deal. Here is the filing link: " + link; 
+    var message = "Can you go through the following SEC filing and tell me if there are any red flags, like any mention of bankruptcy, insolvency, dissolving of assets or subsidiaries, major layoffs, delisting in a couple weeks, shutting down operations, or an upcoming stock offering filed, pharmaceutical drug news (i.e. phase 1/2/3 results, of which even good results can still cause the stock to drop), corporate turnaround efforts, or anything similar to that? If it's about something minor like a CEO retiring, a delisting notice where the delisting is months away, or an earnings net income where they simply didn't make as much as what was estimated, that's fine, that's not a big deal. Here is the filing link: " + link; 
 //     var message = "TEST";   
 
     //`Can you read the following link and tell me if there are any red flags in this SEC filing? Here is the link: ${link}`;
