@@ -11,7 +11,7 @@ $secCompanyName = preg_replace("/<.*?>/", "", $secCompanyName);
 $cikNumber = $_GET['cikNumber']; 
 $checkSec = $_GET['checkSec']; 
 
-$yesterdayDays = 3;
+$yesterdayDays = 1;
 
 fopen("cookies.txt", "w");
 
@@ -19,7 +19,7 @@ function buildNewsNotes($companyName)
 {
     $newsNotes = '<ul style="font-family: arial;">
                       <li style="background-color: #00ff00;">SEC - Company name is ' . $companyName . '</li>
-                      <li>Entry into a Material Definitive Agreement - STAY AWAY, SHARE PRICE COMING OUT</li>
+                      <li>Entry into (OR TERMINATION OF) a Material Definitive Agreement - STAY AWAY</li>
                       </ul><br><br>
                       '; 
     return $newsNotes; 
