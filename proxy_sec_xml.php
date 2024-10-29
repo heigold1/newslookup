@@ -19,7 +19,7 @@ function buildNewsNotes($companyName)
 {
     $newsNotes = '<ul style="font-family: arial;">
                       <li style="background-color: #00ff00;">SEC - Company name is ' . $companyName . '</li>
-                      <li>Entry into (OR TERMINATION OF) a Material Definitive Agreement - STAY AWAY</li>
+                      <li>Entry into (stay away), termination of (40%) Material Definitive Agreement.</li>
                       </ul><br><br>
                       '; 
     return $newsNotes; 
