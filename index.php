@@ -66,10 +66,10 @@
 								</span>
 								<label class="historical_data_label_thin">&nbsp;</label>
 								<span>
-									<input id="dollar_19_5_half" type="submit" value="19.3%" style="background-color: pink; ">
+									<input id="dollar_18_5_half" type="submit" value="18.5%" style="background-color: pink; ">
 								</span>
 								<span>
-									<input id="dollar_19_5" type="submit" value="19.3%">
+									<input id="dollar_18_5" type="submit" value="18.5%">
 								</span>
 								<span>
 									<input id="check-sec" type="checkbox" <?php if ($_GET['check-sec'] == 1){echo "checked";} ?>>
