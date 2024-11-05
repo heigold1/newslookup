@@ -809,6 +809,7 @@ function getNewsQuantified($symbol, $yesterdayDays)
           $streetInsiderNews = preg_replace('/ preliminary purchase/i', '<span style="font-size: 25px; background-color:red; color:black; "><b>PRELIMINARY PURCHASE - 40%</b></span>&nbsp;', $streetInsiderNews);
           $streetInsiderNews = preg_replace('/ patent filing/i', '<span style="font-size: 25px; background-color:red; color:black; "><b>patent filing - 40% news update</b></span>&nbsp;', $streetInsiderNews);
           $streetInsiderNews = preg_replace('/ insolvency/i', '<span style="font-size: 25px; background-color:red; color:black; "><b>INSOLVENCY - STAY AWAY</b></span>&nbsp;', $streetInsiderNews); 
+          $streetInsiderNews = preg_replace('/ (announces.*?presentation)/i', '<span style="font-size: 25px; background-color:red; color:black; "><b>$1 - CHECK DATE</b></span>&nbsp;', $streetInsiderNews); 
 
 
 
