@@ -7,7 +7,7 @@ require_once("country-codes.php");
 
 libxml_use_internal_errors(true);
 
-$yesterdayDays = 1;
+$yesterdayDays = 3;
 
 error_reporting(1);
 //ini_set('display_errors', 1);
@@ -1469,7 +1469,7 @@ die();
       $finalReturn = preg_replace('/annual report/i', '<span style="font-size: 25px; background-color: red; color:black"><b>&nbsp; ANNUAL REPORT</b></span>&nbsp;', $finalReturn);
       $finalReturn = preg_replace('/IPO/', '<span style="font-size: 55px; background-color: red; color:black"><b>&nbsp; IPO</b></span>&nbsp;', $finalReturn);
       $finalReturn = preg_replace('/ call put ratio/i', '<span style="font-size: 25px; background-color: red; color:black"><b>&nbsp; CALL PUT RATIO - OK AT 20%</b></span>&nbsp;', $finalReturn);
-      $finalReturn = preg_replace('/ s-1/i', '<span style="font-size: 25px; background-color: red; color:black"><b>&nbsp; s-1 - BACK OFF!!</b></span>&nbsp;', $finalReturn);
+      $finalReturn = preg_replace('/ (s-[0-9])/i', '<span style="font-size: 35px; background-color:red; color:black"><b>&nbsp;$1</span></b>&nbsp;', $finalReturn);   
       $finalReturn = preg_replace('/(Files \$.*M)/i', '<span style="font-size: 25px; background-color: red; color:black"><b>&nbsp; $1 - OFFERING!!!</b></span>&nbsp;', $finalReturn);
       $finalReturn = preg_replace('/ (cuts.*?guidance)/i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp;$1</span></b>&nbsp;', $finalReturn);
       $finalReturn = preg_replace('/ chapter 22/i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp;CHAPTER 22</span></b>&nbsp;', $finalReturn);

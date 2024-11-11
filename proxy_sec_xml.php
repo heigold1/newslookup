@@ -11,7 +11,7 @@ $secCompanyName = preg_replace("/<.*?>/", "", $secCompanyName);
 $cikNumber = $_GET['cikNumber']; 
 $checkSec = $_GET['checkSec']; 
 
-$yesterdayDays = 1;
+$yesterdayDays = 3;
 
 fopen("cookies.txt", "w");
 
@@ -756,7 +756,6 @@ function getNewsQuantified($symbol, $yesterdayDays)
           $streetInsiderNews = preg_replace('/annual report /i', '<span style="font-size: 25px; background-color: red; color:black"><b>&nbsp; ANNUAL REPORT</b></span>&nbsp;', $streetInsiderNews);
           $streetInsiderNews = preg_replace('/ IPO/', '<span style="font-size: 55px; background-color: red; color:black"><b>&nbsp; IPO </b></span>&nbsp;', $streetInsiderNews);
           $streetInsiderNews = preg_replace('/ call put ratio/i', '<span style="font-size: 25px; background-color: red; color:black"><b>&nbsp; CALL PUT RATIO - OK AT 20%</b></span>&nbsp;', $streetInsiderNews);
-          $streetInsiderNews = preg_replace('/ s-1/i', '<span style="font-size: 25px; background-color: red; color:black"><b>&nbsp; s-1 - BACK OFF!!</b></span>&nbsp;', $streetInsiderNews);
           $streetInsiderNews = preg_replace('/(Files \$.*M)/i', '<span style="font-size: 25px; background-color: red; color:black"><b>&nbsp; $1 - OFFERING!!!</b></span>&nbsp;', $streetInsiderNews);
           $streetInsiderNews = preg_replace('/ (cuts.*?guidance)/i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp;$1 </span></b>&nbsp;', $streetInsiderNews); 
           $streetInsiderNews = preg_replace('/ chapter 22/i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp;CHAPTER 22</span></b>&nbsp;', $streetInsiderNews);
@@ -776,7 +775,7 @@ function getNewsQuantified($symbol, $yesterdayDays)
           $streetInsiderNews = preg_replace('/ (..\-q)/i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp; $1 </b></span>&nbsp;', $streetInsiderNews);
           $streetInsiderNews = preg_replace('/ (..-k)/i', '<br><br><span style="font-size: 55px; background-color:red; color:black"><b>&nbsp;$1 - LOOK</span> </b>&nbsp; ', $streetInsiderNews);
           $streetInsiderNews = preg_replace('/sc\s+13g/i', '<span style="font-size: 25px; background-color:#00ff00; color:black"><b>&nbsp;SC 13G</span></b>&nbsp;', $streetInsiderNews);   
-          $streetInsiderNews = preg_replace('/ (s-[0-9])/i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp;$1</span></b>&nbsp;', $streetInsiderNews);   
+          $streetInsiderNews = preg_replace('/ (s-[0-9])/i', '<span style="font-size: 35px; background-color:red; color:black"><b>&nbsp;$1</span></b>&nbsp;', $streetInsiderNews);   
           $streetInsiderNews = preg_replace('/ distribution ratios/i', '<span style="font-size: 55px; background-color:red; color:black"><b>&nbsp;DISTRIBUTION<br><br> RATIOS<br><br> - CHECK DATE</span></b>&nbsp;', $streetInsiderNews);   
           $streetInsiderNews = preg_replace('/ distribution date/i', '<span style="font-size: 55px; background-color:red; color:black"><b>&nbsp;DISTRIBUTION<br><br> DATE<br><br> - CHECK DATE</span></b>&nbsp;', $streetInsiderNews);   
           $streetInsiderNews = preg_replace('/ Hindenburg/i', '<span style="font-size: 55px; background-color:red; color:black"><b>&nbsp;HINDENBERG<br><br> RESEARCH<br><br> - STAY AWAY</span></b>&nbsp;', $streetInsiderNews); 
