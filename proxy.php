@@ -1517,6 +1517,7 @@ die();
       $finalReturn = preg_replace('/ insolvency/i', '<span style="font-size: 25px; background-color:red; color:black; "><b>INSOLVENCY - STAY AWAY</b></span>&nbsp;', $finalReturn); 
       $finalReturn = preg_replace('/ (announces.*?presentation)/i', '<span style="font-size: 25px; background-color:red; color:black; "><b>$1 - CHECK DATE</b></span>&nbsp;', $finalReturn); 
       $finalReturn = preg_replace('/ exercise of warrants/i', '<span style="font-size: 25px; background-color:red; color:black; "><b>EXERCISE OF WARRANTS - STAY AWAY</b></span>&nbsp;', $finalReturn); 
+      $finalReturn = preg_replace('/ regains compliance/i', '<span style="font-size: 25px; background-color:red; color:black; "><b>REGAINS COMPLIANCE - 30-35%</b></span>&nbsp;', $finalReturn); 
 
 
 

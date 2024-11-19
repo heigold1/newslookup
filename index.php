@@ -59,7 +59,7 @@
 								</span>
 								<label class="historical_data_label_thin">&nbsp;</label>
 								<span>
-									<input id="symbol_change" type="submit" value="25%">
+									<input id="symbol_change" type="submit" value="24.5%">
 								</span>
 								<span>
 									<input id="penny_21" type="submit" value="21%">
