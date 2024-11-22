@@ -20,6 +20,7 @@ function buildNewsNotes($companyName)
     $newsNotes = '<ul style="font-family: arial;">
                       <li style="background-color: #00ff00;">SEC - Company name is ' . $companyName . '</li>
                       <li>Entry into (stay away), termination of (40%) Material Definitive Agreement.</li>
+                      <li>If granted extension for listing - that is no news.</li>
                       </ul><br><br>
                       '; 
     return $newsNotes; 
@@ -728,7 +729,7 @@ function getNewsQuantified($symbol, $yesterdayDays)
           $streetInsiderNews = preg_replace('/ phase 2/i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp; PHASE 2!!!!</b></span>&nbsp;', $streetInsiderNews); 
           $streetInsiderNews = preg_replace('/ phase 3/i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp; PHASE 3!!!!</b></span>&nbsp;', $streetInsiderNews); 
           $streetInsiderNews = preg_replace('/ to present/i', '<span style="font-size: 55px; background-color:red; color:black"><br><br><b>TO PRESENT - CHECK DATE</b></span>&nbsp;', $streetInsiderNews);
-          $streetInsiderNews = preg_replace('/ to participate/i', '<span style="font-size: 55px; background-color:red; color:black"><br><b>TO PARTICIPATE - CHECK DATE</b></span>&nbsp;', $streetInsiderNews);
+          $streetInsiderNews = preg_replace('/ to participate/i', '<span style="font-size: 55px; background-color:red; color:black"><br><br><b>TO PARTICIPATE - CHECK DATE</b></span>&nbsp;', $streetInsiderNews);
           $streetInsiderNews = preg_replace('/ to co.host/i', '<span style="font-size: 65px; background-color: red; color:black"><b><br>TO<br><br>CO-HOST<br><br>CHECK<br><br>DATE</b><br></span>&nbsp;', $streetInsiderNews);
           $streetInsiderNews = preg_replace('/ shareholder investigation/i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp; SHAREHOLDER INVESTIGATION - 19.5%</b></span>&nbsp;', $streetInsiderNews);
           $streetInsiderNews = preg_replace('/ announces an investigation/i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp; ANNOUNCES AN INVESTIGATION - 19.5%</b></span>&nbsp;', $streetInsiderNews);
