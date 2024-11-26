@@ -300,6 +300,7 @@
 			- If an earnings is $0.00 - go in at 40%.<br><br> 
 			- Penny stocks with delisting news - you can go in these at 40% provided the delisting date is a long shot away.<br><br>
 			- Inability to file - 38% dollar, 50% penny. <br><br><br>
+			- For going in at/ignoring pre-market lows, do not do this if it was a high-risk stock that spiked up by a long shot (i.e. over 70%).  In this case, to 10% below the pre-market low. 
 			
 			DROPS <br><br>
 			*******<br><br>
