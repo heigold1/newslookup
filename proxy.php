@@ -1519,7 +1519,7 @@ die();
       $finalReturn = preg_replace('/ exercise of warrants/i', '<span style="font-size: 25px; background-color:red; color:black; "><b>EXERCISE OF WARRANTS - STAY AWAY</b></span>&nbsp;', $finalReturn); 
       $finalReturn = preg_replace('/ (regains .*?compliance)/i', '<span style="font-size: 25px; background-color:red; color:black; "><b>$1 - 30-35%</b></span>&nbsp;', $finalReturn); 
       $finalReturn = preg_replace('/ successfully delivers/i', '<span style="font-size: 20px; background-color:#00ff00; color:black; "><b> SUCCESSFULLY DELIVERS - THIS IS OK AT 18-20%</b></span>&nbsp;', $finalReturn); 
-
+      $finalReturn = preg_replace('/ notice of allowance/i', '<span style="font-size: 20px; background-color:#00ff00; color:black; "><b> NOTICE OF ALLOWANCE - THIS IS OK AT 18-20%</b></span>&nbsp;', $finalReturn); 
 
 
 
