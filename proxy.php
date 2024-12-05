@@ -1596,6 +1596,11 @@ die();
       $returnArray['final_return'] = $finalReturn;
       $returnArray['cik'] = $cik; 
 
+
+error_log("in proxy.php, returnArray is:"); 
+error_log($returnArray); 
+
+
       echo json_encode($returnArray); 
 
 } // if ($which_website == "yahoo")
