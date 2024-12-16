@@ -11,7 +11,7 @@ $secCompanyName = preg_replace("/<.*?>/", "", $secCompanyName);
 $cikNumber = $_GET['cikNumber']; 
 $checkSec = $_GET['checkSec']; 
 
-$yesterdayDays = 1;
+$yesterdayDays = 3;
 
 fopen("cookies.txt", "w");
 
@@ -602,11 +602,21 @@ function getNewsQuantified($symbol, $yesterdayDays)
 
         $streetInsiderNews .=  "<br>"; 
 
+
+
+        // light yellow highlighting for - from two weeks ago to a week ago.
+        // light yellow is #fffdaf 
+        for ($daysBack = 14; $daysBack > 6; $daysBack--)
+        {
+            $streetInsiderNews = preg_replace('/(' .  get_yahoo_trade_date($daysBack) . ')/', '<span style="font-size: 12px; background-color:#fffdaf; color:black">$1</span>', $streetInsiderNews);      
+        }
+
         // yellow highlighting for before yesterday
-        for ($daysBack = 14; $daysBack > $yesterdayDays; $daysBack--)
+        for ($daysBack = 5; $daysBack > $yesterdayDays; $daysBack--)
         {
             $streetInsiderNews = preg_replace('/(' .  get_yahoo_trade_date($daysBack) . ')/', '<span style="font-size: 12px; background-color:yellow ; color:black">$1</span>', $streetInsiderNews);      
         }
+
         // blue highlighting for yesterday
         for ($daysBack = $yesterdayDays; $daysBack >= 1; $daysBack--)
         {
@@ -814,6 +824,7 @@ function getNewsQuantified($symbol, $yesterdayDays)
           $streetInsiderNews = preg_replace('/ (regains .*?compliance)/i', '<span style="font-size: 25px; background-color:red; color:black; "><b>$1 - 30-35%</b></span>&nbsp;', $streetInsiderNews); 
           $streetInsiderNews = preg_replace('/ successfully delivers/i', '<span style="font-size: 20px; background-color:#00ff00; color:black; "><b> SUCCESSFULLY DELIVERS - THIS IS OK AT 18-20%</b></span>&nbsp;', $streetInsiderNews);
           $streetInsiderNews = preg_replace('/ notice of allowance/i', '<span style="font-size: 20px; background-color:#00ff00; color:black; "><b> NOTICE OF ALLOWANCE - THIS IS OK AT 18-20%</b></span>&nbsp;', $streetInsiderNews); 
+          $streetInsiderNews = preg_replace('/ (closes.*loan)/i', '<span style="font-size: 20px; background-color:red; color:black; "><b> $1 - NEWS UPDATE - 40%</b></span>&nbsp;', $streetInsiderNews); 
 
 
         return "<div style='height: 250px; width: 100%; overflow-y:auto; border-style: double !important; border-color: black !important; color: black;'>" . $streetInsiderNews . "</div>"; 

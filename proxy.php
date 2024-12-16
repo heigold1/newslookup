@@ -7,7 +7,7 @@ require_once("country-codes.php");
 
 libxml_use_internal_errors(true);
 
-$yesterdayDays = 1;
+$yesterdayDays = 3;
 
 error_reporting(1);
 //ini_set('display_errors', 1);
@@ -1520,6 +1520,7 @@ die();
       $finalReturn = preg_replace('/ (regains .*?compliance)/i', '<span style="font-size: 25px; background-color:red; color:black; "><b>$1 - 30-35%</b></span>&nbsp;', $finalReturn); 
       $finalReturn = preg_replace('/ successfully delivers/i', '<span style="font-size: 20px; background-color:#00ff00; color:black; "><b> SUCCESSFULLY DELIVERS - THIS IS OK AT 18-20%</b></span>&nbsp;', $finalReturn); 
       $finalReturn = preg_replace('/ notice of allowance/i', '<span style="font-size: 20px; background-color:#00ff00; color:black; "><b> NOTICE OF ALLOWANCE - THIS IS OK AT 18-20%</b></span>&nbsp;', $finalReturn); 
+      $finalReturn = preg_replace('/ (closes.*loan)/i', '<span style="font-size: 20px; background-color:red; color:black; "><b> $1 - NEWS UPDATE - 40%</b></span>&nbsp;', $finalReturn); 
 
 
 
