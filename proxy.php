@@ -1314,11 +1314,20 @@ die();
       $finalReturn = preg_replace('/([A-Z][a-z][a-z] [0-9][0-9]:[0-9][0-9][A-Z]M EDT)|([A-Z][a-z][a-z] [0-9]:[0-9][0-9][A-Z]M EDT)/', '<span style="font-size: 12px; background-color:black; color:white">$1$2</span> ', $finalReturn);
       $finalReturn = preg_replace('/([A-Z][a-z][a-z] [0-9][0-9]:[0-9][0-9][A-Z]M EST)|([A-Z][a-z][a-z] [0-9]:[0-9][0-9][A-Z]M EST)/', '<span style="font-size: 12px; background-color:black; color:white">$1$2</span> ', $finalReturn);
 
+      // light yellow highlighting for - from two weeks ago to a week ago.
+      // light yellow is #fffdaf 
+      for ($daysBack = 14; $daysBack > 6; $daysBack--)
+      {
+          $finalReturn = preg_replace('/(' .  get_yahoo_trade_date($daysBack) . ')/', '<span style="font-size: 12px; background-color:#fffdaf; color:black">$1</span>', $finalReturn);      
+      }
+
+      // darker yellow highlighting for - a weeks ago to (yesterday days)
       // yellow highlighting for before yesterday
-      for ($daysBack = 14; $daysBack > $yesterdayDays; $daysBack--)
+      for ($daysBack = 5; $daysBack > $yesterdayDays; $daysBack--)
       {
           $finalReturn = preg_replace('/(' .  get_yahoo_trade_date($daysBack) . ')/', '<span style="font-size: 12px; background-color:yellow ; color:black">$1</span>', $finalReturn);      
       }
+
       // blue highlighting for yesterday
       for ($daysBack = $yesterdayDays; $daysBack >= 1; $daysBack--)
       {
