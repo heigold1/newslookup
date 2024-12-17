@@ -21,6 +21,16 @@ MariaDB [daytrade]> describe streetinsider;
 | lastUpdated | timestamp    | NO   |     | CURRENT_TIMESTAMP | on update CURRENT_TIMESTAMP |
 +-------------+--------------+------+-----+-------------------+-----------------------------+
 
+MariaDB [daytrade]> describe orders;
++------------------+--------------+------+-----+---------------------+-------+
+| Field            | Type         | Null | Key | Default             | Extra |
++------------------+--------------+------+-----+---------------------+-------+
+| symbol           | varchar(10)  | NO   | PRI | NULL                |       |
+| order_stub       | varchar(255) | NO   |     | NULL                |       |
+| volume_notes     | varchar(500) | YES  |     | NULL                |       |
+| individual_notes | text         | YES  |     | NULL                |       |
+| created_at       | timestamp    | YES  |     | current_timestamp() |       |
++------------------+--------------+------+-----+---------------------+-------+
 
 CREATE TABLE `sector` (
   `symbol` varchar(10) NOT NULL,
@@ -31,9 +41,6 @@ CREATE TABLE `sector` (
   PRIMARY KEY (`symbol`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-
-
-
 CREATE TABLE `streetinsider` (
   `symbol` varchar(10) NOT NULL,
   `htmltext` blob,
@@ -43,7 +50,14 @@ CREATE TABLE `streetinsider` (
   PRIMARY KEY (`symbol`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-
+CREATE TABLE `orders` (
+  `symbol` varchar(10) NOT NULL,
+  `order_stub` varchar(255) NOT NULL,
+  `volume_notes` varchar(500) DEFAULT NULL,
+  `individual_notes` text DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT current_timestamp(),
+  PRIMARY KEY (`symbol`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ; 
 
 
 
