@@ -88,19 +88,29 @@ def create_data_structure():
 
 
 
+#      if reverseSplitPattern.search(values[3]): 
+#        if days_difference == 1:
+#          symbolListOther[values[1]] = "REVERSE SPLIT YESTERDAY!!!! 25-30% EARLY!!!!!" 
+#          if values[1] in symbolList: 
+#            symbolList.remove(values[1]) 
+#        elif days_difference == 2: 
+#          symbolListOther[values[1]] = "REVERSE SPLIT TWO TRADING DAYS AGO!!!!! 25-30% EARLY!!!!" 
+#          if values[1] in symbolList:
+#            symbolList.remove(values[1]) 
+#        elif days_difference > 1: 
+#          symbolListOther[values[1]] = "REVERSE SPLIT " + str(days_difference) + " TRADING DAYS AGO!!!!!!"   
+#          if values[1] in symbolList:
+#            symbolList.remove(values[1]) 
+
+
       if reverseSplitPattern.search(values[3]): 
-        if days_difference == 1:
-          symbolListOther[values[1]] = "REVERSE SPLIT YESTERDAY!!!! 25-30% EARLY!!!!!" 
-          if values[1] in symbolList: 
-            symbolList.remove(values[1]) 
-        elif days_difference == 2: 
-          symbolListOther[values[1]] = "REVERSE SPLIT TWO TRADING DAYS AGO!!!!! 25-30% EARLY!!!!" 
-          if values[1] in symbolList:
-            symbolList.remove(values[1]) 
-        elif days_difference > 1: 
+        if days_difference > 10: 
           symbolListOther[values[1]] = "REVERSE SPLIT " + str(days_difference) + " TRADING DAYS AGO!!!!!!"   
           if values[1] in symbolList:
             symbolList.remove(values[1]) 
+
+
+
 
 
       print("Line is ** " + line) 
