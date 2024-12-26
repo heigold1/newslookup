@@ -11,7 +11,7 @@ $secCompanyName = preg_replace("/<.*?>/", "", $secCompanyName);
 $cikNumber = $_GET['cikNumber']; 
 $checkSec = $_GET['checkSec']; 
 
-$yesterdayDays = 1;
+$yesterdayDays = 2;
 
 fopen("cookies.txt", "w");
 

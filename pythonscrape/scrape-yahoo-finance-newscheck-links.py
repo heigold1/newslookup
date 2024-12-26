@@ -57,6 +57,7 @@ def parse_finance_page(symbol):
     first_item = root.find('.//item') 
     if first_item is not None: 
       title = first_item.find('title').text
+      title = title.replace('"', "'") 
       link = first_item.find('link').text 
       print('{"yahooInfo":{"urlTitle":"' + title + '","url":"' + link + '"}}')
     else: 
