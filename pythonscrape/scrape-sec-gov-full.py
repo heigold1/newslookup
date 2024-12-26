@@ -170,6 +170,7 @@ def parse_xml(xml_data, yesterday_days):
         title = re.sub(r'\[Rules (13a-16|15d-16).*?\]', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp; \\g<0> - CHECK FOR BANKRUPTCY, INSOLVENCY, OFFERING, RAISING EXTRA CASH, ETC...</b></span>', title, flags=re.IGNORECASE)
         title = re.sub(r'1\.01', r'<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp; 1.01 - CHECK FOR BANKRUPTCY, INSOLVENCY, OFFERING, RAISING EXTRA CASH, ETC...</b></span>', title)
         title = re.sub(r'withdrawal of offering statement', r'<span style="font-size: 25px; background-color:red; color:black"><b>WITHDRAWAL OF OFFERING STATEMENT - 35-40%</b></span>', title, flags=re.IGNORECASE)
+        title = re.sub(r'certification by an exchange', r'<span style="font-size: 25px; background-color:red; color:black"><b>CERTIFICATION BY AN EXCHANGE - 40%</b></span>', title, flags=re.IGNORECASE)
 
 
 
