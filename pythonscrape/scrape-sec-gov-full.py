@@ -192,9 +192,11 @@ def parse_xml(xml_data, yesterday_days):
     return_sec_html += "".join(sec_table_rows)
     return_sec_html += "</table>"
 
+
+# light yellow is #FFFDAF 
     for days_back_count in range(14, 6, -1):
         date_string = days_back_date(days_back_count) 
-        return_sec_html = re.sub(r'(' + re.escape(date_string) + r')', r'<span style="font-size: 12px; background-color: #FFFDAF; color:black">\1</span>', return_sec_html)
+        return_sec_html = re.sub(r'(' + re.escape(date_string) + r')', r'<span style="font-size: 12px; background-color: yellow; color:black">\1</span>', return_sec_html)
 
     for days_back_count in range(6, yesterday_days, -1):
         date_string = days_back_date(days_back_count) 
