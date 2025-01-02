@@ -147,9 +147,6 @@ def parse_xml(xml_data, yesterday_days):
         filing_type = re.sub(r'PRE ?14A', '<span style="font-size: 15px; background-color:red; color:black">PRE 14A</span> &nbsp;', filing_type, flags=re.IGNORECASE)
         filing_type = re.sub(r'DEF ?14A', '<span style="font-size: 15px; background-color:red; color:black">DEF 14A</span> &nbsp;', filing_type, flags=re.IGNORECASE)
 
-
-
-
         title = re.sub('registration statement', '<span style="font-size: 16px; background-color:red; color:black"><b>&nbsp;Registration statement - OFFERING COMING OUT, HOLD OFF</span></b>&nbsp;', title, flags=re.IGNORECASE)
         title = re.sub(r'beneficial ownership', '<span style="font-size: 16px; background-color:#00ff00; color:black"><b>&nbsp;beneficial ownership</span></b>&nbsp;', title, flags=re.IGNORECASE)
         title = re.sub(r'statement of changes in beneficial ownership of securities', '<span style="font-size: 16px; background-color:#00ff00; color:black"><b>&nbsp;Statement of changes in beneficial ownership of securities - 18% early</span></b>&nbsp;', title, flags=re.IGNORECASE)
@@ -172,6 +169,7 @@ def parse_xml(xml_data, yesterday_days):
         title = re.sub(r'withdrawal of offering statement', r'<span style="font-size: 25px; background-color:red; color:black"><b>WITHDRAWAL OF OFFERING STATEMENT - 35-40%</b></span>', title, flags=re.IGNORECASE)
         title = re.sub(r'certification by an exchange', r'<span style="font-size: 25px; background-color:red; color:black"><b>CERTIFICATION BY AN EXCHANGE - 40%</b></span>', title, flags=re.IGNORECASE)
 
+        item_description = re.sub(r'\b3\.01\b', r'<span style="font-size: 45px; background-color:red; color:black"><b> 3.01 - DELISTING </b></span>', item_description, flags=re.IGNORECASE)
 
 
 
