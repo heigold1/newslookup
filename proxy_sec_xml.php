@@ -11,7 +11,7 @@ $secCompanyName = preg_replace("/<.*?>/", "", $secCompanyName);
 $cikNumber = $_GET['cikNumber']; 
 $checkSec = $_GET['checkSec']; 
 
-$yesterdayDays = 2;
+$yesterdayDays = 1;
 
 fopen("cookies.txt", "w");
 
@@ -826,6 +826,8 @@ function getNewsQuantified($symbol, $yesterdayDays)
           $streetInsiderNews = preg_replace('/ notice of allowance/i', '<span style="font-size: 20px; background-color:#00ff00; color:black; "><b> NOTICE OF ALLOWANCE - THIS IS OK AT 18-20%</b></span>&nbsp;', $streetInsiderNews); 
           $streetInsiderNews = preg_replace('/ (closes.*loan)/i', '<span style="font-size: 20px; background-color:red; color:black; "><b> $1 - NEWS UPDATE - 40%</b></span>&nbsp;', $streetInsiderNews); 
           $streetInsiderNews = preg_replace('/ announces financing/i', '<span style="font-size: 20px; background-color:red; color:black; "><b> ANNOUNCES FINANCING - BACK OFF, COULD BE A SHARE PRICE</b></span>&nbsp;', $streetInsiderNews); 
+          $streetInsiderNews = preg_replace('/ public offering/i', '<span style="font-size: 25px; background-color:red; color:black; "><b> PUBLIC OFFERING - STAY AWAY</b></span>&nbsp;', $streetInsiderNews); 
+          $streetInsiderNews = preg_replace('/ share offering/i', '<span style="font-size: 25px; background-color:red; color:black; "><b> SHARE OFFERING - STAY AWAY</b></span>&nbsp;', $streetInsiderNews); 
 
 
         return "<div style='height: 250px; width: 100%; overflow-y:auto; border-style: double !important; border-color: black !important; color: black;'>" . $streetInsiderNews . "</div>"; 

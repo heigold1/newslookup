@@ -7,7 +7,7 @@ require_once("country-codes.php");
 
 libxml_use_internal_errors(true);
 
-$yesterdayDays = 2;
+$yesterdayDays = 1;
 
 error_reporting(1);
 //ini_set('display_errors', 1);
@@ -1531,6 +1531,8 @@ die();
       $finalReturn = preg_replace('/ notice of allowance/i', '<span style="font-size: 20px; background-color:#00ff00; color:black; "><b> NOTICE OF ALLOWANCE - THIS IS OK AT 18-20%</b></span>&nbsp;', $finalReturn); 
       $finalReturn = preg_replace('/ (closes.*loan)/i', '<span style="font-size: 20px; background-color:red; color:black; "><b> $1 - NEWS UPDATE - 40%</b></span>&nbsp;', $finalReturn); 
       $finalReturn = preg_replace('/ announces financing/i', '<span style="font-size: 20px; background-color:red; color:black; "><b> ANNOUNCES FINANCING - BACK OFF, COULD BE A SHARE PRICE</b></span>&nbsp;', $finalReturn); 
+      $finalReturn = preg_replace('/ public offering/i', '<span style="font-size: 25px; background-color:red; color:black; "><b> PUBLIC OFFERING - STAY AWAY</b></span>&nbsp;', $finalReturn); 
+      $finalReturn = preg_replace('/ share offering/i', '<span style="font-size: 25px; background-color:red; color:black; "><b> SHARE OFFERING - STAY AWAY</b></span>&nbsp;', $finalReturn); 
 
 
 
