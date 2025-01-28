@@ -170,7 +170,7 @@ def parse_xml(xml_data, yesterday_days):
         title = re.sub(r'certification by an exchange', r'<span style="font-size: 25px; background-color:red; color:black"><b>CERTIFICATION BY AN EXCHANGE - 40%</b></span>', title, flags=re.IGNORECASE)
 
         item_description = re.sub(r'\b3\.01\b', r'<span style="font-size: 45px; background-color:red; color:black"><b> 3.01 - DELISTING </b></span>', item_description, flags=re.IGNORECASE)
-
+        item_description = re.sub(r'\b5\.07\b', r'<span style="font-size: 45px; background-color:red; color:black"><b> 5.07<br><br> - CHECK FOR POSSIBLE OFFERING </b></span><span style="font-size: 25px; background-color:red; color:black"<b> Things like *Warrant Exercise Proposal*</b></span>', item_description, flags=re.IGNORECASE) 
 
 
         if re.search('registration', title, re.IGNORECASE) or re.search('offering', title, re.IGNORECASE):

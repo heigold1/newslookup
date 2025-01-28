@@ -1024,7 +1024,7 @@ die();
 
       $yahooFinanceIndustry = preg_replace('/medical devices/i', '<span style="font-size: 60px; background-color: red; color:black"><b>&nbsp; MEDICAL<br><br> DEVICES</b></span>&nbsp;', $yahooFinanceIndustry); 
 
-      $yahooFinanceIndustry = preg_replace('/biotechnology/i', '<br><span style="font-size: 30px; background-color: red; color:black"><b>&nbsp; BIOTECHNOLOGY</b></span>&nbsp;', $yahooFinanceIndustry); 
+      $yahooFinanceIndustry = preg_replace('/(biotechnology|technology)/i', '<br><span style="font-size: 30px; background-color: red; color:black"><b>&nbsp; $1</b></span>&nbsp;', $yahooFinanceIndustry); 
 
       $yahooFinanceIndustry = preg_replace('/shell companies/i', '<span style="font-size: 35px; background-color: red; color:black"><b>&nbsp; Shell Companies</b></span>&nbsp;', $yahooFinanceIndustry); 
 
