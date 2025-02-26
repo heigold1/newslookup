@@ -49,7 +49,7 @@
 									<input id="net_loss_penny" type="submit" value="62.5%">
 								</span>
 								<span>
-									<input id="net_loss" type="submit" value="52.5%">
+									<input id="net_loss" type="submit" value="51%">
 								</span>
 								<span>
 									<input id="net_income_penny" type="submit" value="50%">
