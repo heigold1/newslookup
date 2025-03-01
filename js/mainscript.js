@@ -670,7 +670,7 @@ $(function() {
               $("#day1").html("");
               $("#entryPrice").val(""); 
               $("#entryPercentage").val("");  
-              $("#amountSpending").val("600");
+              $("#amountSpending").val("700");
               $("#eTradeLowPercentage").html("");
               $("#orderStub").val("-----------------------"); 
               $("#foreign_country").html("");
@@ -1300,80 +1300,72 @@ $(function() {
 
 var corporateActionsStocks=
 {
+  "NKLAQ": "SYMBOL CHANGE 3 TRADING DAYS AGO!!! 38 PERCENT!!!",
   "WDC": "NEW SYMBOL AS OF None TRADING DAYS AGO!!!  AT LEAST 38 PERCENT!!!",
   "SNDK": "WAS LISTED None TRADING DAYS AGO!!!  AT LEAST 38 PERCENT!!!",
-  "VRM": "SYMBOL CHANGE 4 TRADING DAYS AGO!!! 38 PERCENT!!!",
+  "VRM": "SYMBOL CHANGE 6 TRADING DAYS AGO!!! 38 PERCENT!!!",
   "HMR": "WAS LISTED None TRADING DAYS AGO!!!  AT LEAST 38 PERCENT!!!",
   "TIC": "WAS LISTED None TRADING DAYS AGO!!!  AT LEAST 38 PERCENT!!!",
-  "SGI": "SYMBOL CHANGE 6 TRADING DAYS AGO!!! 38 PERCENT!!!",
-  "NXXT": "SYMBOL CHANGE 8 TRADING DAYS AGO!!! 38 PERCENT!!!",
+  "SGI": "SYMBOL CHANGE 8 TRADING DAYS AGO!!! 38 PERCENT!!!",
+  "NXXT": "SYMBOL CHANGE 10 TRADING DAYS AGO!!! 38 PERCENT!!!",
   "NPB": "WAS LISTED None TRADING DAYS AGO!!!  AT LEAST 38 PERCENT!!!",
-  "DVLT": "SYMBOL CHANGE 8 TRADING DAYS AGO!!! 38 PERCENT!!!",
+  "DVLT": "SYMBOL CHANGE 10 TRADING DAYS AGO!!! 38 PERCENT!!!",
   "XHLD": "WAS LISTED None TRADING DAYS AGO!!!  AT LEAST 38 PERCENT!!!",
+  "TANH": "REVERSE SPLIT 11 TRADING DAYS AGO!!!!!!",
   "SAIL": "WAS LISTED None TRADING DAYS AGO!!!  AT LEAST 38 PERCENT!!!",
   "KRMN": "WAS LISTED None TRADING DAYS AGO!!!  AT LEAST 38 PERCENT!!!",
+  "HYFM": "REVERSE SPLIT 11 TRADING DAYS AGO!!!!!!",
   "AARD": "WAS LISTED None TRADING DAYS AGO!!!  AT LEAST 38 PERCENT!!!",
   "ODYS": "WAS LISTED None TRADING DAYS AGO!!!  AT LEAST 38 PERCENT!!!",
   "FGMC": "WAS LISTED None TRADING DAYS AGO!!!  AT LEAST 38 PERCENT!!!",
-  "EXOZ": "SYMBOL CHANGE 10 TRADING DAYS AGO!!! 38 PERCENT!!!",
-  "EGRVF": "SYMBOL CHANGE 10 TRADING DAYS AGO!!! 38 PERCENT!!!",
+  "EXOZ": "SYMBOL CHANGE 12 TRADING DAYS AGO!!! 38 PERCENT!!!",
+  "EGRVF": "SYMBOL CHANGE 12 TRADING DAYS AGO!!! 38 PERCENT!!!",
   "AGH": "WAS LISTED None TRADING DAYS AGO!!!  AT LEAST 38 PERCENT!!!",
-  "NIVF": "REVERSE SPLIT 11 TRADING DAYS AGO!!!!!!",
-  "GSAT": "REVERSE SPLIT 11 TRADING DAYS AGO!!!!!!",
-  "TCBP": "REVERSE SPLIT 12 TRADING DAYS AGO!!!!!!",
-  "RIME": "REVERSE SPLIT 12 TRADING DAYS AGO!!!!!!",
+  "NIVF": "REVERSE SPLIT 13 TRADING DAYS AGO!!!!!!",
+  "GSAT": "REVERSE SPLIT 13 TRADING DAYS AGO!!!!!!",
+  "TCBP": "REVERSE SPLIT 14 TRADING DAYS AGO!!!!!!",
+  "RIME": "REVERSE SPLIT 14 TRADING DAYS AGO!!!!!!",
   "EFSI": "WAS LISTED None TRADING DAYS AGO!!!  AT LEAST 38 PERCENT!!!",
-  "BTAI": "REVERSE SPLIT 12 TRADING DAYS AGO!!!!!!",
+  "BTAI": "REVERSE SPLIT 14 TRADING DAYS AGO!!!!!!",
   "TTAM": "WAS LISTED None TRADING DAYS AGO!!!  AT LEAST 38 PERCENT!!!",
   "SION": "WAS LISTED None TRADING DAYS AGO!!!  AT LEAST 38 PERCENT!!!",
   "MRP": "WAS LISTED None TRADING DAYS AGO!!!  AT LEAST 38 PERCENT!!!",
   "STRK": "WAS LISTED None TRADING DAYS AGO!!!  AT LEAST 38 PERCENT!!!",
-  "HVII": "SYMBOL CHANGE 14 TRADING DAYS AGO!!! 38 PERCENT!!!",
+  "HVII": "SYMBOL CHANGE 16 TRADING DAYS AGO!!! 38 PERCENT!!!",
   "FBGL": "WAS LISTED None TRADING DAYS AGO!!!  AT LEAST 38 PERCENT!!!",
   "EPWK": "WAS LISTED None TRADING DAYS AGO!!!  AT LEAST 38 PERCENT!!!",
-  "TNXP": "REVERSE SPLIT 15 TRADING DAYS AGO!!!!!!",
+  "TNXP": "REVERSE SPLIT 17 TRADING DAYS AGO!!!!!!",
   "PLUT": "WAS LISTED None TRADING DAYS AGO!!!  AT LEAST 38 PERCENT!!!",
   "HCAI": "WAS LISTED None TRADING DAYS AGO!!!  AT LEAST 38 PERCENT!!!",
   "CJMB": "WAS LISTED None TRADING DAYS AGO!!!  AT LEAST 38 PERCENT!!!",
-  "GCTK": "REVERSE SPLIT 16 TRADING DAYS AGO!!!!!!",
-  "XIFR": "SYMBOL CHANGE 17 TRADING DAYS AGO!!! 38 PERCENT!!!",
-  "RHEP": "SYMBOL CHANGE 17 TRADING DAYS AGO!!! 38 PERCENT!!!",
-  "PROCF": "SYMBOL CHANGE 17 TRADING DAYS AGO!!! 38 PERCENT!!!",
-  "EYEN": "REVERSE SPLIT 17 TRADING DAYS AGO!!!!!!",
-  "ZKIN": "REVERSE SPLIT 18 TRADING DAYS AGO!!!!!!",
+  "GCTK": "REVERSE SPLIT 18 TRADING DAYS AGO!!!!!!",
+  "XIFR": "SYMBOL CHANGE 19 TRADING DAYS AGO!!! 38 PERCENT!!!",
+  "RHEP": "SYMBOL CHANGE 19 TRADING DAYS AGO!!! 38 PERCENT!!!",
+  "PROCF": "SYMBOL CHANGE 19 TRADING DAYS AGO!!! 38 PERCENT!!!",
+  "EYEN": "REVERSE SPLIT 19 TRADING DAYS AGO!!!!!!",
+  "ZKIN": "REVERSE SPLIT 20 TRADING DAYS AGO!!!!!!",
   "MTSR": "WAS LISTED None TRADING DAYS AGO!!!  AT LEAST 38 PERCENT!!!",
   "MAZE": "WAS LISTED None TRADING DAYS AGO!!!  AT LEAST 38 PERCENT!!!",
   "INR": "WAS LISTED None TRADING DAYS AGO!!!  AT LEAST 38 PERCENT!!!",
-  "FCUV": "REVERSE SPLIT 18 TRADING DAYS AGO!!!!!!",
+  "FCUV": "REVERSE SPLIT 20 TRADING DAYS AGO!!!!!!",
   "TWNP": "WAS LISTED None TRADING DAYS AGO!!!  AT LEAST 38 PERCENT!!!",
   "FATBB": "NEW SYMBOL AS OF None TRADING DAYS AGO!!!  AT LEAST 38 PERCENT!!!",
   "FAT": "NEW SYMBOL AS OF None TRADING DAYS AGO!!!  AT LEAST 38 PERCENT!!!",
   "CSAI": "WAS LISTED None TRADING DAYS AGO!!!  AT LEAST 38 PERCENT!!!",
-  "CRKN": "REVERSE SPLIT 19 TRADING DAYS AGO!!!!!!",
-  "BLRX": "REVERSE SPLIT 19 TRADING DAYS AGO!!!!!!",
+  "CRKN": "REVERSE SPLIT 21 TRADING DAYS AGO!!!!!!",
+  "BLRX": "REVERSE SPLIT 21 TRADING DAYS AGO!!!!!!",
   "BBNX": "WAS LISTED None TRADING DAYS AGO!!!  AT LEAST 38 PERCENT!!!",
-  "ACON": "REVERSE SPLIT 19 TRADING DAYS AGO!!!!!!",
-  "KNWN": "SYMBOL CHANGE 20 TRADING DAYS AGO!!! 38 PERCENT!!!",
-  "ENVB": "REVERSE SPLIT 20 TRADING DAYS AGO!!!!!!",
-  "BCTX": "REVERSE SPLIT 20 TRADING DAYS AGO!!!!!!",
-  "WBUYF": "SYMBOL CHANGE 21 TRADING DAYS AGO!!! 38 PERCENT!!!",
-  "VINC": "REVERSE SPLIT 21 TRADING DAYS AGO!!!!!!",
+  "ACON": "REVERSE SPLIT 21 TRADING DAYS AGO!!!!!!",
+  "KNWN": "SYMBOL CHANGE 22 TRADING DAYS AGO!!! 38 PERCENT!!!",
+  "ENVB": "REVERSE SPLIT 22 TRADING DAYS AGO!!!!!!",
+  "BCTX": "REVERSE SPLIT 22 TRADING DAYS AGO!!!!!!",
+  "WBUYF": "SYMBOL CHANGE 23 TRADING DAYS AGO!!! 38 PERCENT!!!",
+  "VINC": "REVERSE SPLIT 23 TRADING DAYS AGO!!!!!!",
   "SFD": "WAS LISTED None TRADING DAYS AGO!!!  AT LEAST 38 PERCENT!!!",
-  "REVB": "REVERSE SPLIT 21 TRADING DAYS AGO!!!!!!",
-  "INKT": "REVERSE SPLIT 21 TRADING DAYS AGO!!!!!!",
-  "GOEVQ": "SYMBOL CHANGE 21 TRADING DAYS AGO!!! 38 PERCENT!!!",
-  "FMTO": "SYMBOL CHANGE 21 TRADING DAYS AGO!!! 38 PERCENT!!!",
-  "QTIH": "SYMBOL CHANGE 22 TRADING DAYS AGO!!! 38 PERCENT!!!",
-  "LAR": "SYMBOL CHANGE 22 TRADING DAYS AGO!!! 38 PERCENT!!!",
-  "IVP": "REVERSE SPLIT 22 TRADING DAYS AGO!!!!!!",
-  "HAO": "REVERSE SPLIT 22 TRADING DAYS AGO!!!!!!",
-  "GMHS": "SYMBOL CHANGE 22 TRADING DAYS AGO!!! 38 PERCENT!!!",
-  "GITS": "REVERSE SPLIT 22 TRADING DAYS AGO!!!!!!",
-  "CDT": "REVERSE SPLIT 22 TRADING DAYS AGO!!!!!!",
-  "BNGO": "REVERSE SPLIT 22 TRADING DAYS AGO!!!!!!",
-  "BLNE": "SYMBOL CHANGE 22 TRADING DAYS AGO!!! 38 PERCENT!!!",
-  "ACCS": "SYMBOL CHANGE 22 TRADING DAYS AGO!!! 38 PERCENT!!!",
-  "AAPG": "WAS LISTED None TRADING DAYS AGO!!!  AT LEAST 38 PERCENT!!!"
+  "REVB": "REVERSE SPLIT 23 TRADING DAYS AGO!!!!!!",
+  "INKT": "REVERSE SPLIT 23 TRADING DAYS AGO!!!!!!",
+  "GOEVQ": "SYMBOL CHANGE 23 TRADING DAYS AGO!!! 38 PERCENT!!!",
+  "FMTO": "SYMBOL CHANGE 23 TRADING DAYS AGO!!! 38 PERCENT!!!"
 };
 
 
@@ -1633,7 +1625,7 @@ for (var corporateSymbol in corporateActionsStocks)
       amount = amount/3; 
       $("#amountSpending").val(amount);
 */
-      $("#amountSpending").val("350.00"); 
+      $("#amountSpending").val("450.00"); 
 
       calcAll();
       CopyToClipboard();  
@@ -1667,7 +1659,7 @@ for (var corporateSymbol in corporateActionsStocks)
    $("#symbol_change").click(function(){
 
       $("#entryPercentage").val("24.50"); 
-      $("#amountSpending").val("350"); 
+      $("#amountSpending").val("450"); 
 
       var yesterdaysClose = $('#yestCloseText').val(); 
       var newPrice = yesterdaysClose - (yesterdaysClose*24.50/100); 
@@ -1726,7 +1718,7 @@ for (var corporateSymbol in corporateActionsStocks)
 
     $("#dollar_18_half").click(function(){
       $("#entryPercentage").val("18.00"); 
-      $("#amountSpending").val("350"); 
+      $("#amountSpending").val("450"); 
 
 
       var yesterdaysClose = $('#yestCloseText').val(); 
@@ -1746,7 +1738,7 @@ for (var corporateSymbol in corporateActionsStocks)
 
     $("#net_income").click(function(){
       $("#entryPercentage").val("40.00"); 
-      $("#amountSpending").val("350"); 
+      $("#amountSpending").val("450"); 
 
 
       var yesterdaysClose = $('#yestCloseText').val(); 
@@ -1766,7 +1758,7 @@ for (var corporateSymbol in corporateActionsStocks)
 
     $("#net_income_penny").click(function(){
       $("#entryPercentage").val("50.00"); 
-      $("#amountSpending").val("350"); 
+      $("#amountSpending").val("450"); 
 
       var yesterdaysClose = $('#yestCloseText').val(); 
       var newPrice = yesterdaysClose - (yesterdaysClose*50.00/100); 
@@ -1786,7 +1778,7 @@ for (var corporateSymbol in corporateActionsStocks)
 
     $("#net_loss").click(function(){
       $("#entryPercentage").val("51"); 
-      $("#amountSpending").val("350"); 
+      $("#amountSpending").val("450"); 
 
       var yesterdaysClose = $('#yestCloseText').val(); 
       var newPrice = yesterdaysClose - (yesterdaysClose*51/100); 
@@ -1806,7 +1798,7 @@ for (var corporateSymbol in corporateActionsStocks)
 
     $("#net_loss_penny").click(function(){
       $("#entryPercentage").val("62.50"); 
-      $("#amountSpending").val("350"); 
+      $("#amountSpending").val("450"); 
 
       var yesterdaysClose = $('#yestCloseText').val(); 
       var newPrice = yesterdaysClose - (yesterdaysClose*62.50/100); 
@@ -1826,7 +1818,7 @@ for (var corporateSymbol in corporateActionsStocks)
     $("#penny_21").click(function(){
 
       $("#entryPercentage").val("21.00"); 
-      $("#amountSpending").val("350"); 
+      $("#amountSpending").val("450"); 
 
       var yesterdaysClose = $('#yestCloseText').val(); 
       var newPrice = yesterdaysClose - (yesterdaysClose*21.00/100); 
