@@ -7,7 +7,7 @@ require_once("country-codes.php");
 
 libxml_use_internal_errors(true);
 
-$yesterdayDays = 3;
+$yesterdayDays = 1;
 
 error_reporting(1);
 //ini_set('display_errors', 1);
@@ -914,6 +914,8 @@ die();
         $yahooFinanceIndustry = "NOT LISTED"; 
         $website = "NOT LISTED"; 
         $cik = "NOT_FOUND"; 
+        $ceo = "NOT_FOUND"; 
+        $description = "NOT_FOUND"; 
       }
       else
       {
@@ -925,7 +927,8 @@ die();
           $yahooFinanceIndustry = "NOT LISTED"; 
           $website = "NOT LISTED"; 
           $cik = "NOT_FOUND"; 
-
+          $ceo = "NOT_FOUND"; 
+          $description = "NOT_FOUND"; 
         }
         else 
         {
@@ -936,6 +939,22 @@ die();
           $city = $yahooFinanceObject[0]['city']; 
           $state = $yahooFinanceObject[0]['state']; 
           $cik = $yahooFinanceObject[0]['cik']; 
+          $ceo = $yahooFinanceObject[0]['ceo']; 
+          $description = $yahooFinanceObject[0]['description']; 
+          $description = preg_replace('/\b(china|japan|singapore|taiwan|malaysia|korea)\b/i', '<span style="font-size: 35px; background-color: red; color:black"><b>&nbsp; $1</b></span>$1</span>', $description);
+
+          $asianCountryPattern = '/\b(china|japan|singapore|taiwan|malaysia|korea)\b/i';
+          $chineseSurnames = ["Li", "Wang", "Zhang", "Liu", "Chen", "Yang", "Huang", "Zhao", "Wu", "Zhou", "Xu", "Sun", "Ma", "Hu", "Gao", "Lin", "He", "Guo", "Luo", "Deng", "Long"];
+
+          $surnamePattern = "/\b(" . implode("|", $chineseSurnames) . ")\b/i";
+
+          $ceoHasChineseSurname = preg_match($surnamePattern, $ceo);
+          $descriptionContainsAsianCountry = preg_match($asianCountryPattern, $description);
+
+          if ($ceoHasChineseSurname || $descriptionContainsAsianCountry) {
+            $ceo = '<br><br><span style="font-size: 55px; background-color: red;">CEO ' . $ceo . '</span>'; 
+          }
+
 
           if (trim($city) == "")
           {
@@ -1030,7 +1049,7 @@ die();
 
       $yahooFinanceIndustry = preg_replace('/banks/i', '<span style="font-size: 35px; background-color: red; color:black"><b>&nbsp; BANKS</b></span>&nbsp;', $yahooFinanceIndustry); 
 
-      $sectorCountry = '<span style="font-size: 15px;">SECTOR - ' . $yahooFinanceSector . '</span>&nbsp;&nbsp;<span id="industry" style="font-size: 15px;">INDUSTRY - ' . $yahooFinanceIndustry . '</span><br><br><div id="country" style="font-size: 15px; height:75px; ">' . $country . '</div>'; 
+      $sectorCountry = '<span style="font-size: 15px;">SECTOR - ' . $yahooFinanceSector . '</span>&nbsp;&nbsp;<span id="industry" style="font-size: 15px;">INDUSTRY - ' . $yahooFinanceIndustry . ' </span>' . 'CEO ' . $ceo . '<br><br><div id="country" style="font-size: 15px; height:75px; ">' . $country . '</div>'; 
 
 
 
@@ -1608,6 +1627,7 @@ die();
       $returnArray['currently_halted'] = $tradeHaltsArray['currently_halted']; 
       $returnArray['final_return'] = $finalReturn;
       $returnArray['cik'] = $cik; 
+      $returnArray['description'] = $description; 
 
       echo json_encode($returnArray); 
 
