@@ -941,10 +941,10 @@ die();
           $cik = $yahooFinanceObject[0]['cik']; 
           $ceo = $yahooFinanceObject[0]['ceo']; 
           $description = $yahooFinanceObject[0]['description']; 
-          $description = preg_replace('/\b(china|japan|singapore|taiwan|malaysia|korea)\b/i', '<span style="font-size: 35px; background-color: red; color:black"><b>&nbsp; $1</b></span>$1</span>', $description);
+          $description = preg_replace('/\b(china|japan|singapore|taiwan|malaysia|korea)\b/i', '<span style="font-size: 45px; background-color: red; color:black"><b>&nbsp; $1</b></span>$1</span>', $description);
 
           $asianCountryPattern = '/\b(china|japan|singapore|taiwan|malaysia|korea)\b/i';
-          $chineseSurnames = ["Li", "Wang", "Zhang", "Liu", "Chen", "Yang", "Huang", "Zhao", "Wu", "Zhou", "Xu", "Sun", "Ma", "Hu", "Gao", "Lin", "He", "Guo", "Luo", "Deng", "Long"];
+          $chineseSurnames = ["Li", "Wang", "Zhang", "Liu", "Chen", "Yang", "Huang", "Zhao", "Wu", "Zhou", "Xu", "Sun", "Ma", "Hu", "Gao", "Lin", "He", "Guo", "Luo", "Deng", "Long", "Kwan", "Yau", "Ho", "Tsu", "Qian", "Jie", "Tuo", "Ze", "Dongye", "Dao", "Du", "Zhi", "Xu", "Di", "Bo", "Du"];
 
           $surnamePattern = "/\b(" . implode("|", $chineseSurnames) . ")\b/i";
 
