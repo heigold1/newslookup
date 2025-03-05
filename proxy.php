@@ -941,7 +941,10 @@ die();
           $cik = $yahooFinanceObject[0]['cik']; 
           $ceo = $yahooFinanceObject[0]['ceo']; 
           $description = $yahooFinanceObject[0]['description']; 
-          $description = preg_replace('/\b(china|japan|singapore|taiwan|malaysia|korea)\b/i', '<br><br><span style="font-size: 45px; background-color: red; color:black"><b>&nbsp; $1</b></span>$1</span>', $description);
+          $descriptionRegex = $description;
+          $descriptionRegex = preg_replace('/\b(china|japan|singapore|taiwan|malaysia|korea)\b/i', '<br><br><span style="font-size: 45px; background-color: red; color:black"><b>&nbsp; $1</b></span>$1</span>', $descriptionRegex);
+          $descriptionRegex .= '<button onclick="prepareChineseJay(\'' . $symbol . '\',\''. addslashes($ceo). '\',\'' . addslashes($description) . '\')">Prepare Chinese Question</button>';   
+
 
           $asianCountryPattern = '/\b(china|japan|singapore|taiwan|malaysia|korea)\b/i';
           $chineseSurnames = ["Li", "Wang", "Zhang", "Liu", "Chen", "Yang", "Huang", "Zhao", "Wu", "Zhou", "Xu", "Sun", "Ma", "Hu", "Gao", "Lin", "He", "Guo", "Luo", "Deng", "Long", "Kwan", "Yau", "Ho", "Tsu", "Qian", "Jie", "Tuo", "Ze", "Dongye", "Dao", "Du", "Zhi", "Xu", "Di", "Bo", "Du", "Duan", "Gao", "Cai"];
@@ -1628,6 +1631,8 @@ die();
       $returnArray['final_return'] = $finalReturn;
       $returnArray['cik'] = $cik; 
       $returnArray['description'] = $description; 
+      $returnArray['descriptionRegex'] = $descriptionRegex; 
+      $returnArray['ceo'] = $ceo; 
 
       echo json_encode($returnArray); 
 

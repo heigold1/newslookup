@@ -49,6 +49,37 @@ function prepareChatGPTQuestion(link)
 }
 
 
+function prepareChineseJay(symbol, ceo, description)
+{
+
+    var message = symbol + " (Chinese alert)" + "CEO: " + ceo + " DESCRIPTION: " + description; 
+
+    //`Can you read the following link and tell me if there are any red flags in this SEC filing? Here is the link: ${link}`;
+    
+    document.getElementById("prepareChineseQuestion").value = message;
+
+
+//    if (textBox) {
+//        textBox.value = message; // Set the message as the value
+        
+        var copyTextarea = $("#prepareChineseQuestion");
+        copyTextarea.select();
+
+        try {
+          var successful = document.execCommand('copy');
+          var msg = successful ? 'successful' : 'unsuccessful';
+          console.log('Copying text command was ' + msg);
+        } catch (err) {
+          console.log('Oops, unable to copy');
+        }
+/*
+    } 
+    else {
+        console.error("Hidden textbox not found in DOM.");
+    }
+*/
+}
+
 
 
 function CopyToClipboard() {
@@ -604,7 +635,7 @@ $(function() {
           var checkHighlightDate = 0; 
           var checkParticipationDate = 0; 
           var cikNumber = ""; 
-          var description; 
+          var descriptionRegex; 
 
 
           closeAllWindows();
@@ -1075,7 +1106,7 @@ $(function() {
               yahooHtmlResults = finalObject.final_return; 
               haltSymbolList = JSON.parse(finalObject.halt_symbol_list); 
               currentlyHaltedList = JSON.parse(finalObject.currently_halted);
-              description = finalObject.description; 
+              descriptionRegex = finalObject.descriptionRegex; 
 
               if (haltSymbolList.includes(original_symbol))
               {
@@ -1125,7 +1156,7 @@ $(function() {
               google_keyword_string = google_keyword_string.replace(/inc\./ig, "");
               google_keyword_string = google_keyword_string.replace(/ltd\./ig, "");
 
-              $("div#bigcharts_yest_close").html("<a href='https://www.google.com/search?q=stock+" + symbol + "&tbm=nws' target='blank'>GOOGLE NEWS</a> &nbsp; <a href='https://www.biopharmcatalyst.com/company/" + symbol + "' target='blank'>DRUG PIPELINE</a><br>");  
+              $("div#bigcharts_yest_close").html("<a href='https://www.google.com/search?q=stock+" + symbol + "&tbm=nws' target='blank'>GOOGLE NEWS</a> &nbsp; <a href='https://www.biopharmcatalyst.com/company/" + symbol + "' target='blank'>DRUG PIPELINE</a> &nbsp; <input type='textarea' id='prepareChineseQuestion' style='width: 5px !important'><br>");  
 
               var currentlyHaltedKeys = Object.keys(currentlyHaltedList); 
 
@@ -1134,7 +1165,7 @@ $(function() {
                 $("div#bigcharts_yest_close").append(generateHaltedStocksTable(currentlyHaltedList)); 
               }
 
-              $("div#bigcharts_yest_close").append(description); 
+              $("div#bigcharts_yest_close").append(descriptionRegex); 
 
               if (
                 (finalObject.final_return.search(/there is google news/gi) > 0)
