@@ -942,17 +942,27 @@ die();
           $ceo = $yahooFinanceObject[0]['ceo']; 
           $description = $yahooFinanceObject[0]['description']; 
           $descriptionRegex = $description;
-          $descriptionRegex = preg_replace('/\b(china|japan|singapore|taiwan|malaysia|korea)\b/i', '<br><br><span style="font-size: 45px; background-color: red; color:black"><b>&nbsp; $1</b></span>$1</span>', $descriptionRegex);
+          $chineseCityArray = "/\b(china|japan|singapore|taiwan|malaysia|korea)\b/i"; 
+
+
+          preg_match_all($chineseCityArray, $descriptionRegex, $matches);
+
+          if (!empty($matches[0])) {
+            // Join all the matched countries with a comma and space, then prepend to the text
+            $descriptionRegex = strtoupper(implode(", ", array_unique($matches[0]))) . " - " . $descriptionRegex;
+          }
+
+
+          $descriptionRegex = preg_replace($chineseCityArray, '<br><br><span style="font-size: 45px; background-color: red; color:black"><b>&nbsp; $1</b></span>$1</span>', $descriptionRegex);
           $descriptionRegex .= '<button onclick="prepareChineseJay(\'' . $symbol . '\',\''. addslashes($ceo). '\',\'' . addslashes($description) . '\')">Prepare Chinese Question</button>';   
 
 
-          $asianCountryPattern = '/\b(china|japan|singapore|taiwan|malaysia|korea)\b/i';
           $chineseSurnames = ["Li", "Wang", "Zhang", "Liu", "Chen", "Yang", "Huang", "Zhao", "Wu", "Zhou", "Xu", "Sun", "Ma", "Hu", "Gao", "Lin", "He", "Guo", "Luo", "Deng", "Long", "Kwan", "Yau", "Ho", "Tsu", "Qian", "Jie", "Tuo", "Ze", "Dongye", "Dao", "Du", "Zhi", "Xu", "Di", "Bo", "Du", "Duan", "Gao", "Cai"];
 
           $surnamePattern = "/\b(" . implode("|", $chineseSurnames) . ")\b/i";
 
           $ceoHasChineseSurname = preg_match($surnamePattern, $ceo);
-          $descriptionContainsAsianCountry = preg_match($asianCountryPattern, $description);
+          $descriptionContainsAsianCountry = preg_match($chineseCityArray, $description);
 
           if ($ceoHasChineseSurname || $descriptionContainsAsianCountry) {
             $ceo = '<br><br><span style="font-size: 55px; background-color: red;">CEO ' . $ceo . '</span>'; 
