@@ -58,10 +58,6 @@ function prepareChineseJay(symbol, ceo, description)
     
     document.getElementById("prepareChineseQuestion").value = message;
 
-
-//    if (textBox) {
-//        textBox.value = message; // Set the message as the value
-        
         var copyTextarea = $("#prepareChineseQuestion");
         copyTextarea.select();
 
@@ -72,12 +68,6 @@ function prepareChineseJay(symbol, ceo, description)
         } catch (err) {
           console.log('Oops, unable to copy');
         }
-/*
-    } 
-    else {
-        console.error("Hidden textbox not found in DOM.");
-    }
-*/
 }
 
 
