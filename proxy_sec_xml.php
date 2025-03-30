@@ -632,7 +632,7 @@ function getNewsQuantified($symbol, $yesterdayDays)
           $streetInsiderNews = preg_replace('/ delist/i', '<span style="font-size: 55px; background-color:red; color:black"><b> delist - check the date</b></span>', $streetInsiderNews);
           $streetInsiderNews = preg_replace('/Delist/', '<span style="font-size: 55px; background-color:red; color:black"><b> delist - check the date</b></span>', $streetInsiderNews);
           $streetInsiderNews = preg_replace('/ chapter 11|chapter 11 /i', '<span style="font-size: 55px; background-color:red; color:black"><br><br><b> &nbsp;CHAPTER 11</b></span>', $streetInsiderNews);
-          $streetInsiderNews = preg_replace('/ bankrupt/i', '<span style="font-size: 55px; background-color:red; color:black"><b>&nbsp;bankrupt</span></b>', $streetInsiderNews);      
+          $streetInsiderNews = preg_replace('/ bankrupt/i', '<span style="font-size: 35px; background-color:red; color:black"><br><br><b>&nbsp;bankrupt - are they winding down? Check for sale of assets</span></b>', $streetInsiderNews);      
           $streetInsiderNews = preg_replace('/ reverse split|reverse split /i', '<span style="font-size: 55px; background-color:red; color:black"><b> &nbsp;REVERSE SPLIT -<br><br> CHECK DATE</b></span>', $streetInsiderNews);
           $streetInsiderNews = preg_replace('/ reverse.stock split|reverse stock split /i', '<div style="font-size: 55px; background-color:red; color:black; display: inline-block;"><b>REVERSE SPLIT -<br><br> CHECK DATE</b></div>', $streetInsiderNews);
           $streetInsiderNews = preg_replace('/ reverse.share split|reverse stock split /i', '<div style="font-size: 55px; background-color:red; color:black; display: inline-block;"><b>REVERSE SPLIT -<br><br> CHECK DATE</b></div>', $streetInsiderNews);
@@ -651,7 +651,7 @@ function getNewsQuantified($symbol, $yesterdayDays)
           $streetInsiderNews = preg_replace('/ etn/i', '<span style="font-size: 15px; background-color:red; color:black"><b> &nbsp;ETN</b>&nbsp;</span>', $streetInsiderNews);                        
           $streetInsiderNews = preg_replace('/[ \']disruption[ \']/i', '<span style="font-size: 12px; background-color:red; color:black"><b> &nbsp;disruption&nbsp;</span> (chase at 52%)</b>', $streetInsiderNews);
           $streetInsiderNews = preg_replace('/ abandon/i', '<span style="font-size: 15px; background-color:red; color:black"><b>&nbsp;abandon&nbsp;</span> (65-70%)</b>', $streetInsiderNews);
-          $streetInsiderNews = preg_replace('/ bankrupt/i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp;bankrupt</span> </b>', $streetInsiderNews);      
+          $streetInsiderNews = preg_replace('/ bankrupt/i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp;bankrupt - are they winding down?</span> </b>', $streetInsiderNews);      
           $streetInsiderNews = preg_replace('/ terminate| terminates| terminated| termination/i', '<span style="font-size: 15px; background-color:red; color:black"><b>&nbsp;terminate&nbsp;</span> (65% dollar, 75% penny) </b>', $streetInsiderNews);            
           $streetInsiderNews = preg_replace('/ drug/i', '<span style="font-size: 15px; background-color:red; color:black"><b>&nbsp;drug </span></b> ', $streetInsiderNews);
           $streetInsiderNews = preg_replace('/ guidance/i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp;GUIDANCE</span></b>&nbsp;', $streetInsiderNews);
@@ -828,6 +828,7 @@ function getNewsQuantified($symbol, $yesterdayDays)
           $streetInsiderNews = preg_replace('/ announces financing/i', '<span style="font-size: 20px; background-color:red; color:black; "><b> ANNOUNCES FINANCING - BACK OFF, COULD BE A SHARE PRICE</b></span>&nbsp;', $streetInsiderNews); 
           $streetInsiderNews = preg_replace('/ public offering/i', '<span style="font-size: 25px; background-color:red; color:black; "><b> PUBLIC OFFERING - STAY AWAY</b></span>&nbsp;', $streetInsiderNews); 
           $streetInsiderNews = preg_replace('/ share offering/i', '<span style="font-size: 25px; background-color:red; color:black; "><b> SHARE OFFERING - STAY AWAY</b></span>&nbsp;', $streetInsiderNews); 
+          $streetInsiderNews = preg_replace('/ purchase order/i', '<span style="font-size: 25px; background-color:red; color:black; "><b> PURCHASE ORDER - BACK OFF, EVEN IF IT LOOKS GOOD</b></span>&nbsp;', $streetInsiderNews); 
 
 
         return "<div style='height: 250px; width: 100%; overflow-y:auto; border-style: double !important; border-color: black !important; color: black;'>" . $streetInsiderNews . "</div>"; 

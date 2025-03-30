@@ -1393,7 +1393,7 @@ die();
       $finalReturn = preg_replace('/ etn/i', '<span style="font-size: 12px; background-color:red; color:black"><b> &nbsp;ETN</b>&nbsp;</span>', $finalReturn);                        
       $finalReturn = preg_replace('/[ \']disruption[ \']/i', '<span style="font-size: 12px; background-color:red; color:black"><b> &nbsp;disruption&nbsp;</span> (chase at 52%)</b>', $finalReturn);
       $finalReturn = preg_replace('/ abandon/i', '<span style="font-size: 12px; background-color:red; color:black"><b>&nbsp;abandon&nbsp;</span> (65-70%)</b>', $finalReturn);
-      $finalReturn = preg_replace('/ bankrupt/i', '<span style="font-size: 55px; background-color:red; color:black"><b><br><br>&nbsp;bankrupt</span></b>', $finalReturn);      
+      $finalReturn = preg_replace('/ bankrupt/i', '<span style="font-size: 35px; background-color:red; color:black"><b><br><br>&nbsp;bankrupt - are they winding down?  Check for sale of assets</span></b>', $finalReturn);      
       $finalReturn = preg_replace('/ terminate| terminates| terminated| termination/i', '<span style="font-size: 12px; background-color:red; color:black"><b>&nbsp;terminate&nbsp;</span> (65% dollar, 75% penny) </b>', $finalReturn);            
 
       $finalReturn = preg_replace('/ drug/i', '<span style="font-size: 12px; background-color:red; color:black"><b>&nbsp;drug </span></b> ', $finalReturn);
@@ -1565,6 +1565,7 @@ die();
       $finalReturn = preg_replace('/ announces financing/i', '<span style="font-size: 20px; background-color:red; color:black; "><b> ANNOUNCES FINANCING - BACK OFF, COULD BE A SHARE PRICE</b></span>&nbsp;', $finalReturn); 
       $finalReturn = preg_replace('/ public offering/i', '<span style="font-size: 25px; background-color:red; color:black; "><b> PUBLIC OFFERING - STAY AWAY</b></span>&nbsp;', $finalReturn); 
       $finalReturn = preg_replace('/ share offering/i', '<span style="font-size: 25px; background-color:red; color:black; "><b> SHARE OFFERING - STAY AWAY</b></span>&nbsp;', $finalReturn); 
+      $finalReturn = preg_replace('/ purchase order/i', '<span style="font-size: 25px; background-color:red; color:black; "><b> PURCHASE ORDER - BACK OFF, EVEN IF IT LOOKS GOOD</b></span>&nbsp;', $finalReturn); 
 
 
 
