@@ -102,12 +102,17 @@ if (isset($mkt_response_obj->QuoteData->All->previousClose))
 
 	// There is some kind of regulation that states that you can't place an order for more than 
 	// 118,500 shares. 
+
+/*
+
 	if ($numShares > 118500) 
 	{
 		$numShares = 118500; 
 	}
+*/
 
-	$orderStub = $symbol . " BUY " . $numShares . " $" . $price . " (" . $percentage . "%)"; 
+
+	$orderStub = $symbol . " BUY " . $numShares . " $" . $price . " (" . $percentage . "%) -- $" . $prevClose . " CIK_NOT_FOUND"; 
 
   $response = array(
     'orderStub' => $orderStub, 
