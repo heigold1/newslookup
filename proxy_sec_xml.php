@@ -5,6 +5,7 @@ require_once("regex-street-insider.php");
 
 error_reporting(E_ALL);
 
+
 $symbol=$_GET['symbol'];
 $originalSymbol=$_GET['originalSymbol']; 
 $secCompanyName = $_GET['secCompanyName'];
@@ -539,13 +540,14 @@ function getStreetInsider($symbol, $yesterdayDays)
 
         // light yellow highlighting for - from two weeks ago to a week ago.
         // light yellow is #fffdaf 
-        for ($daysBack = 14; $daysBack > 6; $daysBack--)
+
+        for ($daysBack = 14; $daysBack >= 7; $daysBack--)
         {
             $streetInsiderNews = preg_replace('/(' .  get_yahoo_trade_date($daysBack) . ')/', '<span style="font-size: 12px; background-color:yellow; color:black">$1</span>', $streetInsiderNews);      
         }
 
         // yellow highlighting for before yesterday
-        for ($daysBack = 5; $daysBack > $yesterdayDays; $daysBack--)
+        for ($daysBack = 6; $daysBack > $yesterdayDays; $daysBack--)
         {
             $streetInsiderNews = preg_replace('/(' .  get_yahoo_trade_date($daysBack) . ')/', '<span style="font-size: 12px; background-color:yellow ; color:black">$1</span>', $streetInsiderNews);      
         }
