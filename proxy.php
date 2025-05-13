@@ -1401,9 +1401,9 @@ die();
       $finalReturn = preg_replace('/ guidance/i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp;GUIDANCE </span></b>&nbsp;', $finalReturn);
       $finalReturn = preg_replace('/ regulatory update/i', '<span style="font-size: 12px; background-color:red; color:black"><b>&nbsp;regulatory update (35% even if regulation is good)</span></b>&nbsp;', $finalReturn);
       $finalReturn = preg_replace('/ suspended/i', '<span style="font-size: 12px; background-color:red; color:black"><b>&nbsp;suspended</span> (65-70%)</b>&nbsp;', $finalReturn);
-      $finalReturn = preg_replace('/ fraud/i', '<span style="font-size: 12px; background-color:red; color:black"><b>&nbsp;fraud</span></b>&nbsp;', $finalReturn);      
+      $finalReturn = preg_replace('/ fraud/i', '<span style="font-size: 45px; background-color:red; color:black"><b>&nbsp;fraud</span></b>&nbsp;', $finalReturn);      
       $finalReturn = preg_replace('/ dividend/i', '<span style="font-size: 55px; background-color:red; color:black"><br><br><b>&nbsp;DIVIDEND<br><br> - CHECK<br><br> ISSUING<br><br> DATE)</span></b>&nbsp;', $finalReturn);             
-      $finalReturn = preg_replace('/ strategic alternatives/i', '<span style="font-size: 55px; background-color:red; color:black"><b>&nbsp;strategic alternatives</span></b>&nbsp;', $finalReturn);
+      $finalReturn = preg_replace('/ strategic alternatives/i', '<span style="font-size: 55px; background-color:red; color:black"><b>&nbsp;strategic alternatives - check if winding down</span></b>&nbsp;', $finalReturn);
       $finalReturn = preg_replace('/ unpatentable/i', '<span style="font-size: 12px; background-color:red; color:black"><b>&nbsp;unpatentable</span> (60%)</b>&nbsp;', $finalReturn);
       $finalReturn = preg_replace('/ accelerate or increase/i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp;accelerate or increase</span> (Possible Chapter 11, stay away)</b>&nbsp;', $finalReturn);
       $finalReturn = preg_replace('/ denial of application/i', '<span style="font-size: 12px; background-color:red; color:black"><b>&nbsp;denial of application</span> (65%)</b>&nbsp;', $finalReturn);
@@ -1569,6 +1569,7 @@ die();
       $finalReturn = preg_replace('/ withdraws appliction/i', '<span style="font-size: 25px; background-color:red; color:black; "><b>WITHDRAWS APPLICATION</b></span>&nbsp;', $finalReturn); 
       $finalReturn = preg_replace('/ review options/i', '<span style="font-size: 25px; background-color:red; color:black; "><b>REVIEW OPTIONS</b></span><br><br><span style="font-size: 50px; background-color:red; color:black; "><b>STAY AWAY</b></span>&nbsp;', $finalReturn); 
       $finalReturn = preg_replace('/ ceo exits/i', '<span style="font-size: 25px; background-color:red; color:black; "><b>CEO EXITS</b></span><br><br><span style="font-size: 50px; background-color:red; color:black; "><b>STAY AWAY</b></span>&nbsp;', $finalReturn); 
+      $finalReturn = preg_replace('/ strategic review/i', '<span style="font-size: 25px; background-color:red; color:black; "><b>STRAGETIC REVIEW</b></span><br><br><span style="font-size: 50px; background-color:red; color:black; "><b>STAY AWAY</b></span>&nbsp;', $finalReturn); 
 
 
 

@@ -66,7 +66,7 @@
 								</span>
 								<label class="historical_data_label_thin">&nbsp;</label>
 								<span>
-									<input id="dollar_18_half" type="submit" value="18%" style="background-color: pink; ">
+									<input id="dollar_19_half" type="submit" value="19%" style="background-color: pink; ">
 								</span>
 								<span>
 									<input id="dollar_18" type="submit" value="18%">
