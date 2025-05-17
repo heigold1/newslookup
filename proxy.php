@@ -942,7 +942,7 @@ die();
           $ceo = $yahooFinanceObject[0]['ceo']; 
           $description = $yahooFinanceObject[0]['description']; 
           $descriptionRegex = $description;
-          $chineseCityArray = "/\b(china|japan|singapore|taiwan|malaysia|korea)\b/i"; 
+          $chineseCityArray = "/\b(china|japan|singapore|taiwan|malaysia|korea|hong kong)\b/i"; 
 
 
           preg_match_all($chineseCityArray, $descriptionRegex, $matches);
@@ -1427,7 +1427,7 @@ die();
       $finalReturn = preg_replace('/ strategic update/i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp; STRATEGIC UPDATE - BE CAREFUL &nbsp;</b></span>&nbsp;', $finalReturn);
       $finalReturn = preg_replace('/ strategic shift/i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp; STRATEGIC SHIFT - BE CAREFUL &nbsp;</b></span>&nbsp;', $finalReturn);
       $finalReturn = preg_replace('/ attorney general/i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp; attorney general (if there is an attorney general probe then 45-50%) &nbsp;</b></span>&nbsp;', $finalReturn);
-      $finalReturn = preg_replace('/ merger/i', '<span style="font-size: 55px; background-color:red; color:black"><br><br><b>&nbsp; MERGER<br><br> - STAY AWAY</b></span>&nbsp;', $finalReturn);
+      $finalReturn = preg_replace('/ merger/i', '<span style="font-size: 55px; background-color:red; color:black"><br><br><b>&nbsp; MERGER<br><br> - STAY AWAY</b></span><span style="font-size: 25px; background-color:red; color:black"><br><br><b>&nbsp; LET IT SETTLE FOR A COUPLE DAYS</b></span>&nbsp;', $finalReturn);
       $finalReturn = preg_replace('/ take private/i', '<span style="font-size: 55px; background-color:red; color:black"><b>&nbsp; TAKE PRIVATE<br><br> - STAY AWAY</b></span>&nbsp;', $finalReturn);
       $finalReturn = preg_replace('/ preliminary(.*?)outlook/i', '<span style="font-size: 12px; background-color:red; color:black"><b>&nbsp; Preliminary$1Outlook -</span> <span style="font-size: 12px; background-color:lightgreen; color:black">41% right off the bat, then 48% literally 3 minutes later.  TAKE NO MORE THAN 5% AND BAIL &nbsp;</b></span>&nbsp;', $finalReturn);
       $finalReturn = preg_replace('/ conference call to provide update/i', '<span style="font-size: 12px; background-color:red; color:black"><b>&nbsp; Conference Call to Provide Update -</span> <span style="font-size: 12px; background-color:lightgreen; color:black">CHECK THE DATE/TIME OF THE CALL &nbsp;</b></span>&nbsp;', $finalReturn);

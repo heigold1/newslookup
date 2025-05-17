@@ -19,7 +19,7 @@ function prepareChatGPTQuestion(link)
     var randomBillion = Math.floor(Math.random() * 1000000001);
 
 
-    var message = "Can you go through the following SEC filing and tell me if there are any red flags, like any mention of bankruptcy, insolvency, dissolving of assets or subsidiaries, major layoffs, delisting in a couple weeks, shutting down operations, or a risk of an upcoming share offering or share dilution, pharmaceutical drug news (i.e. phase 1/2/3 results, of which even good results can still cause the stock to drop), corporate turnaround efforts, or anything similar to that? If it's about something minor like a CEO retiring, a delisting notice where the delisting is months away, or an earnings net income where they simply didn't make as much as what was estimated, that's fine, that's not a big deal. Here is the filing link: " + link + "?rand=" + randomBillion; 
+    var message = "Can you go through the following SEC filing and tell me if there are any red flags, like any mention of bankruptcy, insolvency, dissolving of assets or subsidiaries, major layoffs, delisting in a couple weeks, shutting down operations, or a risk of an upcoming share offering or share dilution (i.e S-1, S-2, 424B3, notice of effectiveness, etc...), pharmaceutical drug news (i.e. phase 1/2/3 results, of which even good results can still cause the stock to drop), corporate turnaround efforts, or anything similar to that? If it's about something minor like a CEO retiring, a delisting notice where the delisting is months away, or an earnings net income where they simply didn't make as much as what was estimated, that's fine, that's not a big deal.  Don't worry about giving an overview, or key details, only let me know if there are red flags.  If there are no red flags found, just say 'No red flags found'.  And please be brief, just make it in point form.  Here is the filing link: " + link + "?rand=" + randomBillion; 
 //     var message = "TEST";   
 
     //`Can you read the following link and tell me if there are any red flags in this SEC filing? Here is the link: ${link}`;
@@ -1326,73 +1326,66 @@ $(function() {
 
 var corporateActionsStocks=
 {
-  "GIBO": "SYMBOL CHANGE 2 TRADING DAYS AGO!!! 38 PERCENT!!!",
-  "B": "SYMBOL CHANGE 2 TRADING DAYS AGO!!! 38 PERCENT!!!",
+  "GIBO": "SYMBOL CHANGE 5 TRADING DAYS AGO!!! 38 PERCENT!!!",
+  "B": "SYMBOL CHANGE 5 TRADING DAYS AGO!!! 38 PERCENT!!!",
   "APUS": "WAS LISTED None TRADING DAYS AGO!!!  AT LEAST 38 PERCENT!!!",
-  "WBUY": "SYMBOL CHANGE 3 TRADING DAYS AGO!!! 38 PERCENT!!!",
+  "WBUY": "SYMBOL CHANGE 6 TRADING DAYS AGO!!! 38 PERCENT!!!",
   "AII": "WAS LISTED None TRADING DAYS AGO!!!  AT LEAST 38 PERCENT!!!",
   "STRZ": "WAS LISTED None TRADING DAYS AGO!!!  AT LEAST 38 PERCENT!!!",
   "CMRE": "NEW SYMBOL AS OF None TRADING DAYS AGO!!!  AT LEAST 38 PERCENT!!!",
   "CMDB": "WAS LISTED None TRADING DAYS AGO!!!  AT LEAST 38 PERCENT!!!",
-  "HTO": "SYMBOL CHANGE 5 TRADING DAYS AGO!!! 38 PERCENT!!!",
-  "MAAS": "REVERSE SPLIT 21 TRADING DAYS AGO!!!!!!",
+  "HTO": "SYMBOL CHANGE 8 TRADING DAYS AGO!!! 38 PERCENT!!!",
+  "MAAS": "SYMBOL CHANGE 9 TRADING DAYS AGO!!! 38 PERCENT!!!",
   "ISOU": "WAS LISTED None TRADING DAYS AGO!!!  AT LEAST 38 PERCENT!!!",
-  "DFDV": "SYMBOL CHANGE 6 TRADING DAYS AGO!!! 38 PERCENT!!!",
+  "DFDV": "SYMBOL CHANGE 9 TRADING DAYS AGO!!! 38 PERCENT!!!",
   "WSBK": "WAS LISTED None TRADING DAYS AGO!!!  AT LEAST 38 PERCENT!!!",
-  "STBXF": "REVERSE SPLIT 20 TRADING DAYS AGO!!!!!!",
+  "STBXF": "SYMBOL CHANGE 10 TRADING DAYS AGO!!! 38 PERCENT!!!",
   "SDM": "WAS LISTED None TRADING DAYS AGO!!!  AT LEAST 38 PERCENT!!!",
   "CEPT": "WAS LISTED None TRADING DAYS AGO!!!  AT LEAST 38 PERCENT!!!",
-  "LUXE": "SYMBOL CHANGE 8 TRADING DAYS AGO!!! 38 PERCENT!!!",
+  "PTPI": "REVERSE SPLIT 11 TRADING DAYS AGO!!!!!!",
+  "LUXE": "SYMBOL CHANGE 11 TRADING DAYS AGO!!! 38 PERCENT!!!",
   "LIMN": "WAS LISTED None TRADING DAYS AGO!!!  AT LEAST 38 PERCENT!!!",
   "YB": "WAS LISTED None TRADING DAYS AGO!!!  AT LEAST 38 PERCENT!!!",
-  "SRXH": "SYMBOL CHANGE 9 TRADING DAYS AGO!!! 38 PERCENT!!!",
+  "SRXH": "SYMBOL CHANGE 12 TRADING DAYS AGO!!! 38 PERCENT!!!",
   "GBFH": "WAS LISTED None TRADING DAYS AGO!!!  AT LEAST 38 PERCENT!!!",
-  "JBIO": "SYMBOL CHANGE 10 TRADING DAYS AGO!!! 38 PERCENT!!!",
+  "JBIO": "REVERSE SPLIT 13 TRADING DAYS AGO!!!!!!",
+  "FOXO": "REVERSE SPLIT 13 TRADING DAYS AGO!!!!!!",
   "FLYY": "WAS LISTED None TRADING DAYS AGO!!!  AT LEAST 38 PERCENT!!!",
-  "XFOR": "REVERSE SPLIT 11 TRADING DAYS AGO!!!!!!",
-  "STSS": "REVERSE SPLIT 11 TRADING DAYS AGO!!!!!!",
-  "STKH": "REVERSE SPLIT 11 TRADING DAYS AGO!!!!!!",
-  "PITEF": "SYMBOL CHANGE 11 TRADING DAYS AGO!!! 38 PERCENT!!!",
-  "NAAS": "REVERSE SPLIT 11 TRADING DAYS AGO!!!!!!",
-  "IVF": "SYMBOL CHANGE 11 TRADING DAYS AGO!!! 38 PERCENT!!!",
-  "INEO": "SYMBOL CHANGE 11 TRADING DAYS AGO!!! 38 PERCENT!!!",
-  "DEA": "REVERSE SPLIT 11 TRADING DAYS AGO!!!!!!",
+  "XFOR": "REVERSE SPLIT 14 TRADING DAYS AGO!!!!!!",
+  "STSS": "REVERSE SPLIT 14 TRADING DAYS AGO!!!!!!",
+  "STKH": "REVERSE SPLIT 14 TRADING DAYS AGO!!!!!!",
+  "PITEF": "SYMBOL CHANGE 14 TRADING DAYS AGO!!! 38 PERCENT!!!",
+  "NAAS": "REVERSE SPLIT 14 TRADING DAYS AGO!!!!!!",
+  "IVF": "SYMBOL CHANGE 14 TRADING DAYS AGO!!! 38 PERCENT!!!",
+  "INEO": "SYMBOL CHANGE 14 TRADING DAYS AGO!!! 38 PERCENT!!!",
+  "DEA": "REVERSE SPLIT 14 TRADING DAYS AGO!!!!!!",
   "SSII": "WAS LISTED None TRADING DAYS AGO!!!  AT LEAST 38 PERCENT!!!",
   "PHOE": "WAS LISTED None TRADING DAYS AGO!!!  AT LEAST 38 PERCENT!!!",
-  "VIVS": "SYMBOL CHANGE 13 TRADING DAYS AGO!!! 38 PERCENT!!!",
-  "KWE": "REVERSE SPLIT 14 TRADING DAYS AGO!!!!!!",
-  "SPWR": "SYMBOL CHANGE 15 TRADING DAYS AGO!!! 38 PERCENT!!!",
+  "VIVS": "SYMBOL CHANGE 16 TRADING DAYS AGO!!! 38 PERCENT!!!",
+  "KWE": "REVERSE SPLIT 17 TRADING DAYS AGO!!!!!!",
+  "SPWR": "SYMBOL CHANGE 18 TRADING DAYS AGO!!! 38 PERCENT!!!",
   "PFAI": "WAS LISTED None TRADING DAYS AGO!!!  AT LEAST 38 PERCENT!!!",
-  "MCRB": "REVERSE SPLIT 15 TRADING DAYS AGO!!!!!!",
+  "MCRB": "REVERSE SPLIT 18 TRADING DAYS AGO!!!!!!",
   "MBBC": "WAS LISTED None TRADING DAYS AGO!!!  AT LEAST 38 PERCENT!!!",
-  "FMTO": "REVERSE SPLIT 15 TRADING DAYS AGO!!!!!!",
-  "DTCB": "SYMBOL CHANGE 15 TRADING DAYS AGO!!! 38 PERCENT!!!",
+  "FMTO": "REVERSE SPLIT 18 TRADING DAYS AGO!!!!!!",
+  "DTCB": "SYMBOL CHANGE 18 TRADING DAYS AGO!!! 38 PERCENT!!!",
   "CIGL": "WAS LISTED None TRADING DAYS AGO!!!  AT LEAST 38 PERCENT!!!",
-  "BSLK": "REVERSE SPLIT 15 TRADING DAYS AGO!!!!!!",
-  "YHC": "REVERSE SPLIT 16 TRADING DAYS AGO!!!!!!",
+  "BSLK": "REVERSE SPLIT 18 TRADING DAYS AGO!!!!!!",
+  "YHC": "REVERSE SPLIT 19 TRADING DAYS AGO!!!!!!",
   "TMDE": "WAS LISTED None TRADING DAYS AGO!!!  AT LEAST 38 PERCENT!!!",
-  "SUNE": "REVERSE SPLIT 16 TRADING DAYS AGO!!!!!!",
-  "HOLO": "REVERSE SPLIT 16 TRADING DAYS AGO!!!!!!",
+  "SUNE": "REVERSE SPLIT 19 TRADING DAYS AGO!!!!!!",
+  "HOLO": "REVERSE SPLIT 19 TRADING DAYS AGO!!!!!!",
   "DVS": "WAS LISTED None TRADING DAYS AGO!!!  AT LEAST 38 PERCENT!!!",
-  "DDC": "REVERSE SPLIT 16 TRADING DAYS AGO!!!!!!",
-  "BMRA": "REVERSE SPLIT 16 TRADING DAYS AGO!!!!!!",
-  "NHIC": "SYMBOL CHANGE 18 TRADING DAYS AGO!!! 38 PERCENT!!!",
-  "KZIA": "REVERSE SPLIT 18 TRADING DAYS AGO!!!!!!",
-  "ENZB": "SYMBOL CHANGE 18 TRADING DAYS AGO!!! 38 PERCENT!!!",
+  "DDC": "REVERSE SPLIT 19 TRADING DAYS AGO!!!!!!",
+  "BMRA": "REVERSE SPLIT 19 TRADING DAYS AGO!!!!!!",
+  "NHIC": "SYMBOL CHANGE 21 TRADING DAYS AGO!!! 38 PERCENT!!!",
+  "KZIA": "REVERSE SPLIT 21 TRADING DAYS AGO!!!!!!",
+  "ENZB": "SYMBOL CHANGE 21 TRADING DAYS AGO!!! 38 PERCENT!!!",
   "EDHL": "WAS LISTED None TRADING DAYS AGO!!!  AT LEAST 38 PERCENT!!!",
   "CHA": "WAS LISTED None TRADING DAYS AGO!!!  AT LEAST 38 PERCENT!!!",
-  "TVRD": "SYMBOL CHANGE 19 TRADING DAYS AGO!!! 38 PERCENT!!!",
-  "AWHL": "SYMBOL CHANGE 19 TRADING DAYS AGO!!! 38 PERCENT!!!",
-  "SCLX": "REVERSE SPLIT 20 TRADING DAYS AGO!!!!!!",
-  "RBNE": "WAS LISTED None TRADING DAYS AGO!!!  AT LEAST 38 PERCENT!!!",
-  "HXHX": "WAS LISTED None TRADING DAYS AGO!!!  AT LEAST 38 PERCENT!!!",
-  "FRGE": "REVERSE SPLIT 20 TRADING DAYS AGO!!!!!!",
-  "CPHI": "REVERSE SPLIT 20 TRADING DAYS AGO!!!!!!",
-  "WIMI": "REVERSE SPLIT 21 TRADING DAYS AGO!!!!!!",
-  "PIII": "REVERSE SPLIT 21 TRADING DAYS AGO!!!!!!",
-  "PEVM": "SYMBOL CHANGE 21 TRADING DAYS AGO!!! 38 PERCENT!!!"
+  "TVRD": "REVERSE SPLIT 22 TRADING DAYS AGO!!!!!!",
+  "AWHL": "SYMBOL CHANGE 22 TRADING DAYS AGO!!! 38 PERCENT!!!"
 };
-
 
 
 
@@ -1750,7 +1743,7 @@ for (var corporateSymbol in corporateActionsStocks)
 
 
       var yesterdaysClose = $('#yestCloseText').val(); 
-      var newPrice = yesterdaysClose - (yesterdaysClose*18.00/100); 
+      var newPrice = yesterdaysClose - (yesterdaysClose*19.00/100); 
       if (yesterdaysClose > 1.00){
         newPrice = newPrice.toFixed(2);         
       }
