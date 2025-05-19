@@ -179,7 +179,7 @@ def parse_xml(xml_data, yesterday_days):
         else:
             registration_offering = ""
 
-        sec_table_rows.append(f"<tr style='border: 1px solid black !important; height: 20px;'><td style='border: 1px solid black !important'>{filing_type}</td><td style='border: 1px solid black !important'><a target='_blank' href='{href}'>{title}, {item_description}</a><button onclick='prepareChatGPTQuestion(\"{href}\")' style='margin-left: 5px;'>ChatGPT</button></td><td style='border: 1px solid black !important'>{datestamp}</td><td style='border: 1px solid black !important; font-size: 18px;'>{time}</td></tr>")
+        sec_table_rows.append(f"<tr style='border: 1px solid black !important; height: 20px;'><td style='border: 1px solid black !important'>{filing_type}</td><td style='border: 1px solid black !important'><a target='_blank' href='{href}'>{title}, {item_description}</a><button onclick='prepareChatGPTQuestion(\"{href}\")' style='margin-left: 5px;'>ChatGPT</button><br><br></td><td style='border: 1px solid black !important'>{datestamp}</td><td style='border: 1px solid black !important; font-size: 18px;'>{time}</td></tr>")
         sec_table_row_count += 1
 
     return_sec_html = "<table style='border: 1px solid black !important; background-color: #B1D4E0'>"
