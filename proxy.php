@@ -7,7 +7,7 @@ require_once("country-codes.php");
 
 libxml_use_internal_errors(true);
 
-$yesterdayDays = 3;
+$yesterdayDays = 1;
 
 error_reporting(1);
 //ini_set('display_errors', 1);
@@ -1624,7 +1624,7 @@ die();
 
       $marketStackFromDate = getYMDTradeDate(100); 
       $marketStackToDate = getYMDTradeDate(1); 
-      $marketStackURL = "https://api.marketstack.com/v1/eod?access_key=d36ab142bed5a1430fcde797063f6b9a&symbols=" . $symbol . "&date_from=" . $marketStackFromDate . "&date_to=" . $marketStackToDate;         
+      $marketStackURL = "https://api.marketstack.com/v2/eod?access_key=d36ab142bed5a1430fcde797063f6b9a&symbols=" . $symbol . "&date_from=" . $marketStackFromDate . "&date_to=" . $marketStackToDate;         
       $marketStackOHLC = '&nbsp;&nbsp;<a target="_blank" onclick="return openPage(this.href)" href= ' . $marketStackURL . '> OHLC</a>&nbsp;&nbsp;&nbsp;&nbsp;'; 
 
       $seekingAlphaURL = "https://seekingalpha.com/symbol/" . $originalSymbol; 

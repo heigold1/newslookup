@@ -285,6 +285,15 @@
   <!-- Modal content -->
   <div class="modal-content" style="overflow: auto; ">
     <p style="font-size: 25px">
+
+    		NON-NEWS DOLLAR ENTRIES<br><br>
+    		*******<br><br>
+    		9:30 - 20%<br>
+    		10:15 - 23%<br>
+    		11:00 - 25%<br>
+    		11:45 - 28% <br>
+    		12:30 - 30%<br><br><br>
+
     		PINK SHEET<br><br>
     		**********<br><br>
 			- Pink Sheet dollar stocks - if the 50% down price is still over $1.00 a share, you can jump in at 50%.  If you catch a Pink Sheet dollar stock at 50% mark, only take 20-25% profit<br><br>

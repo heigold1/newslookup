@@ -83,7 +83,7 @@ $returnArray['penny_to_dollar'] = false;
 /*echo "test";
 die();  */ 
 
-$url = "https://api.marketstack.com/v1/eod?access_key=d36ab142bed5a1430fcde797063f6b9a&symbols=" . $symbol . "&date_from=" . $fromDate . "&date_to=" . $toDate; 
+$url = "https://api.marketstack.com/v2/eod?access_key=d36ab142bed5a1430fcde797063f6b9a&symbols=" . $symbol . "&date_from=" . $fromDate . "&date_to=" . $toDate; 
 
 $results = grabHTML("api.marketstack.com", $url);
 
