@@ -42,7 +42,7 @@
 							</td>
 							<td style="width:650px"> 
 								<span>
-									<input id="asian_stocks" type="submit" value="85.5%">
+									<input id="asian_stocks" type="submit" value="85%">
 								</span>
 								<label class="historical_data_label_thin">&nbsp;</label>
 								<span>
@@ -288,11 +288,11 @@
 
     		NON-NEWS DOLLAR ENTRIES<br><br>
     		*******<br><br>
-    		9:30 - 20%<br>
-    		10:15 - 23%<br>
-    		11:00 - 25%<br>
-    		11:45 - 28% <br>
-    		12:30 - 30%<br><br><br>
+    		6:30 - 20%<br>
+    		7:15 - 23%<br>
+    		8:00 - 25%<br>
+    		8:45 - 28% <br>
+    		9:30 - 30%<br><br><br>
 
     		PINK SHEET<br><br>
     		**********<br><br>
@@ -302,18 +302,24 @@
 
 			NASDAQ/NYSE<br><br>
 			***********<br><br>
-			- Recent S1/S1/S3/etc... if the S1/S2/S3/424B3/notice of effectiveness is several days old, you can go in, penny or dollar.<br><br>
-			- Super low volume stocks - you can go in at 22%, ONLY FOR DOLLAR STOCKS.<br><br>
 			- Recent bankruptcies - you can go into these at 40% penny the day after a bankruptcy, 35% dollar. <br><br>
 			- You can go for stocks whose earnings are about to come out after market close that day.<br><br>
+			- Presentation the next day - the usual 18-20% is ok.<br><br><br>  
 			- If an earnings is $0.00 - go in at 40%.<br><br> 
 			- Penny stocks with delisting news - you can go in these at 40% provided the delisting date is a long shot away.<br><br>
-			- Inability to file - 38% dollar, 50% penny. <br><br><br>
-			- For going in at/ignoring pre-market lows, do not do this if it was a high-risk stock that spiked up by a long shot (i.e. over 70%).  In this case, to 10% below the pre-market low. 
+			- Inability to file - 40% dollar, 50% penny. <br><br>
+			- If there is news, check all sites to see if it already came out the previous day.<br><br><br> 
+
+			DELISTINGS<br><br>
+			**********<br><br>
+			120-180 days - 40%<br><br>
+			More than a month - 50% or more<br><br>
+			Less than a month - 60% or more<br><br>
+			Less than a week - 75% or more<br><br><br> 
 			
 			DROPS <br><br>
 			*******<br><br>
-			- 40-45% drop previous day - 22%<br><br><br>
+
 
 			MAJOR NEWS <br><br>
 			*******<br><br>
