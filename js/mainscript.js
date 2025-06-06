@@ -1702,11 +1702,11 @@ for (var corporateSymbol in corporateActionsStocks)
 
    $("#asian_stocks").click(function(){
 
-      $("#entryPercentage").val("85"); 
+      $("#entryPercentage").val("84.5"); 
       $("#amountSpending").val("70"); 
 
       var yesterdaysClose = $('#yestCloseText').val(); 
-      var newPrice = yesterdaysClose - (yesterdaysClose*85/100); 
+      var newPrice = yesterdaysClose - (yesterdaysClose*84.5/100); 
       if (yesterdaysClose > 1.00){
         newPrice = newPrice.toFixed(2);         
       }
