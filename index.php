@@ -42,7 +42,7 @@
 							</td>
 							<td style="width:650px"> 
 								<span>
-									<input id="asian_stocks" type="submit" value="84.5">
+									<input id="asian_stocks" type="submit" value="84.5%">
 								</span>
 								<label class="historical_data_label_thin">&nbsp;</label>
 								<span>
