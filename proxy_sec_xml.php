@@ -543,7 +543,7 @@ function getStreetInsider($symbol, $yesterdayDays)
 
         for ($daysBack = 14; $daysBack >= 7; $daysBack--)
         {
-            $streetInsiderNews = preg_replace('/(' .  get_yahoo_trade_date($daysBack) . ')/', '<span style="font-size: 12px; background-color:yellow; color:black">$1</span>', $streetInsiderNews);      
+            $streetInsiderNews = preg_replace('/(' .  get_yahoo_trade_date($daysBack) . ')/', '<span style="font-size: 12px; background-color:#FFFFC5; color:black">$1</span>', $streetInsiderNews);      
         }
 
         // yellow highlighting for before yesterday

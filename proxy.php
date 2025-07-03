@@ -600,11 +600,17 @@ if ($which_website == "marketwatch")
       $marketWatchNewsHTML .= '</div>';
 
       // yellow highlighting for before yesterday
-      for ($daysBack = 14; $daysBack > $yesterdayDays; $daysBack--)
+      for ($daysBack = 14; $daysBack >= 7; $daysBack--)
+      {
+          $marketWatchNewsHTML = preg_replace('/(' .  get_marketwatch_trade_date($daysBack) . ')/', '<span style="font-size: 10px; background-color:#FFFFC5 ; color:black">$1</span>', $marketWatchNewsHTML);      
+      }
+
+      for ($daysBack = 6; $daysBack > $yesterdayDays; $daysBack--)
       {
           $marketWatchNewsHTML = preg_replace('/(' .  get_marketwatch_trade_date($daysBack) . ')/', '<span style="font-size: 10px; background-color:yellow ; color:black">$1</span>', $marketWatchNewsHTML);      
-          
       }
+
+
       // blue highlighting for yesterday
       for ($daysBack = $yesterdayDays; $daysBack >= 1; $daysBack--)
       {
