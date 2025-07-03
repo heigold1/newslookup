@@ -963,7 +963,7 @@ die();
           $descriptionRegex .= '<button onclick="prepareChineseJay(\'' . $symbol . '\',\''. addslashes($ceo). '\',\'' . addslashes($description) . '\')">Prepare Chinese Question</button>';   
 
 
-          $chineseSurnames = ["Li", "Wang", "Zhang", "Liu", "Chen", "Yang", "Huang", "Zhao", "Wu", "Zhou", "Xu", "Sun", "Ma", "Hu", "Gao", "Lin", "He", "Guo", "Luo", "Deng", "Long", "Kwan", "Yau", "Ho", "Tsu", "Qian", "Jie", "Tuo", "Ze", "Dongye", "Dao", "Du", "Zhi", "Xu", "Di", "Bo", "Du", "Duan", "Gao", "Cai", "Xiyong", "Hou", "Xiao", "Sui", "Ming", "Mei", "Phua", "Wing", "Fung", "Siu", "Lu", "Pun", "Ping", "Xiaoyan", "Mi", "Jin", "Chow", "Ching", "Chang", "Chan", "Kim", "Ly", "Zhai", "Yin", "Yan"];
+          $chineseSurnames = ["Li", "Wang", "Zhang", "Liu", "Chen", "Yang", "Huang", "Zhao", "Wu", "Zhou", "Xu", "Sun", "Ma", "Hu", "Gao", "Lin", "He", "Guo", "Luo", "Deng", "Long", "Kwan", "Yau", "Ho", "Tsu", "Qian", "Jie", "Tuo", "Ze", "Dongye", "Dao", "Du", "Zhi", "Xu", "Di", "Bo", "Du", "Duan", "Gao", "Cai", "Xiyong", "Hou", "Xiao", "Sui", "Ming", "Mei", "Phua", "Wing", "Fung", "Siu", "Lu", "Pun", "Ping", "Xiaoyan", "Mi", "Jin", "Chow", "Ching", "Chang", "Chan", "Kim", "Ly", "Zhai", "Yin", "Yan", "You", "Jiulong"];
 
           $surnamePattern = "/\b(" . implode("|", $chineseSurnames) . ")\b/i";
 
@@ -1353,10 +1353,10 @@ die();
       $finalReturn = preg_replace('/([A-Z][a-z][a-z] [0-9][0-9]:[0-9][0-9][A-Z]M EST)|([A-Z][a-z][a-z] [0-9]:[0-9][0-9][A-Z]M EST)/', '<span style="font-size: 12px; background-color:black; color:white">$1$2</span> ', $finalReturn);
 
       // light yellow highlighting for - from two weeks ago to a week ago.
-      // light yellow is #fffdaf 
+      // light yellow is #FFFFC5 
       for ($daysBack = 14; $daysBack > 6; $daysBack--)
       {
-          $finalReturn = preg_replace('/(' .  get_yahoo_trade_date($daysBack) . ')/', '<span style="font-size: 12px; background-color:yellow; color:black">$1</span>', $finalReturn);
+          $finalReturn = preg_replace('/(' .  get_yahoo_trade_date($daysBack) . ')/', '<span style="font-size: 12px; background-color:#FFFFC5; color:black">$1</span>', $finalReturn);
       }
 
       // darker yellow highlighting for - a weeks ago to (yesterday days)
