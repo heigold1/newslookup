@@ -14,7 +14,7 @@ $secCompanyName = preg_replace("/<.*?>/", "", $secCompanyName);
 $cikNumber = $_GET['cikNumber']; 
 $checkSec = $_GET['checkSec']; 
 
-$yesterdayDays = 1;
+$yesterdayDays = 3;
 
 fopen("cookies.txt", "w");
 
@@ -539,11 +539,11 @@ function getStreetInsider($symbol, $yesterdayDays)
         $streetInsiderNews .=  "</ul>";
 
         // light yellow highlighting for - from two weeks ago to a week ago.
-        // light yellow is #fffdaf 
+        // light yellow is #FFFFC5 
 
         for ($daysBack = 14; $daysBack >= 7; $daysBack--)
         {
-            $streetInsiderNews = preg_replace('/(' .  get_yahoo_trade_date($daysBack) . ')/', '<span style="font-size: 12px; background-color:#FFFFC5; color:black">$1</span>', $streetInsiderNews);      
+            $streetInsiderNews = preg_replace('/(' .  get_yahoo_trade_date($daysBack) . ')/', '<span style="font-size: 12px; background-color:yellow; color:black">$1</span>', $streetInsiderNews);      
         }
 
         // yellow highlighting for before yesterday

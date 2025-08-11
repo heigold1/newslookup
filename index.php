@@ -59,10 +59,10 @@
 								</span>
 								<label class="historical_data_label_thin">&nbsp;</label>
 								<span>
-									<input id="symbol_change" type="submit" value="24.5%">
+									<input id="entry_27" type="submit" value="27%">
 								</span>
 								<span>
-									<input id="penny_21" type="submit" value="21%">
+									<input id="entry_23" type="submit" value="23%">
 								</span>
 								<label class="historical_data_label_thin">&nbsp;</label>
 								<span>
@@ -74,6 +74,9 @@
 								<span>
 									<input id="check-sec" type="checkbox" <?php if ($_GET['check-sec'] == 1){echo "checked";} ?>>
 									<label for="check-sec">SEC</label>
+								</span>
+								<span>
+									<input id="etrade_order" type="submit" value="E*T">
 								</span>
 								&nbsp; 
 							</td>
