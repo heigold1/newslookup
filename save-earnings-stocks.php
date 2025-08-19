@@ -4,7 +4,7 @@ error_reporting(1);
 
 ini_set('display_errors', 1);
 
-	$symbol=$_GET['symbol'];
+	$symbol=$_POST['symbol'];
 
 	file_put_contents('./earnings.txt', $symbol . "\n", FILE_APPEND);
 
