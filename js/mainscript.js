@@ -126,7 +126,7 @@ function generateHaltedStocksTable(stocks) {
 
     for (const[symbol, reasonCode] of Object.entries(stocks))
     {
-        table+= `<a target="_blank" href="http://ec2-34-221-98-254.us-west-2.compute.amazonaws.com/newslookup/index.php?symbol=${symbol}&check-sec=1"><tr style="height: 15px !important;"><td style="border: 1px solid black; ">${symbol}</td><td style="border: 1px solid black; ">${reasonCode}</td></tr></a>`; 
+        table+= `<tr style="height: 15px !important;"><td style="border: 1px solid black; "><a target="_blank" href="http://ec2-34-221-98-254.us-west-2.compute.amazonaws.com/newslookup/index.php?symbol=${symbol}&check-sec=1">${symbol}</a></td><td style="border: 1px solid black; ">${reasonCode}</td></tr>`; 
     }
 
 
