@@ -964,7 +964,7 @@ die();
           $descriptionRegex .= '<button onclick="prepareChineseJay(\'' . $symbol . '\',\''. addslashes($ceo). '\',\'' . addslashes($description) . '\')">Prepare Chinese Question</button>';   
 
 
-          $chineseSurnames = ["Li", "Wang", "Zhang", "Liu", "Chen", "Yang", "Huang", "Zhao", "Wu", "Zhou", "Xu", "Sun", "Ma", "Hu", "Gao", "Lin", "He", "Guo", "Luo", "Deng", "Long", "Kwan", "Yau", "Ho", "Tsu", "Qian", "Jie", "Tuo", "Ze", "Dongye", "Dao", "Du", "Zhi", "Xu", "Di", "Bo", "Du", "Duan", "Gao", "Cai", "Xiyong", "Hou", "Xiao", "Sui", "Ming", "Mei", "Phua", "Wing", "Fung", "Siu", "Lu", "Pun", "Ping", "Xiaoyan", "Mi", "Jin", "Chow", "Ching", "Chang", "Chan", "Kim", "Ly", "Zhai", "Yin", "Yan", "You", "Jiulong", "Yu"];
+          $chineseSurnames = ["Li", "Wang", "Zhang", "Liu", "Chen", "Yang", "Huang", "Zhao", "Wu", "Zhou", "Xu", "Sun", "Ma", "Hu", "Gao", "Lin", "He", "Guo", "Luo", "Deng", "Long", "Kwan", "Yau", "Ho", "Tsu", "Qian", "Jie", "Tuo", "Ze", "Dongye", "Dao", "Du", "Zhi", "Xu", "Di", "Bo", "Du", "Duan", "Gao", "Cai", "Xiyong", "Hou", "Xiao", "Sui", "Ming", "Mei", "Phua", "Wing", "Fung", "Siu", "Lu", "Pun", "Ping", "Xiaoyan", "Mi", "Jin", "Chow", "Ching", "Chang", "Chan", "Kim", "Ly", "Zhai", "Yin", "Yan", "You", "Jiulong", "Yu", "Ngan", "Cheng", "Wong"];
 
           $surnamePattern = "/\b(" . implode("|", $chineseSurnames) . ")\b/i";
 
@@ -974,7 +974,10 @@ die();
           if ($ceoHasChineseSurname || $descriptionContainsAsianCountry) {
             $ceo = '<br><br><span style="font-size: 55px; background-color: red;">CEO ' . $ceo . '</span>'; 
           }
-
+          elseif ($ceo == null)
+          {
+            $ceo = '<br><br><span style="font-size: 50px; background-color: red;"><a style="font-size: 45px" target="_blank" href="https://www.etrade.wallst.com/etrade-web/fundamentals?symbol=' . $symbol . '"> CEO - NULL - CHECK E*TRADE</a></span>'; 
+          }
 
           if (trim($city) == "")
           {
