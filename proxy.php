@@ -1669,8 +1669,18 @@ else if ($which_website == "bigcharts")
       $result = grabHTML("bigcharts.marketwatch.com", $url);
       $html = str_get_html($result);  
 
+/*
       $command = escapeshellcmd('python3 ./pythonscrape/scrape-bigcharts.py ' . $symbol);
       $bigChartsValues = shell_exec($command);
+*/
+
+      $venv_python = '/var/www/html/newslookup/venv/bin/python3';
+      $command = escapeshellcmd($venv_python . ' ./pythonscrape/scrape-bigcharts.py ' . $symbol);
+      $bigChartsValues = shell_exec($command);
+
+
+
+
 
       $values = explode('|', $bigChartsValues); 
 
@@ -1678,7 +1688,7 @@ else if ($which_website == "bigcharts")
       $bigChartsLast = $values[1]; 
       $bigChartsTime = $values[2]; 
 
-      echo   $bigChartsPercentage . "|" . $bigChartsLast . "|" . $bigChartsTime;   
+      echo  $bigChartsPercentage . "|" . $bigChartsLast . "|" . $bigChartsTime;   
 
 } // if ($which_website == "bigcharts")
 else if ($which_website == "streetinsider")

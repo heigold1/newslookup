@@ -1,98 +1,43 @@
 #!/usr/bin/python3
 
-import re 
-from lxml import html
-import requests
-from time import sleep
-import json
-import argparse
-from random import randint
-import sys 
-import urllib3 
-import itertools as it 
-import xml.etree.ElementTree as ET 
-from datetime import datetime, timedelta
+import sys
+import yfinance as yf
 
+def get_delayed_quote(symbol):
+    try:
+        ticker = yf.Ticker(symbol)
 
-urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
+        # Attempt to fetch 15-minute intraday data for the last 5 days
+        data = ticker.history(period="5d", interval="15m")
 
-def parse_bigcharts_page(symbol):
+        if data.empty:
+            print("NF|0.00|0.00")
+            return
 
-  headers = {
-          "Accept":"text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8",
-          "Accept-Encoding":"gzip, deflate",
-          "Accept-Language":"en-GB,en;q=0.9,en-US;q=0.8,ml;q=0.7",
-          "Connection":"keep-alive",
-          "Cache-Control":"no-store, no-cache, must-revalidate, max-age=0'",
-          "Cache-Control":"post-check=0, pre-check=0", 
-          "Pragma":"no-cache", 
-          "Host":"bigcharts.marketwatch.com",
-          "Referer":"https://bigcharts.marketwatch.com",
-          "Upgrade-Insecure-Requests":"1",
-          "User-Agent":"brent@heigoldinvestments.com"
-    } 
+        # Get last available bar
+        last_row = data.iloc[-1]
+        last_price = last_row["Close"]
 
-  url = "https://bigcharts.marketwatch.com/quickchart/quickchart.asp?symb=" + symbol  
+        # Previous day's close
+        prev_close = ticker.info.get("previousClose", None)
+        if prev_close is None:
+            percent_change = "ERR"
+        else:
+            percent_change = ((last_price - prev_close) / prev_close) * 100
 
+        # Timestamp of the last bar (formatted HH:MM:SS)
+        last_timestamp = last_row.name.to_pydatetime().strftime("%H:%M:%S")
 
+        print(f"{percent_change:.2f}|{last_price:.2f}|{last_timestamp}")
 
-  try:    
+    except Exception as e:
+        print(f"ERR|ERR|ERR - {e}")
 
-    request = requests.get(url, headers = headers, verify=False)
+if __name__ == "__main__":
+    if len(sys.argv) < 2:
+        print("Usage: python3 script.py SYMBOL")
+        sys.exit(1)
 
-    if request.status_code!=200:
-      raise ValueError("Invalid Response Received From Webserver")
-
-      # Adding random delay
-      # sleep(randint(1,3))   
-
-      # print(request.content.decode('utf-8'))  
-
-    finalHTMLString = request.content.decode('utf-8')     
-
-    pattern_not_found = "unable to find" 
-    match_not_found = re.search(pattern_not_found, finalHTMLString) 
-    if match_not_found:
-      print("NF|0.00|0.00") 
-      sys.exit() 
-
-    pattern_last = r'<span class="label">Low:</span>\s*<div>(.*?)</div>'
-    pattern_time = r'<td class="soft time">(.*?)</td>'
-    pattern_percent_change = r'<span class="label">Percent Change:</span>\s*<div class="important negative">(.*?)</div>'
-
-    # Search for the pattern in the HTML content
-    match_last = re.search(pattern_last, finalHTMLString)
-    match_time = re.search(pattern_time, finalHTMLString)
-    match_percent_change = re.search(pattern_percent_change, finalHTMLString) 
-
-    # Check if a match is found and extract the value
-    if match_last:
-      last = match_last.group(1)  
-    else:
-      last = "ERR" 
-
-    if match_time: 
-      time = match_time.group(1)
-      pattern = r'/\d{4}'
-      final_time = re.sub(pattern, '', time) 
-    else:
-      time = "ERR" 
-
-    if match_percent_change: 
-      percent_change = match_percent_change.group(1) 
-    else: 
-      percent_change = "ERR" 
- 
-    print(percent_change + "|" + last + "|" + final_time) 
-
-
-  except Exception as e:
-    print("Failed to process the request, Exception:%s"%(e))
-
-symbol = sys.argv[1]
-
-scraped_data = parse_bigcharts_page(symbol)
-
-
-
+    symbol = sys.argv[1].upper()
+    get_delayed_quote(symbol)
 
