@@ -1,43 +1,44 @@
 #!/usr/bin/python3
 
-import sys
 import yfinance as yf
+from datetime import datetime
 
 def get_delayed_quote(symbol):
     try:
         ticker = yf.Ticker(symbol)
 
-        # Attempt to fetch 15-minute intraday data for the last 5 days
-        data = ticker.history(period="5d", interval="15m")
+        # Previous day's close (from daily candles, more reliable than .info)
+        hist = ticker.history(period="2d", interval="1d")
+        if hist.empty or len(hist) < 2:
+            return "NF|0.00|00:00:00"
+        prev_close = hist["Close"].iloc[-2]
 
-        if data.empty:
-            print("NF|0.00|0.00")
-            return
+        # Get today's intraday 1-minute data
+        data = ticker.history(period="1d", interval="1m")
+        if data.empty or len(data) < 16:
+            return "NF|0.00|00:00:00"
 
-        # Get last available bar
-        last_row = data.iloc[-1]
-        last_price = last_row["Close"]
+        # Candle from 15 minutes ago
+        candle_15min_ago = data.iloc[-16]
+        low_price = candle_15min_ago["Low"]
 
-        # Previous day's close
-        prev_close = ticker.info.get("previousClose", None)
-        if prev_close is None:
-            percent_change = "ERR"
-        else:
-            percent_change = ((last_price - prev_close) / prev_close) * 100
+        # Percent down from previous day's close
+        pct_down = ((low_price - prev_close) / prev_close) * 100
 
-        # Timestamp of the last bar (formatted HH:MM:SS)
-        last_timestamp = last_row.name.to_pydatetime().strftime("%H:%M:%S")
+        # Timestamp
+        timestamp = candle_15min_ago.name.to_pydatetime().strftime("%H:%M:%S")
 
-        print(f"{percent_change:.2f}|{last_price:.2f}|{last_timestamp}")
+        return f"{pct_down:.2f}|{low_price:.2f}|{timestamp}"
 
     except Exception as e:
-        print(f"ERR|ERR|ERR - {e}")
+        return f"ERR|ERR|ERR - {e}"
 
 if __name__ == "__main__":
+    import sys
     if len(sys.argv) < 2:
         print("Usage: python3 script.py SYMBOL")
         sys.exit(1)
 
     symbol = sys.argv[1].upper()
-    get_delayed_quote(symbol)
+    print(get_delayed_quote(symbol))
 
