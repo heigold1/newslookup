@@ -59,7 +59,7 @@
 								</span>
 								<label class="historical_data_label_thin">&nbsp;</label>
 								<span>
-									<input id="entry_27" type="submit" value="27%">
+									<input id="entry_26" type="submit" value="26%">
 								</span>
 								<span>
 									<input id="entry_23" type="submit" value="23%">
