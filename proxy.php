@@ -7,7 +7,7 @@ require_once("country-codes.php");
 
 libxml_use_internal_errors(true);
 
-$yesterdayDays = 2;
+$yesterdayDays = 1;
 
 error_reporting(1);
 //ini_set('display_errors', 1);
@@ -767,9 +767,8 @@ These methods don't work anymore, so we have to do a python scrape
    $rss = grabHTML('feeds.finance.yahoo.com', "https://feeds.finance.yahoo.com/rss/2.0/headline?s=$symbol&region=US&lang=en-US"); 
 */
 
-
-
-      $command = escapeshellcmd('python3 ./pythonscrape/scrape-yahoo-finance-rss.py ' . $symbol . ' ' . $yesterdayDays);
+      $venv_python = '/var/www/html/newslookup/venv/bin/python3';
+      $command = escapeshellcmd($venv_python . ' ./pythonscrape/scrape-yahoo-finance-rss.py ' . $symbol . ' ' . $yesterdayDays);
       $allNews = shell_exec($command);
 
 /*
@@ -964,7 +963,7 @@ die();
           $descriptionRegex .= '<button onclick="prepareChineseJay(\'' . $symbol . '\',\''. addslashes($ceo). '\',\'' . addslashes($description) . '\')">Prepare Chinese Question</button>';   
 
 
-          $chineseSurnames = ["Li", "Wang", "Zhang", "Liu", "Chen", "Yang", "Huang", "Zhao", "Wu", "Zhou", "Xu", "Sun", "Ma", "Hu", "Gao", "Lin", "He", "Guo", "Luo", "Deng", "Long", "Kwan", "Yau", "Ho", "Tsu", "Qian", "Jie", "Tuo", "Ze", "Dongye", "Dao", "Du", "Zhi", "Xu", "Di", "Bo", "Du", "Duan", "Gao", "Cai", "Xiyong", "Hou", "Xiao", "Sui", "Ming", "Mei", "Phua", "Wing", "Fung", "Siu", "Lu", "Pun", "Ping", "Xiaoyan", "Mi", "Jin", "Chow", "Ching", "Chang", "Chan", "Kim", "Ly", "Zhai", "Yin", "Yan", "You", "Jiulong", "Yu", "Ngan", "Cheng", "Wong", "Hang", "Song", "Jinghua"];
+          $chineseSurnames = ["Li", "Wang", "Zhang", "Liu", "Chen", "Yang", "Huang", "Zhao", "Wu", "Zhou", "Xu", "Sun", "Ma", "Hu", "Gao", "Lin", "He", "Guo", "Luo", "Deng", "Long", "Kwan", "Yau", "Ho", "Tsu", "Qian", "Jie", "Tuo", "Ze", "Dongye", "Dao", "Du", "Zhi", "Xu", "Di", "Bo", "Du", "Duan", "Gao", "Cai", "Xiyong", "Hou", "Xiao", "Sui", "Ming", "Mei", "Phua", "Wing", "Fung", "Siu", "Lu", "Pun", "Ping", "Xiaoyan", "Mi", "Jin", "Chow", "Ching", "Chang", "Chan", "Kim", "Ly", "Zhai", "Yin", "Yan", "You", "Jiulong", "Yu", "Ngan", "Cheng", "Wong", "Hang", "Song", "Jinghua", "Xykis", "Zhaoying" ];
 
           $surnamePattern = "/\b(" . implode("|", $chineseSurnames) . ")\b/i";
 
@@ -1559,8 +1558,8 @@ die();
       $finalReturn = preg_replace('/ to submit/i', '<span style="font-size: 25px; background-color:red; color:black"><b>TO SUBMIT - CHECK DATE - IF IN THE FUTURE THEN ITS OK TO CHASE AT USUAL ENTRY</b></span>&nbsp;', $finalReturn);
       $finalReturn = preg_replace('/ launch/i', '<span style="font-size: 20px; background-color:orange; color:black; "><b>LAUNCH - IF ABOUT TO LAUNCH OR LAUNCH IS SUCCESSFUL, 18-20%.  IF FAILED LAUNCH, 40%</b></span>&nbsp;', $finalReturn);
       $finalReturn = preg_replace('/ to supply/i', '<span style="font-size: 20px; background-color:#00ff00; color:black; "><b>TO SUPPLY - THIS IS OK</b></span>&nbsp;', $finalReturn);
-      $finalReturn = preg_replace('/ enters partnership/i', '<span style="font-size: 20px; background-color:#00ff00; color:black; "><b>ENTERS PARTNERSHIP - THIS IS OK</b></span>&nbsp;', $finalReturn);
-      $finalReturn = preg_replace('/ announces partnership/i', '<span style="font-size: 20px; background-color:#00ff00; color:black; "><b>ANNOUNCES PARTNERSHIP - THIS IS OK</b></span>&nbsp;', $finalReturn);
+      $finalReturn = preg_replace('/ enters partnership/i', '<span style="font-size: 20px; background-color:#00ff00; color:black; "><b>ENTERS PARTNERSHIP - THIS IS OK AT 40%</b></span>&nbsp;', $finalReturn);
+      $finalReturn = preg_replace('/ announces partnership/i', '<span style="font-size: 20px; background-color:#00ff00; color:black; "><b>ANNOUNCES PARTNERSHIP - THIS IS OK AT 40%</b></span>&nbsp;', $finalReturn);
       $finalReturn = preg_replace('/ shareholder update/i', '<span style="font-size: 25px; background-color:red; color:black; "><b>SHAREHOLDER UPDATE - 40%</b></span>&nbsp;', $finalReturn);
       $finalReturn = preg_replace('/ granted extension (.*?) listing/i', '<span style="font-size: 25px; background-color:red; color:black; "><b>GRANTED EXTENSION $1 LISTING - 40%</b></span>&nbsp;', $finalReturn);
       $finalReturn = preg_replace('/ preliminary purchase/i', '<span style="font-size: 25px; background-color:red; color:black; "><b>PRELIMINARY PURCHASE - 40%</b></span>&nbsp;', $finalReturn);
