@@ -961,6 +961,7 @@ die();
           $state = $yahooFinanceObject[0]['state']; 
           $cik = $yahooFinanceObject[0]['cik']; 
           $ceo = $yahooFinanceObject[0]['ceo']; 
+          $otherExecutives = $yahooFinanceObject[0]['otherExecutives'];       
           $description = $yahooFinanceObject[0]['description']; 
           $descriptionRegex = $description;
           $chineseCityArray = "/\b(china|japan|singapore|taiwan|malaysia|korea|hong kong)\b/i"; 
