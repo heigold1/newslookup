@@ -7,7 +7,7 @@ require_once("country-codes.php");
 
 libxml_use_internal_errors(true);
 
-$yesterdayDays = 3;
+$yesterdayDays = 1;
 
 error_reporting(1);
 //ini_set('display_errors', 1);
@@ -21,6 +21,20 @@ $stockOrFund=$_GET['stockOrFund'];
 $google_keyword_string = $_GET['google_keyword_string'];
 
 fopen("cookies.txt", "w");
+
+
+$honorifics = ['Mr.', 'Ms.', 'Mrs.', 'Dr.', 'Prof.'];
+
+// Helper function to remove honorifics
+function removeHonorifics($name, $honorifics) {
+    foreach ($honorifics as $title) {
+        // Remove the title if it exists at the start of the name
+        if (stripos($name, $title) === 0) {
+            $name = trim(substr($name, strlen($title)));
+        }
+    }
+    return $name;
+}
 
 
 function getYMDTradeDate($daysBack)
@@ -907,9 +921,9 @@ die();
       $website = ""; 
       $cik = ""; 
 
-      $apiUrl = 'https://financialmodelingprep.com/api/v3/profile/' . $originalSymbol . '?apikey=EdahmOwRgQ6xcbs6j37SESSCrCIhcoa9';
-
-      $yahooFinanceJson = file_get_contents($apiUrl); 
+      $venv_python = '/var/www/html/newslookup/venv/bin/python3';
+      $command = escapeshellcmd($venv_python . ' ./pythonscrape/yahoo-finance-company-profile.py ' . $symbol);
+      $yahooFinanceJson = shell_exec($command);
 
       // Make the HTTP GET request
 
@@ -938,7 +952,8 @@ die();
         }
         else 
         {
-          $country = $countryCodes[$yahooFinanceObject[0]['country']];
+          $country = $yahooFinanceObject[0]['country']; 
+//           $country = $countryCodes[$yahooFinanceObject[0]['country']];
           $yahooFinanceSector = $yahooFinanceObject[0]['sector']; 
           $yahooFinanceIndustry = $yahooFinanceObject[0]['industry']; 
           $website = $yahooFinanceObject[0]['website'];
@@ -950,6 +965,18 @@ die();
           $descriptionRegex = $description;
           $chineseCityArray = "/\b(china|japan|singapore|taiwan|malaysia|korea|hong kong)\b/i"; 
 
+          $allNames = [];
+          if (!empty($ceoName)) {
+            $allNames[] = removeHonorifics($ceoName, $honorifics);
+          }
+
+          foreach ($otherExecutives as $exec) {
+            if (!empty($exec['name'])) {
+            $allNames[] = removeHonorifics($exec['name'], $honorifics);
+            }   
+          }
+
+          $concatenatedNames = implode(' ', $allNames);
 
           preg_match_all($chineseCityArray, $descriptionRegex, $matches);
 
@@ -967,7 +994,7 @@ die();
 
           $surnamePattern = "/\b(" . implode("|", $chineseSurnames) . ")\b/i";
 
-          $ceoHasChineseSurname = preg_match($surnamePattern, $ceo);
+          $ceoHasChineseSurname = preg_match($surnamePattern, $concatenatedNames);
           $descriptionContainsAsianCountry = preg_match($chineseCityArray, $description);
 
           if ($ceoHasChineseSurname || $descriptionContainsAsianCountry) {
