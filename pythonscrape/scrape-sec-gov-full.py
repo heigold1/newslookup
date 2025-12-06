@@ -144,8 +144,12 @@ def parse_xml(xml_data, yesterday_days):
         datestamp = re.sub(f'({get_today_trade_date()})', r'<span style="font-size: 16px; background-color:black;  border: 1px solid red; color:white">\1</span>', datestamp)
        
 
-        filing_type = re.sub(r'PRE ?14A', '<span style="font-size: 15px; background-color:red; color:black">PRE 14A</span> &nbsp;', filing_type, flags=re.IGNORECASE)
-        filing_type = re.sub(r'DEF ?14A', '<span style="font-size: 15px; background-color:red; color:black">DEF 14A</span> &nbsp;', filing_type, flags=re.IGNORECASE)
+        filing_type = re.sub(r'PRE.*14A', '<span style="font-size: 15px; background-color:red; color:black">PRE 14A</span> &nbsp;', filing_type, flags=re.IGNORECASE)
+        filing_type = re.sub(r'DEF.*14A', '<span style="font-size: 15px; background-color:red; color:black">DEF 14A</span> &nbsp;', filing_type, flags=re.IGNORECASE)
+        filing_type = re.sub(r'144', '<span style="font-size: 15px; background-color:#00ff00; color:black">144</span> &nbsp;', filing_type, flags=re.IGNORECASE)
+
+
+
 
         title = re.sub('registration statement', '<span style="font-size: 16px; background-color:red; color:black"><b>&nbsp;Registration statement - OFFERING COMING OUT, HOLD OFF</span></b>&nbsp;', title, flags=re.IGNORECASE)
         title = re.sub(r'beneficial ownership', '<span style="font-size: 16px; background-color:#00ff00; color:black"><b>&nbsp;beneficial ownership</span></b>&nbsp;', title, flags=re.IGNORECASE)
