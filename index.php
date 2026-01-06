@@ -312,7 +312,8 @@
 			- Penny stocks with delisting news - you can go in these at 40% provided the delisting date is a long shot away.<br><br>
 			- Inability to file - 40% dollar, 50% penny. <br><br>
 			- If there is news, check all sites to see if it already came out the previous day.<br><br>
-			- Withdraw guidance - 40%<br><br><br>
+			- Withdraw guidance - 40%<br><br>
+			- If the company is being acquired and the 20%-below-acquisition-price price is above the previous day's closing price, it's still ok.<br><br><br> 
 
 			DELISTINGS<br><br>
 			**********<br><br>
