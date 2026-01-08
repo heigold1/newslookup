@@ -253,6 +253,36 @@ else
     $returnArray['new_stock'] = true; 
 }
 
+
+// ---------- BUILD FULL OHLC ARRAY FOR CHART ----------
+
+$returnArray['ohlc'] = [];
+
+if (isset($fullJSON->data) && is_array($fullJSON->data)) {
+
+    foreach ($fullJSON->data as $bar) {
+
+        if (
+            isset($bar->open) &&
+            isset($bar->high) &&
+            isset($bar->low) &&
+            isset($bar->close) &&
+            isset($bar->date)
+        ) {
+            $returnArray['ohlc'][] = [
+                "x" => strtotime($bar->date) * 1000, // milliseconds
+                "o" => (float)$bar->open,
+                "h" => (float)$bar->high,
+                "l" => (float)$bar->low,
+                "c" => (float)$bar->close
+            ];
+        }
+    }
+}
+
+
+
+
 echo json_encode($returnArray);
 
 ?>

@@ -662,7 +662,7 @@ $(function() {
 //          alert("CHECK TMX FOR L-BARS"); 
 
           $("#left_bottom_container").html("");
-          $("#bigcharts_chart_container").html("");
+//          $("#bigcharts_chart_container").html("");
           $("#bigcharts_yest_close").html("");
           $("#right_top_container").html("");
 
@@ -696,7 +696,7 @@ $(function() {
 
               original_symbol = original_symbol.replace(/\.p\./gi, ".P"); 
 
-              $("div#bigcharts_chart_container").html("<img style='max-width:100%; max-height:100%;' src='https://api.wsj.net/api/kaavio/charts/big.chart?nosettings=1&symb=US:" + original_symbol + "&uf=0&type=2&size=2&style=320&freq=1&entitlementtoken=0c33378313484ba9b46b8e24ded87dd6&time=4&rand=" + Math.random() + "&compidx=&ma=0&maval=9&lf=1&lf2=0&lf3=0&height=335&width=579&mocktick=1)'>");
+//              $("div#bigcharts_chart_container").html("<img style='max-width:100%; max-height:100%;' src='https://api.wsj.net/api/kaavio/charts/big.chart?nosettings=1&symb=US:" + original_symbol + "&uf=0&type=2&size=2&style=320&freq=1&entitlementtoken=0c33378313484ba9b46b8e24ded87dd6&time=4&rand=" + Math.random() + "&compidx=&ma=0&maval=9&lf=1&lf2=0&lf3=0&height=335&width=579&mocktick=1)'>");
 
               document.title = "Lookup - " + symbol; 
 //              openPage("https://www.nasdaq.com/symbol/" + symbol + "/sec-filings");
@@ -1011,6 +1011,131 @@ $(function() {
                       $("#day5_total_volume").css({'background-color' : '#ff8a8a', 'font-size' : '17px'});
                       $("#day5_total_volume").fadeOut(300).fadeIn(300).fadeOut(300).fadeIn(300).fadeOut(300).fadeIn(300).fadeOut(300).fadeIn(300).fadeOut(300).fadeIn(300).fadeOut(300).fadeIn(300).fadeOut(300).fadeIn(300).fadeOut(300).fadeIn(300);
                   }
+
+
+
+console.log("OHLC COUNT:", returnedObject.ohlc.length);
+console.log("FIRST BAR:", returnedObject.ohlc[0]);
+
+if (returnedObject.ohlc && returnedObject.ohlc.length > 0) {
+
+    // 1. Reverse to have oldest first
+    const candles = returnedObject.ohlc.slice().reverse();
+
+    // 2. Calculate 1 month ago timestamp
+    const today = new Date();
+    const oneMonthAgo = new Date(today);
+    oneMonthAgo.setMonth(today.getMonth() - 1);
+    oneMonthAgo.setHours(0, 0, 0, 0);
+
+    // 3. Filter candles to only include past 1 month
+    const recentCandles = candles.filter(bar => {
+        const ts = typeof bar.x === 'number' ? bar.x : new Date(bar.x).getTime();
+        return ts >= oneMonthAgo.getTime();
+    });
+
+    // 4. Prepare OHLC and Volume data
+    const ohlcData = recentCandles.map(bar => ({
+        x: typeof bar.x === 'number' ? bar.x : new Date(bar.x).getTime(),
+        o: bar.o,
+        h: bar.h,
+        l: bar.l,
+        c: bar.c
+    }));
+
+    const volumeData = recentCandles.map(bar => ({
+        x: typeof bar.x === 'number' ? bar.x : new Date(bar.x).getTime(),
+        y: bar.v || bar.volume || 0,
+        open: bar.o,
+        close: bar.c
+    }));
+
+    // 5. Destroy previous charts if they exist
+    if (window.monthlyOHLC && typeof window.monthlyOHLC.destroy === 'function') {
+        window.monthlyOHLC.destroy();
+    }
+    if (window.monthlyVolume && typeof window.monthlyVolume.destroy === 'function') {
+        window.monthlyVolume.destroy();
+    }
+
+
+    // ==== OHLC Chart ====
+    window.monthlyOHLC = new Chart(document.getElementById("monthlyOHLC").getContext("2d"), {
+        type: 'candlestick',
+        data: {
+            datasets: [{
+                label: original_symbol,
+                data: ohlcData,
+                borderColor: '#000',
+                upColor: '#00b050',
+                downColor: '#c00000',
+                wickUpColor: '#00b050',
+                wickDownColor: '#c00000',
+                barPercentage: 0.5,
+                categoryPercentage: 0.6
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            animation: false,
+            scales: {
+                x: {
+                    type: 'time',
+                    time: { unit: 'day', tooltipFormat: 'MMM d' },
+                    ticks: {
+                        source: 'auto',
+                        autoSkip: false,
+                        maxRotation: 0,
+                        callback: function(value, index, ticks) {
+                            const d = new Date(this.getLabelForValue(value));
+                            return d.getDate(); // show day numbers
+                        }
+                    },
+                    grid: { drawOnChartArea: false }
+                },
+                y: { position: 'right', title: { display: true, text: 'Price ($)' } }
+            },
+            plugins: { legend: { display: false } }
+        }
+    });
+
+    // ==== Volume Chart ====
+    window.monthlyVolume = new Chart(document.getElementById("monthlyVolume").getContext("2d"), {
+        type: 'bar',
+        data: {
+            datasets: [{
+                label: 'Volume',
+                data: volumeData,
+                backgroundColor: ctx => ctx.raw.close >= ctx.raw.open ? '#00b050' : '#c00000',
+                borderColor: 'transparent',
+                barPercentage: 0.5,
+                categoryPercentage: 0.6
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            animation: false,
+            scales: {
+                x: {
+                    type: 'time',
+                    time: { unit: 'day' },
+                    ticks: { display: false },
+                    grid: { drawOnChartArea: false }
+                },
+                y: {
+                    beginAtZero: true,
+                    title: { display: true, text: 'Volume' }
+                }
+            },
+            plugins: { legend: { display: false } }
+        }
+    });
+
+}
+
+
 
 
                 },
@@ -1349,60 +1474,66 @@ $(function() {
 
 var corporateActionsStocks=
 {
-  "ORIO": "SYMBOL CHANGE 1 TRADING DAYS AGO!!! 38 PERCENT!!!",
-  "ACH": "SYMBOL CHANGE 1 TRADING DAYS AGO!!! 38 PERCENT!!!",
-  "ABXL": "SYMBOL CHANGE 4 TRADING DAYS AGO!!! 38 PERCENT!!!",
-  "ABX": "SYMBOL CHANGE 4 TRADING DAYS AGO!!! 38 PERCENT!!!",
-  "OPLN": "SYMBOL CHANGE 6 TRADING DAYS AGO!!! 38 PERCENT!!!",
-  "BVC": "SYMBOL CHANGE 8 TRADING DAYS AGO!!! 38 PERCENT!!!",
-  "ZYXIQ": "SYMBOL CHANGE 9 TRADING DAYS AGO!!! 38 PERCENT!!!",
-  "LAZRQ": "SYMBOL CHANGE 9 TRADING DAYS AGO!!! 38 PERCENT!!!",
-  "HTT": "SYMBOL CHANGE 10 TRADING DAYS AGO!!! 38 PERCENT!!!",
-  "EPWKF": "SYMBOL CHANGE 10 TRADING DAYS AGO!!! 38 PERCENT!!!",
-  "RENX": "SYMBOL CHANGE 11 TRADING DAYS AGO!!! 38 PERCENT!!!",
-  "IRBTQ": "SYMBOL CHANGE 11 TRADING DAYS AGO!!! 38 PERCENT!!!",
-  "PAVS": "REVERSE SPLIT 12 TRADING DAYS AGO!!!!!!",
-  "MNTS": "REVERSE SPLIT 12 TRADING DAYS AGO!!!!!!",
+  "VSNT": "WAS LISTED None TRADING DAYS AGO!!!  AT LEAST 38 PERCENT!!!",
+  "HELP": "SYMBOL CHANGE 2 TRADING DAYS AGO!!! 38 PERCENT!!!",
+  "CMCSA": "NEW SYMBOL AS OF None TRADING DAYS AGO!!!  AT LEAST 38 PERCENT!!!",
+  "ORIO": "SYMBOL CHANGE 3 TRADING DAYS AGO!!! 38 PERCENT!!!",
+  "ACH": "SYMBOL CHANGE 3 TRADING DAYS AGO!!! 38 PERCENT!!!",
+  "ABXL": "SYMBOL CHANGE 6 TRADING DAYS AGO!!! 38 PERCENT!!!",
+  "ABX": "SYMBOL CHANGE 6 TRADING DAYS AGO!!! 38 PERCENT!!!",
+  "OPLN": "SYMBOL CHANGE 8 TRADING DAYS AGO!!! 38 PERCENT!!!",
+  "BVC": "SYMBOL CHANGE 10 TRADING DAYS AGO!!! 38 PERCENT!!!",
+  "ZYXIQ": "SYMBOL CHANGE 11 TRADING DAYS AGO!!! 38 PERCENT!!!",
+  "TNMG": "REVERSE SPLIT 11 TRADING DAYS AGO!!!!!!",
+  "LAZRQ": "SYMBOL CHANGE 11 TRADING DAYS AGO!!! 38 PERCENT!!!",
+  "CHR": "REVERSE SPLIT 11 TRADING DAYS AGO!!!!!!",
+  "BOXL": "REVERSE SPLIT 11 TRADING DAYS AGO!!!!!!",
+  "VSA": "REVERSE SPLIT 12 TRADING DAYS AGO!!!!!!",
+  "PRPH": "REVERSE SPLIT 12 TRADING DAYS AGO!!!!!!",
+  "INHD": "REVERSE SPLIT 12 TRADING DAYS AGO!!!!!!",
+  "HTT": "SYMBOL CHANGE 12 TRADING DAYS AGO!!! 38 PERCENT!!!",
+  "EPWKF": "SYMBOL CHANGE 12 TRADING DAYS AGO!!! 38 PERCENT!!!",
+  "RENX": "SYMBOL CHANGE 13 TRADING DAYS AGO!!! 38 PERCENT!!!",
+  "IRBTQ": "SYMBOL CHANGE 13 TRADING DAYS AGO!!! 38 PERCENT!!!",
+  "PAVS": "REVERSE SPLIT 14 TRADING DAYS AGO!!!!!!",
+  "MNTS": "REVERSE SPLIT 14 TRADING DAYS AGO!!!!!!",
   "FJET": "WAS LISTED None TRADING DAYS AGO!!!  AT LEAST 38 PERCENT!!!",
-  "DFLI": "REVERSE SPLIT 12 TRADING DAYS AGO!!!!!!",
-  "PCSA": "REVERSE SPLIT 13 TRADING DAYS AGO!!!!!!",
+  "DFLI": "REVERSE SPLIT 14 TRADING DAYS AGO!!!!!!",
+  "PCSA": "REVERSE SPLIT 15 TRADING DAYS AGO!!!!!!",
   "MDLN": "WAS LISTED None TRADING DAYS AGO!!!  AT LEAST 38 PERCENT!!!",
   "ANDG": "WAS LISTED None TRADING DAYS AGO!!!  AT LEAST 38 PERCENT!!!",
-  "STAI": "REVERSE SPLIT 14 TRADING DAYS AGO!!!!!!",
-  "INBS": "REVERSE SPLIT 14 TRADING DAYS AGO!!!!!!",
-  "DTCX": "SYMBOL CHANGE 14 TRADING DAYS AGO!!! 38 PERCENT!!!",
-  "XBP": "REVERSE SPLIT 15 TRADING DAYS AGO!!!!!!",
-  "NVVE": "REVERSE SPLIT 15 TRADING DAYS AGO!!!!!!",
-  "FRGT": "REVERSE SPLIT 15 TRADING DAYS AGO!!!!!!",
-  "CMND": "REVERSE SPLIT 15 TRADING DAYS AGO!!!!!!",
-  "BENF": "REVERSE SPLIT 15 TRADING DAYS AGO!!!!!!",
+  "STAI": "REVERSE SPLIT 16 TRADING DAYS AGO!!!!!!",
+  "INBS": "REVERSE SPLIT 16 TRADING DAYS AGO!!!!!!",
+  "DTCX": "SYMBOL CHANGE 16 TRADING DAYS AGO!!! 38 PERCENT!!!",
+  "XBP": "REVERSE SPLIT 17 TRADING DAYS AGO!!!!!!",
+  "NVVE": "REVERSE SPLIT 17 TRADING DAYS AGO!!!!!!",
+  "FRGT": "REVERSE SPLIT 17 TRADING DAYS AGO!!!!!!",
+  "CMND": "REVERSE SPLIT 17 TRADING DAYS AGO!!!!!!",
+  "BENF": "REVERSE SPLIT 17 TRADING DAYS AGO!!!!!!",
   "WLTH": "WAS LISTED None TRADING DAYS AGO!!!  AT LEAST 38 PERCENT!!!",
-  "FEED": "SYMBOL CHANGE 16 TRADING DAYS AGO!!! 38 PERCENT!!!",
-  "BNAI": "REVERSE SPLIT 16 TRADING DAYS AGO!!!!!!",
-  "BLMZF": "SYMBOL CHANGE 16 TRADING DAYS AGO!!! 38 PERCENT!!!",
-  "AZI": "REVERSE SPLIT 16 TRADING DAYS AGO!!!!!!",
-  "ARBK": "REVERSE SPLIT 16 TRADING DAYS AGO!!!!!!",
-  "YGMZF": "SYMBOL CHANGE 17 TRADING DAYS AGO!!! 38 PERCENT!!!",
+  "FEED": "SYMBOL CHANGE 18 TRADING DAYS AGO!!! 38 PERCENT!!!",
+  "BNAI": "REVERSE SPLIT 18 TRADING DAYS AGO!!!!!!",
+  "BLMZF": "SYMBOL CHANGE 18 TRADING DAYS AGO!!! 38 PERCENT!!!",
+  "AZI": "REVERSE SPLIT 18 TRADING DAYS AGO!!!!!!",
+  "ARBK": "REVERSE SPLIT 18 TRADING DAYS AGO!!!!!!",
+  "YGMZF": "SYMBOL CHANGE 19 TRADING DAYS AGO!!! 38 PERCENT!!!",
   "LMRI": "WAS LISTED None TRADING DAYS AGO!!!  AT LEAST 38 PERCENT!!!",
-  "JZXN": "REVERSE SPLIT 17 TRADING DAYS AGO!!!!!!",
-  "BNKK": "REVERSE SPLIT 17 TRADING DAYS AGO!!!!!!",
-  "TWAV": "SYMBOL CHANGE 18 TRADING DAYS AGO!!! 38 PERCENT!!!",
-  "TJGC": "SYMBOL CHANGE 18 TRADING DAYS AGO!!! 38 PERCENT!!!",
-  "SVRE": "REVERSE SPLIT 18 TRADING DAYS AGO!!!!!!",
+  "JZXN": "REVERSE SPLIT 19 TRADING DAYS AGO!!!!!!",
+  "BNKK": "REVERSE SPLIT 19 TRADING DAYS AGO!!!!!!",
+  "TWAV": "SYMBOL CHANGE 20 TRADING DAYS AGO!!! 38 PERCENT!!!",
+  "TJGC": "SYMBOL CHANGE 20 TRADING DAYS AGO!!! 38 PERCENT!!!",
+  "SVRE": "REVERSE SPLIT 20 TRADING DAYS AGO!!!!!!",
   "JMG": "WAS LISTED None TRADING DAYS AGO!!!  AT LEAST 38 PERCENT!!!",
-  "DCX": "SYMBOL CHANGE 18 TRADING DAYS AGO!!! 38 PERCENT!!!",
+  "DCX": "SYMBOL CHANGE 20 TRADING DAYS AGO!!! 38 PERCENT!!!",
   "CDNL": "WAS LISTED None TRADING DAYS AGO!!!  AT LEAST 38 PERCENT!!!",
-  "XXI": "SYMBOL CHANGE 19 TRADING DAYS AGO!!! 38 PERCENT!!!",
-  "PSNY": "REVERSE SPLIT 19 TRADING DAYS AGO!!!!!!",
-  "WKHS": "REVERSE SPLIT 20 TRADING DAYS AGO!!!!!!",
+  "XXI": "SYMBOL CHANGE 21 TRADING DAYS AGO!!! 38 PERCENT!!!",
+  "PSNY": "REVERSE SPLIT 21 TRADING DAYS AGO!!!!!!",
+  "WKHS": "REVERSE SPLIT 22 TRADING DAYS AGO!!!!!!",
   "UL": "NEW SYMBOL AS OF None TRADING DAYS AGO!!!  AT LEAST 38 PERCENT!!!",
   "MICC": "WAS LISTED None TRADING DAYS AGO!!!  AT LEAST 38 PERCENT!!!",
-  "MHUAF": "SYMBOL CHANGE 20 TRADING DAYS AGO!!! 38 PERCENT!!!",
-  "DOO": "SYMBOL CHANGE 20 TRADING DAYS AGO!!! 38 PERCENT!!!",
-  "AGIG": "SYMBOL CHANGE 20 TRADING DAYS AGO!!! 38 PERCENT!!!",
-  "TGL": "REVERSE SPLIT 21 TRADING DAYS AGO!!!!!!",
-  "MTVA": "REVERSE SPLIT 21 TRADING DAYS AGO!!!!!!",
-  "IMG": "REVERSE SPLIT 21 TRADING DAYS AGO!!!!!!"
+  "MHUAF": "SYMBOL CHANGE 22 TRADING DAYS AGO!!! 38 PERCENT!!!",
+  "DOO": "SYMBOL CHANGE 22 TRADING DAYS AGO!!! 38 PERCENT!!!",
+  "AGIG": "SYMBOL CHANGE 22 TRADING DAYS AGO!!! 38 PERCENT!!!"
 };
 
 

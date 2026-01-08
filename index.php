@@ -1,25 +1,43 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Lookup - <?php echo $_GET['symbol'] ?></title>	
-	<meta content="text/html;charset=utf-8" http-equiv="Content-Type">
-	<meta content="utf-8" http-equiv="encoding">	
-	<script src="js/jquery-1.11.1.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.15.1/moment.min.js"></script>
-	<script src="js/mainscript.js?n=1"></script>   
-	<link type="text/css" href="./css/main.css" rel="stylesheet"/>
-	<link type="text/css" href="./css/combined-min-1.0.5754.css" rel="stylesheet" />
-	<link type="text/css" href="./css/quote-layout.css" rel="stylesheet"/>
-	<link type="text/css" href="./css/quote-typography.css" rel="stylesheet"/>
+  <title>Lookup - <?php echo $_GET['symbol'] ?></title>  
+  <meta charset="utf-8">
+
+  <!-- Styles -->
+  <link type="text/css" href="./css/main.css" rel="stylesheet"/>
+  <link type="text/css" href="./css/combined-min-1.0.5754.css" rel="stylesheet" />
+  <link type="text/css" href="./css/quote-layout.css" rel="stylesheet"/>
+  <link type="text/css" href="./css/quote-typography.css" rel="stylesheet"/>
+  <link type="text/css" href="./highcharts-css/css.css" rel="stylesheet"/>
 
 
+		<script src="https://cdn.jsdelivr.net/npm/luxon@3.4.4"></script>
+		<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-luxon@1.3.1"></script>
+		<script src="js/chartjs-chart-financial.js" type="text/javascript"></script>
+
+		<script src="https://cdn.jsdelivr.net/npm/lightweight-charts@4.2.1/dist/lightweight-charts.standalone.production.js"></script>
+
+
+
+  <!-- jQuery -->
+  <script src="js/jquery-1.11.1.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.15.1/moment.min.js"></script>
+
+  <!-- Your main script (AFTER the plugin) -->
+  <script src="js/mainscript.js?n=1"></script>
+
+  <!-- Highcharts (optional) -->
   <script src="https://code.highcharts.com/highcharts.js"></script>
   <script src="https://code.highcharts.com/highcharts-3d.js"></script>
   <script src="https://code.highcharts.com/modules/exporting.js"></script>
-	<script src="https://code.highcharts.com/modules/export-data.js"></script>
+  <script src="https://code.highcharts.com/modules/export-data.js"></script>
   <script src="https://code.highcharts.com/modules/accessibility.js"></script>
-	<link type="text/css" href="./highcharts-css/css.css" rel="stylesheet"/>
 </head>
+
+
+
 
 <div id="volumeChecked" style="display: none">0</div>
 <div id="windowNumber" style="display: none">1</div>
@@ -259,6 +277,19 @@
 
 		<div id="right_bottom_container"> 
 			<div id="bigcharts_chart_container" style="	position: relative;	width: 53%; height: 100%; display: inline-block; border-style: solid; border-width: 3px; 	border-color: red;">
+
+<!--
+    <div style="height: 100px;">
+        <canvas id="monthlyOHLC"></canvas>
+    </div>
+    <div style="height: 300px; margin-top:10px;">
+        <canvas id="monthlyVolume"></canvas>
+    </div>
+--> 
+
+   				<canvas id="monthlyOHLC" style="width:100%; height:100px;"></canvas> 
+    			<canvas id="monthlyVolume" style="width:100%; height:100px; margin-top:10px;"></canvas>
+
 			</div> <!-- Right Bottom Container Div -->
 
 			<div id="bigcharts_yest_close" style="	display: inline-block; width: 44%; height: 100%; vertical-align: top; border-style: solid;  overflow: scroll; ">
@@ -607,6 +638,8 @@ var chart = new Highcharts.Chart({
 
 
 </script>
+
+
 
 
 </html>
