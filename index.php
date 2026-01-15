@@ -29,11 +29,18 @@
   <script src="js/mainscript.js?n=1"></script>
 
   <!-- Highcharts (optional) -->
-  <script src="https://code.highcharts.com/highcharts.js"></script>
-  <script src="https://code.highcharts.com/highcharts-3d.js"></script>
-  <script src="https://code.highcharts.com/modules/exporting.js"></script>
-  <script src="https://code.highcharts.com/modules/export-data.js"></script>
-  <script src="https://code.highcharts.com/modules/accessibility.js"></script>
+<!-- CORE (includes Highcharts + Stock) -->
+<script src="https://code.highcharts.com/stock/highstock.js"></script>
+
+<!-- Optional but common -->
+<script src="https://code.highcharts.com/stock/modules/exporting.js"></script>
+<script src="https://code.highcharts.com/stock/modules/export-data.js"></script>
+<script src="https://code.highcharts.com/stock/modules/accessibility.js"></script>
+
+
+
+
+
 </head>
 
 
@@ -276,21 +283,10 @@
 	<div id="right_container" style="position: relative; background-color: #F3F3FF; border-style: solid; border-width: 1px; float: right; width: 50%; height: 100%;	display: block; border-style: solid; border-width: 1px; 	">
 
 		<div id="right_bottom_container"> 
-			<div id="bigcharts_chart_container" style="	position: relative;	width: 53%; height: 100%; display: inline-block; border-style: solid; border-width: 3px; 	border-color: red;">
+				<div id="bigcharts_chart_container" style="position: relative; width: 53%; height: 350px; display: inline-block; border: 3px solid red;">
+				    <div id="monthlyOHLC"></div>
+				</div>
 
-<!--
-    <div style="height: 100px;">
-        <canvas id="monthlyOHLC"></canvas>
-    </div>
-    <div style="height: 300px; margin-top:10px;">
-        <canvas id="monthlyVolume"></canvas>
-    </div>
---> 
-
-   				<canvas id="monthlyOHLC" style="width:100%; height:100px;"></canvas> 
-    			<canvas id="monthlyVolume" style="width:100%; height:100px; margin-top:10px;"></canvas>
-
-			</div> <!-- Right Bottom Container Div -->
 
 			<div id="bigcharts_yest_close" style="	display: inline-block; width: 44%; height: 100%; vertical-align: top; border-style: solid;  overflow: scroll; ">
 			</div> <!-- yesterday's close, also the "last" value of previous market close --> 

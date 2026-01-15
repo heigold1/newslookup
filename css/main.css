@@ -5,6 +5,12 @@
   user-select: auto  !important;
 }
 
+#monthlyOHLC {
+    height: auto !important;
+    overflow: visible !important;
+    height: 100%;
+}
+
 div#main_container{
 	position: absolute;
 	background-color: #F3F3FF; 
