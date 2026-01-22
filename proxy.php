@@ -357,6 +357,31 @@ function getTradeHalts()
     $dateTime->modify('-8 hours'); 
     $currentDate = $dateTime->format("m/d/Y"); 
 
+    $servername = "localhost";
+    $username = "superuser";
+    $password = "heimer27";
+    $db = "daytrade"; 
+    $mysqli = null;
+    $date = date("Y-m-d"); 
+
+    // Check connection
+    try {
+        $mysqli = new mysqli($servername, $username, $password, $db);
+    } catch (mysqli_sql_exception $e) {
+
+    } 
+
+    $orderSymbols = array();
+
+    $result = $mysqli->query("SELECT DISTINCT symbol FROM orders");
+
+    if ($result) {
+        while ($row = $result->fetch_assoc()) {
+            $orderSymbols[] = strtoupper(trim($row['symbol']));
+        }
+    }
+
+
     foreach ($rss_feed->channel->item as $feed_item) {
 
       $ns = $feed_item->getNamespaces(true); 
@@ -373,12 +398,17 @@ function getTradeHalts()
             array_push($haltSymbolList, $symbol); 
         }
 
-        if ($resumptionTime == "")
-        {
-            if (!in_array($symbol, $currentlyHalted)) {
-                $currentlyHalted[$symbol] = $reasonCode; 
-            }
-        }        
+            if ($resumptionTime == "") {
+
+                $symbol = strtoupper($symbol);
+
+                // Filters
+                $alreadyTraded = in_array($symbol, $orderSymbols);
+
+                if (!$alreadyTraded) {
+                    $currentlyHalted[$symbol] = $reasonCode;
+                }
+            }     
 
       }
     }

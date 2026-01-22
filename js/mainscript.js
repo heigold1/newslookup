@@ -84,39 +84,46 @@ function CopyToClipboard() {
   }
 }
 
-function playChineseStock(){
-  var chineseStock = new Audio('./wav/china.wav');
-  chineseStock.play();
+function playChineseStock() {
+    if (!window.audioUnlocked) return;
+    window.sounds.chinese.currentTime = 0;
+    window.sounds.chinese.play().catch(e => console.log("Play failed:", e));
 }
 
 function playHighRiskStock(){
-  var highRiskStock = new Audio('./wav/high-risk.wav');
-  highRiskStock.play();
+    if (!window.audioUnlocked) return;
+    window.sounds.highRisk.currentTime = 0;
+    window.sounds.highRisk.play().catch(e => console.log("Play failed:", e));
 }
 
 function playLowVolumeStock(){
-  var lowVolumeStock = new Audio('./wav/low-volume.wav');
-  lowVolumeStock.play();
+    if (!window.audioUnlocked) return;
+    window.sounds.lowVolume.currentTime = 0;
+    window.sounds.lowVolume.play().catch(e => console.log("Play failed:", e));
 }
 
 function playForeignStock(){
-  var foreignStock = new Audio('./wav/foreign.wav');
-  foreignStock.play();
+    if (!window.audioUnlocked) return;
+    window.sounds.foreign.currentTime = 0;
+    window.sounds.foreign.play().catch(e => console.log("Play failed:", e));
 }
 
-function playCheckTradeHalts(){
-  var chineseStock = new Audio('./wav/check-trade-halts.mp3');
-  chineseStock.play();
+function playCheckTradeHalts() {
+    if (!window.audioUnlocked) return;
+    window.sounds.tradeHalt.currentTime = 0;
+    window.sounds.tradeHalt.play().catch(e => console.log("Play failed:", e));
 }
 
 function playReverseStockSplit(){
-  var reverseStockSplit = new Audio('./wav/reverse-stock-split.wav');
-  reverseStockSplit.play();
+    if (!window.audioUnlocked) return;
+    window.sounds.reverseSplit.currentTime = 0;
+    window.sounds.reverseSplit.play().catch(e => console.log("Play failed:", e));
 }
 
 function playDelist(){
-  var delist = new Audio('./wav/delist.wav');
-  delist.play();
+    if (!window.audioUnlocked) return;
+    window.sounds.delist.currentTime = 0;
+    window.sounds.delist.play().catch(e => console.log("Play failed:", e));
 }
 
 function generateHaltedStocksTable(stocks) {
@@ -1242,7 +1249,6 @@ Highcharts.stockChart('monthlyOHLC', {
 
               if (Object.keys(currentlyHaltedList).length > 0) {
                   playCheckTradeHalts();  
-                  console.log("HALTED STOCKS:", currentlyHaltedList);
               }
 
               if (haltSymbolList.includes(original_symbol))

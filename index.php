@@ -631,7 +631,41 @@ var chart = new Highcharts.Chart({
 
 }(Highcharts));
 
+		window.sounds = {
+		    chinese: new Audio('./wav/china.wav'),
+		    highRisk: new Audio('./wav/high-risk.wav'),
+		    lowVolume: new Audio('./wav/low-volume.wav'),
+		    foreign: new Audio('./wav/foreign.wav'),
+		    tradeHalt: new Audio('./wav/check-trade-halts.mp3'),
+		    reverseSplit: new Audio('./wav/reverse-stock-split.wav'),
+		    delist: new Audio('./wav/delist.wav')
+		};
 
+		Object.values(window.sounds).forEach(sound => {
+		    sound.volume = 1.0;
+		    sound.load();
+		});
+
+		window.audioUnlocked = false;
+
+		function unlockAudio() {
+		    if (window.audioUnlocked) return;
+
+		    Promise.all(
+		        Object.values(window.sounds).map(sound =>
+		            sound.play().then(() => {
+		                sound.pause();
+		                sound.currentTime = 0;
+		            })
+		        )
+		    ).then(() => {
+		        window.audioUnlocked = true;
+		        console.log("🔊 All sounds unlocked");
+		    });
+		}
+
+		document.addEventListener("click", unlockAudio, { once: true });
+		document.addEventListener("keydown", unlockAudio, { once: true });
 
 </script>
 
