@@ -646,23 +646,33 @@ var chart = new Highcharts.Chart({
 		    sound.load();
 		});
 
-		window.audioUnlocked = false;
+		window.audioUnlocked = sessionStorage.getItem("audioUnlocked") === "true";
 
 		function unlockAudio() {
-		    if (window.audioUnlocked) return;
+		    console.log("unlockAudio() fired");
+
+		    if (window.audioUnlocked) {
+		        console.log("Already unlocked");
+		        return;
+		    }
 
 		    Promise.all(
 		        Object.values(window.sounds).map(sound =>
 		            sound.play().then(() => {
 		                sound.pause();
 		                sound.currentTime = 0;
+		            }).catch(e => {
+		                console.log("Unlock failed:", sound.src, e);
 		            })
 		        )
 		    ).then(() => {
 		        window.audioUnlocked = true;
+		        sessionStorage.setItem("audioUnlocked", "true");
 		        console.log("🔊 All sounds unlocked");
 		    });
 		}
+
+
 
 		document.addEventListener("click", unlockAudio, { once: true });
 		document.addEventListener("keydown", unlockAudio, { once: true });
