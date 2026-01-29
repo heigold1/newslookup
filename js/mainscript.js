@@ -1312,7 +1312,7 @@ console.log("about to playCheckTradeHalts");
               google_keyword_string = google_keyword_string.replace(/inc\./ig, "");
               google_keyword_string = google_keyword_string.replace(/ltd\./ig, "");
 
-              $("div#bigcharts_yest_close").html("<a href='https://www.google.com/search?q=stock+" + symbol + "&tbm=nws' target='blank'>GOOGLE NEWS</a> &nbsp; <a href='https://www.biopharmcatalyst.com/company/" + symbol + "' target='blank'>DRUG PIPELINE</a> &nbsp; <input type='textarea' id='prepareChineseQuestion' style='width: 5px !important'><br>");  
+              $("div#bigcharts_yest_close").html("<a href='https://www.google.com/search?q=stock+" + symbol + "&tbm=nws' target='blank'>GOOGLE NEWS</a> &nbsp; <a href='https://synapse.patsnap.com/homepage/search' target='blank'>DRUG PIPELINE</a> &nbsp; <input type='textarea' id='prepareChineseQuestion' style='width: 5px !important'><br>");  
 
               var currentlyHaltedKeys = Object.keys(currentlyHaltedList); 
 
