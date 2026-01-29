@@ -430,21 +430,30 @@ function placeEtradeOrder(){
     $.ajax({
         url: './etrade-order-chat-gpt.php',
         type: 'POST', 
-        data: {order_stub: orderStub},
-        async: true, 
-        dataType: 'html',
-              success: function(response) {
-                  console.log("Order placed successfully:", response);
-                  alert("Order placed successfully!");
-              },
-              error: function(xhr, status, error) {
-                  console.error("Error placing order:", error);
-                  alert("Failed to place order.");
-              }
+        data: { order_stub: orderStub },
+        dataType: 'json',
+
+        success: function(response) {
+
+            console.log("Full backend response:", response);
+
+            if (response.success === true) {
+                alert("✅ Order placed successfully!");
+            } else {
+                alert("❌ Order failed at " + response.stage);
+                console.error("E*TRADE error:", response);
+            }
+        },
+
+        error: function(xhr, status, error) {
+            console.error("HTTP Status:", xhr.status);
+            console.error("Server response:", xhr.responseText);
+            alert("❌ PHP error — check console.");
+        }
 
     });
-
 }
+
 
 
 // a function to set a fixed decimal without rounding 

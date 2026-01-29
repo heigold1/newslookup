@@ -1,4 +1,9 @@
 <?php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
+header("Content-Type: application/json");
 
 $orderStub = null; 
 
@@ -16,15 +21,13 @@ $beforeDash = trim($beforeDash);
 
 // Step 2: Match the parts we want
 // Pattern: SYMBOL BUY SHARES $PRICE (price can have commas, optional decimals)
-if (preg_match('/^(\S+)\s+BUY\s+(\d+)\s+\$([\d,]+(?:\.\d{1,2})?)/', $beforeDash, $matches)) {
-    $symbol = $matches[1];
-    $shares = (int)$matches[2];
-    // Remove commas from price before converting to float
-    $price  = (float) str_replace(',', '', $matches[3]);
-
+if (preg_match('/^([A-Z\.]+)\s+BUY\s+([\d,]+)\s+\$([\d\.]+)(?:\s*\([^\)]+\))?/i', $beforeDash, $matches)) {
+    $symbol = strtoupper($matches[1]);                  // RMHB
+    $shares = (int) str_replace(',', '', $matches[2]); // 12500
+    $price  = (float) $matches[3];                     // 0.0004
 } else {
-    echo "Couldn't parse the order stub.\n";
-    die(); 
+    echo "Couldn't parse the order stub: [$beforeDash]";
+    die();
 }
 
     // Validate and sanitize the inputs (optional)
@@ -194,9 +197,25 @@ $oauthHeader = buildOAuthHeader($url, 'POST', $consumerKey, $consumerSecret, $ac
 
 $response = curlRequest($url, $oauthHeader, $jsonPayload, "json"); 
 
+if (!$response) {
+    echo json_encode([
+        "success" => false,
+        "stage" => "preview",
+        "error" => "Empty response from E*TRADE"
+    ]);
+    exit;
+}
+
 $orderPreviewXMLResponseObject = simplexml_load_string($response);
 
-$previewId = 0; 
+if (!$orderPreviewXMLResponseObject) {
+    echo json_encode([
+        "success" => false,
+        "stage" => "preview",
+        "raw_response" => $response
+    ]);
+    exit;
+}
 
 if (!empty($orderPreviewXMLResponseObject->PreviewIds->previewId)) {
     $previewId = $orderPreviewXMLResponseObject->PreviewIds->previewId;
@@ -236,15 +255,46 @@ if (!empty($orderPreviewXMLResponseObject->PreviewIds->previewId)) {
 
     $orderUrl = "https://api.etrade.com/v1/accounts/{$accountId}/orders/place"; 
     $oauthHeader = buildOAuthHeader($orderUrl, 'POST', $consumerKey, $consumerSecret, $accessToken, $accessTokenSecret);
+
+
     $response = curlRequest($orderUrl, $oauthHeader, $orderXMLPayload, "xml"); 
+
+    if (!$response) {
+        echo json_encode([
+            "success" => false,
+            "stage" => "place_order",
+            "error" => "Empty response from E*TRADE"
+        ]);
+        exit;
+    }
+
     $placeOrderXMLResponseObject = simplexml_load_string($response);
 
-    return json_decode($response, true);
+    if (!$placeOrderXMLResponseObject) {
+        echo json_encode([
+            "success" => false,
+            "stage" => "place_order",
+            "raw_response" => $response
+        ]);
+        exit;
+    }
+
+    echo json_encode([
+        "success" => true,
+        "stage" => "order_placed",
+        "previewId" => (string)$previewId,
+        "etrade_response" => $placeOrderXMLResponseObject
+    ]);
+    exit;
 
 } else {
-    echo "Preview order failed!";
-    $previewId = -1; 
-    die(); 
+    echo json_encode([
+        "success" => false,
+        "stage" => "preview",
+        "raw_response" => $response
+    ]);
+    exit;
+
 }
 
 
