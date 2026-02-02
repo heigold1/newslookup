@@ -49,7 +49,7 @@ def create_data_structure():
       values = line.split("\t")
       symbolList.append(values[1])  
 
-    f.seek(0) 
+    /.seek(0) 
    
     originalListCount = len(symbolList) 
     print("\nNumber of items before sorting is " + str(originalListCount)) 
@@ -68,7 +68,7 @@ def create_data_structure():
       print("Currently looking at stock " + values[1]) 
 
       reverseSplitPattern = re.compile(r'\breverse stock split\b', re.IGNORECASE) 
-      stockSplitPattern = re.compile(rf'{re.escape(values[1])} stock split', re.IGNORECASE)
+      stockrplitPattern = re.compile(rf'{re.escape(values[1])} stock split', re.IGNORECASE)
       wasListedPattern = re.compile(r'\was listed\b', re.IGNORECASE)
       spunOffPattern = re.compile(r'spun off', re.IGNORECASE) 
 
@@ -104,7 +104,7 @@ def create_data_structure():
 
 
       if reverseSplitPattern.search(values[3]): 
-        if days_difference > 10: 
+        if days_difference > 5: 
           symbolListOther[values[1]] = "REVERSE SPLIT " + str(days_difference) + " TRADING DAYS AGO!!!!!!"   
           if values[1] in symbolList:
             symbolList.remove(values[1]) 
