@@ -72,9 +72,9 @@ def create_data_structure():
 
             # ---- Reverse stock split ----
             if reverseSplitPattern.search(description):
-                if days_difference > 5:
+                if days_difference > 10:
                     symbolListOther[symbol] = (
-                        f"REVERSE SPLIT {days_difference} TRADING DAYS AGO"
+                        f"REVERSE SPLIT {days_difference} TRADING DAYS AGO!!!!!!!!!"
                     )
                     symbolSet.discard(symbol)
                 continue
