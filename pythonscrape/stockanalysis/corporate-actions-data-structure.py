@@ -1,169 +1,128 @@
 #!/usr/bin/python3
 import urllib3
 from collections import OrderedDict
-import re 
+import re
 import json
-from datetime import datetime  
-import sys  
+from datetime import datetime
+import sys
 import pandas as pd
-import numpy as np 
-
-
 
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
+# ----------------------------
+# Market holidays
+# ----------------------------
+market_holidays = ['Sep 2, 2024']
+market_holidays = pd.to_datetime(market_holidays, format="%b %d, %Y")
 
-market_holidays = [
-  'Sep 2, 2024'
-        ]
-
-market_holidays = pd.to_datetime(market_holidays, format="%b %d, %Y") 
-
+# ----------------------------
+# Trading days helper
+# ----------------------------
 def trading_days_ago(past_date_str, holidays):
-    # Convert past_date_str to a datetime object with the same format
     past_date = pd.to_datetime(past_date_str, format="%b %d, %Y")
-
-    # Get the current date
     current_date = pd.to_datetime(datetime.now().date())
+    business_days = pd.bdate_range(
+        past_date, current_date, freq="C", holidays=holidays
+    )
+    return int(len(business_days) - 1)
 
-    # Create a range of business days between the past date and current date
-    business_days = pd.bdate_range(past_date, current_date, freq='C',  holidays=holidays)
-    
-    # Calculate the number of trading days ago (exclude weekends and holidays)
-    trading_days_ago = len(business_days) - 1  # Subtract 1 to exclude today
-    
-    return int(trading_days_ago)
-
-
+# ----------------------------
+# Main logic
+# ----------------------------
 def create_data_structure():
+    try:
+        with open("corporate-actions.txt", "r") as f:
+            lines = f.readlines()
 
-  try:    
+        # -------- First pass: build symbol list --------
+        symbolList = [line.split("\t")[1] for line in lines]
+        originalListCount = len(symbolList)
 
+        print("\nNumber of items before sorting is", originalListCount)
 
-    f = open("corporate-actions.txt", "r")
-    symbolList = [] 
-    symbolListOther = {} 
+        # Deduplicate while preserving order
+        symbolList = list(OrderedDict.fromkeys(symbolList))
 
+        print("The original symbolList array is:")
+        print(symbolList)
 
-    for line in f:
-      values = line.split("\t")
-      symbolList.append(values[1])  
+        symbolSet = set(symbolList)
+        symbolListOther = {}
 
-    /.seek(0) 
-   
-    originalListCount = len(symbolList) 
-    print("\nNumber of items before sorting is " + str(originalListCount)) 
+        # -------- Regex patterns --------
+        reverseSplitPattern = re.compile(r"\breverse stock split\b", re.IGNORECASE)
+        wasListedPattern = re.compile(r"\bwas listed\b", re.IGNORECASE)
+        spunOffPattern = re.compile(r"spun off", re.IGNORECASE)
 
-    # Remove duplicates 
-    symbolList = list(OrderedDict.fromkeys(symbolList))
+        # -------- Second pass: filtering logic --------
+        for line in lines:
+            values = line.strip().split("\t")
 
-    print("The original symbolList array is:") 
-    print(symbolList) 
+            date_str, symbol, action, description = values
+            days_difference = trading_days_ago(date_str, market_holidays)
 
-    # 2nd pass 
-    for line in f: 
-      values = line.split("\t") 
-      days_difference = None 
+            print(f"Currently looking at stock {symbol}")
+            print(f"Days difference for {date_str} is: {days_difference}")
+            print("Line is **", line.strip())
 
-      print("Currently looking at stock " + values[1]) 
+            # ---- Delisted ----
+            if action == "Delisted":
+                symbolSet.discard(symbol)
+                continue
 
-      reverseSplitPattern = re.compile(r'\breverse stock split\b', re.IGNORECASE) 
-      stockrplitPattern = re.compile(rf'{re.escape(values[1])} stock split', re.IGNORECASE)
-      wasListedPattern = re.compile(r'\was listed\b', re.IGNORECASE)
-      spunOffPattern = re.compile(r'spun off', re.IGNORECASE) 
+            # ---- Reverse stock split ----
+            if reverseSplitPattern.search(description):
+                if days_difference > 5:
+                    symbolListOther[symbol] = (
+                        f"REVERSE SPLIT {days_difference} TRADING DAYS AGO"
+                    )
+                    symbolSet.discard(symbol)
+                continue
 
-      today_date = datetime.now()
+            # ---- Symbol change ----
+            if action == "Symbol Change":
+                symbolListOther[symbol] = (
+                    f"SYMBOL CHANGE {days_difference} TRADING DAYS AGO!!! 38 PERCENT!!!"
+                )
+                symbolSet.discard(symbol)
+                continue
 
-      if ((values[2] == 'Delisted') or reverseSplitPattern.search(values[3]) or (values[2] == 'Symbol Change')):
-        if (values[2] == 'Delisted'): 
-          if values[1] in symbolList:
-            symbolList.remove(values[1]) 
-        else: 
-          given_date_string = values[0] 
-#          given_date = datetime.strptime(given_date_string, "%b %d, %Y") 
-#          date_difference = today_date - given_date
-#          days_difference = date_difference.days
-          days_difference = trading_days_ago(given_date_string, market_holidays) 
-          print(f"Days difference for {values[0]} is: {days_difference}") 
+            # ---- Newly listed ----
+            if wasListedPattern.search(description):
+                symbolListOther[symbol] = (
+                    f"WAS LISTED {days_difference} TRADING DAYS AGO!!! AT LEAST 38 PERCENT!!!"
+                )
+                symbolSet.discard(symbol)
+                continue
 
+            # ---- Spinoff ----
+            if spunOffPattern.search(description):
+                symbolListOther[symbol] = (
+                    f"NEW SYMBOL AS OF {days_difference} TRADING DAYS AGO!!! AT LEAST 38 PERCENT!!!"
+                )
+                symbolSet.discard(symbol)
+                continue
 
+        # -------- Output --------
+        final_symbols = list(symbolSet)
+        diff = originalListCount - len(final_symbols)
 
-#      if reverseSplitPattern.search(values[3]): 
-#        if days_difference == 1:
-#          symbolListOther[values[1]] = "REVERSE SPLIT YESTERDAY!!!! 25-30% EARLY!!!!!" 
-#          if values[1] in symbolList: 
-#            symbolList.remove(values[1]) 
-#        elif days_difference == 2: 
-#          symbolListOther[values[1]] = "REVERSE SPLIT TWO TRADING DAYS AGO!!!!! 25-30% EARLY!!!!" 
-#          if values[1] in symbolList:
-#            symbolList.remove(values[1]) 
-#        elif days_difference > 1: 
-#          symbolListOther[values[1]] = "REVERSE SPLIT " + str(days_difference) + " TRADING DAYS AGO!!!!!!"   
-#          if values[1] in symbolList:
-#            symbolList.remove(values[1]) 
+        print("\nNumber of items after sorting is", len(final_symbols))
+        print("Difference is", diff, "\n")
 
+        print("const corporateActionsStocks=[")
+        for symbol in final_symbols:
+            print(f'"{symbol}",', end=" ")
+        print("\n]")
 
-      if reverseSplitPattern.search(values[3]): 
-        if days_difference > 5: 
-          symbolListOther[values[1]] = "REVERSE SPLIT " + str(days_difference) + " TRADING DAYS AGO!!!!!!"   
-          if values[1] in symbolList:
-            symbolList.remove(values[1]) 
+        print("\nvar corporateActionsStocks=")
+        print(json.dumps(symbolListOther, indent=2) + ";")
 
+    except Exception as e:
+        print("Exception:", e)
+        exc_type, exc_obj, exc_tb = sys.exc_info()
+        print("An exception occurred on line", exc_tb.tb_lineno)
 
-
-
-
-      print("Line is ** " + line) 
-
-      if stockSplitPattern.search(values[3]):
-        if values[1] in symbolList: 
-          symbolList.remove(values[1])
-
-      if values[2] == 'Symbol Change':
-        symbolListOther[values[1]] = "SYMBOL CHANGE " + str(days_difference) + " TRADING DAYS AGO!!! 38 PERCENT!!!" 
-        if values[1] in symbolList: 
-          symbolList.remove(values[1])           
-
-      if wasListedPattern.search(values[3]): 
-        symbolListOther[values[1]] = "WAS LISTED " + str(days_difference) + " TRADING DAYS AGO!!!  AT LEAST 38 PERCENT!!!" 
-        if values[1] in symbolList:
-          symbolList.remove(values[1]) 
-
-      if spunOffPattern.search(values[3]):
-        symbolListOther[values[1]] = "NEW SYMBOL AS OF " + str(days_difference) + " TRADING DAYS AGO!!!  AT LEAST 38 PERCENT!!!" 
-        if values[1] in symbolList:
-          symbolList.remove(values[1]) 
-
-
-    f.close() 
-
-    afterSortListCount = len(symbolList) 
-
-    diff = originalListCount - afterSortListCount 
-
-    print("Number of items after sorting is " + str(len(symbolList))) 
-    print("Difference is " + str(diff) + "\n") 
-
-    print("const corporateActionsStocks=[") 
-
-    for symbol in symbolList:
-      print('"' + symbol + '",', end=" ")
-
-
-    print("\n\nvar corporateActionsStocks= ") 
-
-    symbolListOtherJSON = json.dumps(symbolListOther, indent=2) 
-    print(symbolListOtherJSON + ";") 
-
-    print("\n") 
-
-  except Exception as e:
-    print("Exception") 
-    print(e)
-    exc_type, exc_obj, exc_tb = sys.exc_info()  
-    print("An exception occurred on line " + str(exc_tb.tb_lineno))
-
-mydata = create_data_structure()
-
-
+# Run
+create_data_structure()
 
