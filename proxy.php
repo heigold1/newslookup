@@ -7,7 +7,7 @@ require_once("country-codes.php");
 
 libxml_use_internal_errors(true);
 
-$yesterdayDays = 3;
+$yesterdayDays = 1;
 
 error_reporting(1);
 //ini_set('display_errors', 1);
@@ -1021,7 +1021,7 @@ die();
           $descriptionRegex .= '<button onclick="prepareChineseJay(\'' . $symbol . '\',\''. addslashes($ceo). '\',\'' . addslashes($description) . '\')">Prepare Chinese Question</button>';   
 
 
-          $chineseSurnames = ["Li", "Wang", "Zhang", "Liu", "Chen", "Yang", "Huang", "Zhao", "Wu", "Zhou", "Xu", "Sun", "Ma", "Hu", "Gao", "Lin", "He", "Guo", "Luo", "Deng", "Long", "Kwan", "Yau", "Ho", "Tsu", "Qian", "Jie", "Tuo", "Ze", "Dongye", "Dao", "Du", "Zhi", "Xu", "Di", "Bo", "Du", "Duan", "Gao", "Cai", "Xiyong", "Hou", "Xiao", "Sui", "Ming", "Mei", "Phua", "Wing", "Fung", "Siu", "Lu", "Pun", "Ping", "Xiaoyan", "Mi", "Jin", "Chow", "Ching", "Chang", "Chan", "Kim", "Ly", "Zhai", "Yin", "Yan", "You", "Jiulong", "Yu", "Ngan", "Cheng", "Wong", "Hang", "Song", "Jinghua", "Xykis", "Zhaoying", "Lim", "Woon", "Ngee", "Tan" ];
+          $chineseSurnames = ["Li", "Wang", "Zhang", "Liu", "Chen", "Yang", "Huang", "Zhao", "Wu", "Zhou", "Xu", "Sun", "Ma", "Hu", "Gao", "Lin", "He", "Guo", "Luo", "Deng", "Long", "Kwan", "Yau", "Ho", "Tsu", "Qian", "Jie", "Tuo", "Ze", "Dongye", "Dao", "Du", "Zhi", "Xu", "Di", "Bo", "Du", "Duan", "Gao", "Cai", "Xiyong", "Hou", "Xiao", "Sui", "Ming", "Mei", "Phua", "Wing", "Fung", "Siu", "Lu", "Pun", "Ping", "Xiaoyan", "Mi", "Jin", "Chow", "Ching", "Chang", "Chan", "Kim", "Ly", "Zhai", "Yin", "Yan", "You", "Jiulong", "Yu", "Ngan", "Cheng", "Wong", "Hang", "Song", "Jinghua", "Xykis", "Zhaoying", "Lim", "Woon", "Ngee", "Tan", "Wook", "Suk" ];
 
           $surnamePattern = "/\b(" . implode("|", $chineseSurnames) . ")\b/i";
 

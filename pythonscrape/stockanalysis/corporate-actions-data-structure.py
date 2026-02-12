@@ -113,7 +113,7 @@ def create_data_structure():
         print("const corporateActionsStocks=[")
         for symbol in final_symbols:
             print(f'"{symbol}",', end=" ")
-        print("\n]")
+#        print("\n]")
 
         print("\nvar corporateActionsStocks=")
         print(json.dumps(symbolListOther, indent=2) + ";")
