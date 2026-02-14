@@ -49,7 +49,7 @@ def main():
     stocks = extract_stocks(html)
     
     # Print the result as a comma-separated list
-    print(", ".join(stocks))
+    print(", ".join(stocks) + ",")
 
 if __name__ == "__main__":
     main()
