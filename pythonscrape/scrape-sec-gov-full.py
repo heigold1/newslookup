@@ -146,9 +146,6 @@ def parse_xml(xml_data, yesterday_days):
 
         filing_type = re.sub(r'PRE.*14A', '<span style="font-size: 15px; background-color:red; color:black">PRE 14A</span> &nbsp;', filing_type, flags=re.IGNORECASE)
         filing_type = re.sub(r'DEF.*14A', '<span style="font-size: 15px; background-color:red; color:black">DEF 14A</span> &nbsp;', filing_type, flags=re.IGNORECASE)
-        filing_type = re.sub(r'144', '<span style="font-size: 15px; background-color:#00ff00; color:black">144</span> &nbsp;', filing_type, flags=re.IGNORECASE)
-
-
 
 
         title = re.sub('registration statement', '<span style="font-size: 16px; background-color:red; color:black"><b>&nbsp;Registration statement - OFFERING COMING OUT, HOLD OFF</span></b>&nbsp;', title, flags=re.IGNORECASE)
@@ -174,6 +171,7 @@ def parse_xml(xml_data, yesterday_days):
         title = re.sub(r'certification by an exchange', r'<span style="font-size: 25px; background-color:red; color:black"><b>CERTIFICATION BY AN EXCHANGE - 40%</b></span>', title, flags=re.IGNORECASE)
         if filing_type == '144':
             title = re.sub(r'proposed sale of securities', r'<span style="font-size: 14px; background-color:#00ff00; color:black"><b>PROPOSED SALE OF SECURITIES (filing 144 is not news)</b></span>', title, flags=re.IGNORECASE)
+            filing_type = re.sub(r'144', '<span style="font-size: 15px; background-color:#00ff00; color:black">144</span> &nbsp;', filing_type, flags=re.IGNORECASE)
         else:
             title = re.sub(r'proposed sale of securities', r'<span style="font-size: 30px; background-color:red; color:black"><b>PROPOSED SALE OF SECURITIES</b></span>', title, flags=re.IGNORECASE)
 
