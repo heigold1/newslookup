@@ -138,7 +138,7 @@ function grabHTML($function_host_name, $url)
     curl_setopt($ch,CURLOPT_COOKIEJAR,'cookies.txt');
     curl_setopt($ch,CURLOPT_HTTPHEADER,$header);
 
-    curl_setopt($ch, CURLOPT_VERBOSE, true);
+    curl_setopt($ch, CURLOPT_VERBOSE, false);
     curl_setopt($ch, CURLOPT_STDERR,$f = fopen(__DIR__ . "/error.log", "w+"));
 
     $returnHTML = curl_exec($ch); 

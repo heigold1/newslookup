@@ -134,7 +134,7 @@ function generateHaltedStocksTable(stocks) {
 
     for (const[symbol, reasonCode] of Object.entries(stocks))
     {
-        table+= `<tr style="height: 15px !important;"><td style="border: 1px solid black; "><a target="_blank" href="http://ec2-52-88-162-246.us-west-2.compute.amazonaws.com/newslookup/index.php?symbol=${symbol}&check-sec=1">${symbol}</a></td><td style="border: 1px solid black; ">${reasonCode}</td></tr>`; 
+        table+= `<tr style="height: 15px !important;"><td style="border: 1px solid black; "><a target="_blank" href="http://ec2-52-89-7-59.us-west-2.compute.amazonaws.com/newslookup/index.php?symbol=${symbol}&check-sec=1">${symbol}</a></td><td style="border: 1px solid black; ">${reasonCode}</td></tr>`; 
     }
 
 
@@ -1150,7 +1150,10 @@ Highcharts.stockChart('monthlyOHLC', {
 
                 },
                 error: function (xhr, ajaxOptions, thrownError) {
-                  console.log("there was an error in calling marketstack-api-historical-data.php");
+                    console.log("AJAX ERROR in calling marketstack-api-historical-data.php:");
+                    console.log("Status:", xhr.status);
+                    console.log("Response:", xhr.responseText);
+                    console.log("Error:", thrownError);
                 }
 
             });

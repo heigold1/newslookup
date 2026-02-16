@@ -37,7 +37,7 @@ $header=array('GET /1575051 HTTP/1.1',
 
 
 
-  curl_setopt($ch, CURLOPT_VERBOSE, true);
+  curl_setopt($ch, CURLOPT_VERBOSE, false);
   curl_setopt($ch, CURLOPT_STDERR,$f = fopen(__DIR__ . "/error.log", "w+"));
   
 

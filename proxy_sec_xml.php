@@ -639,7 +639,7 @@ function getNewsQuantified($symbol, $yesterdayDays)
 function getSecFilings($symbol, $originalSymbol, $yesterdayDays, $cikNumber, $secCompanyName)
 {
 
-     $command = escapeshellcmd('python3 ./pythonscrape/scrape-sec-gov-full.py ' . $symbol . " " . $originalSymbol . " " . $yesterdayDays . " " . $cikNumber . " " . $secCompanyName);
+     $command = escapeshellcmd('/var/www/html/newslookup/venv/bin/python3 ./pythonscrape/scrape-sec-gov-full.py ' . $symbol . " " . $originalSymbol . " " . $yesterdayDays . " " . $cikNumber . " " . $secCompanyName);
 
 //      $command = escapeshellcmd('python3 ./pythonscrape/scrape-sec-gov.py ' . $cik);
 

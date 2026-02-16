@@ -1,4 +1,5 @@
 <?php
+
 /**
  * E*TRADE PHP SDK
  *
@@ -18,11 +19,10 @@ require_once(dirname(__FILE__) . '/Common/Common.php');
 require_once(dirname(__FILE__) . '/OAuth/etOAuth.class.php');
 require_once(dirname(__FILE__) . '/Market/MarketClient.class.php'); */
 
-include './Samples/config.php';
-include './Common/Common.php';
-include './OAuth/etOAuth.class.php';
-include './Market/MarketClient.class.php';
-
+require './Samples/config.php';
+require './Common/Common.php';
+require './OAuth/etOAuth.class.php';
+require './Market/MarketClient.class.php';
 
 /*
 $file_name = dirname(__FILE__);
@@ -33,6 +33,10 @@ $symbol=$_GET['symbol'];
 $dataArray = array();
 
 $ini_array = parse_ini_file('etrade.ini', true);
+
+if ($ini_array === false) {
+    die("INI FILE NOT FOUND OR NOT READABLE");
+}
 
 //$consumer   = new etOAuthConsumer(ETWS_APP_KEY,ETWS_APP_SECRET);
 $consumer = new etOAuthConsumer($ini_array['OAuth']['oauth_consumer_key'],$ini_array['OAuth']['consumer_secret']);
