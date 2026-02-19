@@ -373,6 +373,7 @@ function getTradeHalts()
 
     $orderSymbols = array();
 
+    // --- Pull symbols from orders table ---
     $result = $mysqli->query("SELECT DISTINCT symbol FROM orders");
 
     if ($result) {
@@ -380,6 +381,19 @@ function getTradeHalts()
             $orderSymbols[] = strtoupper(trim($row['symbol']));
         }
     }
+
+    // --- Pull symbols from halts table ---
+    $resultHalts = $mysqli->query("SELECT symbol FROM halts");
+
+    if ($resultHalts) {
+        while ($row = $resultHalts->fetch_assoc()) {
+            $orderSymbols[] = strtoupper(trim($row['symbol']));
+        }
+    }
+
+    // Remove duplicates just in case
+    $orderSymbols = array_unique($orderSymbols);
+
 
 
     foreach ($rss_feed->channel->item as $feed_item) {
