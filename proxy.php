@@ -383,7 +383,7 @@ function getTradeHalts()
     }
 
     // --- Pull symbols from halts table ---
-    $resultHalts = $mysqli->query("SELECT symbol FROM halts");
+    $resultHalts = $mysqli->query("SELECT DISTINCT symbol FROM halts");
 
     if ($resultHalts) {
         while ($row = $resultHalts->fetch_assoc()) {
