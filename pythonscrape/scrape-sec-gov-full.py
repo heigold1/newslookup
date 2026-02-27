@@ -155,6 +155,7 @@ def parse_xml(xml_data, yesterday_days):
         title = re.sub(r'exempt offering of securities', '<span style="font-size: 16px; background-color:red; color:black"><b>&nbsp;Exempt Offering of Securities - ask Jay if its just a change of ownership</span></b>&nbsp;', title, flags=re.IGNORECASE)
         title = re.sub(r'1\.01', '<span style="font-size: 16px; background-color:red; color:black"><b>&nbsp;1.01 - Entry into a Material Definitive Agreement - OFFERING COMING! BACK OFF!</span></b>&nbsp;', title)
         title = re.sub(r'Current report', '<span style="font-size: 45px; background-color:red; color:black"><b><br>&nbsp;Current report</span></b>&nbsp;', title, flags=re.IGNORECASE)
+        title = re.sub(r'Registration of securities', '<span style="font-size: 40px; background-color:red; color:black"><b><br>&nbsp;Registration of securities</span></b>&nbsp;', title, flags=re.IGNORECASE)
         title = re.sub(r'7\.01', '<span style="font-size: 16px; background-color:lightblue; color:black"><b>&nbsp;Regulation FD Disclosure</span></b>&nbsp;<br>', title)
         title = re.sub(r'8\.01', '<span style="font-size: 16px; background-color:lightblue; color:black"><b>&nbsp;Other Events</span></b>&nbsp;<br>', title)
         title = re.sub(r'9\.01', '<span style="font-size: 16px; background-color:lightblue; color:black"><b>&nbsp;Financial Statemtnes and Exhibits</span></b>&nbsp;<br>', title)
