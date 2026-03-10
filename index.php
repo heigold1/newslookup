@@ -69,6 +69,9 @@
 								<span>
 									<input id="asian_stocks" type="submit" value="84.5%">
 								</span>
+								<span>
+									<input id="asian_early" type="submit" value="81.5%">
+								</span>
 								<label class="historical_data_label_thin">&nbsp;</label>
 								<span>
 									<input id="net_loss_penny" type="submit" value="62.5%">
@@ -84,18 +87,12 @@
 								</span>
 								<label class="historical_data_label_thin">&nbsp;</label>
 								<span>
-									<input id="entry_26" type="submit" value="26%">
+									<input id="entry_33" type="submit" value="33%">
 								</span>
 								<span>
-									<input id="entry_23" type="submit" value="23%">
+									<input id="entry_27" type="submit" value="27%">
 								</span>
 								<label class="historical_data_label_thin">&nbsp;</label>
-								<span>
-									<input id="dollar_19_half" type="submit" value="19%" style="background-color: pink; ">
-								</span>
-								<span>
-									<input id="dollar_18" type="submit" value="18%">
-								</span>
 								<span>
 									<input id="check-sec" type="checkbox" <?php if ($_GET['check-sec'] == 1){echo "checked";} ?>>
 									<label for="check-sec">SEC</label>
