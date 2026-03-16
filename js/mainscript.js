@@ -90,7 +90,66 @@ function prepareChineseJay(symbol, ceo, description)
         }
 }
 
+function prepareNoNewsChatGPT(symbol) {
 
+    var message = `Can you suggest to me which tier # (and therefore percentage entry) I should go in for the non-news stock (ticker symbol is ${symbol})?
+
+Here is the criteria:
+
+🔹 Tier 1 — Clean Structure (Best Bounce Candidates)
+
+- Reverse splits: None in the last ~2–3 years
+- Share count growth: < 50% over the last 12 months
+- Offerings / filings: No recent S‑1 / S‑3 / 424B5 or other dilution events (if known)
+- Stock type adjustment: Dollar stocks (≥ $1) are inherently safer and more liquid
+
+Entry Suggestion:
+
+- Penny stocks (< $1): ~40% drop. 
+- Dollar stocks (≥ $1): ~30–35% drop. 
+
+🔹 Tier 2 — Moderate Risk
+
+- Reverse splits: 1–2 total in last 2–5 years
+- Share count growth: 50–200% over last 12 months
+- Offerings / filings: Possibly one dilution filing in last year
+- Stock type adjustment: Dollar stocks are still safer → can enter earlier than penny stocks
+
+Entry Suggestion:
+
+- Penny stocks: ~45–50% drop. 
+- Dollar stocks: ~35–40% drop. 
+
+🔹 Tier 3 — High / Serial Dilution Risk
+
+- Reverse splits: Recent (last 2 years) or large split ≥1:20
+- Share count growth: >200% over last 12 months
+- Offerings / filings: Multiple S‑3 / 424B5 or other dilution filings
+- Stock type adjustment: Even dollar stocks are riskier, but still less extreme than penny stocks
+
+Entry Suggestion:
+
+- Penny stocks: ~55–65% drop. 
+- Dollar stocks: ~40–45% drop.  
+
+Please be brief, just a couple points in point form, and then the suggested tier# and percentage, as I am day trading and my time is very limited.
+`;
+
+    document.getElementById("noNewsChatGPT").value = message;
+
+        var copyTextarea = $("#noNewsChatGPT");
+        copyTextarea.select();
+
+        try {
+          var successful = document.execCommand('copy');
+          var msg = successful ? 'successful' : 'unsuccessful';
+          console.log('Copying text command was ' + msg);
+        } catch (err) {
+          console.log('Oops, unable to copy');
+        }
+
+    return message;
+}
 
 function CopyToClipboard() {
   var copyTextarea = $("#orderStub");
@@ -1337,7 +1396,13 @@ console.log("about to playCheckTradeHalts");
               google_keyword_string = google_keyword_string.replace(/inc\./ig, "");
               google_keyword_string = google_keyword_string.replace(/ltd\./ig, "");
 
-              $("div#bigcharts_yest_close").html("<a href='https://www.google.com/search?q=stock+" + symbol + "&tbm=nws' target='blank'>GOOGLE NEWS</a> &nbsp; <a href='https://synapse.patsnap.com/homepage/search' target='blank'>DRUG PIPELINE</a> &nbsp; <input type='textarea' id='prepareChineseQuestion' style='width: 5px !important'><br>");  
+              $("div#bigcharts_yest_close").html(
+                    "<a href='https://www.google.com/search?q=stock+" + symbol + "&tbm=nws' target='blank'>GOOGLE</a> &nbsp; " +
+                    "<a href='https://synapse.patsnap.com/homepage/search' target='blank'>DRUG PIPE</a> &nbsp; " +
+                    "<button onclick='prepareNoNewsChatGPT(\"" + symbol + "\")'>PREP NO-NEWS</button> &nbsp; " +
+                    "<input type='textarea' id='noNewsChatGPT' style='width: 5px !important'> &nbsp; " +
+                    "<input type='textarea' id='prepareChineseQuestion' style='width: 5px !important'><br>"
+);
 
               var currentlyHaltedKeys = Object.keys(currentlyHaltedList); 
 
@@ -1516,68 +1581,64 @@ console.log("about to playCheckTradeHalts");
 
 var corporateActionsStocks=
 {
-  "VMET": "WAS LISTED 2 TRADING DAYS AGO!!! AT LEAST 38 PERCENT!!!",
-  "PPLC": "WAS LISTED 2 TRADING DAYS AGO!!! AT LEAST 38 PERCENT!!!",
-  "MMED": "WAS LISTED 2 TRADING DAYS AGO!!! AT LEAST 38 PERCENT!!!",
-  "CIMG": "SYMBOL CHANGE 3 TRADING DAYS AGO!!! 38 PERCENT!!!",
-  "TIRXF": "SYMBOL CHANGE 4 TRADING DAYS AGO!!! 38 PERCENT!!!",
-  "MRDN": "SYMBOL CHANGE 5 TRADING DAYS AGO!!! 38 PERCENT!!!",
-  "TSEOF": "SYMBOL CHANGE 6 TRADING DAYS AGO!!! 38 PERCENT!!!",
-  "SUNB": "WAS LISTED 6 TRADING DAYS AGO!!! AT LEAST 38 PERCENT!!!",
-  "FRMM": "SYMBOL CHANGE 6 TRADING DAYS AGO!!! 38 PERCENT!!!",
-  "AHRT": "SYMBOL CHANGE 6 TRADING DAYS AGO!!! 38 PERCENT!!!",
-  "RNA": "WAS LISTED 7 TRADING DAYS AGO!!! AT LEAST 38 PERCENT!!!",
-  "GENB": "WAS LISTED 7 TRADING DAYS AGO!!! AT LEAST 38 PERCENT!!!",
-  "CMII": "WAS LISTED 19 TRADING DAYS AGO!!! AT LEAST 38 PERCENT!!!",
-  "RNAM": "NEW SYMBOL AS OF 8 TRADING DAYS AGO!!! AT LEAST 38 PERCENT!!!",
-  "NXTS": "SYMBOL CHANGE 8 TRADING DAYS AGO!!! 38 PERCENT!!!",
-  "BCHT": "WAS LISTED 8 TRADING DAYS AGO!!! AT LEAST 38 PERCENT!!!",
-  "ALOY": "SYMBOL CHANGE 9 TRADING DAYS AGO!!! 38 PERCENT!!!",
-  "RYZ": "SYMBOL CHANGE 10 TRADING DAYS AGO!!! 38 PERCENT!!!",
-  "QNC": "WAS LISTED 10 TRADING DAYS AGO!!! AT LEAST 38 PERCENT!!!",
-  "CVSA": "SYMBOL CHANGE 10 TRADING DAYS AGO!!! 38 PERCENT!!!",
-  "XRN": "SYMBOL CHANGE 11 TRADING DAYS AGO!!! 38 PERCENT!!!",
-  "NBY": "REVERSE SPLIT 11 TRADING DAYS AGO!!!!!!!!!",
-  "MWG": "REVERSE SPLIT 11 TRADING DAYS AGO!!!!!!!!!",
-  "LVROF": "SYMBOL CHANGE 11 TRADING DAYS AGO!!! 38 PERCENT!!!",
-  "DSY": "REVERSE SPLIT 11 TRADING DAYS AGO!!!!!!!!!",
-  "BTM": "REVERSE SPLIT 11 TRADING DAYS AGO!!!!!!!!!",
-  "ROC": "WAS LISTED 12 TRADING DAYS AGO!!! AT LEAST 38 PERCENT!!!",
-  "BYAH": "REVERSE SPLIT 12 TRADING DAYS AGO!!!!!!!!!",
-  "BESS": "WAS LISTED 12 TRADING DAYS AGO!!! AT LEAST 38 PERCENT!!!",
-  "ADVB": "REVERSE SPLIT 12 TRADING DAYS AGO!!!!!!!!!",
-  "ABPO": "SYMBOL CHANGE 12 TRADING DAYS AGO!!! 38 PERCENT!!!",
-  "ZDAI": "REVERSE SPLIT 13 TRADING DAYS AGO!!!!!!!!!",
-  "INTS": "REVERSE SPLIT 13 TRADING DAYS AGO!!!!!!!!!",
-  "GGRP": "SYMBOL CHANGE 13 TRADING DAYS AGO!!! 38 PERCENT!!!",
-  "AURE": "REVERSE SPLIT 13 TRADING DAYS AGO!!!!!!!!!",
-  "ARIS": "SYMBOL CHANGE 13 TRADING DAYS AGO!!! 38 PERCENT!!!",
-  "AIDX": "WAS LISTED 13 TRADING DAYS AGO!!! AT LEAST 38 PERCENT!!!",
-  "SHAZ": "WAS LISTED 14 TRADING DAYS AGO!!! AT LEAST 38 PERCENT!!!",
-  "NDLS": "REVERSE SPLIT 14 TRADING DAYS AGO!!!!!!!!!",
-  "CNTN": "SYMBOL CHANGE 14 TRADING DAYS AGO!!! 38 PERCENT!!!",
-  "WTO": "REVERSE SPLIT 15 TRADING DAYS AGO!!!!!!!!!",
-  "SMX": "REVERSE SPLIT 15 TRADING DAYS AGO!!!!!!!!!",
-  "JFBR": "REVERSE SPLIT 15 TRADING DAYS AGO!!!!!!!!!",
-  "INTJ": "REVERSE SPLIT 15 TRADING DAYS AGO!!!!!!!!!",
-  "EEIQ": "REVERSE SPLIT 15 TRADING DAYS AGO!!!!!!!!!",
-  "FGNX": "REVERSE SPLIT 17 TRADING DAYS AGO!!!!!!!!!",
-  "CRE": "REVERSE SPLIT 17 TRADING DAYS AGO!!!!!!!!!",
-  "SCPQ": "SYMBOL CHANGE 18 TRADING DAYS AGO!!! 38 PERCENT!!!",
-  "RUBI": "REVERSE SPLIT 18 TRADING DAYS AGO!!!!!!!!!",
-  "CICC": "WAS LISTED 18 TRADING DAYS AGO!!! AT LEAST 38 PERCENT!!!",
-  "BRAI": "WAS LISTED 18 TRADING DAYS AGO!!! AT LEAST 38 PERCENT!!!",
-  "APC": "WAS LISTED 18 TRADING DAYS AGO!!! AT LEAST 38 PERCENT!!!",
-  "AIOS": "SYMBOL CHANGE 18 TRADING DAYS AGO!!! 38 PERCENT!!!",
-  "SAV": "WAS LISTED 19 TRADING DAYS AGO!!! AT LEAST 38 PERCENT!!!",
-  "RPC": "SYMBOL CHANGE 19 TRADING DAYS AGO!!! 38 PERCENT!!!",
-  "MWH": "WAS LISTED 19 TRADING DAYS AGO!!! AT LEAST 38 PERCENT!!!",
-  "AGBK": "WAS LISTED 19 TRADING DAYS AGO!!! AT LEAST 38 PERCENT!!!",
-  "JAGU": "WAS LISTED 20 TRADING DAYS AGO!!! AT LEAST 38 PERCENT!!!",
-  "HCTI": "REVERSE SPLIT 20 TRADING DAYS AGO!!!!!!!!!",
-  "FGL": "REVERSE SPLIT 20 TRADING DAYS AGO!!!!!!!!!",
-  "ATPC": "REVERSE SPLIT 20 TRADING DAYS AGO!!!!!!!!!",
-  "ANY": "REVERSE SPLIT 20 TRADING DAYS AGO!!!!!!!!!"
+  "VMET": "WAS LISTED 4 TRADING DAYS AGO!!! AT LEAST 38 PERCENT!!!",
+  "PPLC": "WAS LISTED 4 TRADING DAYS AGO!!! AT LEAST 38 PERCENT!!!",
+  "MMED": "WAS LISTED 4 TRADING DAYS AGO!!! AT LEAST 38 PERCENT!!!",
+  "CIMG": "SYMBOL CHANGE 5 TRADING DAYS AGO!!! 38 PERCENT!!!",
+  "TIRXF": "SYMBOL CHANGE 6 TRADING DAYS AGO!!! 38 PERCENT!!!",
+  "MRDN": "SYMBOL CHANGE 7 TRADING DAYS AGO!!! 38 PERCENT!!!",
+  "TSEOF": "SYMBOL CHANGE 8 TRADING DAYS AGO!!! 38 PERCENT!!!",
+  "SUNB": "WAS LISTED 8 TRADING DAYS AGO!!! AT LEAST 38 PERCENT!!!",
+  "FRMM": "SYMBOL CHANGE 8 TRADING DAYS AGO!!! 38 PERCENT!!!",
+  "AHRT": "SYMBOL CHANGE 8 TRADING DAYS AGO!!! 38 PERCENT!!!",
+  "RNA": "WAS LISTED 9 TRADING DAYS AGO!!! AT LEAST 38 PERCENT!!!",
+  "GENB": "WAS LISTED 9 TRADING DAYS AGO!!! AT LEAST 38 PERCENT!!!",
+  "CMII": "SYMBOL CHANGE 9 TRADING DAYS AGO!!! 38 PERCENT!!!",
+  "RNAM": "NEW SYMBOL AS OF 10 TRADING DAYS AGO!!! AT LEAST 38 PERCENT!!!",
+  "NXTS": "SYMBOL CHANGE 10 TRADING DAYS AGO!!! 38 PERCENT!!!",
+  "BCHT": "WAS LISTED 10 TRADING DAYS AGO!!! AT LEAST 38 PERCENT!!!",
+  "SVRE": "REVERSE SPLIT 11 TRADING DAYS AGO!!!!!!!!!",
+  "ALOY": "SYMBOL CHANGE 11 TRADING DAYS AGO!!! 38 PERCENT!!!",
+  "TRNR": "REVERSE SPLIT 12 TRADING DAYS AGO!!!!!!!!!",
+  "RYZ": "SYMBOL CHANGE 12 TRADING DAYS AGO!!! 38 PERCENT!!!",
+  "RPGL": "REVERSE SPLIT 12 TRADING DAYS AGO!!!!!!!!!",
+  "QNC": "WAS LISTED 12 TRADING DAYS AGO!!! AT LEAST 38 PERCENT!!!",
+  "LFWD": "REVERSE SPLIT 12 TRADING DAYS AGO!!!!!!!!!",
+  "DULL": "REVERSE SPLIT 12 TRADING DAYS AGO!!!!!!!!!",
+  "CVSA": "SYMBOL CHANGE 12 TRADING DAYS AGO!!! 38 PERCENT!!!",
+  "XRN": "SYMBOL CHANGE 13 TRADING DAYS AGO!!! 38 PERCENT!!!",
+  "NBY": "REVERSE SPLIT 13 TRADING DAYS AGO!!!!!!!!!",
+  "MWG": "REVERSE SPLIT 13 TRADING DAYS AGO!!!!!!!!!",
+  "LVROF": "SYMBOL CHANGE 13 TRADING DAYS AGO!!! 38 PERCENT!!!",
+  "DSY": "REVERSE SPLIT 13 TRADING DAYS AGO!!!!!!!!!",
+  "BTM": "REVERSE SPLIT 13 TRADING DAYS AGO!!!!!!!!!",
+  "ROC": "WAS LISTED 14 TRADING DAYS AGO!!! AT LEAST 38 PERCENT!!!",
+  "BYAH": "REVERSE SPLIT 14 TRADING DAYS AGO!!!!!!!!!",
+  "BESS": "WAS LISTED 14 TRADING DAYS AGO!!! AT LEAST 38 PERCENT!!!",
+  "ADVB": "REVERSE SPLIT 14 TRADING DAYS AGO!!!!!!!!!",
+  "ABPO": "SYMBOL CHANGE 14 TRADING DAYS AGO!!! 38 PERCENT!!!",
+  "ZDAI": "REVERSE SPLIT 15 TRADING DAYS AGO!!!!!!!!!",
+  "INTS": "REVERSE SPLIT 15 TRADING DAYS AGO!!!!!!!!!",
+  "GGRP": "SYMBOL CHANGE 15 TRADING DAYS AGO!!! 38 PERCENT!!!",
+  "AURE": "REVERSE SPLIT 15 TRADING DAYS AGO!!!!!!!!!",
+  "ARIS": "SYMBOL CHANGE 15 TRADING DAYS AGO!!! 38 PERCENT!!!",
+  "AIDX": "WAS LISTED 15 TRADING DAYS AGO!!! AT LEAST 38 PERCENT!!!",
+  "SHAZ": "WAS LISTED 16 TRADING DAYS AGO!!! AT LEAST 38 PERCENT!!!",
+  "NDLS": "REVERSE SPLIT 16 TRADING DAYS AGO!!!!!!!!!",
+  "CNTN": "SYMBOL CHANGE 16 TRADING DAYS AGO!!! 38 PERCENT!!!",
+  "WTO": "REVERSE SPLIT 17 TRADING DAYS AGO!!!!!!!!!",
+  "SMX": "REVERSE SPLIT 17 TRADING DAYS AGO!!!!!!!!!",
+  "JFBR": "REVERSE SPLIT 17 TRADING DAYS AGO!!!!!!!!!",
+  "INTJ": "REVERSE SPLIT 17 TRADING DAYS AGO!!!!!!!!!",
+  "EEIQ": "REVERSE SPLIT 17 TRADING DAYS AGO!!!!!!!!!",
+  "FGNX": "REVERSE SPLIT 19 TRADING DAYS AGO!!!!!!!!!",
+  "CRE": "REVERSE SPLIT 19 TRADING DAYS AGO!!!!!!!!!",
+  "SCPQ": "SYMBOL CHANGE 20 TRADING DAYS AGO!!! 38 PERCENT!!!",
+  "RUBI": "REVERSE SPLIT 20 TRADING DAYS AGO!!!!!!!!!",
+  "CICC": "WAS LISTED 20 TRADING DAYS AGO!!! AT LEAST 38 PERCENT!!!",
+  "BRAI": "WAS LISTED 20 TRADING DAYS AGO!!! AT LEAST 38 PERCENT!!!",
+  "APC": "WAS LISTED 20 TRADING DAYS AGO!!! AT LEAST 38 PERCENT!!!",
+  "AIOS": "SYMBOL CHANGE 20 TRADING DAYS AGO!!! 38 PERCENT!!!"
 };
 
 
@@ -1872,13 +1933,13 @@ for (var corporateSymbol in corporateActionsStocks)
     }); // End of click function 
 
 
-   $("#entry_27").click(function(){
+   $("#entry_26").click(function(){
 
-      $("#entryPercentage").val("27.00"); 
+      $("#entryPercentage").val("26.00"); 
       $("#amountSpending").val("700.00"); 
 
       var yesterdaysClose = $('#yestCloseText').val(); 
-      var newPrice = yesterdaysClose - (yesterdaysClose*27.00/100); 
+      var newPrice = yesterdaysClose - (yesterdaysClose*26.00/100); 
       if (yesterdaysClose > 1.00){
         newPrice = newPrice.toFixed(2);         
       }
@@ -2011,13 +2072,34 @@ for (var corporateSymbol in corporateActionsStocks)
 
     }); // End of click function 
 
-    $("#entry_33").click(function(){
+    $("#entry_31").click(function(){
 
-      $("#entryPercentage").val("33.00"); 
+      $("#entryPercentage").val("31.00"); 
       $("#amountSpending").val("700.00"); 
 
       var yesterdaysClose = $('#yestCloseText').val(); 
-      var newPrice = yesterdaysClose - (yesterdaysClose*33.00/100); 
+      var newPrice = yesterdaysClose - (yesterdaysClose*31.00/100); 
+      if (yesterdaysClose > 1.00){
+        newPrice = newPrice.toFixed(2);         
+      }
+      else
+      {
+        newPrice = newPrice.toFixed(4); 
+      }
+
+      $('#entryPrice').val(newPrice); 
+      calcAll();
+      CopyToClipboard();  
+
+    }); // End of click function 
+
+    $("#entry_35").click(function(){
+
+      $("#entryPercentage").val("35.00"); 
+      $("#amountSpending").val("700.00"); 
+
+      var yesterdaysClose = $('#yestCloseText').val(); 
+      var newPrice = yesterdaysClose - (yesterdaysClose*35.00/100); 
       if (yesterdaysClose > 1.00){
         newPrice = newPrice.toFixed(2);         
       }

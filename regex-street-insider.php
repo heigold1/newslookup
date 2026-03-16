@@ -212,6 +212,7 @@ function regexStreetInsider($streetInsiderNews)
   $streetInsiderNews = preg_replace('/ review options/i', '<span style="font-size: 25px; background-color:red; color:black; "><b>REVIEW OPTIONS</b></span><br><br><span style="font-size: 50px; background-color:red; color:black; "><b>STAY AWAY</b></span>&nbsp;', $streetInsiderNews); 
   $streetInsiderNews = preg_replace('/ ceo exits/i', '<span style="font-size: 25px; background-color:red; color:black; "><b>CEO EXITS</b></span><br><br><span style="font-size: 50px; background-color:red; color:black; "><b>STAY AWAY</b></span>&nbsp;', $streetInsiderNews);   
   $streetInsiderNews = preg_replace('/ strategic review/i', '<span style="font-size: 25px; background-color:red; color:black; "><b>STRAGETIC REVIEW</b></span><br><br><span style="font-size: 50px; background-color:red; color:black; "><b>STAY AWAY</b></span>&nbsp;', $streetInsiderNews); 
+  $streetInsiderNews = preg_replace('/ changes name/i', '<span style="font-size: 40px; background-color:red; color:black; "><b>CHANGES NAME</b>&nbsp;', $streetInsiderNews); 
 
   return $streetInsiderNews;
 

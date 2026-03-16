@@ -60,12 +60,13 @@
 			<div id="enter_quote_div">
 					<table>
 						<tr>
-							<td style="width:200px">
-<input tabindex ="1" style="text-align: left;" id="quote_input" class="textbox" type="text" size="10" value="<?php echo $_GET['symbol'] ?>">
+							<td style="width:150px">
+<input tabindex ="1" style="text-align: left; width: 50px; " id="quote_input" class="textbox" type="text" size="10" value="<?php echo $_GET['symbol'] ?>">
 								<input id="submit_button" type="submit" value="Sub">
 								<input id="earnings_button" type="submit" value="E">
 							</td>
-							<td style="width:650px"> 
+							<td style="width:700px"> 
+								<label class="historical_data_label_thin">&nbsp;</label>
 								<span>
 									<input id="asian_stocks" type="submit" value="84.5%">
 								</span>
@@ -85,12 +86,15 @@
 								<span>
 									<input id="net_income" type="submit" value="40%">
 								</span>
+								<span>
+									<input id="entry_35" type="submit" value="35%">
+								</span>
 								<label class="historical_data_label_thin">&nbsp;</label>
 								<span>
-									<input id="entry_33" type="submit" value="33%">
+									<input id="entry_31" type="submit" value="31%">
 								</span>
 								<span>
-									<input id="entry_27" type="submit" value="27%">
+									<input id="entry_26" type="submit" value="26%">
 								</span>
 								<label class="historical_data_label_thin">&nbsp;</label>
 								<span>
