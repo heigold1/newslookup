@@ -132,6 +132,8 @@ Entry Suggestion:
 - Penny stocks: ~55–65% drop. 
 - Dollar stocks: ~40–45% drop.  
 
+LASTLY - if this stock has a coming delisting date (i.e. within a few weeks), I need to know the date! 
+
 Please be brief, just a couple points in point form, and then the suggested tier# and percentage, as I am day trading and my time is very limited.  The current price it is trading at is now 
 `;
 
