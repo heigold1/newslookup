@@ -1005,6 +1005,7 @@ die();
           $state = $yahooFinanceObject[0]['state']; 
           $cik = $yahooFinanceObject[0]['cik']; 
           $ceo = $yahooFinanceObject[0]['ceo']; 
+          $ceoRaw = $yahooFinanceObject[0]['ceo']; 
           $otherExecutives = $yahooFinanceObject[0]['otherExecutives'];       
           $description = $yahooFinanceObject[0]['description']; 
           $descriptionRegex = $description;
@@ -1043,12 +1044,21 @@ die();
           $descriptionContainsAsianCountry = preg_match($chineseCityArray, $description);
 
           if ($ceoHasChineseSurname || $descriptionContainsAsianCountry) {
-            $ceo = '<br><br><span style="font-size: 55px; background-color: red;">CEO ' . $ceo . '</span>'; 
-          }
-          elseif ($ceo == null)
-          {
-            $ceo = '<br><br><span style="font-size: 50px; background-color: red;"><a style="font-size: 45px" target="_blank" href="https://www.etrade.wallst.com/etrade-web/fundamentals?symbol=' . $symbol . '"> CEO - NULL - CHECK E*TRADE</a></span>'; 
-          }
+
+            if ($ceoRaw == null) {
+                    $ceo = '<br><br><span style="font-size: 50px; background-color: red;">
+                    <a target="_blank" href="https://www.etrade.wallst.com/etrade-web/fundamentals?symbol=' . $symbol . '">
+                    CEO - NULL - CHECK E*TRADE</a></span>'; 
+                } else {
+                  $ceo = '<br><br><span style="font-size: 55px; background-color: red;">CEO ' . $ceoRaw . '</span>'; 
+                }
+
+            } elseif ($ceoRaw == null) {
+
+                $ceo = '<br><br><span style="font-size: 50px; background-color: red;">
+                <a target="_blank" href="https://www.etrade.wallst.com/etrade-web/fundamentals?symbol=' . $symbol . '">
+                CEO - NULL - CHECK E*TRADE</a></span>'; 
+            }
 
           if (trim($city) == "")
           {
