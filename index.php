@@ -257,7 +257,11 @@
 						</div>
 
 								5-day Avg Vol: <span style="font-size: 12px" id="five-day-average-volume"></span><br>
-								&nbsp; &nbsp; &nbsp; &nbsp; <span id="low-volume-dollar-chart" style="background-color: #00ff00;">Dollar</span>&nbsp;<span id="low-volume-penny-chart" style="background-color: #00ff00;">Penny</span>&nbsp;<span id="notes" style="background-color: #00ff00;">NOTES</span>	
+								&nbsp; &nbsp; &nbsp; &nbsp; <!-- <span id="low-volume-dollar-chart" style="background-color: #00ff00;">Dollar</span> --> 
+								&nbsp;<!-- <span id="low-volume-penny-chart" style="background-color: #00ff00;">Penny</span> --> &nbsp;
+								<button onclick='preparePinkSheetChatGPT(<?php echo json_encode($_GET["symbol"]); ?>, $("#yestCloseText").val())'>PinkGPT</button>
+								<input type='textarea' id='pinkSheetChatGPT' style='width: 5px !important'> &nbsp; 
+								<!-- <span id="notes" style="background-color: #00ff00;">NOTES</span>	 --> 
 
 						</td>
 
@@ -284,7 +288,7 @@
 	<div id="right_container" style="position: relative; background-color: #F3F3FF; border-style: solid; border-width: 1px; float: right; width: 50%; height: 100%;	display: block; border-style: solid; border-width: 1px; 	">
 
 		<div id="right_bottom_container"> 
-				<div id="bigcharts_chart_container" style="position: relative; width: 53%; height: 350px; display: inline-block; border: 3px solid red;">
+				<div id="bigcharts_chart_container" style="position: relative; width: 53%; height: 350px; display: inline-block; order: 3px solid red;">
 				    <div id="monthlyOHLC"></div>
 				</div>
 

@@ -94,6 +94,8 @@ function prepareNoNewsChatGPT(symbol) {
 
     var message = `Can you suggest to me which tier # (and therefore percentage entry) I should go in for the non-news stock (ticker symbol is ${symbol})?
 
+So just as a reminder - we're just doing no-news tiers.  If there is news, we switch gears and it becomes a "What is the entry point based on what the news is" and the criteria changes, so that's not the case here.  We're just doing a no-news analysis based on reverse splits, offerings, or any other red flags you might notice, etc...
+
 Here is the criteria:
 
 🔹 Tier 1 — Clean Structure (Best Bounce Candidates)
@@ -134,12 +136,123 @@ Entry Suggestion:
 
 LASTLY - if this stock has a coming delisting date (i.e. within a few weeks), I need to know the date! 
 
+So PLEASE MAKE SURE to check any recent offerings and reverse splits when doing your due diligence, and add this to your judgement criteria. 
+
+So start off by checking any recent reverse splits or offerings, and then any other red flags you might think are important. 
+
 Please be brief, just a couple points in point form, and then the suggested tier# and percentage, as I am day trading and my time is very limited.  The current price it is trading at is now 
 `;
 
     document.getElementById("noNewsChatGPT").value = message;
 
         var copyTextarea = $("#noNewsChatGPT");
+        copyTextarea.select();
+
+        try {
+          var successful = document.execCommand('copy');
+          var msg = successful ? 'successful' : 'unsuccessful';
+          console.log('Copying text command was ' + msg);
+        } catch (err) {
+          console.log('Oops, unable to copy');
+        }
+
+    return message;
+}
+
+
+function preparePinkSheetChatGPT(symbol, closingPrice) {
+
+    var message = `When I trade Pink Sheets, the criteria usually is: 
+
+    - If they are penny Pink Sheet stocks, I'll jump in at around 85% (down from the previous day's closing price). 
+    - If they are Pink Sheet DOLLAR stocks I can jump in at 75% (down from the previous day's closing price). 
+    - So to clarify - if the previous day's closing price is over $1.00, then I can jump in a bit sooner than 85%, more like 75% (again, down from the previous day's closing price). 
+        - HOWEVER, if it closed at like $1.10 and therefore the 75% price is like $0.275, then that's a TOTAL penny stock, so 85%.
+    - So it's like - the closer the price is to like $1.75 and higher, the more safer it is to jump in at the 75% mark.  You know? 
+    - Perfect example - On March 20th, 2026, Pink Sheet security MGNC's closing price was $1.72 and it dropped 75% to $0.42 and recovered nicely from there.  
+    - This Pink Sheet stock's symbol is ${symbol} and it's previous day's closing price was ${closingPrice}. 
+    - Can you give me an assessment as to what you think is the best entry (i.e. 75% or maybe 80-85% to be safe)?   
+        - How about - can look at the recent OHLC data and today's Level II bids/asks and see if there are any liquidiy risks that would suggest 85% as opposed to 75%? 
+
+    So again, the general rule is Pink Sheet penny - 85%, Pink Sheet dollar - 75%, I'm just asking you to do the nuancing. 
+
+    Here are a couple rules you added: 
+
+    ⚡ Simple rule upgrade (this is gold for you)
+    Add this filter:
+        If previous close is $1.00–$1.25 → treat as penny stock unless strong liquidity is visible
+        So:
+            - $1.70+ → 75% valid
+            - $1.30–1.70 → 75–80% (case-by-case)
+            - $1.00–1.25 → default to 80–85%
+
+    ⚡ Clean rule (refined)
+    ✅ Base rule:
+        - $1.25+ → you can consider 75%
+        - $1.00–1.25 → treat as 80–85% (penny behavior)
+
+    ⚠️ BUT add this 1 filter (this is the key)
+    Even if it’s above $1.25, ask:
+        “Does 75% drop put me into a dead zone (< ~$0.40)?”
+        - If YES → go 80–85%
+        - If NO → 75% is fine
+
+    🔥 Final “2-second rule”
+        Prev close ≥ $1.25
+            - AND 75% level ≥ ~$0.40 → ✅ 75%
+            - BUT 75% level < ~$0.40 → ⚠️ 80–85%
+
+    LAST BUT NOT LEAST!!! 
+    - It it's 75% entry is WAY ABOVE the $1.00 mark, we can consider 65-70%, IF-AND-ONLY-IF: 
+        1. High starting price (this is #1 driver)
+        - $5+ → consider
+        - $10+ → strong candidate
+
+        2. 75% level is STILL very liquid
+        Ask:
+            - “Is 75% still above ~$2–$3?”
+            - Yes → ✅ safer to go earlier
+            - No → ❌ stick to 75%+
+
+        3. Tight spreads / real bids (Level II)
+            - Bids stacked within a few cents
+            - Not huge gaps between levels
+            - No “ghost town” book
+            - If tight → earlier entry OK
+            - If thin → DO NOT go early
+
+        4. Not a trash OTC / dilution machine
+        Avoid early entry if:
+            - constant offerings
+            - reverse split history
+            - sketchy China/AI pump names
+            - You WANT:
+            - ADRs / real companies
+            - steady trading behavior
+
+        5. Price action = controlled drop (not panic crash)
+            - Gradual selloff → ✅ early entry works
+            - Violent flush candles → ❌ wait deeper
+
+        🔥 Simple “2-second upgrade rule”
+        After your 75% check:
+        If ALL are true → go 65–70%
+            - Price ≥ $5
+            - 75% level ≥ ~$2–3
+            - Tight Level II
+            - Not a dilution ticker
+            - Controlled drop
+        Otherwise:
+            → default back to 75%
+
+        Please keep it brief, just a few lines and then your recommended entry percentage, as my time is limited. 
+        Also - just for easy readability for me, please make the very last line, the recommended percentage entry so I don't have to fish for it. 
+
+`;
+
+    document.getElementById("pinkSheetChatGPT").value = message;
+
+        var copyTextarea = $("#pinkSheetChatGPT");
         copyTextarea.select();
 
         try {
@@ -1582,74 +1695,100 @@ console.log("about to playCheckTradeHalts");
 
 var corporateActionsStocks=
 {
-  "GIX": "SYMBOL CHANGE 1 TRADING DAYS AGO!!! 38 PERCENT!!!",
-  "ZENVF": "SYMBOL CHANGE 2 TRADING DAYS AGO!!! 38 PERCENT!!!",
-  "XSLL": "SYMBOL CHANGE 2 TRADING DAYS AGO!!! 38 PERCENT!!!",
-  "ULYX": "SYMBOL CHANGE 3 TRADING DAYS AGO!!! 38 PERCENT!!!",
-  "SWMR": "WAS LISTED 3 TRADING DAYS AGO!!! AT LEAST 38 PERCENT!!!",
-  "ARCI": "SYMBOL CHANGE 3 TRADING DAYS AGO!!! 38 PERCENT!!!",
-  "VIVO": "SYMBOL CHANGE 4 TRADING DAYS AGO!!! 38 PERCENT!!!",
-  "FNUC": "SYMBOL CHANGE 4 TRADING DAYS AGO!!! 38 PERCENT!!!",
-  "ALOV": "SYMBOL CHANGE 4 TRADING DAYS AGO!!! 38 PERCENT!!!",
-  "MDA": "WAS LISTED 5 TRADING DAYS AGO!!! AT LEAST 38 PERCENT!!!",
-  "BHATF": "SYMBOL CHANGE 5 TRADING DAYS AGO!!! 38 PERCENT!!!",
-  "QUCY": "SYMBOL CHANGE 6 TRADING DAYS AGO!!! 38 PERCENT!!!",
-  "PAYP": "WAS LISTED 6 TRADING DAYS AGO!!! AT LEAST 38 PERCENT!!!",
-  "GRML": "SYMBOL CHANGE 6 TRADING DAYS AGO!!! 38 PERCENT!!!",
-  "GMEX": "SYMBOL CHANGE 6 TRADING DAYS AGO!!! 38 PERCENT!!!",
-  "DMRA": "SYMBOL CHANGE 6 TRADING DAYS AGO!!! 38 PERCENT!!!",
-  "HSLV": "WAS LISTED 7 TRADING DAYS AGO!!! AT LEAST 38 PERCENT!!!",
-  "FLNA": "SYMBOL CHANGE 7 TRADING DAYS AGO!!! 38 PERCENT!!!",
-  "OIO": "SYMBOL CHANGE 8 TRADING DAYS AGO!!! 38 PERCENT!!!",
-  "CAST": "WAS LISTED 8 TRADING DAYS AGO!!! AT LEAST 38 PERCENT!!!",
-  "XFLH": "SYMBOL CHANGE 9 TRADING DAYS AGO!!! 38 PERCENT!!!",
-  "VMET": "WAS LISTED 10 TRADING DAYS AGO!!! AT LEAST 38 PERCENT!!!",
-  "PPLC": "WAS LISTED 10 TRADING DAYS AGO!!! AT LEAST 38 PERCENT!!!",
-  "MMED": "WAS LISTED 10 TRADING DAYS AGO!!! AT LEAST 38 PERCENT!!!",
-  "XTKG": "REVERSE SPLIT 11 TRADING DAYS AGO!!!!!!!!!",
-  "CIMG": "SYMBOL CHANGE 11 TRADING DAYS AGO!!! 38 PERCENT!!!",
-  "AEHL": "REVERSE SPLIT 11 TRADING DAYS AGO!!!!!!!!!",
-  "TIRXF": "SYMBOL CHANGE 12 TRADING DAYS AGO!!! 38 PERCENT!!!",
-  "SPRC": "REVERSE SPLIT 12 TRADING DAYS AGO!!!!!!!!!",
-  "MRDN": "REVERSE SPLIT 13 TRADING DAYS AGO!!!!!!!!!",
-  "ZCMD": "REVERSE SPLIT 14 TRADING DAYS AGO!!!!!!!!!",
-  "TSEOF": "SYMBOL CHANGE 14 TRADING DAYS AGO!!! 38 PERCENT!!!",
-  "SUNB": "WAS LISTED 14 TRADING DAYS AGO!!! AT LEAST 38 PERCENT!!!",
-  "PPBT": "REVERSE SPLIT 14 TRADING DAYS AGO!!!!!!!!!",
-  "FRMM": "SYMBOL CHANGE 14 TRADING DAYS AGO!!! 38 PERCENT!!!",
-  "BURU": "REVERSE SPLIT 14 TRADING DAYS AGO!!!!!!!!!",
-  "VCIG": "REVERSE SPLIT 15 TRADING DAYS AGO!!!!!!!!!",
-  "SFHG": "REVERSE SPLIT 15 TRADING DAYS AGO!!!!!!!!!",
-  "RNA": "WAS LISTED 15 TRADING DAYS AGO!!! AT LEAST 38 PERCENT!!!",
-  "PTLE": "REVERSE SPLIT 15 TRADING DAYS AGO!!!!!!!!!",
-  "IXHL": "REVERSE SPLIT 15 TRADING DAYS AGO!!!!!!!!!",
-  "GENB": "WAS LISTED 15 TRADING DAYS AGO!!! AT LEAST 38 PERCENT!!!",
-  "CMII": "SYMBOL CHANGE 15 TRADING DAYS AGO!!! 38 PERCENT!!!",
-  "RNAM": "NEW SYMBOL AS OF 16 TRADING DAYS AGO!!! AT LEAST 38 PERCENT!!!",
-  "NXTS": "SYMBOL CHANGE 16 TRADING DAYS AGO!!! 38 PERCENT!!!",
-  "FRSX": "REVERSE SPLIT 16 TRADING DAYS AGO!!!!!!!!!",
-  "BCHT": "WAS LISTED 16 TRADING DAYS AGO!!! AT LEAST 38 PERCENT!!!",
-  "SVRE": "REVERSE SPLIT 17 TRADING DAYS AGO!!!!!!!!!",
-  "NUCL": "SYMBOL CHANGE 17 TRADING DAYS AGO!!! 38 PERCENT!!!",
-  "ALOY": "SYMBOL CHANGE 17 TRADING DAYS AGO!!! 38 PERCENT!!!",
-  "TRNR": "REVERSE SPLIT 18 TRADING DAYS AGO!!!!!!!!!",
-  "RYZ": "SYMBOL CHANGE 18 TRADING DAYS AGO!!! 38 PERCENT!!!",
-  "RPGL": "REVERSE SPLIT 18 TRADING DAYS AGO!!!!!!!!!",
-  "QNC": "WAS LISTED 18 TRADING DAYS AGO!!! AT LEAST 38 PERCENT!!!",
-  "LFWD": "REVERSE SPLIT 18 TRADING DAYS AGO!!!!!!!!!",
-  "DULL": "REVERSE SPLIT 18 TRADING DAYS AGO!!!!!!!!!",
-  "CVSA": "SYMBOL CHANGE 18 TRADING DAYS AGO!!! 38 PERCENT!!!",
-  "XRN": "SYMBOL CHANGE 19 TRADING DAYS AGO!!! 38 PERCENT!!!",
-  "NBY": "REVERSE SPLIT 19 TRADING DAYS AGO!!!!!!!!!",
-  "MWG": "REVERSE SPLIT 19 TRADING DAYS AGO!!!!!!!!!",
-  "LVROF": "SYMBOL CHANGE 19 TRADING DAYS AGO!!! 38 PERCENT!!!",
-  "DSY": "REVERSE SPLIT 19 TRADING DAYS AGO!!!!!!!!!",
-  "BTM": "REVERSE SPLIT 19 TRADING DAYS AGO!!!!!!!!!",
-  "ROC": "WAS LISTED 20 TRADING DAYS AGO!!! AT LEAST 38 PERCENT!!!",
-  "BYAH": "REVERSE SPLIT 20 TRADING DAYS AGO!!!!!!!!!",
-  "BESS": "WAS LISTED 20 TRADING DAYS AGO!!! AT LEAST 38 PERCENT!!!",
-  "ADVB": "REVERSE SPLIT 20 TRADING DAYS AGO!!!!!!!!!",
-  "ABPO": "SYMBOL CHANGE 20 TRADING DAYS AGO!!! 38 PERCENT!!!"
+  "UCAR": "REVERSE SPLIT 0 TRADING DAYS AGO!!!!!!!!!",
+  "AUUD": "REVERSE SPLIT 0 TRADING DAYS AGO!!!!!!!!!",
+  "PAVS": "REVERSE SPLIT 1 TRADING DAYS AGO!!!!!!!!!",
+  "MODD": "REVERSE SPLIT 1 TRADING DAYS AGO!!!!!!!!!",
+  "AKTX": "REVERSE SPLIT 1 TRADING DAYS AGO!!!!!!!!!",
+  "AGL": "REVERSE SPLIT 1 TRADING DAYS AGO!!!!!!!!!",
+  "SVRN": "REVERSE SPLIT 2 TRADING DAYS AGO!!!!!!!!!",
+  "FBLG": "REVERSE SPLIT 2 TRADING DAYS AGO!!!!!!!!!",
+  "EJH": "REVERSE SPLIT 2 TRADING DAYS AGO!!!!!!!!!",
+  "ATXG": "REVERSE SPLIT 2 TRADING DAYS AGO!!!!!!!!!",
+  "TRUG": "REVERSE SPLIT 3 TRADING DAYS AGO!!!!!!!!!",
+  "LBGJ": "REVERSE SPLIT 3 TRADING DAYS AGO!!!!!!!!!",
+  "IVF": "REVERSE SPLIT 3 TRADING DAYS AGO!!!!!!!!!",
+  "CDT": "REVERSE SPLIT 3 TRADING DAYS AGO!!!!!!!!!",
+  "ADV": "REVERSE SPLIT 3 TRADING DAYS AGO!!!!!!!!!",
+  "RENX": "REVERSE SPLIT 4 TRADING DAYS AGO!!!!!!!!!",
+  "CMBMF": "SYMBOL CHANGE 4 TRADING DAYS AGO!!! 38 PERCENT!!!",
+  "XTLB": "REVERSE SPLIT 5 TRADING DAYS AGO!!!!!!!!!",
+  "ONCO": "REVERSE SPLIT 5 TRADING DAYS AGO!!!!!!!!!",
+  "JAN": "WAS LISTED 5 TRADING DAYS AGO!!! AT LEAST 38 PERCENT!!!",
+  "FUBO": "REVERSE SPLIT 6 TRADING DAYS AGO!!!!!!!!!",
+  "DTCKF": "REVERSE SPLIT 17 TRADING DAYS AGO!!!!!!!!!",
+  "YYGH": "REVERSE SPLIT 7 TRADING DAYS AGO!!!!!!!!!",
+  "JDZG": "REVERSE SPLIT 7 TRADING DAYS AGO!!!!!!!!!",
+  "FCHL": "REVERSE SPLIT 7 TRADING DAYS AGO!!!!!!!!!",
+  "EUDA": "REVERSE SPLIT 7 TRADING DAYS AGO!!!!!!!!!",
+  "AZI": "REVERSE SPLIT 7 TRADING DAYS AGO!!!!!!!!!",
+  "AREB": "REVERSE SPLIT 7 TRADING DAYS AGO!!!!!!!!!",
+  "ORGN": "REVERSE SPLIT 8 TRADING DAYS AGO!!!!!!!!!",
+  "KRAQ": "SYMBOL CHANGE 8 TRADING DAYS AGO!!! 38 PERCENT!!!",
+  "HQ": "WAS LISTED 8 TRADING DAYS AGO!!! AT LEAST 38 PERCENT!!!",
+  "DFMC": "WAS LISTED 8 TRADING DAYS AGO!!! AT LEAST 38 PERCENT!!!",
+  "CIIT": "REVERSE SPLIT 8 TRADING DAYS AGO!!!!!!!!!",
+  "UOKAF": "REVERSE SPLIT 12 TRADING DAYS AGO!!!!!!!!!",
+  "GIX": "SYMBOL CHANGE 9 TRADING DAYS AGO!!! 38 PERCENT!!!",
+  "ZENVF": "SYMBOL CHANGE 10 TRADING DAYS AGO!!! 38 PERCENT!!!",
+  "XSLL": "SYMBOL CHANGE 10 TRADING DAYS AGO!!! 38 PERCENT!!!",
+  "COOK": "REVERSE SPLIT 10 TRADING DAYS AGO!!!!!!!!!",
+  "ULYX": "SYMBOL CHANGE 11 TRADING DAYS AGO!!! 38 PERCENT!!!",
+  "SWMR": "WAS LISTED 11 TRADING DAYS AGO!!! AT LEAST 38 PERCENT!!!",
+  "ARCI": "SYMBOL CHANGE 11 TRADING DAYS AGO!!! 38 PERCENT!!!",
+  "ZJYL": "REVERSE SPLIT 12 TRADING DAYS AGO!!!!!!!!!",
+  "XLO": "REVERSE SPLIT 12 TRADING DAYS AGO!!!!!!!!!",
+  "VIVO": "SYMBOL CHANGE 12 TRADING DAYS AGO!!! 38 PERCENT!!!",
+  "SKYQ": "REVERSE SPLIT 12 TRADING DAYS AGO!!!!!!!!!",
+  "NIVF": "REVERSE SPLIT 12 TRADING DAYS AGO!!!!!!!!!",
+  "MASK": "REVERSE SPLIT 12 TRADING DAYS AGO!!!!!!!!!",
+  "HBIO": "REVERSE SPLIT 12 TRADING DAYS AGO!!!!!!!!!",
+  "FNUC": "SYMBOL CHANGE 12 TRADING DAYS AGO!!! 38 PERCENT!!!",
+  "DXST": "REVERSE SPLIT 12 TRADING DAYS AGO!!!!!!!!!",
+  "CLIR": "REVERSE SPLIT 12 TRADING DAYS AGO!!!!!!!!!",
+  "ALOV": "SYMBOL CHANGE 12 TRADING DAYS AGO!!! 38 PERCENT!!!",
+  "STFS": "REVERSE SPLIT 13 TRADING DAYS AGO!!!!!!!!!",
+  "PED": "REVERSE SPLIT 13 TRADING DAYS AGO!!!!!!!!!",
+  "MDA": "WAS LISTED 13 TRADING DAYS AGO!!! AT LEAST 38 PERCENT!!!",
+  "KXIN": "REVERSE SPLIT 13 TRADING DAYS AGO!!!!!!!!!",
+  "BHATF": "REVERSE SPLIT 17 TRADING DAYS AGO!!!!!!!!!",
+  "ZNB": "REVERSE SPLIT 14 TRADING DAYS AGO!!!!!!!!!",
+  "QUCY": "SYMBOL CHANGE 14 TRADING DAYS AGO!!! 38 PERCENT!!!",
+  "PAYP": "WAS LISTED 14 TRADING DAYS AGO!!! AT LEAST 38 PERCENT!!!",
+  "GRML": "SYMBOL CHANGE 14 TRADING DAYS AGO!!! 38 PERCENT!!!",
+  "GMEX": "SYMBOL CHANGE 14 TRADING DAYS AGO!!! 38 PERCENT!!!",
+  "ELPW": "REVERSE SPLIT 14 TRADING DAYS AGO!!!!!!!!!",
+  "DMRA": "SYMBOL CHANGE 14 TRADING DAYS AGO!!! 38 PERCENT!!!",
+  "WLDS": "REVERSE SPLIT 15 TRADING DAYS AGO!!!!!!!!!",
+  "HSLV": "WAS LISTED 15 TRADING DAYS AGO!!! AT LEAST 38 PERCENT!!!",
+  "FLNA": "SYMBOL CHANGE 15 TRADING DAYS AGO!!! 38 PERCENT!!!",
+  "OIO": "SYMBOL CHANGE 16 TRADING DAYS AGO!!! 38 PERCENT!!!",
+  "KIDZ": "REVERSE SPLIT 16 TRADING DAYS AGO!!!!!!!!!",
+  "ELAB": "REVERSE SPLIT 16 TRADING DAYS AGO!!!!!!!!!",
+  "CAST": "WAS LISTED 16 TRADING DAYS AGO!!! AT LEAST 38 PERCENT!!!",
+  "ARTL": "REVERSE SPLIT 16 TRADING DAYS AGO!!!!!!!!!",
+  "XFLH": "SYMBOL CHANGE 17 TRADING DAYS AGO!!! 38 PERCENT!!!",
+  "RVPH": "REVERSE SPLIT 17 TRADING DAYS AGO!!!!!!!!!",
+  "DCOY": "REVERSE SPLIT 17 TRADING DAYS AGO!!!!!!!!!",
+  "ADTX": "REVERSE SPLIT 17 TRADING DAYS AGO!!!!!!!!!",
+  "WCT": "REVERSE SPLIT 18 TRADING DAYS AGO!!!!!!!!!",
+  "VMET": "WAS LISTED 18 TRADING DAYS AGO!!! AT LEAST 38 PERCENT!!!",
+  "TVGN": "REVERSE SPLIT 18 TRADING DAYS AGO!!!!!!!!!",
+  "PPLC": "WAS LISTED 18 TRADING DAYS AGO!!! AT LEAST 38 PERCENT!!!",
+  "MMED": "WAS LISTED 18 TRADING DAYS AGO!!! AT LEAST 38 PERCENT!!!",
+  "GSIW": "REVERSE SPLIT 18 TRADING DAYS AGO!!!!!!!!!",
+  "XTKG": "REVERSE SPLIT 19 TRADING DAYS AGO!!!!!!!!!",
+  "CIMG": "SYMBOL CHANGE 19 TRADING DAYS AGO!!! 38 PERCENT!!!",
+  "AEHL": "REVERSE SPLIT 19 TRADING DAYS AGO!!!!!!!!!",
+  "TIRXF": "SYMBOL CHANGE 20 TRADING DAYS AGO!!! 38 PERCENT!!!",
+  "SPRC": "REVERSE SPLIT 20 TRADING DAYS AGO!!!!!!!!!",
+  "MRDN": "REVERSE SPLIT 21 TRADING DAYS AGO!!!!!!!!!",
+  "ZCMD": "REVERSE SPLIT 22 TRADING DAYS AGO!!!!!!!!!",
+  "TSEOF": "SYMBOL CHANGE 22 TRADING DAYS AGO!!! 38 PERCENT!!!",
+  "SUNB": "WAS LISTED 22 TRADING DAYS AGO!!! AT LEAST 38 PERCENT!!!",
+  "PPBT": "REVERSE SPLIT 22 TRADING DAYS AGO!!!!!!!!!",
+  "FRMM": "SYMBOL CHANGE 22 TRADING DAYS AGO!!! 38 PERCENT!!!",
+  "BURU": "REVERSE SPLIT 22 TRADING DAYS AGO!!!!!!!!!"
 };
 
 
