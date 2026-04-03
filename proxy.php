@@ -1568,7 +1568,7 @@ die();
       $finalReturn = preg_replace('/ efficacy data/i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp; EFFICACY DATA - DRUG NEWS</b></span>&nbsp;', $finalReturn);
       $finalReturn = preg_replace('/ phase 1/i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp; PHASE 1!!!!</b></span>&nbsp;', $finalReturn);
       $finalReturn = preg_replace('/ phase 2/i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp; PHASE 2!!!!</b></span>&nbsp;', $finalReturn); 
-      $finalReturn = preg_replace('/ phase 3/i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp; PHASE 3!!!!</b></span>&nbsp;', $finalReturn); 
+      $finalReturn = preg_replace('/ phase 3/i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp; PHASE 3!!!! CHECK PIPELINE, IF MANY DRUGS THEN YOU CAN GO EARLY AT 80%!!!</b></span>&nbsp;', $finalReturn); 
       $finalReturn = preg_replace('/ to present/i', '<span style="font-size: 65px; background-color: red; color:black"><b><br>TO<br><br>PRESENT<br><br>CHECK<br><br>DATE</b><br></span>&nbsp;', $finalReturn);
       $finalReturn = preg_replace('/ to participate/i', '<span style="font-size: 65px; background-color: red; color:black"><b><br>TO<br><br>PARTICIPATE<br><br>CHECK<br><br>DATE</b><br></span>&nbsp;', $finalReturn);
       $finalReturn = preg_replace('/ to co.host/i', '<span style="font-size: 65px; background-color: red; color:black"><b><br>TO<br><br>CO-HOST<br><br>CHECK<br><br>DATE</b><br></span>&nbsp;', $finalReturn);
