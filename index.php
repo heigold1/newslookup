@@ -257,11 +257,11 @@
 						</div>
 
 								5-day Avg Vol: <span style="font-size: 12px" id="five-day-average-volume"></span><br>
-								&nbsp; &nbsp; &nbsp; &nbsp; <!-- <span id="low-volume-dollar-chart" style="background-color: #00ff00;">Dollar</span> --> 
-								&nbsp;<!-- <span id="low-volume-penny-chart" style="background-color: #00ff00;">Penny</span> --> &nbsp;
+								<!-- <span id="low-volume-dollar-chart" style="background-color: #00ff00;">Dollar</span> --> 
+								<!-- <span id="low-volume-penny-chart" style="background-color: #00ff00;">Penny</span> --> &nbsp;
 								<button onclick='preparePinkSheetChatGPT(<?php echo json_encode($_GET["symbol"]); ?>, $("#yestCloseText").val())'>PinkGPT</button>
 								<input type='textarea' id='pinkSheetChatGPT' style='width: 5px !important'> &nbsp; 
-								<!-- <span id="notes" style="background-color: #00ff00;">NOTES</span>	 --> 
+								<span id="notes" style="background-color: #00ff00;">Hi-Ri</span>
 
 						</td>
 
@@ -320,52 +320,23 @@
   <!-- Modal content -->
   <div class="modal-content" style="overflow: auto; ">
     <p style="font-size: 25px">
-
-    		NON-NEWS DOLLAR ENTRIES<br><br>
-    		*******<br><br>
-    		6:30 - 20%<br>
-    		7:15 - 23%<br>
-    		8:00 - 25%<br>
-    		8:45 - 28% <br>
-    		9:30 - 30%<br><br><br>
-
-    		PINK SHEET<br><br>
-    		**********<br><br>
-			- Pink Sheet dollar stocks - if the 50% down price is still over $1.00 a share, you can jump in at 50%.  If you catch a Pink Sheet dollar stock at 50% mark, only take 20-25% profit<br><br>
-			- Pink Sheet dollar stocks on news - you still have to chase these at 85%, even if they are dollar stocks<br><br>
-			- PINK SHEET - If there is no level II data and your order is the only order showing, cancel your order.<br><br><br>
-
-			NASDAQ/NYSE<br><br>
-			***********<br><br>
-			- Recent bankruptcies - you can go into these at 40% penny the day after a bankruptcy, 35% dollar. <br><br>
-			- You can go for stocks whose earnings are about to come out after market close that day.<br><br>
-			- Presentation the next day - the usual 18-20% is ok.<br><br><br>  
-			- If an earnings is $0.00 - go in at 40%.<br><br> 
-			- Penny stocks with delisting news - you can go in these at 40% provided the delisting date is a long shot away.<br><br>
-			- Inability to file - 40% dollar, 50% penny. <br><br>
-			- If there is news, check all sites to see if it already came out the previous day.<br><br>
-			- Withdraw guidance - 40%<br><br>
-			- If the company is being acquired and the 20%-below-acquisition-price price is above the previous day's closing price, it's still ok.<br><br><br> 
-
-			DELISTINGS<br><br>
-			**********<br><br>
-			120-180 days - 40%<br><br>
-			More than a month - 50% or more<br><br>
-			Less than a month - 60% or more<br><br>
-			Less than a week - 75% or more<br><br><br> 
-			
-			DROPS <br><br>
-			*******<br><br>
-
-
-			MAJOR NEWS <br><br>
-			*******<br><br>
-			- If a Phase 1/2 stock drops 64% in the after hours and recovers, you can go for it at 64% again in the pre-market.%<br><br>
-
+	    <table id="highRiskSpikePrevDayTable">
+	      <tr>
+	        <th>Previous-Day Spike</th>
+	        <th>Wait for Drop (%)</th>
+	      </tr>
+	      <tr><td>25–40%</td><td>23–27%</td></tr>
+	      <tr><td>40–70%</td><td>26–30%</td></tr>
+	      <tr><td>70–100%</td><td>30–35%</td></tr>
+	      <tr><td>100–130%</td><td>35–40%</td></tr>
+	      <tr><td>130–160%</td><td>40–45%</td></tr>
+	      <tr><td>160–200%</td><td>45–50%</td></tr>
+	      <tr><td>200%+</td><td>50–55%</td></tr>
+	    </table>
     </p>
   </div>
 
-</div>
+</div> <!-- Notes modal --> 
 
 <div id="low-volume-dollar-chart-modal" class="modal" style="display: none">
 
