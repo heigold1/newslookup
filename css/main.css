@@ -354,7 +354,7 @@ li.indent{
   border-radius: 8px;
   max-width: 500px;
   width: 90%;
-  max-height: 50%;   /* shrink vertical space */
+  max-height: 100%;   /* shrink vertical space */
   overflow-y: auto;  /* scroll if table is taller */
   box-shadow: 0 4px 12px rgba(0,0,0,0.3);
 }

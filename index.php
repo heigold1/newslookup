@@ -325,13 +325,33 @@
 	        <th>Previous-Day Spike</th>
 	        <th>Wait for Drop (%)</th>
 	      </tr>
-	      <tr><td>25–40%</td><td>23–27%</td></tr>
-	      <tr><td>40–70%</td><td>26–30%</td></tr>
-	      <tr><td>70–100%</td><td>30–35%</td></tr>
-	      <tr><td>100–130%</td><td>35–40%</td></tr>
-	      <tr><td>130–160%</td><td>40–45%</td></tr>
-	      <tr><td>160–200%</td><td>45–50%</td></tr>
-	      <tr><td>200%+</td><td>50–55%</td></tr>
+				<tr><td>25–30%</td><td>25–26%</td></tr>
+				<tr><td>30–35%</td><td>26–27%</td></tr>
+				<tr><td>35–40%</td><td>27–29%</td></tr>
+
+				<tr><td>40–45%</td><td>29–31%</td></tr>
+				<tr><td>45–50%</td><td>30–32%</td></tr>
+				<tr><td>50–60%</td><td>31–33%</td></tr>
+				<tr><td>60–70%</td><td>32–34%</td></tr>
+
+				<tr><td>70–80%</td><td>34–36%</td></tr>
+				<tr><td>80–90%</td><td>35–37%</td></tr>
+				<tr><td>90–100%</td><td>36–38%</td></tr>
+
+				<tr><td>100–110%</td><td>38–40%</td></tr>
+				<tr><td>110–120%</td><td>39–41%</td></tr>
+				<tr><td>120–130%</td><td>40–42%</td></tr>
+
+				<tr><td>130–140%</td><td>41–43%</td></tr>
+				<tr><td>140–150%</td><td>42–44%</td></tr>
+				<tr><td>150–160%</td><td>43–45%</td></tr>
+
+				<tr><td>160–180%</td><td>45–47%</td></tr>
+				<tr><td>180–200%</td><td>47–49%</td></tr>
+
+				<tr><td>200–225%</td><td>49–51%</td></tr>
+				<tr><td>225–250%</td><td>51–53%</td></tr>
+				<tr><td>250%+</td><td>53–55%</td></tr>
 	    </table>
     </p>
   </div>
