@@ -1965,6 +1965,11 @@ for (var corporateSymbol in corporateActionsStocks)
         let spikePercent = parseFloat($("#day1").html().replace(/,/g, ''));
         let prevClose = parseFloat($("#yestCloseText").val());
 
+        if (isNaN($("#day1").html()))
+        {
+            alert("ERROR IN PREVIOUS SPIKE NUMBER!!!"); 
+        }
+
         if (!isNaN(spikePercent) && (spikePercent > 24)) {
 
             let priceType = "dollar";
