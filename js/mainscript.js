@@ -2008,7 +2008,7 @@ for (var corporateSymbol in corporateActionsStocks)
         }
         var day1_volume = parseFloat($("#day1_volume").html().replace(/,/g, ""));
 
-        if (!isNaN(day_1_volume) && (day1_volume >= 5.0))
+        if (!isNaN(day1_volume) && (day1_volume >= 5.0))
         {
             highRiskFlag = 1; 
             warningMessage += " ** HIGH RISK STOCK!!! ** ";
