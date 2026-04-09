@@ -1743,113 +1743,125 @@ console.log("about to playCheckTradeHalts");
 
 var corporateActionsStocks=
 {
-  "RDGT": "REVERSE SPLIT -1 TRADING DAYS AGO!!!!!!!!!",
-  "NXTS": "REVERSE SPLIT -1 TRADING DAYS AGO!!!!!!!!!",
-  "JTAI": "REVERSE SPLIT -1 TRADING DAYS AGO!!!!!!!!!",
-  "MOBX": "REVERSE SPLIT 0 TRADING DAYS AGO!!!!!!!!!",
-  "CHR": "REVERSE SPLIT 0 TRADING DAYS AGO!!!!!!!!!",
-  "XRTX": "REVERSE SPLIT 1 TRADING DAYS AGO!!!!!!!!!",
-  "WNW": "REVERSE SPLIT 1 TRADING DAYS AGO!!!!!!!!!",
-  "SKK": "REVERSE SPLIT 1 TRADING DAYS AGO!!!!!!!!!",
-  "LNKS": "REVERSE SPLIT 1 TRADING DAYS AGO!!!!!!!!!",
-  "INLF": "REVERSE SPLIT 1 TRADING DAYS AGO!!!!!!!!!",
-  "HTCR": "REVERSE SPLIT 1 TRADING DAYS AGO!!!!!!!!!",
-  "HKIT": "REVERSE SPLIT 1 TRADING DAYS AGO!!!!!!!!!",
-  "GNLN": "REVERSE SPLIT 1 TRADING DAYS AGO!!!!!!!!!",
-  "BDRX": "REVERSE SPLIT 1 TRADING DAYS AGO!!!!!!!!!",
-  "BCAB": "REVERSE SPLIT 1 TRADING DAYS AGO!!!!!!!!!",
-  "AIIO": "REVERSE SPLIT 1 TRADING DAYS AGO!!!!!!!!!",
-  "PSTV": "REVERSE SPLIT 3 TRADING DAYS AGO!!!!!!!!!",
-  "NCT": "REVERSE SPLIT 3 TRADING DAYS AGO!!!!!!!!!",
-  "VGNT": "WAS LISTED 4 TRADING DAYS AGO!!! AT LEAST 38 PERCENT!!!",
-  "UCAR": "REVERSE SPLIT 4 TRADING DAYS AGO!!!!!!!!!",
-  "HMH": "WAS LISTED 4 TRADING DAYS AGO!!! AT LEAST 38 PERCENT!!!",
-  "BARK": "REVERSE SPLIT 4 TRADING DAYS AGO!!!!!!!!!",
-  "AUUD": "REVERSE SPLIT 4 TRADING DAYS AGO!!!!!!!!!",
-  "APTV": "NEW SYMBOL AS OF 4 TRADING DAYS AGO!!! AT LEAST 38 PERCENT!!!",
-  "PAVS": "REVERSE SPLIT 5 TRADING DAYS AGO!!!!!!!!!",
-  "NINE": "WAS LISTED 5 TRADING DAYS AGO!!! AT LEAST 38 PERCENT!!!",
-  "NEXR": "SYMBOL CHANGE 5 TRADING DAYS AGO!!! 38 PERCENT!!!",
-  "MODD": "REVERSE SPLIT 5 TRADING DAYS AGO!!!!!!!!!",
-  "ITRMF": "SYMBOL CHANGE 5 TRADING DAYS AGO!!! 38 PERCENT!!!",
-  "AKTX": "REVERSE SPLIT 5 TRADING DAYS AGO!!!!!!!!!",
-  "AGL": "REVERSE SPLIT 5 TRADING DAYS AGO!!!!!!!!!",
-  "SVRN": "REVERSE SPLIT 6 TRADING DAYS AGO!!!!!!!!!",
-  "MAKO": "WAS LISTED 6 TRADING DAYS AGO!!! AT LEAST 38 PERCENT!!!",
-  "FBLG": "REVERSE SPLIT 6 TRADING DAYS AGO!!!!!!!!!",
-  "EJH": "REVERSE SPLIT 6 TRADING DAYS AGO!!!!!!!!!",
-  "ATXG": "REVERSE SPLIT 6 TRADING DAYS AGO!!!!!!!!!",
-  "TRUG": "REVERSE SPLIT 7 TRADING DAYS AGO!!!!!!!!!",
-  "LBGJ": "REVERSE SPLIT 7 TRADING DAYS AGO!!!!!!!!!",
-  "IVF": "REVERSE SPLIT 7 TRADING DAYS AGO!!!!!!!!!",
-  "CYAB": "SYMBOL CHANGE 7 TRADING DAYS AGO!!! 38 PERCENT!!!",
-  "CDT": "REVERSE SPLIT 7 TRADING DAYS AGO!!!!!!!!!",
-  "ADV": "REVERSE SPLIT 7 TRADING DAYS AGO!!!!!!!!!",
-  "RENX": "REVERSE SPLIT 8 TRADING DAYS AGO!!!!!!!!!",
-  "GLND": "SYMBOL CHANGE 8 TRADING DAYS AGO!!! 38 PERCENT!!!",
-  "CMBMF": "SYMBOL CHANGE 8 TRADING DAYS AGO!!! 38 PERCENT!!!",
-  "XTLB": "REVERSE SPLIT 9 TRADING DAYS AGO!!!!!!!!!",
-  "ONCO": "REVERSE SPLIT 9 TRADING DAYS AGO!!!!!!!!!",
-  "JAN": "WAS LISTED 9 TRADING DAYS AGO!!! AT LEAST 38 PERCENT!!!",
-  "FUBO": "REVERSE SPLIT 10 TRADING DAYS AGO!!!!!!!!!",
-  "DTCKF": "REVERSE SPLIT 21 TRADING DAYS AGO!!!!!!!!!",
-  "YYGH": "REVERSE SPLIT 11 TRADING DAYS AGO!!!!!!!!!",
-  "JDZG": "REVERSE SPLIT 11 TRADING DAYS AGO!!!!!!!!!",
-  "FCHL": "REVERSE SPLIT 11 TRADING DAYS AGO!!!!!!!!!",
-  "EUDA": "REVERSE SPLIT 11 TRADING DAYS AGO!!!!!!!!!",
-  "AZI": "REVERSE SPLIT 11 TRADING DAYS AGO!!!!!!!!!",
-  "AREB": "REVERSE SPLIT 11 TRADING DAYS AGO!!!!!!!!!",
-  "ORGN": "REVERSE SPLIT 12 TRADING DAYS AGO!!!!!!!!!",
-  "MRLN": "SYMBOL CHANGE 12 TRADING DAYS AGO!!! 38 PERCENT!!!",
-  "KRAQ": "SYMBOL CHANGE 12 TRADING DAYS AGO!!! 38 PERCENT!!!",
-  "HQ": "WAS LISTED 12 TRADING DAYS AGO!!! AT LEAST 38 PERCENT!!!",
-  "DFMC": "WAS LISTED 12 TRADING DAYS AGO!!! AT LEAST 38 PERCENT!!!",
-  "CIIT": "REVERSE SPLIT 12 TRADING DAYS AGO!!!!!!!!!",
-  "UOKAF": "REVERSE SPLIT 16 TRADING DAYS AGO!!!!!!!!!",
-  "GIX": "SYMBOL CHANGE 13 TRADING DAYS AGO!!! 38 PERCENT!!!",
-  "ZENVF": "SYMBOL CHANGE 14 TRADING DAYS AGO!!! 38 PERCENT!!!",
-  "XSLL": "SYMBOL CHANGE 14 TRADING DAYS AGO!!! 38 PERCENT!!!",
-  "COOK": "REVERSE SPLIT 14 TRADING DAYS AGO!!!!!!!!!",
-  "ULYX": "SYMBOL CHANGE 15 TRADING DAYS AGO!!! 38 PERCENT!!!",
-  "SWMR": "WAS LISTED 15 TRADING DAYS AGO!!! AT LEAST 38 PERCENT!!!",
-  "ARCI": "SYMBOL CHANGE 15 TRADING DAYS AGO!!! 38 PERCENT!!!",
-  "AIB": "WAS LISTED 15 TRADING DAYS AGO!!! AT LEAST 38 PERCENT!!!",
-  "ZJYL": "REVERSE SPLIT 16 TRADING DAYS AGO!!!!!!!!!",
-  "XLO": "REVERSE SPLIT 16 TRADING DAYS AGO!!!!!!!!!",
-  "VIVO": "SYMBOL CHANGE 16 TRADING DAYS AGO!!! 38 PERCENT!!!",
-  "SKYQ": "REVERSE SPLIT 16 TRADING DAYS AGO!!!!!!!!!",
-  "NIVF": "REVERSE SPLIT 16 TRADING DAYS AGO!!!!!!!!!",
-  "MASK": "REVERSE SPLIT 16 TRADING DAYS AGO!!!!!!!!!",
-  "HBIO": "REVERSE SPLIT 16 TRADING DAYS AGO!!!!!!!!!",
-  "FNUC": "SYMBOL CHANGE 16 TRADING DAYS AGO!!! 38 PERCENT!!!",
-  "DXST": "REVERSE SPLIT 16 TRADING DAYS AGO!!!!!!!!!",
-  "CLIR": "REVERSE SPLIT 16 TRADING DAYS AGO!!!!!!!!!",
-  "ALOV": "SYMBOL CHANGE 16 TRADING DAYS AGO!!! 38 PERCENT!!!",
-  "STFS": "REVERSE SPLIT 17 TRADING DAYS AGO!!!!!!!!!",
-  "PED": "REVERSE SPLIT 17 TRADING DAYS AGO!!!!!!!!!",
-  "MDA": "WAS LISTED 17 TRADING DAYS AGO!!! AT LEAST 38 PERCENT!!!",
-  "KXIN": "REVERSE SPLIT 17 TRADING DAYS AGO!!!!!!!!!",
-  "BHATF": "REVERSE SPLIT 21 TRADING DAYS AGO!!!!!!!!!",
-  "ZNB": "REVERSE SPLIT 18 TRADING DAYS AGO!!!!!!!!!",
-  "QUCY": "SYMBOL CHANGE 18 TRADING DAYS AGO!!! 38 PERCENT!!!",
-  "PAYP": "WAS LISTED 18 TRADING DAYS AGO!!! AT LEAST 38 PERCENT!!!",
-  "GRML": "SYMBOL CHANGE 18 TRADING DAYS AGO!!! 38 PERCENT!!!",
-  "GMEX": "SYMBOL CHANGE 18 TRADING DAYS AGO!!! 38 PERCENT!!!",
-  "ELPW": "REVERSE SPLIT 18 TRADING DAYS AGO!!!!!!!!!",
-  "DMRA": "SYMBOL CHANGE 18 TRADING DAYS AGO!!! 38 PERCENT!!!",
-  "WLDS": "REVERSE SPLIT 19 TRADING DAYS AGO!!!!!!!!!",
-  "HSLV": "WAS LISTED 19 TRADING DAYS AGO!!! AT LEAST 38 PERCENT!!!",
-  "FLNA": "SYMBOL CHANGE 19 TRADING DAYS AGO!!! 38 PERCENT!!!",
-  "OIO": "SYMBOL CHANGE 20 TRADING DAYS AGO!!! 38 PERCENT!!!",
-  "KIDZ": "REVERSE SPLIT 20 TRADING DAYS AGO!!!!!!!!!",
-  "ELAB": "REVERSE SPLIT 20 TRADING DAYS AGO!!!!!!!!!",
-  "CAST": "WAS LISTED 20 TRADING DAYS AGO!!! AT LEAST 38 PERCENT!!!",
-  "ARTL": "REVERSE SPLIT 20 TRADING DAYS AGO!!!!!!!!!",
-  "XFLH": "SYMBOL CHANGE 21 TRADING DAYS AGO!!! 38 PERCENT!!!",
-  "RVPH": "REVERSE SPLIT 21 TRADING DAYS AGO!!!!!!!!!",
-  "DCOY": "REVERSE SPLIT 21 TRADING DAYS AGO!!!!!!!!!",
-  "ADTX": "REVERSE SPLIT 21 TRADING DAYS AGO!!!!!!!!!"
+  "RUBI": "REVERSE SPLIT 0 TRADING DAYS AGO!!!!!!!!!",
+  "TMCR": "WAS LISTED 1 TRADING DAYS AGO!!! AT LEAST 38 PERCENT!!!",
+  "RDGT": "REVERSE SPLIT 1 TRADING DAYS AGO!!!!!!!!!",
+  "NXTS": "REVERSE SPLIT 1 TRADING DAYS AGO!!!!!!!!!",
+  "JTAI": "REVERSE SPLIT 1 TRADING DAYS AGO!!!!!!!!!",
+  "OGC": "WAS LISTED 2 TRADING DAYS AGO!!! AT LEAST 38 PERCENT!!!",
+  "MOBX": "REVERSE SPLIT 2 TRADING DAYS AGO!!!!!!!!!",
+  "DCBG": "SYMBOL CHANGE 2 TRADING DAYS AGO!!! 38 PERCENT!!!",
+  "CHR": "REVERSE SPLIT 2 TRADING DAYS AGO!!!!!!!!!",
+  "XRTX": "REVERSE SPLIT 3 TRADING DAYS AGO!!!!!!!!!",
+  "WNW": "REVERSE SPLIT 3 TRADING DAYS AGO!!!!!!!!!",
+  "SKK": "REVERSE SPLIT 3 TRADING DAYS AGO!!!!!!!!!",
+  "SDEV": "SYMBOL CHANGE 3 TRADING DAYS AGO!!! 38 PERCENT!!!",
+  "LNKS": "REVERSE SPLIT 3 TRADING DAYS AGO!!!!!!!!!",
+  "KEEL": "SYMBOL CHANGE 3 TRADING DAYS AGO!!! 38 PERCENT!!!",
+  "IOBTQ": "SYMBOL CHANGE 3 TRADING DAYS AGO!!! 38 PERCENT!!!",
+  "INLF": "REVERSE SPLIT 3 TRADING DAYS AGO!!!!!!!!!",
+  "HTCR": "REVERSE SPLIT 3 TRADING DAYS AGO!!!!!!!!!",
+  "HKIT": "REVERSE SPLIT 3 TRADING DAYS AGO!!!!!!!!!",
+  "GNLN": "REVERSE SPLIT 3 TRADING DAYS AGO!!!!!!!!!",
+  "BDRX": "REVERSE SPLIT 3 TRADING DAYS AGO!!!!!!!!!",
+  "BCAB": "REVERSE SPLIT 3 TRADING DAYS AGO!!!!!!!!!",
+  "AIIO": "REVERSE SPLIT 3 TRADING DAYS AGO!!!!!!!!!",
+  "QHUOY": "SYMBOL CHANGE 5 TRADING DAYS AGO!!! 38 PERCENT!!!",
+  "PSTV": "REVERSE SPLIT 5 TRADING DAYS AGO!!!!!!!!!",
+  "NCT": "REVERSE SPLIT 5 TRADING DAYS AGO!!!!!!!!!",
+  "VGNT": "WAS LISTED 6 TRADING DAYS AGO!!! AT LEAST 38 PERCENT!!!",
+  "UCAR": "REVERSE SPLIT 6 TRADING DAYS AGO!!!!!!!!!",
+  "HMH": "WAS LISTED 6 TRADING DAYS AGO!!! AT LEAST 38 PERCENT!!!",
+  "BARK": "REVERSE SPLIT 6 TRADING DAYS AGO!!!!!!!!!",
+  "AUUD": "REVERSE SPLIT 6 TRADING DAYS AGO!!!!!!!!!",
+  "APTV": "NEW SYMBOL AS OF 6 TRADING DAYS AGO!!! AT LEAST 38 PERCENT!!!",
+  "PAVS": "REVERSE SPLIT 7 TRADING DAYS AGO!!!!!!!!!",
+  "NINE": "WAS LISTED 7 TRADING DAYS AGO!!! AT LEAST 38 PERCENT!!!",
+  "NEXR": "SYMBOL CHANGE 7 TRADING DAYS AGO!!! 38 PERCENT!!!",
+  "MODD": "REVERSE SPLIT 7 TRADING DAYS AGO!!!!!!!!!",
+  "ITRMF": "SYMBOL CHANGE 7 TRADING DAYS AGO!!! 38 PERCENT!!!",
+  "BBUC": "WAS LISTED 7 TRADING DAYS AGO!!! AT LEAST 38 PERCENT!!!",
+  "AKTX": "REVERSE SPLIT 7 TRADING DAYS AGO!!!!!!!!!",
+  "AGL": "REVERSE SPLIT 7 TRADING DAYS AGO!!!!!!!!!",
+  "SVRN": "REVERSE SPLIT 8 TRADING DAYS AGO!!!!!!!!!",
+  "MAKO": "WAS LISTED 8 TRADING DAYS AGO!!! AT LEAST 38 PERCENT!!!",
+  "HCIC": "SYMBOL CHANGE 8 TRADING DAYS AGO!!! 38 PERCENT!!!",
+  "FBLG": "REVERSE SPLIT 8 TRADING DAYS AGO!!!!!!!!!",
+  "EJH": "REVERSE SPLIT 8 TRADING DAYS AGO!!!!!!!!!",
+  "ATXG": "REVERSE SPLIT 8 TRADING DAYS AGO!!!!!!!!!",
+  "TRUG": "REVERSE SPLIT 9 TRADING DAYS AGO!!!!!!!!!",
+  "LBGJ": "REVERSE SPLIT 9 TRADING DAYS AGO!!!!!!!!!",
+  "IVF": "REVERSE SPLIT 9 TRADING DAYS AGO!!!!!!!!!",
+  "CYAB": "SYMBOL CHANGE 9 TRADING DAYS AGO!!! 38 PERCENT!!!",
+  "CDT": "REVERSE SPLIT 9 TRADING DAYS AGO!!!!!!!!!",
+  "ADV": "REVERSE SPLIT 9 TRADING DAYS AGO!!!!!!!!!",
+  "RENX": "REVERSE SPLIT 10 TRADING DAYS AGO!!!!!!!!!",
+  "GLND": "SYMBOL CHANGE 10 TRADING DAYS AGO!!! 38 PERCENT!!!",
+  "CMBMF": "SYMBOL CHANGE 10 TRADING DAYS AGO!!! 38 PERCENT!!!",
+  "XTLB": "REVERSE SPLIT 11 TRADING DAYS AGO!!!!!!!!!",
+  "ONCO": "REVERSE SPLIT 11 TRADING DAYS AGO!!!!!!!!!",
+  "JAN": "WAS LISTED 11 TRADING DAYS AGO!!! AT LEAST 38 PERCENT!!!",
+  "FUBO": "REVERSE SPLIT 12 TRADING DAYS AGO!!!!!!!!!",
+  "DTCKF": "REVERSE SPLIT 23 TRADING DAYS AGO!!!!!!!!!",
+  "YYGH": "REVERSE SPLIT 13 TRADING DAYS AGO!!!!!!!!!",
+  "JDZG": "REVERSE SPLIT 13 TRADING DAYS AGO!!!!!!!!!",
+  "FCHL": "REVERSE SPLIT 13 TRADING DAYS AGO!!!!!!!!!",
+  "EUDA": "REVERSE SPLIT 13 TRADING DAYS AGO!!!!!!!!!",
+  "AZI": "REVERSE SPLIT 13 TRADING DAYS AGO!!!!!!!!!",
+  "AREB": "REVERSE SPLIT 13 TRADING DAYS AGO!!!!!!!!!",
+  "ORGN": "REVERSE SPLIT 14 TRADING DAYS AGO!!!!!!!!!",
+  "MRLN": "SYMBOL CHANGE 14 TRADING DAYS AGO!!! 38 PERCENT!!!",
+  "KRAQ": "SYMBOL CHANGE 14 TRADING DAYS AGO!!! 38 PERCENT!!!",
+  "HQ": "WAS LISTED 14 TRADING DAYS AGO!!! AT LEAST 38 PERCENT!!!",
+  "GMTL": "WAS LISTED 14 TRADING DAYS AGO!!! AT LEAST 38 PERCENT!!!",
+  "DFMC": "WAS LISTED 14 TRADING DAYS AGO!!! AT LEAST 38 PERCENT!!!",
+  "CIIT": "REVERSE SPLIT 14 TRADING DAYS AGO!!!!!!!!!",
+  "UOKAF": "REVERSE SPLIT 18 TRADING DAYS AGO!!!!!!!!!",
+  "GIX": "SYMBOL CHANGE 15 TRADING DAYS AGO!!! 38 PERCENT!!!",
+  "ZENVF": "SYMBOL CHANGE 16 TRADING DAYS AGO!!! 38 PERCENT!!!",
+  "XSLL": "SYMBOL CHANGE 16 TRADING DAYS AGO!!! 38 PERCENT!!!",
+  "COOK": "REVERSE SPLIT 16 TRADING DAYS AGO!!!!!!!!!",
+  "ULYX": "SYMBOL CHANGE 17 TRADING DAYS AGO!!! 38 PERCENT!!!",
+  "SWMR": "WAS LISTED 17 TRADING DAYS AGO!!! AT LEAST 38 PERCENT!!!",
+  "ARCI": "SYMBOL CHANGE 17 TRADING DAYS AGO!!! 38 PERCENT!!!",
+  "AIB": "WAS LISTED 17 TRADING DAYS AGO!!! AT LEAST 38 PERCENT!!!",
+  "ZJYL": "REVERSE SPLIT 18 TRADING DAYS AGO!!!!!!!!!",
+  "XLO": "REVERSE SPLIT 18 TRADING DAYS AGO!!!!!!!!!",
+  "VIVO": "SYMBOL CHANGE 18 TRADING DAYS AGO!!! 38 PERCENT!!!",
+  "SKYQ": "REVERSE SPLIT 18 TRADING DAYS AGO!!!!!!!!!",
+  "NIVF": "REVERSE SPLIT 18 TRADING DAYS AGO!!!!!!!!!",
+  "MASK": "REVERSE SPLIT 18 TRADING DAYS AGO!!!!!!!!!",
+  "HBIO": "REVERSE SPLIT 18 TRADING DAYS AGO!!!!!!!!!",
+  "FNUC": "SYMBOL CHANGE 18 TRADING DAYS AGO!!! 38 PERCENT!!!",
+  "DXST": "REVERSE SPLIT 18 TRADING DAYS AGO!!!!!!!!!",
+  "CLIR": "REVERSE SPLIT 18 TRADING DAYS AGO!!!!!!!!!",
+  "ALOV": "SYMBOL CHANGE 18 TRADING DAYS AGO!!! 38 PERCENT!!!",
+  "STFS": "REVERSE SPLIT 19 TRADING DAYS AGO!!!!!!!!!",
+  "PED": "REVERSE SPLIT 19 TRADING DAYS AGO!!!!!!!!!",
+  "MDA": "WAS LISTED 19 TRADING DAYS AGO!!! AT LEAST 38 PERCENT!!!",
+  "KXIN": "REVERSE SPLIT 19 TRADING DAYS AGO!!!!!!!!!",
+  "BHATF": "REVERSE SPLIT 23 TRADING DAYS AGO!!!!!!!!!",
+  "ZNB": "REVERSE SPLIT 20 TRADING DAYS AGO!!!!!!!!!",
+  "QUCY": "SYMBOL CHANGE 20 TRADING DAYS AGO!!! 38 PERCENT!!!",
+  "PAYP": "WAS LISTED 20 TRADING DAYS AGO!!! AT LEAST 38 PERCENT!!!",
+  "GRML": "SYMBOL CHANGE 20 TRADING DAYS AGO!!! 38 PERCENT!!!",
+  "GMEX": "SYMBOL CHANGE 20 TRADING DAYS AGO!!! 38 PERCENT!!!",
+  "ELPW": "REVERSE SPLIT 20 TRADING DAYS AGO!!!!!!!!!",
+  "DMRA": "SYMBOL CHANGE 20 TRADING DAYS AGO!!! 38 PERCENT!!!",
+  "WLDS": "REVERSE SPLIT 21 TRADING DAYS AGO!!!!!!!!!",
+  "HSLV": "WAS LISTED 21 TRADING DAYS AGO!!! AT LEAST 38 PERCENT!!!",
+  "FLNA": "SYMBOL CHANGE 21 TRADING DAYS AGO!!! 38 PERCENT!!!",
+  "OIO": "SYMBOL CHANGE 22 TRADING DAYS AGO!!! 38 PERCENT!!!",
+  "KIDZ": "REVERSE SPLIT 22 TRADING DAYS AGO!!!!!!!!!",
+  "ELAB": "REVERSE SPLIT 22 TRADING DAYS AGO!!!!!!!!!",
+  "CAST": "WAS LISTED 22 TRADING DAYS AGO!!! AT LEAST 38 PERCENT!!!",
+  "ARTL": "REVERSE SPLIT 22 TRADING DAYS AGO!!!!!!!!!",
+  "XFLH": "SYMBOL CHANGE 23 TRADING DAYS AGO!!! 38 PERCENT!!!",
+  "RVPH": "REVERSE SPLIT 23 TRADING DAYS AGO!!!!!!!!!",
+  "DCOY": "REVERSE SPLIT 23 TRADING DAYS AGO!!!!!!!!!",
+  "ADTX": "REVERSE SPLIT 23 TRADING DAYS AGO!!!!!!!!!"
 };
+
 
 
 for (var corporateSymbol in corporateActionsStocks)
@@ -1937,14 +1949,14 @@ for (var corporateSymbol in corporateActionsStocks)
 
         var highRiskFlag = 0; 
 
-        if (day1 > 21)
+        if (!isNaN(day1) && (day1 > 21)) 
         {
             highRiskFlag = 1; 
             warningMessage += " ** HIGH RISK STOCK!!! ** ";
             $("#day1").css({'background-color' : 'red', 'font-size' : '17px'});
             $("#day1").fadeOut(300).fadeIn(300).fadeOut(300).fadeIn(300).fadeOut(300).fadeIn(300).fadeOut(300).fadeIn(300).fadeOut(300).fadeIn(300).fadeOut(300).fadeIn(300).fadeOut(300).fadeIn(300).fadeOut(300).fadeIn(300);
         }
-        else if (day1 < -15)
+        else if (!isNaN(day1) && (day1 < -15))
         {
             $("#day1").css({'background-color' : 'yellow', 'font-size' : '17px'});
             $("#day1").fadeOut(300).fadeIn(300).fadeOut(300).fadeIn(300).fadeOut(300).fadeIn(300).fadeOut(300).fadeIn(300).fadeOut(300).fadeIn(300).fadeOut(300).fadeIn(300).fadeOut(300).fadeIn(300).fadeOut(300).fadeIn(300);
@@ -1953,7 +1965,7 @@ for (var corporateSymbol in corporateActionsStocks)
         let spikePercent = parseFloat($("#day1").html().replace(/,/g, ''));
         let prevClose = parseFloat($("#yestCloseText").val());
 
-        if (spikePercent > 24) {
+        if (!isNaN(spikePercent) && (spikePercent > 24)) {
 
             let priceType = "dollar";
 
@@ -1977,26 +1989,26 @@ for (var corporateSymbol in corporateActionsStocks)
             $("#day1").attr("title", tooltipText);
         }
 
-        if (day2 > 15)
+        if (!isNaN(day2) && (day2 > 15))
         {
             $("#day2").css({'background-color' : 'red', 'font-size' : '17px'});
         }
-        else if (day2 < -15)
+        else if (!isNaN(day2) && (day2 < -15))
         {
             $("#day2").css({'background-color' : 'yellow', 'font-size' : '17px'});
         }
 
-        if (day3 > 15)
+        if (!isNaN(day3) && (day3 > 15))
         {
             $("#day3").css({'background-color' : 'red', 'font-size' : '17px'});
         }
-        else if (day3 < -15)
+        else if (!isNaN(day3) && (day3 < -15))
         {
             $("#day3").css({'background-color' : 'yellow', 'font-size' : '17px'});
         }
         var day1_volume = parseFloat($("#day1_volume").html().replace(/,/g, ""));
 
-        if (day1_volume >= 5.0)
+        if (!isNaN(day_1_volume) && (day1_volume >= 5.0))
         {
             highRiskFlag = 1; 
             warningMessage += " ** HIGH RISK STOCK!!! ** ";
@@ -2011,54 +2023,37 @@ for (var corporateSymbol in corporateActionsStocks)
 //             playHighRiskStock(); 
         }
 
-        if ((day1 > 1.00) && (day2 > 1.00) && (day3 > 1.00))
-        {
-//           alert("UPWARD TRAJECTORY!!! 19%!!!!"); 
-// Taking this out for now, because now that I am checking the TMX 3-month chart for L-bars, I will
-// see this when doing that check.           
-        }
-
-
-        if ((day1 < 1.00) && (day2 < 1.00) && (day3 < 1.00))
-        {
-//          alert("DOWNWARD TRAJECTORY!!!"); 
-// Since I put it in the pop-ups now, to check the TMX 3-month chart for L-bars, I'm going to temporarily take this out for now.
-// since checking the TMX 3-month for L-bars will tell me if there is a downward trajectory. 
-
-        }
-
-
         var day1_low = parseFloat($("#day1_low").html());
         var day2_low = parseFloat($("#day2_low").html());
         var day3_low = parseFloat($("#day3_low").html());
 
-        if (day1_low < -10)
+        if (!isNaN(day1_low) && (day1_low < -10))
         {
             warningMessage += " ** LOW DROP STOCK!!! ** ";
             $("#day1_low").css({'background-color' : 'red', 'font-size' : '19px'});
             $("#day1_low").fadeOut(300).fadeIn(300).fadeOut(300).fadeIn(300).fadeOut(300).fadeIn(300).fadeOut(300).fadeIn(300).fadeOut(300).fadeIn(300).fadeOut(300).fadeIn(300).fadeOut(300).fadeIn(300).fadeOut(300).fadeIn(300);
         }
-        else if (day1_low > 0)
+        else if (!isNaN(day1_low) && (day1_low > 0))
         {
             $("#day1_low").css({'background-color' : '#00ff00', 'font-size' : '19px'});
         }  
 
-        if (day2_low < -10)
+        if (!isNaN(day2_low) && (day2_low < -10))
         {
             warningMessage += " ** LOW DROP STOCK!!! ** ";
             $("#day2_low").css({'background-color' : 'red', 'font-size' : '19px'});
         }
-        else if (day2_low > 0)
+        else if (!isNaN(day2_low) && (day2_low > 0))
         {
             $("#day2_low").css({'background-color' : '#00ff00', 'font-size' : '19px'});
         }  
 
-        if (day3_low < -10)
+        if (!isNaN(day3_low) && (day3_low < -10))
         {
             warningMessage += " ** LOW DROP STOCK!!! ** ";
             $("#day3_low").css({'background-color' : 'red', 'font-size' : '19px'});
         }
-        else if (day3_low > 0)
+        else if (!isNaN(day3_low) && (day3_low > 0))
         {
             $("#day3_low").css({'background-color' : '#00ff00', 'font-size' : '19px'});
         }  

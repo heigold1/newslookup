@@ -110,11 +110,29 @@ if (!empty($fullJSON->data[0]->adj_volume) && !empty($fullJSON->data[0]->volume)
 $returnArray['yest_volume'] = $yestVol;
 
 if (isset($fullJSON->data[1]->close)) {
-    $day_1_percentage = (($fullJSON->data[0]->close - $fullJSON->data[1]->close) / $fullJSON->data[1]->close) * 100;
-    $day_1_percentage_low = (($fullJSON->data[0]->low - $fullJSON->data[1]->close) / $fullJSON->data[1]->close) * 100;
 
-    $returnArray['day_1'] = number_format((float)$day_1_percentage, 2, '.', '');
-    $returnArray['day_1_low'] = number_format((float)$day_1_percentage_low, 2, '.', '');
+    if ( $fullJSON->data[1]->close != 0.0)
+    {
+        $day_1_percentage = (($fullJSON->data[0]->close - $fullJSON->data[1]->close) / $fullJSON->data[1]->close) * 100;
+        $day_1_percentage_low = (($fullJSON->data[0]->low - $fullJSON->data[1]->close) / $fullJSON->data[1]->close) * 100;
+    }
+    else 
+    {
+        $day_1_percentage = "DV0"; 
+        $day_1_percentage_low = "DV0"; 
+    }
+
+    if ($day_1_percentage === "DV0") {
+        $returnArray['day_1'] = "DV0";
+    } else {
+        $returnArray['day_1'] = number_format((float)$day_1_percentage, 2, '.', '');
+    }
+
+    if ($day_1_percentage_low === "DV0") {
+        $returnArray['day_1_low'] = "DV0";
+    } else {
+        $returnArray['day_1_low'] = number_format((float)$day_1_percentage_low, 2, '.', '');
+    }
 
     // Calculate day_1_volume using both adj_volume and volume
     $prevVol = 0; // previous day's volume (data[1])
@@ -162,8 +180,29 @@ if (isset($fullJSON->data[1]->close)) {
 
 
 if (isset($fullJSON->data[2]->close)) {
-    $day_2_percentage = (($fullJSON->data[1]->close - $fullJSON->data[2]->close) / $fullJSON->data[2]->close) * 100;
-    $day_2_percentage_low = (($fullJSON->data[1]->low - $fullJSON->data[2]->close) / $fullJSON->data[2]->close) * 100;
+
+    if ($fullJSON->data[2]->close != 0.0)
+    {
+        $day_2_percentage = (($fullJSON->data[1]->close - $fullJSON->data[2]->close) / $fullJSON->data[2]->close) * 100;
+        $day_2_percentage_low = (($fullJSON->data[1]->low - $fullJSON->data[2]->close) / $fullJSON->data[2]->close) * 100;
+    }        
+    else 
+    {
+        $day_2_percentage = "DV0"; 
+        $day_2_percentage_low = "DV0"; 
+    }
+
+    if ($day_2_percentage === "DV0") {
+        $returnArray['day_2'] = "DV0";
+    } else {
+        $returnArray['day_2'] = number_format((float)$day_2_percentage, 2, '.', '');
+    }
+
+    if ($day_2_percentage_low === "DV0") {
+        $returnArray['day_2_low'] = "DV0";
+    } else {
+        $returnArray['day_2_low'] = number_format((float)$day_2_percentage_low, 2, '.', '');
+    }
 
     $returnArray['day_2'] = number_format((float)$day_2_percentage, 2, '.', '');
     $returnArray['day_2_low'] = number_format((float)$day_2_percentage_low, 2, '.', '');
@@ -205,8 +244,29 @@ if (isset($fullJSON->data[2]->close)) {
 
 
 if (isset($fullJSON->data[3]->close)) {
-    $day_3_percentage = (($fullJSON->data[2]->close - $fullJSON->data[3]->close) / $fullJSON->data[3]->close) * 100;
-    $day_3_percentage_low = (($fullJSON->data[2]->low - $fullJSON->data[3]->close) / $fullJSON->data[3]->close) * 100;
+
+    if ($fullJSON->data[3]->close != 0.0)
+    {
+        $day_3_percentage = (($fullJSON->data[2]->close - $fullJSON->data[3]->close) / $fullJSON->data[3]->close) * 100;
+        $day_3_percentage_low = (($fullJSON->data[2]->low - $fullJSON->data[3]->close) / $fullJSON->data[3]->close) * 100;
+    }
+    else 
+    {
+        $day_3_percentage = "DV0";  
+        $day_3_percentage_low = "DV0"; 
+    }
+
+    if ($day_3_percentage === "DV0") {
+        $returnArray['day_3'] = "DV0";
+    } else {
+        $returnArray['day_3'] = number_format((float)$day_3_percentage, 2, '.', '');
+    }
+
+    if ($day_3_percentage_low === "DV0") {
+        $returnArray['day_3_low'] = "DV0";
+    } else {
+        $returnArray['day_3_low'] = number_format((float)$day_3_percentage_low, 2, '.', '');
+    }
 
     $returnArray['day_3'] = number_format((float)$day_3_percentage, 2, '.', '');
     $returnArray['day_3_low'] = number_format((float)$day_3_percentage_low, 2, '.', '');
@@ -246,8 +306,29 @@ if (isset($fullJSON->data[3]->close)) {
 
 
 if (isset($fullJSON->data[4]->close)) {
-    $day_4_percentage = (($fullJSON->data[3]->close - $fullJSON->data[4]->close) / $fullJSON->data[4]->close) * 100;
-    $day_4_percentage_low = (($fullJSON->data[3]->low - $fullJSON->data[4]->close) / $fullJSON->data[4]->close) * 100;
+
+    if ($fullJSON->data[4]->close != 0.0)
+    {
+        $day_4_percentage = (($fullJSON->data[3]->close - $fullJSON->data[4]->close) / $fullJSON->data[4]->close) * 100;
+        $day_4_percentage_low = (($fullJSON->data[3]->low - $fullJSON->data[4]->close) / $fullJSON->data[4]->close) * 100;
+    }
+    else
+    {        
+        $day_4_percentage = "DV0"; 
+        $day_4_percentage_low = "DV0"; 
+    }
+
+    if ($day_4_percentage === "DV0") {
+        $returnArray['day_4'] = "DV0";
+    } else {
+        $returnArray['day_4'] = number_format((float)$day_4_percentage, 2, '.', '');
+    }
+
+    if ($day_4_percentage_low === "DV0") {
+        $returnArray['day_4_low'] = "DV0";
+    } else {
+        $returnArray['day_4_low'] = number_format((float)$day_4_percentage_low, 2, '.', '');
+    }
 
     $returnArray['day_4'] = number_format((float)$day_4_percentage, 2, '.', '');
     $returnArray['day_4_low'] = number_format((float)$day_4_percentage_low, 2, '.', '');
@@ -287,8 +368,29 @@ if (isset($fullJSON->data[4]->close)) {
 
 
 if (isset($fullJSON->data[5]->close)) {
-    $day_5_percentage = (($fullJSON->data[4]->close - $fullJSON->data[5]->close) / $fullJSON->data[5]->close) * 100;
-    $day_5_percentage_low = (($fullJSON->data[4]->low - $fullJSON->data[5]->close) / $fullJSON->data[5]->close) * 100;
+
+    if ($fullJSON->data[5]->close != 0.0)
+    {
+        $day_5_percentage = (($fullJSON->data[4]->close - $fullJSON->data[5]->close) / $fullJSON->data[5]->close) * 100;
+        $day_5_percentage_low = (($fullJSON->data[4]->low - $fullJSON->data[5]->close) / $fullJSON->data[5]->close) * 100;
+    }
+    else 
+    {
+        $day_5_percentage = "DV0"; 
+        $day_5_percentage_low = "DV0"; 
+    }
+
+    if ($day_5_percentage === "DV0") {
+        $returnArray['day_5'] = "DV0";
+    } else {
+        $returnArray['day_5'] = number_format((float)$day_5_percentage, 2, '.', '');
+    }
+
+    if ($day_5_percentage_low === "DV0") {
+        $returnArray['day_5_low'] = "DV0";
+    } else {
+        $returnArray['day_5_low'] = number_format((float)$day_5_percentage_low, 2, '.', '');
+    }
 
     $returnArray['day_5'] = number_format((float)$day_5_percentage, 2, '.', '');
     $returnArray['day_5_low'] = number_format((float)$day_5_percentage_low, 2, '.', '');
