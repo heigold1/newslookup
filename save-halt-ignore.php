@@ -34,7 +34,7 @@ if (!isset($data['symbol']) || empty($data['symbol'])) {
 $symbol = strtoupper(trim($data['symbol']));
 
 // Optional: basic validation (only letters, numbers, dot)
-if (!preg_match('/^[A-Z0-9\.]+$/', $symbol)) {
+if (!preg_match('/^[A-Z0-9\.+]+$/', $symbol)) {
     echo json_encode(['status' => 'error', 'message' => 'Invalid symbol format']);
     exit;
 }
