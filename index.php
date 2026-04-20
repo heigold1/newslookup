@@ -71,7 +71,7 @@
 									<input id="asian_stocks" type="submit" value="84.5%">
 								</span>
 								<span>
-									<input id="asian_early" type="submit" value="81.5%">
+									<input id="asian_early" type="submit" value="80.0%">
 								</span>
 								<label class="historical_data_label_thin">&nbsp;</label>
 								<span>
