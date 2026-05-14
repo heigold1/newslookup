@@ -14,7 +14,7 @@ $secCompanyName = preg_replace("/<.*?>/", "", $secCompanyName);
 $cikNumber = $_GET['cikNumber']; 
 $checkSec = $_GET['checkSec']; 
 
-$yesterdayDays = 1;  
+$yesterdayDays = 1;
 
 fopen("cookies.txt", "w");
 
@@ -531,7 +531,7 @@ function getStreetInsider($symbol, $yesterdayDays)
             $newsTitle = preg_replace('/nasdaq rejects(.*?)listing/i', '<span style="font-size: 12px; background-color:red; color:black"><b>Nasdaq rejects $1 listing</span> </b>&nbsp;', $newsTitle);
             $newsTitle = preg_replace('/ announces(.*?)offering/i', '<span style="font-size: 35px; background-color:red; color:black"><b> ANNOUNCES $1 OFFERING </b></span> ', $newsTitle);
 
-            $streetInsiderNews .=  " ><a target='_blank' href='$feedItem->link'> " . $publicationDate . " " . $publicationTime . " - <br>" . $newsTitle . "</a></li>";
+            $streetInsiderNews .= " ><a target='_blank' href='$feedItem->link'> " . $publicationDate . " " . $publicationTime . " - <br>" . $newsTitle . "</a> <button onclick=\"prepareChatGPTEarn('$feedItem->link')\">EARN</button></li>";
 
             $previousNewsTitle = $currentNewsTitle; 
         } // looping through each news channel item 
