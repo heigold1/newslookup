@@ -74,7 +74,7 @@ function prepareChatGPTEarn(link) {
 
     var message = `Can you go through the following article and A) Tell me if it is an earnings net income or loss, and B) If it is an earnings net income, look at other factors about the company and tell me if my 40% entry is safe, or if there are red flags that suggest that I should go lower than 40% (i.e 52.5%)?  The link is ${link}
 
-Just to brief you - we already know that the reason why an earnings net income stock is dropping is because they EPS wasn't as high as expected.  We understand this go into those at 40%.  I need to know of any other red flags that may affect the price. For example, the cut their dividends $0.15/share to $0.01/share, etc... 
+Just to brief you - we already know that the reason why an earnings net income stock is dropping is because they EPS wasn't as high as expected.  We understand this go into those at 40%.  I need to know of any other red flags that may affect the price. For example, the cut their dividends from $0.15/share to $0.01/share, mass layoffs, guidance problems, delisting risk, etc... 
 
 Also - for earnings net loss - we just default those to 50%.  
 
