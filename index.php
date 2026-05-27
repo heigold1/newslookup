@@ -260,7 +260,7 @@
 								<!-- <span id="low-volume-dollar-chart" style="background-color: #00ff00;">Dollar</span> --> 
 								<!-- <span id="low-volume-penny-chart" style="background-color: #00ff00;">Penny</span> --> &nbsp;
 								<button onclick='preparePinkSheetChatGPT(<?php echo json_encode($_GET["symbol"]); ?>, $("#yestCloseText").val())'>PinkGPT</button>
-								<input type='textarea' id='pinkSheetChatGPT' style='width: 5px !important'> &nbsp; 
+								<textarea id="prepareChatGPT" style="width:1px; height:1px;"></textarea>
 								<span id="notes" style="background-color: #00ff00;">Hi-Ri</span>
 
 						</td>

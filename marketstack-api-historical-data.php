@@ -438,7 +438,7 @@ if (isset($fullJSON->pagination->count))
     $latestDay = strtotime($fullJSON->data[$latestDay]->date); 
     $daysOld = dateDifference($latestDay); 
 
-    if ($daysOld < 30)
+    if ($daysOld < 22)
     {
         $returnArray['new_stock'] = true; 
     }
