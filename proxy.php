@@ -7,7 +7,7 @@ require_once("country-codes.php");
 
 libxml_use_internal_errors(true);
 
-$yesterdayDays = 4;
+$yesterdayDays = 1;
 
 error_reporting(1);
 //ini_set('display_errors', 1);
@@ -1410,7 +1410,7 @@ die();
             $newsTitle = preg_replace('/ withdrawal(.*?)application/i', '<span style="font-size: 12px; background-color:red; color:black"><b> withdrawal $1 application (55%) </b></span> ', $newsTitle);
             $newsTitle = preg_replace('/nasdaq rejects(.*?)listing/i', '<span style="font-size: 12px; background-color:red; color:black"><b>Nasdaq rejects $1 listing</span> If delisting tomorrow 65%, if delisting days away then 50-55%</b>&nbsp;', $newsTitle);
 
-            $seekingAlphaNews .= " ><a target='_blank' href='$feedItem->link'> " . $publicationDate . " " . $publicationTime . " - <br>" . $newsTitle . "</a><button onclick=\"prepareChatGPTEarn('$feedItem->link')\" style='margin-left:5px;'>EARN</button>";
+            $seekingAlphaNews .= " ><a target='_blank' href='$feedItem->link'> " . $publicationDate . " " . $publicationTime . " - <br>" . $newsTitle . "</a><button onclick=\"prepareChatGPTQuestion('$feedItem->link')\" style='margin-left:5px;'>ChatGPT</button>   <button onclick=\"prepareChatGPTEarn('$feedItem->link')\" style='margin-left:5px;'>EARN</button> <button onclick=\"prepareChatGPTMisc('$feedItem->link')\">MISC</button>";
           }
         }
         else 
@@ -1485,7 +1485,7 @@ die();
       $finalReturn = preg_replace('/[ \']disruption[ \']/i', '<span style="font-size: 12px; background-color:red; color:black"><b> &nbsp;disruption&nbsp;</span> (chase at 52%)</b>', $finalReturn);
       $finalReturn = preg_replace('/ abandon/i', '<span style="font-size: 12px; background-color:red; color:black"><b>&nbsp;abandon&nbsp;</span> (65-70%)</b>', $finalReturn);
       $finalReturn = preg_replace('/ bankrupt/i', '<span style="font-size: 35px; background-color:red; color:black"><b><br><br>&nbsp;bankrupt - are they winding down?  Check for sale of assets</span></b>', $finalReturn);      
-      $finalReturn = preg_replace('/ terminate| terminates| terminated| termination/i', '<span style="font-size: 12px; background-color:red; color:black"><b>&nbsp;terminate&nbsp;</span> (65% dollar, 75% penny) </b>', $finalReturn);            
+      $finalReturn = preg_replace('/ terminate| terminates| terminated| termination/i', '<span style="font-size: 20px; background-color:red; color:black"><b>&nbsp;TERMINATE&nbsp; --- CHECK THE SEVERITY, DO YOU NEED 70%?</span> </b>', $finalReturn);            
 
       $finalReturn = preg_replace('/ drug/i', '<span style="font-size: 12px; background-color:red; color:black"><b>&nbsp;drug </span></b> ', $finalReturn);
 
@@ -1661,7 +1661,13 @@ die();
       $finalReturn = preg_replace('/ review options/i', '<span style="font-size: 25px; background-color:red; color:black; "><b>REVIEW OPTIONS</b></span><br><br><span style="font-size: 50px; background-color:red; color:black; "><b>STAY AWAY</b></span>&nbsp;', $finalReturn); 
       $finalReturn = preg_replace('/ ceo exits/i', '<span style="font-size: 25px; background-color:red; color:black; "><b>CEO EXITS</b></span><br><br><span style="font-size: 50px; background-color:red; color:black; "><b>STAY AWAY</b></span>&nbsp;', $finalReturn); 
       $finalReturn = preg_replace('/ strategic review/i', '<span style="font-size: 25px; background-color:red; color:black; "><b>STRAGETIC REVIEW</b></span><br><br><span style="font-size: 50px; background-color:red; color:black; "><b>STAY AWAY</b></span>&nbsp;', $finalReturn); 
-      $finalReturn = preg_replace('/ changes name/i', '<span style="font-size: 40px; background-color:red; color:black; "><b>CHANGES NAME</b>&nbsp;', $finalReturn); 
+      $finalReturn = preg_replace('/ changes name/i', '<span style="font-size: 40px; background-color:red; color:black; "><b>CHANGES NAME</b></span>&nbsp;', $finalReturn); 
+      $finalReturn = preg_replace(
+          '/\b(ends\s+(?:the\s+|its\s+)?contract)\b/i',
+          '<span style="font-size: 20px; background-color:red; color:black;"><b>$1 - BACK WAY, WAY OFF, LIKE 70%</b></span>&nbsp;',
+          $finalReturn
+      );
+      $finalReturn = preg_replace('/ customer loss/i', '<span style="font-size: 40px; background-color:red; color:black; "><b>CUSTOMER LOSS - BACK WAY, WAY OFF, LIKE 70%</b></span>&nbsp;', $finalReturn); 
 
 
 

@@ -14,7 +14,7 @@ $secCompanyName = preg_replace("/<.*?>/", "", $secCompanyName);
 $cikNumber = $_GET['cikNumber']; 
 $checkSec = $_GET['checkSec']; 
 
-$yesterdayDays = 4;
+$yesterdayDays = 1;
 
 fopen("cookies.txt", "w");
 
@@ -473,6 +473,10 @@ function getStreetInsider($symbol, $yesterdayDays)
             $publicationTime = $convertedDate->format("g:i A");
 
             $newsTitle = $feedItem->title; 
+
+            $newsTitle = regexStreetInsider($newsTitle);
+
+
             $currentNewsTitle = $newsTitle; 
             if (strcmp($previousNewsTitle, $currentNewsTitle) == 0)
             {
@@ -528,10 +532,12 @@ function getStreetInsider($symbol, $yesterdayDays)
             // if the regular expression contains (.*) then we need to do it per title, to avoid greedy regular expressions
 
             $newsTitle = preg_replace('/ withdrawal(.*?)application/i', '<span style="font-size: 12px; background-color:red; color:black"><b> withdrawal $1 application (55%) </b></span> ', $newsTitle);
-            $newsTitle = preg_replace('/nasdaq rejects(.*?)listing/i', '<span style="font-size: 12px; background-color:red; color:black"><b>Nasdaq rejects $1 listing</span> </b>&nbsp;', $newsTitle);
+            $newsTitle = preg_replace('/nasdaq rejects(.*?)listing/i', '<span style="font-size: 12px; background-color:red; color:black"><b>Nasdaq rejects $1 listing</b></span>&nbsp;', $newsTitle);
             $newsTitle = preg_replace('/ announces(.*?)offering/i', '<span style="font-size: 35px; background-color:red; color:black"><b> ANNOUNCES $1 OFFERING </b></span> ', $newsTitle);
 
-            $streetInsiderNews .= " ><a target='_blank' href='$feedItem->link'> " . $publicationDate . " " . $publicationTime . " - <br>" . $newsTitle . "</a> <button onclick=\"prepareChatGPTEarn('$feedItem->link')\">EARN</button></li>";
+
+
+            $streetInsiderNews .= " ><a target='_blank' href='$feedItem->link'> " . $publicationDate . " " . $publicationTime . " - <br>" . $newsTitle . "</a><button onclick=\"prepareChatGPTQuestion('$feedItem->link')\" style='margin-left:5px;'>ChatGPT</button> <button onclick=\"prepareChatGPTEarn('$feedItem->link')\">EARN</button> <button onclick=\"prepareChatGPTMisc('$feedItem->link')\">MISC</button></li>";
 
             $previousNewsTitle = $currentNewsTitle; 
         } // looping through each news channel item 
@@ -560,7 +566,7 @@ function getStreetInsider($symbol, $yesterdayDays)
 
         $streetInsiderNews .= "yesterdayDays is " . $yesterdayDays . "<br>"; 
 
-        $streetInsiderNews = regexStreetInsider($streetInsiderNews); 
+//        $streetInsiderNews = regexStreetInsider($streetInsiderNews); 
                              
         try 
         {

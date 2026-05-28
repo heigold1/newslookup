@@ -31,7 +31,7 @@ function regexStreetInsider($streetInsiderNews)
   $streetInsiderNews = preg_replace('/[ \']disruption[ \']/i', '<span style="font-size: 12px; background-color:red; color:black"><b> &nbsp;disruption&nbsp;</span> (chase at 52%)</b>', $streetInsiderNews);
   $streetInsiderNews = preg_replace('/ abandon/i', '<span style="font-size: 15px; background-color:red; color:black"><b>&nbsp;abandon&nbsp;</span> (65-70%)</b>', $streetInsiderNews);
   $streetInsiderNews = preg_replace('/ bankrupt/i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp;bankrupt - are they winding down?</span> </b>', $streetInsiderNews);      
-  $streetInsiderNews = preg_replace('/ terminate| terminates| terminated| termination/i', '<span style="font-size: 15px; background-color:red; color:black"><b>&nbsp;terminate&nbsp;</span> (65% dollar, 75% penny) </b>', $streetInsiderNews);            
+  $streetInsiderNews = preg_replace('/ terminate| terminates| terminated| termination/i', '<span style="font-size: 20px; background-color:red; color:black"><b>&nbsp;TERIMINATE&nbsp; --- CHECK THE SEVERITY - DO YOU NEED LIKE 70%?</span></b>', $streetInsiderNews);            
   $streetInsiderNews = preg_replace('/ drug/i', '<span style="font-size: 15px; background-color:red; color:black"><b>&nbsp;drug </span></b> ', $streetInsiderNews);
   $streetInsiderNews = preg_replace('/ guidance/i', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp;GUIDANCE</span></b>&nbsp;', $streetInsiderNews);
   $streetInsiderNews = preg_replace('/ regulatory update/i', '<span style="font-size: 15px; background-color:red; color:black"><b>&nbsp;regulatory update (35% even if regulation is good)</span></b>&nbsp;', $streetInsiderNews);
@@ -212,7 +212,13 @@ function regexStreetInsider($streetInsiderNews)
   $streetInsiderNews = preg_replace('/ review options/i', '<span style="font-size: 25px; background-color:red; color:black; "><b>REVIEW OPTIONS</b></span><br><br><span style="font-size: 50px; background-color:red; color:black; "><b>STAY AWAY</b></span>&nbsp;', $streetInsiderNews); 
   $streetInsiderNews = preg_replace('/ ceo exits/i', '<span style="font-size: 25px; background-color:red; color:black; "><b>CEO EXITS</b></span><br><br><span style="font-size: 50px; background-color:red; color:black; "><b>STAY AWAY</b></span>&nbsp;', $streetInsiderNews);   
   $streetInsiderNews = preg_replace('/ strategic review/i', '<span style="font-size: 25px; background-color:red; color:black; "><b>STRAGETIC REVIEW</b></span><br><br><span style="font-size: 50px; background-color:red; color:black; "><b>STAY AWAY</b></span>&nbsp;', $streetInsiderNews); 
-  $streetInsiderNews = preg_replace('/ changes name/i', '<span style="font-size: 40px; background-color:red; color:black; "><b>CHANGES NAME</b>&nbsp;', $streetInsiderNews); 
+  $streetInsiderNews = preg_replace('/ changes name/i', '<span style="font-size: 40px; background-color:red; color:black; "><b>CHANGES NAME</b></span>&nbsp;', $streetInsiderNews); 
+  $streetInsiderNews = preg_replace(
+      '/\b(ends\s+(?:the\s+|its\s+)?contract)\b/i',
+      '<span style="font-size: 20px; background-color:red; color:black;"><b>$1 - BACK WAY, WAY OFF, LIKE 70%</b></span>&nbsp;',
+      $streetInsiderNews
+  );
+  $streetInsiderNews = preg_replace('/ customer loss/i', '<span style="font-size: 20px; background-color:red; color:black; "><b>CUSTOMER LOSS - BACK WAY, WAY OFF, LIKE 70%</b></span>&nbsp;', $streetInsiderNews); 
 
   return $streetInsiderNews;
 

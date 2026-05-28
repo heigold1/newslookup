@@ -117,6 +117,43 @@ Please be brief, just a couple points in point form, and then the suggested tier
     return message;
 }
 
+function prepareChatGPTMisc(link) {
+
+    var message = `Can you go through the following article and tell me if it looks to you like a basic 40% news update or if there are red flags indicating that I should be going way, way lower (i.e. like maybe 50-60-70-75%%)?
+
+    For example, the article may say that a business lost a customer, but if the customer provides only 5% of the revenue, then that's a 40% update.
+
+    But if the business lost a customer and the customer provides 85% of the revenue, then that is MAJOR and a 70-75% entry is better.
+
+    Here are some examples of typical 40% news articles:
+
+        - The day a company receives a delisting notice, so they have 180 days to get their stock over $1.00, and no pressure yet - 40%.
+        - The day that news comes out saying that a reverse stock split is coming in the next few days, almost always drops 40% and recovers. 
+
+    Let's give some more examples of articles where we might think it's a 40% update but it's way, way worse when you look into it: 
+
+        - On May 27th, 2026, company Verra Mobility (VRRM) lost a customer (Avis Budget).  You might think it's a typical 40% update but this loss will result in $123 million annualized reduction to segment profitability, which represents approximately 30% of Verra Motility's estimated 2026 EBITDA.  That is MAJOR, WAY more than just a typical 40% news update.  And it showed, because on that morning their stock dropped 74%.  Again, that's not a typical 40% news update.
+
+    Here is the link: ${link}
+
+
+`;
+
+    document.getElementById("prepareChatGPT").value = message;
+
+        var copyTextarea = $("#prepareChatGPT");
+        copyTextarea.select();
+
+        try {
+          var successful = document.execCommand('copy');
+          var msg = successful ? 'successful' : 'unsuccessful';
+          console.log('Copying text command was ' + msg);
+        } catch (err) {
+          console.log('Oops, unable to copy');
+        }
+
+    return message;
+}
 
 function prepareChineseJay(symbol, ceo, description)
 {
