@@ -566,8 +566,6 @@ function getStreetInsider($symbol, $yesterdayDays)
 
         $streetInsiderNews .= "yesterdayDays is " . $yesterdayDays . "<br>"; 
 
-//        $streetInsiderNews = regexStreetInsider($streetInsiderNews); 
-                             
         try 
         {
             $link->set_charset("utf8");
@@ -630,12 +628,6 @@ function getNewsQuantified($symbol, $yesterdayDays)
         }
 
         $streetInsiderNews .= "yesterdayDays is " . $yesterdayDays . "<br>"; 
-
-
-        $streetInsiderNews = regexStreetInsider($streetInsiderNews); 
-
-
-
 
         return "<div style='height: 250px; width: 100%; overflow-y:auto; border-style: double !important; border-color: black !important; color: black;'>" . $streetInsiderNews . "</div>"; 
 
