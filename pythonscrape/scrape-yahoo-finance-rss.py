@@ -132,7 +132,7 @@ def parse_finance_page(symbol, yesterday_days):
       title = re.sub(r' withdrawal(.*?)application', r'<span style="font-size: 12px; background-color:red; color:black"><b> withdrawal \1 application (55%) </b></span>', title, flags=re.IGNORECASE)
       title = re.sub(r'nasdaq rejects(.*?)listing', r'<span style="font-size: 12px; background-color:red; color:black"><b>Nasdaq rejects \1 listing</span> If delisting tomorrow 65%, if delisting days away then 50-55%</b>&nbsp;', title, flags=re.IGNORECASE)
 
-      all_news += " ><a target='_blank' href='" + link + "'> " + publication_date + " " + publication_time + "<br>" + title + "</a><button onclick=\"prepareChatGPTQuestion('" + link + "')\">ChatGPT</button>  <button onclick=\"prepareChatGPTEarn('" + link + "')\">EARN</button> <button onclick=\"prepareChatGPTMisc('" + link + "')\">MISC</button>  </li>";
+      all_news += " ><a target='_blank' href='" + link + "'> " + publication_date + " " + publication_time + "<br>" + title + "</a> <button onclick=\"prepareChatGPTQuestion('" + link + "')\">ChatGPT</button>  <button onclick=\"prepareChatGPTEarn('" + link + "')\">EARN</button> <button onclick=\"prepareChatGPTMisc('" + link + "')\">MISC</button>  </li>";
 
 
     all_news += "</ul>" 

@@ -39,7 +39,23 @@ function prepareChatGPTQuestion(link)
     var randomBillion = Math.floor(Math.random() * 1000000001);
 
 
-    var message = "Can you go through the following SEC filing and tell me if there are any red flags, like any mention of bankruptcy, insolvency, dissolving of assets or subsidiaries, major layoffs, delisting in a couple weeks, is going to begin trading on the OTC or Pink Sheets within a day/week/couple weeks (i.e. delist), shutting down operations, or a risk of an upcoming share offering or share dilution (i.e S-1, S-2, 424B3, notice of effectiveness, etc...), pharmaceutical drug news (i.e. phase 1/2/3 results, of which even good results can still cause the stock to drop), corporate turnaround efforts, any kind of shutdown, or anything similar to that? If it's about something minor like a CEO retiring, a delisting notice where the delisting is months away, or an earnings net income where they simply didn't make as much as what was estimated, that's fine, that's not a big deal.  Don't worry about giving an overview, or key details, only let me know if there are red flags.  If there are no red flags found, just say 'No red flags found'.  And if there are no red flags about a particlar area, don't worry about telling me about it (i.e. don't need to say 'No mention of bankruptcy', just don't say anything at all).  And please be brief, just make it in point form.  Here is the filing link: " + link + "?rand=" + randomBillion; 
+    var message = `Can you go through the following SEC filing and tell me if there are any red flags, 
+    like any mention of bankruptcy, insolvency, dissolving of assets or subsidiaries, major layoffs, delisting in a couple weeks, 
+    is going to begin trading on the OTC or Pink Sheets within a day/week/couple weeks (i.e. delist), shutting down operations, 
+    or a risk of an upcoming share offering or share dilution (i.e S-1, S-2, 424B3, notice of effectiveness, etc...), 
+    pharmaceutical drug news (i.e. phase 1/2/3 results, of which even good results can still cause the stock to drop), 
+    corporate turnaround efforts, any kind of shutdown, or anything similar to that? 
+
+    Maybe a delisting notice where the delisting is months away, or an earnings net income where they simply didn't make as much as what was estimated, 
+    or maybe losing a client/contract, or maybe an investigation by the Department of Justice or other governmental entity.  
+
+    If there are no red flags found, just say 'No red flags found' with a brief point-form description of what the article generally is about.  
+    And if there are no red flags about a particlar area, don't worry about telling me about it (i.e. you don't need to say 'No mention of bankruptcy', etc...).  
+
+    Also - don't take into account news from other articles (unless you see a delisting date!), only focus on what is spoken about in this article.  
+    So don't worry about like 'in another article I found from last week, they declared a quarterly net loss ', etc... 
+
+    And please be brief, just make it in point form.  Here is the filing link: ` + link + `?rand=` + randomBillion; 
 //     var message = "TEST";   
 
     //`Can you read the following link and tell me if there are any red flags in this SEC filing? Here is the link: ${link}`;
@@ -98,6 +114,8 @@ Also - for earnings net loss - we just default those to 50%.
 
 I'm mostly concerned about going in to a net income stock too early (i.e. 40% when there are other red flags that suggest a lower price).    
 
+Also - don't take into account news from other articles (unless you see a delisting date!), only focus on what is spoken about in this article.  So don't worry about like 'in another article I found from last week, they declared a quarterly net loss ', etc...
+
 Please be brief, just a couple points in point form, and then the suggested tier# and percentage, as I am day trading and my time is very limited.  
 `;
 
@@ -133,6 +151,8 @@ function prepareChatGPTMisc(link) {
     Let's give some more examples of articles where we might think it's a 40% update but it's way, way worse when you look into it: 
 
         - On May 27th, 2026, company Verra Mobility (VRRM) lost a customer (Avis Budget).  You might think it's a typical 40% update but this loss will result in $123 million annualized reduction to segment profitability, which represents approximately 30% of Verra Motility's estimated 2026 EBITDA.  That is MAJOR, WAY more than just a typical 40% news update.  And it showed, because on that morning their stock dropped 74%.  Again, that's not a typical 40% news update.
+
+    Also - don't take into account news from other articles (unless you see a delisting date!), only focus on what is spoken about in this article.  So don't worry about like 'in another article I found from last week, they declared a quarterly net loss ', etc...
 
     Here is the link: ${link}
 
@@ -178,55 +198,23 @@ function prepareChineseJay(symbol, ceo, description)
 
 function prepareNoNewsChatGPT(symbol) {
 
-    var message = `Can you suggest to me which tier # (and therefore percentage entry) I should go in for the non-news stock (ticker symbol is ${symbol})?
+    var message = `Can you check and see if any news has come out for stock market symbol "${symbol}" in the after-hours of last night, or this morning?  
 
-So just as a reminder - we're just doing no-news tiers.  If there is news, we switch gears and it becomes a "What is the entry point based on what the news is" and the criteria changes, so that's not the case here.  We're just doing a no-news analysis based on reverse splits, offerings, or any other red flags you might notice, etc...
+    I can't seem to find any recent news and I need to know why it is dropping. 
 
-Here is the criteria:
+    But I thought I would check with you and see if you can find anything from this morning or after-hours last night (or maybe the last hour & a half of yesterday's session), you know?
+    Recent enough to still be considered as "still being digested by the market". 
 
-🔹 Tier 1 — Clean Structure (Best Bounce Candidates)
+    For example, yesterday morning is irrelevant because it had all day yesterday to be digested by the market, so I don't need to know about it. 
 
-- Reverse splits: None in the last ~2–3 years
-- Share count growth: < 50% over the last 12 months
-- Offerings / filings: No recent S‑1 / S‑3 / 424B5 or other dilution events (if known)
-- Stock type adjustment: Dollar stocks (≥ $1) are inherently safer and more liquid
+    Also, I understand that a lot of the time stocks drop on no-news, if that's the case then so be it.  If that's the case then just say "I couldn't find any news". 
 
-Entry Suggestion:
+    HOWEVER - if this stock has a coming delisting date (i.e. within a few weeks), I need to know the date! 
 
-- Penny stocks (< $1): ~40% drop. 
-- Dollar stocks (≥ $1): ~30–35% drop. 
+    Let me know! 
 
-🔹 Tier 2 — Moderate Risk
 
-- Reverse splits: 1–2 total in last 2–5 years
-- Share count growth: 50–200% over last 12 months
-- Offerings / filings: Possibly one dilution filing in last year
-- Stock type adjustment: Dollar stocks are still safer → can enter earlier than penny stocks
 
-Entry Suggestion:
-
-- Penny stocks: ~45–50% drop. 
-- Dollar stocks: ~35–40% drop. 
-
-🔹 Tier 3 — High / Serial Dilution Risk
-
-- Reverse splits: Recent (last 2 years) or large split ≥1:20
-- Share count growth: >200% over last 12 months
-- Offerings / filings: Multiple S‑3 / 424B5 or other dilution filings
-- Stock type adjustment: Even dollar stocks are riskier, but still less extreme than penny stocks
-
-Entry Suggestion:
-
-- Penny stocks: ~55–65% drop. 
-- Dollar stocks: also ~50-55% drop.  
-
-LASTLY - if this stock has a coming delisting date (i.e. within a few weeks), I need to know the date! 
-
-So PLEASE MAKE SURE to check any recent offerings and reverse splits when doing your due diligence, and add this to your judgement criteria. 
-
-So start off by checking any recent reverse splits or offerings, and then any other red flags you might think are important. 
-
-Please be brief, just a couple points in point form, and then the suggested tier# and percentage, as I am day trading and my time is very limited.  The current price it is trading at is now 
 `;
 
     document.getElementById("prepareChatGPT").value = message;
@@ -1825,114 +1813,117 @@ Highcharts.stockChart('monthlyOHLC', {
 
 var corporateActionsStocks=
 {
-  "SDOT": "REVERSE SPLIT 0 TRADING DAYS AGO!!!!!!!!!",
-  "CUPR": "REVERSE SPLIT 0 TRADING DAYS AGO!!!!!!!!!",
-  "WGRX": "REVERSE SPLIT 1 TRADING DAYS AGO!!!!!!!!!",
-  "VSA": "REVERSE SPLIT 1 TRADING DAYS AGO!!!!!!!!!",
-  "TJGC": "REVERSE SPLIT 1 TRADING DAYS AGO!!!!!!!!!",
-  "PRTS": "REVERSE SPLIT 1 TRADING DAYS AGO!!!!!!!!!",
-  "UBXG": "REVERSE SPLIT 3 TRADING DAYS AGO!!!!!!!!!",
-  "NAKA": "REVERSE SPLIT 3 TRADING DAYS AGO!!!!!!!!!",
-  "LZMH": "REVERSE SPLIT 3 TRADING DAYS AGO!!!!!!!!!",
-  "LNAI": "REVERSE SPLIT 3 TRADING DAYS AGO!!!!!!!!!",
-  "IPW": "REVERSE SPLIT 3 TRADING DAYS AGO!!!!!!!!!",
-  "ONCO": "REVERSE SPLIT 4 TRADING DAYS AGO!!!!!!!!!",
-  "KPET": "SYMBOL CHANGE 4 TRADING DAYS AGO!!! 38 PERCENT!!!",
-  "HAO": "REVERSE SPLIT 4 TRADING DAYS AGO!!!!!!!!!",
-  "CNXU": "WAS LISTED 4 TRADING DAYS AGO!!! AT LEAST 38 PERCENT!!!",
-  "CMND": "REVERSE SPLIT 4 TRADING DAYS AGO!!!!!!!!!",
-  "BNY": "SYMBOL CHANGE 4 TRADING DAYS AGO!!! 38 PERCENT!!!",
-  "RACC": "WAS LISTED 5 TRADING DAYS AGO!!! AT LEAST 38 PERCENT!!!",
-  "QTEX": "SYMBOL CHANGE 5 TRADING DAYS AGO!!! 38 PERCENT!!!",
-  "PRTCY": "SYMBOL CHANGE 5 TRADING DAYS AGO!!! 38 PERCENT!!!",
-  "OPTH": "WAS LISTED 5 TRADING DAYS AGO!!! AT LEAST 38 PERCENT!!!",
-  "LCLN": "WAS LISTED 5 TRADING DAYS AGO!!! AT LEAST 38 PERCENT!!!",
-  "KWY": "SYMBOL CHANGE 5 TRADING DAYS AGO!!! 38 PERCENT!!!",
-  "AMSS": "WAS LISTED 5 TRADING DAYS AGO!!! AT LEAST 38 PERCENT!!!",
-  "NCI": "REVERSE SPLIT 6 TRADING DAYS AGO!!!!!!!!!",
-  "EZGO": "REVERSE SPLIT 6 TRADING DAYS AGO!!!!!!!!!",
-  "YYAI": "REVERSE SPLIT 7 TRADING DAYS AGO!!!!!!!!!",
-  "YMT": "REVERSE SPLIT 7 TRADING DAYS AGO!!!!!!!!!",
-  "XMAX": "SYMBOL CHANGE 7 TRADING DAYS AGO!!! 38 PERCENT!!!",
-  "UZX": "SYMBOL CHANGE 7 TRADING DAYS AGO!!! 38 PERCENT!!!",
-  "RETO": "REVERSE SPLIT 7 TRADING DAYS AGO!!!!!!!!!",
-  "PUSA": "SYMBOL CHANGE 7 TRADING DAYS AGO!!! 38 PERCENT!!!",
-  "PPCB": "REVERSE SPLIT 7 TRADING DAYS AGO!!!!!!!!!",
-  "MI": "REVERSE SPLIT 7 TRADING DAYS AGO!!!!!!!!!",
-  "FRGT": "REVERSE SPLIT 7 TRADING DAYS AGO!!!!!!!!!",
-  "EZRA": "REVERSE SPLIT 7 TRADING DAYS AGO!!!!!!!!!",
-  "AUC": "SYMBOL CHANGE 7 TRADING DAYS AGO!!! 38 PERCENT!!!",
-  "ADTX": "REVERSE SPLIT 7 TRADING DAYS AGO!!!!!!!!!",
-  "VIDA": "WAS LISTED 8 TRADING DAYS AGO!!! AT LEAST 38 PERCENT!!!",
-  "EXYN": "WAS LISTED 8 TRADING DAYS AGO!!! AT LEAST 38 PERCENT!!!",
-  "DUKR": "WAS LISTED 8 TRADING DAYS AGO!!! AT LEAST 38 PERCENT!!!",
-  "SLMT": "REVERSE SPLIT 9 TRADING DAYS AGO!!!!!!!!!",
-  "MWC": "WAS LISTED 9 TRADING DAYS AGO!!! AT LEAST 38 PERCENT!!!",
-  "EROK": "WAS LISTED 9 TRADING DAYS AGO!!! AT LEAST 38 PERCENT!!!",
-  "CBRS": "WAS LISTED 9 TRADING DAYS AGO!!! AT LEAST 38 PERCENT!!!",
-  "AIAI": "WAS LISTED 9 TRADING DAYS AGO!!! AT LEAST 38 PERCENT!!!",
-  "RTB": "SYMBOL CHANGE 10 TRADING DAYS AGO!!! 38 PERCENT!!!",
-  "GMRS": "WAS LISTED 10 TRADING DAYS AGO!!! AT LEAST 38 PERCENT!!!",
-  "FRVO": "WAS LISTED 10 TRADING DAYS AGO!!! AT LEAST 38 PERCENT!!!",
-  "PLGO": "SYMBOL CHANGE 11 TRADING DAYS AGO!!! 38 PERCENT!!!",
-  "WSE": "WAS LISTED 12 TRADING DAYS AGO!!! AT LEAST 38 PERCENT!!!",
-  "SMX": "REVERSE SPLIT 12 TRADING DAYS AGO!!!!!!!!!",
-  "KALA": "REVERSE SPLIT 12 TRADING DAYS AGO!!!!!!!!!",
-  "DKI": "REVERSE SPLIT 12 TRADING DAYS AGO!!!!!!!!!",
-  "BRUN": "SYMBOL CHANGE 12 TRADING DAYS AGO!!! 38 PERCENT!!!",
-  "BOT": "WAS LISTED 12 TRADING DAYS AGO!!! AT LEAST 38 PERCENT!!!",
-  "ASBP": "REVERSE SPLIT 12 TRADING DAYS AGO!!!!!!!!!",
-  "AIXI": "REVERSE SPLIT 12 TRADING DAYS AGO!!!!!!!!!",
-  "OLOX": "REVERSE SPLIT 13 TRADING DAYS AGO!!!!!!!!!",
-  "ODTX": "WAS LISTED 13 TRADING DAYS AGO!!! AT LEAST 38 PERCENT!!!",
-  "MOBI": "WAS LISTED 13 TRADING DAYS AGO!!! AT LEAST 38 PERCENT!!!",
-  "LKFT": "SYMBOL CHANGE 13 TRADING DAYS AGO!!! 38 PERCENT!!!",
-  "BNZI": "REVERSE SPLIT 13 TRADING DAYS AGO!!!!!!!!!",
-  "AGNT": "SYMBOL CHANGE 13 TRADING DAYS AGO!!! 38 PERCENT!!!",
-  "SUJA": "WAS LISTED 14 TRADING DAYS AGO!!! AT LEAST 38 PERCENT!!!",
-  "HAWK": "WAS LISTED 14 TRADING DAYS AGO!!! AT LEAST 38 PERCENT!!!",
-  "CHSN": "REVERSE SPLIT 14 TRADING DAYS AGO!!!!!!!!!",
-  "REA": "WAS LISTED 15 TRADING DAYS AGO!!! AT LEAST 38 PERCENT!!!",
-  "MIMI": "REVERSE SPLIT 15 TRADING DAYS AGO!!!!!!!!!",
-  "DUSG": "WAS LISTED 15 TRADING DAYS AGO!!! AT LEAST 38 PERCENT!!!",
-  "PONO": "SYMBOL CHANGE 16 TRADING DAYS AGO!!! 38 PERCENT!!!",
-  "CHRN": "SYMBOL CHANGE 16 TRADING DAYS AGO!!! 38 PERCENT!!!",
-  "VEEE": "REVERSE SPLIT 17 TRADING DAYS AGO!!!!!!!!!",
-  "TRI": "REVERSE SPLIT 17 TRADING DAYS AGO!!!!!!!!!",
-  "ONT": "SYMBOL CHANGE 17 TRADING DAYS AGO!!! 38 PERCENT!!!",
-  "INHD": "REVERSE SPLIT 17 TRADING DAYS AGO!!!!!!!!!",
-  "FCHL": "REVERSE SPLIT 17 TRADING DAYS AGO!!!!!!!!!",
-  "ERNA": "REVERSE SPLIT 17 TRADING DAYS AGO!!!!!!!!!",
-  "AYA": "WAS LISTED 17 TRADING DAYS AGO!!! AT LEAST 38 PERCENT!!!",
-  "TLIH": "REVERSE SPLIT 18 TRADING DAYS AGO!!!!!!!!!",
-  "SPTX": "WAS LISTED 18 TRADING DAYS AGO!!! AT LEAST 38 PERCENT!!!",
-  "QXL": "SYMBOL CHANGE 18 TRADING DAYS AGO!!! 38 PERCENT!!!",
-  "GMEX": "REVERSE SPLIT 18 TRADING DAYS AGO!!!!!!!!!",
-  "DYNC": "SYMBOL CHANGE 18 TRADING DAYS AGO!!! 38 PERCENT!!!",
-  "COAG": "WAS LISTED 18 TRADING DAYS AGO!!! AT LEAST 38 PERCENT!!!",
-  "BGDE": "SYMBOL CHANGE 18 TRADING DAYS AGO!!! 38 PERCENT!!!",
-  "UK": "REVERSE SPLIT 19 TRADING DAYS AGO!!!!!!!!!",
-  "SBMT": "WAS LISTED 19 TRADING DAYS AGO!!! AT LEAST 38 PERCENT!!!",
-  "PSUS": "WAS LISTED 19 TRADING DAYS AGO!!! AT LEAST 38 PERCENT!!!",
-  "PS": "WAS LISTED 19 TRADING DAYS AGO!!! AT LEAST 38 PERCENT!!!",
-  "JAGX": "REVERSE SPLIT 19 TRADING DAYS AGO!!!!!!!!!",
-  "BKYI": "REVERSE SPLIT 19 TRADING DAYS AGO!!!!!!!!!",
-  "AVLN": "WAS LISTED 19 TRADING DAYS AGO!!! AT LEAST 38 PERCENT!!!",
-  "AIRE": "REVERSE SPLIT 19 TRADING DAYS AGO!!!!!!!!!",
-  "FABC": "SYMBOL CHANGE 20 TRADING DAYS AGO!!! 38 PERCENT!!!",
-  "CTNT": "REVERSE SPLIT 20 TRADING DAYS AGO!!!!!!!!!",
-  "AIFC": "SYMBOL CHANGE 20 TRADING DAYS AGO!!! 38 PERCENT!!!",
-  "VNRX": "REVERSE SPLIT 21 TRADING DAYS AGO!!!!!!!!!",
-  "VBIO": "SYMBOL CHANGE 21 TRADING DAYS AGO!!! 38 PERCENT!!!",
-  "ISPC": "REVERSE SPLIT 21 TRADING DAYS AGO!!!!!!!!!",
-  "DGNX": "REVERSE SPLIT 21 TRADING DAYS AGO!!!!!!!!!",
-  "ZSQR": "SYMBOL CHANGE 22 TRADING DAYS AGO!!! 38 PERCENT!!!",
-  "UP": "REVERSE SPLIT 22 TRADING DAYS AGO!!!!!!!!!",
-  "OCG": "REVERSE SPLIT 22 TRADING DAYS AGO!!!!!!!!!",
-  "IMUX": "REVERSE SPLIT 22 TRADING DAYS AGO!!!!!!!!!",
-  "DRCT": "REVERSE SPLIT 22 TRADING DAYS AGO!!!!!!!!!",
-  "CISS": "REVERSE SPLIT 22 TRADING DAYS AGO!!!!!!!!!",
-  "AIOS": "REVERSE SPLIT 22 TRADING DAYS AGO!!!!!!!!!"
+  "ZCMD": "REVERSE SPLIT 1 TRADING DAYS AGO!!!!!!!!!",
+  "NHIV": "SYMBOL CHANGE 1 TRADING DAYS AGO!!! 38 PERCENT!!!",
+  "KIDZ": "REVERSE SPLIT 1 TRADING DAYS AGO!!!!!!!!!",
+  "HUBC": "REVERSE SPLIT 1 TRADING DAYS AGO!!!!!!!!!",
+  "FEMY": "REVERSE SPLIT 1 TRADING DAYS AGO!!!!!!!!!",
+  "CDLX": "REVERSE SPLIT 1 TRADING DAYS AGO!!!!!!!!!",
+  "BSIN": "SYMBOL CHANGE 1 TRADING DAYS AGO!!! 38 PERCENT!!!",
+  "SMSI": "REVERSE SPLIT 2 TRADING DAYS AGO!!!!!!!!!",
+  "SELXF": "SYMBOL CHANGE 2 TRADING DAYS AGO!!! 38 PERCENT!!!",
+  "CETX": "REVERSE SPLIT 2 TRADING DAYS AGO!!!!!!!!!",
+  "WXM": "REVERSE SPLIT 3 TRADING DAYS AGO!!!!!!!!!",
+  "SSMR": "WAS LISTED 3 TRADING DAYS AGO!!! AT LEAST 38 PERCENT!!!",
+  "QNT": "WAS LISTED 3 TRADING DAYS AGO!!! AT LEAST 38 PERCENT!!!",
+  "PPLI": "SYMBOL CHANGE 3 TRADING DAYS AGO!!! 38 PERCENT!!!",
+  "LFTO": "WAS LISTED 3 TRADING DAYS AGO!!! AT LEAST 38 PERCENT!!!",
+  "INIO": "WAS LISTED 3 TRADING DAYS AGO!!! AT LEAST 38 PERCENT!!!",
+  "ICCM": "REVERSE SPLIT 3 TRADING DAYS AGO!!!!!!!!!",
+  "ETSS": "WAS LISTED 17 TRADING DAYS AGO!!! AT LEAST 38 PERCENT!!!",
+  "SILO": "REVERSE SPLIT 4 TRADING DAYS AGO!!!!!!!!!",
+  "PW": "REVERSE SPLIT 4 TRADING DAYS AGO!!!!!!!!!",
+  "PFLA": "WAS LISTED 4 TRADING DAYS AGO!!! AT LEAST 38 PERCENT!!!",
+  "PBK": "SYMBOL CHANGE 4 TRADING DAYS AGO!!! 38 PERCENT!!!",
+  "AADX": "WAS LISTED 4 TRADING DAYS AGO!!! AT LEAST 38 PERCENT!!!",
+  "WYHG": "REVERSE SPLIT 5 TRADING DAYS AGO!!!!!!!!!",
+  "VSXY": "SYMBOL CHANGE 5 TRADING DAYS AGO!!! 38 PERCENT!!!",
+  "PRHI": "REVERSE SPLIT 5 TRADING DAYS AGO!!!!!!!!!",
+  "ZOOZ": "REVERSE SPLIT 6 TRADING DAYS AGO!!!!!!!!!",
+  "TBH": "REVERSE SPLIT 6 TRADING DAYS AGO!!!!!!!!!",
+  "SMX": "REVERSE SPLIT 21 TRADING DAYS AGO!!!!!!!!!",
+  "SCYX": "REVERSE SPLIT 6 TRADING DAYS AGO!!!!!!!!!",
+  "SBFM": "REVERSE SPLIT 6 TRADING DAYS AGO!!!!!!!!!",
+  "NVRI": "WAS LISTED 6 TRADING DAYS AGO!!! AT LEAST 38 PERCENT!!!",
+  "JDZG": "REVERSE SPLIT 6 TRADING DAYS AGO!!!!!!!!!",
+  "FOCL": "SYMBOL CHANGE 6 TRADING DAYS AGO!!! 38 PERCENT!!!",
+  "FDXF": "WAS LISTED 6 TRADING DAYS AGO!!! AT LEAST 38 PERCENT!!!",
+  "FDX": "NEW SYMBOL AS OF 6 TRADING DAYS AGO!!! AT LEAST 38 PERCENT!!!",
+  "DAIC": "REVERSE SPLIT 6 TRADING DAYS AGO!!!!!!!!!",
+  "CDTG": "REVERSE SPLIT 6 TRADING DAYS AGO!!!!!!!!!",
+  "AZUL": "WAS LISTED 6 TRADING DAYS AGO!!! AT LEAST 38 PERCENT!!!",
+  "ABVEF": "SYMBOL CHANGE 6 TRADING DAYS AGO!!! 38 PERCENT!!!",
+  "SLXN": "REVERSE SPLIT 7 TRADING DAYS AGO!!!!!!!!!",
+  "QH": "SYMBOL CHANGE 7 TRADING DAYS AGO!!! 38 PERCENT!!!",
+  "NXB": "SYMBOL CHANGE 7 TRADING DAYS AGO!!! 38 PERCENT!!!",
+  "HKIT": "REVERSE SPLIT 7 TRADING DAYS AGO!!!!!!!!!",
+  "SKYA": "SYMBOL CHANGE 8 TRADING DAYS AGO!!! 38 PERCENT!!!",
+  "RPGL": "REVERSE SPLIT 8 TRADING DAYS AGO!!!!!!!!!",
+  "RKTO": "SYMBOL CHANGE 8 TRADING DAYS AGO!!! 38 PERCENT!!!",
+  "OCTV": "WAS LISTED 8 TRADING DAYS AGO!!! AT LEAST 38 PERCENT!!!",
+  "HXGBY": "NEW SYMBOL AS OF 8 TRADING DAYS AGO!!! AT LEAST 38 PERCENT!!!",
+  "SDOT": "REVERSE SPLIT 9 TRADING DAYS AGO!!!!!!!!!",
+  "PWRL": "WAS LISTED 9 TRADING DAYS AGO!!! AT LEAST 38 PERCENT!!!",
+  "CUPR": "REVERSE SPLIT 9 TRADING DAYS AGO!!!!!!!!!",
+  "AIFA": "SYMBOL CHANGE 9 TRADING DAYS AGO!!! 38 PERCENT!!!",
+  "WGRX": "REVERSE SPLIT 10 TRADING DAYS AGO!!!!!!!!!",
+  "VSA": "REVERSE SPLIT 10 TRADING DAYS AGO!!!!!!!!!",
+  "TJGC": "REVERSE SPLIT 10 TRADING DAYS AGO!!!!!!!!!",
+  "PRTS": "REVERSE SPLIT 10 TRADING DAYS AGO!!!!!!!!!",
+  "HDRN": "SYMBOL CHANGE 10 TRADING DAYS AGO!!! 38 PERCENT!!!",
+  "UBXG": "REVERSE SPLIT 12 TRADING DAYS AGO!!!!!!!!!",
+  "NAKA": "REVERSE SPLIT 12 TRADING DAYS AGO!!!!!!!!!",
+  "LZMH": "REVERSE SPLIT 12 TRADING DAYS AGO!!!!!!!!!",
+  "LNAI": "REVERSE SPLIT 12 TRADING DAYS AGO!!!!!!!!!",
+  "IPW": "REVERSE SPLIT 12 TRADING DAYS AGO!!!!!!!!!",
+  "BTMCQ": "SYMBOL CHANGE 12 TRADING DAYS AGO!!! 38 PERCENT!!!",
+  "ONCO": "REVERSE SPLIT 13 TRADING DAYS AGO!!!!!!!!!",
+  "KPET": "SYMBOL CHANGE 13 TRADING DAYS AGO!!! 38 PERCENT!!!",
+  "HAO": "REVERSE SPLIT 13 TRADING DAYS AGO!!!!!!!!!",
+  "CNXU": "WAS LISTED 13 TRADING DAYS AGO!!! AT LEAST 38 PERCENT!!!",
+  "CMND": "REVERSE SPLIT 13 TRADING DAYS AGO!!!!!!!!!",
+  "BNY": "SYMBOL CHANGE 13 TRADING DAYS AGO!!! 38 PERCENT!!!",
+  "RACC": "WAS LISTED 14 TRADING DAYS AGO!!! AT LEAST 38 PERCENT!!!",
+  "QTEX": "SYMBOL CHANGE 14 TRADING DAYS AGO!!! 38 PERCENT!!!",
+  "PRTCY": "SYMBOL CHANGE 14 TRADING DAYS AGO!!! 38 PERCENT!!!",
+  "OPTH": "WAS LISTED 14 TRADING DAYS AGO!!! AT LEAST 38 PERCENT!!!",
+  "LCLN": "WAS LISTED 14 TRADING DAYS AGO!!! AT LEAST 38 PERCENT!!!",
+  "KWY": "SYMBOL CHANGE 14 TRADING DAYS AGO!!! 38 PERCENT!!!",
+  "AMSS": "WAS LISTED 14 TRADING DAYS AGO!!! AT LEAST 38 PERCENT!!!",
+  "NCI": "REVERSE SPLIT 15 TRADING DAYS AGO!!!!!!!!!",
+  "EZGO": "REVERSE SPLIT 15 TRADING DAYS AGO!!!!!!!!!",
+  "YYAI": "REVERSE SPLIT 16 TRADING DAYS AGO!!!!!!!!!",
+  "YMT": "REVERSE SPLIT 16 TRADING DAYS AGO!!!!!!!!!",
+  "XMAX": "SYMBOL CHANGE 16 TRADING DAYS AGO!!! 38 PERCENT!!!",
+  "UZX": "SYMBOL CHANGE 16 TRADING DAYS AGO!!! 38 PERCENT!!!",
+  "RETO": "REVERSE SPLIT 16 TRADING DAYS AGO!!!!!!!!!",
+  "PUSA": "SYMBOL CHANGE 16 TRADING DAYS AGO!!! 38 PERCENT!!!",
+  "PPCB": "REVERSE SPLIT 16 TRADING DAYS AGO!!!!!!!!!",
+  "MI": "REVERSE SPLIT 16 TRADING DAYS AGO!!!!!!!!!",
+  "FRGT": "REVERSE SPLIT 16 TRADING DAYS AGO!!!!!!!!!",
+  "EZRA": "REVERSE SPLIT 16 TRADING DAYS AGO!!!!!!!!!",
+  "AUC": "SYMBOL CHANGE 16 TRADING DAYS AGO!!! 38 PERCENT!!!",
+  "AIIR": "SYMBOL CHANGE 16 TRADING DAYS AGO!!! 38 PERCENT!!!",
+  "ADTX": "REVERSE SPLIT 16 TRADING DAYS AGO!!!!!!!!!",
+  "VIDA": "WAS LISTED 17 TRADING DAYS AGO!!! AT LEAST 38 PERCENT!!!",
+  "EXYN": "WAS LISTED 17 TRADING DAYS AGO!!! AT LEAST 38 PERCENT!!!",
+  "DUKR": "WAS LISTED 17 TRADING DAYS AGO!!! AT LEAST 38 PERCENT!!!",
+  "SLMT": "REVERSE SPLIT 18 TRADING DAYS AGO!!!!!!!!!",
+  "MWC": "WAS LISTED 18 TRADING DAYS AGO!!! AT LEAST 38 PERCENT!!!",
+  "EROK": "WAS LISTED 18 TRADING DAYS AGO!!! AT LEAST 38 PERCENT!!!",
+  "CBRS": "WAS LISTED 18 TRADING DAYS AGO!!! AT LEAST 38 PERCENT!!!",
+  "AIAI": "WAS LISTED 18 TRADING DAYS AGO!!! AT LEAST 38 PERCENT!!!",
+  "RTB": "SYMBOL CHANGE 19 TRADING DAYS AGO!!! 38 PERCENT!!!",
+  "GMRS": "WAS LISTED 19 TRADING DAYS AGO!!! AT LEAST 38 PERCENT!!!",
+  "FRVO": "WAS LISTED 19 TRADING DAYS AGO!!! AT LEAST 38 PERCENT!!!",
+  "PLGO": "SYMBOL CHANGE 20 TRADING DAYS AGO!!! 38 PERCENT!!!",
+  "WSE": "WAS LISTED 21 TRADING DAYS AGO!!! AT LEAST 38 PERCENT!!!",
+  "KALA": "REVERSE SPLIT 21 TRADING DAYS AGO!!!!!!!!!",
+  "DKI": "REVERSE SPLIT 21 TRADING DAYS AGO!!!!!!!!!",
+  "BRUN": "SYMBOL CHANGE 21 TRADING DAYS AGO!!! 38 PERCENT!!!",
+  "BOT": "WAS LISTED 21 TRADING DAYS AGO!!! AT LEAST 38 PERCENT!!!",
+  "ASBP": "REVERSE SPLIT 21 TRADING DAYS AGO!!!!!!!!!",
+  "AIXI": "REVERSE SPLIT 21 TRADING DAYS AGO!!!!!!!!!"
 };
 
 
