@@ -547,6 +547,8 @@ function getStreetInsider($symbol, $yesterdayDays)
         // light yellow highlighting for - from two weeks ago to a week ago.
         // light yellow is #FFFFC5 
 
+        $streetInsiderNews = preg_replace('/(' . get_yahoo_todays_trade_date() . ')/', '<span style="font-size: 12px;   background-color: black; color:white"> $1</span>', $streetInsiderNews);
+
         for ($daysBack = 14; $daysBack >= 7; $daysBack--)
         {
             $streetInsiderNews = preg_replace('/(' .  get_yahoo_trade_date($daysBack) . ')/', '<span style="font-size: 12px; background-color:yellow; color:black">$1</span>', $streetInsiderNews);      
