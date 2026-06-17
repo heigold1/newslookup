@@ -537,7 +537,7 @@ function getStreetInsider($symbol, $yesterdayDays)
 
 
 
-            $streetInsiderNews .= " ><a target='_blank' href='$feedItem->link'> " . $publicationDate . " " . $publicationTime . " - <br>" . $newsTitle . "</a><button onclick=\"prepareChatGPTQuestion('$feedItem->link')\" style='margin-left:5px;'>ChatGPT</button> <button onclick=\"prepareChatGPTEarn('$feedItem->link')\">EARN</button> <button onclick=\"prepareChatGPTMisc('$feedItem->link')\">MISC</button></li>";
+            $streetInsiderNews .= " ><a target='_blank' href='$feedItem->link'> " . $publicationDate . " " . $publicationTime . " - <br>" . $newsTitle . "</a><button onclick=\"prepareChatGPTQuestion('$symbol', '$feedItem->link')\" style='margin-left:5px;'>ChatGPT</button> <button onclick=\"prepareChatGPTEarn('$feedItem->link')\">EARN</button> <button onclick=\"prepareChatGPTMisc('$feedItem->link')\">MISC</button></li>";
 
             $previousNewsTitle = $currentNewsTitle; 
         } // looping through each news channel item 

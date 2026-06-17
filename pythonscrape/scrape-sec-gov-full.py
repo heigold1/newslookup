@@ -185,13 +185,13 @@ def parse_xml(xml_data, yesterday_days):
         else:
             registration_offering = ""
 
-        sec_table_rows.append(f"<tr style='border: 1px solid black !important; height: 20px;'><td style='border: 1px solid black !important'>{filing_type}</td><td style='border: 1px solid black !important'><a target='_blank' href='{href}'>{title}, {item_description}</a><button onclick='prepareChatGPTQuestion(\"{href}\")' style='margin-left: 5px;'>ChatGPT</button><button onclick='prepareChatGPTEarn(\"{href}\")' style='margin-left: 5px;'>EARN</button><br><br></td><td style='border: 1px solid black !important'>{datestamp}</td><td style='border: 1px solid black !important; font-size: 18px;'>{time}</td></tr>")
+        sec_table_rows.append(f"<tr style='border: 1px solid black !important; height: 20px;'><td style='border: 1px solid black !important'>{filing_type}</td><td style='border: 1px solid black !important'><a target='_blank' href='{href}'>{title}, {item_description}</a><button onclick='prepareChatGPTQuestion(\"{symbol}\",\"{href}\")' style='margin-left: 5px;'>ChatGPT</button><button onclick='prepareChatGPTEarn(\"{href}\")' style='margin-left: 5px;'>EARN</button><br><br></td><td style='border: 1px solid black !important'>{datestamp}</td><td style='border: 1px solid black !important; font-size: 18px;'>{time}</td></tr>")
         sec_table_row_count += 1
 
     return_sec_html = "<table style='border: 1px solid black !important; background-color: #B1D4E0'>"
     sec_message = f" rowcount is {sec_table_row_count} "
     if sec_table_row_count == 0:
-        sec_message = f"<a target='_blank' href='https://seekingalpha.com/symbol/{symbol}/sec-filings'><span style='font-size: 50px; background-color: red'> - SEC ROWCOUNT IS 0 - CHECK STREET INSIDER</span></a>"
+        sec_message = f"<a target='_blank' href='https://seekingalpha.com/symbol/{symbol}/sec-filings?filter=all'><span style='font-size: 50px; background-color: red'> - SEC ROWCOUNT IS 0 - CHECK STREET INSIDER</span></a>"
 
     return_sec_html += f"<tr><td>Type</td><td>Title{sec_message}</td><td>Date</td><td>Time</td></tr>"
     return_sec_html += "".join(sec_table_rows)

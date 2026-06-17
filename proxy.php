@@ -1410,7 +1410,7 @@ die();
             $newsTitle = preg_replace('/ withdrawal(.*?)application/i', '<span style="font-size: 12px; background-color:red; color:black"><b> withdrawal $1 application (55%) </b></span> ', $newsTitle);
             $newsTitle = preg_replace('/nasdaq rejects(.*?)listing/i', '<span style="font-size: 12px; background-color:red; color:black"><b>Nasdaq rejects $1 listing</span> If delisting tomorrow 65%, if delisting days away then 50-55%</b>&nbsp;', $newsTitle);
 
-            $seekingAlphaNews .= " ><a target='_blank' href='$feedItem->link'> " . $publicationDate . " " . $publicationTime . " - <br>" . $newsTitle . "</a><button onclick=\"prepareChatGPTQuestion('$feedItem->link')\" style='margin-left:5px;'>ChatGPT</button> <button onclick=\"prepareChatGPTEarn('$feedItem->link')\" style='margin-left:5px;'>EARN</button> <button onclick=\"prepareChatGPTMisc('$feedItem->link')\">MISC</button>";
+            $seekingAlphaNews .= " ><a target='_blank' href='$feedItem->link'> " . $publicationDate . " " . $publicationTime . " - <br>" . $newsTitle . "</a><button onclick=\"prepareChatGPTQuestion('$symbol', '$feedItem->link')\" style='margin-left:5px;'>ChatGPT</button> <button onclick=\"prepareChatGPTEarn('$feedItem->link')\" style='margin-left:5px;'>EARN</button> <button onclick=\"prepareChatGPTMisc('$feedItem->link')\">MISC</button>";
           }
         }
         else 
