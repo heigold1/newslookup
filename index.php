@@ -255,13 +255,12 @@
 								<br>
 							<span id="bigcharts_diff"></span><br>
 						</div>
-
-								5-day Avg Vol: <span style="font-size: 12px" id="five-day-average-volume"></span><br>
 								<!-- <span id="low-volume-dollar-chart" style="background-color: #00ff00;">Dollar</span> --> 
 								<!-- <span id="low-volume-penny-chart" style="background-color: #00ff00;">Penny</span> --> &nbsp;
 								<button onclick='preparePinkSheetChatGPT(<?php echo json_encode($_GET["symbol"]); ?>, $("#yestCloseText").val())'>PinkGPT</button>
 								<textarea id="prepareChatGPT" style="width:1px; height:1px;"></textarea>
 								<span id="notes" style="background-color: #00ff00;">Hi-Ri</span>
+								<span id="jays-notes" style="background-color: #00ff00;">Jay</span>
 
 						</td>
 
@@ -377,6 +376,18 @@
   </div>
 
 </div> <!-- Notes modal --> 
+
+<div id="jays-notes-modal" class="modal" style="display: none">
+
+  <!-- Modal content -->
+  <div class="modal-content" style="overflow: auto; ">
+    <p style="font-size: 25px">
+    	- Jay needs 30% BigCharts separation for drug or Asian stocks.
+    	- DO NOT chase recent SPAC mergers, they can literally drop like 60% (June 16th, 2026, went in at 40% and tripped my two-tier stop loss) and never recover.
+    </p>
+  </div>
+
+</div> <!-- Jay's Noted modal --> 
 
 <div id="low-volume-dollar-chart-modal" class="modal" style="display: none">
 
