@@ -315,7 +315,7 @@ def parse_finance_page(symbol, original_symbol, yesterday_days, cik_number, comp
 
                     result = {
                         'found' : False, 
-                        'message' : '<a target="_blank" href="http://seekingalpha.com/symbol/' + original_symbol + '/sec-filings"><div style="background-color: red"><span style="font-size: 45px">NO MATCHING COMPANIES - CHECK SEEKING ALPHA</span></div></a>'
+                        'message' : '<a target="_blank" href="http://seekingalpha.com/symbol/' + original_symbol + '/sec-filings?filter=all"><div style="background-color: red"><span style="font-size: 45px">NO MATCHING COMPANIES - CHECK SEEKING ALPHA</span></div></a>'
                         }
                     print(json.dumps(result))
                     sys.exit() 
@@ -332,7 +332,7 @@ def parse_finance_page(symbol, original_symbol, yesterday_days, cik_number, comp
 
                     result = {
                         'found' : False, 
-                        'message' : '<a target="_blank" href="http://seekingalpha.com/symbol/' + original_symbol + '/sec-filings"><div style="background-color: red"><span style="font-size: 45px">AMBIGUOUS NAMES - CHECK SEEKING ALPHA</span></div></a>'
+                        'message' : '<a target="_blank" href="http://seekingalpha.com/symbol/' + original_symbol + '/sec-filings?filter=all"><div style="background-color: red"><span style="font-size: 45px">AMBIGUOUS NAMES - CHECK SEEKING ALPHA</span></div></a>'
                         }
 
                     print(json.dumps(result))
