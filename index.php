@@ -382,7 +382,7 @@
   <!-- Modal content -->
   <div class="modal-content" style="overflow: auto; ">
     <p style="font-size: 25px">
-    	- Jay needs 30% BigCharts separation for drug or Asian stocks.<br>
+    	- Jay needs 30% BigCharts separation for drug or Asian stocks, and 30% down from the previous low-of-the-day as well to engage if it already bounced.<br>
     	- DO NOT chase recent SPAC mergers, they can literally drop like 60% (June 16th, 2026, went in at 40% and tripped my two-tier stop loss) and never recover.<br>
     	- Any acquisitions where instead of a share price it's a fixed ratio - just set it to 40%.<br>
     	- Someone merely leaving the company to pursue other interests - 
