@@ -56,21 +56,29 @@ $ac_obj = new MarketClient($consumer);
 
     $out  = $ac_obj->getQuote($request_params);
 
-  }catch(ETWSException $e){
-    echo  "***Caught exception*** 1 \n".
-        "Error Code   : " . $e->getErrorCode()."\n" .
-        "Error Message  : " . $e->getErrorMessage() . "\n" ;
-    if(DEBUG_MODE) echo $e->getTraceAsString() . "\n" ;
-    exit;
-  }catch(Exception $e){
-    echo  "***Caught exception*** 2 \n".
-        "Error Code   : " . $e->getCode()."\n" .
-        "Error Message  : " . $e->getMessage() . "\n" ;
-    if(DEBUG_MODE) echo $e->getTraceAsString() . "\n" ;
-    echo "Exiting...\n";
-    exit;
-
-  }
+    }catch(ETWSException $e){
+        header('Content-Type: application/json');
+        $errorResponse = array(
+          'error' => true,
+          'source' => 'ETWSException',
+          'errorCode' => $e->getErrorCode(),
+          'errorMessage' => $e->getErrorMessage()
+        );
+        if (DEBUG_MODE) $errorResponse['trace'] = $e->getTraceAsString();
+        echo json_encode($errorResponse);
+        exit;
+    }catch(Exception $e){
+        header('Content-Type: application/json');
+        $errorResponse = array(
+          'error' => true,
+          'source' => 'Exception',
+          'errorCode' => $e->getCode(),
+          'errorMessage' => $e->getMessage()
+        );
+        if (DEBUG_MODE) $errorResponse['trace'] = $e->getTraceAsString();
+        echo json_encode($errorResponse);
+        exit;
+      }
 
 //  $mkt_responce_obj = json_decode($out);   // USE THIS ON THE Verio Server 
 // $mkt_response_obj = etHttpUtils::GetResponseObject($out);   // Use this on localhost
@@ -92,7 +100,13 @@ if (isset($mkt_response_obj->QuoteData->All->previousClose))
 }
 else
 {
-	echo "NO PREVIOUS CLOSE LISTED"; 
+  header('Content-Type: application/json');
+  $errorResponse = array(
+    'error' => true,
+    'source' => 'NoPreviousClose',
+    'errorMessage' => 'NO PREVIOUS CLOSE LISTED for ' . $symbol
+  );
+  echo json_encode($errorResponse);
 }
 
 ?>
