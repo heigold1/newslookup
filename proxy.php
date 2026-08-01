@@ -352,10 +352,14 @@ function getTradeHalts()
     $returnArray['halt_table'] = "<table>"; 
     $haltSymbolList = array(); 
     $currentlyHalted = array(); 
+    $resumingToday   = array();   // <-- NEW: red-row deep-halt resumption candidates
 
     $dateTime = new DateTime(); 
     $dateTime->modify('-8 hours'); 
     $currentDate = $dateTime->format("m/d/Y"); 
+
+    $now = new DateTime();        // <-- NEW: for future-time comparison
+    $now->modify('-8 hours');     // keep it on the same clock basis as $currentDate
 
     $servername = "localhost";
     $username = "superuser";
@@ -375,7 +379,6 @@ function getTradeHalts()
 
     // --- Pull symbols from orders table ---
     $result = $mysqli->query("SELECT DISTINCT symbol FROM orders");
-
     if ($result) {
         while ($row = $result->fetch_assoc()) {
             $orderSymbols[] = strtoupper(trim($row['symbol']));
@@ -384,7 +387,6 @@ function getTradeHalts()
 
     // --- Pull symbols from halts table ---
     $resultHalts = $mysqli->query("SELECT DISTINCT symbol FROM halts");
-
     if ($resultHalts) {
         while ($row = $resultHalts->fetch_assoc()) {
             $orderSymbols[] = strtoupper(trim($row['symbol']));
@@ -393,7 +395,6 @@ function getTradeHalts()
 
     // Remove duplicates just in case
     $orderSymbols = array_unique($orderSymbols);
-
 
 
     foreach ($rss_feed->channel->item as $feed_item) {
@@ -406,6 +407,48 @@ function getTradeHalts()
       $symbol = trim($feed_item->title); 
       $reasonCode = trim($child->ReasonCode); 
 
+      // ---- Pull the fields needed for red-row detection ----
+      $haltDateStr        = trim($child->HaltDate);
+      $resumptionDateStr  = trim($child->ResumptionDate);
+      $quoteTimeStr       = trim($child->ResumptionQuoteTime);
+      $tradeTimeStr       = trim($child->ResumptionTradeTime);
+      $symbolUpper        = strtoupper($symbol);
+
+      // ======================================================
+      // RED LIST: deep-halt resumption candidates (resuming today)
+      // Keys off ResumptionDate == today, so it must live OUTSIDE
+      // the HaltDate == today block below.
+      // ======================================================
+      if (
+            $haltDateStr !== $currentDate               // halted on a prior day (deep halt)
+         && $resumptionDateStr === $currentDate          // resuming today
+         && $reasonCode !== "LUDP"                        // exclude 5-min volatility pauses
+      ) {
+          // Build full datetimes (date + time) for the future-time check
+          $quoteDateTime = ($quoteTimeStr !== "")
+              ? DateTime::createFromFormat('m/d/Y H:i:s', $resumptionDateStr . ' ' . $quoteTimeStr)
+              : null;
+          $tradeDateTime = ($tradeTimeStr !== "")
+              ? DateTime::createFromFormat('m/d/Y H:i:s', $resumptionDateStr . ' ' . $tradeTimeStr)
+              : null;
+
+          $quoteAhead = ($quoteDateTime !== false && $quoteDateTime !== null && $quoteDateTime > $now);
+          $tradeAhead = ($tradeDateTime !== false && $tradeDateTime !== null && $tradeDateTime > $now);
+
+          // Either/or: still upcoming if quote OR trade reopen is in the future
+          if ($quoteAhead || $tradeAhead) {
+
+              $alreadyTradedRed = in_array($symbolUpper, $orderSymbols);
+
+              if (!$alreadyTradedRed) {
+                  $resumingToday[$symbolUpper] = $reasonCode;
+              }
+          }
+      }
+
+      // ======================================================
+      // GREEN LIST: your existing "currently halted today" logic
+      // ======================================================
       if ($date == $currentDate)
       {
         if (!in_array($symbol, $haltSymbolList)) {
@@ -419,7 +462,8 @@ function getTradeHalts()
                 // Filters
                 $alreadyTraded = in_array($symbol, $orderSymbols);
 
-                if (!$alreadyTraded) {
+                // Dedupe: don't green-list something already flagged red
+                if (!$alreadyTraded && !isset($resumingToday[$symbol])) {
                     $currentlyHalted[$symbol] = $reasonCode;
                 }
             }     
@@ -429,6 +473,7 @@ function getTradeHalts()
 
     $returnArray['halt_symbol_list'] = json_encode($haltSymbolList); 
     $returnArray['currently_halted'] = json_encode($currentlyHalted); 
+    $returnArray['resuming_today']   = json_encode($resumingToday);   // <-- NEW
 
     return $returnArray; 
 }

@@ -435,14 +435,36 @@ function playDelist(){
     window.sounds.delist.play().catch(e => console.log("Play failed:", e));
 }
 
-function generateHaltedStocksTable(stocks) {
-    let table = '<table id="haltedTable" style="border: 1px solid black; border-collapse: collapse; background-color: #00ff00; width: 100%; text-align: center;">';
+function generateHaltedStocksTable(stocks, resumingToday) {
+    // Guard against undefined/null being passed in
+    stocks = stocks || {};
+    resumingToday = resumingToday || {};
+
+    let table = '<table id="haltedTable" style="border: 1px solid black; border-collapse: collapse; width: 100%; text-align: center;">';
     table += '<thead><tr style="height: 15px !important;"><th style="border: 1px solid black;">Symbol</th><th style="border: 1px solid black;">Reason</th><th style="border: 1px solid black;"></th></tr></thead>';
     table += '<tbody>';
 
+    // --- RED ROWS FIRST: resuming-today candidates (the high-value setup) ---
+    for (const [symbol, reasonCode] of Object.entries(resumingToday)) {
+        table += `
+            <tr style="height: 15px !important; background-color: #ffb3b3;">
+                <td style="border: 1px solid black;">
+                    <a target="_blank" href="http://ec2-52-89-7-59.us-west-2.compute.amazonaws.com/newslookup/index.php?symbol=${symbol}&check-sec=1">${symbol}</a>
+                </td>
+                <td style="border: 1px solid black;">${reasonCode}</td>
+                <td style="border: 1px solid black;">
+                    <span class="ignore-btn" data-symbol="${symbol}" style="cursor:pointer; color:blue; text-decoration:underline;">
+                        ignore
+                    </span>
+                </td>
+            </tr>
+        `;
+    }
+
+    // --- GREEN ROWS: currently-halted (your existing behavior) ---
     for (const [symbol, reasonCode] of Object.entries(stocks)) {
         table += `
-            <tr style="height: 15px !important;">
+            <tr style="height: 15px !important; background-color: #00ff00;">
                 <td style="border: 1px solid black;">
                     <a target="_blank" href="http://ec2-52-89-7-59.us-west-2.compute.amazonaws.com/newslookup/index.php?symbol=${symbol}&check-sec=1">${symbol}</a>
                 </td>
@@ -1613,11 +1635,12 @@ Highcharts.stockChart('monthlyOHLC', {
               yahooHtmlResults = finalObject.final_return; 
               haltSymbolList = JSON.parse(finalObject.halt_symbol_list); 
               currentlyHaltedList = JSON.parse(finalObject.currently_halted);
+              resumingTodayList = JSON.parse(finalObject.resuming_today);
               descriptionRegex = finalObject.descriptionRegex; 
 
-              if (Object.keys(currentlyHaltedList).length > 0) {
-                  playCheckTradeHalts();  
-              }
+                if (Object.keys(currentlyHaltedList).length > 0 || Object.keys(resumingTodayList).length > 0) {
+                    playCheckTradeHalts();  
+                }
 
               if (haltSymbolList.includes(original_symbol))
               {
@@ -1675,11 +1698,12 @@ Highcharts.stockChart('monthlyOHLC', {
                     "<button onclick='chatGPTHalts(\"" + symbol + "\")'>HALTS</button> &nbsp; "   
 );
 
-              var currentlyHaltedKeys = Object.keys(currentlyHaltedList); 
+              var currentlyHaltedKeys = Object.keys(currentlyHaltedList);
+              var resumingTodayKeys   = Object.keys(resumingTodayList);
 
-              if (currentlyHaltedKeys.length > 0)              
+              if (currentlyHaltedKeys.length > 0 || resumingTodayKeys.length > 0)
               {
-                $("div#bigcharts_yest_close").append(generateHaltedStocksTable(currentlyHaltedList)); 
+                  $("div#bigcharts_yest_close").append(generateHaltedStocksTable(currentlyHaltedList, resumingTodayList));
               }
 
               $("div#bigcharts_yest_close").append(descriptionRegex); 
@@ -1852,120 +1876,112 @@ Highcharts.stockChart('monthlyOHLC', {
 
 var corporateActionsStocks=
 {
-  "YXT": "REVERSE SPLIT 0 TRADING DAYS AGO!!!!!!!!!",
-  "LGHL": "REVERSE SPLIT 0 TRADING DAYS AGO!!!!!!!!!",
-  "JEM": "REVERSE SPLIT 0 TRADING DAYS AGO!!!!!!!!!",
-  "YHC": "REVERSE SPLIT 1 TRADING DAYS AGO!!!!!!!!!",
-  "XAIR": "REVERSE SPLIT 1 TRADING DAYS AGO!!!!!!!!!",
-  "SKHY": "WAS LISTED 2 TRADING DAYS AGO!!! AT LEAST 38 PERCENT!!!",
-  "PSQH": "REVERSE SPLIT 1 TRADING DAYS AGO!!!!!!!!!",
-  "FTFT": "REVERSE SPLIT 1 TRADING DAYS AGO!!!!!!!!!",
-  "EDBL": "REVERSE SPLIT 1 TRADING DAYS AGO!!!!!!!!!",
-  "CPOP": "REVERSE SPLIT 1 TRADING DAYS AGO!!!!!!!!!",
-  "CCHH": "REVERSE SPLIT 1 TRADING DAYS AGO!!!!!!!!!",
-  "BIYA": "REVERSE SPLIT 1 TRADING DAYS AGO!!!!!!!!!",
-  "YMAT": "REVERSE SPLIT 2 TRADING DAYS AGO!!!!!!!!!",
-  "GIPR": "REVERSE SPLIT 2 TRADING DAYS AGO!!!!!!!!!",
-  "RBNE": "REVERSE SPLIT 3 TRADING DAYS AGO!!!!!!!!!",
-  "PMA": "SYMBOL CHANGE 3 TRADING DAYS AGO!!! 38 PERCENT!!!",
-  "ENLV": "REVERSE SPLIT 3 TRADING DAYS AGO!!!!!!!!!",
-  "CEPL": "WAS LISTED 4 TRADING DAYS AGO!!! AT LEAST 38 PERCENT!!!",
-  "PFSA": "REVERSE SPLIT 5 TRADING DAYS AGO!!!!!!!!!",
-  "NCRA": "REVERSE SPLIT 5 TRADING DAYS AGO!!!!!!!!!",
-  "MIDD": "NEW SYMBOL AS OF 5 TRADING DAYS AGO!!! AT LEAST 38 PERCENT!!!",
-  "MFP": "WAS LISTED 5 TRADING DAYS AGO!!! AT LEAST 38 PERCENT!!!",
-  "CGTL": "REVERSE SPLIT 5 TRADING DAYS AGO!!!!!!!!!",
-  "VCRE": "WAS LISTED 6 TRADING DAYS AGO!!! AT LEAST 38 PERCENT!!!",
-  "SRXH": "REVERSE SPLIT 6 TRADING DAYS AGO!!!!!!!!!",
-  "SNAL": "REVERSE SPLIT 6 TRADING DAYS AGO!!!!!!!!!",
-  "SLAI": "REVERSE SPLIT 6 TRADING DAYS AGO!!!!!!!!!",
-  "NVVE": "REVERSE SPLIT 6 TRADING DAYS AGO!!!!!!!!!",
-  "NTCL": "REVERSE SPLIT 6 TRADING DAYS AGO!!!!!!!!!",
-  "NMAD": "SYMBOL CHANGE 6 TRADING DAYS AGO!!! 38 PERCENT!!!",
-  "NIVF": "REVERSE SPLIT 6 TRADING DAYS AGO!!!!!!!!!",
-  "NIPG": "REVERSE SPLIT 6 TRADING DAYS AGO!!!!!!!!!",
-  "JZ": "REVERSE SPLIT 6 TRADING DAYS AGO!!!!!!!!!",
-  "INLF": "REVERSE SPLIT 6 TRADING DAYS AGO!!!!!!!!!",
-  "HKIT": "REVERSE SPLIT 6 TRADING DAYS AGO!!!!!!!!!",
-  "CRIS": "REVERSE SPLIT 6 TRADING DAYS AGO!!!!!!!!!",
-  "ABTC": "REVERSE SPLIT 6 TRADING DAYS AGO!!!!!!!!!",
-  "SECZ": "SYMBOL CHANGE 8 TRADING DAYS AGO!!! 38 PERCENT!!!",
-  "LIME": "WAS LISTED 8 TRADING DAYS AGO!!! AT LEAST 38 PERCENT!!!",
-  "ITG": "WAS LISTED 8 TRADING DAYS AGO!!! AT LEAST 38 PERCENT!!!",
-  "IQMX": "SYMBOL CHANGE 8 TRADING DAYS AGO!!! 38 PERCENT!!!",
-  "GMEX": "REVERSE SPLIT 8 TRADING DAYS AGO!!!!!!!!!",
-  "FXHO": "REVERSE SPLIT 16 TRADING DAYS AGO!!!!!!!!!",
-  "COPR": "WAS LISTED 8 TRADING DAYS AGO!!! AT LEAST 38 PERCENT!!!",
-  "CIRC": "SYMBOL CHANGE 8 TRADING DAYS AGO!!! 38 PERCENT!!!",
-  "RMTI": "REVERSE SPLIT 9 TRADING DAYS AGO!!!!!!!!!",
-  "NSLR": "SYMBOL CHANGE 9 TRADING DAYS AGO!!! 38 PERCENT!!!",
-  "MQ": "REVERSE SPLIT 9 TRADING DAYS AGO!!!!!!!!!",
-  "MBGL": "WAS LISTED 9 TRADING DAYS AGO!!! AT LEAST 38 PERCENT!!!",
-  "HODO": "SYMBOL CHANGE 9 TRADING DAYS AGO!!! 38 PERCENT!!!",
-  "BSP": "WAS LISTED 9 TRADING DAYS AGO!!! AT LEAST 38 PERCENT!!!",
-  "ALIT": "REVERSE SPLIT 9 TRADING DAYS AGO!!!!!!!!!",
-  "TRNR": "REVERSE SPLIT 10 TRADING DAYS AGO!!!!!!!!!",
-  "QNCX": "REVERSE SPLIT 10 TRADING DAYS AGO!!!!!!!!!",
-  "JBDI": "REVERSE SPLIT 10 TRADING DAYS AGO!!!!!!!!!",
-  "HCWB": "REVERSE SPLIT 10 TRADING DAYS AGO!!!!!!!!!",
-  "GLAS": "WAS LISTED 10 TRADING DAYS AGO!!! AT LEAST 38 PERCENT!!!",
-  "ZCMD": "REVERSE SPLIT 11 TRADING DAYS AGO!!!!!!!!!",
-  "PAVS": "REVERSE SPLIT 11 TRADING DAYS AGO!!!!!!!!!",
-  "MNDR": "REVERSE SPLIT 11 TRADING DAYS AGO!!!!!!!!!",
-  "HONA": "WAS LISTED 11 TRADING DAYS AGO!!! AT LEAST 38 PERCENT!!!",
-  "HON": "NEW SYMBOL AS OF 11 TRADING DAYS AGO!!! AT LEAST 38 PERCENT!!!",
-  "GIBO": "REVERSE SPLIT 11 TRADING DAYS AGO!!!!!!!!!",
-  "GDC": "REVERSE SPLIT 11 TRADING DAYS AGO!!!!!!!!!",
-  "DMC": "SYMBOL CHANGE 11 TRADING DAYS AGO!!! 38 PERCENT!!!",
-  "VRAX": "REVERSE SPLIT 12 TRADING DAYS AGO!!!!!!!!!",
-  "USDE": "WAS LISTED 12 TRADING DAYS AGO!!! AT LEAST 38 PERCENT!!!",
-  "SIND": "WAS LISTED 12 TRADING DAYS AGO!!! AT LEAST 38 PERCENT!!!",
-  "RUBI": "REVERSE SPLIT 12 TRADING DAYS AGO!!!!!!!!!",
-  "NUWE": "REVERSE SPLIT 12 TRADING DAYS AGO!!!!!!!!!",
-  "NAMI": "REVERSE SPLIT 13 TRADING DAYS AGO!!!!!!!!!",
-  "DSC": "WAS LISTED 13 TRADING DAYS AGO!!! AT LEAST 38 PERCENT!!!",
-  "DPC": "WAS LISTED 13 TRADING DAYS AGO!!! AT LEAST 38 PERCENT!!!",
-  "ORISF": "REVERSE SPLIT 16 TRADING DAYS AGO!!!!!!!!!",
-  "ECHO": "SYMBOL CHANGE 14 TRADING DAYS AGO!!! 38 PERCENT!!!",
-  "DD": "REVERSE SPLIT 14 TRADING DAYS AGO!!!!!!!!!",
-  "AMIX": "REVERSE SPLIT 14 TRADING DAYS AGO!!!!!!!!!",
-  "YYGH": "REVERSE SPLIT 15 TRADING DAYS AGO!!!!!!!!!",
-  "TMS": "SYMBOL CHANGE 15 TRADING DAYS AGO!!! 38 PERCENT!!!",
-  "ILLR": "REVERSE SPLIT 15 TRADING DAYS AGO!!!!!!!!!",
-  "FCUV": "REVERSE SPLIT 15 TRADING DAYS AGO!!!!!!!!!",
-  "DEVSF": "SYMBOL CHANGE 15 TRADING DAYS AGO!!! 38 PERCENT!!!",
-  "WLDS": "REVERSE SPLIT 16 TRADING DAYS AGO!!!!!!!!!",
-  "SNBRQ": "SYMBOL CHANGE 16 TRADING DAYS AGO!!! 38 PERCENT!!!",
-  "POM": "REVERSE SPLIT 16 TRADING DAYS AGO!!!!!!!!!",
-  "MTNE": "SYMBOL CHANGE 16 TRADING DAYS AGO!!! 38 PERCENT!!!",
-  "LHSW": "REVERSE SPLIT 16 TRADING DAYS AGO!!!!!!!!!",
-  "LABT": "REVERSE SPLIT 16 TRADING DAYS AGO!!!!!!!!!",
-  "HAPN": "SYMBOL CHANGE 16 TRADING DAYS AGO!!! 38 PERCENT!!!",
-  "FIRY": "SYMBOL CHANGE 16 TRADING DAYS AGO!!! 38 PERCENT!!!",
-  "BOXL": "REVERSE SPLIT 16 TRADING DAYS AGO!!!!!!!!!",
-  "BMGL": "REVERSE SPLIT 16 TRADING DAYS AGO!!!!!!!!!",
-  "WOK": "REVERSE SPLIT 18 TRADING DAYS AGO!!!!!!!!!",
-  "KARD": "WAS LISTED 18 TRADING DAYS AGO!!! AT LEAST 38 PERCENT!!!",
-  "FISN": "WAS LISTED 18 TRADING DAYS AGO!!! AT LEAST 38 PERCENT!!!",
-  "FCBM": "WAS LISTED 18 TRADING DAYS AGO!!! AT LEAST 38 PERCENT!!!",
-  "VMAR": "REVERSE SPLIT 19 TRADING DAYS AGO!!!!!!!!!",
-  "UPLD": "REVERSE SPLIT 19 TRADING DAYS AGO!!!!!!!!!",
-  "KAZR": "SYMBOL CHANGE 19 TRADING DAYS AGO!!! 38 PERCENT!!!",
-  "FTH": "SYMBOL CHANGE 19 TRADING DAYS AGO!!! 38 PERCENT!!!",
-  "CXII": "SYMBOL CHANGE 19 TRADING DAYS AGO!!! 38 PERCENT!!!",
-  "CTHH": "WAS LISTED 19 TRADING DAYS AGO!!! AT LEAST 38 PERCENT!!!",
-  "CTGG": "WAS LISTED 19 TRADING DAYS AGO!!! AT LEAST 38 PERCENT!!!",
-  "CAES": "WAS LISTED 19 TRADING DAYS AGO!!! AT LEAST 38 PERCENT!!!",
-  "FLZH": "SYMBOL CHANGE 20 TRADING DAYS AGO!!! 38 PERCENT!!!",
-  "CREG": "REVERSE SPLIT 20 TRADING DAYS AGO!!!!!!!!!",
-  "BMNP": "WAS LISTED 20 TRADING DAYS AGO!!! AT LEAST 38 PERCENT!!!",
-  "AIFU": "REVERSE SPLIT 20 TRADING DAYS AGO!!!!!!!!!",
-  "TDIC": "REVERSE SPLIT 21 TRADING DAYS AGO!!!!!!!!!",
-  "SLBT": "SYMBOL CHANGE 21 TRADING DAYS AGO!!! 38 PERCENT!!!",
-  "GOCOQ": "SYMBOL CHANGE 21 TRADING DAYS AGO!!! 38 PERCENT!!!",
-  "AVX": "REVERSE SPLIT 21 TRADING DAYS AGO!!!!!!!!!",
-  "AMOD": "REVERSE SPLIT 21 TRADING DAYS AGO!!!!!!!!!"
+  "OFAL": "REVERSE SPLIT 0 TRADING DAYS AGO!!!!!!!!!",
+  "NEXR": "REVERSE SPLIT 0 TRADING DAYS AGO!!!!!!!!!",
+  "CSAI": "REVERSE SPLIT 0 TRADING DAYS AGO!!!!!!!!!",
+  "YAAS": "REVERSE SPLIT 1 TRADING DAYS AGO!!!!!!!!!",
+  "YARW": "REVERSE SPLIT 4 TRADING DAYS AGO!!!!!!!!!",
+  "ZNB": "REVERSE SPLIT 4 TRADING DAYS AGO!!!!!!!!!",
+  "TRNZ": "SYMBOL CHANGE 4 TRADING DAYS AGO!!! 38 PERCENT!!!",
+  "TRNI": "SYMBOL CHANGE 4 TRADING DAYS AGO!!! 38 PERCENT!!!",
+  "TONT": "SYMBOL CHANGE 4 TRADING DAYS AGO!!! 38 PERCENT!!!",
+  "STKH": "REVERSE SPLIT 4 TRADING DAYS AGO!!!!!!!!!",
+  "SGLY": "REVERSE SPLIT 4 TRADING DAYS AGO!!!!!!!!!",
+  "SBEV": "REVERSE SPLIT 4 TRADING DAYS AGO!!!!!!!!!",
+  "LTGR": "SYMBOL CHANGE 4 TRADING DAYS AGO!!! 38 PERCENT!!!",
+  "IPVV": "SYMBOL CHANGE 4 TRADING DAYS AGO!!! 38 PERCENT!!!",
+  "AMZE": "REVERSE SPLIT 4 TRADING DAYS AGO!!!!!!!!!",
+  "VIP": "SYMBOL CHANGE 5 TRADING DAYS AGO!!! 38 PERCENT!!!",
+  "TRIB": "REVERSE SPLIT 5 TRADING DAYS AGO!!!!!!!!!",
+  "SCTX": "WAS LISTED 5 TRADING DAYS AGO!!! AT LEAST 38 PERCENT!!!",
+  "FFAI": "REVERSE SPLIT 5 TRADING DAYS AGO!!!!!!!!!",
+  "DBGI": "REVERSE SPLIT 5 TRADING DAYS AGO!!!!!!!!!",
+  "BIOT": "WAS LISTED 5 TRADING DAYS AGO!!! AT LEAST 38 PERCENT!!!",
+  "APUS": "REVERSE SPLIT 5 TRADING DAYS AGO!!!!!!!!!",
+  "PWCM": "REVERSE SPLIT 14 TRADING DAYS AGO!!!!!!!!!",
+  "MSS": "REVERSE SPLIT 7 TRADING DAYS AGO!!!!!!!!!",
+  "MEDS": "SYMBOL CHANGE 7 TRADING DAYS AGO!!! 38 PERCENT!!!",
+  "CHGA": "SYMBOL CHANGE 7 TRADING DAYS AGO!!! 38 PERCENT!!!",
+  "XPON": "REVERSE SPLIT 8 TRADING DAYS AGO!!!!!!!!!",
+  "FRNM": "SYMBOL CHANGE 8 TRADING DAYS AGO!!! 38 PERCENT!!!",
+  "CIGL": "SYMBOL CHANGE 8 TRADING DAYS AGO!!! 38 PERCENT!!!",
+  "CANG": "REVERSE SPLIT 8 TRADING DAYS AGO!!!!!!!!!",
+  "TOMZ": "REVERSE SPLIT 9 TRADING DAYS AGO!!!!!!!!!",
+  "PRPL": "REVERSE SPLIT 9 TRADING DAYS AGO!!!!!!!!!",
+  "OGG": "SYMBOL CHANGE 9 TRADING DAYS AGO!!! 38 PERCENT!!!",
+  "NIKI": "REVERSE SPLIT 9 TRADING DAYS AGO!!!!!!!!!",
+  "MF": "SYMBOL CHANGE 9 TRADING DAYS AGO!!! 38 PERCENT!!!",
+  "DFNS": "REVERSE SPLIT 9 TRADING DAYS AGO!!!!!!!!!",
+  "CUVL": "WAS LISTED 9 TRADING DAYS AGO!!! AT LEAST 38 PERCENT!!!",
+  "CIIT": "REVERSE SPLIT 9 TRADING DAYS AGO!!!!!!!!!",
+  "CDT": "REVERSE SPLIT 9 TRADING DAYS AGO!!!!!!!!!",
+  "CCG": "REVERSE SPLIT 9 TRADING DAYS AGO!!!!!!!!!",
+  "BANL": "REVERSE SPLIT 9 TRADING DAYS AGO!!!!!!!!!",
+  "VIVK": "REVERSE SPLIT 10 TRADING DAYS AGO!!!!!!!!!",
+  "SHOT": "SYMBOL CHANGE 10 TRADING DAYS AGO!!! 38 PERCENT!!!",
+  "STDN": "WAS LISTED 11 TRADING DAYS AGO!!! AT LEAST 38 PERCENT!!!",
+  "QMLS": "WAS LISTED 11 TRADING DAYS AGO!!! AT LEAST 38 PERCENT!!!",
+  "GNPX": "REVERSE SPLIT 11 TRADING DAYS AGO!!!!!!!!!",
+  "DPU": "SYMBOL CHANGE 11 TRADING DAYS AGO!!! 38 PERCENT!!!",
+  "CSQR": "WAS LISTED 11 TRADING DAYS AGO!!! AT LEAST 38 PERCENT!!!",
+  "YXT": "REVERSE SPLIT 13 TRADING DAYS AGO!!!!!!!!!",
+  "LGHL": "REVERSE SPLIT 13 TRADING DAYS AGO!!!!!!!!!",
+  "JEM": "REVERSE SPLIT 13 TRADING DAYS AGO!!!!!!!!!",
+  "YICC": "SYMBOL CHANGE 14 TRADING DAYS AGO!!! 38 PERCENT!!!",
+  "YHC": "REVERSE SPLIT 14 TRADING DAYS AGO!!!!!!!!!",
+  "XAIR": "REVERSE SPLIT 14 TRADING DAYS AGO!!!!!!!!!",
+  "SKHY": "WAS LISTED 15 TRADING DAYS AGO!!! AT LEAST 38 PERCENT!!!",
+  "RACD": "WAS LISTED 14 TRADING DAYS AGO!!! AT LEAST 38 PERCENT!!!",
+  "PSQH": "REVERSE SPLIT 14 TRADING DAYS AGO!!!!!!!!!",
+  "GFUZ": "SYMBOL CHANGE 14 TRADING DAYS AGO!!! 38 PERCENT!!!",
+  "FTFT": "REVERSE SPLIT 14 TRADING DAYS AGO!!!!!!!!!",
+  "EDBL": "REVERSE SPLIT 14 TRADING DAYS AGO!!!!!!!!!",
+  "CPOP": "REVERSE SPLIT 14 TRADING DAYS AGO!!!!!!!!!",
+  "CCHH": "REVERSE SPLIT 14 TRADING DAYS AGO!!!!!!!!!",
+  "BIYA": "REVERSE SPLIT 14 TRADING DAYS AGO!!!!!!!!!",
+  "YMAT": "REVERSE SPLIT 15 TRADING DAYS AGO!!!!!!!!!",
+  "GIPR": "REVERSE SPLIT 15 TRADING DAYS AGO!!!!!!!!!",
+  "RBNE": "REVERSE SPLIT 16 TRADING DAYS AGO!!!!!!!!!",
+  "PMA": "SYMBOL CHANGE 16 TRADING DAYS AGO!!! 38 PERCENT!!!",
+  "ENLV": "REVERSE SPLIT 16 TRADING DAYS AGO!!!!!!!!!",
+  "CEPL": "WAS LISTED 17 TRADING DAYS AGO!!! AT LEAST 38 PERCENT!!!",
+  "PFSA": "REVERSE SPLIT 18 TRADING DAYS AGO!!!!!!!!!",
+  "NCRA": "REVERSE SPLIT 18 TRADING DAYS AGO!!!!!!!!!",
+  "MIDD": "NEW SYMBOL AS OF 18 TRADING DAYS AGO!!! AT LEAST 38 PERCENT!!!",
+  "MFP": "WAS LISTED 18 TRADING DAYS AGO!!! AT LEAST 38 PERCENT!!!",
+  "CGTL": "REVERSE SPLIT 18 TRADING DAYS AGO!!!!!!!!!",
+  "VCRE": "WAS LISTED 19 TRADING DAYS AGO!!! AT LEAST 38 PERCENT!!!",
+  "SRXH": "REVERSE SPLIT 19 TRADING DAYS AGO!!!!!!!!!",
+  "SNAL": "REVERSE SPLIT 19 TRADING DAYS AGO!!!!!!!!!",
+  "SLAI": "REVERSE SPLIT 19 TRADING DAYS AGO!!!!!!!!!",
+  "NVVE": "REVERSE SPLIT 19 TRADING DAYS AGO!!!!!!!!!",
+  "NTCL": "REVERSE SPLIT 19 TRADING DAYS AGO!!!!!!!!!",
+  "NMAD": "SYMBOL CHANGE 19 TRADING DAYS AGO!!! 38 PERCENT!!!",
+  "NIVF": "REVERSE SPLIT 19 TRADING DAYS AGO!!!!!!!!!",
+  "NIPG": "REVERSE SPLIT 19 TRADING DAYS AGO!!!!!!!!!",
+  "JZ": "REVERSE SPLIT 19 TRADING DAYS AGO!!!!!!!!!",
+  "INLF": "REVERSE SPLIT 19 TRADING DAYS AGO!!!!!!!!!",
+  "HKIT": "REVERSE SPLIT 19 TRADING DAYS AGO!!!!!!!!!",
+  "CRIS": "REVERSE SPLIT 19 TRADING DAYS AGO!!!!!!!!!",
+  "ABTC": "REVERSE SPLIT 19 TRADING DAYS AGO!!!!!!!!!",
+  "SECZ": "SYMBOL CHANGE 21 TRADING DAYS AGO!!! 38 PERCENT!!!",
+  "LIME": "WAS LISTED 21 TRADING DAYS AGO!!! AT LEAST 38 PERCENT!!!",
+  "ITG": "WAS LISTED 21 TRADING DAYS AGO!!! AT LEAST 38 PERCENT!!!",
+  "IQMX": "SYMBOL CHANGE 21 TRADING DAYS AGO!!! 38 PERCENT!!!",
+  "GMEX": "REVERSE SPLIT 21 TRADING DAYS AGO!!!!!!!!!",
+  "FXHO": "SYMBOL CHANGE 21 TRADING DAYS AGO!!! 38 PERCENT!!!",
+  "COPR": "WAS LISTED 21 TRADING DAYS AGO!!! AT LEAST 38 PERCENT!!!",
+  "CIRC": "SYMBOL CHANGE 21 TRADING DAYS AGO!!! 38 PERCENT!!!",
+  "RMTI": "REVERSE SPLIT 22 TRADING DAYS AGO!!!!!!!!!",
+  "NSLR": "SYMBOL CHANGE 22 TRADING DAYS AGO!!! 38 PERCENT!!!",
+  "MQ": "REVERSE SPLIT 22 TRADING DAYS AGO!!!!!!!!!",
+  "MBGL": "WAS LISTED 22 TRADING DAYS AGO!!! AT LEAST 38 PERCENT!!!",
+  "HODO": "SYMBOL CHANGE 22 TRADING DAYS AGO!!! 38 PERCENT!!!",
+  "BSP": "WAS LISTED 22 TRADING DAYS AGO!!! AT LEAST 38 PERCENT!!!",
+  "ALIT": "REVERSE SPLIT 22 TRADING DAYS AGO!!!!!!!!!"
 };
+
+
 
 for (var corporateSymbol in corporateActionsStocks)
 {
@@ -2263,7 +2279,7 @@ for (var corporateSymbol in corporateActionsStocks)
       amount = amount/2; 
       $("#amountSpending").val(amount);
 */
-      $("#amountSpending").val("100"); 
+      $("#amountSpending").val("200"); 
 
       calcAll();
       CopyToClipboard();  
