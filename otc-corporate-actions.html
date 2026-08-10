@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OTC Corporate Actions — OHLC Lookup</title>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-chart-financial@0.2.1/dist/chartjs-chart-financial.min.js"></script>
+
+<style>
+  body {
+    font-family: -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+    max-width: 900px;
+    margin: 20px auto;
+    padding: 0 16px;
+    color: #1a1a1a;
+  }
+  h1 { font-size: 20px; margin-bottom: 4px; }
+  .sub { color: #666; font-size: 13px; margin-top: 0; }
+
+  .toggle-row { margin: 16px 0 8px; }
+  .toggle-row label { margin-right: 18px; font-weight: 600; cursor: pointer; }
+
+  textarea {
+    width: 100%;
+    height: 220px;
+    font-family: Menlo, Consolas, monospace;
+    font-size: 12px;
+    padding: 10px;
+    box-sizing: border-box;
+    border: 1px solid #bbb;
+    border-radius: 6px;
+    resize: vertical;
+  }
+
+  .btn {
+    margin-top: 10px;
+    padding: 9px 18px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #fff;
+    background: #2a63d6;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+  .btn:disabled { background: #9bb4e6; cursor: default; }
+
+  #status { margin: 12px 0; font-size: 13px; color: #444; }
+
+  .report { margin-top: 20px; }
+  .entry {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 12px 14px;
+    margin-bottom: 18px;
+  }
+  .entry-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 8px;
+  }
+  .entry-symbol { font-size: 16px; font-weight: 700; }
+  .entry-meta { font-size: 12px; color: #777; }
+  .nodata { color: #b00020; font-weight: 600; font-size: 14px; padding: 6px 0; }
+  .used-fallback { color: #a06400; font-size: 12px; }
+  .chart-wrap { position: relative; height: 260px; }
+  .vol-wrap   { position: relative; height: 90px; margin-top: 4px; }
+  .pending { color: #888; font-size: 13px; }
+</style>
+</head>
+<body>
+
+<h1>OTC Corporate Actions — OHLC Lookup</h1>
+<p class="sub">Paste the copied table from OTC Markets, choose the type, and process. Symbols with a "." are skipped; only 4–5 letter tickers are used.</p>
+
+<div class="toggle-row">
+  <label><input type="radio" name="ctype" value="symbol" checked> Symbol Changes</label>
+  <label><input type="radio" name="ctype" value="venue"> Venue Changes</label>
+</div>
+
+<textarea id="pasteBox" placeholder="Paste the copied OTC Markets table here (including or excluding the header row — both work)."></textarea>
+<br>
+<button id="goBtn" class="btn">Process</button>
+
+<div id="status"></div>
+<div id="report" class="report"></div>
+
+<script>
+// ---- Register the financial chart controllers with Chart.js ----
+// (chartjs-chart-financial registers 'candlestick' and 'ohlc' types)
+
+const BACKEND = "otc-corporate-actions.php";
+
+/**
+ * Clean a raw "New Symbol"/"Old Symbol" cell into a bare ticker.
+ * The New Symbol cell often has icon alt-text glued in front, e.g.
+ *   "OTCID Market LogoLINMF"      -> LINMF
+ *   "Limited Information IconLGSXY" -> LGSXY
+ * Rule you specified: we only use 4- or 5-letter tickers, and skip any
+ * symbol containing a ".".  So we extract the TRAILING run of 4–5
+ * uppercase letters. Returns "" if none / if it contains a dot.
+ */
+function cleanTicker(raw) {
+  if (!raw) return "";
+  const s = raw.trim();
+  if (s.indexOf(".") !== -1) return "";        // skip anything with a dot
+  // grab a trailing run of 4 or 5 uppercase letters
+  const m = s.match(/([A-Z]{4,5})\s*$/);
+  if (!m) return "";
+  return m[1];
+}
+
+/**
+ * Parse the pasted text into rows of {oldSym, newSym}.
+ * Handles both formats (symbol changes / venue changes); we only need
+ * the Old Symbol (col 2) and New Symbol (col 3) from either.
+ * Skips a header line if present, and any blank lines.
+ */
+function parsePaste(text) {
+  const lines = text.split(/\r?\n/);
+  const rows = [];
+  for (let line of lines) {
+    if (!line.trim()) continue;
+    // split on tabs (the copied table is tab-separated)
+    const cols = line.split("\t");
+    if (cols.length < 3) continue;             // not a data row
+    // skip header row
+    if (/old\s*symbol/i.test(cols[1]) || /^date$/i.test(cols[0].trim())) continue;
+    // skip a stray "Symbol Changes"/"Venue Changes" title line
+    if (cols.length < 3) continue;
+
+    const oldRaw = cols[1];
+    const newRaw = cols[2];
+    rows.push({
+      oldSym: cleanTicker(oldRaw),
+      newSym: cleanTicker(newRaw),
+      rawNew: newRaw.trim(),
+      rawOld: oldRaw.trim()
+    });
+  }
+  return rows;
+}
+
+function el(tag, cls, txt) {
+  const e = document.createElement(tag);
+  if (cls) e.className = cls;
+  if (txt !== undefined) e.textContent = txt;
+  return e;
+}
+
+/**
+ * Build a price (OHLC) chart + a volume chart for one symbol's data.
+ * ohlc: array of {date, open, high, low, close, volume} oldest-first.
+ */
+function renderCharts(container, symbolUsed, ohlc) {
+  // --- price (OHLC) chart --- uses category x-axis (date strings), no date adapter needed
+  const priceWrap = el("div", "chart-wrap");
+  const priceCanvas = document.createElement("canvas");
+  priceWrap.appendChild(priceCanvas);
+  container.appendChild(priceWrap);
+
+  const labels = ohlc.map(r => r.date);
+
+  // For the financial 'ohlc' type with a category axis, x is the category index.
+  const ohlcData = ohlc.map((r, i) => ({
+    x: i, o: r.open, h: r.high, l: r.low, c: r.close
+  }));
+
+  new Chart(priceCanvas.getContext("2d"), {
+    type: "candlestick",
+    data: {
+      labels: labels,
+      datasets: [{
+        label: symbolUsed + " price",
+        data: ohlcData,
+        color: {
+          up:        "#0a8f3c",   // green up candles
+          down:      "#c0271b",   // red down candles
+          unchanged: "#888"
+        },
+        borderColor: {
+          up:        "#0a8f3c",
+          down:      "#c0271b",
+          unchanged: "#888"
+        }
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      parsing: false,
+      plugins: { legend: { display: true } },
+      scales: {
+        x: { type: "category", labels: labels, ticks: { maxRotation: 0, autoSkip: true, font: { size: 9 } } },
+        y: { position: "right" }
+      }
+    }
+  });
+
+  // --- volume chart ---
+  const volWrap = el("div", "vol-wrap");
+  const volCanvas = document.createElement("canvas");
+  volWrap.appendChild(volCanvas);
+  container.appendChild(volWrap);
+
+  new Chart(volCanvas.getContext("2d"), {
+    type: "bar",
+    data: {
+      labels: labels,
+      datasets: [{
+        label: "Volume",
+        data: ohlc.map(r => r.volume),
+        backgroundColor: "#5a7fc0"
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: { legend: { display: false } },
+      scales: {
+        x: { ticks: { maxRotation: 0, autoSkip: true, font: { size: 9 } } },
+        y: { position: "right", ticks: { font: { size: 9 } } }
+      }
+    }
+  });
+}
+
+async function lookupRow(type, row) {
+  // Decide which symbol(s) to send.
+  // Symbol Changes: primary = newSym, fallback = oldSym
+  // Venue Changes : primary = newSym, no fallback
+  const primary  = row.newSym;
+  const fallback = (type === "symbol") ? row.oldSym : "";
+
+  // If we have no usable primary (e.g., it had a dot or wasn't 4-5 letters),
+  // but this is a symbol-change with a usable fallback, use the fallback as primary.
+  let sendSymbol = primary;
+  let sendFallback = fallback;
+  if (!sendSymbol && sendFallback) {
+    sendSymbol = sendFallback;
+    sendFallback = "";
+  }
+
+  if (!sendSymbol) {
+    return { status: "skipped" };
+  }
+
+  const body = new URLSearchParams();
+  body.append("symbol", sendSymbol);
+  if (sendFallback) body.append("fallback", sendFallback);
+
+  const resp = await fetch(BACKEND, {
+    method: "POST",
+    headers: { "Content-Type": "application/x-www-form-urlencoded" },
+    body: body.toString()
+  });
+  return await resp.json();
+}
+
+// Insert a space between a known icon-label prefix and the ticker, for display.
+function spacePrefix(raw) {
+  if (!raw) return raw;
+  return raw.replace(
+    /(Limited Information Icon|OTCID Market Logo|Expert Market Icon|OTCQB Venture Market Logo|OTCQX .*? Market Logo|Pink .*? Logo|Grey Market Logo)/g,
+    "$1 "
+  ).replace(/\s+/g, " ").trim();
+}
+
+document.getElementById("goBtn").addEventListener("click", async () => {
+  const btn = document.getElementById("goBtn");
+  const statusEl = document.getElementById("status");
+  const report = document.getElementById("report");
+  report.innerHTML = "";
+
+  const type = document.querySelector('input[name="ctype"]:checked').value;
+  const text = document.getElementById("pasteBox").value;
+  const rows = parsePaste(text);
+
+  if (rows.length === 0) {
+    statusEl.textContent = "No data rows found in the pasted text.";
+    return;
+  }
+
+  btn.disabled = true;
+  statusEl.textContent = `Processing ${rows.length} row(s)…`;
+
+  // Process sequentially (≤ ~10 rows, gentle on the API).
+  for (let i = 0; i < rows.length; i++) {
+    const row = rows[i];
+
+    // Build the entry shell up front so the user sees progress.
+    const entry = el("div", "entry");
+    const head = el("div", "entry-head");
+    const displaySym = row.newSym || row.oldSym || row.rawNew || "(unparseable)";
+
+    const symDiv = el("div", "entry-symbol");
+    const symLink = document.createElement("a");
+    symLink.href = "http://ec2-52-89-7-59.us-west-2.compute.amazonaws.com/newslookup/index.php?symbol="
+                 + encodeURIComponent(displaySym) + "&vix=15.21&check-sec=1";
+    symLink.target = "_blank";
+    symLink.textContent = displaySym;
+    symDiv.appendChild(symLink);
+    head.appendChild(symDiv);
+
+    head.appendChild(el("div", "entry-meta", `${row.oldSym || row.rawOld} → ${row.newSym || row.rawNew}`));
+    entry.appendChild(head);
+    const bodyDiv = el("div");
+    bodyDiv.appendChild(el("div", "pending", "Looking up…"));
+    entry.appendChild(bodyDiv);
+    report.appendChild(entry);
+
+    statusEl.textContent = `Processing row ${i + 1} of ${rows.length}…`;
+
+    let res;
+    try {
+      res = await lookupRow(type, row);
+    } catch (e) {
+      res = { status: "error", message: String(e) };
+    }
+
+    bodyDiv.innerHTML = "";
+
+    if (res.status === "skipped") {
+      bodyDiv.appendChild(el("div", "nodata", "No usable 4–5 letter ticker (skipped)."));
+    } else if (res.status === "ok") {
+      if (res.symbolUsed && res.symbolUsed !== displaySym) {
+        bodyDiv.appendChild(el("div", "used-fallback",
+          `New symbol had no data — showing OLD symbol: ${res.symbolUsed}`));
+      }
+      renderCharts(bodyDiv, res.symbolUsed, res.ohlc);
+    } else if (res.status === "none") {
+      bodyDiv.appendChild(el("div", "nodata", "No Data Found"));
+    } else {
+      bodyDiv.appendChild(el("div", "nodata", "Error: " + (res.message || "unknown")));
+    }
+  }
+
+  statusEl.textContent = `Done. Processed ${rows.length} row(s).`;
+  btn.disabled = false;
+});
+</script>
+
+</body>
+</html>

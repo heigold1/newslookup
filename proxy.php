@@ -7,7 +7,7 @@ require_once("country-codes.php");
 
 libxml_use_internal_errors(true);
 
-$yesterdayDays = 1;
+$yesterdayDays = 3;
 
 error_reporting(1);
 //ini_set('display_errors', 1);
@@ -353,7 +353,6 @@ function getTradeHalts()
     $haltSymbolList = array(); 
     $currentlyHalted = array(); 
     $resumingToday   = array();   // <-- NEW: red-row deep-halt resumption candidates
-
     $dateTime = new DateTime(); 
     $dateTime->modify('-8 hours'); 
     $currentDate = $dateTime->format("m/d/Y"); 
@@ -1787,6 +1786,7 @@ die();
 
       $returnArray['halt_symbol_list'] = $tradeHaltsArray['halt_symbol_list']; 
       $returnArray['currently_halted'] = $tradeHaltsArray['currently_halted']; 
+      $returnArray['resuming_today']   = $tradeHaltsArray['resuming_today'];
       $returnArray['final_return'] = $finalReturn;
       $returnArray['cik'] = $cik; 
       $returnArray['description'] = $description; 
