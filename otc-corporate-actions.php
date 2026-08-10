@@ -19,7 +19,7 @@ header('Content-Type: application/json');
 // ---- Config ----
 $ACCESS_KEY = "d36ab142bed5a1430fcde797063f6b9a";   // marketstack access key (server-side)
 $API_BASE   = "https://api.marketstack.com/v2/eod";
-$WEEKS_BACK = 3;
+$WEEKS_BACK = 12;
 
 // ---- Read input ----
 $symbol   = isset($_POST['symbol'])   ? trim($_POST['symbol'])   : "";
