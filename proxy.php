@@ -7,7 +7,7 @@ require_once("country-codes.php");
 
 libxml_use_internal_errors(true);
 
-$yesterdayDays = 3;
+$yesterdayDays = 1;
 
 error_reporting(1);
 //ini_set('display_errors', 1);
@@ -863,145 +863,9 @@ else if ($which_website == "yahoo")
     $companyName = $_GET['company_name']; 
     $companyNameArray = explode(" ", $companyName);
 
-/*
-These methods don't work anymore, so we have to do a python scrape 
-   $rss = simplexml_load_file("https://feeds.finance.yahoo.com/rss/2.0/headline?s=$symbol&region=US&lang=en-US");
-   $rss = grabHTML('feeds.finance.yahoo.com', "https://feeds.finance.yahoo.com/rss/2.0/headline?s=$symbol&region=US&lang=en-US"); 
-*/
-
       $venv_python = '/var/www/html/newslookup/venv/bin/python3';
       $command = escapeshellcmd($venv_python . ' ./pythonscrape/scrape-yahoo-finance-rss.py ' . $symbol . ' ' . $yesterdayDays);
       $allNews = shell_exec($command);
-
-/*
-
-echo "About to echo the yahoo finance command<br>";
-
-echo "<pre>"; 
-var_dump($allNews); 
-echo "</pre>"; 
-die(); 
-*/
-
-
-/*
-    $allNews = "<ul class='newsSide'>";
-    $allNews .= "<li style='font-size: 20px !important; background-color: #00ff00;'>Yahoo Finance News</li>";
-
-    $classActionAdded = false;
-    $j = 0;
-
-    foreach ($rssYahoo->channel->item as $feedItem) {
-        $j++;
-
-        // Convert time from GMT to  AM/PM New York
-        // just add or subtract 3600 (seconds) to add or subtract one hour 
-        $publicationDateStrToTime = strtotime($feedItem->pubDate) - 14400; 
-        $convertedDate = new DateTime(); 
-        $convertedDate->setTimestamp($publicationDateStrToTime);
-
-        $publicationDate = $feedItem->pubDate;
-
-        $publicationDate = preg_replace("/[0-9][0-9]\:[0-9][0-9]\:[0-9][0-9] \+0000/", "", $publicationDate); 
-        $publicationTime = $convertedDate->format("g:i A");
-
-        $newsTitle = $feedItem->title; 
-
-        if (preg_match('/class.action/i', $newsTitle))
-        {
-            if ($classActionAdded == true)
-            {
-              continue;              
-            }
-            else
-            {
-              $classActionAdded = true;
-            }
-        }
-
-        $allNews .= "<li "; 
-
-        // red/green highlighting for yesterday/today
-        for ($i = $yesterdayDays; $i >= 1; $i--)
-        {
-            if (preg_match('/(' .  get_yahoo_trade_date($i) . ')/', $publicationDate))
-            {
-                $publicationTime = preg_replace('/PM/', '<span style="background-color: red; font-size: 18px; ">PM</span>', $publicationTime); 
-                if ($i == $yesterdayDays) 
-                {
-                    $publicationTime = preg_replace('/AM/', '<span style="background-color: #00ff00; font-size: 18px;">AM</span>', $publicationTime); 
-              
-                }
-                else
-                {
-                    $publicationTime = preg_replace('/AM/', '<span style="background-color: red; font-size: 18px;">AM</span>', $publicationTime); 
-                }  
-            }
-        }
-
-        if ($j % 2 == 1)
-        {
-          $allNews .=  "style='background-color: #ebd8bd; '"; 
-        };
-        
-        // if the regular expression contains (.*) then we need to do it per title, to avoid greedy regular expressions
-
-        $newsTitle = preg_replace('/ withdrawal(.*?)application/i', '<span style="font-size: 12px; background-color:red; color:black"><b> withdrawal $1 application (55%) </b></span> ', $newsTitle);
-        $newsTitle = preg_replace('/nasdaq rejects(.*?)listing/i', '<span style="font-size: 12px; background-color:red; color:black"><b>Nasdaq rejects $1 listing</span> If delisting tomorrow 65%, if delisting days away then 50-55%</b>&nbsp;', $newsTitle);
-
-        $allNews .=  " ><a href='$feedItem->link'> " . $publicationDate . " " . $publicationTime . " - <br>" . $newsTitle;
-    }
-
-      $allNews .=  "</ul>";
-
-      */ 
-
-
-
-
-
-      // grab the finanicals 
-
-
-                      // Now we grab website, sector, and company from finviz.com
-/*
-                      $url="https://www.finviz.com/quote.ashx?t=$symbol";
-                      $host_name = "www.finviz.com";
-                      $result = grabHTML($host_name, $url);
-                      $html = str_get_html($result);
-                 
-                      $companyWebsiteArray = $html->find('table.fullview-title tbody tr td a');
-                      $companyWebsite = $companyWebsiteArray[1];
-                      $companyWebsite = preg_replace('/<b>.*<\/b>/', '<b>Website</b>', $companyWebsite);
-                      $companyWebsite = str_replace('<a ', '<a target="_blank" onclick="return openPage(this.href)" ', $companyWebsite);
-
-                      $sectorCountryArray = $html->find('table.fullview-title tbody tr td a');
-                      $sectorCountry = " " . $sectorCountryArray[2] . " - " . $sectorCountryArray[3] . " - " . $sectorCountryArray[4] . "<br>";
-                      $sectorCountry = str_replace('<a', '<span id="geo_country"', $sectorCountry);    
-                      $sectorCountry = str_replace('\/a', '/span', $sectorCountry);   
-*/
-
-
-/* Scrape Yahoo Finance */
-/*
-      $command = escapeshellcmd('python3 ./pythonscrape/scrape-yahoo-finance-company-profile.py ' . $symbol);
-      $yahooFinanceJson = shell_exec($command);
-
-      $yahooFinanceObject = json_decode($yahooFinanceJson);
-
-      $companyWebsite = '<a target="_blank" style="font-size: 15px;" onclick="return openPage(this.href)" href="' . $yahooFinanceObject->website . '" class="tab-link"><b>Website</b></a>&nbsp;&nbsp;';
-
-      $countryPipeString = $yahooFinanceObject->address; 
-      $countryPipeArray = explode('|', $countryPipeString);
-      $countryPipeArrayLength = count($countryPipeArray);
-
-      $country = trim($countryPipeArray[$countryPipeArrayLength - 1]); 
-
-      $yahooFinanceSector = $yahooFinanceObject->sector; 
-      $yahooFinanceIndustry = $yahooFinanceObject->industry; 
-/* 
-
-/* We are currently grabbing sector, industry, and country from financialmodelingprep.com */
 
       $country = "";
       $yahooFinanceSector = ""; 
