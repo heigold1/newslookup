@@ -406,6 +406,11 @@ function getTradeHalts()
       $symbol = trim($feed_item->title); 
       $reasonCode = trim($child->ReasonCode); 
 
+      if (strpos($symbol, '-') !== false || strpos($symbol, '.') !== false) {
+          continue;
+      }
+
+
       // ---- Pull the fields needed for red-row detection ----
       $haltDateStr        = trim($child->HaltDate);
       $resumptionDateStr  = trim($child->ResumptionDate);
