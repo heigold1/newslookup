@@ -468,8 +468,7 @@ function getStreetInsider($symbol, $yesterdayDays)
             $convertedDate = new DateTime(); 
             $convertedDate->setTimestamp($publicationDateStrToTime);
 
-            $publicationDate = $feedItem->pubDate;
-            $publicationDate = preg_replace("/[0-9][0-9]\:[0-9][0-9]\:[0-9][0-9] \-[0-9][0-9][0-9][0-9]/", "", $publicationDate); 
+            $publicationDate = $convertedDate->format('D, d M Y');
             $publicationTime = $convertedDate->format("g:i A");
 
             $newsTitle = $feedItem->title; 

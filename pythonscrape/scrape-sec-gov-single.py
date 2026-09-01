@@ -188,7 +188,7 @@ def parse_finance_page(symbol, cik_number, company_name):
 
         html_page_first_try = request.content.decode('utf-8') 
        
-        if "TThis page is temporarily unavailable" in html_page_first_try:
+        if "This page is temporarily unavailable" in html_page_first_try:
             
             if cik_number == "NOT_FOUND":
                 result = {

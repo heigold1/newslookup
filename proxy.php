@@ -1581,6 +1581,7 @@ else if ($which_website == "yahoo")
           $finalReturn
       );
       $finalReturn = preg_replace('/ customer loss/i', '<span style="font-size: 40px; background-color:red; color:black; "><b>CUSTOMER LOSS - BACK WAY, WAY OFF, LIKE 70%</b></span>&nbsp;', $finalReturn); 
+      $finalReturn = preg_replace('/ definitive agreement/i', '<span style="font-size: 40px; background-color:red; color:black; "><b>DEVINITIVE AGREEMENT - CHECK FOR SHARE PRICE.</b></span>&nbsp;', $finalReturn);  
 
 
 
