@@ -1,273 +1,72 @@
 #!/usr/bin/python3
-
-import re 
-from lxml import html
-import xml.etree.ElementTree as ET 
-from datetime import datetime, timedelta 
-from dateutil import parser
-from bs4 import BeautifulSoup 
-import requests
-from time import sleep
+import sys
 import json
-import argparse
-from random import randint
-import sys 
-import urllib3 
-import itertools as it 
-import random 
-
-
-urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
-
-
-def get_date_from_utc(utc_date):
-    return parser.isoparse(utc_date).strftime("%Y-%m-%d")
-
-def get_ampm_time_from_utc(utc_date):
-    dt = parser.isoparse(utc_date)
-    hour = dt.hour
-    am_pm = "AM"
-    if hour > 12:
-        hour -= 12
-        am_pm = "PM"
-    elif hour == 0:
-        hour = 12
-    minute = dt.minute
-    return f"{hour}:{minute:02d} {am_pm}"
-
-def timestamp_is_safe(utc_date):
-    dt = parser.isoparse(utc_date)  # Use dateutil.parser to parse the date string
-    hour = dt.hour
-    return hour <= 12
-
-def get_today_trade_date():
-    return datetime.now().strftime('%Y-%m-%d')
-
-def get_trade_date(days_ago):
-    trade_date = datetime.now() - timedelta(days=days_ago)
-    return trade_date.strftime('%Y-%m-%d')
-
-def parse_xml(xml_data):
-
-    headers = {
-          "Accept":"text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8",
-          "Accept-Encoding":"gzip, deflate",
-          "Accept-Language":"en-GB,en;q=0.9,en-US;q=0.8,ml;q=0.7",
-          "Connection":"keep-alive",
-          "Cache-Control":"no-store, no-cache, must-revalidate, max-age=0'",
-          "Cache-Control":"post-check=0, pre-check=0", 
-          "Pragma":"no-cache", 
-          "Host":"www.sec.gov",
-          "Referer":"https://www.sec.gov",
-          "Upgrade-Insecure-Requests":"1",
-          "User-Agent":"brent@heigoldinvestments.com"
-      } 
-
-    root = ET.fromstring(xml_data)
-    entries = root.findall("{http://www.w3.org/2005/Atom}entry")
-
-    sec_table_rows = []
-    sec_table_row_count = 0
-    recent_news = False
-
-    entry = entries[0]
-    updated = entry.find("{http://www.w3.org/2005/Atom}updated").text
-    datestamp = get_date_from_utc(updated)
-    content = entry.find("{http://www.w3.org/2005/Atom}content")
-        
-    filing_type = ""
-    title = ""
-    item_description = ""
-        
-    for element in content:
-        if element.tag == "{http://www.w3.org/2005/Atom}filing-type":
-            filing_type = element.text
-        elif element.tag == "{http://www.w3.org/2005/Atom}form-name":
-            title = element.text
-        elif element.tag == "{http://www.w3.org/2005/Atom}items-desc":
-            item_description = element.text
-
-    first_link = entry.find("{http://www.w3.org/2005/Atom}link").attrib['href']
-        
-        # Fetch HTML content from the link
-
-#        html_content = grab_html('www.sec.gov', first_link)
-       
-    response = requests.get(first_link, headers=headers, verify=False)
-
-    response.raise_for_status()  # Raise an error for bad status codes
-
-    soup = BeautifulSoup(response.text, 'html.parser')
-        
-    # Find the href in the second row
-    table_rows = soup.find_all('tr')
-    if len(table_rows) > 1:
-        a_tags = table_rows[1].find_all('a')
-        if a_tags:
-            href = 'https://www.sec.gov' + a_tags[0]['href']
-        else:
-            href = ""
-    else:
-        href = ""
+import requests
  
-    result = {
-            'url': href, 
-            'url_title': title
-        }      
-    print(json.dumps(result)) 
-
-def get_xml_page_from_rss_link(rss_link): 
-    headers = {
-          "Accept":"text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8",
-          "Accept-Encoding":"gzip, deflate",
-          "Accept-Language":"en-GB,en;q=0.9,en-US;q=0.8,ml;q=0.7",
-          "Connection":"keep-alive",
-          "Cache-Control":"no-store, no-cache, must-revalidate, max-age=0'",
-          "Cache-Control":"post-check=0, pre-check=0", 
-          "Pragma":"no-cache", 
-          "Host":"www.sec.gov",
-          "Referer":"https://www.sec.gov",
-          "Upgrade-Insecure-Requests":"1",
-          "User-Agent":"brent@heigoldinvestments.com"
-      } 
-
-    try:
-        response = requests.get(rss_link, headers=headers, verify=False)
-
-        response.raise_for_status()  # Raise an error for bad status codes
-
-        return response.text 
-
-    except requests.exceptions.RequestException as e:
-        result = {
-            'url': '---', 
-            'url_title': 'NO SEC' 
-        }
-
-        print(json.dumps(result))
-
-def parse_finance_page(symbol, cik_number, company_name):
-
-    headers = {
-          "Accept":"text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8",
-          "Accept-Encoding":"gzip, deflate",
-          "Accept-Language":"en-GB,en;q=0.9,en-US;q=0.8,ml;q=0.7",
-          "Connection":"keep-alive",
-          "Cache-Control":"no-store, no-cache, must-revalidate, max-age=0'",
-          "Cache-Control":"post-check=0, pre-check=0", 
-          "Pragma":"no-cache", 
-          "Host":"www.sec.gov",
-          "Referer":"https://www.sec.gov",
-          "Upgrade-Insecure-Requests":"1",
-          "User-Agent":"brent@heigoldinvestments.com"
-      } 
-
-    url= "https://www.sec.gov/cgi-bin/browse-edgar?CIK=" + symbol + "&owner=include&action=getcompany&rand=" + str(random.randint(0,1000000))
-
-    try:
-
-        request = requests.get(url, headers=headers, verify=False)
-
-        if request.status_code!=200:
-
-            if cik_number == "NOT_FOUND":
-            
-                result = {
-                    'url': '---', 
-                    'url_title': 'NO SEC' 
-                }
-                print(json.dumps(result))
-                sys.exit() 
-
-            rss_link = "https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=" + cik_number + "&type=&dateb=&owner=include&start=0&count=40&output=atom"
-            print("Status code !=200, rss_link is " + rss_link) 
-            xml_page = get_xml_page_from_rss_link(rss_link) 
-            parse_xml(xml_page) 
-            sys.exit()
-           
-
-        html_page_first_try = request.content.decode('utf-8') 
-       
-        if "This page is temporarily unavailable" in html_page_first_try:
-            
-            if cik_number == "NOT_FOUND":
-                result = {
-                    'url': '---', 
-                    'url_title': 'NO SEC' 
-                }                
-                print(json.dumps(result))
-                sys.exit() 
-           
-            rss_link = "https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=" + cik_number + "&type=&dateb=&owner=include&start=0&count=40&output=atom"
-            xml_page = get_xml_page_from_rss_link(rss_link) 
-            parse_xml(xml_page)
-            sys.exit() 
-
-
-        if "No matching Ticker Symbol" in html_page_first_try: 
-            url="https://www.sec.gov/cgi-bin/browse-edgar?company=" + company_name + "&owner=include&action=getcompany&rand=" + str(random.randint(0,1000000))
-            
-            request = requests.get(url, headers=headers, verify=False)
-            html_page_second_try = request.content.decode('utf-8') 
-            tree = html.fromstring(html_page_second_try) 
-
-            if "No matching companies" in html_page_second_try: 
-
-                if cik_number == "NOT_FOUND": 
-                    result = {
-                        'url': '---', 
-                        'url_title': 'NO SEC' 
-                    }
-                    print(json.dumps(result))
-                    sys.exit() 
-
-                rss_link = "https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=" + cik_number + "&type=&dateb=&owner=include&start=0&count=40&output=atom"
-                xml_page = get_xml_page_from_rss_link(rss_link) 
-                parse_xml(xml_page) 
-                sys.exit()
-
-
-            if "Companies with names matching" in html_page_second_try: 
-
-                if cik_number == "NOT_FOUND":
-                    result = {
-                        'url': '---', 
-                        'url_title': 'NO SEC' 
-                    }
-                    print(json.dumps(result))
-                    sys.exit() 
-
-                rss_link = "https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=" + cik_number + "&type=&dateb=&owner=include&start=0&count=40&output=atom"
-                xml_page = get_xml_page_from_rss_link(rss_link) 
-                parse_xml(xml_page)
-                sys.exit()
-
-
-            rss_links = tree.xpath('//a[contains(text(), "RSS Feed")]/@href') 
-            rss_link = "https://www.sec.gov" + rss_links[0]
-            xml_page = get_xml_page_from_rss_link(rss_link) 
-            parse_xml(xml_page) 
-            sys.exit() 
-
-        tree = html.fromstring(html_page_first_try)
-        rss_links = tree.xpath('//a[contains(text(), "RSS Feed")]/@href')
-        rss_link = "https://www.sec.gov" + rss_links[0] 
-        xml_page = get_xml_page_from_rss_link(rss_link) 
-        parse_xml(xml_page) 
-        sys.exit() 
-
-
-
-
-    except Exception as e:
-        print("Failed to process the request, Exception:%s"%(e)) 
-
+FORM_TYPE_DESCRIPTIONS = {
+    '8-K': 'Current report',
+    '10-K': 'Annual report',
+    '10-K/A': 'Annual report (amended)',
+    '10-Q': 'Quarterly report',
+    '10-Q/A': 'Quarterly report (amended)',
+    'S-1': 'Registration statement',
+    'S-1/A': 'Registration statement (amended)',
+    'S-3': 'Registration statement (shelf)',
+    'S-3/A': 'Registration statement (shelf, amended)',
+    '424B1': 'Prospectus [Rule 424(b)(1)]',
+    '424B2': 'Prospectus [Rule 424(b)(2)]',
+    '424B3': 'Prospectus [Rule 424(b)(3)]',
+    '424B4': 'Prospectus [Rule 424(b)(4)]',
+    '424B5': 'Prospectus [Rule 424(b)(5)]',
+    '3': 'Initial statement of beneficial ownership',
+    '4': 'Statement of changes in beneficial ownership',
+    '5': 'Annual statement of beneficial ownership',
+    'SC 13D': 'Schedule 13D - beneficial ownership',
+    'SC 13D/A': 'Schedule 13D - beneficial ownership (amended)',
+    'SC 13G': 'Schedule 13G - beneficial ownership',
+    'SC 13G/A': 'Schedule 13G - beneficial ownership (amended)',
+    'DEF 14A': 'Definitive proxy statement',
+    'DEFA14A': 'Additional proxy soliciting materials',
+    'NT 10-K': 'Notification of late filing (10-K)',
+    'NT 10-Q': 'Notification of late filing (10-Q)',
+    '25-NSE': 'Notification of removal from listing',
+    '6-K': 'Report of foreign private issuer',
+    '20-F': 'Annual report (foreign private issuer)',
+}
+ 
+ 
+def get_form_description(form_type):
+    return FORM_TYPE_DESCRIPTIONS.get(form_type, form_type)  # falls back to raw code if not in the table
+ 
+ 
+def get_most_recent_filing(cik_number):
+    cik_padded = cik_number.zfill(10)
+    url = f"https://data.sec.gov/submissions/CIK{cik_padded}.json"
+    headers = {"User-Agent": "Brent Heigold brent@heigoldinvestments.com"}
+    response = requests.get(url, headers=headers, timeout=10)
+    response.raise_for_status()
+    data = response.json()
+    recent = data['filings']['recent']
+    if not recent['form']:
+        return None
+    cik_no_zeros = str(int(cik_number))
+    accession = recent['accessionNumber'][0].replace('-', '')
+    primary_doc = recent['primaryDocument'][0]
+    form_type = recent['form'][0]
+    doc_url = f"https://www.sec.gov/Archives/edgar/data/{cik_no_zeros}/{accession}/{primary_doc}"
+    return {'url': doc_url, 'url_title': get_form_description(form_type)}
+ 
+ 
 symbol = sys.argv[1]
 cik_number = sys.argv[2]
-company_name = sys.argv[3] 
-
-scraped_data = parse_finance_page(symbol, cik_number, company_name)
-
-
-
-
+company_name = sys.argv[3]
+ 
+if not cik_number or cik_number == "NOT_FOUND":
+    print(json.dumps({'url': '---', 'url_title': 'NO SEC'}))
+    sys.exit()
+ 
+try:
+    result = get_most_recent_filing(cik_number)
+    print(json.dumps(result if result else {'url': '---', 'url_title': 'NO SEC'}))
+except Exception:
+    print(json.dumps({'url': '---', 'url_title': 'NO SEC'}))
