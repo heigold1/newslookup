@@ -329,6 +329,47 @@ function addYahooSectorIndustry($symbol, $sector, $industry, $country, $companyN
 
 }
 
+function getCikFromSec($symbol) {
+    $cacheFile = '/var/www/html/newslookup/cache/company_tickers.json';
+    $cacheMaxAge = 86400;
+    $data = null;
+
+    // Use the cache only if it exists and is fresh
+    if (file_exists($cacheFile) && (time() - filemtime($cacheFile)) <= $cacheMaxAge) {
+        $data = json_decode(file_get_contents($cacheFile), true);
+    }
+
+    // No usable cache -> fetch fresh from SEC
+    if (empty($data)) {
+        $ch = curl_init('https://www.sec.gov/files/company_tickers.json');
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, ['User-Agent: Brent Heigold brent@heigoldinvestments.com']);
+        curl_setopt($ch, CURLOPT_TIMEOUT, 10);
+        $response = curl_exec($ch);
+        $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        curl_close($ch);
+
+        if ($response === false || $httpCode !== 200) {
+            return null; // fetch itself failed, nothing to work with
+        }
+
+        $data = json_decode($response, true); // use it directly, don't round-trip through the file
+
+        @file_put_contents($cacheFile, $response); // best-effort save for next time; ignored if it fails
+    }
+
+    if (empty($data)) {
+        return null;
+    }
+
+    foreach ($data as $entry) {
+        if (strcasecmp($entry['ticker'], $symbol) === 0) {
+            return str_pad($entry['cik_str'], 10, '0', STR_PAD_LEFT);
+        }
+    }
+    return null;
+}
+
 
 function curl_get_contents($url)
 {
@@ -890,7 +931,10 @@ else if ($which_website == "yahoo")
         $yahooFinanceSector = "NOT LISTED"; 
         $yahooFinanceIndustry = "NOT LISTED"; 
         $website = "NOT LISTED"; 
-        $cik = "NOT_FOUND"; 
+        $cik = getCikFromSec($symbol);
+            if (empty($cik)) {
+                $cik = "NOT_FOUND";
+            }
         $ceo = "NOT_FOUND"; 
         $description = "NOT_FOUND"; 
       }
@@ -903,7 +947,10 @@ else if ($which_website == "yahoo")
           $yahooFinanceSector = "NOT LISTED"; 
           $yahooFinanceIndustry = "NOT LISTED"; 
           $website = "NOT LISTED"; 
-          $cik = "NOT_FOUND"; 
+          $cik = getCikFromSec($symbol);
+            if (empty($cik)) {
+                $cik = "NOT_FOUND";
+            }
           $ceo = "NOT_FOUND"; 
           $description = "NOT_FOUND"; 
         }
@@ -917,6 +964,12 @@ else if ($which_website == "yahoo")
           $city = $yahooFinanceObject[0]['city']; 
           $state = $yahooFinanceObject[0]['state']; 
           $cik = $yahooFinanceObject[0]['cik']; 
+          if (empty($cik)) {
+              $cik = getCikFromSec($symbol);
+              if (empty($cik)) {
+                  $cik = "NOT_FOUND";
+              }
+          }
           $ceo = $yahooFinanceObject[0]['ceo']; 
           $ceoRaw = $yahooFinanceObject[0]['ceo']; 
           $otherExecutives = $yahooFinanceObject[0]['otherExecutives'];       
@@ -949,7 +1002,7 @@ else if ($which_website == "yahoo")
           $descriptionRegex .= '<button onclick="prepareChineseJay(\'' . $symbol . '\',\''. addslashes($ceo). '\',\'' . addslashes($description) . '\')">Prepare Chinese Question</button>';   
 
 
-          $chineseSurnames = ["Li", "Wang", "Zhang", "Liu", "Chen", "Yang", "Huang", "Zhao", "Wu", "Zhou", "Xu", "Sun", "Ma", "Hu", "Gao", "Lin", "He", "Guo", "Luo", "Deng", "Long", "Kwan", "Yau", "Ho", "Tsu", "Qian", "Jie", "Tuo", "Ze", "Dongye", "Dao", "Du", "Zhi", "Xu", "Di", "Bo", "Du", "Duan", "Gao", "Cai", "Xiyong", "Hou", "Xiao", "Sui", "Ming", "Mei", "Phua", "Wing", "Fung", "Siu", "Lu", "Pun", "Ping", "Xiaoyan", "Mi", "Jin", "Chow", "Ching", "Chang", "Chan", "Kim", "Ly", "Zhai", "Yin", "Yan", "You", "Jiulong", "Yu", "Ngan", "Cheng", "Wong", "Hang", "Song", "Jinghua", "Xykis", "Zhaoying", "Lim", "Woon", "Ngee", "Tan", "Wook", "Suk", "Lee", "Kau", "Hwang", "Kan", "Teh", "Lau", "Tak", "Kee", "Chooi", "Phing", "Wai", "Jang", "Chai", "Zhamu"];
+          $chineseSurnames = ["Li", "Wang", "Zhang", "Liu", "Chen", "Yang", "Huang", "Zhao", "Wu", "Zhou", "Xu", "Sun", "Ma", "Hu", "Gao", "Lin", "He", "Guo", "Luo", "Deng", "Long", "Kwan", "Yau", "Ho", "Tsu", "Qian", "Jie", "Tuo", "Ze", "Dongye", "Dao", "Du", "Zhi", "Xu", "Di", "Bo", "Du", "Duan", "Gao", "Cai", "Xiyong", "Hou", "Xiao", "Sui", "Ming", "Mei", "Phua", "Wing", "Fung", "Siu", "Lu", "Pun", "Ping", "Xiaoyan", "Mi", "Jin", "Chow", "Ching", "Chang", "Chan", "Kim", "Ly", "Zhai", "Yin", "Yan", "You", "Jiulong", "Yu", "Ngan", "Cheng", "Wong", "Hang", "Song", "Jinghua", "Xykis", "Zhaoying", "Lim", "Woon", "Ngee", "Tan", "Wook", "Suk", "Lee", "Kau", "Hwang", "Kan", "Teh", "Lau", "Tak", "Kee", "Chooi", "Phing", "Wai", "Jang", "Chai", "Zhamu", "Fang"];
 
           $surnamePattern = "/\b(" . implode("|", $chineseSurnames) . ")\b/i";
 
