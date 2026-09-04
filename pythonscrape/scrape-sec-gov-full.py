@@ -230,6 +230,7 @@ def build_filings_table(data, yesterday_days, symbol, cik_number):
         title = re.sub(r' business combination', '<span style="font-size: 55px; background-color:red; color:black"><br><br><b>&nbsp; BUSINESS<br><br> COMBINATION<br><br> - STAY<br><br>AWAY<br><br> </b></span> &nbsp;', title, flags=re.IGNORECASE)
         title = re.sub(r'annual report', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp; ANNUAL REPORT - CHECK IF IT HAS EARNINGS, IF NOT THEN 40%</b></span> &nbsp;', title, flags=re.IGNORECASE)
         title = re.sub(r'424', '<span style="font-size: 45px; background-color:red; color:black"><b>&nbsp; 424 - OFFERING</b></span> &nbsp;', title)
+        title = re.sub(r'425', '425 - Business Combination', title)        
         title = re.sub(r'notice of effectiveness', '<span style="font-size: 30px; background-color:red; color:black"><b>NOTICE OF EFFECTIVENESS</b></span> &nbsp;', title, flags=re.IGNORECASE)
         title = re.sub(r'additional definitive proxy soliciting materials', '<span style="font-size: 20px; background-color:red; color:black"><b>ADDITIONAL DEFINITIVE PROXY SOLICITING MATERIALS - CHECK WITH JAY ON THE MEETING MINUTES</b></span> &nbsp;', title, flags=re.IGNORECASE)
         title = re.sub(r'offered to employees', '<span style="font-size: 20px; background-color:red; color:black"><b>OFFERED TO EMPLOYEES</b></span> &nbsp;', title, flags=re.IGNORECASE)
