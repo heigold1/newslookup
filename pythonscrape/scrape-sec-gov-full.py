@@ -1,29 +1,20 @@
 #!/usr/bin/python3
 
-import re 
-from lxml import html
-import xml.etree.ElementTree as ET 
-from datetime import datetime, timedelta 
+import re
+from datetime import datetime, timedelta
 from dateutil import parser
-from bs4 import BeautifulSoup 
 import requests
-from time import sleep
 import json
-import argparse
-from random import randint
-import sys 
-import urllib3 
-import itertools as it 
-import random 
+import sys
 
-
-urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
-
+# ---------------------------------------------------------------------------
+# Date/time helpers - unchanged from your RSS-based version
+# ---------------------------------------------------------------------------
 
 def days_back_date(days):
     today = datetime.now()
     past_date = today - timedelta(days=days)
-    return past_date.strftime('%Y-%m-%d') 
+    return past_date.strftime('%Y-%m-%d')
 
 def get_date_from_utc(utc_date):
     return parser.isoparse(utc_date).strftime("%Y-%m-%d")
@@ -41,7 +32,7 @@ def get_ampm_time_from_utc(utc_date):
     return f"{hour}:{minute:02d} {am_pm}"
 
 def timestamp_is_safe(utc_date):
-    dt = parser.isoparse(utc_date)  # Use dateutil.parser to parse the date string
+    dt = parser.isoparse(utc_date)
     hour = dt.hour
     return hour <= 12
 
@@ -52,75 +43,153 @@ def get_trade_date(days_ago):
     trade_date = datetime.now() - timedelta(days=days_ago)
     return trade_date.strftime('%Y-%m-%d')
 
-def parse_xml(xml_data, yesterday_days):
 
-    headers = {
-          "Accept":"text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8",
-          "Accept-Encoding":"gzip, deflate",
-          "Accept-Language":"en-GB,en;q=0.9,en-US;q=0.8,ml;q=0.7",
-          "Connection":"keep-alive",
-          "Cache-Control":"no-store, no-cache, must-revalidate, max-age=0'",
-          "Cache-Control":"post-check=0, pre-check=0", 
-          "Pragma":"no-cache", 
-          "Host":"www.sec.gov",
-          "Referer":"https://www.sec.gov",
-          "Upgrade-Insecure-Requests":"1",
-          "User-Agent":"brent@heigoldinvestments.com"
-      } 
+# ---------------------------------------------------------------------------
+# form code -> description text.
+#
+# The old RSS/Atom feed handed you a ready-made "form-name" description
+# straight from SEC (e.g. "Current report" for an 8-K). The JSON submissions
+# API only gives you the raw form code (e.g. "8-K"), so this table rebuilds
+# an equivalent description string -- specifically so the title regex rules
+# below (which search for phrases like "annual report", "business
+# combination", "offered to employees", etc.) keep firing the same way they
+# did against the RSS feed.
+#
+# CONFIDENCE: the common forms below (8-K, 10-K, 10-Q, S-1/S-3/S-4/S-8,
+# Form 3/4/5, SC 13D/G, 424B*, NT filings, D, 144, 6-K, 20-F, DEFA14A,
+# Form 10, 8-A) are wording I'm confident matches SEC's own form-name text
+# closely enough to keep tripping the same regexes. The three marked
+# "unverified" below are my best guess at which form produces the phrase
+# your regex is hunting for -- I could not confirm the exact EDGAR code/
+# wording from here, so check those against a real filing before trusting
+# the highlight.
+# ---------------------------------------------------------------------------
 
-    root = ET.fromstring(xml_data)
-    entries = root.findall("{http://www.w3.org/2005/Atom}entry")
+FORM_NAME_DESCRIPTIONS = {
+    '8-K': 'Current report',
+    '8-K/A': 'Current report',
+    '10-K': 'Annual report [Section 13 and 15(d), not S-K Item 405]',
+    '10-K/A': 'Annual report [Section 13 and 15(d), not S-K Item 405]',
+    '10-Q': 'Quarterly report [Sections 13 or 15(d)]',
+    '10-Q/A': 'Quarterly report [Sections 13 or 15(d)]',
+    '20-F': 'Annual report of a foreign private issuer [Sections 13 or 15(d)]',
+    '20-F/A': 'Annual report of a foreign private issuer [Sections 13 or 15(d)]',
+    '40-F': 'Annual report, Canadian issuer [Sections 13 or 15(d)]',
+    '6-K': 'Report of foreign issuer [Rules 13a-16 and 15d-16]',
+    'S-1': 'Registration statement [Section 5(a), Securities Act of 1933]',
+    'S-1/A': 'Registration statement [Section 5(a), Securities Act of 1933] (amended)',
+    'S-3': 'Registration statement [Section 5(a), Securities Act of 1933]',
+    'S-3/A': 'Registration statement [Section 5(a), Securities Act of 1933] (amended)',
+    'S-4': 'Registration statement for securities issued in business combination transactions',
+    'S-4/A': 'Registration statement for securities issued in business combination transactions (amended)',
+    'S-8': 'Initial registration of securities to be offered to employees pursuant to employee benefit plans',
+    'S-8 POS': 'Post-effective amendment to registration of securities offered to employees',
+    'S-11': 'Registration statement, real estate companies [Section 5(a), Securities Act of 1933]',
+    'S-11/A': 'Registration statement, real estate companies [Section 5(a), Securities Act of 1933] (amended)',
+    'F-1': 'Registration statement, foreign private issuer [Section 5(a), Securities Act of 1933]',
+    'F-1/A': 'Registration statement, foreign private issuer [Section 5(a), Securities Act of 1933] (amended)',
+    'F-3': 'Registration statement, foreign private issuer [Section 5(a), Securities Act of 1933]',
+    'F-3/A': 'Registration statement, foreign private issuer [Section 5(a), Securities Act of 1933] (amended)',
+    'F-4': 'Registration statement for securities issued in business combination transactions, foreign private issuer',
+    'F-4/A': 'Registration statement for securities issued in business combination transactions, foreign private issuer (amended)',
+    'POS AM': 'Post-effective amendment to a registration statement',
+    '424B1': 'Prospectus [Rule 424(b)(1)]',
+    '424B2': 'Prospectus [Rule 424(b)(2)]',
+    '424B3': 'Prospectus [Rule 424(b)(3)]',
+    '424B4': 'Prospectus [Rule 424(b)(4)]',
+    '424B5': 'Prospectus [Rule 424(b)(5)]',
+    '3': 'Initial statement of beneficial ownership of securities',
+    '3/A': 'Initial statement of beneficial ownership of securities (amended)',
+    '4': 'Statement of changes in beneficial ownership of securities',
+    '4/A': 'Statement of changes in beneficial ownership of securities (amended)',
+    '5': 'Annual statement of beneficial ownership of securities',
+    '5/A': 'Annual statement of beneficial ownership of securities (amended)',
+    'SC 13D': 'Schedule 13D - beneficial ownership',
+    'SC 13D/A': 'Schedule 13D - beneficial ownership (amended)',
+    'SC 13G': 'Schedule 13G - beneficial ownership',
+    'SC 13G/A': 'Schedule 13G - beneficial ownership (amended)',
+    'DEF 14A': 'Definitive proxy statement',
+    'PRE 14A': 'Preliminary proxy statement',
+    'DEFA14A': 'Additional definitive proxy soliciting materials',
+    'NT 10-K': 'Notification of inability to timely file form 10-K [Rule 12b-25]',
+    'NT 10-Q': 'Notification of inability to timely file form 10-Q [Rule 12b-25]',
+    'NT 20-F': 'Notification of inability to timely file form 20-F [Rule 12b-25]',
+    'D': 'Notice of exempt offering of securities',
+    'D/A': 'Notice of exempt offering of securities (amended)',
+    '8-A12B': 'Registration of securities [Section 12(b)]',
+    '8-A12G': 'Registration of securities [Section 12(g)]',
+    '10-12B': 'General form for registration of securities [Section 12(b)]',
+    '10-12G': 'General form for registration of securities [Section 12(g)]',
+    '144': 'Report of proposed sale of securities',
+    '25': 'Notification of removal from listing',
+    '25-NSE': 'Notification of removal from listing',
+    'EFFECT': 'Notice of effectiveness',              # unverified
+    'RW': 'Withdrawal of offering statement',         # unverified -- guessed code
+    'CERT': 'Certification by an exchange',           # unverified -- guessed code
+}
+
+
+def get_form_name(form_type):
+    return FORM_NAME_DESCRIPTIONS.get(form_type, form_type)
+
+
+# ---------------------------------------------------------------------------
+# SEC data access
+# ---------------------------------------------------------------------------
+
+def get_filings_json(cik_number):
+    cik_padded = cik_number.zfill(10)
+    url = f"https://data.sec.gov/submissions/CIK{cik_padded}.json"
+    headers = {"User-Agent": "Brent Heigold brent@heigoldinvestments.com"}
+    response = requests.get(url, headers=headers, timeout=10)
+    response.raise_for_status()
+    return response.json()
+
+
+def build_doc_url(cik_number, accession_number, primary_document):
+    cik_no_zeros = str(int(cik_number))
+    accession_no_dashes = accession_number.replace('-', '')
+    return f"https://www.sec.gov/Archives/edgar/data/{cik_no_zeros}/{accession_no_dashes}/{primary_document}"
+
+
+# ---------------------------------------------------------------------------
+# Table building - this is your original parse_xml(), with the per-entry
+# data now coming from the JSON 'recent' filings arrays instead of RSS/Atom
+# entries. Every highlighting rule below (dates, filing_type, title,
+# item_description regex substitutions) is UNCHANGED from your version --
+# only how filing_type/title/item_description/datestamp/time/href get
+# built is different.
+# ---------------------------------------------------------------------------
+
+def build_filings_table(data, yesterday_days, symbol, cik_number):
+
+    yesterday_days = int(yesterday_days)  # hoisted above the loop so this still works even with 0 filings
+
+    recent = data['filings']['recent']
+    forms = recent.get('form', [])
+    num_entries = len(forms)
+
+    accession_numbers = recent.get('accessionNumber', [])
+    primary_documents = recent.get('primaryDocument', [])
+    acceptance_datetimes = recent.get('acceptanceDateTime', [])
+    items_list = recent.get('items', [''] * num_entries)
 
     sec_table_rows = []
     sec_table_row_count = 0
     recent_news = False
-    num_entries = len(entries) 
-
-
 
     for i in range(0, min(9, num_entries)):
-        entry = entries[i]
-        updated = entry.find("{http://www.w3.org/2005/Atom}updated").text
+
+        updated = acceptance_datetimes[i]
         datestamp = get_date_from_utc(updated)
-        content = entry.find("{http://www.w3.org/2005/Atom}content")
-        
-        filing_type = ""
-        title = ""
-        item_description = ""
-        
-        for element in content:
-            if element.tag == "{http://www.w3.org/2005/Atom}filing-type":
-                filing_type = element.text
-            elif element.tag == "{http://www.w3.org/2005/Atom}form-name":
-                title = element.text
-            elif element.tag == "{http://www.w3.org/2005/Atom}items-desc":
-                item_description = element.text
+
+        filing_type = forms[i]
+        title = get_form_name(filing_type)
+        item_description = items_list[i] if i < len(items_list) else ''
 
         time = get_ampm_time_from_utc(updated)
-        first_link = entry.find("{http://www.w3.org/2005/Atom}link").attrib['href']
-        
-        # Fetch HTML content from the link
 
-#        html_content = grab_html('www.sec.gov', first_link)
-       
-        response = requests.get(first_link, headers=headers, verify=False)
-
-        response.raise_for_status()  # Raise an error for bad status codes
-
-        soup = BeautifulSoup(response.text, 'html.parser')
-        
-        # Find the href in the second row
-        table_rows = soup.find_all('tr')
-        if len(table_rows) > 1:
-            a_tags = table_rows[1].find_all('a')
-            if a_tags:
-                href = 'https://www.sec.gov' + a_tags[0]['href']
-            else:
-                href = ""
-        else:
-            href = ""
-       
-        yesterday_days = int(yesterday_days) 
+        href = build_doc_url(cik_number, accession_numbers[i], primary_documents[i])
 
         for j in range(yesterday_days, 0, -1):
             trade_date = get_trade_date(j)
@@ -142,11 +211,9 @@ def parse_xml(xml_data, yesterday_days):
             continue
 
         datestamp = re.sub(f'({get_today_trade_date()})', r'<span style="font-size: 16px; background-color:black;  border: 1px solid red; color:white">\1</span>', datestamp)
-       
 
         filing_type = re.sub(r'PRE.*14A', '<span style="font-size: 15px; background-color:red; color:black">PRE 14A</span> &nbsp;', filing_type, flags=re.IGNORECASE)
         filing_type = re.sub(r'DEF.*14A', '<span style="font-size: 15px; background-color:red; color:black">DEF 14A</span> &nbsp;', filing_type, flags=re.IGNORECASE)
-
 
         title = re.sub('registration statement', '<span style="font-size: 16px; background-color:red; color:black"><b>&nbsp;Registration statement - OFFERING COMING OUT, HOLD OFF</span></b>&nbsp;', title, flags=re.IGNORECASE)
         title = re.sub(r'beneficial ownership', '<span style="font-size: 16px; background-color:#00ff00; color:black"><b>&nbsp;beneficial ownership</span></b>&nbsp;', title, flags=re.IGNORECASE)
@@ -177,8 +244,7 @@ def parse_xml(xml_data, yesterday_days):
             title = re.sub(r'proposed sale of securities', r'<span style="font-size: 30px; background-color:red; color:black"><b>PROPOSED SALE OF SECURITIES</b></span>', title, flags=re.IGNORECASE)
 
         item_description = re.sub(r'\b3\.01\b', r'<span style="font-size: 45px; background-color:red; color:black"><b> 3.01 - DELISTING </b></span>', item_description, flags=re.IGNORECASE)
-        item_description = re.sub(r'\b5\.07\b', r'<span style="font-size: 45px; background-color:red; color:black"><b> 5.07<br><br> - CHECK FOR OFFERING </b></span><span style="font-size: 25px; background-color:red; color:black"<b> Things like *Warrant Exercise Proposal*</b></span>', item_description, flags=re.IGNORECASE) 
-
+        item_description = re.sub(r'\b5\.07\b', r'<span style="font-size: 45px; background-color:red; color:black"><b> 5.07<br><br> - CHECK FOR OFFERING </b></span><span style="font-size: 25px; background-color:red; color:black"<b> Things like *Warrant Exercise Proposal*</b></span>', item_description, flags=re.IGNORECASE)
 
         if re.search('registration', title, re.IGNORECASE) or re.search('offering', title, re.IGNORECASE):
             registration_offering = " - REGISTRATION"
@@ -197,180 +263,50 @@ def parse_xml(xml_data, yesterday_days):
     return_sec_html += "".join(sec_table_rows)
     return_sec_html += "</table>"
 
-
-# light yellow is #FFFDAF 
     for days_back_count in range(14, 6, -1):
         date_string = days_back_date(days_back_count)
-        # light yellow is #FFFFC5 
         return_sec_html = re.sub(r'(' + re.escape(date_string) + r')', r'<span style="font-size: 12px; background-color: yellow; color:black">\1</span>', return_sec_html)
 
     for days_back_count in range(6, yesterday_days, -1):
-        date_string = days_back_date(days_back_count) 
+        date_string = days_back_date(days_back_count)
         return_sec_html = re.sub(r'(' + re.escape(date_string) + r')', r'<span style="font-size: 12px; background-color:yellow; color:black">\1</span>', return_sec_html)
 
     result = {
-        'found' : True, 
-        'message' : return_sec_html 
+        'found': True,
+        'message': return_sec_html
+    }
+    print(json.dumps(result))
+
+
+# ---------------------------------------------------------------------------
+# Entry point
+# ---------------------------------------------------------------------------
+
+def get_sec_filings(symbol, original_symbol, yesterday_days, cik_number, company_name):
+
+    if not cik_number or cik_number == "NOT_FOUND":
+        result = {
+            'found': False,
+            'message': f'<a target="_blank" href="http://seekingalpha.com/symbol/{original_symbol}/sec-filings?filter=all"><div style="background-color: red"><span style="font-size: 45px">NO CIK ON FILE - CHECK SEEKING ALPHA</span></div></a>'
         }
-    print(json.dumps(result)) 
-
-
-def get_xml_page_from_rss_link(rss_link): 
-    headers = {
-          "Accept":"text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8",
-          "Accept-Encoding":"gzip, deflate",
-          "Accept-Language":"en-GB,en;q=0.9,en-US;q=0.8,ml;q=0.7",
-          "Connection":"keep-alive",
-          "Cache-Control":"no-store, no-cache, must-revalidate, max-age=0'",
-          "Cache-Control":"post-check=0, pre-check=0", 
-          "Pragma":"no-cache", 
-          "Host":"www.sec.gov",
-          "Referer":"https://www.sec.gov",
-          "Upgrade-Insecure-Requests":"1",
-          "User-Agent":"brent@heigoldinvestments.com"
-      } 
+        print(json.dumps(result))
+        return
 
     try:
-        response = requests.get(rss_link, headers=headers, verify=False)
-
-        response.raise_for_status()  # Raise an error for bad status codes
-
-        return response.text 
-
-    except requests.exceptions.RequestException as e:
+        data = get_filings_json(cik_number)
+        build_filings_table(data, yesterday_days, symbol, cik_number)
+    except Exception:
         result = {
-            'found' : True, 
-            'message' : 'Something with the request went wrong'
-                }
+            'found': False,
+            'message': f'<a target="_blank" href="http://seekingalpha.com/symbol/{original_symbol}/sec-filings?filter=all"><div style="background-color: red"><span style="font-size: 45px">SEC WEBSITE IS DOWN - CHECK SEEKING ALPHA</span></div></a>'
+        }
         print(json.dumps(result))
 
-def parse_finance_page(symbol, original_symbol, yesterday_days, cik_number, company_name):
-
-    headers = {
-          "Accept":"text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8",
-          "Accept-Encoding":"gzip, deflate",
-          "Accept-Language":"en-GB,en;q=0.9,en-US;q=0.8,ml;q=0.7",
-          "Connection":"keep-alive",
-          "Cache-Control":"no-store, no-cache, must-revalidate, max-age=0'",
-          "Cache-Control":"post-check=0, pre-check=0", 
-          "Pragma":"no-cache", 
-          "Host":"www.sec.gov",
-          "Referer":"https://www.sec.gov",
-          "Upgrade-Insecure-Requests":"1",
-          "User-Agent":"brent@heigoldinvestments.com"
-      } 
-
-    url= "https://www.sec.gov/cgi-bin/browse-edgar?CIK=" + symbol + "&owner=include&action=getcompany&rand=" + str(random.randint(0,1000000))
-
-    try:
-
-        request = requests.get(url, headers=headers, verify=False)
-
-        if request.status_code!=200:
-
-            if cik_number == "NOT_FOUND":
-
-                result = {
-                    'found' : False, 
-                    'message' : '<a target="_blank" href="http://seekingalpha.com/symbol/' + original_symbol + '/sec-filings?filter=all"><div style="background-color: red"><span style="font-size: 45px">SEC WEBSITE IS DOWN - CHECK SEEKING ALPHA</span></div></a>'
-                    }
-                print(json.dumps(result))
-                sys.exit() 
-
-            rss_link = "https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=" + cik_number + "&type=&dateb=&owner=include&start=0&count=40&output=atom"
-            xml_page = get_xml_page_from_rss_link(rss_link) 
-            parse_xml(xml_page, yesterday_days) 
-            sys.exit()
-           
-
-        html_page_first_try = request.content.decode('utf-8') 
-       
-        if "TThis page is temporarily unavailable" in html_page_first_try:
-            
-            if cik_number == "NOT_FOUND":
-
-                result = {
-                    'found' : False, 
-                    'message' : '<a target="_blank" href="http://seekingalpha.com/symbol/' + original_symbol + '/sec-filings"><div style="background-color: red"><span style="font-size: 45px">PAGE UNAVAILABLE - CHECK SEEKING ALPHA</span></div></a>'
-                    }
-                print(json.dumps(result))
-                sys.exit() 
-           
-            rss_link = "https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=" + cik_number + "&type=&dateb=&owner=include&start=0&count=40&output=atom"
-            xml_page = get_xml_page_from_rss_link(rss_link) 
-            parse_xml(xml_page, yesterday_days)
-            sys.exit() 
-
-
-        if "No matching Ticker Symbol" in html_page_first_try: 
-            url="https://www.sec.gov/cgi-bin/browse-edgar?company=" + company_name + "&owner=include&action=getcompany&rand=" + str(random.randint(0,1000000))
-            
-            request = requests.get(url, headers=headers, verify=False)
-            html_page_second_try = request.content.decode('utf-8') 
-            tree = html.fromstring(html_page_second_try) 
-
-            if "No matching companies" in html_page_second_try: 
-
-                if cik_number == "NOT_FOUND": 
-
-                    result = {
-                        'found' : False, 
-                        'message' : '<a target="_blank" href="http://seekingalpha.com/symbol/' + original_symbol + '/sec-filings?filter=all"><div style="background-color: red"><span style="font-size: 45px">NO MATCHING COMPANIES - CHECK SEEKING ALPHA</span></div></a>'
-                        }
-                    print(json.dumps(result))
-                    sys.exit() 
-
-                rss_link = "https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=" + cik_number + "&type=&dateb=&owner=include&start=0&count=40&output=atom"
-                xml_page = get_xml_page_from_rss_link(rss_link) 
-                parse_xml(xml_page, yesterday_days) 
-                sys.exit()
-
-
-            if "Companies with names matching" in html_page_second_try: 
-
-                if cik_number == "NOT_FOUND":
-
-                    result = {
-                        'found' : False, 
-                        'message' : '<a target="_blank" href="http://seekingalpha.com/symbol/' + original_symbol + '/sec-filings?filter=all"><div style="background-color: red"><span style="font-size: 45px">AMBIGUOUS NAMES - CHECK SEEKING ALPHA</span></div></a>'
-                        }
-
-                    print(json.dumps(result))
-                    sys.exit() 
-
-                rss_link = "https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=" + cik_number + "&type=&dateb=&owner=include&start=0&count=40&output=atom"
-                xml_page = get_xml_page_from_rss_link(rss_link) 
-                parse_xml(xml_page, yesterday_days)
-                sys.exit()
-
-
-            rss_links = tree.xpath('//a[contains(text(), "RSS Feed")]/@href') 
-            rss_link = "https://www.sec.gov" + rss_links[0]
-            xml_page = get_xml_page_from_rss_link(rss_link) 
-            parse_xml(xml_page, yesterday_days) 
-            sys.exit() 
-
-
-        tree = html.fromstring(html_page_first_try)
-        rss_links = tree.xpath('//a[contains(text(), "RSS Feed")]/@href')
-        rss_link = "https://www.sec.gov" + rss_links[0] 
-        xml_page = get_xml_page_from_rss_link(rss_link) 
-        parse_xml(xml_page, yesterday_days) 
-        sys.exit() 
-
-
-
-    except Exception as e:
-        print("Failed to process the request, Exception:%s"%(e)) 
 
 symbol = sys.argv[1]
 original_symbol = sys.argv[2]
-yesterday_days = sys.argv[3] 
+yesterday_days = sys.argv[3]
 cik_number = sys.argv[4]
-company_name = sys.argv[5]
+company_name = sys.argv[5]  # kept for CLI compatibility with your PHP caller; no longer used now that lookups go straight off the CIK
 
-scraped_data = parse_finance_page(symbol, original_symbol, yesterday_days, cik_number, company_name)
-
-
-
-
+get_sec_filings(symbol, original_symbol, yesterday_days, cik_number, company_name)
