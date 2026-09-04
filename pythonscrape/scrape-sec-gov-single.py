@@ -13,6 +13,7 @@ FORM_TYPE_DESCRIPTIONS = {
     'S-1/A': 'Registration statement (amended)',
     'S-3': 'Registration statement (shelf)',
     'S-3/A': 'Registration statement (shelf, amended)',
+    'S-8': 'Registration statement (employee benefit plan)',
     '424B1': 'Prospectus [Rule 424(b)(1)]',
     '424B2': 'Prospectus [Rule 424(b)(2)]',
     '424B3': 'Prospectus [Rule 424(b)(3)]',

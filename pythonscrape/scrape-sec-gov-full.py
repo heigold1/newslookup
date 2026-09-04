@@ -229,8 +229,9 @@ def build_filings_table(data, yesterday_days, symbol, cik_number):
         title = re.sub(r'general form for registration of securities', '<span style="font-size: 35px; background-color:red; color:black"><b>&nbsp;General form for registration of securities</span></b>&nbsp;', title, flags=re.IGNORECASE)
         title = re.sub(r' business combination', '<span style="font-size: 55px; background-color:red; color:black"><br><br><b>&nbsp; BUSINESS<br><br> COMBINATION<br><br> - STAY<br><br>AWAY<br><br> </b></span> &nbsp;', title, flags=re.IGNORECASE)
         title = re.sub(r'annual report', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp; ANNUAL REPORT - CHECK IF IT HAS EARNINGS, IF NOT THEN 40%</b></span> &nbsp;', title, flags=re.IGNORECASE)
-        title = re.sub(r'424', '<span style="font-size: 45px; background-color:red; color:black"><b>&nbsp; 424 - OFFERING</b></span> &nbsp;', title)
-        title = re.sub(r'425', '425 - Business Combination', title)        
+        title = re.sub(r'424', '<span style="font-size: 45px; background-color:red; color:black"><b>&nbsp; 424 - OFFERING</b></span> &nbsp;', title, flags=re.IGNORECASE)
+        title = re.sub(r'425', '<span style="font-size: 35px; background-color:red; color:black"><br><b>&nbsp; 425 - BUSINESS COMBINATION</b></span> &nbsp;', title, flags=re.IGNORECASE)
+        title = re.sub(r'notice of effectiveness', '<span style="font-size: 30px; background-color:red; color:black"><b>NOTICE OF EFFECTIVENESS</b></span> &nbsp;', title, flags=re.IGNORECASE)
         title = re.sub(r'notice of effectiveness', '<span style="font-size: 30px; background-color:red; color:black"><b>NOTICE OF EFFECTIVENESS</b></span> &nbsp;', title, flags=re.IGNORECASE)
         title = re.sub(r'additional definitive proxy soliciting materials', '<span style="font-size: 20px; background-color:red; color:black"><b>ADDITIONAL DEFINITIVE PROXY SOLICITING MATERIALS - CHECK WITH JAY ON THE MEETING MINUTES</b></span> &nbsp;', title, flags=re.IGNORECASE)
         title = re.sub(r'offered to employees', '<span style="font-size: 20px; background-color:red; color:black"><b>OFFERED TO EMPLOYEES</b></span> &nbsp;', title, flags=re.IGNORECASE)
@@ -243,6 +244,9 @@ def build_filings_table(data, yesterday_days, symbol, cik_number):
             filing_type = re.sub(r'144', '<span style="font-size: 15px; background-color:#00ff00; color:black">144</span> &nbsp;', filing_type, flags=re.IGNORECASE)
         else:
             title = re.sub(r'proposed sale of securities', r'<span style="font-size: 30px; background-color:red; color:black"><b>PROPOSED SALE OF SECURITIES</b></span>', title, flags=re.IGNORECASE)
+
+        if filing_type == 'S-8':
+            title = '<span style="font-size: 20px; background-color:red; color:black"><b>&nbsp;S-8 - EMPLOYEE COMPENSATION / STOCK PLAN - CHECK SHARE COUNT VS FLOAT</b></span>&nbsp;'
 
         item_description = re.sub(r'\b3\.01\b', r'<span style="font-size: 45px; background-color:red; color:black"><b> 3.01 - DELISTING </b></span>', item_description, flags=re.IGNORECASE)
         item_description = re.sub(r'\b5\.07\b', r'<span style="font-size: 45px; background-color:red; color:black"><b> 5.07<br><br> - CHECK FOR OFFERING </b></span><span style="font-size: 25px; background-color:red; color:black"<b> Things like *Warrant Exercise Proposal*</b></span>', item_description, flags=re.IGNORECASE)
