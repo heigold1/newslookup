@@ -152,6 +152,52 @@ def build_doc_url(cik_number, accession_number, primary_document):
     return f"https://www.sec.gov/Archives/edgar/data/{cik_no_zeros}/{accession_no_dashes}/{primary_document}"
 
 
+def find_cik_via_full_text_search(query):
+    """
+    Fallback when no CIK was resolved upstream. Used twice below -- once
+    with the ticker, once with the company name -- since SEC's EDGAR
+    Full Text Search API (efts.sec.gov) resolves both the same way: the
+    entityName parameter matches against the filer/company name field
+    (which includes the ticker in parentheses, e.g. "Apple Inc. (AAPL)
+    (CIK 0000320193)"), not full filing text. Real structured JSON in,
+    real JSON out -- this replaces what used to be two separate
+    browse-edgar HTML scrapes (find_cik_by_ticker / find_cik_by_company_name).
+
+    This is a fuzzy, multi-term match rather than an exact phrase match,
+    so for an oddly-worded or very generic query it's possible (though
+    uncommon) for a closely related entity -- a co-filer, an affiliated
+    company -- to outrank the one you meant. Taking only the single
+    top-ranked hit's primary CIK keeps this about as reliable as the old
+    scrape's "single unambiguous match" behavior, just without the HTML
+    scraping.
+
+    Returns the CIK as a string, or None if nothing matched.
+    """
+    headers = {
+        "User-Agent": "Brent Heigold brent@heigoldinvestments.com",
+    }
+    params = {
+        "entityName": query,
+    }
+
+    try:
+        response = requests.get("https://efts.sec.gov/LATEST/search-index", headers=headers, params=params, timeout=10)
+        response.raise_for_status()
+        data = response.json()
+    except (requests.exceptions.RequestException, ValueError):
+        return None
+
+    hits = data.get("hits", {}).get("hits", [])
+    if not hits:
+        return None
+
+    ciks = hits[0].get("_source", {}).get("ciks", [])
+    if not ciks:
+        return None
+
+    return ciks[0]
+
+
 # ---------------------------------------------------------------------------
 # Table building - this is your original parse_xml(), with the per-entry
 # data now coming from the JSON 'recent' filings arrays instead of RSS/Atom
@@ -229,9 +275,8 @@ def build_filings_table(data, yesterday_days, symbol, cik_number):
         title = re.sub(r'general form for registration of securities', '<span style="font-size: 35px; background-color:red; color:black"><b>&nbsp;General form for registration of securities</span></b>&nbsp;', title, flags=re.IGNORECASE)
         title = re.sub(r' business combination', '<span style="font-size: 55px; background-color:red; color:black"><br><br><b>&nbsp; BUSINESS<br><br> COMBINATION<br><br> - STAY<br><br>AWAY<br><br> </b></span> &nbsp;', title, flags=re.IGNORECASE)
         title = re.sub(r'annual report', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp; ANNUAL REPORT - CHECK IF IT HAS EARNINGS, IF NOT THEN 40%</b></span> &nbsp;', title, flags=re.IGNORECASE)
-        title = re.sub(r'424', '<span style="font-size: 45px; background-color:red; color:black"><b>&nbsp; 424 - OFFERING</b></span> &nbsp;', title, flags=re.IGNORECASE)
-        title = re.sub(r'425', '<span style="font-size: 35px; background-color:red; color:black"><br><b>&nbsp; 425 - BUSINESS COMBINATION</b></span> &nbsp;', title, flags=re.IGNORECASE)
-        title = re.sub(r'notice of effectiveness', '<span style="font-size: 30px; background-color:red; color:black"><b>NOTICE OF EFFECTIVENESS</b></span> &nbsp;', title, flags=re.IGNORECASE)
+        title = re.sub(r'424', '<span style="font-size: 45px; background-color:red; color:black"><b>&nbsp; 424 - OFFERING</b></span> &nbsp;', title)
+        title = re.sub(r'425', '<span style="font-size: 55px; background-color:red; color:black"><br><br><b>&nbsp; 425 - BUSINESS<br><br> COMBINATION<br><br> - STAY<br><br>AWAY<br><br> </b></span> &nbsp;', title)
         title = re.sub(r'notice of effectiveness', '<span style="font-size: 30px; background-color:red; color:black"><b>NOTICE OF EFFECTIVENESS</b></span> &nbsp;', title, flags=re.IGNORECASE)
         title = re.sub(r'additional definitive proxy soliciting materials', '<span style="font-size: 20px; background-color:red; color:black"><b>ADDITIONAL DEFINITIVE PROXY SOLICITING MATERIALS - CHECK WITH JAY ON THE MEETING MINUTES</b></span> &nbsp;', title, flags=re.IGNORECASE)
         title = re.sub(r'offered to employees', '<span style="font-size: 20px; background-color:red; color:black"><b>OFFERED TO EMPLOYEES</b></span> &nbsp;', title, flags=re.IGNORECASE)
@@ -287,15 +332,62 @@ def build_filings_table(data, yesterday_days, symbol, cik_number):
 # Entry point
 # ---------------------------------------------------------------------------
 
+def looks_like_etf(company_name, symbol):
+    """
+    Cheap pre-filter so leveraged/inverse ETFs and plain ETFs don't burn a
+    round trip through the whole CIK-resolution chain just to hit a dead
+    end -- they either have no CIK your pipeline can find, or file fund
+    forms (N-CSR, N-PORT, 497, etc.) that none of your highlighting rules
+    know what to do with anyway.
+
+    Checks company_name and symbol for "ETF"/"ETN", a leverage multiple
+    like "2X"/"3X"/"4X"/"1.5X" (any digit(s), not just 2 and 3), or one of
+    a handful of ETF-issuer brand names distinctive enough to be
+    essentially zero-risk (iShares, ProShares, Direxion, SPDR,
+    WisdomTree, VanEck).
+
+    Deliberately NOT included: "Trust", "Fund", "Shares", "Bull", "Bear",
+    "Daily" -- all common in ETF names, but also real words that show up
+    in real small-cap operating companies (there's an actual OTC mining
+    stock called Bear Creek Mining, for instance). Better to let a couple
+    of ETFs slip through than silently skip a real name.
+    """
+    text = f"{company_name or ''} {symbol or ''}"
+
+    if re.search(r'\bETFs?\b', text, re.IGNORECASE):
+        return True
+    if re.search(r'\bETNs?\b', text, re.IGNORECASE):
+        return True
+    if re.search(r'\b\d+(?:\.\d+)?X\b', text, re.IGNORECASE):
+        return True
+    if re.search(r'\b(iShares|ProShares|Direxion|SPDR|WisdomTree|VanEck)\b', text, re.IGNORECASE):
+        return True
+
+    return False
+
+
 def get_sec_filings(symbol, original_symbol, yesterday_days, cik_number, company_name):
 
-    if not cik_number or cik_number == "NOT_FOUND":
+    if looks_like_etf(company_name, symbol):
         result = {
             'found': False,
-            'message': f'<a target="_blank" href="http://seekingalpha.com/symbol/{original_symbol}/sec-filings?filter=all"><div style="background-color: red"><span style="font-size: 45px">NO CIK ON FILE - CHECK SEEKING ALPHA</span></div></a>'
+            'message': '<div style="background-color: orange"><span style="font-size: 30px"><b>&nbsp;LOOKS LIKE AN ETF - DON\'T BOTHER</b></span></div>'
         }
         print(json.dumps(result))
         return
+
+    if not cik_number or cik_number == "NOT_FOUND":
+        resolved_cik = find_cik_via_full_text_search(symbol) if symbol else None
+        if not resolved_cik and company_name:
+            resolved_cik = find_cik_via_full_text_search(company_name)
+        if not resolved_cik:
+            result = {
+                'found': False,
+                'message': f'<a target="_blank" href="http://seekingalpha.com/symbol/{original_symbol}/sec-filings?filter=all"><div style="background-color: red"><span style="font-size: 45px">NO CIK ON FILE - CHECK SEEKING ALPHA</span></div></a>'
+            }
+            print(json.dumps(result))
+            return
+        cik_number = resolved_cik
 
     try:
         data = get_filings_json(cik_number)
@@ -308,10 +400,26 @@ def get_sec_filings(symbol, original_symbol, yesterday_days, cik_number, company
         print(json.dumps(result))
 
 
-symbol = sys.argv[1]
-original_symbol = sys.argv[2]
-yesterday_days = sys.argv[3]
-cik_number = sys.argv[4]
-company_name = sys.argv[5]  # kept for CLI compatibility with your PHP caller; no longer used now that lookups go straight off the CIK
+def main():
+    # Guaranteed to print SOMETHING no matter what goes wrong -- a missing
+    # argv entry (e.g. company_name not passed through when it's unknown),
+    # a surprise exception inside get_sec_filings, anything. Before this,
+    # an uncaught crash here went to stderr, shell_exec() got back an empty
+    # string, and the page silently showed nothing at all.
+    try:
+        symbol = sys.argv[1] if len(sys.argv) > 1 else ''
+        original_symbol = sys.argv[2] if len(sys.argv) > 2 else symbol
+        yesterday_days = sys.argv[3] if len(sys.argv) > 3 else '0'
+        cik_number = sys.argv[4] if len(sys.argv) > 4 else ''
+        company_name = sys.argv[5] if len(sys.argv) > 5 else ''
 
-get_sec_filings(symbol, original_symbol, yesterday_days, cik_number, company_name)
+        get_sec_filings(symbol, original_symbol, yesterday_days, cik_number, company_name)
+    except Exception:
+        result = {
+            'found': False,
+            'message': '<div style="background-color: red"><span style="font-size: 45px">SEC LOOKUP FAILED - CHECK SEEKING ALPHA</span></div>'
+        }
+        print(json.dumps(result))
+
+
+main()
