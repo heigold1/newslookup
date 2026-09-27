@@ -273,7 +273,7 @@ def build_filings_table(data, yesterday_days, symbol, cik_number):
         title = re.sub(r'8\.01', '<span style="font-size: 16px; background-color:lightblue; color:black"><b>&nbsp;Other Events</span></b>&nbsp;<br>', title)
         title = re.sub(r'9\.01', '<span style="font-size: 16px; background-color:lightblue; color:black"><b>&nbsp;Financial Statemtnes and Exhibits</span></b>&nbsp;<br>', title)
         title = re.sub(r'general form for registration of securities', '<span style="font-size: 35px; background-color:red; color:black"><b>&nbsp;General form for registration of securities</span></b>&nbsp;', title, flags=re.IGNORECASE)
-        title = re.sub(r' business combination', '<span style="font-size: 55px; background-color:red; color:black"><br><br><b>&nbsp; BUSINESS<br><br> COMBINATION<br><br> - STAY<br><br>AWAY<br><br> </b></span> &nbsp;', title, flags=re.IGNORECASE)
+        title = re.sub(r' business combination', '<span style="font-size: 40px; background-color:red; color:black"><br><br><b>&nbsp; BUSINESS<br><br> COMBINATION<br><br> - STAY<br><br>AWAY<br><br> </b></span> &nbsp;', title, flags=re.IGNORECASE)
         title = re.sub(r'annual report', '<span style="font-size: 25px; background-color:red; color:black"><b>&nbsp; ANNUAL REPORT - CHECK IF IT HAS EARNINGS, IF NOT THEN 40%</b></span> &nbsp;', title, flags=re.IGNORECASE)
         title = re.sub(r'424', '<span style="font-size: 45px; background-color:red; color:black"><b>&nbsp; 424 - OFFERING</b></span> &nbsp;', title)
         title = re.sub(r'425', '<span style="font-size: 55px; background-color:red; color:black"><br><br><b>&nbsp; 425 - BUSINESS<br><br> COMBINATION<br><br> - STAY<br><br>AWAY<br><br> </b></span> &nbsp;', title)
