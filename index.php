@@ -287,8 +287,8 @@
 	<div id="right_container" style="position: relative; background-color: #F3F3FF; border-style: solid; border-width: 1px; float: right; width: 50%; height: 100%;	display: block; border-style: solid; border-width: 1px; 	">
 
 		<div id="right_bottom_container"> 
-				<div id="bigcharts_chart_container" style="position: relative; width: 53%; height: 350px; display: inline-block; order: 3px solid red;">
-				    <div id="monthlyOHLC"></div>
+				<div id="red_flags_container">
+
 				</div>
 
 

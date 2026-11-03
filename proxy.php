@@ -4,6 +4,7 @@ include './Samples/config.php';
 
 require_once("simple_html_dom.php"); 
 require_once("country-codes.php");
+require_once('red-flag-check.php');
 
 libxml_use_internal_errors(true);
 
@@ -594,38 +595,38 @@ function grabHTML($function_host_name, $url)
     curl_setopt($ch, CURLOPT_VERBOSE, false);
     curl_setopt($ch, CURLOPT_STDERR,$f = fopen(__DIR__ . "/error.log", "w+"));
 
+    $response = curl_exec($ch);
 
+    if (curl_errno($ch)) {
+        echo 'Curl error: ' . curl_error($ch);
+    } else {
+        $finalUrl = curl_getinfo($ch, CURLINFO_EFFECTIVE_URL);
+        return htmlspecialchars($response);
+    }
 
-
-$response = curl_exec($ch);
-
-if (curl_errno($ch)) {
-    echo 'Curl error: ' . curl_error($ch);
-} else {
-    $finalUrl = curl_getinfo($ch, CURLINFO_EFFECTIVE_URL);
-    return htmlspecialchars($response);
-}
-
-
-
-
-
-
-
-
-/*
-
-    $returnHTML = curl_exec($ch); 
-
-    if($errno = curl_errno($ch)) {
-        $error_message = curl_strerror($errno);
-        echo "cURL error ({$errno}):\n {$error_message}";
-    }   
-    curl_close($ch);
-    return $returnHTML; 
-*/
 
 } // end of function grabHTML
+
+// Free industry gate: call BEFORE run_red_flag_checks(). Exact matches only,
+// so "Pharmaceutical Retailers" and "Medical Distribution" do NOT match.
+// Empty/unknown industry returns true so the check still runs to be safe.
+function rf_is_healthcare_industry(?string $industry): bool
+{
+    $industry = strtolower(trim((string)$industry));
+    if ($industry === '') {
+        return true;
+    }
+    $allowed = [
+        'biotechnology',
+        'drug manufacturers - general',
+        'drug manufacturers - specialty & generic',
+        'medical devices',
+        'medical instruments & supplies',
+        'diagnostics & research',
+    ];
+    return in_array($industry, $allowed, true);
+}
+
 
 $ret = "";
 $finalReturn = "";
@@ -1035,12 +1036,7 @@ else if ($which_website == "yahoo")
               $state = "ALPHA";
           }
 
-
-/*          if ($country == "United States") 
-          { */
-            $country .= " (" . $city . ", " . $state . ")"; 
-
-//          }
+          $country .= " (" . $city . ", " . $state . ")"; 
         }
 
       }
@@ -1059,69 +1055,25 @@ else if ($which_website == "yahoo")
 
       addYahooSectorIndustry($symbol, $yahooFinanceSector, $yahooFinanceIndustry, $country, $companyName);
 
-/* Scrape the stockanalysis.com website for country, sector, and industry information */ 
-/*
-      $command = escapeshellcmd('python3 ./pythonscrape/scrape-stock-analysis.py ' . $symbol);
-      $stockAnalysisJson = shell_exec($command);
-      $yahooFinanceObject = json_decode($stockAnalysisJson); 
-
-      $companyWebsite = '<a target="_blank" style="font-size: 15px;" onclick="return openPage(this.href)" href="" class="tab-link"><b>No website</b></a>&nbsp;&nbsp;';
-
-      $country = $yahooFinanceObject->country; 
-      $yahooFinanceSector = $yahooFinanceObject->sector; 
-      $yahooFinanceIndustry = $yahooFinanceObject->industry; 
-
-*/
-
-/* end of scraping stockanalysis.com website */ 
-
-
-/* Alphavantage alpha vantage API for company overview (sector, industry, country) 
-      
-      
-
-    $alphaVantageAPI = "https://www.alphavantage.co/query?function=OVERVIEW&symbol=" . $symbol . "&apikey=d36ab142bed5a1430fcde797063f6b9a"; 
-    $alphaVantageResults = grabHTML("www.alphavantage.co", $alphaVantageAPI);
-    $alphaVantageJSON = json_decode($alphaVantageResults);
-
-    $alphaVantageSector = $alphaVantageJSON->Sector; 
-    $alphaVantageIndustry = $alphaVantageJSON->Industry; 
-    $alphaVantageAddress = $alphaVantageJSON->Address; 
-
-    $commaLocation = intval(strrpos($alphaVantageAddress, ',')); 
-    $alphaVantageCountryCode = trim(substr($alphaVantageAddress, $commaLocation + 1)); 
+      $redFlag = false;
+      $redFlagText = "NO RED FLAGS";
 
 
 
-//     $alphaVantagCountry = mapCountryCodes($alphaVantageCountryCode); 
+      if (rf_is_healthcare_industry($yahooFinanceIndustry)) {
+        $rf = run_red_flag_checks($symbol);
+        $p  = $rf['details']['pipeline'] ?? [];
 
-
-
-  end of Alphavantage alpha vantage API for company overview */  
-
-
-
-
-
-      /* Highlight certain sector words that should put us on guard */ 
-
-      $yahooFinanceSector = preg_replace('/energy/i', '<span style="font-size: 20px; background-color: red; color:black"><b>&nbsp; ENERGY</b></span>&nbsp;', $yahooFinanceSector); 
-      $yahooFinanceSector = preg_replace('/shell companies/i', '<span style="font-size: 20px; background-color: red; color:black"><b>&nbsp; SHELL COMPANIES - STAY AWAY</b></span>&nbsp;', $yahooFinanceSector); 
-      $yahooFinanceSector = preg_replace('/healthcare/i', '<br><span style="font-size: 60px; background-color: red; color:black"><b>&nbsp; HEALTHCARE</b></span>&nbsp;', $yahooFinanceSector); 
-
-      $yahooFinanceIndustry = preg_replace('/oil \& gas/i', '<span style="font-size: 60px; background-color: red; color:black"><b>&nbsp; OIL & GAS</b></span>&nbsp;', $yahooFinanceIndustry); 
-
-      $yahooFinanceIndustry = preg_replace('/medical devices/i', '<span style="font-size: 60px; background-color: red; color:black"><b>&nbsp; MEDICAL<br><br> DEVICES</b></span>&nbsp;', $yahooFinanceIndustry); 
-
-      $yahooFinanceIndustry = preg_replace('/(biotechnology|technology)/i', '<br><span style="font-size: 30px; background-color: red; color:black"><b>&nbsp; $1</b></span>&nbsp;', $yahooFinanceIndustry); 
-
-      $yahooFinanceIndustry = preg_replace('/shell companies/i', '<span style="font-size: 35px; background-color: red; color:black"><b>&nbsp; Shell Companies</b></span>&nbsp;', $yahooFinanceIndustry); 
-
-      $yahooFinanceIndustry = preg_replace('/banks/i', '<span style="font-size: 35px; background-color: red; color:black"><b>&nbsp; BANKS</b></span>&nbsp;', $yahooFinanceIndustry); 
+        if (!empty($p['error'])) {
+            $redFlag = true; 
+            $redFlagText = 'RED-FLAG CHECK FAILED - CHECK PIPELINE COUNT';   // unknown, not "clean"
+        } elseif (!empty($p['flag'])) {
+            $redFlag = true;
+            $redFlagText = 'PHARMACEUTICAL WITH 2 OR LESS DRUGS IN PIPELINE (found: ' . (int)($p['pipeline_count'] ?? 0) . ')';
+        }
+      }
 
       $sectorCountry = '<span style="font-size: 15px;">SECTOR - ' . $yahooFinanceSector . '</span>&nbsp;&nbsp;<span id="industry" style="font-size: 15px;">INDUSTRY - ' . $yahooFinanceIndustry . ' </span>' . 'CEO ' . $ceo . '<br><br><div id="country" style="font-size: 15px; height:75px; ">' . $country . '</div>'; 
-
-
 
       $returnCompanyName = '<h1>' . $companyName . '</h1>';
 
@@ -1152,27 +1104,6 @@ else if ($which_website == "yahoo")
 
       $currentVolumeHTML = '<span id="vol_current" style="font-size: 12px; background-color:#ff9999; color: black; display: inline-block;"><b>Vol - ' . $currentVolume . '</b></span>'; 
 
-      // Calculate the finViz 3 month volume number
-/*
-                $finVizTDArray = $html->find('table.snapshot-table2 tbody tr.table-dark-row');
-                $avgVolFinViz = "<span id='vol_fin_viz' style='background-color: orange'><b>FinVizAVG - " . calcFinVizAvgVolume($finVizTDArray[10]) . "</b></span>";
-*/
-
-
-/*
-      // get Yahoo Finance average volume number.  We're going to skip yahoo finance avg vol for now, it's not that important 
-
-      $command = escapeshellcmd('python3 ./pythonscrape/scrape-yahoo-finance-summary.py ' . $symbol);
-      $yahooFinanceJson = shell_exec($command);
-
-      $yahooFinanceObject = json_decode($yahooFinanceJson);
-
-      $avgVolYahoo =  '<span id="vol_yahoo" style="background-color: orange; font-size: 20px;"><b>YahooAVG - ' . $yahooFinanceObject->avgvol . '</b></span>'; 
-*/
-
-
-
-
       $avgVol10days = '<span id="vol_10_day" style="font-size: 20px; background-color:#CCFF99; color: black; display: inline-block;"><b>eTradeAVG - ' . number_format((int) $_GET['ten_day_volume']) . '</b></span>'; 
 
       // todo - put in the avgVol3Months from finviz.com
@@ -1193,15 +1124,10 @@ else if ($which_website == "yahoo")
       $google_keyword_string = preg_replace('/inc\./i', "+", $google_keyword_string);
       $google_keyword_string = preg_replace('/ltd\./i', "+", $google_keyword_string);
 
-
-      // Not RSS feed but just a google scrape with keywords
-
       $googleNewsFlag = "there is no google news"; 
       $googleNewsURL = "https://www.google.com/search?q=stock+" . $symbol . "&tbm=nws"; 
 
       $googleNewsResults = grabHTML("www.google.com", $googleNewsURL);
-
-//      $googleNewsHtml = str_get_html($googleNewsResults);  
 
       if (
         preg_match('/minutes? ago/', $googleNewsResults) || 
@@ -1210,99 +1136,6 @@ else if ($which_website == "yahoo")
       {
           $googleNewsFlag = "there is google news"; 
       }
-
-      // URL of Google News RSS feed
-
-/*
-      $googleNewsRSSFeed = simplexml_load_file('https://news.google.com/news/feeds?hl=en&gl=ca&q='.$google_keyword_string.'&um=1&ie=UTF-8&output=rss'); 
-
-      $googleRSSArray = array();
-
-      foreach ($googleNewsRSSFeed->channel->item as $feedItem) {
-          if (!preg_match('/This RSS feed URL is deprecated/', $feedItem->title))
-          {
-              $time = strToTime($feedItem->pubDate);
-
-              $publicationDateStrToTime = strtotime($feedItem->pubDate);
-              $convertedDate = new DateTime(); 
-              $convertedDate->setTimestamp($publicationDateStrToTime);
-
-              $publicationDate = $feedItem->pubDate;
-              $publicationDate = preg_replace("/[0-9][0-9]\:[0-9][0-9]\:[0-9][0-9] GMT/", "", $publicationDate); 
-              $publicationTime = $convertedDate->format("g:i A");
-
-              // red/green highlighting for AM/PM 
-              for ($i = $yesterdayDays; $i >= 1; $i--)
-              {
-                  if (preg_match('/(' .  get_yahoo_trade_date($i) . ')/', $publicationDate))
-                  {
-                      $publicationTime = preg_replace('/PM/', '<span style="background-color: red">PM</span>', $publicationTime); 
-                      if ($i == $yesterdayDays) 
-                      {
-                          $publicationTime = preg_replace('/AM/', '<span style="background-color: lightgreen">AM</span>', $publicationTime); 
-                    
-                      }
-                      else
-                      {
-                          $publicationTime = preg_replace('/AM/', '<span style="background-color: red">AM</span>', $publicationTime); 
-                      }  
-                  }
-              }
-
-              $link = $feedItem->link; 
-              $title = $feedItem->title; 
-
-              $title = preg_replace('/' . $companyNameArray[0] . '/i', '<span style="font-size: 12px; background-color:lightblue; color:black"><b>' . $companyNameArray[0] . '</b></span>', $title);              
-
-              $title = preg_replace('/' . $symbol . '/i', '<span style="font-size: 12px; background-color:lightblue; color:black"><b>' . $symbol . '</b></span>', $title);              
-
-              $pubDate = $feedItem->pubDate; 
-              $googleStruct = array();
-
-              $googleStruct['link'] =  strval($feedItem->link);
-              $googleStruct['title'] =  strval($title);
-              $googleStruct['pub-date'] =  strval($publicationDate . " " . $publicationTime);
-
-              $googleRSSArray[$time] = $googleStruct;
-          }
-      }
-
-      krsort($googleRSSArray);
-
-      $url = "https://www.stocksplithistory.com/?symbol=" . $symbol; 
-
-      $results = grabHTML("www.stocksplithistory.com", $url);
-
-      $html = str_get_html($results);  
-      $splitsTable = $html->find('body center div table tbody tr td table'); 
-
-      $stockSplitsTable = $splitsTable[4]; 
-
-      if (preg_match('/latest/i', $stockSplitsTable))
-      {
-          $stockSplitsTable = "<table><tbody><tr><td><span style='font-style:arial; font-size: 25px;'>SPLIT NOT WORKING</span></td></tr></tbody></table>"; 
-      }
-
-//       $stockSplitsTable = preg_replace("/\<table border.*\/table\>?/", "", $stockSplitsTable); 
-
-      $googleNews = "<ul class='newsSide'>";
-      $googleNews .= "<li style='font-size: 20px !important; background-color: lightblue; '>Google News</li>";
-      $i = 0;
-      foreach ($googleRSSArray as $feedItem) {
-
-          $i++;
-          $googleNews .= "<li "; 
-
-          if ($i % 2 == 1)
-          {
-            $googleNews .=  "style='background-color: #ebd8bd; '"; 
-          };
-          $googleNews .=  " ><a hr   
-       ef='" . $feedItem['link'] . "'>" . $feedItem['pub-date'] . " - <br>" . $feedItem['title'] . "</a></li>";
-      }
-      $googleNews .=  "</ul>";
-
-*/
 
       /*** Seeking Alpha RSS Parse ***/ 
 
@@ -1721,6 +1554,8 @@ else if ($which_website == "yahoo")
       $returnArray['description'] = $description; 
       $returnArray['descriptionRegex'] = $descriptionRegex; 
       $returnArray['ceo'] = $ceo; 
+      $returnArray['red_flags'] = $redFlag; 
+      $returnArray['red_flag_text'] = $redFlagText; 
 
       echo json_encode($returnArray); 
 
