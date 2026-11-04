@@ -284,6 +284,12 @@ def build_filings_table(data, yesterday_days, symbol, cik_number):
         title = re.sub(r'1\.01', r'<span style="font-size: 40px; background-color: red; color:black">CHECK FOR OFFERING</span><span style="font-size: 15px; background-color:red; color:black"><b>&nbsp; 1.01 - CHECK FOR BANKRUPTCY, INSOLVENCY, OFFERING, RAISING EXTRA CASH, ETC...</b></span>', title)
         title = re.sub(r'withdrawal of offering statement', r'<span style="font-size: 25px; background-color:red; color:black"><b>WITHDRAWAL OF OFFERING STATEMENT - 35-40%</b></span>', title, flags=re.IGNORECASE)
         title = re.sub(r'certification by an exchange', r'<span style="font-size: 25px; background-color:red; color:black"><b>CERTIFICATION BY AN EXCHANGE - 40%</b></span>', title, flags=re.IGNORECASE)
+        title = re.sub(r'\b(SCHEDULE|SC)\s+13G(/A)?\b',
+                       r'<span style="font-size: 15px; background-color:#00ff00; color:black"><b>\g<0> (holder report, not news)</b></span>',
+                       title, flags=re.IGNORECASE)
+        filing_type = re.sub(r'\b(SCHEDULE|SC)\s+13G(/A)?\b',
+                             r'<span style="font-size: 15px; background-color:#00ff00; color:black">\g<0></span> &nbsp;',
+                             filing_type, flags=re.IGNORECASE)
         if filing_type == '144':
             title = re.sub(r'proposed sale of securities', r'<span style="font-size: 14px; background-color:#00ff00; color:black"><b>PROPOSED SALE OF SECURITIES (filing 144 is not news)</b></span>', title, flags=re.IGNORECASE)
             filing_type = re.sub(r'144', '<span style="font-size: 15px; background-color:#00ff00; color:black">144</span> &nbsp;', filing_type, flags=re.IGNORECASE)

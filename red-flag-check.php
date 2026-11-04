@@ -113,8 +113,8 @@ function ask_claude_json(string $prompt): array
 
     $messages = [['role' => 'user', 'content' => $prompt]];
 
-    // A long web-search turn can occasionally pause; continue it (max 2 extra calls).
-    for ($i = 0; $i < 3; $i++) {
+    // A long web-search turn can occasionally pause; continue it (max 4 extra calls).
+    for ($i = 0; $i < 5; $i++) {
         $data = call_claude_api($messages, $apiKey);
         if (($data['stop_reason'] ?? '') !== 'pause_turn') {
             break;
@@ -129,7 +129,8 @@ function ask_claude_json(string $prompt): array
         }
     }
     if (!preg_match('/\{.*\}/s', $text, $m)) {
-        throw new RuntimeException("No JSON found in reply:\n$text");
+        $why = $data['stop_reason'] ?? 'unknown';
+        throw new RuntimeException("No JSON found (stop_reason: $why):\n$text");
     }
     $result = json_decode($m[0], true);
     if (!is_array($result)) {
@@ -142,7 +143,7 @@ function call_claude_api(array $messages, string $apiKey): array
 {
     $payload = [
         'model'      => RF_MODEL,
-        'max_tokens' => 1024,
+        'max_tokens' => 4096,
         'tools'      => [[
             'type'     => 'web_search_20250305',
             'name'     => 'web_search',
