@@ -1055,21 +1055,48 @@ else if ($which_website == "yahoo")
 
       addYahooSectorIndustry($symbol, $yahooFinanceSector, $yahooFinanceIndustry, $country, $companyName);
 
+      error_log("RF DEBUG symbol=$symbol industry=[" . var_export($yahooFinanceIndustry ?? null, true) . "] gate=" . (rf_is_healthcare_industry($yahooFinanceIndustry ?? '') ? 'yes' : 'no'));
+
       $redFlag = false;
       $redFlagText = "NO RED FLAGS";
 
+      $industry = trim((string)($yahooFinanceIndustry ?? ''));
 
+      if ($industry === '') {
+          $redFlag = true;
+          $redFlagText = 'INDUSTRY UNKNOWN - RED FLAG CHECK SKIPPED - REFRESH';
+      } elseif (rf_is_healthcare_industry($industry)) {
 
-      if (rf_is_healthcare_industry($yahooFinanceIndustry)) {
-        $rf = run_red_flag_checks($symbol);
-        $p  = $rf['details']['pipeline'] ?? [];
+        // Runs the check; returns [pipeline array, ok?]. "ok" = a real numeric count came back with no error.
+        $runCheck = function () use ($symbol) {
+            $rf = run_red_flag_checks($symbol);
+            $p  = $rf['details']['pipeline'] ?? [];
+            $ok = empty($rf['error']) && empty($p['error'])
+                  && isset($p['pipeline_count']) && is_numeric($p['pipeline_count']);
+            error_log("RF RESULT symbol=$symbol ok=" . ($ok ? 'yes' : 'no')
+                . " count=" . ($p['pipeline_count'] ?? 'none')
+                . " flag=" . (!empty($p['flag']) ? 'yes' : 'no')
+                . " err=" . json_encode($rf['error'] ?? ($p['error'] ?? null))
+                . " products=" . json_encode($p['products'] ?? []));
+            return [$p, $ok];
+        };
 
-        if (!empty($p['error'])) {
-            $redFlag = true; 
-            $redFlagText = 'RED-FLAG CHECK FAILED - CHECK PIPELINE COUNT';   // unknown, not "clean"
+        [$p, $ok] = $runCheck();
+
+        // Second opinion if the first run failed or said "clean"
+        if (!$ok || empty($p['flag'])) {
+            [$p2, $ok2] = $runCheck();
+            if ($ok2 && (!empty($p2['flag']) || !$ok)) {
+                [$p, $ok] = [$p2, $ok2];
+            }
+        }
+
+        if (!$ok) {
+            $redFlag = true;
+            $redFlagText = 'RED-FLAG CHECK FAILED - CHECK PIPELINE COUNT';
         } elseif (!empty($p['flag'])) {
             $redFlag = true;
-            $redFlagText = 'PHARMACEUTICAL WITH 2 OR LESS DRUGS IN PIPELINE (found: ' . (int)($p['pipeline_count'] ?? 0) . ')';
+            $redFlagText = 'PHARMACEUTICAL WITH 2 OR LESS DRUGS IN PIPELINE (found: ' . (int)$p['pipeline_count'] . ')';
         }
       }
 

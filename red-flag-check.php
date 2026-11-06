@@ -75,19 +75,50 @@ function run_red_flag_checks(string $ticker): array
 // ---------------------------------------------------------------------------
 function check_pipeline(string $ticker): array
 {
-    $prompt = <<<'EOT'
+      $prompt = <<<'EOT'
 Use web search to check the company with stock ticker {TICKER}.
+
+Step 1 - Identify the company. Confirm the company that currently trades under {TICKER}
+(tickers get reused; make sure it's the current company).
+
+Step 1b - Decide is_pharma_biotech_or_device. Answer true ONLY if the company develops
+or sells its OWN drugs, biologics, biosimilars, vaccines, cell/gene therapies, regulated
+medical devices or diagnostic tests that need FDA (or equivalent) approval/clearance.
+Answer false for: research tools/reagents/lab equipment, CROs, contract manufacturers
+(CDMOs), lab testing services, distributors/pharmacies, agricultural or animal biotech,
+licensing-only platforms, and any non-healthcare business - even if it calls itself "biotech".
+
+Step 2 - Find its products. Prefer the company's own sources: its latest 10-K/10-Q,
+its investor-relations pipeline page, or recent press releases. Use the most recent
+information available.
+
+Step 3 - List each qualifying product ONCE. A product qualifies only if it is:
+  - approved/cleared AND marketed, or
+  - under FDA (or equivalent regulator) review, or
+  - in human clinical trials (Phase 1, 2 or 3).
+
+Counting rules (follow exactly):
+  - Count DISTINCT products only: a distinct drug molecule, biologic, biosimilar,
+    device or diagnostic test.
+  - Biosimilars, biologics, vaccines and cell/gene therapies DO count.
+  - The SAME product counts as ONE, even if it has different models, sizes, versions,
+    generations, accessories, applicators, doses, formulations, brand names, or is used
+    in different diseases/indications.
+  - A device platform sold under one brand (system + its parts) = ONE product.
+  - Do NOT count: preclinical or discovery programs, discontinued products, products
+    licensed out to another company, services, or software that isn't a regulated medical device.
+  - If you are unsure whether two items are the same product, count them as ONE.
+  - If you are unsure whether a product qualifies, INCLUDE it and add "(uncertain)" after its stage.
+
+Step 4 - pipeline_count = the number of items in your "products" list. They must match.
 
 Answer ONLY with a JSON object, no other text, in exactly this format:
 {
   "company": "<company name>",
   "is_pharma_biotech_or_device": true or false,
-  "pipeline_count": <number of DISTINCT drug or medical-device candidates that are
-                     in human clinical trials, under FDA review, or approved/marketed.
-                     Do NOT count preclinical programs, the same product in different
-                     diseases, or discontinued/licensed-out products>,
-  "products": ["<product name (stage)>", ...],
-  "reason": "<one short sentence>"
+  "products": ["<product name> (<stage, e.g. FDA-cleared & marketed / Phase 2 / under FDA review>)", ...],
+  "pipeline_count": <number of items in "products">,
+  "reason": "<one short sentence explaining the count, naming anything you excluded and why>"
 }
 EOT;
 
@@ -97,6 +128,11 @@ EOT;
     $isHealth = !empty($res['is_pharma_biotech_or_device']);
     $count    = isset($res['pipeline_count']) ? (int)$res['pipeline_count'] : null;
     $res['flag'] = $isHealth && $count !== null && $count <= 2;
+
+    // A real drug/device developer with 0 products = the search failed, not a fact.
+    if ($isHealth && $count === 0 && empty($res['error'])) {
+        $res['error'] = 'developer with 0 products found - likely a failed search';
+    }
 
     return $res;
 }
