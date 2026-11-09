@@ -284,6 +284,16 @@ def build_filings_table(data, yesterday_days, symbol, cik_number):
         title = re.sub(r'1\.01', r'<span style="font-size: 40px; background-color: red; color:black">CHECK FOR OFFERING</span><span style="font-size: 15px; background-color:red; color:black"><b>&nbsp; 1.01 - CHECK FOR BANKRUPTCY, INSOLVENCY, OFFERING, RAISING EXTRA CASH, ETC...</b></span>', title)
         title = re.sub(r'withdrawal of offering statement', r'<span style="font-size: 25px; background-color:red; color:black"><b>WITHDRAWAL OF OFFERING STATEMENT - 35-40%</b></span>', title, flags=re.IGNORECASE)
         title = re.sub(r'certification by an exchange', r'<span style="font-size: 25px; background-color:red; color:black"><b>CERTIFICATION BY AN EXCHANGE - 40%</b></span>', title, flags=re.IGNORECASE)
+
+        # 13D / 13D/A = active holder report. Usually just a stake update,
+        # but Item 4/5 can hold a takeover offer, activist demand or big sale -> yellow, not green.
+        title = re.sub(r'\b(SCHEDULE|SC)\s+13D(/A)?\b',
+                       r'<span style="font-size: 15px; background-color:yellow; color:black"><b>\g<0> (holder report - check Item 4 &amp; 5 for sales/proposals)</b></span>',
+                       title, flags=re.IGNORECASE)
+        filing_type = re.sub(r'\b(SCHEDULE|SC)\s+13D(/A)?\b',
+                             r'<span style="font-size: 15px; background-color:yellow; color:black">\g<0></span> &nbsp;',
+                             filing_type, flags=re.IGNORECASE)
+        
         title = re.sub(r'\b(SCHEDULE|SC)\s+13G(/A)?\b',
                        r'<span style="font-size: 15px; background-color:#00ff00; color:black"><b>\g<0> (holder report, not news)</b></span>',
                        title, flags=re.IGNORECASE)
