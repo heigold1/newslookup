@@ -12,13 +12,16 @@ import urllib3
 import itertools as it 
 import xml.etree.ElementTree as ET 
 from datetime import datetime, timedelta
+from zoneinfo import ZoneInfo
+
+NY = ZoneInfo("America/New_York")
 
 
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 def get_yahoo_trade_date(days_back):
   # Calculate the date 'days_back' days ago
-  date = datetime.now() - timedelta(days=days_back)
+  date = datetime.now(NY) - timedelta(days=days_back)
 
   # Get the day of the week (abbreviated to the first three letters)
   week_day = date.strftime('%a')
@@ -80,6 +83,7 @@ def parse_finance_page(symbol, yesterday_days):
     returnString = ""
     class_action = False  
     j = 0 
+    clean_news = []     # untouched headlines for the Claude dump (before any highlighting rules) 
 
     all_news = "<ul class='newsSide'>";
     all_news += "<li style='font-size:20px !important; background-color:#00ff00;'>Yahoo Finance News <textarea id='prepareChatGPT' style='position:absolute; left:-9999px;'></textarea></li>";
@@ -97,14 +101,11 @@ def parse_finance_page(symbol, yesterday_days):
       pub_date_str = item.find("pubDate").text
       link = item.find("link").text
 
-      # Convert the pubDate string to a datetime object
+      # Convert the pubDate string (GMT) to New York time - handles EST/EDT automatically
       pub_date = datetime.strptime(pub_date_str, "%a, %d %b %Y %H:%M:%S %z")
-      # Subtract 14400 seconds (4 hours)
-      publication_date_str_to_time = pub_date - timedelta(seconds=14400)
-      # Create a new datetime object from the timestamp
-      converted_date = publication_date_str_to_time
-      # Remove the time part from the publication date string
-      publication_date = re.sub(r"\d{2}:\d{2}:\d{2} \+0000", "", pub_date_str)
+      converted_date = pub_date.astimezone(NY)
+      # New York date, e.g. "Fri, 13 Nov 2026 " (same format as before, trailing space included)
+      publication_date = converted_date.strftime("%a, %d %b %Y ")
       # Format the time as "g:i A" (12-hour format with AM/PM)
       publication_time = converted_date.strftime("%I:%M %p")
 
@@ -113,6 +114,9 @@ def parse_finance_page(symbol, yesterday_days):
           continue 
         else: 
           class_action = True 
+
+      # untouched copy for the Claude dump - saved BEFORE the title regex rules below
+      clean_news.append({"title": title, "link": link, "pub_date": pub_date_str})
 
       all_news += "<li " 
 
@@ -137,7 +141,7 @@ def parse_finance_page(symbol, yesterday_days):
 
     all_news += "</ul>" 
     print(all_news.encode('ascii', 'ignore').decode('ascii')) 
-  
+    print("<!--CLEAN_NEWS_JSON-->" + json.dumps(clean_news))
 
   except Exception as e:
     print("Failed to process the request, Exception:%s"%(e))

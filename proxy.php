@@ -386,6 +386,28 @@ function curl_get_contents($url)
     return $data;
 }
 
+// Builds one untouched news item for the Claude dump:
+// original title + link, and the time converted properly to New York time (handles daylight saving).
+function cleanNewsItem($source, $title, $link, $pubDate)
+{
+    $item = array(
+        'source'       => $source,
+        'title'        => trim((string) $title),
+        'link'         => trim((string) $link),
+        'pub_date_raw' => trim((string) $pubDate),   // exactly as the RSS feed sent it (GMT)
+        'date_et'      => '',
+        'time_et'      => ''
+    );
+    try {
+        $dt = new DateTime($item['pub_date_raw']);
+        $dt->setTimezone(new DateTimeZone('America/New_York'));
+        $item['date_et'] = $dt->format('D, d M Y');    // e.g. "Fri, 13 Nov 2026"
+        $item['time_et'] = $dt->format('g:i A T');     // e.g. "8:09 PM EST"
+    } catch (Exception $e) {
+        // leave date/time blank if the feed's date can't be read
+    }
+    return $item;
+}
 
 function getTradeHalts()
 {
@@ -914,11 +936,23 @@ else if ($which_website == "yahoo")
       $command = escapeshellcmd($venv_python . ' ./pythonscrape/scrape-yahoo-finance-rss.py ' . $symbol . ' ' . $yesterdayDays);
       $allNews = shell_exec($command);
 
+      // ---- split off the untouched Yahoo headlines (for the Claude dump) before any highlighting ----
+      $yahooCleanNews = array();
+      $newsParts = explode("<!--CLEAN_NEWS_JSON-->", (string) $allNews, 2);
+      $allNews = $newsParts[0];
+      if (isset($newsParts[1])) {
+          $decoded = json_decode(trim($newsParts[1]), true);
+          if (is_array($decoded)) {
+              $yahooCleanNews = $decoded;
+          }
+      }
+
       $country = "";
       $yahooFinanceSector = ""; 
       $yahooFinanceIndustry = ""; 
       $website = ""; 
       $cik = ""; 
+      $asianCheck = null;     // Asian-stock check for the Claude dump - filled in when the Yahoo profile loads
 
       $venv_python = '/var/www/html/newslookup/venv/bin/python3';
       $command = escapeshellcmd($venv_python . ' ./pythonscrape/yahoo-finance-company-profile.py ' . $symbol);
@@ -979,8 +1013,8 @@ else if ($which_website == "yahoo")
           $chineseCityArray = "/\b(china|japan|singapore|taiwan|malaysia|korea|hong kong)\b/i"; 
 
           $allNames = [];
-          if (!empty($ceoName)) {
-            $allNames[] = removeHonorifics($ceoName, $honorifics);
+          if (!empty($ceoRaw)) {
+            $allNames[] = removeHonorifics($ceoRaw, $honorifics);
           }
 
           foreach ($otherExecutives as $exec) {
@@ -1010,7 +1044,22 @@ else if ($which_website == "yahoo")
           $ceoHasChineseSurname = preg_match($surnamePattern, $concatenatedNames);
           $descriptionContainsAsianCountry = preg_match($chineseCityArray, $description);
 
-          if ($ceoHasChineseSurname || $descriptionContainsAsianCountry) {
+          // ---- Asian-stock check as DATA for the Claude dump ----
+          $asianMatchedNames = array();
+          foreach (array_unique($allNames) as $oneName) {
+              if (preg_match($surnamePattern, $oneName)) {
+                  $asianMatchedNames[] = $oneName;
+              }
+          }
+          $asianCheck = array(
+              'country'               => trim($country . ' (' . $city . ')'),
+              'country_is_asian'      => (bool) preg_match($chineseCityArray, $country . ' ' . $city),
+              'description_countries' => array_values(array_unique(array_map('strtolower', $matches[0]))),
+              'executives_checked'    => count(array_unique($allNames)),
+              'executives_matched'    => $asianMatchedNames   // surname match only - can include Western names like "Lee" or "Kim"
+          );
+
+          if ($ceoHasChineseSurname || $descriptionContainsAsianCountry || $asianCheck['country_is_asian']) {
 
             if ($ceoRaw == null) {
                     $ceo = '<br><br><span style="font-size: 50px; background-color: red;">
@@ -1174,6 +1223,7 @@ else if ($which_website == "yahoo")
 
       $classActionAdded = false;
       $j = 0;
+      $saCleanNews = array();          // untouched Seeking Alpha headlines for the Claude dump 
 
 
          if (isset($rssSeekingAlpha->channel->item) && count($rssSeekingAlpha->channel->item) > 0) {
@@ -1181,12 +1231,9 @@ else if ($which_website == "yahoo")
           foreach ($rssSeekingAlpha->channel->item as $feedItem) {
             $j++;
 
-            // Convert time from GMT to  AM/PM New York
-            // 18000 is 5 hours X 60 seconds/minute X 60 minutes/hour
-            $publicationDateStrToTime = strtotime($feedItem->pubDate) - 14400;
-
-            $convertedDate = new DateTime(); 
-            $convertedDate->setTimestamp($publicationDateStrToTime);
+            // Convert time from GMT to AM/PM New York (handles EST/EDT automatically)
+            $convertedDate = new DateTime((string) $feedItem->pubDate);
+            $convertedDate->setTimezone(new DateTimeZone('America/New_York'));
 
             $publicationDate = $feedItem->pubDate;
             $publicationDate = preg_replace("/[0-9][0-9]\:[0-9][0-9]\:[0-9][0-9] \-[0-9][0-9][0-9][0-9]/", "", $publicationDate); 
@@ -1205,6 +1252,9 @@ else if ($which_website == "yahoo")
                   $classActionAdded = true;
                 }
             }
+
+            // Untouched copy, saved BEFORE the title regex rules below
+            $saCleanNews[] = cleanNewsItem('Seeking Alpha', $feedItem->title, $feedItem->link, $feedItem->pubDate);
 
             $seekingAlphaNews .= "<li "; 
 
@@ -1582,33 +1632,34 @@ else if ($which_website == "yahoo")
       $returnArray['descriptionRegex'] = $descriptionRegex; 
       $returnArray['ceo'] = $ceo; 
       $returnArray['red_flags'] = $redFlag; 
+      $returnArray['asian_check'] = $asianCheck;
       $returnArray['red_flag_text'] = $redFlagText; 
+
+      // Untouched headlines from both feeds, for the Claude dump ----
+      $newsClean = array();
+      foreach ($yahooCleanNews as $n) {
+          $newsClean[] = cleanNewsItem('Yahoo Finance',
+                                       isset($n['title'])    ? $n['title']    : '',
+                                       isset($n['link'])     ? $n['link']     : '',
+                                       isset($n['pub_date']) ? $n['pub_date'] : '');
+      }
+      foreach ($saCleanNews as $n) {
+          $newsClean[] = $n;
+      }
+      $returnArray['news_clean'] = $newsClean;
 
       echo json_encode($returnArray); 
 
 } // if ($which_website == "yahoo")
 else if ($which_website == "bigcharts")
 {
-      // grab the last value from bigcharts
-      $url = "https://bigcharts.marketwatch.com/quickchart/quickchart.asp?symb=" . $symbol . "&insttype=&freq=9&show=&time=1&rand=" . rand(); 
-      $result = grabHTML("bigcharts.marketwatch.com", $url);
-      $html = str_get_html($result);  
-
+      // Delayed quote from Yahoo Finance (scrape-bigcharts.py) - passed through exactly as the script returns it:
+      // pct_down|price|time|day_low|day_low_time|session_date
       $venv_python = '/var/www/html/newslookup/venv/bin/python3';
       $command = escapeshellcmd($venv_python . ' ./pythonscrape/scrape-bigcharts.py ' . $symbol);
       $bigChartsValues = shell_exec($command);
 
-
-
-
-
-      $values = explode('|', $bigChartsValues); 
-
-      $bigChartsPercentage = $values[0];
-      $bigChartsLast = $values[1]; 
-      $bigChartsTime = $values[2]; 
-
-      echo  $bigChartsPercentage . "|" . $bigChartsLast . "|" . $bigChartsTime;   
+      echo trim((string) $bigChartsValues); 
 
 } // if ($which_website == "bigcharts")
 else if ($which_website == "streetinsider")

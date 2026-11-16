@@ -258,6 +258,8 @@
 								<!-- <span id="low-volume-dollar-chart" style="background-color: #00ff00;">Dollar</span> --> 
 								<!-- <span id="low-volume-penny-chart" style="background-color: #00ff00;">Penny</span> --> &nbsp;
 								<button onclick='preparePinkSheetChatGPT(<?php echo json_encode($_GET["symbol"]); ?>, $("#yestCloseText").val())'>PinkGPT</button>
+								<button onclick='copyClaudeDump()'>CLAUDE DUMP</button>
+								<button onclick='copyClaudeLinks()'>COPY LINKS</button>
 								<textarea id="prepareChatGPT" style="width:1px; height:1px;"></textarea>
 								<span id="notes" style="background-color: #00ff00;">Hi-Ri</span>
 								<span id="jays-notes" style="background-color: #00ff00;">Jay</span>

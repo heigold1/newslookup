@@ -29,6 +29,23 @@ function buildNewsNotes($companyName)
     return $newsNotes; 
 }
 
+// untouched copy of one StreetInsider headline for the Claude dump (before any highlighting rules)
+function siCleanItem($title, $link, $pubDate)
+{
+    $item = array('source' => 'StreetInsider', 'title' => trim((string) $title), 'link' => trim((string) $link),
+                  'pub_date_raw' => trim((string) $pubDate), 'date_et' => '', 'time_et' => '', 'epoch' => null);
+    if ($item['pub_date_raw'] !== '')
+    {
+        try {
+            $dt = new DateTime($item['pub_date_raw']);
+            $item['epoch'] = $dt->getTimestamp();                     // seconds since 1970, for headline-age math
+            $dt->setTimezone(new DateTimeZone('America/New_York'));
+            $item['date_et'] = $dt->format('D, d M Y');
+            $item['time_et'] = $dt->format('g:i A T');
+        } catch (Exception $e) { }
+    }
+    return $item;
+}
 
 function get_yahoo_trade_date($daysBack)
 {
@@ -458,15 +475,14 @@ function getStreetInsider($symbol, $yesterdayDays)
         $previousNewsTitle = "";
         $currentNewsTitle = ""; 
 
+        $siClean = array();     // untouched headlines for the Claude dump
+
         foreach ($xmlFinalObject->channel->item as $feedItem) {
             $j++;
 
-            // Convert time from GMT to  AM/PM New York
-            // 14400 is 4 hours X 60 seconds/minute X 60 minutes/hour
-            $publicationDateStrToTime = strtotime($feedItem->pubDate) - 14400;
-
-            $convertedDate = new DateTime(); 
-            $convertedDate->setTimestamp($publicationDateStrToTime);
+            // Convert time from GMT to AM/PM New York (handles EST/EDT automatically)
+            $convertedDate = new DateTime((string) $feedItem->pubDate);
+            $convertedDate->setTimezone(new DateTimeZone('America/New_York'));
 
             $publicationDate = $convertedDate->format('D, d M Y');
             $publicationTime = $convertedDate->format("g:i A");
@@ -502,6 +518,9 @@ function getStreetInsider($symbol, $yesterdayDays)
             {
                 continue; 
             }
+
+            // untouched copy for the Claude dump - saved BEFORE the title regex rules below
+            $siClean[] = siCleanItem($feedItem->title, $feedItem->link, $feedItem->pubDate);
 
             $streetInsiderNews .= "<li "; 
 
@@ -566,6 +585,7 @@ function getStreetInsider($symbol, $yesterdayDays)
         }
 
         $streetInsiderNews .= "yesterdayDays is " . $yesterdayDays . "<br>"; 
+        $streetInsiderNews .= "<!--CLEAN_SI_JSON-->" . json_encode($siClean);   // cached in MySQL along with the HTML
 
         try 
         {
@@ -584,6 +604,11 @@ function getStreetInsider($symbol, $yesterdayDays)
             echo "Error when writing to database is " . $e->errorMessage() . "<br>"; 
         } 
     }  // if either we didn't find it in the database, or it hasn't been half an hour since we last scraped it. 
+
+    // split the clean list back off (works for both fresh scrapes and cached rows)
+    $siParts = explode("<!--CLEAN_SI_JSON-->", $streetInsiderNews, 2);
+    $streetInsiderNews = $siParts[0];
+    $GLOBALS['streetInsiderClean'] = (count($siParts) == 2) ? json_decode($siParts[1], true) : null;
 
     return "<div style='height: 250px; width: 100%; overflow-y:auto; border-style: double !important; border-color: black !important; color: black;'>" . $streetInsiderNews . "</div>"; 
 
@@ -645,6 +670,14 @@ function getSecFilings($symbol, $originalSymbol, $yesterdayDays, $cikNumber, $se
       $secData = shell_exec($command);
       $tableData = json_decode($secData, true);
 
+      // untouched filings for the Claude dump, plus why it failed if it did (ETF / no CIK / SEC down)
+      $found = isset($tableData['found']) && $tableData['found'];
+      $GLOBALS['secFilingsClean'] = array(
+          'found'   => $found,
+          'status'  => $found ? 'ok' : trim(strip_tags(isset($tableData['message']) ? $tableData['message'] : 'NO RESPONSE FROM SEC SCRIPT')),
+          'filings' => isset($tableData['clean']) ? $tableData['clean'] : array()
+      );
+
       return $tableData['message'];  
 
 } // end of getSecFilings
@@ -683,7 +716,7 @@ function getSecFilings($symbol, $originalSymbol, $yesterdayDays, $cikNumber, $se
       $returnArray['checkAnnouncementDate'] = 0;
       if (preg_match('/to announce/i', $returnHtml))
       {
-        $returnArray['checkAnnouncementtDate'] = 1;
+        $returnArray['checkAnnouncementDate'] = 1;
       }
       $returnArray['checkPresentationDate'] = 0;
       if (preg_match('/to present/i', $returnHtml))
@@ -735,7 +768,12 @@ function getSecFilings($symbol, $originalSymbol, $yesterdayDays, $cikNumber, $se
       $returnArray['industryCount'] = $industryCount["count"]; 
       $returnArray['industry'] = $industryCount["industry"]; 
 
-        echo json_encode($returnArray);       
+      $returnArray['sec_filings_clean'] = isset($secFilingsClean) ? $secFilingsClean
+          : array('found' => false, 'status' => 'SEC NOT CHECKED (check-sec box was off)', 'filings' => array());
+
+      $returnArray['streetinsider_clean'] = isset($streetInsiderClean) ? $streetInsiderClean : null;
+
+      echo json_encode($returnArray);       
 
 ?>
 

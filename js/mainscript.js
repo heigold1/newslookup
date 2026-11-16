@@ -32,6 +32,613 @@ document.addEventListener('DOMContentLoaded', function() {
 
 });
 
+// ===================== CLAUDE DUMP =====================
+// One central place to keep every API result from the current lookup.
+var claudeDump = null;
+
+function newClaudeDump(ticker) {
+    return {
+        ticker: ticker,
+        startedAt: new Date().toLocaleString(),
+
+        // ---- yesterday_close.php (E*TRADE quote) ----
+        etrade: {
+            raw: null,                       // exact text E*TRADE sent back (kept so errors are visible)
+            error: null,                     // filled in if the call failed or returned no data
+            prev_close: null,
+            low: null,
+            high: null,
+            bid: null,
+            last_trade: null,
+            extended_hour_last_trade: null,
+            ten_day_volume: null,
+            total_volume: null,
+            company_name: null,
+            exchange: null,             
+            server_now_epoch: null,   // server clock (seconds) at lookup time - used to age the headlines
+            server_now_et: null,      // same moment in New York time, e.g. "Mon, 17 Nov 2025 9:42:10 AM EST"
+            market_session: null      // pre-market / market open / after hours / closed
+        },
+
+        // ---- marketstack-api-historical-data.php (daily OHLC history) ----
+        marketstack: {
+            raw: null,                       // exact text Marketstack sent back
+            error: null,                     // filled in if the call failed
+            symbol_used: null,               // symbol actually used (Pink Sheet 5-letter retries drop a letter)
+
+            // close-to-close % change (day_1 = last trading day)
+            day_1: null, day_2: null, day_3: null, day_4: null, day_5: null,
+            // % the day's low got below the previous day's close
+            day_1_low: null, day_2_low: null, day_3_low: null, day_4_low: null, day_5_low: null,
+            // volume ratio vs. the previous day
+            day_1_volume: null, day_2_volume: null, day_3_volume: null, day_4_volume: null, day_5_volume: null,
+            // actual share volume
+            day_1_total_volume: null, day_2_total_volume: null, day_3_total_volume: null,
+            day_4_total_volume: null, day_5_total_volume: null,
+
+            day_1_recovery: null,            // % the last day's close bounced off its low
+            yest_volume: null,
+            five_day_average_volume: null,
+            penny_to_dollar: null,
+            new_stock: null,
+            count: null,                     // number of trading days of history returned
+            ohlc: null                       // [{x: date ms, o, h, l, c, v}, ...] newest first
+        },
+
+        // ---- proxy.php which_website=bigcharts (actually yfinance via scrape-bigcharts.py) ----
+        // Deliberately 15-minute-delayed, to measure how fast the stock is dropping.
+        bigcharts: {
+            raw: null,                       // exact text returned, e.g. "-40.48|2.75|15:44:00"
+            error: null,                     // filled in if the call failed, or NF / ERR came back
+            pct_change: null,                // % of the 15-min-ago candle's low vs. previous close
+            price: null,                     // that candle's low (4 decimals under $1)
+            time: null,                      // that candle's time (New York time)
+            day_low: null,                   // lowest price of the day up to 15 min ago - PRE-MARKET INCLUDED
+            day_low_time: null,              // when that low happened (New York time)
+            session_date: null               // the trading day these candles belong to, e.g. "2026-11-13"
+        },                                   // <-- this was "}" - now "},"
+
+        // ---- proxy.php which_website=yahoo (profile, news, halts, red-flag check) ----
+        yahoo: {
+            raw: null,                       // exact text returned
+            error: null,                     // filled in if the call failed
+
+            final_return: null,              // the whole right-hand panel as HTML (profile, volume, links, news)
+            description: null,               // company business description
+            descriptionRegex: null,          // description as HTML with keywords highlighted
+            ceo: null,
+            cik: null,                       // SEC company ID
+
+            red_flags: null,                 // true/false from the Claude red-flag check
+            red_flag_text: null,             // that check's explanation
+
+            asian_check: null,               // {country, country_is_asian, description_countries, executives_checked, executives_matched}
+
+            // 1 = this phrase appears in the news, so check the date
+            dividendCheckDate: null,         // "dividend"
+            checkReportDate: null,           // "to report"
+            checkAnnouncementDate: null,     // "to announce"
+            checkPresentationDate: null,     // "to present"
+            checkHighlightDate: null,        // "to highlight"
+            checkParticipationDate: null,    // "to participate"
+
+            // market-wide halt lists from the Nasdaq Trader feed
+            halt_symbol_list: null,          // every symbol halted today
+            currently_halted: null,          // {SYMBOL: reason code} halted right now
+            resuming_today: null,            // {SYMBOL: reason code} deep halts resuming today
+
+            // THIS ticker's halt status, worked out from the lists above
+            halted_today: null,              // true if this ticker was halted at any point today
+            currently_halted_reason: null,   // reason code if halted right now, otherwise null
+            resuming_today_reason: null,      // reason code if it's a deep halt resuming today, otherwise null
+
+            news_clean: null   
+        },
+
+        // ---- proxy_sec_xml.php (StreetInsider news + SEC filings + sector count) ----
+        sec: {
+            raw: null,                       // exact text the server sent back
+            error: null,                     // filled if the call failed
+            html: null,                      // the left-bottom panel HTML (has the old regex labels - NOT for the dump)
+            industry: null,                  // this stock's industry, from your sector table
+            industryCount: null,             // how many stocks in that industry are in your sector table
+
+            // 1 = this phrase appears in the StreetInsider news, so check the date
+            dividendCheckDate: null,
+            checkReportDate: null,
+            checkAnnouncementDate: null,
+            checkPresentationDate: null,
+            checkHighlightDate: null,
+            checkParticipationDate: null,
+
+            corporate_action: null,          // from your corporateActionsStocks list, e.g. "REVERSE SPLIT 3 TRADING DAYS AGO"
+
+            sec_filings_clean: null,         // step B - untouched SEC filings
+            streetinsider_clean: null        // step C - untouched StreetInsider headlines
+        },
+
+        // ---- claude_dump_sec.php (background: press-release text + going-concern lines from sec.gov) ----
+        sec_docs: {
+            status: null,                    // "loading" / "done" / "failed"
+            error: null,
+            press_releases: null,            // recent 8-K / 6-K: [{form, items, date_et, time_et, epoch, link, exhibit, text, full_length, going_concern_lines}]
+                        going_concern: null              // latest 10-Q / 10-K / 20-F: {form, date_et, time_et, link, chars_searched, substantial_doubt, lines}
+        },
+
+        // ---- claude_dump_articles.php (background: text of the NEW non-SEC news articles) ----
+        articles: {
+            status: null,                    // "loading" / "done" / "failed" / "none"
+            error: null,
+            items: null                      // [{link, ok, chars, text, error}]
+        }
+        // (more sources get added here as we go)
+    };
+}
+
+// ===================== CLAUDE DUMP: TEXT BUILDER =====================
+// Turns claudeDump into one plain-text block to paste into Claude.
+// FACTS AND FLAGS ONLY - the trading rules live in the briefing notes, never in here.
+
+var CD_NEW_NEWS_CUTOFF_HOUR   = 15;   // NEW news = published after 3:00 PM ET ...
+var CD_NEW_NEWS_CUTOFF_MINUTE = 0;    // ... on the previous trading day ("late afternoon")
+
+var CD_DAY_NAMES   = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+var CD_MONTH_NAMES = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+
+function cdNum(v) {                                   // "3.44" -> 3.44, "2,258,111" -> 2258111, junk -> null
+    var n = parseFloat(String(v).replace(/,/g, ""));
+    return isNaN(n) ? null : n;
+}
+
+function cdMoney(v) {                                 // 3.4 -> "$3.40", 0.0345 -> "$0.0345"
+    var n = cdNum(v);
+    if (n === null) return "n/a";
+    return "$" + (n >= 1 ? n.toFixed(2) : n.toFixed(4));
+}
+
+function cdPctNum(price, base) {                      // % change from base to price, as a number
+    var p = cdNum(price), b = cdNum(base);
+    if (p === null || b === null || b === 0) return null;
+    return (p - b) / b * 100;
+}
+
+function cdPct(price, base) {                         // same, as text: "-29.9%"
+    var x = cdPctNum(price, base);
+    if (x === null) return "n/a";
+    return (x >= 0 ? "+" : "") + x.toFixed(1) + "%";
+}
+
+function cdSignedPct(v) {                             // "-25.54" -> "-25.54%", "DV0" stays "DV0"
+    var n = cdNum(v);
+    if (n === null) return String(v);
+    return (n >= 0 ? "+" : "") + n.toFixed(2) + "%";
+}
+
+function cdShares(v) {                                // 2258111 -> "2,258,111"
+    var n = cdNum(v);
+    return n === null ? "n/a" : Math.round(n).toLocaleString("en-US");
+}
+
+function cdPlain(html) {                              // strip HTML tags and extra spaces
+    return $.trim($("<div>").html(html || "").text()).replace(/\s+/g, " ");
+}
+
+function cdAge(nowSec, thenSec) {                     // "2d 11h ago", "3h 12m ago", "45m ago"
+    var s = Math.max(0, nowSec - thenSec);
+    var d = Math.floor(s / 86400), h = Math.floor((s % 86400) / 3600), m = Math.floor((s % 3600) / 60);
+    if (d >= 7) return d + "d ago";
+    if (d > 0)  return d + "d " + h + "h ago";
+    if (h > 0)  return h + "h " + m + "m ago";
+    return m + "m ago";
+}
+
+function cdNyParts(sec) {                             // New York date, hour and weekday of an epoch (seconds)
+    var parts = {};
+    $.each(new Intl.DateTimeFormat("en-US", {timeZone: "America/New_York", hourCycle: "h23",
+            year: "numeric", month: "2-digit", day: "2-digit", hour: "2-digit", weekday: "short"})
+            .formatToParts(new Date(sec * 1000)), function (i, p) { parts[p.type] = p.value; });
+    return {ymd: parts.year + "-" + parts.month + "-" + parts.day, hour: parseInt(parts.hour, 10), weekday: parts.weekday};
+}
+
+function cdNyEpoch(ymd, hour, minute) {               // epoch (seconds) of a New York wall-clock time
+    var p = ymd.split("-");
+    var guess = Date.UTC(+p[0], +p[1] - 1, +p[2], hour + 5, minute) / 1000;   // assume EST (UTC-5)
+    if (cdNyParts(guess).hour !== hour) guess -= 3600;                         // no - it's EDT (UTC-4)
+    return guess;
+}
+
+function cdDayLabel(ymd) {                            // "2026-11-13" -> "Fri 13 Nov"
+    var p = ymd.split("-");
+    var d = new Date(Date.UTC(+p[0], +p[1] - 1, +p[2], 12));
+    return CD_DAY_NAMES[d.getUTCDay()] + " " + d.getUTCDate() + " " + CD_MONTH_NAMES[d.getUTCMonth()];
+}
+
+function cdShortWhen(dateEt, timeEt) {                // "Fri, 13 Nov 2026" + "8:09 PM EST" -> "Fri 13 Nov 8:09 PM EST"
+    var m = /^(\w{3}), (\d{1,2}) (\w{3}) \d{4}$/.exec($.trim(dateEt || ""));
+    return (m ? m[1] + " " + parseInt(m[2], 10) + " " + m[3] : (dateEt || "?")) + " " + (timeEt || "");
+}
+
+function buildClaudeDump() {
+    var cd = claudeDump;
+    if (!cd) return "No lookup has been run yet.";
+    var et = cd.etrade, ms = cd.marketstack, bc = cd.bigcharts, yh = cd.yahoo, sec = cd.sec;
+    var L = [];       // the output, one line per entry
+    var i;
+
+    // ---------- NOW (server clock; browser clock if the E*TRADE call failed) ----------
+    var nowSec  = cdNum(et.server_now_epoch);
+    var nowText = et.server_now_et;
+    var session = et.market_session || "unknown";
+    if (!nowSec) {
+        nowSec  = Math.floor(Date.now() / 1000);
+        nowText = new Date().toLocaleString("en-US", {timeZone: "America/New_York"}) + " ET (browser clock - the E*TRADE call failed)";
+    }
+    var now = cdNyParts(nowSec);
+
+    // ---------- the trading day the NEW-news cutoff hangs off ----------
+    // Marketstack only has days the market really traded (holidays skipped), and its newest bar is never today.
+    var tradingDays = $.map(ms.ohlc || [], function (bar) {
+        return (bar && bar.x) ? new Date(bar.x).toISOString().slice(0, 10) : null;
+    });
+    var refDay = null;
+    if (now.weekday !== "Sat" && now.weekday !== "Sun" && now.hour >= 16) {
+        refDay = now.ymd;                                   // after the 4 PM close, today IS the last trading day
+    } else {
+        for (i = 0; i < tradingDays.length; i++) {
+            if (tradingDays[i] < now.ymd) { refDay = tradingDays[i]; break; }
+        }
+    }
+    if (!refDay) {                                          // no Marketstack data - fall back to the previous weekday
+        var back = nowSec - 86400;
+        while (cdNyParts(back).weekday === "Sat" || cdNyParts(back).weekday === "Sun") back -= 86400;
+        refDay = cdNyParts(back).ymd;
+    }
+    var cutoffSec  = cdNyEpoch(refDay, CD_NEW_NEWS_CUTOFF_HOUR, CD_NEW_NEWS_CUTOFF_MINUTE);
+    var ch = CD_NEW_NEWS_CUTOFF_HOUR, cm = CD_NEW_NEWS_CUTOFF_MINUTE;
+    var cutoffText = cdDayLabel(refDay) + " " + ((ch % 12) || 12) + ":" + (cm < 10 ? "0" : "") + cm + (ch < 12 ? " AM" : " PM") + " ET";
+
+    // ---------- prices ----------
+    var refClose = cdNum($("#yestCloseText").val()) || cdNum(et.prev_close);    // the same close your screen uses
+    var current, currentSource;
+    if (session === "market open") {
+        current = cdNum(et.last_trade);
+        currentSource = "last trade";
+    } else {
+        current = cdNum(et.extended_hour_last_trade) || cdNum(et.last_trade);
+        currentSource = "extended-hours last trade";
+    }
+    var company = cdPlain(et.company_name);
+
+    // ---------- HEADER ----------
+    L.push("=== CLAUDE DUMP: " + String(cd.ticker || "").toUpperCase() + " - " + company + (et.exchange ? " (" + et.exchange + ")" : "") + " ===");
+    L.push("NOW: " + nowText + " - " + session);
+    L.push("Apply the rules in my briefing notes. This dump gives you FACTS and FLAGS from my software only - it does not repeat my rules.");
+    L.push("All prices, percentages and ages were calculated by my software - use them as given. All times are New York time.");
+    L.push("");
+    L.push("START YOUR ANSWER WITH THESE TWO LINES:");
+    L.push("FAST DROP (Jay): __%   — base tier if it drops fast; use the 5%-bounce bump-down");
+    L.push("SLOW / NO FAST DROP (Claude): __%   — red-flag-adjusted tier");
+    L.push("Then brief point form: KEY NEWS / RULES APPLIED / WARNINGS. Always say whether going-concern doubt EXISTS (see SEC DOCUMENTS below). Keep it short and pastable.");
+    L.push("SPEED MATTERS - I'm trading live. Answer from this dump first: the press release, article text and going-concern lines are already in it.");
+    L.push("Only search the web or open a link if a NEW headline has no text here AND it could change the tier.");
+    L.push("If you're unsure whether a rule applies, choose the DEEPER (safer) tier and say UNSURE plus why, in one line.");
+
+    // ---------- PRICE ACTION ----------
+    L.push("");
+    L.push("--- PRICE ACTION ---");
+    L.push("Reference close (today's drop is measured from this): " + cdMoney(refClose));
+    L.push("Current price (E*TRADE real-time, " + currentSource + "): " + cdMoney(current) + " (" + cdPct(current, refClose) + ")");
+    L.push("E*TRADE day low: " + cdMoney(et.low) + " (" + cdPct(et.low, refClose) + ")   high: " + cdMoney(et.high) + "   bid: " + cdMoney(et.bid));
+    var vol = cdNum(et.total_volume), avgVol = cdNum(et.ten_day_volume);
+    L.push("Volume today: " + cdShares(vol) + " shares" + (vol !== null && avgVol ? " = " + (vol / avgVol).toFixed(1) + "x the 10-day average (" + cdShares(avgVol) + ")" : ""));
+
+    var bcOk    = !bc.error && cdNum(bc.price) !== null;
+    var bcStale = (bcOk && bc.session_date && bc.session_date !== now.ymd) ? " - from " + cdDayLabel(bc.session_date) + ", not today" : "";
+    if (bcOk) {
+        L.push("Delayed quote (15 min old, Yahoo): " + cdMoney(bc.price) + " at " + String(bc.time).slice(0, 5) + bcStale);
+        if (cdNum(bc.day_low) !== null) {
+            L.push("Delayed low of the day (pre-market included): " + cdMoney(bc.day_low) + " at " + String(bc.day_low_time).slice(0, 5) + " (" + cdPct(bc.day_low, refClose) + ")" + bcStale);
+        }
+    } else {
+        L.push("Delayed quote: not available (" + cdPlain(String(bc.error || "no data")) + ")");
+    }
+
+    // ---------- JAY'S FAST-DROP CHECK ----------
+    var penny = (refClose !== null && refClose < 1) || (current !== null && current < 1);
+    var threshold = penny ? 15 : 10;
+    L.push("");
+    L.push("--- JAY'S FAST-DROP CHECK (for reference) ---");
+    L.push("Threshold: " + threshold + "% below the delayed price or the delayed low" + (penny ? " (penny stock)" : " (15% if penny - including if your entry price lands under $1.00)"));
+    if (bcOk && current !== null && !bcStale) {
+        var vsPrice = cdPctNum(current, bc.price), vsLow = cdPctNum(current, bc.day_low);
+        if (vsPrice !== null) L.push("Current vs delayed price: " + vsPrice.toFixed(1) + "% -> " + (vsPrice <= -threshold ? "MET" : "not met"));
+        if (vsLow !== null)   L.push("Current vs delayed low of the day: " + vsLow.toFixed(1) + "% -> " + (vsLow <= -threshold ? "MET" : "not met"));
+    } else {
+        L.push("Not available right now (no delayed quote from today).");
+    }
+
+    // ---------- LAST 5 TRADING DAYS ----------
+    L.push("");
+    L.push("--- LAST 5 TRADING DAYS (Marketstack) ---");
+    for (i = 1; i <= 5; i++) {
+        L.push((tradingDays[i - 1] ? cdDayLabel(tradingDays[i - 1]) : "Day " + i) + ": close " + cdSignedPct(ms["day_" + i])
+             + " | low " + cdSignedPct(ms["day_" + i + "_low"]) + " (vs the close before)"
+             + " | volume " + ms["day_" + i + "_volume"] + "x the day before (" + cdShares(ms["day_" + i + "_total_volume"]) + " shares)");
+    }
+    if (cdNum(ms.day_1_recovery) !== null) L.push("The last day closed " + ms.day_1_recovery + "% above its low.");
+    L.push("Trading history: " + (ms.count || 0) + " trading days in the last 100 calendar days" + (ms.new_stock ? " - NEW STOCK (hasn't traded a full month)" : ""));
+
+    // ---------- FLAGS ----------
+    L.push("");
+    L.push("--- FLAGS FROM MY SOFTWARE ---");
+    var d1 = cdNum(ms.day_1), d1v = cdNum(ms.day_1_volume), why = [];
+    if (d1v !== null && d1v >= 5) why.push("volume was " + d1v.toFixed(2) + "x the day before");
+    if (d1 !== null && d1 >= 25)  why.push("it closed +" + d1.toFixed(2) + "% vs the day before");
+    L.push("HIGH-RISK (last trading day" + (tradingDays[0] ? ", " + cdDayLabel(tradingDays[0]) : "") + "): " + (why.length ? "YES - " + why.join("; ") : "no"));
+    L.push("Penny stock: " + (penny ? "YES" : "no") + " (reference close " + cdMoney(refClose) + ", current " + cdMoney(current) + ")");
+
+    var halt = yh.currently_halted_reason ? "CURRENTLY HALTED (reason " + yh.currently_halted_reason + ")"
+             : yh.resuming_today_reason   ? "deep halt RESUMING TODAY (reason " + yh.resuming_today_reason + ")"
+             : yh.halted_today            ? "was halted earlier today"
+             : "not halted today";
+    L.push("Halts: " + halt);
+    L.push("Corporate action list: " + (sec.corporate_action || "none"));
+    L.push("Industry: " + (sec.industry || "n/a") + " - " + (sec.industryCount || 0) + " stocks in this industry on my sector list");
+    L.push("Pipeline check (healthcare industries only): "
+         + (cdPlain(yh.red_flag_text) || "n/a").replace(/PHARMACEUTICAL WITH 2 OR LESS DRUGS IN PIPELINE/i, "2 OR FEWER DRUGS/PRODUCTS IN PIPELINE"));
+
+    var ac = yh.asian_check;
+    if (ac) {
+        L.push("Asian check: country " + ac.country + (ac.country_is_asian ? " - ASIAN COUNTRY" : "")
+             + " | description mentions: " + (ac.description_countries.length ? ac.description_countries.join(", ") : "none")
+             + " | executives with Asian-pattern surnames: " + (ac.executives_matched.length ? ac.executives_matched.join(", ") : "none")
+             + " (of " + ac.executives_checked + " checked; surname match only - may include Western names like Lee or Kim)");
+    } else {
+        L.push("Asian check: not available (the company profile didn't load)");
+    }
+
+    var scf = sec.sec_filings_clean, si = sec.streetinsider_clean;
+    L.push("SEC filings: " + (scf ? (scf.found ? "loaded" : scf.status) : "not loaded"));
+    L.push("StreetInsider: " + (!si ? "not available this time"
+                              : si.length ? si.length + " headlines loaded"
+                              : "NO headlines (the feed may have been rate-limited - that is NOT the same as no news)"));
+
+    var problems = [];
+    $.each({"E*TRADE": et.error, "Marketstack": ms.error, "Delayed quote": bc.error, "Yahoo": yh.error, "SEC/StreetInsider": sec.error},
+        function (name, err) { if (err) problems.push(name + ": " + cdPlain(String(err)).slice(0, 120)); });
+    if (problems.length) L.push("DATA PROBLEMS (treat missing data with caution): " + problems.join(" | "));
+
+    // ---------- NEWS: Yahoo + Seeking Alpha + StreetInsider + SEC, newest first ----------
+    var items = [];
+    $.each(yh.news_clean || [], function (k, n) {
+        var t = Date.parse(n.pub_date_raw);
+        items.push({sec: isNaN(t) ? null : t / 1000, src: (n.source === "Seeking Alpha" ? "SA" : "Yahoo"),
+                    when: cdShortWhen(n.date_et, n.time_et), title: n.title, link: n.link});
+    });
+    $.each(si || [], function (k, n) {
+        items.push({sec: cdNum(n.epoch), src: "StreetInsider", when: cdShortWhen(n.date_et, n.time_et), title: n.title, link: n.link});
+    });
+    $.each((scf && scf.filings) || [], function (k, f) {
+        items.push({sec: cdNum(f.epoch), src: "SEC", when: cdShortWhen(f.date_et, f.time_et),
+                    title: "Form " + f.form + (f.items ? " (items " + f.items + ")" : "") + ((f.form_name && f.form_name !== f.form) ? " - " + f.form_name : ""),
+                    link: f.link});
+    });
+
+    var seen = {};                                          // drop exact duplicate headlines
+    items = $.grep(items, function (it) {
+        var key = $.trim(it.title || "").toLowerCase().replace(/\s+/g, " ");
+        if (!key || seen[key]) return false;
+        seen[key] = true;
+        return true;
+    });
+    items.sort(function (a, b) { return (b.sec || 0) - (a.sec || 0); });
+
+    function newsLine(it, withLink) {
+        var line = "[" + (it.sec ? cdAge(nowSec, it.sec) : "age unknown") + "]  " + it.when + "  " + it.src + "  " + $.trim(it.title).replace(/\s+/g, " ");
+        return (withLink && it.link) ? line + "\n      " + it.link : line;
+    }
+
+    var newItems = $.grep(items, function (it) { return it.sec !== null && it.sec >= cutoffSec; });
+    var oldItems = $.grep(items, function (it) { return !(it.sec !== null && it.sec >= cutoffSec); });
+    cd.last_new_items   = newItems;          // kept for COPY LINKS and the article fetch
+    cd.last_cutoff_text = cutoffText;
+
+    L.push("");
+    L.push("--- NEW NEWS: since " + cutoffText + " (this is what's moving it today) ---");
+    if (newItems.length) { $.each(newItems, function (k, it) { L.push(newsLine(it, true)); }); }
+    else { L.push("(none - no headlines or filings since the cutoff)"); }
+
+    var phrases = [];
+    $.each(["dividend", "to report", "to announce", "to present", "to highlight", "to participate"], function (k, phrase) {
+        $.each(newItems, function (j, it) {
+            if ((it.title || "").toLowerCase().indexOf(phrase) !== -1) { phrases.push('"' + phrase + '"'); return false; }
+        });
+    });
+    if (phrases.length) L.push("Date phrases in the NEW headlines (check the dates): " + phrases.join(", "));
+
+    L.push("");
+    L.push("--- OLDER NEWS: already digested by the market - background only ---");
+    L.push("(Still flag anything with a date that matters going forward: delisting, offering, reverse split, going concern.)");
+    if (oldItems.length) { $.each(oldItems, function (k, it) { L.push(newsLine(it, false)); }); }
+    else { L.push("(none)"); }
+
+    L.push("");
+    L.push("--- HOW TO READ THE NEWS ---");
+    L.push("- Ignore headlines about other companies, UNLESS it's a competitor and the news is about a competing product.");
+    L.push("- Group headlines about the same event. Open ONE primary source per event (the company's press release, or the SEC 8-K Exhibit 99.1),");
+    L.push("  plus any headline that adds NEW facts (guidance withdrawn, dollar estimates, call commentary, recalls).");
+    L.push("- If a headline doesn't state the result (e.g. \"reports Q3 results\"), open it: net income or loss, and guidance.");
+    L.push("- You can't open links inside this pasted dump. The NEW-news links are also in my message as plain text - open those.");
+    L.push("  For any other article, search for its exact headline.");
+    L.push("- Seeking Alpha is paywalled - use the press release text in SEC DOCUMENTS instead.");
+
+    // ---------- ARTICLE TEXT (NEW news, fetched in the background) ----------
+    var ar = cd.articles || {};
+    L.push("");
+    L.push("--- ARTICLE TEXT for the NEW news (fetched by my software) ---");
+    if (ar.status === "none") {
+        L.push("(no NEW articles to fetch - SEC filings are in SEC DOCUMENTS, Seeking Alpha is paywalled)");
+    } else if (!ar.status) {
+        L.push("Not fetched (the lookup didn't get that far).");
+    } else if (ar.status === "loading") {
+        L.push("STILL LOADING when this was copied - click CLAUDE DUMP again in a few seconds.");
+    } else if (ar.status !== "done") {
+        L.push("Could not fetch the articles (" + (ar.error || "unknown error") + ") - use the links in my message.");
+    } else {
+        var titles = {};
+        $.each(newItems, function (k, it) { if (it.link) titles[it.link] = it.when + "  " + it.src + "  " + $.trim(it.title).replace(/\s+/g, " "); });
+        $.each(ar.items || [], function (k, a) {
+            L.push("");
+            L.push(">> " + (titles[a.link] || a.link));
+            L.push(a.ok ? a.text : "(could not read it: " + a.error + " - use the link in my message)");
+        });
+    }
+
+
+    // ---------- SEC DOCUMENTS (fetched from sec.gov in the background) ----------
+    var sd = cd.sec_docs || {};
+    L.push("");
+    L.push("--- SEC DOCUMENTS (fetched from sec.gov by my software - no need to open these links) ---");
+    if (!sd.status) {
+        L.push("Not fetched (the lookup didn't get that far) - going concern NOT checked.");
+    } else if (sd.status === "loading") {
+        L.push("STILL LOADING when this was copied - click CLAUDE DUMP again in a few seconds to get the press release and going-concern check.");
+    } else if (sd.status !== "done") {
+        L.push("Could not fetch SEC documents (" + (sd.error || "unknown error") + ") - going concern NOT checked.");
+    } else {
+        var gc = sd.going_concern;
+        if (gc && !gc.error) {
+            L.push("GOING CONCERN - latest " + gc.form + " (filed " + cdShortWhen(gc.date_et, gc.time_et) + ", " + cdShares(gc.chars_searched) + " characters searched).");
+            L.push("Judge from these sentences whether the company says substantial doubt EXISTS, or whether it's standard boilerplate:");
+            if (gc.lines && gc.lines.length) { $.each(gc.lines, function (k, s) { L.push("  > " + s); }); }
+            else { L.push("  (no mention of \"going concern\" or \"substantial doubt\" anywhere in it)"); }
+        } else {
+            L.push("GOING CONCERN: " + (gc ? gc.form + " could not be read (" + gc.error + ")" : "no 10-Q / 10-K / 20-F on file") + " - NOT checked.");
+        }
+        if (sd.press_releases && sd.press_releases.length) {
+            $.each(sd.press_releases, function (k, pr) {
+                L.push("");
+                L.push("PRESS RELEASE - Form " + pr.form + (pr.items ? " (items " + pr.items + ")" : "") + ", filed " + cdShortWhen(pr.date_et, pr.time_et)
+                     + " [" + (pr.epoch >= cutoffSec ? "NEW" : "older - already digested") + "]" + (pr.exhibit ? " - " + pr.exhibit : "") + ":");
+                L.push(pr.text || "(no text)");
+            });
+        } else {
+            L.push("");
+            L.push("PRESS RELEASES: no 8-K / 6-K filed in the last 5 days.");
+        }
+    }
+
+
+    // ---------- COMPANY ----------
+    L.push("");
+    L.push("--- COMPANY ---");
+    L.push(company + (et.exchange ? " (" + et.exchange + ")" : "") + (ac ? " - " + ac.country : ""));
+    L.push("Industry: " + (sec.industry || "n/a") + "   CEO: " + (cdPlain(yh.ceo) || "n/a"));
+    L.push(cdPlain(yh.description) || "(no description)");
+
+    return L.join("\n");
+}
+
+function copyClaudeDump() {
+    var text = buildClaudeDump();
+    var box = document.getElementById("prepareChatGPT");
+    box.value = text;
+    $(box).select();
+    try {
+        var successful = document.execCommand('copy');
+        console.log('Claude dump copy was ' + (successful ? 'successful' : 'unsuccessful') + ' (' + text.length + ' characters)');
+    } catch (err) {
+        console.log('Oops, unable to copy the Claude dump');
+    }
+}
+
+// Starts the sec.gov fetch for the Claude dump in the BACKGROUND (async), right after the Yahoo call.
+// It isn't done on the button click because the browser only allows copying to the clipboard
+// for a few seconds after a click - too short to wait for sec.gov.
+function fetchClaudeDumpSecDocs(cik) {
+    var dump = claudeDump;                           // the lookup this fetch belongs to
+    dump.sec_docs.status = "loading";
+    $.ajax({
+        url: "claude_dump_sec.php",
+        data: {cik: cik},
+        dataType: "json",
+        timeout: 90000,
+        success: function (data) {
+            if (data && data.ok) {
+                $.extend(dump.sec_docs, data);
+                dump.sec_docs.status = "done";
+            } else {
+                dump.sec_docs.status = "failed";
+                dump.sec_docs.error = (data && data.error) || "unknown error";
+            }
+        },
+        error: function (xhr, textStatus, thrownError) {
+            dump.sec_docs.status = "failed";
+            dump.sec_docs.error = "HTTP " + xhr.status + " " + (thrownError || textStatus);
+        }
+    });
+}
+
+// Copies ONLY the NEW-news links - short enough to paste as plain message text next to the dump.
+// (Claude can open links typed in the message, but not links inside a pasted attachment.)
+function copyClaudeLinks() {
+    if (!claudeDump) return;
+    buildClaudeDump();                               // works out which items are NEW
+    var items = claudeDump.last_new_items || [];
+    var L = ["Links for the NEW news in the attached CLAUDE DUMP for " + String(claudeDump.ticker || "").toUpperCase()
+           + " (since " + claudeDump.last_cutoff_text + "):"];
+    $.each(items, function (k, it) {
+        if (it.link) L.push(it.when + " " + it.src + ": " + $.trim(it.title).replace(/\s+/g, " ").slice(0, 90) + "\n" + it.link);
+    });
+    if (L.length === 1) L.push("(none - no NEW news since the cutoff)");
+    var text = L.join("\n");
+    var box = document.getElementById("prepareChatGPT");
+    box.value = text;
+    $(box).select();
+    try {
+        var successful = document.execCommand('copy');
+        console.log('Claude links copy was ' + (successful ? 'successful' : 'unsuccessful') + ' (' + (L.length - 1) + ' links)');
+    } catch (err) {
+        console.log('Oops, unable to copy the Claude links');
+    }
+}
+
+// Fetches the TEXT of the NEW news articles in the BACKGROUND, right after the SEC panel call
+// (by then every news source is in). Skips SEC filings (already in SEC DOCUMENTS) and Seeking Alpha (paywalled).
+var CD_MAX_ARTICLES = 6;
+
+function fetchClaudeDumpArticles() {
+    var dump = claudeDump;                           // the lookup this fetch belongs to
+    buildClaudeDump();                               // works out which items are NEW
+    var urls = [];
+    $.each(dump.last_new_items || [], function (k, it) {
+        if (!it.link || it.src === "SEC") return;
+        if (/seekingalpha\.com|sec\.gov|streetinsider\.com\/SEC\+Filings/i.test(it.link)) return;
+        if (urls.length < CD_MAX_ARTICLES) urls.push(it.link);
+    });
+    if (!urls.length) { dump.articles.status = "none"; return; }
+    dump.articles.status = "loading";
+    $.ajax({
+        url: "claude_dump_articles.php",
+        type: "POST",
+        data: {urls: urls},
+        dataType: "json",
+        timeout: 90000,
+        success: function (data) {
+            if (data && data.ok) {
+                dump.articles.items = data.articles;
+                dump.articles.status = "done";
+            } else {
+                dump.articles.status = "failed";
+                dump.articles.error = (data && data.error) || "unknown error";
+            }
+        },
+        error: function (xhr, textStatus, thrownError) {
+            dump.articles.status = "failed";
+            dump.articles.error = "HTTP " + xhr.status + " " + (thrownError || textStatus);
+        }
+    });
+}
 
 function prepareChatGPTQuestion(symbol, link)
 {
@@ -1069,12 +1676,7 @@ $(function() {
 
           closeAllWindows();
 
-/*
-          if (getSystemTime() < 630)
-          {
-              alert("Check for extreme drops in the after-hours"); 
-          }
-*/
+          claudeDump = newClaudeDump(original_symbol);
 
           $("#left_bottom_container").html("");
           $("#bigcharts_yest_close").html("");
@@ -1153,6 +1755,8 @@ $(function() {
                   dataType: 'html',
                   success:  function (data) {
 
+                          claudeDump.etrade.raw = data;
+
                           var hasPeriod = original_symbol.indexOf('.'); 
                           var length = original_symbol.length; 
 
@@ -1165,10 +1769,12 @@ $(function() {
                           if (returnData || (data == '------') || (data == '------a') || (data == '------b'))
                           {
                             $("#yestCloseText").val("EXP");
+                            claudeDump.etrade.error = data;
                           }
                           else
                           {
                           jsonObject = JSON.parse(data);
+                          $.extend(claudeDump.etrade, jsonObject);
                           low = parseFloat(jsonObject.low);
                           bid = parseFloat(jsonObject.bid);
                           prev_close = parseFloat(jsonObject.prev_close); 
@@ -1215,10 +1821,6 @@ $(function() {
 
                           console.log("SEC company name is *" + secCompanyName + "*");
 
-
-/*                          openPage('./proxy_sec_xml.php?symbol=' + symbol + '&secCompanyName=' + secCompanyName);  */
-/*                          openPage('https://www.nasdaq.com/symbol/' + symbol + '/sec-filings');  */
-
                           yahoo10DayVolume = jsonObject.ten_day_volume; 
                           totalVolume = jsonObject.total_volume; 
 
@@ -1226,66 +1828,6 @@ $(function() {
 
                           var bidCalculatedPercentage=((prev_close-bid)/prev_close)*100; 
                           var lowCalculatedPercentage=((prev_close-low)/prev_close)*100; 
-
-/*
-
-                          if ((exchange == "u") && (lowCalculatedPercentage < 30.00)) 
-                          {
-                              // check if my broker's data is haywire 
-                              // any Pink Sheet that isn't down 30%, alert it in the orderStub window
-                              $("#entryPrice").val("!!HAYWIRE!!");
-                              $("#orderStub").val("Pink Sheet - " + lowCalculatedPercentage.toFixed(2) + "%!!!  HAYWIRE!!"); 
-                          }
-                          else if ((exchange != "u") && (lowCalculatedPercentage < 13.00)) 
-                          {
-                              // check if my broker's data is haywire 
-                              // any Nasdaq/NYSE/AMEX that isn't down 13%, alert it in the orderStub window
-                              $("#entryPrice").val("!!HAYWIRE!!");
-                              $("#orderStub").val("NASDAQ/NYSE/AMEX - " + lowCalculatedPercentage.toFixed(2) + "%!!!  HAYWIRE!!"); 
-                          }
-                          else if ((bid < prev_close) && (bidCalculatedPercentage >= (lowCalculatedPercentage - 2.5)))
-                          {
-                              // if the bid is within a 3% range of the low, then we're going to set the default 
-                              // entry to the bid, just in case it dropped extremely fast and we only have a couple 
-                              // seconds to pull the trigger, have the order ready.
-
-                              defaultEntry = parseFloat(bid);
-
-                              if (defaultEntry == 0.9999)
-                              {
-                                defaultEntry = 1.00;
-                              }
-                              else if (defaultEntry < 0.9999)
-                              {
-                                defaultEntry += 0.0001
-                              }
-                              else if (defaultEntry >= 1.0)
-                              {
-                                defaultEntry += 0.01;
-                              }
-                              if (defaultEntry < 1.00)
-                              {
-                                defaultEntry = defaultEntry.toFixed(4);
-                              }
-                              else
-                              {
-                                defaultEntry = defaultEntry.toFixed(2);
-                              }
-
-                              defaultEntry = defaultEntry.toString();
-                              defaultEntry = defaultEntry.replace(/^0\./gm, '.');
-
-                              $("#entryPrice").val(defaultEntry);
-
-                              calcAll(); 
-                          }    
-                          else
-                          {
-                            $("#entryPrice").val(low.toFixed(2));
-                            var bidLowDiff = lowCalculatedPercentage - bidCalculatedPercentage;
-                            $("#orderStub").val("bid/low diff - "  + bidLowDiff.toFixed(2) + "%" ); 
-                          }
-*/
 
                           var lowCalculatedPercentage=((prev_close-low)/prev_close)*100
                           $("#eTradeLowPercentage").html(lowCalculatedPercentage.toFixed(2)); 
@@ -1295,6 +1837,7 @@ $(function() {
               error: function (xhr, ajaxOptions, thrownError) {
 
               $("#yestCloseText").val(xhr.status);
+              claudeDump.etrade.error = "HTTP " + xhr.status + " " + thrownError;
             }
             });  // End of AJAX to get E*TRADE API data 
 
@@ -1308,7 +1851,12 @@ $(function() {
                 dataType: 'html',
                 success:  function (data) {
 
+                  claudeDump.marketstack.raw = data;
+                  claudeDump.marketstack.symbol_used = symbolToFetch; 
+
                   var returnedObject = JSON.parse(data);
+
+                  $.extend(claudeDump.marketstack, returnedObject);
 
                   var hasNoData = !returnedObject || !Array.isArray(returnedObject.ohlc) || returnedObject.ohlc.length === 0;
 
@@ -1437,6 +1985,7 @@ $(function() {
 
               },
                 error: function (xhr, ajaxOptions, thrownError) {
+                    claudeDump.marketstack.error = "HTTP " + xhr.status + " " + thrownError;
                     console.log("AJAX ERROR in calling marketstack-api-historical-data.php:");
                     console.log("Status:", xhr.status);
                     console.log("Response:", xhr.responseText);
@@ -1466,6 +2015,20 @@ $(function() {
                   // the daily VIX, so you can see how the volatility goes throughout the day
 
                  var textArray = data.split("|"); 
+
+                 var textArray = data.split("|"); 
+
+                 claudeDump.bigcharts.raw        = data;                          
+                 claudeDump.bigcharts.pct_change = $.trim(textArray[0] || "");    
+                 claudeDump.bigcharts.price      = $.trim(textArray[1] || "");    
+                 claudeDump.bigcharts.time       = $.trim(textArray[2] || "");    
+                 claudeDump.bigcharts.day_low      = $.trim(textArray[3] || "");
+                 claudeDump.bigcharts.day_low_time = $.trim(textArray[4] || "");
+                 claudeDump.bigcharts.session_date = $.trim(textArray[5] || "");
+
+                 if (/^(NF|ERR)/.test(claudeDump.bigcharts.pct_change)) {         
+                     claudeDump.bigcharts.error = data;                           
+                 }                                                                
 
                  yesterdaysClose = parseFloat($('#yestCloseText').val()); 
                  
@@ -1498,7 +2061,15 @@ $(function() {
 
                   $("#bigcharts_diff").text("10% Diff: $" + diffPrice); 
 
-                }
+                },                                                                         
+                    error: function (xhr, ajaxOptions, thrownError) {                          
+                    claudeDump.bigcharts.error = "HTTP " + xhr.status + " " + thrownError; 
+                }      
+
+
+
+
+
             });  // end of AJAX call to bigcharts   
 
 
@@ -1523,9 +2094,26 @@ $(function() {
             dataType: 'html',
             success:  function (data) {
 
-              $("#entryPercentage").focus();   
+              $("#entryPercentage").focus();  
+
+              claudeDump.yahoo.raw = data; 
 
               finalObject = JSON.parse(data); 
+
+              // save everything Yahoo sent ----
+              $.extend(claudeDump.yahoo, finalObject);
+
+              // the halt lists arrive as JSON text inside the JSON - turn them into real lists
+              try { claudeDump.yahoo.halt_symbol_list = JSON.parse(finalObject.halt_symbol_list || "[]"); } catch (e) {}
+              try { claudeDump.yahoo.currently_halted = JSON.parse(finalObject.currently_halted || "{}"); } catch (e) {}
+              try { claudeDump.yahoo.resuming_today   = JSON.parse(finalObject.resuming_today   || "{}"); } catch (e) {}
+
+              // this ticker's own halt status
+              var cdSym = original_symbol.toUpperCase();
+              claudeDump.yahoo.halted_today            = $.inArray(cdSym, claudeDump.yahoo.halt_symbol_list || []) !== -1;
+              claudeDump.yahoo.currently_halted_reason = (claudeDump.yahoo.currently_halted || {})[cdSym] || null;
+              claudeDump.yahoo.resuming_today_reason   = (claudeDump.yahoo.resuming_today   || {})[cdSym] || null;
+              fetchClaudeDumpSecDocs(claudeDump.yahoo.cik);     // background - doesn't slow the lookup
 
               var $rf = $("#red_flags_container");
               $rf.text(finalObject.red_flag_text || "");
@@ -1690,14 +2278,13 @@ $(function() {
 
               if ((etfStringLocation > -1) || (etnStringLocation  > -1))
               {           
-                  stockOrFund = "fund"; 
-              }
-              else
-              {
                   stockOrFund = "stock";
               } 
-            }  // yahoo success function 
-        });  // yahoo ajax   
+            },  // yahoo success function                                              
+                error: function (xhr, ajaxOptions, thrownError) {                      
+                    claudeDump.yahoo.error = "HTTP " + xhr.status + " " + thrownError; 
+            }                                                                          
+        });  // yahoo ajax    
 
         $("div#right_top_container").css("background-color", "#F3F3FF");
         $("#entryPercentage").focus();   
@@ -1724,7 +2311,9 @@ $(function() {
                     success:  function (data) {
                       $("#entryPercentage").focus();   
 
+                      claudeDump.sec.raw = data;
                       finalObject = JSON.parse(data); 
+                      $.extend(claudeDump.sec, finalObject);
 
                       if (finalObject.dividendCheckDate == 1)
                       {
@@ -1893,6 +2482,8 @@ var corporateActionsStocks=
   "FMFC": "REVERSE SPLIT 23 TRADING DAYS AGO!!!!!!!!!"
 };
 
+claudeDump.sec.corporate_action = corporateActionsStocks[symbol] || null;
+
 
 
 for (var corporateSymbol in corporateActionsStocks)
@@ -1945,7 +2536,11 @@ for (var corporateSymbol in corporateActionsStocks)
                       }
 
                       $("div#left_bottom_container").html(finalObject.html);   /*streetInsiderIFrame + */
+                      fetchClaudeDumpArticles();     // background - text of the NEW news articles (all news sources are in by now)
 
+                  },   // end of sec success function
+                  error: function (xhr, ajaxOptions, thrownError) {
+                      claudeDump.sec.error = "HTTP " + xhr.status + " " + thrownError;
                   }
 
                 });  // end of AJAX call to marketwatch    

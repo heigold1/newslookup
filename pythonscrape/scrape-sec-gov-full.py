@@ -6,41 +6,52 @@ from dateutil import parser
 import requests
 import json
 import sys
+from zoneinfo import ZoneInfo
+
+NY = ZoneInfo("America/New_York")
+
+def to_ny(utc_date):
+    # SEC's acceptanceDateTime is UTC (that's what the "Z" on the end means) - convert it to New York time
+    return parser.isoparse(utc_date).astimezone(NY)
+
 
 # ---------------------------------------------------------------------------
 # Date/time helpers - unchanged from your RSS-based version
 # ---------------------------------------------------------------------------
 
 def days_back_date(days):
-    today = datetime.now()
+    today = datetime.now(NY)
     past_date = today - timedelta(days=days)
     return past_date.strftime('%Y-%m-%d')
 
 def get_date_from_utc(utc_date):
-    return parser.isoparse(utc_date).strftime("%Y-%m-%d")
+    return to_ny(utc_date).strftime("%Y-%m-%d")
 
 def get_ampm_time_from_utc(utc_date):
-    dt = parser.isoparse(utc_date)
+    dt = to_ny(utc_date)
     hour = dt.hour
     am_pm = "AM"
-    if hour > 12:
-        hour -= 12
+
+    if hour >= 12:
         am_pm = "PM"
+        if hour > 12:
+            hour -= 12
     elif hour == 0:
         hour = 12
+
     minute = dt.minute
     return f"{hour}:{minute:02d} {am_pm}"
 
 def timestamp_is_safe(utc_date):
-    dt = parser.isoparse(utc_date)
+    dt = to_ny(utc_date)
     hour = dt.hour
     return hour <= 12
 
 def get_today_trade_date():
-    return datetime.now().strftime('%Y-%m-%d')
+    return datetime.now(NY).strftime('%Y-%m-%d')
 
 def get_trade_date(days_ago):
-    trade_date = datetime.now() - timedelta(days=days_ago)
+    trade_date = datetime.now(NY) - timedelta(days=days_ago)
     return trade_date.strftime('%Y-%m-%d')
 
 
@@ -198,6 +209,21 @@ def find_cik_via_full_text_search(query):
     return ciks[0]
 
 
+def clean_filing(form, form_name, items, accepted, href):
+    # untouched copy of one filing for the Claude dump. acceptanceDateTime is UTC - converted to New York time here.
+    item = {"form": form, "form_name": form_name, "items": items,
+            "accepted_raw": accepted, "link": href,
+            "date_et": "", "time_et": "", "epoch": None}
+    try:
+        dt = to_ny(accepted)
+        item["date_et"] = dt.strftime("%a, %d %b %Y")
+        item["time_et"] = dt.strftime("%I:%M %p %Z").lstrip("0")
+        item["epoch"]   = int(dt.timestamp())     # seconds since 1970, for headline-age math
+    except Exception:
+        pass
+    return item
+
+
 # ---------------------------------------------------------------------------
 # Table building - this is your original parse_xml(), with the per-entry
 # data now coming from the JSON 'recent' filings arrays instead of RSS/Atom
@@ -221,6 +247,7 @@ def build_filings_table(data, yesterday_days, symbol, cik_number):
     items_list = recent.get('items', [''] * num_entries)
 
     sec_table_rows = []
+    clean_filings = []      # untouched filings for the Claude dump (before any highlighting rules)
     sec_table_row_count = 0
     recent_news = False
 
@@ -255,6 +282,9 @@ def build_filings_table(data, yesterday_days, symbol, cik_number):
 
         if re.search('beneficial ownership', title, re.IGNORECASE):
             continue
+
+        # untouched copy for the Claude dump - saved BEFORE the highlight rules below
+        clean_filings.append(clean_filing(filing_type, title, item_description, updated, href))
 
         datestamp = re.sub(f'({get_today_trade_date()})', r'<span style="font-size: 16px; background-color:black;  border: 1px solid red; color:white">\1</span>', datestamp)
 
@@ -339,8 +369,10 @@ def build_filings_table(data, yesterday_days, symbol, cik_number):
 
     result = {
         'found': True,
-        'message': return_sec_html
+        'message': return_sec_html,
+        'clean': clean_filings
     }
+
     print(json.dumps(result))
 
 

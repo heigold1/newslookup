@@ -32,6 +32,21 @@ $symbol=$_GET['symbol'];
 
 $dataArray = array();
 
+// ---- server clock, converted to New York time (the server itself runs on UTC) ----
+$nowET = new DateTime('now', new DateTimeZone('America/New_York'));
+$dataArray['server_now_epoch'] = $nowET->getTimestamp();                 // seconds since 1970, for headline-age math
+$dataArray['server_now_et']    = $nowET->format('D, d M Y g:i:s A T');  // e.g. Mon, 17 Nov 2025 9:42:10 AM EST
+
+$hhmm = (int) $nowET->format('Hi');   // e.g. 942 for 9:42 AM
+$dow  = (int) $nowET->format('N');    // 1 = Mon ... 7 = Sun
+if ($dow >= 6)        { $session = 'closed (weekend)'; }
+elseif ($hhmm < 400)  { $session = 'closed (overnight)'; }
+elseif ($hhmm < 930)  { $session = 'pre-market'; }
+elseif ($hhmm < 1600) { $session = 'market open'; }
+elseif ($hhmm < 2000) { $session = 'after hours'; }
+else                  { $session = 'closed (overnight)'; }
+$dataArray['market_session'] = $session;
+
 $ini_array = parse_ini_file('etrade.ini', true);
 
 if ($ini_array === false) {
@@ -73,6 +88,17 @@ $ac_obj = new MarketClient($consumer);
 
   }
 
+// Converts E*TRADE sub-penny values like "12E-4" into 0.0012; leaves normal values alone.
+function fixE4($value)
+{
+    $value = (string) $value;
+    if (preg_match('/E-4/', $value))
+    {
+        return floatval(preg_replace('/E-4/', '', $value)) / 10000;
+    }
+    return $value;
+}
+
 //  $mkt_responce_obj = json_decode($out);   // USE THIS ON THE Verio Server 
 // $mkt_response_obj = etHttpUtils::GetResponseObject($out);   // Use this on localhost
 
@@ -96,22 +122,11 @@ $mkt_response_obj = simplexml_load_string($out);
         $bid = (string) $mkt_response_obj->QuoteData->All->bid;
         $exchange = trim((string) $mkt_response_obj->QuoteData->All->primaryExchange);
 
-        if (preg_match('/E-4/', $last_trade))
-        {
-          $last_trade = floatval(preg_replace('/E-4/', '', $last_trade))/10000;
-        }
-        if (preg_match('/E-4/', $low))
-        {
-          $low = floatval(preg_replace('/E-4/', '', $low))/10000;
-        }
-        if (preg_match('/E-4/', $high))
-        {
-          $high = floatval(preg_replace('/E-4/', '', $high))/10000;
-        }
-        if (preg_match('/E-4/', $bid))
-        {
-          $bid = floatval(preg_replace('/E-4/', '', $bid))/10000;
-        }
+        $prev_close = fixE4($prev_close);
+        $last_trade = fixE4($last_trade);
+        $low        = fixE4($low);
+        $high       = fixE4($high);
+        $bid        = fixE4($bid);
 
         $dataArray['prev_close'] = $prev_close; 
         $dataArray['low'] = $low; 
@@ -147,22 +162,11 @@ $mkt_response_obj = simplexml_load_string($out);
         $extended_hour_last_trade = (string) $mkt_response_obj->QuoteData->All->ExtendedHourQuoteDetail->lastPrice; 
         $exchange = trim((string) $mkt_response_obj->QuoteData->All->primaryExchange);
 
-        if (preg_match('/E-4/', $prev_close))
-        {
-          $prev_close = floatval(preg_replace('/E-4/', '', $prev_close))/10000;
-        }
-        if (preg_match('/E-4/', $low))
-        {
-          $low = floatval(preg_replace('/E-4/', '', $low))/10000;
-        }
-        if (preg_match('/E-4/', $high))
-        {
-          $high = floatval(preg_replace('/E-4/', '', $high))/10000;
-        }
-        if (preg_match('/E-4/', $bid))
-        {
-          $bid = floatval(preg_replace('/E-4/', '', $bid))/10000;
-        }
+        $prev_close = fixE4($prev_close);
+        $last_trade = fixE4($last_trade);
+        $low        = fixE4($low);
+        $high       = fixE4($high);
+        $bid        = fixE4($bid);
 
         $dataArray['prev_close'] = $prev_close; 
         $dataArray['low'] = $low; 
