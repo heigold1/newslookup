@@ -13,7 +13,7 @@ foreach ($urls as $url)
     {
         $clean[] = $url;
     }
-    if (count($clean) >= 6)
+    if (count($clean) >= 15)
     {
         break;
     }

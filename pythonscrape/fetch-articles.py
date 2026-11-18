@@ -16,8 +16,8 @@ from urllib.parse import urljoin, urlparse
 import requests
 from lxml import html as lxml_html
 
-MAX_ARTICLES = 6
-MAX_CHARS    = 4000          # per article (about 650 words)
+MAX_ARTICLES = 15
+MAX_CHARS    = 2500          # per article (about 650 words)
 MAX_BYTES    = 3000000       # never download more than 3 MB of one page
 HEADERS = {
     "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0 Safari/537.36",

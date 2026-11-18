@@ -154,8 +154,12 @@ def main():
                     info["text"] = text[:MAX_PRESS_CHARS] + (f" [...cut - {len(text):,} characters total]" if len(text) > MAX_PRESS_CHARS else "")
                     info["going_concern_lines"] = going_concern_lines(text)
                 else:
-                    info["exhibit"] = None
-                    info["text"] = "(no Exhibit 99 press release in this filing)"
+                    # no press release attached - use the filing's own text (layoffs, agreements, delisting notices often come this way)
+                    body = html_to_text(sec_get(info["link"]).text)
+                    info["exhibit"] = "filing text (no press release attached)"
+                    info["full_length"] = len(body)
+                    info["text"] = body[:MAX_PRESS_CHARS] + (f" [...cut - {len(body):,} characters total]" if len(body) > MAX_PRESS_CHARS else "")
+                    info["going_concern_lines"] = going_concern_lines(body)
             except Exception as e:
                 info["text"] = f"(could not fetch this filing: {e})"
             result["press_releases"].append(clean(info))
