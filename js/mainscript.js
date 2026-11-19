@@ -36,6 +36,64 @@ document.addEventListener('DOMContentLoaded', function() {
 // One central place to keep every API result from the current lookup.
 var claudeDump = null;
 
+// ---------- RED FLAG PANEL: a list of messages, each in its own pink box ----------
+// Any check can call addRedFlag("...") - the panel turns red as soon as there is one.
+var redFlagList = [];
+var redFlagsYahooDone = false;     // "NO RED FLAGS" only shows once the Yahoo pipeline check has actually run
+
+function resetRedFlags() {
+    redFlagList = [];
+    redFlagsYahooDone = false;
+    renderRedFlags();
+}
+
+function addRedFlag(text) {
+    text = $.trim(String(text || ""));
+    if (text && $.inArray(text, redFlagList) === -1) redFlagList.push(text);
+    renderRedFlags();
+}
+
+function renderRedFlags() {
+    var $rf = $("#red_flags_container").empty();
+    $.each(redFlagList, function (k, t) { $rf.append($("<span class='rf-msg'></span>").text(t)); });
+    if (!redFlagList.length && redFlagsYahooDone) $rf.append($("<span class='rf-msg'></span>").text("NO RED FLAGS"));
+    $rf.toggleClass("rf-alert", redFlagList.length > 0);
+}
+
+// ---------- DELISTING CHECK (delisting_check.php) - runs in the background at the start of every lookup ----------
+// The server checks every source listed in delisting_check.php ($DL_SOURCES); each hit becomes a pink box.
+function fetchDelistingCheck(symbol) {
+    var dump = claudeDump;                                   // the lookup this check belongs to
+    dump.delisting = {status: "loading", error: null, sources_checked: [], flags: [], errors: []};
+    $.ajax({
+        url: "delisting_check.php",
+        data: {symbol: symbol},
+        dataType: "json",
+        timeout: 30000,
+        success: function (res) {
+            if (dump !== claudeDump) return;                 // a newer lookup has started - ignore this one
+            if (!res || !res.ok) {
+                dump.delisting.status = "failed";
+                dump.delisting.error  = (res && res.error) || "unknown error";
+                addRedFlag("DELISTING CHECK FAILED - CHECK BY HAND");
+                return;
+            }
+            dump.delisting.status          = "done";
+            dump.delisting.sources_checked = res.sources_checked || [];
+            dump.delisting.flags           = res.flags || [];
+            dump.delisting.errors          = res.errors || [];
+            $.each(dump.delisting.flags,  function (k, f) { if (f.level !== "info") addRedFlag(f.text); });   // "info" = more than a month away
+            $.each(dump.delisting.errors, function (k, e) { addRedFlag("DELISTING CHECK FAILED (" + e.source + ") - CHECK BY HAND"); });
+        },
+        error: function (xhr, textStatus, thrownError) {
+            if (dump !== claudeDump) return;
+            dump.delisting.status = "failed";
+            dump.delisting.error  = "HTTP " + xhr.status + " " + (thrownError || textStatus);
+            addRedFlag("DELISTING CHECK FAILED - CHECK BY HAND");
+        }
+    });
+}
+
 function newClaudeDump(ticker) {
     return {
         ticker: ticker,
@@ -382,6 +440,16 @@ function buildClaudeDump() {
              : yh.halted_today            ? "was halted earlier today"
              : "not halted today";
     L.push("Halts: " + halt);
+    var dl = cd.delisting;
+    if (!dl || dl.status === "loading") {
+        L.push("Delisting check: STILL LOADING - click CLAUDE DUMP again in a few seconds");
+    } else if (dl.status !== "done") {
+        L.push("Delisting check: FAILED (" + cdPlain(String(dl.error || "unknown error")) + ") - delisting NOT checked");
+    } else {
+        L.push("Delisting check (" + (dl.sources_checked || []).join(", ") + "): "
+             + (dl.flags.length ? $.map(dl.flags, function (f) { return f.text + (f.level === "info" ? " [more than a month away]" : ""); }).join(" | ") : "nothing found"));
+        $.each(dl.errors, function (k, e) { L.push("Delisting check - SOURCE FAILED, not checked: " + e.source + " (" + e.error + ")"); });
+    }
     L.push("Corporate action list: " + (sec.corporate_action || "none"));
     L.push("Industry: " + (sec.industry || "n/a") + " - " + (sec.industryCount || 0) + " stocks in this industry on my sector list");
     L.push("Pipeline check (healthcare industries only): "
@@ -887,7 +955,7 @@ function prepareChineseJay(symbol, ceo, description)
 
 function prepareNoNewsChatGPT(symbol) {
 
-    var message = `Can you check and see if any news has come out for stock market symbol "${symbol}" in the after-hours of last night, or this morning?  
+    var message = promptStockHeader() + `Can you check and see if any news has come out for stock market symbol "${symbol}" in the after-hours of last night, or this morning?  
 
     I can't seem to find any recent news and I need to know why it is dropping. 
 
@@ -1698,6 +1766,9 @@ $(function() {
 
           claudeDump = newClaudeDump(original_symbol);
 
+          resetRedFlags();                          // empty red-flag panel for the new lookup
+          fetchDelistingCheck(original_symbol);     // background - adds a pink box if the stock is being suspended/delisted
+
           $("#left_bottom_container").html("");
           $("#bigcharts_yest_close").html("");
           $("#right_top_container").html("");
@@ -2135,9 +2206,9 @@ $(function() {
               claudeDump.yahoo.resuming_today_reason   = (claudeDump.yahoo.resuming_today   || {})[cdSym] || null;
               fetchClaudeDumpSecDocs(claudeDump.yahoo.cik);     // background - doesn't slow the lookup
 
-              var $rf = $("#red_flags_container");
-              $rf.text(finalObject.red_flag_text || "");
-              $rf.toggleClass("rf-alert", finalObject.red_flags === true);
+              redFlagsYahooDone = true;                                     // the pipeline/industry check has run
+              if (finalObject.red_flags === true) addRedFlag(finalObject.red_flag_text);
+              else renderRedFlags();                                        // shows NO RED FLAGS if nothing else has been added
 
               cikNumber = finalObject.cik; 
 
@@ -2390,125 +2461,129 @@ $(function() {
 
 var corporateActionsStocks=
 {
-  "SPWR": "REVERSE SPLIT -1 TRADING DAYS AGO!!!!!!!!!",
-  "MKDW": "REVERSE SPLIT -1 TRADING DAYS AGO!!!!!!!!!",
-  "RCT": "REVERSE SPLIT 0 TRADING DAYS AGO!!!!!!!!!",
-  "MOBX": "REVERSE SPLIT 0 TRADING DAYS AGO!!!!!!!!!",
-  "LOBO": "REVERSE SPLIT 0 TRADING DAYS AGO!!!!!!!!!",
-  "FCDH": "SYMBOL CHANGE 16 TRADING DAYS AGO!!! 38 PERCENT!!!",
-  "EDBL": "REVERSE SPLIT 0 TRADING DAYS AGO!!!!!!!!!",
-  "YMT": "REVERSE SPLIT 1 TRADING DAYS AGO!!!!!!!!!",
-  "TGL": "REVERSE SPLIT 1 TRADING DAYS AGO!!!!!!!!!",
-  "SGRX": "REVERSE SPLIT 1 TRADING DAYS AGO!!!!!!!!!",
-  "NCT": "REVERSE SPLIT 1 TRADING DAYS AGO!!!!!!!!!",
-  "KALA": "REVERSE SPLIT 1 TRADING DAYS AGO!!!!!!!!!",
-  "DFSC": "REVERSE SPLIT 1 TRADING DAYS AGO!!!!!!!!!",
-  "ZYN": "SYMBOL CHANGE 2 TRADING DAYS AGO!!! 38 PERCENT!!!",
-  "WWB": "WAS LISTED 2 TRADING DAYS AGO!!! AT LEAST 38 PERCENT!!!",
-  "VVVV": "WAS LISTED 2 TRADING DAYS AGO!!! AT LEAST 38 PERCENT!!!",
-  "PMCB": "REVERSE SPLIT 2 TRADING DAYS AGO!!!!!!!!!",
-  "OPHI": "SYMBOL CHANGE 2 TRADING DAYS AGO!!! 38 PERCENT!!!",
-  "MDRN": "WAS LISTED 2 TRADING DAYS AGO!!! AT LEAST 38 PERCENT!!!",
-  "HUBC": "REVERSE SPLIT 2 TRADING DAYS AGO!!!!!!!!!",
-  "COSM": "REVERSE SPLIT 2 TRADING DAYS AGO!!!!!!!!!",
-  "KNRXF": "SYMBOL CHANGE 3 TRADING DAYS AGO!!! 38 PERCENT!!!",
-  "CRMN": "SYMBOL CHANGE 3 TRADING DAYS AGO!!! 38 PERCENT!!!",
-  "ARAI": "REVERSE SPLIT 3 TRADING DAYS AGO!!!!!!!!!",
-  "SLXN": "REVERSE SPLIT 4 TRADING DAYS AGO!!!!!!!!!",
-  "GOVX": "REVERSE SPLIT 4 TRADING DAYS AGO!!!!!!!!!",
-  "XGPU": "SYMBOL CHANGE 5 TRADING DAYS AGO!!! 38 PERCENT!!!",
-  "QUIT": "SYMBOL CHANGE 5 TRADING DAYS AGO!!! 38 PERCENT!!!",
-  "OFAL": "REVERSE SPLIT 5 TRADING DAYS AGO!!!!!!!!!",
-  "NCI": "REVERSE SPLIT 5 TRADING DAYS AGO!!!!!!!!!",
-  "JOB": "REVERSE SPLIT 5 TRADING DAYS AGO!!!!!!!!!",
-  "WCT": "REVERSE SPLIT 6 TRADING DAYS AGO!!!!!!!!!",
-  "TXCP": "SYMBOL CHANGE 6 TRADING DAYS AGO!!! 38 PERCENT!!!",
-  "STKH": "REVERSE SPLIT 6 TRADING DAYS AGO!!!!!!!!!",
-  "SMX": "REVERSE SPLIT 6 TRADING DAYS AGO!!!!!!!!!",
-  "NXTS": "REVERSE SPLIT 6 TRADING DAYS AGO!!!!!!!!!",
-  "MTRI": "REVERSE SPLIT 8 TRADING DAYS AGO!!!!!!!!!",
-  "CISS": "REVERSE SPLIT 6 TRADING DAYS AGO!!!!!!!!!",
-  "ARAY": "REVERSE SPLIT 6 TRADING DAYS AGO!!!!!!!!!",
-  "ALPS": "REVERSE SPLIT 6 TRADING DAYS AGO!!!!!!!!!",
-  "ADGM": "REVERSE SPLIT 6 TRADING DAYS AGO!!!!!!!!!",
-  "TOPS": "REVERSE SPLIT 7 TRADING DAYS AGO!!!!!!!!!",
-  "ONCO": "REVERSE SPLIT 7 TRADING DAYS AGO!!!!!!!!!",
-  "NWGL": "REVERSE SPLIT 7 TRADING DAYS AGO!!!!!!!!!",
-  "NEXR": "REVERSE SPLIT 7 TRADING DAYS AGO!!!!!!!!!",
-  "JSPR": "REVERSE SPLIT 7 TRADING DAYS AGO!!!!!!!!!",
-  "CDT": "REVERSE SPLIT 7 TRADING DAYS AGO!!!!!!!!!",
-  "AIIO": "REVERSE SPLIT 7 TRADING DAYS AGO!!!!!!!!!",
-  "XXII": "REVERSE SPLIT 8 TRADING DAYS AGO!!!!!!!!!",
-  "EZGO": "REVERSE SPLIT 8 TRADING DAYS AGO!!!!!!!!!",
-  "ALDFF": "SYMBOL CHANGE 8 TRADING DAYS AGO!!! 38 PERCENT!!!",
-  "SAEN": "SYMBOL CHANGE 9 TRADING DAYS AGO!!! 38 PERCENT!!!",
-  "GCDTF": "SYMBOL CHANGE 9 TRADING DAYS AGO!!! 38 PERCENT!!!",
-  "UFG": "REVERSE SPLIT 10 TRADING DAYS AGO!!!!!!!!!",
-  "SUPN": "SYMBOL CHANGE 10 TRADING DAYS AGO!!! 38 PERCENT!!!",
-  "BJDX": "REVERSE SPLIT 10 TRADING DAYS AGO!!!!!!!!!",
-  "VCIG": "REVERSE SPLIT 11 TRADING DAYS AGO!!!!!!!!!",
-  "RETO": "REVERSE SPLIT 11 TRADING DAYS AGO!!!!!!!!!",
-  "NARA": "WAS LISTED 11 TRADING DAYS AGO!!! AT LEAST 38 PERCENT!!!",
-  "CASK": "SYMBOL CHANGE 11 TRADING DAYS AGO!!! 38 PERCENT!!!",
-  "ZONE": "REVERSE SPLIT 12 TRADING DAYS AGO!!!!!!!!!",
-  "WFF": "REVERSE SPLIT 12 TRADING DAYS AGO!!!!!!!!!",
-  "RUBI": "REVERSE SPLIT 12 TRADING DAYS AGO!!!!!!!!!",
-  "NXXT": "REVERSE SPLIT 12 TRADING DAYS AGO!!!!!!!!!",
-  "MASK": "REVERSE SPLIT 12 TRADING DAYS AGO!!!!!!!!!",
-  "IVF": "REVERSE SPLIT 12 TRADING DAYS AGO!!!!!!!!!",
-  "BBTX": "WAS LISTED 12 TRADING DAYS AGO!!! AT LEAST 38 PERCENT!!!",
-  "ASPE": "WAS LISTED 12 TRADING DAYS AGO!!! AT LEAST 38 PERCENT!!!",
-  "OMEX": "REVERSE SPLIT 13 TRADING DAYS AGO!!!!!!!!!",
-  "GBC": "WAS LISTED 13 TRADING DAYS AGO!!! AT LEAST 38 PERCENT!!!",
-  "AZR": "SYMBOL CHANGE 13 TRADING DAYS AGO!!! 38 PERCENT!!!",
-  "AXG": "REVERSE SPLIT 13 TRADING DAYS AGO!!!!!!!!!",
-  "ATYR": "REVERSE SPLIT 13 TRADING DAYS AGO!!!!!!!!!",
-  "FFTT": "SYMBOL CHANGE 14 TRADING DAYS AGO!!! 38 PERCENT!!!",
-  "SCAG": "REVERSE SPLIT 15 TRADING DAYS AGO!!!!!!!!!",
-  "PARA": "REVERSE SPLIT 15 TRADING DAYS AGO!!!!!!!!!",
-  "NUWE": "REVERSE SPLIT 15 TRADING DAYS AGO!!!!!!!!!",
-  "MSGR": "WAS LISTED 15 TRADING DAYS AGO!!! AT LEAST 38 PERCENT!!!",
-  "MSGK": "NEW SYMBOL AS OF 15 TRADING DAYS AGO!!! AT LEAST 38 PERCENT!!!",
-  "ENLV": "REVERSE SPLIT 15 TRADING DAYS AGO!!!!!!!!!",
-  "TWG": "REVERSE SPLIT 16 TRADING DAYS AGO!!!!!!!!!",
-  "SXTC": "REVERSE SPLIT 16 TRADING DAYS AGO!!!!!!!!!",
-  "SBFM": "REVERSE SPLIT 16 TRADING DAYS AGO!!!!!!!!!",
-  "PTIV": "SYMBOL CHANGE 16 TRADING DAYS AGO!!! 38 PERCENT!!!",
-  "PPCB": "REVERSE SPLIT 16 TRADING DAYS AGO!!!!!!!!!",
-  "LHSW": "REVERSE SPLIT 16 TRADING DAYS AGO!!!!!!!!!",
-  "IPW": "REVERSE SPLIT 16 TRADING DAYS AGO!!!!!!!!!",
-  "HKPD": "REVERSE SPLIT 16 TRADING DAYS AGO!!!!!!!!!",
-  "HCTI": "REVERSE SPLIT 16 TRADING DAYS AGO!!!!!!!!!",
-  "GUNN": "WAS LISTED 16 TRADING DAYS AGO!!! AT LEAST 38 PERCENT!!!",
-  "GCTK": "REVERSE SPLIT 16 TRADING DAYS AGO!!!!!!!!!",
-  "ELMES": "SYMBOL CHANGE 16 TRADING DAYS AGO!!! 38 PERCENT!!!",
-  "COCH": "REVERSE SPLIT 16 TRADING DAYS AGO!!!!!!!!!",
-  "CHOW": "REVERSE SPLIT 16 TRADING DAYS AGO!!!!!!!!!",
-  "BDRX": "REVERSE SPLIT 16 TRADING DAYS AGO!!!!!!!!!",
-  "AZTR": "REVERSE SPLIT 16 TRADING DAYS AGO!!!!!!!!!",
-  "AETR": "SYMBOL CHANGE 16 TRADING DAYS AGO!!! 38 PERCENT!!!",
-  "PASW": "REVERSE SPLIT 17 TRADING DAYS AGO!!!!!!!!!",
-  "NIVF": "REVERSE SPLIT 17 TRADING DAYS AGO!!!!!!!!!",
-  "LYCA": "WAS LISTED 17 TRADING DAYS AGO!!! AT LEAST 38 PERCENT!!!",
-  "LU": "REVERSE SPLIT 17 TRADING DAYS AGO!!!!!!!!!",
-  "HCAI": "REVERSE SPLIT 17 TRADING DAYS AGO!!!!!!!!!",
-  "APXC": "WAS LISTED 17 TRADING DAYS AGO!!! AT LEAST 38 PERCENT!!!",
-  "DKI": "REVERSE SPLIT 18 TRADING DAYS AGO!!!!!!!!!",
-  "DAVI": "WAS LISTED 18 TRADING DAYS AGO!!! AT LEAST 38 PERCENT!!!",
-  "AXNX": "REVERSE SPLIT 18 TRADING DAYS AGO!!!!!!!!!",
-  "POM": "REVERSE SPLIT 19 TRADING DAYS AGO!!!!!!!!!",
-  "NANO": "SYMBOL CHANGE 19 TRADING DAYS AGO!!! 38 PERCENT!!!",
-  "EHGO": "REVERSE SPLIT 19 TRADING DAYS AGO!!!!!!!!!",
-  "SATS": "WAS LISTED 20 TRADING DAYS AGO!!! AT LEAST 38 PERCENT!!!",
-  "REVB": "REVERSE SPLIT 20 TRADING DAYS AGO!!!!!!!!!",
-  "MBRX": "REVERSE SPLIT 20 TRADING DAYS AGO!!!!!!!!!",
-  "SRTM": "SYMBOL CHANGE 21 TRADING DAYS AGO!!! 38 PERCENT!!!",
-  "OBAI": "REVERSE SPLIT 21 TRADING DAYS AGO!!!!!!!!!",
-  "GP": "REVERSE SPLIT 21 TRADING DAYS AGO!!!!!!!!!",
-  "FRGT": "REVERSE SPLIT 21 TRADING DAYS AGO!!!!!!!!!",
-  "DCM": "SYMBOL CHANGE 21 TRADING DAYS AGO!!! 38 PERCENT!!!",
-  "CAPS": "REVERSE SPLIT 21 TRADING DAYS AGO!!!!!!!!!",
-  "AMTD": "REVERSE SPLIT 21 TRADING DAYS AGO!!!!!!!!!"
+  "SPWR": "REVERSE SPLIT 0 TRADING DAYS AGO!!!!!!!!!",
+  "MKDW": "REVERSE SPLIT 0 TRADING DAYS AGO!!!!!!!!!",
+  "SLQT": "REVERSE SPLIT 1 TRADING DAYS AGO!!!!!!!!!",
+  "RCT": "REVERSE SPLIT 1 TRADING DAYS AGO!!!!!!!!!",
+  "MOBX": "REVERSE SPLIT 1 TRADING DAYS AGO!!!!!!!!!",
+  "LOBO": "REVERSE SPLIT 1 TRADING DAYS AGO!!!!!!!!!",
+  "FCDH": "SYMBOL CHANGE 17 TRADING DAYS AGO!!! 38 PERCENT!!!",
+  "EDBL": "REVERSE SPLIT 1 TRADING DAYS AGO!!!!!!!!!",
+  "YMT": "REVERSE SPLIT 2 TRADING DAYS AGO!!!!!!!!!",
+  "TGL": "REVERSE SPLIT 2 TRADING DAYS AGO!!!!!!!!!",
+  "SGRX": "REVERSE SPLIT 2 TRADING DAYS AGO!!!!!!!!!",
+  "PLCEQ": "SYMBOL CHANGE 2 TRADING DAYS AGO!!! 38 PERCENT!!!",
+  "NCT": "REVERSE SPLIT 2 TRADING DAYS AGO!!!!!!!!!",
+  "KALA": "REVERSE SPLIT 2 TRADING DAYS AGO!!!!!!!!!",
+  "DFSC": "REVERSE SPLIT 2 TRADING DAYS AGO!!!!!!!!!",
+  "ZYN": "SYMBOL CHANGE 3 TRADING DAYS AGO!!! 38 PERCENT!!!",
+  "WWB": "WAS LISTED 3 TRADING DAYS AGO!!! AT LEAST 38 PERCENT!!!",
+  "VVVV": "WAS LISTED 3 TRADING DAYS AGO!!! AT LEAST 38 PERCENT!!!",
+  "PMCB": "REVERSE SPLIT 3 TRADING DAYS AGO!!!!!!!!!",
+  "OPHI": "SYMBOL CHANGE 3 TRADING DAYS AGO!!! 38 PERCENT!!!",
+  "MDRN": "WAS LISTED 3 TRADING DAYS AGO!!! AT LEAST 38 PERCENT!!!",
+  "HUBC": "REVERSE SPLIT 3 TRADING DAYS AGO!!!!!!!!!",
+  "COSM": "REVERSE SPLIT 3 TRADING DAYS AGO!!!!!!!!!",
+  "KNRXF": "SYMBOL CHANGE 4 TRADING DAYS AGO!!! 38 PERCENT!!!",
+  "CRMN": "SYMBOL CHANGE 4 TRADING DAYS AGO!!! 38 PERCENT!!!",
+  "ARAI": "REVERSE SPLIT 4 TRADING DAYS AGO!!!!!!!!!",
+  "SLXN": "REVERSE SPLIT 5 TRADING DAYS AGO!!!!!!!!!",
+  "GOVX": "REVERSE SPLIT 5 TRADING DAYS AGO!!!!!!!!!",
+  "XGPU": "SYMBOL CHANGE 6 TRADING DAYS AGO!!! 38 PERCENT!!!",
+  "QUIT": "SYMBOL CHANGE 6 TRADING DAYS AGO!!! 38 PERCENT!!!",
+  "OFAL": "REVERSE SPLIT 6 TRADING DAYS AGO!!!!!!!!!",
+  "NCI": "REVERSE SPLIT 6 TRADING DAYS AGO!!!!!!!!!",
+  "JOB": "REVERSE SPLIT 6 TRADING DAYS AGO!!!!!!!!!",
+  "WCT": "REVERSE SPLIT 7 TRADING DAYS AGO!!!!!!!!!",
+  "TXCP": "SYMBOL CHANGE 7 TRADING DAYS AGO!!! 38 PERCENT!!!",
+  "STKH": "REVERSE SPLIT 7 TRADING DAYS AGO!!!!!!!!!",
+  "SMX": "REVERSE SPLIT 7 TRADING DAYS AGO!!!!!!!!!",
+  "NXTS": "REVERSE SPLIT 7 TRADING DAYS AGO!!!!!!!!!",
+  "MTRI": "REVERSE SPLIT 9 TRADING DAYS AGO!!!!!!!!!",
+  "CISS": "REVERSE SPLIT 7 TRADING DAYS AGO!!!!!!!!!",
+  "ARAY": "REVERSE SPLIT 7 TRADING DAYS AGO!!!!!!!!!",
+  "ALPS": "REVERSE SPLIT 7 TRADING DAYS AGO!!!!!!!!!",
+  "ADGM": "REVERSE SPLIT 7 TRADING DAYS AGO!!!!!!!!!",
+  "TOPS": "REVERSE SPLIT 8 TRADING DAYS AGO!!!!!!!!!",
+  "ONCO": "REVERSE SPLIT 8 TRADING DAYS AGO!!!!!!!!!",
+  "NWGL": "REVERSE SPLIT 8 TRADING DAYS AGO!!!!!!!!!",
+  "NEXR": "REVERSE SPLIT 8 TRADING DAYS AGO!!!!!!!!!",
+  "JSPR": "REVERSE SPLIT 8 TRADING DAYS AGO!!!!!!!!!",
+  "CDT": "REVERSE SPLIT 8 TRADING DAYS AGO!!!!!!!!!",
+  "AIIO": "REVERSE SPLIT 8 TRADING DAYS AGO!!!!!!!!!",
+  "XXII": "REVERSE SPLIT 9 TRADING DAYS AGO!!!!!!!!!",
+  "EZGO": "REVERSE SPLIT 9 TRADING DAYS AGO!!!!!!!!!",
+  "ALDFF": "SYMBOL CHANGE 9 TRADING DAYS AGO!!! 38 PERCENT!!!",
+  "SAEN": "SYMBOL CHANGE 10 TRADING DAYS AGO!!! 38 PERCENT!!!",
+  "GCDTF": "SYMBOL CHANGE 10 TRADING DAYS AGO!!! 38 PERCENT!!!",
+  "UFG": "REVERSE SPLIT 11 TRADING DAYS AGO!!!!!!!!!",
+  "SUPN": "SYMBOL CHANGE 11 TRADING DAYS AGO!!! 38 PERCENT!!!",
+  "BJDX": "REVERSE SPLIT 11 TRADING DAYS AGO!!!!!!!!!",
+  "VCIG": "REVERSE SPLIT 12 TRADING DAYS AGO!!!!!!!!!",
+  "RETO": "REVERSE SPLIT 12 TRADING DAYS AGO!!!!!!!!!",
+  "NARA": "WAS LISTED 12 TRADING DAYS AGO!!! AT LEAST 38 PERCENT!!!",
+  "CASK": "SYMBOL CHANGE 12 TRADING DAYS AGO!!! 38 PERCENT!!!",
+  "ZONE": "REVERSE SPLIT 13 TRADING DAYS AGO!!!!!!!!!",
+  "WHLR": "REVERSE SPLIT 13 TRADING DAYS AGO!!!!!!!!!",
+  "WFF": "REVERSE SPLIT 13 TRADING DAYS AGO!!!!!!!!!",
+  "RUBI": "REVERSE SPLIT 13 TRADING DAYS AGO!!!!!!!!!",
+  "NXXT": "REVERSE SPLIT 13 TRADING DAYS AGO!!!!!!!!!",
+  "MASK": "REVERSE SPLIT 13 TRADING DAYS AGO!!!!!!!!!",
+  "IVF": "REVERSE SPLIT 13 TRADING DAYS AGO!!!!!!!!!",
+  "BBTX": "WAS LISTED 13 TRADING DAYS AGO!!! AT LEAST 38 PERCENT!!!",
+  "ASPE": "WAS LISTED 13 TRADING DAYS AGO!!! AT LEAST 38 PERCENT!!!",
+  "OMEX": "REVERSE SPLIT 14 TRADING DAYS AGO!!!!!!!!!",
+  "GBC": "WAS LISTED 14 TRADING DAYS AGO!!! AT LEAST 38 PERCENT!!!",
+  "ENHA": "REVERSE SPLIT 14 TRADING DAYS AGO!!!!!!!!!",
+  "AZR": "SYMBOL CHANGE 14 TRADING DAYS AGO!!! 38 PERCENT!!!",
+  "AXG": "REVERSE SPLIT 14 TRADING DAYS AGO!!!!!!!!!",
+  "ATYR": "REVERSE SPLIT 14 TRADING DAYS AGO!!!!!!!!!",
+  "FFTT": "SYMBOL CHANGE 15 TRADING DAYS AGO!!! 38 PERCENT!!!",
+  "SCAG": "REVERSE SPLIT 16 TRADING DAYS AGO!!!!!!!!!",
+  "PARA": "REVERSE SPLIT 16 TRADING DAYS AGO!!!!!!!!!",
+  "NUWE": "REVERSE SPLIT 16 TRADING DAYS AGO!!!!!!!!!",
+  "MSGR": "WAS LISTED 16 TRADING DAYS AGO!!! AT LEAST 38 PERCENT!!!",
+  "MSGK": "NEW SYMBOL AS OF 16 TRADING DAYS AGO!!! AT LEAST 38 PERCENT!!!",
+  "ENLV": "REVERSE SPLIT 16 TRADING DAYS AGO!!!!!!!!!",
+  "TWG": "REVERSE SPLIT 17 TRADING DAYS AGO!!!!!!!!!",
+  "SXTC": "REVERSE SPLIT 17 TRADING DAYS AGO!!!!!!!!!",
+  "SBFM": "REVERSE SPLIT 17 TRADING DAYS AGO!!!!!!!!!",
+  "PTIV": "SYMBOL CHANGE 17 TRADING DAYS AGO!!! 38 PERCENT!!!",
+  "PPCB": "REVERSE SPLIT 17 TRADING DAYS AGO!!!!!!!!!",
+  "LHSW": "REVERSE SPLIT 17 TRADING DAYS AGO!!!!!!!!!",
+  "IPW": "REVERSE SPLIT 17 TRADING DAYS AGO!!!!!!!!!",
+  "HKPD": "REVERSE SPLIT 17 TRADING DAYS AGO!!!!!!!!!",
+  "HCTI": "REVERSE SPLIT 17 TRADING DAYS AGO!!!!!!!!!",
+  "GUNN": "WAS LISTED 17 TRADING DAYS AGO!!! AT LEAST 38 PERCENT!!!",
+  "GCTK": "REVERSE SPLIT 17 TRADING DAYS AGO!!!!!!!!!",
+  "ELMES": "SYMBOL CHANGE 17 TRADING DAYS AGO!!! 38 PERCENT!!!",
+  "COCH": "REVERSE SPLIT 17 TRADING DAYS AGO!!!!!!!!!",
+  "CHOW": "REVERSE SPLIT 17 TRADING DAYS AGO!!!!!!!!!",
+  "BDRX": "REVERSE SPLIT 17 TRADING DAYS AGO!!!!!!!!!",
+  "AZTR": "REVERSE SPLIT 17 TRADING DAYS AGO!!!!!!!!!",
+  "AETR": "SYMBOL CHANGE 17 TRADING DAYS AGO!!! 38 PERCENT!!!",
+  "PASW": "REVERSE SPLIT 18 TRADING DAYS AGO!!!!!!!!!",
+  "NIVF": "REVERSE SPLIT 18 TRADING DAYS AGO!!!!!!!!!",
+  "LYCA": "WAS LISTED 18 TRADING DAYS AGO!!! AT LEAST 38 PERCENT!!!",
+  "LU": "REVERSE SPLIT 18 TRADING DAYS AGO!!!!!!!!!",
+  "HCAI": "REVERSE SPLIT 18 TRADING DAYS AGO!!!!!!!!!",
+  "APXC": "WAS LISTED 18 TRADING DAYS AGO!!! AT LEAST 38 PERCENT!!!",
+  "DKI": "REVERSE SPLIT 19 TRADING DAYS AGO!!!!!!!!!",
+  "DAVI": "WAS LISTED 19 TRADING DAYS AGO!!! AT LEAST 38 PERCENT!!!",
+  "AXNX": "REVERSE SPLIT 19 TRADING DAYS AGO!!!!!!!!!",
+  "POM": "REVERSE SPLIT 20 TRADING DAYS AGO!!!!!!!!!",
+  "NANO": "SYMBOL CHANGE 20 TRADING DAYS AGO!!! 38 PERCENT!!!",
+  "EHGO": "REVERSE SPLIT 20 TRADING DAYS AGO!!!!!!!!!",
+  "SATS": "WAS LISTED 21 TRADING DAYS AGO!!! AT LEAST 38 PERCENT!!!",
+  "REVB": "REVERSE SPLIT 21 TRADING DAYS AGO!!!!!!!!!",
+  "MBRX": "REVERSE SPLIT 21 TRADING DAYS AGO!!!!!!!!!",
+  "SRTM": "SYMBOL CHANGE 22 TRADING DAYS AGO!!! 38 PERCENT!!!",
+  "OBAI": "REVERSE SPLIT 22 TRADING DAYS AGO!!!!!!!!!",
+  "GP": "REVERSE SPLIT 22 TRADING DAYS AGO!!!!!!!!!",
+  "FRGT": "REVERSE SPLIT 22 TRADING DAYS AGO!!!!!!!!!",
+  "DCM": "SYMBOL CHANGE 22 TRADING DAYS AGO!!! 38 PERCENT!!!",
+  "CAPS": "REVERSE SPLIT 22 TRADING DAYS AGO!!!!!!!!!",
+  "AMTD": "REVERSE SPLIT 22 TRADING DAYS AGO!!!!!!!!!"
 };
 
 claudeDump.sec.corporate_action = corporateActionsStocks[symbol] || null;

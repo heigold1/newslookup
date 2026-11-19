@@ -124,6 +124,18 @@ div#red_flags_container.rf-alert{
 	font-weight: bold;
 }
 
+/* the message itself gets a light pink box, so it's readable on the red alert background */
+div#red_flags_container.rf-alert .rf-msg{
+	display: block;
+	margin: 8px;
+	padding: 6px 10px;
+	background-color: #ffb3c1;     /* light pink */
+	color: black;
+	border: 2px solid #7a0000;
+	border-radius: 4px;
+	line-height: 1.4;
+}
+
 div#bigcharts_yest_close{
 	display: inline-block;
 	width: 44%; 
