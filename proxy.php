@@ -1037,7 +1037,7 @@ else if ($which_website == "yahoo")
           $descriptionRegex .= '<button onclick="prepareChineseJay(\'' . $symbol . '\',\''. addslashes($ceo). '\',\'' . addslashes($description) . '\')">Prepare Chinese Question</button>';   
 
 
-          $chineseSurnames = ["Li", "Wang", "Zhang", "Liu", "Chen", "Yang", "Huang", "Zhao", "Wu", "Zhou", "Xu", "Sun", "Ma", "Hu", "Gao", "Lin", "He", "Guo", "Luo", "Deng", "Long", "Kwan", "Yau", "Ho", "Tsu", "Qian", "Jie", "Tuo", "Ze", "Dongye", "Dao", "Du", "Zhi", "Xu", "Di", "Bo", "Du", "Duan", "Gao", "Cai", "Xiyong", "Hou", "Xiao", "Sui", "Ming", "Mei", "Phua", "Wing", "Fung", "Siu", "Lu", "Pun", "Ping", "Xiaoyan", "Mi", "Jin", "Chow", "Ching", "Chang", "Chan", "Kim", "Ly", "Zhai", "Yin", "Yan", "You", "Jiulong", "Yu", "Ngan", "Cheng", "Wong", "Hang", "Song", "Jinghua", "Xykis", "Zhaoying", "Lim", "Woon", "Ngee", "Tan", "Wook", "Suk", "Lee", "Kau", "Hwang", "Kan", "Teh", "Lau", "Tak", "Kee", "Chooi", "Phing", "Wai", "Jang", "Chai", "Zhamu", "Fang", "Teo", "Cheong", "Jia", "Jin", "Yee", "Won", "Hiew", "Gan", "Yong", "Sheng", "Tan", "Chuang", "Tang", "Gu", "Shao-Lee", "Chiao-Chieh"];
+          $chineseSurnames = ["Li", "Wang", "Zhang", "Liu", "Chen", "Yang", "Huang", "Zhao", "Wu", "Zhou", "Xu", "Sun", "Ma", "Hu", "Gao", "Lin", "He", "Guo", "Luo", "Deng", "Long", "Kwan", "Yau", "Ho", "Tsu", "Qian", "Jie", "Tuo", "Ze", "Dongye", "Dao", "Du", "Zhi", "Xu", "Di", "Bo", "Du", "Duan", "Gao", "Cai", "Xiyong", "Hou", "Xiao", "Sui", "Ming", "Mei", "Phua", "Wing", "Fung", "Siu", "Lu", "Pun", "Ping", "Xiaoyan", "Mi", "Jin", "Chow", "Ching", "Chang", "Chan", "Kim", "Ly", "Zhai", "Yin", "Yan", "You", "Jiulong", "Yu", "Ngan", "Cheng", "Wong", "Hang", "Song", "Jinghua", "Xykis", "Zhaoying", "Lim", "Woon", "Ngee", "Tan", "Wook", "Suk", "Lee", "Kau", "Hwang", "Kan", "Teh", "Lau", "Tak", "Kee", "Chooi", "Phing", "Wai", "Jang", "Chai", "Zhamu", "Fang", "Teo", "Cheong", "Jia", "Jin", "Yee", "Won", "Hiew", "Gan", "Yong", "Sheng", "Tan", "Chuang", "Tang", "Gu", "Shao-Lee", "Chiao-Chieh", "Yinying", "Feng", "Ouyang", "Qi", "Zhu", "Shi", "Jiang", "Wei", "Tian", "Dong", "Liang", "Xie", "Cao", "Zeng", "Peng", "Shen", "Yuan", "Qin", "Xue", "Tao", "Ren", "Kong", "Mao", "Hao", "Leung", "Tsang", "Yip", "Kwok", "Cheung", "Ng", "Lam", "Chu", "Tse", "Fong", "Kwong", "Nguyen", "Tran", "Pham"];
 
           $surnamePattern = "/\b(" . implode("|", $chineseSurnames) . ")\b/i";
 
@@ -1633,6 +1633,8 @@ else if ($which_website == "yahoo")
       $returnArray['ceo'] = $ceo; 
       $returnArray['red_flags'] = $redFlag; 
       $returnArray['asian_check'] = $asianCheck;
+      $returnArray['asian_surnames']        = isset($chineseSurnames) ? array_values(array_unique($chineseSurnames)) : array();   // for the news-text Asian check in mainscript.js
+      $returnArray['asian_country_pattern'] = isset($chineseCityArray) ? $chineseCityArray : '';
       $returnArray['red_flag_text'] = $redFlagText; 
 
       // Untouched headlines from both feeds, for the Claude dump ----
