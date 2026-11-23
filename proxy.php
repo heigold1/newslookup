@@ -8,7 +8,7 @@ require_once('red-flag-check.php');
 
 libxml_use_internal_errors(true);
 
-$yesterdayDays = 1;
+$yesterdayDays = 3;
 
 error_reporting(1);
 //ini_set('display_errors', 1);
