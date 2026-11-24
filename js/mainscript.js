@@ -676,6 +676,7 @@ function buildClaudeDump() {
     var oldItems = $.grep(items, function (it) { return !(it.sec !== null && it.sec >= cutoffSec); });
     cd.last_new_items   = newItems;          // kept for COPY LINKS and the article fetch
     cd.last_cutoff_text = cutoffText;
+    cd.last_cutoff_sec  = cutoffSec;         // kept for the Seeking Alpha headlines in the EARN prompt
 
     L.push("");
     L.push("--- NEW NEWS: since " + cutoffText + " (this is what's moving it today) ---");
@@ -1002,9 +1003,72 @@ function chatGPTHalts(symbol)
     }
 }
 
+// Seeking Alpha headlines for the EARN prompt - the same list as the "Seeking Alpha News" panel, newest first.
+// NEW = since the Claude dump cutoff (3:00 PM ET on the previous trading day): today, last night, previous afternoon.
+// Anything older is marked (older), up to SA_PROMPT_MAX_OLDER of them.
+var SA_PROMPT_EXTRA_DAYS = 2;     // also list older headlines from this many trading days before the cutoff, marked (older)
+var SA_PROMPT_MAX_OLDER  = 15;    // safety cap on how many older ones
+
+function saHeadlinesForPrompt() {
+    var yh = (claudeDump && claudeDump.yahoo) || {};
+    if (!yh.news_clean) return "Seeking Alpha headlines: none found (the lookup hadn't loaded the news yet).";
+
+    buildClaudeDump();                                   // works out the NEW-news cutoff
+    var cutoffSec = claudeDump.last_cutoff_sec || 0;
+    // after the 4 PM close the Claude dump moves its cutoff to 3 PM TODAY - for this prompt, today's headlines stay NEW,
+    // so step back to 3 PM on the trading day BEFORE today
+    var todayYmd = cdNyParts(Date.now() / 1000).ymd;
+    if (cutoffSec && cdNyParts(cutoffSec).ymd === todayYmd) {
+        var prevDay = null;
+        $.each((claudeDump.marketstack && claudeDump.marketstack.ohlc) || [], function (k, bar) {   // real trading days (skips holidays)
+            var d = (bar && bar.x) ? new Date(bar.x).toISOString().slice(0, 10) : null;
+            if (d && d < todayYmd && (!prevDay || d > prevDay)) prevDay = d;
+        });
+        if (!prevDay) {                                  // no Marketstack data - previous weekday
+            var back = cutoffSec - 86400;
+            while (cdNyParts(back).weekday === "Sat" || cdNyParts(back).weekday === "Sun") back -= 86400;
+            prevDay = cdNyParts(back).ymd;
+        }
+        cutoffSec = cdNyEpoch(prevDay, CD_NEW_NEWS_CUTOFF_HOUR, CD_NEW_NEWS_CUTOFF_MINUTE);
+    }
+
+    // older headlines go back SA_PROMPT_EXTRA_DAYS more weekdays before the cutoff (e.g. Mon 3 PM -> Thu 3 PM)
+    var olderCutoffSec = cutoffSec, extraDays = 0;
+    while (extraDays < SA_PROMPT_EXTRA_DAYS) {
+        olderCutoffSec -= 86400;
+        var wd = cdNyParts(olderCutoffSec).weekday;
+        if (wd !== "Sat" && wd !== "Sun") extraDays++;
+    }
+
+    var rows = [];
+    $.each(yh.news_clean, function (k, n) {
+        if (n.source !== "Seeking Alpha" || !$.trim(n.title || "")) return;
+        var t = Date.parse(n.pub_date_raw);
+        rows.push({sec: isNaN(t) ? 0 : t / 1000, n: n});
+    });
+    rows.sort(function (a, b) { return b.sec - a.sec; });
+
+    var L = [], older = 0;
+    $.each(rows, function (k, r) {
+        var isNew = r.sec > 0 && r.sec >= cutoffSec;
+        if (!isNew && (r.sec < olderCutoffSec || ++older > SA_PROMPT_MAX_OLDER)) return;   // too old, or too many
+        var time = String(r.n.time_et || "").replace(/\s+[A-Z]{2,4}$/, "");      // "1:02 PM EST" -> "1:02 PM"
+        var when = $.trim((r.n.date_et || "") + " " + time) || "(no date)";
+        L.push("- " + when + " - " + $.trim(r.n.title).replace(/\s+/g, " ") + (isNew ? "" : " (older)"));
+    });
+
+    if (!L.length) return "Seeking Alpha headlines: none found.";
+    return "Seeking Alpha headlines:\n" + L.join("\n");
+}
+
+
 function prepareChatGPTEarn(link) {
 
-    var message = promptStockHeader() + `Can you go through the following article and A) Tell me if it is an earnings net income or loss, and B) If it is an earnings net income, look at other factors about the company and tell me if my 40% entry is safe, or if there are red flags that suggest that I should go lower than 40% (i.e 52.5%)?  Or maybe there are even additional news articles today (or last night, or late in the afternoon on the previous trading day) talking about significant layoffs, or the loss of a major customer, etc... that would make it worse than a typical earnings net income/loss.  The link is ${link}
+var saHeadlines = saHeadlinesForPrompt();
+
+var message = promptStockHeader() + `Can you go through the following article and A) Tell me if it is an earnings net income or loss, and B) If it is an earnings net income, look at other factors about the company and tell me if my 40% entry is safe, or if there are red flags that suggest that I should go lower than 40% (i.e 52.5%)?  Or maybe there are even additional news articles today (or last night, or late in the afternoon on the previous trading day) talking about significant layoffs, or the loss of a major customer, etc... that would make it worse than a typical earnings net income/loss.  The link is ${link}
+
+${saHeadlines}
 
 Just to brief you - we already know that the reason why an earnings net income stock is dropping is because they EPS wasn't as high as expected.  We understand this go into those at 40%.  I need to know of any other red flags that may affect the price. For example, the cut their dividends from $0.15/share to $0.01/share, mass layoffs, guidance problems, delisting risk, etc... 
 

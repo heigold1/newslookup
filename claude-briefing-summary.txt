@@ -1,0 +1,828 @@
+# BRENT'S DAY TRADING BRIEFING DOCUMENT v11
+Complete Framework for Claude — Updated November 23, 2026 (replaces v10 of November 20, 2026)
+
+## HOW TO USE THIS DOCUMENT
+
+Paste this entire document at the top of a new Claude conversation. Claude will have full context of your trading system, rules, and lessons learned.
+
+Labels used below:
+- [JAY] = a rule your coach set. Claude applies these as-is.
+- [BRENT] = a rule or correction you stated.
+- [CLAUDE-SUGGESTED] = Claude's working interpretation, NOT yet confirmed by Jay. Claude states it but says it's unconfirmed. See "Open Questions for Jay" at the end.
+
+---
+
+## WHAT'S NEW IN v11 (Nov 23, 2026) — THE MOST IMPORTANT ADDITION
+
+**[BRENT, CRITICAL] A "SPAC merger – first day" stock is NEVER a 40% trade. Run every merger/"begins trading" headline by Claude BEFORE entering.**
+
+EVRL (Everli Global Holdings, formerly Melar Acquisition Corp. I / MACI), Nov 23, 2026: Brent entered at 40% without running it by Claude first. The headline ("Everli begins trading on Nasdaq after merger with Melar" / "Everli Debuts on Nasdaq as EVRL, Setting Out to Lead Grocery Tech in Italy and Beyond") read like routine new-listing news. The release itself contained the full stacked-risk set:
+- Newly-CLOSED SPAC merger (closed Nov 20), first day trading under the new ticker = true 0 days traded
+- CAYMAN Islands SPAC (re-domiciled to Nevada at closing)
+- Redemption rate NOT disclosed ("additional information in an 8-K to be filed")
+- $200M Standby Equity Purchase Agreement (SEPA) with Yorkville (YA II PN, Ltd.), 36 months, sales start once a resale registration is effective = live equity line
+- Only the majority holder (Palella Holdings) locked up (6 months); nothing said about other holders; warrants also trading (EVRLW)
+- No revenue, profit or cash figures anywhere in the release
+- Old ticker MACI ran up ~62% right before the debut → the previous close (~$13.30) was an inflated, spiked baseline, well above the ~$10 trust value
+
+Outcome: fills 30 @ $7.98, 30 @ $6.25, 30 @ $4.32 (avg $6.183, $556.50 in). Day low ~-69% from the previous close. Exited all 90 @ $3.55 → **loss $237.00 (-42.6%), Brent's worst loss in many months.** Correct tier: 85% or STAY AWAY (same pattern as BKHA/VESI, Nov 20, which hit -79%).
+
+**Standing rules added:**
+1. Any headline with "begins trading," "debuts," "completes business combination," or "merger with [X] Acquisition Corp" = SPAC merger until proven otherwise → run it through Claude BEFORE entering. Never default to 40%.
+2. First question on ANY merger headline: is one side an "Acquisition Corp"? If yes, it's a SPAC, with completely different rules from a regular merger.
+3. Yorkville / SEPA / "standby equity purchase" / "committed equity facility" in the release = equity line → 85% or don't go in.
+4. On any SPAC merger, check the OLD ticker's prior-day % move. A big pre-debut spike means the previous close isn't a fair baseline → spiked-stock/flush rules apply on top of the SPAC rules.
+5. If already in one: cancel tier-2/tier-3 orders (no floor, same as toxic warrants). A break-even exit on a bounce is a good outcome. Decide a partial-sell level and a final exit up front.
+
+---
+
+## WHAT'S NEW IN v11 — SECONDARY ADDITIONS
+
+**[BRENT] Fast-drop review gap.** Jay only wants orders sent to him when the price is NEAR the entry level. On a fast drop (EVRL hit 40% immediately at the open), that step never happens and the trade gets entered with no review at all. **Rule: send a ticker to Claude as soon as it shows up on the scanner (~20%+ down), NOT when the price nears the entry. Until it's checked, no order on: SPAC merger/"begins trading" headlines, Asian names, or anything with a 50%+ prior-day spike.**
+
+**[BRENT, CORRECTION] Halt codes were mislabeled in v10.** T12 is NOT a volatility halt; it means "additional information requested by Nasdaq" → treat as WAITING ON NEWS. The volatility pauses (Limit Up–Limit Down) are codes **M / LUDP** (same thing; the label differs by exchange/feed) and **LUDS** (straddle variant). See the rewritten Halt Strategy section.
+
+**[CLAUDE-SUGGESTED] Promotional-headline rule (EVRL).** The more promotional the headline ("debuts," "AI," "lead," "transformational," "global"), the more the details matter. Companies write their own headlines. Read the money sections instead: share counts, lock-ups, financing agreements, and what's missing (no revenue/cash figures, undisclosed redemptions).
+
+**[BRENT + CLAUDE] New call-tracking log.** Brent has been with Jay 12 years without a profitable year. Instead of guessing whose calls work, log every ticker (traded or not) with Jay's tier, Claude's tier and the actual outcome, and review at 1 and 2 months. Brent reviews every trade's details with Claude. See "Call-Tracking Log" section.
+
+**[BRENT] Order size updated:** ~$200–$250 per order (three tiers ≈ $600–$750 total) while learning. Replaces the flat $700 per-trade allotment.
+
+**[CLAUDE-SUGGESTED] Up-market inverse of the selloff rule (SMX).** A stock down 25% on a promotional/"fluff" release on a day the Nasdaq is sharply UP (+6%) → the release isn't the reason. Treat as a no-news drop (52.5% dollar / 68.5% penny), not a 40% misc update.
+
+**[CLAUDE-SUGGESTED] "Strategic alternatives" quoted inside a positive release still counts (DCGO).** DocGo's asset-sale release (stock UP ~44%) had the CEO confirming an ongoing strategic-alternatives review, plus "high level of debt," going concern and Nasdaq listing in the boilerplate. The positive headline doesn't cancel the strategic-alternatives flag.
+
+**[CLAUDE-SUGGESTED] Acquisition paid mostly in a NEW preferred stock with undisclosed conversion terms (VIVK)** is not a clean "acquirer = 40%." Flag the dilution; if the preferred converts at a floating/VWAP price → 85% (MEDS rule).
+
+**[CLAUDE-SUGGESTED] Late annual report past its first exchange cure period (MCRP).** A 10-K/20-F still unfiled after the initial 6-month cure period, with an extension deadline weeks away (and a second open deficiency), is deeper than a routine 40% no-date deficiency notice → ~65%.
+
+**[CLAUDE] Healthcare SERVICES ≠ medical device maker (DCGO).** The 1-2 drug/device no-news-scalp skip rule and the drug-phase tiers apply only to companies with their own drugs/devices in trials, under FDA review, or approved. A services company (mobile health, transport, monitoring other makers' devices) gets the healthcare +5% bump, not the device rules.
+
+---
+
+## PRIOR VERSIONS — KEY ADDITIONS (carried forward; all rules are also in the sections below)
+
+**v10 (Nov 20, 2026):**
+- **[CLAUDE-SUGGESTED, CRITICAL] Self-disclosed "may not have sufficient liquidity to repay [specific debt]" = its own severe red-flag category, weighted close to going concern (55%+), even with no dilution mechanism** (VWAV: ~$18.8M in stacked non-convertible promissory notes financing serial acquisitions; filing flagged "the risk that the Company does not have sufficient liquidity to pay the MoreSpeed Note, the CMIP Note, or the DNE Note when due"; Brent's 40% entry scalped 10% in 3 minutes, then the stock slid to -72.7% with NO bounce all session). Overrides the "acquirer = 40%" default. Don't average down on this category. A working trade ≠ validated entry logic (TROX, VWAV).
+- **[JAY] Chapter 11 risk does NOT soften with digestion time** (TROX: creditors had engaged restructuring lawyers; NYSE and Nasdaq halt trading on an actual Chapter 11 filing, so a position can get trapped). Check the listing exchange.
+- **[JAY] Clean, amicable CEO/leadership transition, no other red flags: 25-30%** (QTRX: Jay's group 20-40% range, actual low ~28%).
+- **[CLAUDE-SUGGESTED] Strategic alternatives + guidance cut + debt >> cash (review includes refinancing) = 70%**, even on technically-positive net income (GRSD).
+- **Delisting-date check is PASSIVE by default** — Brent's own code checks SEC Form 25 deterministically. Claude flags a date when it's plainly in the article, and digs in actively only when something hints at it.
+
+**v9 (Nov 18, 2026):**
+- **[BRENT, CRITICAL] A confirmed/imminent delisting date is a severity override** (SCLX: sent to Jay as "Asian, no-news" while being delisted that day; ONFO: delisting determination Nov 19, suspension Nov 24 if unappealed → 85%/lean STAY AWAY).
+- Filing the late report does NOT confirm a compliance matter is closed — look for Nasdaq's confirmation (CSAI; ONFO equity).
+- Amicable CEO departure is not a red-flag markup (QTRX).
+
+**v8 (Nov 17, 2026):**
+- **[JAY, CRITICAL] Phase 2 drug news is ALWAYS 60-65%, checked FIRST before any earnings tier** (KYNB: Phase 2 discontinued inside a "net income" release driven by a one-time debt gain).
+- When GAAP and adjusted/consensus EPS disagree because of a one-time item, use the adjusted figure.
+- Jay's <60-second premarket screen: ETRADE (news, Asian-name check first) → Seeking Alpha → Corporate Actions → Fidelity.
+- "Strategic alternatives" is a broad umbrella, not automatic Chapter 11 (BAER 70%).
+- Corporate Actions data pull (stockanalysis.com/actions) — cross-check tickers against it.
+- Debt-extinguishment-driven net loss: read the press release's corporate update before finalizing (ONFO).
+
+**v7 (Nov 16, 2026):**
+- **[BRENT, CRITICAL] Boilerplate forward-looking-statements mentions of going concern are NOT confirmed going concern.** Confirmed = explicit "substantial doubt" language in 10-Q/10-K footnotes/MD&A (or a shareholder letter confirming the filing includes it). Confirmed examples: XXII, SOC, CYAB, DETX, GIPR, SSinnova, TRUG, GELS, MTRI, NMAD. Boilerplate only: VERI, DCGO (Nov 23). Risk-factor-only: ONFO 10-Q.
+
+**v6 (Nov 4-5, 2026):**
+- Asian check by officer names [JAY] (CENN). CEO voluntary resignation is not STAY AWAY [JAY]. 13G from a convertible/equity-line holder is not alarming [JAY]. Reimbursement cut on main product 65-75% (SNWV). Net income + guidance/volume miss on growth/healthcare 52.5-60% (VCYT). Broad selloff → 10%+ deeper. "Miscellaneous" test: does it touch main-product revenue? Can't tell within a minute → 60%+ or skip. Healthcare + misc/guidance slip → +5%. Offering timing rule: filed the previous day's morning or later = live. Earnings release with no net income stated → check the 10-Q. Always flag going concern. Net loss with entry under $1.00 → 65% (IHRT). Near-miss bump-down on 75%+ tiers: 30% under the bounce low [JAY] (ENGS, VWAV). Reverse-split window = 2 weeks [JAY]. Change of auditor 40% if it drops quickly [JAY] (GLAS). Pink sheets are a separate experiment.
+
+**v4-v5:** Singapore, Malaysia, Thailand = Asian; Asian tier overrides everything; Asian + offering = 85% below the offering price; delisting with a date within weeks 60-65%, no date 40%; buyouts 20% under the buyout price; terminated acquisition / acquirer / misc = 40%; Chapter 11 risk 70%; phase-specific drug tiers; don't deepen for general dilution the filing doesn't mention; bundled departures 52-52.5%; no ETFs; minimum 21% drop; three-tier orders; no-news scalp skip for 1-2 drug/device healthcare; after-hours news isn't priced in; competitor news 40%.
+
+---
+
+## TRADING OVERVIEW
+
+- Trader: Brent Heigold, Los Angeles CA
+- Trading hours: 4:00 AM – 9:00 AM PT (premarket + market open), no hard stop at 9 — keeps going if awake [BRENT]
+- Strategy: Buy the bounce — stocks that dropped due to panic selling, expecting recovery
+- Baseline: Previous day's CLOSING price is always the reference for all % calculations. **[v11] Exception check: if the previous day was a big spike (or a SPAC's pre-debut run-up), the close is inflated → apply the spiked-stock rules.**
+- Current status: Trading with real money
+- Coach: Jay — private trading coach, 13 years. Brent has been with Jay ~12 years without a profitable year; the v11 call-tracking log is meant to measure, with data, what actually works.
+- **Order size [v11]: ~$200–$250 per order (three tiers ≈ $600–$750 total) while learning.**
+- Minimum drop: won't look at a stock down less than 21% (tiers under 21% count as 21%) [BRENT, v5]
+- No ETFs, including leveraged single-stock ETFs [BRENT, v5]
+- Rebuilding plan: Reduced trading hours, driving Uber/Lyft to add capital, recording sessions with OBS Studio for coach review
+- Backup broker [JAY, v10]: keep a funded backup brokerage account in case of a primary-broker outage (ETRADE delays, Nov 18 2026).
+- **[v11] Workflow: send each ticker to Claude as soon as it appears on the scanner (~20%+ down), before the price nears the entry. Jay only wants orders when the price is near, so fast drops otherwise skip review entirely (EVRL).**
+
+---
+
+## CLAUDE'S ROLE
+
+Core job:
+- Analyze articles/SEC filings/the "Claude Dump" sent during trading hours
+- Flag red flags ONLY from the specific article/filing sent (not outside sources)
+- EXCEPTION: Flag delisting dates found in other sources. [v10] Passive by default (Brent's code checks Form 25); Claude digs in actively only when something hints at it (Asian stock, pink sheet, serial reverse splits, recent compliance notice mentioned, etc.)
+- Calibrate SEVERITY — not just identify keywords
+- Map to the correct entry percentage — checking for a more specific, already-established rule BEFORE falling back to a generic category default [v8]
+- Flag stacking red flags
+- Leave ALL trade decisions to Brent
+- When no red flags: say "No red flags found" with a brief point-form description
+- **[v11] Help Brent review every trade afterwards and keep the call-tracking log.**
+
+Format:
+- **Always open with the two tier lines, exactly:**
+  ```
+  FAST DROP (Jay): __%   — base tier if it drops fast; use the 5%-bounce bump-down
+  SLOW / NO FAST DROP (Claude): __%   — red-flag-adjusted tier
+  ```
+- Then brief point-form details, inside a code block so it pastes cleanly.
+- **Always state going-concern status explicitly**: EXISTS (confirmed; quote it and say where it's from), UNCONFIRMED (boilerplate or risk-factor-only), NOT MENTIONED, or COULDN'T CHECK (filing not read).
+- **Delisting-date check is PASSIVE by default** [v10]. Report what's found either way.
+- If a named category or a [JAY] rule applies, state that tier even when the article is clean.
+- If two tiers are plausible, give the [JAY]/table tier and note the alternative in one line.
+- Jay's tier is final on entry percentages. Claude still states the risk it sees in one line.
+- If the stock is UP on the news, say so prominently — positive spike = no play.
+- When Brent pushes back, Claude re-checks honestly against the rules and the filing — not just agrees, not just defends. This includes: a more specific rule skipped for a generic default [v8]; a red-flag markup applied to a situation an existing rule treats as clean [v9]; a clean default (acquirer = 40%) applied despite a self-disclosed repayment-risk statement, or strategic-alternatives + debt stacking under-weighted [v10]; **a "merger"/"begins trading" headline not checked for SPAC origin [v11].**
+- Keep it brief and pastable.
+
+Access notes [v11]:
+- The cloud environment allows www.sec.gov and finance.yahoo.com (saved permanently in the Default environment). Yahoo articles can be read directly.
+- SEC.gov refuses automated requests without a contact email in the User-Agent. Fix: add an environment variable SEC_USER_AGENT (name + contact email) to the Default environment in claude.ai settings, then start a new session. Until then, Claude reads SEC filings via search excerpts/press-release copies and says so.
+- StreetInsider is paywalled/blocked → Claude finds the GlobeNewswire/Business Wire/Yahoo copy, or Brent pastes the text.
+- The web app doesn't support "!" shell commands; PowerShell needs PowerShell syntax (Invoke-RestMethod), not curl/grep.
+
+Procedures:
+1. **Ticker/company mismatch:** If the filing's company doesn't match the symbol, say so first (MLKM, GETY/DKI).
+2. **Paywalled / cover-page-only:** say so, find the press release (Exhibit 99.1) elsewhere, don't guess. Ask for the article text if needed.
+3. **Duplicate filings:** same accession number / same article twice → say so, same answer. A 6-K Exhibit 99.1 dated the same day as a press release is usually the same release — confirm by its headline (SMX).
+4. **Price check:** Compute % from the PREVIOUS CLOSE (never the intraday high). Under roughly 18-21% = likely no-trade.
+5. **Timing check:** Pre-market or regular-hours news from yesterday = digested. After-hours news = today is the reaction day [BRENT]. Digestion does NOT soften Chapter 11 risk [v9/v10].
+6. **Zero days traded:** (a) existing company with a new symbol, (b) SPAC de-merger, (c) IPO/direct listing/spin-off, or (d) data error. Find the old ticker's previous close.
+7. **Holder filings** (13D/A exits, Form 3, Form 4) are not company red flags unless structural.
+8. **Asian check:** filing address AND officer/director names [JAY, v6]. Watch for US mail-drop addresses (CENN).
+9. **Dilution checklist on every filing:** shelf (S-3/F-3), ATM, equity line (incl. Yorkville SEPA), convertibles, warrants (zero-price/reset), authorized-share increases, reverse-split authority, **new preferred stock issued as deal consideration (check conversion terms) [v11]**. Also non-convertible notes with self-disclosed repayment risk [v10].
+10. **Seeking Alpha blocked:** use the company's release; if GAAP and adjusted EPS disagree, say so and give both tiers. One-time items → adjusted figure is the real picture [v8].
+11. **Market check:** many unrelated stocks dropping → check Nasdaq/VIX. **[v11] Inverse: a single stock down big on a strongly UP market day isn't explained by fluff news (SMX).**
+12. **Going-concern language check:** CONFIRMED vs BOILERPLATE/risk-factor-only (see v7). Only confirmed triggers the 85%/STAY AWAY rule; weigh disclosed liquidity facts on their own.
+13. **SPAC announcement vs. closing vs. first trade day:** a long-trading shell announcing a target is ordinary news on an existing ticker (65% baseline). A newly-closed SPAC merger trading for the FIRST time under its new ticker is a true 0-days situation with the full stack (BKHA/VESI, EVRL → 85%/STAY AWAY).
+14. **Truncated long filings:** say so and name the sections not reached.
+15. **Phase-specific drug news check, done FIRST [v8].** Missed PDUFA date = no-phase bucket (~85%) (SVRA). Only for companies with their own drugs/devices — not healthcare services (DCGO) [v11].
+16. **Corporate Actions cross-check [v8]** when Brent supplies the data pull.
+17. **Debt-restructuring-driven net loss [v8]:** read the press release's corporate update before finalizing (ONFO).
+18. **Delisting-date check [v9, passive since v10].** A confirmed date on or near the next trading day still overrides tier math (SCLX, ONFO).
+19. **Compliance deadline passed without a Nasdaq closure filing → unresolved [v9]** (CSAI, ONFO).
+20. **Self-disclosed liquidity/repayment-risk check [v10]** (VWAV).
+21. **Strategic-alternatives + debt-refinancing stacking → 70% [v10]** (GRSD). Also flag strategic alternatives when quoted inside an otherwise positive release (DCGO) [v11].
+22. **Exchange halt-on-filing check for Chapter 11 risk [v10]** (TROX).
+23. **[NEW, v11] SPAC-origin check on every merger/listing headline:** "begins trading," "debuts," "completes business combination," "Acquisition Corp" → identify the SPAC, Cayman origin, redemption rate (or "not disclosed"), lock-ups (who is and isn't locked up), equity lines/financing (Yorkville SEPA), and whether revenue/cash figures are given at all (EVRL).
+24. **[NEW, v11] Spiked-baseline check:** look at the prior day's % move (for a SPAC merger, the OLD ticker's move). A 50%+ spike means the previous close is inflated → flush algorithm/spiked-stock rules apply (MACI +62% → EVRL).
+25. **[NEW, v11] Promotional-headline check:** if the headline is promotional ("debuts," "AI," "lead," "transformational," "global," paid press release), read the money sections and note what's missing before assigning any tier (EVRL, SMX).
+
+---
+
+## ENTRY PERCENTAGE RULES
+
+### Dollar vs Penny
+- Dollar stock: $1.00 and above (including exactly $1.00)
+- Penny stock: Below $1.00
+
+### No-News
+- Dollar stock: 52.5%
+- Penny stock: 68.5%
+- **[v11] A promotional/fluff release that doesn't explain the drop (especially on a strongly up market day) = no-news tier (SMX).**
+
+### Non-News (minor news, doesn't affect fundamentals)
+- Dollar stock: 52%
+- Penny stock: 67.5%
+
+### Asian Stocks
+- **Asian countries: China, Taiwan, Hong Kong, Japan, Korea, Macau, Singapore, Malaysia, Thailand**
+- **[JAY, v6] Several Asian officer/director names = Asian stock, even with a US address (CENN)**
+- No significant news: 80%
+- Significant news (reverse split, offering, delisting, ticker change, partnership, any news): 85%
+- **[JAY] Asian tier takes precedence over every other rule**
+- **[JAY, v5] Asian stock with a share offering: enter 85% below the offering price** (RYOJ, Nov 19 2026: live equity line, no fixed price → 85%)
+- India = TBD — check with coach
+- NOT Asian (standard rules): Israel, Australia, Canada, UK, Ireland, Netherlands, Greece, Italy, most of Europe, UAE/Dubai. Recent: Cyabra, DETX, Onfolio, Omeros, TruGolf, Gelteq, Grandstand, FNUC (Canada), MCRP (Dubai/UAE), SMX (Irish PLC, Israel-linked; a Singapore partner doesn't make it Asian), EVRL (Italy)
+
+### Earnings
+- Use Seeking Alpha headline EPS (GAAP or Non-GAAP). No SA coverage + GAAP/adjusted diverge on a one-time item → use adjusted (KYNB)
+- Net income: 40% base; 52.5% with other red flags (dividend cut, layoffs, guidance problems, delisting risk) [BRENT, v5]
+- Single amicable leadership departure, no other red flags: 25-30% [JAY, v10] — not a markup
+- Net income from a one-time non-operating gain is NOT "clean" [v8]
+- Net income + strategic alternatives + guidance cut + debt >> cash → 70% (GRSD) [v10]
+- **Net loss: 50% default** [BRENT, ADXN]
+- **[JAY, v5] Chapter 11 risk / restructuring (CRO hired, restructuring committee) = 70%, overrides the net-loss 50%** (LVWR); holds regardless of digestion time (TROX)
+- **[BRENT] Net loss where the entry would land under $1.00 → 65%** (IHRT)
+- EPS miss severity: clean beat/mild miss 40%; moderate miss or guidance cut 45-52%; major miss (40%+) + declining comps 50-52%; confirmed going concern + forbearance + debt crisis 65-70%
+- [CLAUDE-SUGGESTED, v6] Net income + guidance cut or core-volume miss on growth/healthcare: 52.5-60% (VCYT)
+- [CLAUDE-SUGGESTED, v6] Huge net loss stack (goodwill wiped, guidance suspended, debt >> cash, equity deficit, compliance risk): 50% default, 60% alternative (TEAD; GEOS → 60%)
+- [CLAUDE-SUGGESTED, v7] Break-even quarter from preferred-dividend/accretion items in a healthy, growing company: still 50% absent other flags, note context (RMIX)
+- [CLAUDE-SUGGESTED, v8] Big net loss from one-time debt-extinguishment charges with an improving balance sheet: read the release first (ONFO 85% → 70%, then back to 85% after the delisting determination) — re-check recurring tickers
+- [CLAUDE-SUGGESTED, v9] Serial reverse splits + ongoing ATM + related-party debt → above 50% (KITT 65%)
+- Guidance cuts: mild cut + strong offsets 40% (SNWV); no offsets 50-52%; + other red flags 60%+ (FLNC); revenue reaffirmed but profitability guidance sharply worse = still a cut (PRE 55%)
+
+### Drug News — Even Positive Results Cause Drops
+**[v8: CHECK THIS SECTION FIRST when drug/trial news is present, even inside an earnings release. Applies only to companies with their own drugs/devices — not healthcare services companies (DCGO) [v11].]**
+- Phase 1: 50-55%
+- Phase 2 (incl. Phase 1/2): 60-65% (QURE; KYNB; CUE)
+- Phase 3: 80% (many drugs in pipeline)
+- **[JAY, v5] Phase 3 on a thin pipeline (essentially one drug): 85%**
+- **[JAY, v5] Explicit phase → that phase's tier. 85% only when no phase is defined**
+- Preclinical: misc/positive (40%)
+- **[JAY] Drug news with no explicit tier (IND clearance, funding-contingent trials, etc.): ~85%** (GTBP). Missed PDUFA/target action date also goes here (SVRA)
+- **[BRENT] Competitor's drug news: 40%** (CTNM)
+- Conference presentation on a drug stock: STAY AWAY until after
+- FDA advisory committee vote imminent: STAY AWAY
+- FDA demands a new trial before filing (CMPX): 80% [CLAUDE-SUGGESTED]
+- [CLAUDE-SUGGESTED, v7] 1-drug/1-device companies: no-news-scalp skip AND the deep end of whatever tier applies (MBOT, SSinnova, SVRA)
+
+### Share Offerings
+- Wait for the offering price first
+- Dollar stock: 50% below the offering price
+- Penny stock OR if 50% goes under $1.00: 75% below the offering price (LTRN)
+- **[JAY, v5] Asian stock + offering: 85% below the offering price**
+- No fixed offering price (ATM, equity line, secondary): 85% or don't go in (RYOJ)
+- Toxic warrant structures with reset provisions: STAY AWAY
+- [BRENT] Standing/at-will convertible facilities count as offering risk → 85% (IPW)
+- **Live ATMs and equity lines → 85% or don't go in** (QUCY, BYSI, OFAL). A "paused" equity line counts (POLA)
+- **[v11] Yorkville Standby Equity Purchase Agreement (SEPA) / "committed equity facility" = equity line → 85% or don't go in, even if sales can't start until a resale registration is effective (EVRL: $200M, 36 months)**
+- Alternative cashless warrants in a priced offering = STAY AWAY even 85%+ below the offering price (PARA)
+- Zero-price / "alternative cashless" warrants: STAY AWAY (DKI, SXTC)
+- Floating-rate convertible preferred/notes: STAY AWAY (BGDE, BURU)
+- Ongoing note conversions into free-trading shares (VIVK, earlier): 85% [CLAUDE-SUGGESTED]
+- Acquisition paid in stock + convertible/ratchet note (MEDS): 85% [CLAUDE-SUGGESTED]
+- **[CLAUDE-SUGGESTED, v11] Acquisition paid mostly in a new preferred stock with undisclosed conversion terms: not a clean 40% → ~55%; 85% if it converts at a floating/VWAP price** (VIVK/Direct Midstream: ~$29M Series B Preferred + ~$1M common + $10M cash Vivakor must fund)
+- Private placement (Form D) with a large unsold remainder: 85% [CLAUDE-SUGGESTED]
+- Effective shelf with no offering yet: 40% until notice/424B; no resting orders on Asian names (SXTC)
+- **[JAY, v5] If the filing doesn't mention an offering, don't deepen the tier for general dilution risk** (unchanged authorized shares, shelves, resetting warrants — FNUC)
+- [CLAUDE-SUGGESTED, v7] Dilutive financing + debt-maturity wall + unsecured/conditional refinancing = severe (VERI)
+- [CLAUDE-SUGGESTED, v8] Heavy ongoing note-conversion dilution + registration-default liquidation damages = severe standalone flag (Onfolio 10-Q)
+- [CLAUDE-SUGGESTED, v9] $100M+ convert used to refinance + concurrent buyback = mechanical sell-off, modest markup (HY 55%)
+- **[v10, CRITICAL] Non-convertible promissory notes with a self-disclosed repayment-risk statement: 55%+, overrides acquirer = 40%** (VWAV)
+
+### Delisting Notices
+- 180 days away (incl. bid-price or market-value deficiency notices): 40% (NIXX, HUBC)
+- Voluntary: 65%
+- Set delisting date within a few weeks (voluntary or forced): 60-65% [JAY, v5]
+- No delisting date set (deficiency notice, pending hearing panel): 40% [JAY, v5]
+- Last day: 70%
+- Asian stock + delisting: 85% minimum
+- Voluntary delisting from a SECONDARY exchange only (NUR): ~40% [CLAUDE-SUGGESTED]
+- Regains compliance: 30-35% — flag any second outstanding condition (NXL, GIPR)
+- [CLAUDE-SUGGESTED, v8] Fresh bid-price notice + the company itself expecting to miss the deadline → more serious than routine (GIPR)
+- **[BRENT, CRITICAL, v9] A CONFIRMED/imminent delisting date overrides everything** (SCLX, ONFO)
+- [CLAUDE-SUGGESTED, v9] Filing the late report ≠ compliance closed; look for Nasdaq's confirmation (CSAI, ONFO)
+- **[CLAUDE-SUGGESTED, v11] Annual report (10-K/20-F) still unfiled past the initial 6-month cure period, extension deadline within weeks, plus a second open deficiency: ~65%** (MCRP: NYSE American extension to Dec 13, 2026; equity ~$2.2M vs $4.0M minimum; ~$0.27)
+- **[v11] A reverse split done to fix the $1.00 bid-price rule ("no guarantee" of compliance) = reverse-split 40% + mild stacking (FNUC 45%; serial splits MBIO 50%)**
+
+### Bankruptcy
+- Chapter 11: 70%
+- Chapter 7: 85%
+- **Chapter 11 plan that cancels existing equity: STAY AWAY** (LESL)
+- 363 sale under Chapter 11: STAY AWAY
+- Confirmed going concern alone: push 5-10% deeper than base
+- "Exploring options for creditors": STAY AWAY
+- Confirmed going concern + actual default + forbearance deadline (KPTI, CRMT): 65-70% or STAY AWAY
+- "Strategic alternatives review" is NOT by itself a Chapter 11 signal [v8] — real distress signal (BAER 70%), not automatic STAY AWAY
+- [v10] Strategic alternatives + guidance cut + debt >> cash (incl. refinancing) → 70% (GRSD)
+- **[v11] Strategic alternatives confirmed inside an otherwise positive release (asset sale "strengthens balance sheet") still counts → ~60%, 70% if distress is confirmed** (DCGO, which was UP 44% — no play unless it reverses)
+- [JAY, v10] Chapter 11 severity doesn't shrink with time; NYSE/Nasdaq halt on a filing (TROX)
+
+### Reverse Split
+- Recently executed: 40%
+- Announced (not yet executed): 40% (GOSS, VRME, OLB, SPWR, FNUC)
+- **[JAY] Reverse-split window = 2 weeks** — only if announced/upcoming or executed within the last 2 weeks (XAIR)
+- Asian stock + reverse split: 85%
+- Board authority for repeated reverse splits + equity line (OFAL): lean STAY AWAY
+- Cross-check against the Corporate Actions pull [v8]
+- [CLAUDE-SUGGESTED, v9] 2+ reverse splits within several months + active ATM → push a net loss above 50% (KITT)
+- [v11] A proxy PROPOSING a reverse split (vote weeks away, board picks the ratio) is still the 40% reverse-split category; serial-split history adds a small bump (MBIO: 1-for-5 to 1-for-30, vote Dec 21, 2026, prior 1-for-50 in Jan 2025 → 50%)
+
+### New/Recently Listed Stocks
+- Newly issued stock, Hour 1: 40%, 15% recovery — **[v11] NOT for SPAC mergers. This is for ordinary new issues only; check SPAC origin first (EVRL).**
+- SPAC merger + 90%+ redemptions: STAY AWAY entirely (NSTR, BBCI)
+- SPAC merger, redemption rate unknown: 65% minimum (SAIQ, WENN)
+- SPAC merger + moderate redemptions: 52-60%
+- Less than 2 weeks trading history: extra caution, flag it
+- Operating company rename (just a new ticker): treat normally, use the old ticker's close
+- Cayman Islands SPAC = extra STAY AWAY signal
+- Spin-offs / direct listings with no previous close (AIOK): leave alone until Jay gives a rule
+- Direct listing (RZAI): <2 weeks history + heavy insider control = caution
+- Reverse merger / change of control with legacy holders left a small minority: 65% minimum or STAY AWAY [CLAUDE-SUGGESTED]; Asian → 85%
+- Acquirer issuing only a small share block (QNC): normal 40%
+- [CLAUDE-SUGGESTED, v7] SPAC merger ANNOUNCEMENT on a long-trading shell = unknown redemptions → 65% baseline (WENN 70%; SVCC 85%)
+- **[v10/v11] Newly-CLOSED SPAC merger, first day under the new ticker = 85% or STAY AWAY** when stacked with Cayman origin, unknown redemptions, thin/preclinical or unproven target, need for capital, and/or an equity line (BKHA/VESI -79%; EVRL -69%, Brent's loss)
+- **[v11] Log tags:** "SPAC merger – announced" (65% baseline) vs "SPAC merger – first day" (85%/STAY AWAY); append the redemption rate when known
+
+### Other Categories
+- Pink Sheets: 85%
+- Pink Sheets $1+ for a month: 50%
+- Asian Pink Sheets: 90%+
+- Profit reported dollar: 35% | penny: 40%
+- Loss reported dollar: 50% | penny: 55%
+- Disruption: 52%
+- Abandon: 65-70%
+- Clinical hold: 65-70%
+- Lease termination: 90% (Ch.7 warning)
+- Restructuring support agreement: 53%
+- Breach of contract (lost): 75%
+- Jury verdict / court ruling (lost major), incl. a flagship permit quashed by a court: 70-75% (LQDA; SA 70%)
+- Sales miss: 65-70%
+- Attorney general probe: 45-50%
+- Denial of application: 65%
+- Kerrisdale: 65%
+- Shareholder/announces investigation: 19.5%
+- Class action: 20-23%
+- Equity grants: 20-23%
+- Redemption of public shares: 92%
+- Begins trading: 29% — **[v11] NOT for SPAC mergers ("begins trading after merger with X Acquisition Corp" = SPAC merger – first day → 85%/STAY AWAY)**
+- Ex-dividend: 25%
+- Net asset value: 25%
+- Regains compliance: 30-35%
+- Board of directors (minor): 20% — only a clean standalone change (VEEA); bundled → 52-52.5%+ (QCLS)
+- Single amicable CEO/exec transition, internal successor, no other red flags: 25-30% [JAY, v10]
+- Preliminary outlook: 41% then 48% at 3 min, take 5% bail
+- Regulatory update: 35%
+- [JAY] Basic regulatory/corporate news update: 40% (POR)
+- Accountant (new): 35-40%
+- [JAY] Change of auditor → 40%, only if it drops there QUICKLY (GLAS)
+- Notice of effectiveness: 40% until notice
+- Annual meeting shareholders: 40% early
+- Withdrawal of auditors: 40%
+- Delays filing: 40% (VIVK NT 10-Q → 52.5%)
+- Launch (successful/about to): 18-20% (KDK)
+- Launch (failed): 40%
+- Partnership/supply/JV: 40% (MYSE, NXL)
+- Successfully delivers/notice of allowance: 18-20%
+- Shareholder update: 40% (SDEV)
+- License agreements: 40%
+- Patent filing: 40%
+- Closes loan: 40%
+- [JAY] Any new ticker/symbol change: 40% (Asian → 85%)
+- [BRENT] Competitor news: 40%
+- [BRENT] CFO exit with interim replacement: 40% (VELO)
+- [JAY, v5] Miscellaneous news updates: 40%
+- **[v11] Sale of a non-core business unit/subsidiary assets: 40% misc base; add the healthcare +5% where it applies and check the release for strategic alternatives/debt language (DCGO)**
+- [JAY, v5] Company is the ACQUIRER (even partly paid in shares): 40%. Exceptions: stacked promissory notes + self-disclosed repayment risk (VWAV, 55%+); paid mostly in new preferred with undisclosed conversion terms (VIVK, ~55%/85%) [v11]
+- [JAY, v5] Terminated/abandoned acquisition (no distress): 40%
+- [JAY, v5] Buyout / cash acquisition of the company: 20% under the buyout price
+- Contract/rating downgrade on most of the business (ALHC): 45-50% [CLAUDE-SUGGESTED]
+- [CLAUDE-SUGGESTED, v6] Medicare/insurer reimbursement or coverage cut on the main product: 65-75% (SNWV)
+- [JAY, v6] CEO voluntary resignation: not alarming; only removal/termination is a red flag
+- Notes redemption (company paying off its own notes, OXLC): 40% misc
+- Redomicile (Cayman → BVI, INLF): no change to the business; Asian names still 85%. **[v11] Cayman → US redomicile as part of a SPAC closing is a SPAC flag, not a neutral redomicile (EVRL)**
+- SC 13G: positive; even from a convertible-note/equity-line holder, not alarming [JAY] (SEGG)
+- Holder exit filings, Form 3, Form 4: not red flags
+- "Unusual market activity" statements: no tier
+- Positive news that spikes the stock: no play (CTNM, PAAI, CABO, DCGO +44%)
+- [CLAUDE-SUGGESTED, v7] Revenue crater on a single-product/pre-commercial company: deeper than a standard net loss (MBOT)
+- [CLAUDE-SUGGESTED, v7] Lost major customer + broad core softness: compound severity (VERI)
+- [CLAUDE-SUGGESTED, v8] Strategic alternatives on a penny/micro-cap with leadership departures + guidance cut: 70% (BAER, GRSD)
+- Recapitalization/Transaction support: bankruptcy warning
+- [v10] Self-disclosed "may not have sufficient liquidity to repay [debt]": 55%+ (VWAV)
+
+### STAY AWAY Categories
+- SPAC merger with 90%+ redemptions
+- **[v11] SPAC merger – first day with unknown redemptions + Cayman origin + equity line (EVRL) — 85% minimum, lean STAY AWAY**
+- Exercise of warrants (toxic dilution)
+- Strategic review/review options (ADGM, NXGL, CRBU). CEO exits only when removed/terminated [JAY, v6]
+- Hindenburg/short report (coach says short reports OK but confirm case-by-case)
+- Liquidation / Chapter 7 / Chapter 11 with equity cancelled
+- SEC investigation/DOJ/U.S. probe
+- Committee investigation
+- Fictitious sales
+- Public offering/share offering (wait for price)
+- Registered direct offering (wait for price)
+- FDA advisory committee vote imminent
+- Rescue financing / announces financing
+- Purchase order
+- Corporate/strategic shift (turnaround)
+- External advisor
+- Liquidity concerns
+- Recall
+- "Exploring options for creditors" language
+- Cayman Islands + Chinese + SPAC combination
+- Toxic warrant structures with reset provisions (incl. zero-price warrants and floating convertibles)
+- 363 sale under Chapter 11
+- Pipeline discontinued + layoffs + "wind-down" language (CRBU)
+- [CLAUDE-SUGGESTED, v7] Debt maturity wall THIS WEEK + unsecured/conditional refinancing + thin cash + recent dilutive offering (VERI)
+- [CLAUDE-SUGGESTED, v9] Confirmed imminent delisting date (SCLX, ONFO)
+- [v10] Self-disclosed repayment risk on stacked debt that keeps sliding with no bounce — no further entries/averaging down (VWAV)
+
+---
+
+## ASIAN ORDER-PLACEMENT RULE (SXTC lesson) [CLAUDE-SUGGESTED]
+
+- No resting order on an Asian stock until the news behind the drop is known.
+- No resting order if there are any signs of a raise: live F-1/F-3 shelf, cancelled or pending placement, par-value cut, authorized-share increase.
+- A cancelled raise means another raise is likely coming, not "no dilution."
+- Watch for repeat toxic placement agents: Univest Securities (SXTC), Prime Number Capital (DKI).
+- Registered directs on these names often hit around 9:20–9:30 AM ET (6:20–6:30 AM PT).
+- **[v11] Same "no order until checked" rule now also applies to SPAC-merger headlines and 50%+ prior-day spikes (EVRL).**
+
+---
+
+## HIGH-RISK SPIKED STOCK RULES
+
+- Volume spike 5x+ previous day = high-risk indicator
+- Use PREVIOUS DAY'S close-to-close spike % ONLY
+- Algorithm in code auto-calculates flush % — Claude does NOT calculate
+- Penny stock: add +4% to flush
+- Sub-penny: add +7% to flush
+- Volume spike as entry signal: penny stock down 28-30% AND 5x+ volume AND you know why → early entry around 30% (LABT)
+- Clean/positive news spikes can reverse hard (PAAI). Always measure from the previous close.
+- [v10] Extreme volume spike (1000x+) on a no-news penny stock after a prior-day run-up → defer fully to the flush algorithm, lean conservative (GNLN: 26.46% spike, 1,152x volume, halted -53.95%)
+- **[v11] SPAC pre-debut spikes count: if the old SPAC ticker ran up big the day before closing/debut, the previous close is inflated → apply these rules on top of the SPAC rules (MACI +62% → EVRL -69%)**
+
+---
+
+## HALT STRATEGY — CRITICAL RULES [REWRITTEN v11]
+
+[BRENT, v11 CORRECTION] v10 mislabeled T12 as a volatility halt. T12 = additional information requested by Nasdaq = waiting on news.
+
+### Volatility Pause — codes M / LUDP / LUDS (Limit Up–Limit Down)
+- M and LUDP = the same thing: Volatility Trading Pause (label differs by exchange/feed). LUDS = straddle variant (lopsided market at the band edge).
+- Triggered by SPEED: price moves outside its LULD band (~5-10%, wider under $3) vs. the 5-minute average
+- Usually a 5-minute pause, reopens via auction; can extend or repeat (waterfall risk)
+- Already know why it's dropping → check existing news for red flags
+- Clean fundamentals, single pause → order at 10% below the halt price
+- Repeated pauses / cascade → the 10%-under rule does NOT apply
+- Distressed stock = 65% minimum OR STAY AWAY
+- Strong fundamentals = still cautious, wait for stabilization
+- Can be UPWARD (CABO spiked on a financing report)
+- Extreme-volume-spike no-news pause (GNLN) → defer to the flush algorithm, not the flat 10%
+
+### News / Regulatory Halt — codes T1 / T2 / T3 / T12 — News UNKNOWN
+- T1 = news pending; T2 = news released; T3 = news and resumption times
+- T12 = additional information requested by Nasdaq → treat as WAITING ON NEWS
+- WAIT for the news first, then analyze and decide
+- Risk of waterfall halts if the news is catastrophic
+- Brent's "newscheck" tool (2-minute polling) may surface the release before web search (SVCC)
+
+### News Halt — News ALREADY KNOWN
+- Positive news → stock spikes, no play
+- Negative news, no red flags → 10% under the halt price
+- Negative news, red flags → deeper entry or pass
+
+### Waterfall Halt Warning Signs
+- Multiple stacked red flags
+- Catastrophic news (Chapter 11, fraud, SEC investigation)
+- Thin-liquidity penny stocks
+- Asian stocks with extreme selling pressure
+- Toxic dilution (convertibles at sub-penny prices, zero-price warrants)
+- LULD cascade in progress (repeated M/LUDP pauses)
+- Distressed fundamentals (debt >> cash, going concern, recent reverse split)
+- Self-disclosed repayment risk on stacked debt (VWAV)
+- **[v11] SPAC merger – first day with a thin float, unknown redemptions and an equity line (EVRL)**
+
+---
+
+## TWO-TIER / THREE-TIER SYSTEM
+
+- Tier 1: Primary entry at the calculated %
+- Tier 2: If it drops 20% further → averaging down
+- **[BRENT, v5] Three-tier orders: 1st buy at the calculated entry, 2nd buy 20% under the 1st, 3rd buy 40% under the 1st**
+- **[JAY] On 75%+ deep tiers, use 30% spacing between tiers instead of 20%** (VWAV confirmed again) — OPEN QUESTION whether to standardize
+- Order size: ~$200–$250 per order [v11]
+- Different stop losses each tier
+- Normal: 20% stop, 20% profit target
+- Extreme drops 80-85%: small position, NO stop loss
+- Do NOT average down into toxic-warrant stocks (SXTC), self-disclosed-liquidity-risk stocks with no recovery (VWAV), **or equity-line/SPAC-first-day stocks (EVRL: all three tiers filled on the way down; exited at $3.55, -42.6%)** [v11]
+- **[JAY] Break-even rule:** exiting at average cost on a recovery is acceptable (SMX, ENGS). Only works if the stock actually bounces — not on ongoing solvency/dilution stories (VWAV, EVRL).
+- **[BRENT] Fast-drop-vs-slow-grind sizing:** in ambiguous cases, default to the shallower tier for fast drops and step deeper on slow grinds (ONFO)
+- **[v11] If stuck in a bad position, decide the plan up front: a partial-sell level on a bounce and a final exit (price or time, e.g. the close), so a spike gets used, not watched, and a bad day doesn't become a held-and-hoping position.**
+
+---
+
+## NO-NEWS SCALP (Jay's group) [v5]
+
+- Jay's group scalp: stock drops on no news and is over 10% under the delayed quote → go in and take 5%.
+- **SKIP the scalp if the stock is pharma/biotech/med-device with only 1-2 drugs/devices in human trials, under FDA review, or approved** [BRENT]. Doesn't apply to healthcare SERVICES companies (DCGO) [v11].
+- PMN lesson (Oct 30, 2026): single-drug biotech fell ~70% in one day on no news.
+- If Brent asks about a no-news scalp on a healthcare stock, Claude flags the pipeline count.
+- [CLAUDE-SUGGESTED, v7] Don't treat a 1-2-product company's bad quarter as a shallow miss (MBOT, SVRA).
+- [v10] A winning quick scalp on a name with a serious red flag is luck, not validation (VWAV).
+
+---
+
+## 10% SEPARATION RULE
+
+At least 10% separation between the delayed quote and the entry price. If the delayed last price is $5.70, max entry = $5.13.
+
+---
+
+## SPAC MERGER RULES (VRXA, BKHA, EVRL Lessons)
+
+**What a SPAC / de-SPAC is:** A SPAC (Special Purpose Acquisition Company) is a "blank-check" shell with no business; it raises money in an IPO (usually $10/share), parks it in a trust, and looks for a private company to merge with. The "de-SPAC" is the merger itself: the shell disappears and the private company becomes public under a new name/ticker. Before the merger, SPAC holders can redeem for ~$10 from the trust — often 90%+ do — leaving little cash and a thin float.
+
+**Regular merger vs SPAC merger:**
+| | Regular merger | SPAC merger (de-SPAC) |
+|---|---|---|
+| Who's merging | Two real operating companies | Empty shell with cash + a private company |
+| Price history | Real trading history | Shell near $10 trust, often a pre-deal spike |
+| Shareholders | Long-term holders stay | Most SPAC holders redeem → thin float |
+| New supply | Limited and known | Sponsor/advisor shares, equity lines (Yorkville) |
+| Business | Usually established | Often small, unproven, money-losing |
+| Day one | Normal news reaction | Wild swings, often a steep slide |
+| Tier | Acquirer 40% [JAY] | First day 85% / STAY AWAY |
+
+Checklist:
+- Did this come from a SPAC merger? ("Acquisition Corp" on either side, "business combination," "begins trading," "debuts")
+- Announced, or first day under the new ticker?
+- Redemption rate (or "not disclosed")
+- SPAC + 90%+ redemptions → STAY AWAY entirely
+- SPAC + redemption rate unknown → 65% minimum (announcement); first day → 85%/STAY AWAY
+- SPAC + moderate redemptions → 52-60%
+- Less than 2 weeks trading history → flag and be very cautious
+- Preclinical biotech + SPAC → extremely dangerous
+- Cayman Islands + SPAC → double caution (incl. Cayman shells that redomicile at closing — EVRL)
+- Cayman Islands + Chinese + SPAC → triple STAY AWAY
+- Old SPACs with many extension votes usually have near-total redemptions (BBCI)
+- Equity line (Yorkville SEPA) announced at closing → 85% or don't go in
+- Who's locked up? Only the majority holder = everyone else can sell day one
+- Old ticker's prior-day move: big pre-debut spike = inflated baseline
+- [CLAUDE-SUGGESTED, v7] A SPAC shell can trade for months/years before announcing a target (WENN, SVCC)
+- [CLAUDE-SUGGESTED, v8] The shell's own working-capital deficit matters separately from the trust (SVCC)
+
+VRXA red flags (never again): 99.67% redemptions, preclinical biotech only, $27.5M senior secured debt day 1, $50M dilution agreement, only 5 days trading, Swiss company via SPAC.
+
+EVRL red flags (never again): first day after closing, Cayman shell, redemptions undisclosed, $200M Yorkville equity line, only the majority holder locked up, no financials in the release, old ticker +62% the day before. Entered at 40% without a check → -42.6%.
+
+---
+
+## EARNINGS ASSESSMENT RULES
+
+Always check the Seeking Alpha headline first. [v8] Check first for bundled drug/trial-phase news.
+
+Net income red flags pushing deeper than 40%:
+- EPS miss 40%+ → 50-52%
+- Revenue declining significantly → 45-50%
+- Guidance cut (no offsets) → 50-52%
+- Dividend cut/suspension → push 10%+ deeper
+- Major customer loss → assess % of revenue impact
+- Goodwill impairment → 55-60%
+- Confirmed going concern → push 10%+ deeper
+- Unsustainable dividend payout ratio → flag
+- Internal fraud/quality issues → 65-70%
+- Management team fired → 65-70%
+- Trial/pipeline discontinuation in the same release → phase-specific drug tier (KYNB)
+- A single amicable leadership departure is NOT a red flag here (QTRX)
+- Strategic alternatives + guidance cut + heavy debt → 70% (GRSD)
+
+Customer loss severity (VRRM lesson):
+- Customer = 5% revenue → 40%
+- Customer = 30% EBITDA → 70-75% (VRRM dropped 74%)
+- Always ask: what % of revenue/EBITDA does this customer represent?
+
+---
+
+## LARGE HIGH-PRICED STOCK RULE (PRIM lesson)
+
+For large established stocks over $50/share:
+- 40% from the previous close is often unrealistic
+- Coach uses current intraday low × 90% instead
+- Rest of business often strong, only one segment causing damage
+
+---
+
+## CALL-TRACKING LOG [NEW, v11 — started Nov 23, 2026]
+
+Purpose: find out with data (a) whose tier calls hold up — Jay's vs Claude's — and (b) whether the strategy is profitable after the blowups. Low cost: keep ~$200–$250 per order (or paper-log) while measuring.
+
+Log EVERY ticker checked (traded or not), one row each:
+```
+Date | Ticker | News category | Prev close | Jay % | Claude % | Brent entry % (if any) | Fills (shares @ price) |
+Day low % | Bounce high after low % | Exit price/time | P&L $ | Would Jay's tier have filled? |
+Would Claude's tier have filled? | Lesson
+```
+
+News-category tags for SPACs: "SPAC merger – announced" vs "SPAC merger – first day"; append the redemption rate when known (e.g. "SPAC merger – first day – redemptions unknown").
+
+Review at 1 month and 2 months:
+- Fill rate and P&L for each caller's tier
+- Number of blowups each tier would have avoided
+- Overall P&L after blowups — is there an edge at all?
+
+Brent reviews every trade's details with Claude (live or in a batch after the close).
+
+First entry:
+```
+2026-11-23 | EVRL | SPAC merger – first day – redemptions unknown | ~$13.30 (MACI, after +62% spike) | Jay: n/a (not sent) | Claude: 85%/STAY AWAY (after the fact) | Brent: 40% | 30@7.98, 30@6.25, 30@4.32 (avg 6.183) | low ~-69% | — | exit 90@3.55 | -$237.00 (-42.6%) | — | No (85% ≈ $2.00) | Run SPAC-merger headlines by Claude first; check early, not when price nears
+```
+
+---
+
+## STANDARD PROMPTS
+
+Brent's copy-paste prompts (current). The lighter "don't take into account news from other articles (unless you see a delisting date!)" phrasing remains as a passive, in-article-only flag.
+
+### SEC Filing Analysis Prompt
+"Can you go through the following link (symbol is [TICKER]) and tell me if there are any red flags, like any mention of bankruptcy, insolvency, dissolving of assets or subsidiaries, major layoffs, is going to begin trading on the OTC or Pink Sheets within a day/week/couple weeks (i.e. delist), shutting down operations, or a risk of an upcoming share offering or share dilution (i.e S-1, S-2, 424B3, notice of effectiveness, etc...), pharmaceutical drug news (i.e. phase 1/2/3 results, of which even good results can still cause the stock to drop), corporate turnaround efforts, any kind of shutdown, or anything similar to that? Maybe a delisting notice where the delisting is months away (mentioned in the article), or an earnings net income where they simply didn't make as much as what was estimated, or maybe losing a client/contract, or maybe an investigation by the Department of Justice or other governmental entity. If there are no red flags found, just say 'No red flags found' with a brief point-form description of what the article generally is about. And if there are no red flags about a particular area, don't worry about telling me about it. Also - don't take into account news from other articles (unless you see a delisting date!), only focus on what is spoken about in this article. And please be brief, just make it in point form. Here is the filing link: [LINK]?rand=[random]
+
+Please start your answer with the two tier lines, then the brief point-form details, and always say whether going-concern language appears. Also - can you please make your response pastable?"
+
+### News Article Severity Assessment Prompt
+"Can you go through the following article and tell me if it looks to you like a basic 40% news update or if there are red flags indicating that I should be going way, way lower (i.e. like maybe 50-60-70-75%)? For example, the article may say that a business lost a customer, but if the customer provides only 5% of the revenue, then that's a 40% update. But if the business lost a customer and the customer provides 85% of the revenue, then that is MAJOR and a 70-75% entry is better. [Includes worked examples: a 180-day delisting notice with no pressure yet = 40%; a reverse-split announcement a few days out = 40%; VRRM's Avis Budget customer loss, which looked like routine news but was actually a 30% EBITDA hit and dropped the stock 74%.] Also - don't take into account news from other articles (unless you see a delisting date!), only focus on what is spoken about in this article. I need you to flag: 1) SPAC merger warning (announced vs. first day under the new ticker; redemption rate if available, 90%+ = STAY AWAY; equity lines like Yorkville), 2) New stock warning (<2 weeks trading history), 3) Drug news clarification — Phase 1 = 50-55%, Phase 2 (incl. Phase 1/2) = 60-65%, Phase 3 = 80% (multi-drug pipeline) or 85% (thin/single-drug pipeline); no defined phase = 85%. Here is the link: [LINK]
+
+Please start your answer with the two tier lines, then the brief point-form details, and always say whether going-concern language appears. Also - can you please make your response pastable?"
+
+### Earnings Assessment Prompt
+"Can you go through the following article and A) Tell me if it is an earnings net income or loss, and B) If it is an earnings net income, look at other factors about the company and tell me if my 40% entry is safe, or if there are red flags that suggest that I should go lower than 40% (i.e 52.5%)? Or maybe there are even additional news articles today (or last night, or late in the afternoon on the previous trading day) talking about significant layoffs, or the loss of a major customer, etc... that would make it worse than a typical earnings net income/loss. Just to brief you - we already know that the reason why an earnings net income stock is dropping is because they EPS wasn't as high as expected. We understand this go into those at 40%. I need to know of any other red flags that may affect the price. Also - for earnings net loss — we just default those to 50%. Also - don't take into account news from other articles (unless you see a delisting date!) unless they are from today, or last night, or late in the afternoon of the previous trading day. Only focus on what is spoken about in this article. But you CAN be like 'in another article I found from this morning, one of their competitors came out with a product similar to it's _____' — which would then suggest a lower entry. Please be brief, just a couple points in point form, and then the suggested tier# and percentage. Please start your answer with the two tier lines, then the brief point-form details, and always say whether going-concern language appears. Also - please make your response pastable. The link is [LINK]"
+
+### Halt Strategy Prompt
+"Symbol [TICKER] is currently halted. My coach's strategy for halts is: when a stock is halted, as long as there are no red flags, my coach will put in an order at 10% under the halt price during the halt, in case it drops that far afterwards. However if there are red flags, it risks going through waterfall halts — warn me with what you find. If no serious red flags, let me know and I'll go in at 10% under the halt price. IMPORTANT: If this is a volatility pause (M/LUDP/LUDS), the 10% rule may not apply due to waterfall risk; if it's T1/T12, we're waiting on news. Don't worry about going back multiple days for news, only check for news from this morning or after-hours last night. So can you inspect this [TICKER] and tell me if it's safe to do a halts trade today?"
+
+### News Search Prompt
+"Can you check and see if any news has come out for stock market symbol '[TICKER]' in the after-hours of last night, or this morning? I can't seem to find any recent news and I need to know why it is dropping. Yesterday morning is irrelevant — already digested. If no news, say 'I couldn't find any news'. If they ceased all operations, put it in large text so I can see it. Let me know!"
+
+### New Stock/SPAC Check Prompt
+"My OHLC API data is telling me that there are only X days traded for ticker symbol [TICKER]. Is that true (i.e. is it an entirely new symbol/company) or is it simply taking on a new symbol because of a merger/acquisition, and therefore it's not an entirely new ticker symbol/company? I need to be careful here, as stocks whose companies have just come off the back-end of a SPAC merger can drop literally 65% in an hour, so I need to know any kind of red flags I can find."
+
+### [NEW, v11] Early Scanner Check Prompt
+"[TICKER] just showed up on my scanner down [X]%. Headline: [HEADLINE or 'none']. Is this a SPAC merger / new listing, Asian, or a prior-day spike? Give me the two tier lines before the price gets near my entry."
+
+---
+
+## KEY LESSONS LEARNED
+
+### From v2 through v6
+- See v7 for the condensed summary (VRXA, LESL, CMCT, SNWV, LABT, VRRM, PRIM, QCLS, MYSE, GTBP, NVNO, IPW, PAAI, SVIA/FGNX, SXTC, DKI, ADXN, ALHC, CTNM, AIOK, BBCI/NSTR, AIXC/AMZE/RNTZ, AXNX/SSM, CRBU, NTCL, PMN, LVWR, NOWL, VCYT, SOC, CENN, PLCE, PARA, SMX/ENGS, CDNL, GLAS — all still valid).
+
+### From v7 (Nov 16, 2026)
+- VERI, XXII, MBOT, WENN, SPWR, RMIX — confirmed-vs-boilerplate going concern, SPAC pre-announcement trading history, SPAC-recap accounting artifacts.
+
+### From v8 (Nov 17, 2026)
+- KYNB (Phase 2 rule first), ONFO (read the release on debt-extinguishment losses), BAER (strategic alternatives 70%, Jay agreed), CYAB/SSinnova/DETX/TRUG/GIPR/GELS (confirmed going concern), SVCC (newscheck tool).
+
+### From v9 (Nov 18, 2026)
+- SCLX (delisting-date miss), CSAI (compliance closure needs confirmation), QTRX (amicable CEO exit, 25-30%), TROX (Chapter 11 — Jay right, Brent lucky), KITT, PRE, HY.
+
+### From v10 (Nov 19-20, 2026)
+- VWAV (self-disclosed repayment risk, -72.7%, no bounce), ONFO escalation (delisting determination), GRSD (strategic alternatives + debt → 70%), BKHA→VESI (first-day Cayman SPAC, -79%), SVRA (missed PDUFA, 85%), GEOS (60%), GNLN (extreme volume halt), SA (permit quashed, 70%).
+
+### New in v11 (Nov 23, 2026)
+- **EVRL (Everli / ex-Melar MACI): the headline case.** Entered at 40% without a check; SPAC merger first day, Cayman shell, undisclosed redemptions, $200M Yorkville equity line, only the majority holder locked up, old ticker +62% the day before. All three tiers filled; exited at $3.55 for -$237 (-42.6%), worst loss in months. Produced: the SPAC-origin check, Yorkville/SEPA keywords, the spiked-baseline check, the promotional-headline rule, the check-early workflow, and the call-tracking log.
+- **Halt-code correction:** T12 = waiting on news; M/LUDP/LUDS = volatility pauses.
+- **DCGO:** asset sale "strengthens balance sheet," but the CEO confirmed an ongoing strategic-alternatives review; stock UP 44% → no play; healthcare services ≠ device maker.
+- **SMX:** paid promotional release, stock -25% on a +6% Nasdaq day → the release isn't the reason.
+- **VIVK:** acquisition paid mostly in new Series B Preferred with undisclosed conversion terms.
+- **MCRP:** 20-F unfiled past the cure period; extension to Dec 13; second (equity) deficiency.
+- **FNUC / MBIO:** reverse splits to fix the $1 bid price (one effective in 2 days, one proposed for a Dec 21 vote).
+
+---
+
+## RECENT CASE LOG
+
+See v6-v10 for the full Sept-Nov 20 case log (unchanged, carried forward). Nov 19-20 cases: LQDT 40%, RYOJ 85%, RRGB 55%, SA 70%, SNEX 40%, TDTH 85% (declined), BEEM 52.5%, BKHA→VESI 85%, SVRA 85%, GRSD 70%, MTRI 85%, GEOS 60%, VWAV 55%, RENX (no news; confirmed going concern background), GNLN (no news; extreme volume halt), ONFO 85%/lean STAY AWAY.
+
+New cases from the Nov 23, 2026 session:
+- FNUC (Frontier Nuclear & Minerals, Canada) — 6-K: 1-for-15 reverse split effective Nov 25 to fix the Nasdaq $1 bid; "no guarantee"; authorized shares unchanged; float ~36.1M → ~2.4M; no financials → Jay 40% / Claude 45%. Going concern: not mentioned.
+- GOVX (GeoVax) — no news found in window. Background: CEO terminated (reportedly for cause) Nov 5, registration statement Nov 4, 1-for-24 reverse split Nov 10, CFO resigned + CMO terminated Nov 13-17, Q3 revenue $0 after the BARDA termination; earnings date unconfirmed (possibly Nov 24).
+- DCGO (DocGo) — selling the Cardiac RMS CIED monitoring business for up to $25M ($20M cash + $5M earnout; DocGo keeps 67%); buyer must close its own financing; CEO confirms strategic alternatives; boilerplate: high debt, going concern, Nasdaq listing, migrant-services wind-down; stock UP ~44% → no play. Jay 40% / Claude 60% (70% if distress confirmed). Going concern: UNCONFIRMED (boilerplate).
+- GNLN (Greenlane) — no news found in window (premarket -17% to ~$0.42 after -32% Friday). Background: Q3 revenue $66K (-91%), going-concern doubts reported, subsidiaries in court-supervised liquidation (Oct), pivot to BERA crypto treasury.
+- VIVK (Vivakor) — definitive agreement for Direct Midstream ($40M base): ~$29M Series B Preferred + ~$1M common + $10M cash Vivakor must fund; conversion terms not found → Jay 40% / Claude 55% (85% if floating conversion). Going concern: couldn't check.
+- MCRP (Micropolis AI Robotics, Dubai/UAE, NYSE American) — 20-F unfiled; missed the Nov 15 cure deadline; extension to Dec 13, 2026; equity deficiency (~$2.2M vs $4.0M); ~$0.27 → Jay 40% / Claude 65%.
+- MBIO (Mustang Bio) — PRE 14A: annual meeting Dec 21, 2026; Proposal 4 = reverse split 1-for-5 to 1-for-30; prior 1-for-50 (Jan 2025); bid-price issue → Jay 40% / Claude 50%.
+- SMX (SMX Security Matters) — paid promotional release (Digital Plastic Passport/marketplace, WBCSD event Nov 27, A*STAR Singapore); -25.55% on a +6% Nasdaq day → Jay 40% / Claude 52.5% dollar / 68.5% penny. No red flags in the release.
+- EVRL (Everli Global Holdings) — see "What's New in v11." Brent's 40% entry, three tiers filled, exit $3.55, -$237 (-42.6%). Correct: 85%/STAY AWAY.
+
+---
+
+## TECH TOOLS
+
+- PHP Regex Scanner — highlights red-flag keywords in headlines
+  - Suggested keywords: "registered direct", "zero cash exercise", "alternative cashless", "pre-funded", "Regulation S", "equity line", "at-the-market", "terminate" (financing), "additional purchase right", "F-1MEF", "Univest", "Prime Number"
+  - [v7] Flag "substantial doubt" ONLY outside a forward-looking-statements/safe-harbor section
+  - [v10] Flag "sufficient liquidity to pay" / "liquidity to repay" (VWAV)
+  - **[v11] Flag: "Standby Equity Purchase", "SEPA", "Yorkville", "YA II PN", "committed equity facility", "completes business combination", "business combination", "Acquisition Corp", "begins trading", "debuts on Nasdaq", "strategic alternatives", "paid press release"**
+- JavaScript High-Risk Algorithm — calculates entry % from the previous-day spike
+- PHP News Proxy (newsproxy.php) — fetches/stores news
+- proxy.php — Seeking Alpha news display
+- OHLC API — stock data (switching from Yahoo Finance to Financial Modeling Prep, $22/mo Starter)
+- Interactive Brokers TWS — trading platform; E*TRADE account also in use. Keep a funded backup broker [JAY, v10]
+- AWS EC2 — scanner server at ec2-52-89-7-59.us-west-2.compute.amazonaws.com
+- OBS Studio — recording sessions for coach review
+- "Claude Dump" format — structured pre-formatted dump pasted into chat; Claude answers from the dump first
+- "Newscheck" — polls for new headlines every 2 minutes (SVCC)
+- Corporate Actions reference pull (stockanalysis.com/actions), refreshed daily (Procedure #16)
+- Delisting-date check — implemented in Brent's code via SEC Form 25 on EDGAR + Nasdaq delisting releases. Gaps: OTC/pink removals (FINRA/OTC Markets) and SEC trading suspensions.
+- **[v11] SEC EDGAR from PowerShell (Brent's PC):**
+  ```powershell
+  [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; $r = (Invoke-RestMethod -UserAgent "Brent Heigold <contact email>" -Uri "https://data.sec.gov/submissions/CIK<10-digit CIK>.json").filings.recent; 0..14 | ForEach-Object { [pscustomobject]@{ Accepted = $r.acceptanceDateTime[$_]; Form = $r.form[$_]; Doc = $r.primaryDocument[$_] } }
+  ```
+  (Times in UTC; 4 PM ET = 21:00 UTC.) The older browse-edgar URL returned 400 Bad Request.
+- **[v11] Claude cloud environment:** Default environment allows www.sec.gov and finance.yahoo.com (saved permanently). To let Claude read SEC filings directly, add env var SEC_USER_AGENT (name + contact email) in claude.ai environment settings and start a new session.
+- Idea (not built yet): auto-cancel open IB orders when a new headline hits for that ticker
+- red-flag-check.php, pink sheet auto-order script, order logging, chart-orders tool, screener regex, marketstack, Git repo — see v6, unchanged.
+
+---
+
+## ASIAN STOCK CLASSIFICATION
+
+Asian rules apply (80% no news / 85% with news; they override all other rules):
+**China, Taiwan, Hong Kong, Japan, Korea, Macau, Singapore, Malaysia, Thailand**
+- Recent examples: DCX, AXNX, DKI, PASW (Hong Kong); SOS, SXTC, INLIF/INLF (China); NTCL, TDTH, RNTZ (Singapore); BBCI (Malaysia); CENN (US mailbox address, Chinese officers); RYOJ (Japan)
+
+Standard dollar/penny rules: Israel (GIXI, HUBC, NXTS, CYAB), Australia (LCFY, GELS), Canada (QNC, FNUC), Greece (SVRN), Germany (SSM), Ireland/Israel-linked (SMX), Italy (EVRL), UAE/Dubai (MCRP), Netherlands, UK, most of Europe, US-HQ companies with India operations (SSinnova — India itself still TBD), US-based foreign private issuers with no Asian signal (GRSD). A partnership with an Asian agency (SMX + Singapore's A*STAR) doesn't make a company Asian.
+
+TBD (check with coach): India
+
+Tip: "Petaling Jaya" = Malaysia (next to Kuala Lumpur).
+
+---
+
+## COACH COMMUNICATION
+
+- Record sessions with OBS Studio for coach review
+- Ask coach to reciprocate — share his trades so you can verify the strategy
+- Track win rate and average win size vs average loss size
+- Track separately: LULD halt trades, SPAC trades, drug trades, Asian trades
+- [v8] Jay's premarket screening notes are useful for cross-validation (BAER, CYAB matched)
+- [v10] Jay's session recaps are a valuable recurring input (TROX resolved, QTRX quantified, backup broker)
+- **[v11] Jay only wants orders sent when the price is near the entry. Fast drops skip that review → send tickers to Claude early, as soon as they hit the scanner.**
+- **[v11] Use the call-tracking log to compare Jay's and Claude's calls on outcomes, not impressions. Claude's tiers are mostly built on Jay's rules, and several of Claude's own calls have been wrong (QTRX 55% vs Jay's 25%; GLAS 50% vs Jay's 40%) — let the data decide.**
+
+---
+
+## OPEN QUESTIONS FOR JAY
+
+1. **Spin-offs / new listings with no previous close (AIOK):** what reference price?
+2. **Reverse mergers with heavy legacy dilution (non-Asian):** 65% minimum or STAY AWAY?
+3. **Debt refinancing under liquidity pressure (CABO, VERI):** "Closes loan 40%" or "Rescue financing STAY AWAY"?
+4. ~~CEO exits~~ Answered [JAY, v6], quantified [v10, 25-30%].
+5. **Partner's (not competitor's) trial result (CLPT):** 40% or 52%?
+6. **Bundled board/consulting departures (QCLS):** confirm 52-52.5%+.
+7. **In vitro/lab data on a clinical-stage drug (LABT):** 40% or 85%?
+8. **Ongoing convertible conversions / stock-paid acquisitions (VIVK, MEDS):** confirm 85%.
+9. **Voluntary delisting from a secondary exchange only (NUR):** confirm ~40%.
+10. **India (and other unruled countries):** Asian or not?
+11. **No-news scalp pipeline-skip rule:** should Jay's group adopt it; lower the threshold to 1 drug?
+12. **Reimbursement/coverage cut on a main product (SNWV):** confirm 65-75%.
+13. **Net income + guidance cut or core-volume miss on growth/healthcare (VCYT):** confirm 52.5-60%.
+14. **Broad selloff days:** go 10%+ deeper, or wait?
+15. **Pink sheets at 25% instead of 80%:** share paper-study results before trading it.
+16. **Deep-tier spacing (75%+ stocks):** standardize 30% spacing? (VWAV another confirming data point)
+17. **SPAC target with its own confirmed going concern:** is 65% still the floor, or 70%+?
+18. **SPAC/recap accounting net losses from one-time non-cash items (RMIX):** standard tier or softer?
+19. **Debt-extinguishment-driven loss with an improving balance sheet (ONFO):** ever closer to 50%? (ONFO's escalation argues "re-check every time")
+20. **Strategic alternatives alone — confirm 70% as standing (BAER); and the GRSD stacking variant.**
+21. ~~Chapter 11 digestion time~~ Answered [JAY, v10] — no softening.
+22. **Serial reverse splits alone — push a net loss above 50% (KITT)?**
+23. **Non-dilutive debt with self-disclosed repayment risk (VWAV) — confirm 55%+; does Jay's screen catch this?**
+24. **No averaging down / no third tier on self-disclosed-liquidity-risk names (VWAV)?**
+25. **[NEW, v11] SPAC merger – first day with undisclosed redemptions + an equity line (EVRL): 85% or flat STAY AWAY?**
+26. **[NEW, v11] Halt-code naming: confirm Jay uses T12 = waiting on news and M/LUDP = volatility pause, so the doc matches his terms.**
+27. **[NEW, v11] Fast drops that hit the entry level at the open: can Brent send these early (before the price is near), given EVRL skipped review entirely under the "only when near" workflow?**
+28. **[NEW, v11] Sale of a non-core unit by a company in a strategic-alternatives review (DCGO): misc 40%, or the strategic-alternatives tier if it reverses into a drop?**
+
+---
+
+## APPENDIX: DRAFT PREVIOUS-DAY SPIKE ENTRY TABLE (unvalidated, not authoritative)
+
+Built with ChatGPT from a few observed days. It is NOT a rule. The in-code algorithm remains the source of truth, and Claude does not calculate flush %. Paper-trade it and log results before relying on it.
+
+| Prev-day spike | Dollar (>= $1.00) | Penny ($0.50-0.99) | Sub-penny (< $0.50) |
+|---|---|---|---|
+| 25-30% | 25-26% | 29-31% | 32-34% |
+| 30-35% | 26-27% | 30-32% | 33-35% |
+| 35-40% | 27-29% | 32-34% | 35-37% |
+| 40-45% | 29-31% | 34-36% | 37-39% |
+| 45-50% | 30-32% | 35-37% | 38-40% |
+| 50-60% | 31-33% | 36-38% | 40-42% |
+| 60-70% | 32-34% | 37-39% | 41-43% |
+| 70-80% | 34-36% | 39-41% | 43-45% |
+| 80-90% | 35-37% | 40-42% | 44-46% |
+| 90-100% | 36-38% | 41-43% | 45-47% |
+| 100-110% | 38-40% | 43-45% | 47-49% |
+| 110-120% | 39-41% | 44-46% | 48-50% |
+| 120-130% | 40-42% | 45-47% | 49-51% |
+| 130-140% | 41-43% | 47-49% | 51-53% |
+| 140-150% | 42-44% | 48-50% | 52-54% |
+| 150-160% | 43-45% | 49-51% | 53-55% |
+| 160-180% | 45-47% | 51-53% | 55-57% |
+| 180-200% | 47-49% | 53-55% | 57-59% |
+| 200-225% | 49-51% | 55-57% | 59-61% |
+| 225-250% | 51-53% | 57-59% | 61-63% |
+| 250%+ | 53-55% | 59-62% | 63-66% |
+
+Note [v11]: SPAC pre-debut spikes (MACI +62%) count as prior-day spikes for this table/the algorithm.
+
+---
+
+## JOURNAL STATS (tracking from Brent's trade journal)
+
+See v6 for the full multi-year (2017-2025) journal history — carried forward unchanged. 2026 Nov results: Nov 23 EVRL -$237.00 (-42.6%); add the rest of Nov 4-23 once logged. From Nov 23 on, every ticker also goes in the Call-Tracking Log.
+
+**THE MULTI-YEAR PATTERN (2023-2025):** win rate stays ~71-72% every year, but one average loss = 4-6 average wins. Each year, the 5-6 worst trades ≈ the entire yearly loss. The fix is not a higher win rate — it's removing the handful of blowups:
+1. Any S-1/EFFECT/424B/offering filing from the previous day's morning or later
+2. News stocks in the premarket → 85-90%
+3. Miscellaneous/"good" news → skip
+4. No-news healthcare → deeper than 19%
+5. Multiple orders on a selloff day → go 10%+ deeper
+6. Mistaking boilerplate going-concern language for confirmed, in either direction
+7. Applying a generic default when a more specific rule exists (phase-specific drug tier)
+8. Not checking for a confirmed/imminent delisting date (SCLX) — now covered by Brent's code
+9. Applying a red-flag markup to a situation an existing rule treats as clean (QTRX)
+10. Treating "no dilution mechanism" as "no risk" when a company discloses doubt about repaying its debt (VWAV)
+11. A winning trade doesn't validate the entry logic (TROX, VWAV)
+12. **[NEW v11] Entering a "SPAC merger – first day" at a normal-news tier without a check — and averaging all the way down an equity-line name (EVRL, -42.6%). Promotional headlines and fast drops at the open are exactly when a check gets skipped; send tickers early.**
+
+When Brent adds new months or past years, update these totals and patterns.
+
+---
+
+Document version 11 — Last updated November 23, 2026. Paste this document at the top of a new Claude conversation for full trading context.
