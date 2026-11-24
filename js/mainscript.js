@@ -1134,6 +1134,9 @@ function prepareNoNewsChatGPT(symbol) {
 
     If they ceased all operations, then put it in large text so I can see it. 
 
+    If you can't access SEC EDGAR directly because the SEC blocks automated requests unless they include a contact email, my contact email is brent@heigoldinvestments.com 
+
+
     Let me know! 
 
 `;

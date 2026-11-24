@@ -1,14 +1,16 @@
 <?php 
 
 include './Samples/config.php';
-
+require_once './Common/Common.php';               // E*TRADE SDK - for the halt price check in getTradeHalts()
+require_once './OAuth/etOAuth.class.php';
+require_once './Market/MarketClient.class.php';
 require_once("simple_html_dom.php"); 
 require_once("country-codes.php");
 require_once('red-flag-check.php');
 
 libxml_use_internal_errors(true);
 
-$yesterdayDays = 3;
+$yesterdayDays = 1;
 
 error_reporting(1);
 //ini_set('display_errors', 1);
@@ -409,6 +411,64 @@ function cleanNewsItem($source, $title, $link, $pubDate)
     return $item;
 }
 
+// Asks E*TRADE for the current price and previous close of a list of symbols (25 per call).
+// Returns array('SYM' => array('current' => 1.23, 'prev_close' => 1.50)).
+// Symbols E*TRADE gives no usable price for are left out, so the caller keeps them (better than missing a real one).
+function getHaltQuotes($symbols)
+{
+    $quotes  = array();
+    $symbols = array_values(array_unique($symbols));
+    if (count($symbols) == 0) return $quotes;
+
+    $ini = @parse_ini_file(dirname(__FILE__) . '/etrade.ini', true);
+    if ($ini === false) return $quotes;
+
+    $consumer = new etOAuthConsumer($ini['OAuth']['oauth_consumer_key'], $ini['OAuth']['consumer_secret']);
+    $consumer->oauth_token        = $ini['OAuth']['oauth_token'];
+    $consumer->oauth_token_secret = $ini['OAuth']['oauth_token_secret'];
+    $client = new MarketClient($consumer);
+
+    // outside 9:30-4:00 ET, use the pre-market / after-hours price if there is one
+    $nowET = new DateTime('now', new DateTimeZone('America/New_York'));
+    $hhmm  = (int) $nowET->format('Hi');
+    $regularHours = ($hhmm >= 930 && $hhmm < 1600);
+
+    foreach (array_chunk($symbols, 25) as $chunk) {
+        try {
+            $params = new getQuoteParams();
+            $params->__set('symbolList', $chunk);
+            $params->__set('afterhourFlag', true);
+            $params->__set('detailFlag', 'All');
+            $xml = @simplexml_load_string($client->getQuote($params));
+        } catch (Exception $e) {
+            continue;                                // this batch failed - those symbols are kept
+        }
+        if (!$xml) continue;
+
+        foreach ($xml->QuoteData as $qd) {
+            $sym  = strtoupper(trim((string) $qd->Product->symbol));
+            $all  = $qd->All;
+            $prev = haltQuoteNum($all->previousClose);
+            $last = haltQuoteNum($all->lastTrade);
+            $ext  = haltQuoteNum($all->ExtendedHourQuoteDetail->lastPrice);
+            $current = (!$regularHours && $ext > 0) ? $ext : $last;
+            if ($sym !== '' && $prev > 0 && $current > 0) {
+                $quotes[$sym] = array('current' => $current, 'prev_close' => $prev);
+            }
+        }
+    }
+    return $quotes;
+}
+
+// E*TRADE sends sub-penny prices like "12E-4" - turns them into 0.0012
+function haltQuoteNum($value)
+{
+    $value = trim((string) $value);
+    if (preg_match('/E-4$/', $value)) return floatval(preg_replace('/E-4$/', '', $value)) / 10000;
+    return floatval($value);
+}
+
+
 function getTradeHalts()
 {
     $rss_feed = simplexml_load_file("https://www.nasdaqtrader.com/rss.aspx?feed=tradehalts");
@@ -537,6 +597,20 @@ function getTradeHalts()
             }     
 
       }
+    }
+
+    // ---- only keep halted stocks that are DROPPING: ignore any whose current price is above yesterday's close ----
+    $haltQuotes = getHaltQuotes(array_merge(array_keys($currentlyHalted), array_keys($resumingToday)));
+
+    foreach (array_keys($currentlyHalted) as $s) {
+        if (isset($haltQuotes[$s]) && $haltQuotes[$s]['current'] >= $haltQuotes[$s]['prev_close']) {
+            unset($currentlyHalted[$s]);
+        }
+    }
+    foreach (array_keys($resumingToday) as $s) {
+        if (isset($haltQuotes[$s]) && $haltQuotes[$s]['current'] >= $haltQuotes[$s]['prev_close']) {
+            unset($resumingToday[$s]);
+        }
     }
 
     $returnArray['halt_symbol_list'] = json_encode($haltSymbolList); 
